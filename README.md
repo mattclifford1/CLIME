@@ -1,6 +1,8 @@
-# CLIME --- Class-Balanced Local Interpretale Model-agnostic Explainer 
+# CLIME --- Class-Balanced Local Interpretale Model-agnostic Explainer
 
 
+## To Do:
+make base function for surrogate model
 
 ## Dev Setup
 Create python environment, e.g. via conda:
