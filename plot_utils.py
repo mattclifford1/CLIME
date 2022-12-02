@@ -8,6 +8,7 @@ cm = plt.cm.RdBu
 def plot_classes(data, ax=None):
     '''
     plot classes in different colour on an axes
+    input:
         - data: dictionary with keys 'X', 'y'
     '''
     ax, show = _get_axes(ax)
@@ -18,6 +19,7 @@ def plot_classes(data, ax=None):
 def plot_decision_boundary(clf, data, ax=None):
     '''
     plot a decision boundary on axes
+    input:
         - clf: sklearn classifier object
     '''
     ax, show = _get_axes(ax)
@@ -29,6 +31,7 @@ def plot_decision_boundary(clf, data, ax=None):
 def _get_axes(ax):
     '''
     determine whether to make an axes or not, making axes also means show them
+    input:
         - ax: None or matplotlib axes object
     '''
     if ax == None:

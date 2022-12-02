@@ -12,7 +12,7 @@ class LIME:
         return self.expl
 
     def plot_explanation(self):
-        fatf_vis_lime.plot_lime(lime_explanation)
+        fatf_vis_lime.plot_lime(self.expl)
 
 
 
