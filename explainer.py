@@ -1,22 +1,36 @@
 import fatf.transparency.predictions.surrogate_explainers as surrogates
+import fatf.vis.lime as fatf_vis_lime
 
-def LIME(data, clf):
-    lime = surrogates.TabularBlimeyLime(data['X'], clf)
-    return lime
+class LIME:
+    def __init__(self, data, clf):
+        self.data = data
+        self.clf = clf
+        self.lime = surrogates.TabularBlimeyLime(self.data['X'], self.clf)
+
+    def __call__(self, data_instance, samples_number=500):
+        self.expl = self.lime.explain_instance(data_instance, samples_number=samples_number)
+        return self.expl
+
+    def plot_explanation(self):
+        fatf_vis_lime.plot_lime(lime_explanation)
+
 
 
 if __name__ == '__main__':
     import data_generation
-    import train_model
+    import model
+    import matplotlib.pyplot as plt
 
     # get dataset
     train_data, test_data = data_generation.get_data()
 
     # train model
-    clf = train_model.SVM(train_data)
+    clf = model.SVM(train_data)
 
     # get lime explainer
     lime = LIME(train_data, clf)
 
-    lime_explanation = lime.explain_instance(test_data['X'][0, :], samples_number=500)
+    lime_explanation = lime(test_data['X'][0, :])
     print(lime_explanation)
+    lime.plot_explanation()
+    plt.show()

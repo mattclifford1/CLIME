@@ -3,3 +3,4 @@ numpy
 matplotlib
 ipython
 notebook
+fat-forensics[VIS]
