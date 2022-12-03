@@ -1,9 +1,11 @@
 import sklearn.svm
 import numpy as np
 
+
 def SVM(data):
     '''
     train a 'black box' model on dataset
+    input:
         - data: dictionary with keys 'X', 'y'
 
     returns:
@@ -13,23 +15,34 @@ def SVM(data):
     clf.fit(data['X'], data['y'])
     return clf
 
-
-class input_balancer:
+# todo make a superclass  of sklearn classifier
+#   and incorportate input_balancer into:
+#       - predict_proba
+#       - predict
+class SVM_balance_boundary:
     '''
-    balance a model by pushing its boundary away from the minority class since
-    we are less certain about predictions in that area, this is achieved by
-    changing the data point before being input to the model
-
+    train a 'black box' model on dataset but balance the model by pushing its
+    boundary away from the minority class since we are less certain about
+    predictions in that area, this is achieved by changing the data point before
+    being input to the model.
     **currently only works with pushing minority class towards the majority class
+    input:
+        - data: dictionary with keys 'X', 'y'
+        - weight: scale to push the boundary
+
+    returns:
+        - model: sklearn model trained on the dataset
     '''
-    def __init__(self, data):
-        '''
-            - data: dictionary with keys 'X', 'y'
-        '''
-        self.get_class_means(data)
+    def __init__(self, data, weight=1):
+        self.weight = weight
+        self.fit(data)
+        self._get_vector_to_balance(data)
 
+    def fit(self, data):
+        self.clf = SVM(data)
+        self.fit_status_ = self.clf.fit_status_
 
-    def get_class_means(self, data):
+    def _get_vector_to_balance(self, data):
         '''get the mean value of each class'''
         ys = np.array(data['y'])
         classes = list(np.unique(ys))
@@ -57,8 +70,36 @@ class input_balancer:
         #     self.bal_vector = np.zeros(self.bal_vector.shape)
         self.diff_scale /= data['X'].shape[0]
 
-    def __call__(self, x, weight=1):
-        return x + (self.bal_vector*self.diff_scale*weight)
+    def _balance_input(self, x):
+        return x - (self.bal_vector*self.diff_scale*self.weight)
+
+    def predict(self, x):
+        bal_x = self._balance_input(x)
+        return self.clf.predict(bal_x)
+
+    def predict_proba(self, x):
+        bal_x = self._balance_input(x)
+        return self.clf.predict_proba(bal_x)
+
+
+class SVM_balance_proba:
+    '''
+    train a 'black box' model on dataset but balance the model by changing the
+    probabilities output from the model by scaling them with respect to the
+    abundance of that class
+    input:
+        - data: dictionary with keys 'X', 'y'
+
+    returns:
+        - model: sklearn model trained on the dataset
+    '''
+    def __init__(self, data):
+        self._train_model(data)
+
+    def _train_model(self, data):
+        self.clf = SVM(data)
+
+
 
 
 
