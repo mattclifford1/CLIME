@@ -25,7 +25,7 @@ def get_data(random_state=random_seed):
     X = np.empty([0,2])
     y = []
     label = 0
-    size = 20
+    size = 200
     class_means = [[0,0],[1,1]] # X and Y cooridnates of mean 
     for m in class_means:
         gaussclass = GaussClass(m[0],m[1],variance=0.5,covariance=np.array([[2,-1],[-1,2]]))
