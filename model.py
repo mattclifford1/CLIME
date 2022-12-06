@@ -2,7 +2,7 @@ import sklearn.svm
 import numpy as np
 
 
-def SVM(data):
+def SVM(data, **kwargs):
     '''
     train a 'black box' model on dataset
     input:
@@ -11,9 +11,13 @@ def SVM(data):
     returns:
         - model: sklearn model trained on the dataset
     '''
-    clf = sklearn.svm.SVC(gamma=2, C=1, probability=True)
+    clf = sklearn.svm.SVC(gamma=2, C=1, probability=True, **kwargs)
     clf.fit(data['X'], data['y'])
     return clf
+
+def SVM_weighted_training(data):
+    return SVM(data, class_weight='balanced')
+    
 
 # todo make a superclass  of sklearn classifier
 #   and incorportate input_balancer into:
@@ -98,6 +102,7 @@ class SVM_balance_proba:
 
     def _train_model(self, data):
         self.clf = SVM(data)
+        self.fit_status_ = self.clf.fit_status_
 
 
 
