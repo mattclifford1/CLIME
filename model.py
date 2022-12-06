@@ -126,7 +126,7 @@ class SVM_balance_proba:
         '''
         preds = self.clf.predict_proba(x)
         adjusted = preds * self.bin_count
-        adjust_probs = adjusted / np.sum(adjusted, axis=1)
+        adjust_probs = adjusted / np.sum(adjusted, axis=1)[:, None]
         return adjust_probs
 
 
