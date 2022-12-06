@@ -5,12 +5,9 @@
 make base function for surrogate model
 
 ## Dev Setup
-Create python environment, e.g. via conda:
+Create python environment, e.g. via conda and install dependancies:
 ```
 conda create -n clime python=3.9 -y
 conda activate clime
-```
-Install dependancies
-```
 pip install -r requirements.txt
 ```
