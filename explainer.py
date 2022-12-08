@@ -22,7 +22,7 @@ if __name__ == '__main__':
     import matplotlib.pyplot as plt
 
     # get dataset
-    train_data, test_data = data_generation.get_data()
+    train_data, test_data = data.get_moons()
 
     # train model
     clf = model.SVM(train_data)

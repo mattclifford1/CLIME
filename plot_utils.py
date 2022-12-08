@@ -88,8 +88,8 @@ if __name__ == '__main__':
     # ax = plt.gca()
     _, [ax1, ax2] = plt.subplots(2)
     # get dataset
-    train_data, test_data = data_generation.get_data()
-    train_data = data_generation.unbalance_data(train_data,[1,0.5])
+    train_data, test_data = data.get_moons()
+    train_data = data_generation.unbalance(train_data,[1,0.5])
     clf = model.SVM(train_data)
     plot_decision_boundary(clf, train_data, ax=ax1)
     plot_classes(train_data, ax=ax1)

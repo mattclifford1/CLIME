@@ -112,9 +112,8 @@ class SVM_balance_proba:
         n_samples = len(data['y'])
         y = np.array(data['y']).astype(np.int64)
         n_classes = len(list(np.unique(y)))
-        self.bin_count = np.bincount(y)
-        self.c_weights = n_samples / (n_classes * self.bin_count)
-        self.prob_weights = 1 / self.c_weights
+        bin_count = np.bincount(y)
+        self.class_weights = 1 / ((n_classes * bin_count) / n_classes)
 
     def predict(self, x):
         return self.clf.predict(x)
@@ -122,10 +121,11 @@ class SVM_balance_proba:
     def predict_proba(self, x):
         '''
         reduce the probability of less representative class
-        #### is this what we want to do?????
         '''
         preds = self.clf.predict_proba(x)
-        adjusted = preds * self.bin_count
+        # adjust probability with the weights
+        adjusted = preds * self.class_weights
+        # normalise to make a probability again -- is this okay to be doing????
         adjust_probs = adjusted / np.sum(adjusted, axis=1)[:, None]
         return adjust_probs
 
@@ -136,8 +136,8 @@ if __name__ == '__main__':
     import plot_utils
 
     # get dataset
-    train_data, test_data = data_generation.get_data()
-    train_data = data_generation.unbalance_data(train_data,[1,0.5])
+    train_data, test_data = data.get_moons()
+    train_data = data.unbalance(train_data,[1,0.5])
 
     # train model
     # clf = SVM(train_data)
