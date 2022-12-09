@@ -66,11 +66,15 @@ def get_gaussian(samples=200,
 def unbalance(data, class_proportions=None, verbose=False):
     '''
     Transfrom balanced dataset into unbalanced dataset
+    Classes are unbalanced via undersampling (random sampling without replacement)
         - data: dictionary with keys 'X', 'y' (must be balanced? - would need to implement an assertion)
 
-        - class_proportions: Decimal value indicating percentage of each class to keep.
+        - class_proportions: list of values indicating percentage of each class to keep.
+                             if values are greater than 1, majority class won't be reduced but the rest will
+                             if values are less than 1, all class will be reduced
+
                              Default: Full representation [1, 1,...] i.e. [100% of class 1, 100% of class 2,...]
-                             Classes are unbalanced via undersampling (random sampling without replacement)
+
 
     returns:
         - data: dictionary with keys 'X', 'y'
@@ -82,6 +86,9 @@ def unbalance(data, class_proportions=None, verbose=False):
         class_proportions=[1.0]*len(np.unique(data['y']))
         clime.utils.out("unbalance warning: No class proportions provided.",verbose)
 
+    # make sure class_proportions not higher than 1:
+    if max(class_proportions) > 1:
+        class_proportions = list(np.array(class_proportions) / max(class_proportions))
 
     labels = np.unique(data['y'][:])   # List of unique class labels
     unbalanced_i = []                  # List for appending sampling indices
