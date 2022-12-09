@@ -7,9 +7,7 @@ import sklearn.datasets
 import sklearn.model_selection
 import random
 import numpy as np
-import sys; sys.path.append(os.path.dirname(os.path.realpath(__file__)))
-import utils
-import datasets
+from clime import utils, datasets
 
 random_seed = 42
 
