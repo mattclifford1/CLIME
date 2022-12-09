@@ -79,6 +79,48 @@ def _get_axes(ax):
         show = False
     return ax, show
 
+'''
+juypter-notebook plotting
+'''
+def plot_data_dict(data_dict):
+    fig, axs = plt.subplots(1, len(data_dict.keys()))
+    for i, key in enumerate(data_dict.keys()):
+        plot_classes(data_dict[key], axs[i])
+        axs[i].set_title(key)
+
+# def plot_clfs():
+#     fig, axs = plt.subplots(1, len(datasets.keys()))
+#     for i, key in enumerate(datasets.keys()):
+#         plot_utils.plot_classes(datasets[key], axs[i])
+#         plot_utils.plot_decision_boundary(models[key], datasets[key], ax=axs[i])
+#         axs[i].set_title(key)
+
+def plot_clfs(data_dict, ax_x=2):
+    '''
+    data dict has keys:
+        - model
+        - data
+    '''
+    ax_y = int(np.ceil(len(data_dict.keys())/2))
+    fig, axs = plt.subplots(ax_y, ax_x)
+    count = 0
+    keys = list(data_dict.keys())
+    for i in range(ax_x):
+        for j in range(ax_y):
+            key = keys[count]
+            data = data_dict[key]['data']
+            model = data_dict[key]['model']
+            if ax_y > 1:
+                ax = axs[i][j]
+            else:
+                ax = axs[i]
+            plot_classes(data, ax)
+            plot_decision_boundary(model, data, ax=ax)
+            ax.set_title(key)
+            count += 1
+
+
+
 if __name__ == '__main__':
     import matplotlib.pyplot as plt
     from sklearn.inspection import DecisionBoundaryDisplay
