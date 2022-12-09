@@ -15,6 +15,14 @@ class LIME:
         fatf_vis_lime.plot_lime(self.expl)
 
 
+class bLIMEy:
+    def __init__(self, clf, query_point, data_lims):
+        self.clf = clf
+        self.query_point = query_point
+        self.data_lims = data_lims
+
+
+
 
 if __name__ == '__main__':
     import data
@@ -22,15 +30,15 @@ if __name__ == '__main__':
     import matplotlib.pyplot as plt
 
     # get dataset
-    train_data, test_data = data.get_moons()
+    data = data.get_moons()
 
     # train model
-    clf = model.SVM(train_data)
+    clf = model.SVM(data)
 
     # get lime explainer
-    lime = LIME(train_data, clf)
+    lime = LIME(data, clf)
 
-    lime_explanation = lime(test_data['X'][0, :])
+    lime_explanation = lime(data['X'][0, :])
     print(lime_explanation)
     lime.plot_explanation()
     plt.show()
