@@ -17,7 +17,7 @@ class LIME:
 
 
 if __name__ == '__main__':
-    import data_generation
+    import data
     import model
     import matplotlib.pyplot as plt
 

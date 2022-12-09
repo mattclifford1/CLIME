@@ -6,9 +6,8 @@ import sklearn.datasets
 import sklearn.model_selection
 import random
 import numpy as np
-from utils import out
-from datasets import GaussClass
-
+import utils
+import datasets
 
 random_seed = 42
 
@@ -45,7 +44,7 @@ def get_gaussian(samples=200, var=1, cov=[[1,0],[0,1]], random_state=random_seed
     label = 0
     class_means = [[0,0],[1,1]] # X and Y cooridnates of mean
     for m in class_means:
-        gaussclass = GaussClass(m[0], m[1], variance=var, covariance=cov)
+        gaussclass = datasets.GaussClass(m[0], m[1], variance=var, covariance=cov)
         gaussclass.gen_data(random_seed+label,samples)
         X = np.vstack([X,gaussclass.data])
         y = np.append(y,[label]*samples)
@@ -72,11 +71,11 @@ def unbalance(data,class_proportions=None, verbose=False):
         - data: dictionary with keys 'X', 'y'
     '''
 
-    out('\n rebalancing classes... \n',verbose)
+    utils.out('\n rebalancing classes... \n',verbose)
     # If class proportions left blank, 100% of each class included
     if class_proportions == None:
         class_proportions=[1.0]*len(np.unique(data['y']))
-        out("unbalance warning: No class proportions provided.",verbose)
+        utils.out("unbalance warning: No class proportions provided.",verbose)
 
 
     labels = np.unique(data['y'][:])   # List of unique class labels
@@ -98,8 +97,8 @@ def unbalance(data,class_proportions=None, verbose=False):
         random.seed(int(random_seed+label))
         unbalanced_i = [int(i) for i in np.append(unbalanced_i,random.sample(label_i,unbalanced_class_size))]
 
-        out('-'*50,verbose)
-        out('Class '+ str(label) + ' | Balanced = ' + str(class_size) + ' , Unbalanced = ' + str(unbalanced_class_size),verbose)
+        utils.out('-'*50,verbose)
+        utils.out('Class '+ str(label) + ' | Balanced = ' + str(class_size) + ' , Unbalanced = ' + str(unbalanced_class_size),verbose)
 
 
 
@@ -141,7 +140,7 @@ def balance(data, verbose=False):
         if value > max_freq:
             max_freq = value
 
-        out('Class '+f"{int(key)} | {value}",verbose)
+        utils.out('Class '+f"{int(key)} | {value}",verbose)
 
      # For each class:
     #   Return index of every class instance
@@ -162,8 +161,8 @@ def balance(data, verbose=False):
         else:
             balanced_i = np.append(balanced_i,label_i)
 
-        out('-'*50,verbose)
-        out('Class '+ str(label) + ' | Unbalanced = ' + str(class_size) + ' , Balanced = ' + str(max_freq),verbose)
+        utils.out('-'*50,verbose)
+        utils.out('Class '+ str(label) + ' | Unbalanced = ' + str(class_size) + ' , Balanced = ' + str(max_freq),verbose)
 
     random.seed(random_seed-1)
     random.shuffle(balanced_i)
@@ -177,7 +176,7 @@ if __name__ == '__main__':
     from matplotlib.colors import ListedColormap
     cm_bright = ListedColormap(["#FF0000", "#0000FF"])
 
-    train_data, test_data = get_data()
+    train_data, test_data = get_moons()
     unbalanced_train_data = unbalance(train_data,[1,0.5])
     balanced_train_data = balance(unbalanced_train_data,verbose=True)
     plt.subplot(3,1,1)

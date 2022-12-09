@@ -132,7 +132,7 @@ class SVM_balance_proba:
 
 if __name__ == '__main__':
     import matplotlib.pyplot as plt
-    import data_generation
+    import data
     import plot_utils
 
     # get dataset
@@ -148,7 +148,7 @@ if __name__ == '__main__':
 
 
     # # plot results
-    # ax = plt.gca()
-    # plot_utils.plot_decision_boundary(clf, train_data, ax=ax)
-    # plot_utils.plot_classes(train_data, ax=ax)
-    # plt.show()
+    ax = plt.gca()
+    plot_utils.plot_decision_boundary(clf, train_data, ax=ax)
+    plot_utils.plot_classes(train_data, ax=ax)
+    plt.show()
