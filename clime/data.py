@@ -2,6 +2,7 @@
 Generate toy data
 Data can be balanced or unbalanced
 '''
+import os
 import sklearn.datasets
 import sklearn.model_selection
 import random
