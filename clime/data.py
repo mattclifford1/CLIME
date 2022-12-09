@@ -5,77 +5,82 @@ Data can be balanced or unbalanced
 import os
 import sklearn.datasets
 import sklearn.model_selection
+import sklearn.utils
 import random
 import numpy as np
-from clime import utils, datasets
+import clime
+import clime.datasets
+import clime.utils
 
-random_seed = 42
 
 
-def get_moons(samples=200, random_state=random_seed):
+def get_moons(samples=200):
     '''
-    make half moon dataset from sklearn
-        - class_proportion: balance of the classes (default:0.5 is 50/50 split)
-                            classes are unbalanced via undersampling
+    sample from the half moons data distribution
     returns:
-        - train_data: dictionary with keys 'X', 'y'
-        - test_data:  dictionary with keys 'X', 'y'
+        - data: dict containing 'X', 'y'
     '''
-    X, y = sklearn.datasets.make_moons(noise=0.3, random_state=random_state, n_samples=samples)
-    X_train, X_test, y_train, y_test = sklearn.model_selection.train_test_split(
-        X, y, test_size=0.4, random_state=random_state)
-    train_data = {'X': X_train, 'y':y_train}
-    test_data =  {'X': X_test,  'y':y_test}
-    return train_data, test_data
+    X, y = sklearn.datasets.make_moons(noise=0.2,
+                                       random_state=clime.RANDOM_SEED,
+                                       n_samples=[int(samples/2)]*2)
+    X, y = sklearn.utils.shuffle(X, y, random_state=clime.RANDOM_SEED)
+    return {'X': X, 'y':y}
 
 
-def get_gaussian(samples=200, var=1, cov=[[1,0],[0,1]], random_state=random_seed):
+def get_gaussian(samples=200,
+                 var=1,
+                 cov=[[1,0],[0,1]],
+                 test=False):
     '''
-    Make two gaussian dataset
-                  half moon dataset from sklearn (deprecated)
+    sample from two Gaussian dataset
 
     returns:
-        - train_data: dictionary with keys 'X', 'y'
-        - test_data:  dictionary with keys 'X', 'y'
+        - data: dict containing 'X', 'y'
     '''
 
-    X = np.empty([0,2])
-    y = []
-    label = 0
-    class_means = [[0,0],[1,1]] # X and Y cooridnates of mean
-    for m in class_means:
-        gaussclass = datasets.GaussClass(m[0], m[1], variance=var, covariance=cov)
-        gaussclass.gen_data(random_seed+label,samples)
-        X = np.vstack([X,gaussclass.data])
-        y = np.append(y,[label]*samples)
-        label += 1
+    X = np.empty([0, 2])
+    y = np.empty([0], dtype=np.int64)
+    labels = [0, 1]
+    class_means = [[0, 0], [1, 1]] # X1 and X2 cooridnates of mean
+    for mean, label in zip(class_means, labels):
+        # equal proportion of class samples
+        class_samples = int(samples/len(labels))
+        # set up current class' sampler
+        gaussclass = clime.datasets.GaussClass(mean[0],
+                                         mean[1],
+                                         variance=var,
+                                         covariance=cov)
+        # get random seed
+        seed = clime.RANDOM_SEED+label
+        if test == True:
+            seed += 1
+            seed *= 2
+        # sample points
+        gaussclass.gen_data(seed, class_samples)
+        X = np.vstack([X, gaussclass.data])
+        y = np.append(y, [label]*class_samples)
+    X, y = sklearn.utils.shuffle(X, y, random_state=clime.RANDOM_SEED)
+    return {'X': X, 'y':y}
 
-    X_train, X_test, y_train, y_test = sklearn.model_selection.train_test_split(
-        X, y, test_size=0.4, random_state=random_state)
-    train_data = {'X': X_train, 'y':y_train}
-    test_data =  {'X': X_test,  'y':y_test}
 
-    return train_data, test_data
-
-
-def unbalance(data,class_proportions=None, verbose=False):
+def unbalance(data, class_proportions=None, verbose=False):
     '''
     Transfrom balanced dataset into unbalanced dataset
         - data: dictionary with keys 'X', 'y' (must be balanced? - would need to implement an assertion)
 
-        - class_proportions: Decimal value indicating proportional representation of each class.
-                             Default: Full representation [1,1,...] i.e. [100% of class 1, 100% of class 2,...]
+        - class_proportions: Decimal value indicating percentage of each class to keep.
+                             Default: Full representation [1, 1,...] i.e. [100% of class 1, 100% of class 2,...]
                              Classes are unbalanced via undersampling (random sampling without replacement)
 
     returns:
         - data: dictionary with keys 'X', 'y'
     '''
 
-    utils.out('\n rebalancing classes... \n',verbose)
+    clime.utils.out('\n rebalancing classes... \n',verbose)
     # If class proportions left blank, 100% of each class included
     if class_proportions == None:
         class_proportions=[1.0]*len(np.unique(data['y']))
-        utils.out("unbalance warning: No class proportions provided.",verbose)
+        clime.utils.out("unbalance warning: No class proportions provided.",verbose)
 
 
     labels = np.unique(data['y'][:])   # List of unique class labels
@@ -94,16 +99,16 @@ def unbalance(data,class_proportions=None, verbose=False):
         class_size = len(label_i)
         unbalanced_class_size = int(class_size*proportion)
 
-        random.seed(int(random_seed+label))
+        random.seed(int(clime.RANDOM_SEED+label))
         unbalanced_i = [int(i) for i in np.append(unbalanced_i,random.sample(label_i,unbalanced_class_size))]
 
-        utils.out('-'*50,verbose)
-        utils.out('Class '+ str(label) + ' | Balanced = ' + str(class_size) + ' , Unbalanced = ' + str(unbalanced_class_size),verbose)
+        clime.utils.out('-'*50,verbose)
+        clime.utils.out('Class '+ str(label) + ' | Balanced = ' + str(class_size) + ' , Unbalanced = ' + str(unbalanced_class_size),verbose)
 
 
 
 
-    random.seed(random_seed-1)
+    random.seed(clime.RANDOM_SEED-1)
     random.shuffle(unbalanced_i)
 
     unbalanced_data = {'X': data['X'][unbalanced_i],'y': data['y'][unbalanced_i]}
@@ -140,7 +145,7 @@ def balance(data, verbose=False):
         if value > max_freq:
             max_freq = value
 
-        utils.out('Class '+f"{int(key)} | {value}",verbose)
+        clime.utils.out('Class '+f"{int(key)} | {value}",verbose)
 
      # For each class:
     #   Return index of every class instance
@@ -155,16 +160,16 @@ def balance(data, verbose=False):
         class_size = len(label_i)
 
         if class_size < max_freq:
-            random.seed(int(random_seed+label))
+            random.seed(int(clime.RANDOM_SEED+label))
             balanced_i = [int(i) for i in np.append(balanced_i,random.sample(label_i,max_freq-class_size))]
             balanced_i = np.append(label_i,balanced_i)
         else:
             balanced_i = np.append(balanced_i,label_i)
 
-        utils.out('-'*50,verbose)
-        utils.out('Class '+ str(label) + ' | Unbalanced = ' + str(class_size) + ' , Balanced = ' + str(max_freq),verbose)
+        clime.utils.out('-'*50,verbose)
+        clime.utils.out('Class '+ str(label) + ' | Unbalanced = ' + str(class_size) + ' , Balanced = ' + str(max_freq),verbose)
 
-    random.seed(random_seed-1)
+    random.seed(clime.RANDOM_SEED-1)
     random.shuffle(balanced_i)
 
     balanced_data = {'X': data['X'][balanced_i],'y': data['y'][balanced_i]}

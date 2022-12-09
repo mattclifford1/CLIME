@@ -9,5 +9,5 @@ Create python environment, e.g. via conda and install dependancies:
 ```
 conda create -n clime python=3.9 -y
 conda activate clime
-pip install -r requirements.txt
+pip install -e .
 ```

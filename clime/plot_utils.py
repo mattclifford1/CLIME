@@ -14,6 +14,7 @@ def plot_classes(data, ax=None):
     '''
     ax, show = _get_axes(ax)
     ax.scatter(data['X'][:, 0], data['X'][:, 1], c=data['y'], cmap=cm_bright, edgecolors="k")
+    ax.grid(False)
     if show == True:
         plt.show()
 
