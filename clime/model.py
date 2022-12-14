@@ -2,28 +2,23 @@ import sklearn.svm
 import numpy as np
 
 
-def SVM(data, **kwargs):
+class SVM(sklearn.svm.SVC):
     '''
-    train a 'black box' model on dataset
+    train a 'black box' model on dataset - sub class of sklearn svm.SVC
     input:
         - data: dictionary with keys 'X', 'y'
 
     returns:
         - model: sklearn model trained on the dataset
+
+    to train with class balance weighting using the kwarg: class_weight='balanced'
     '''
-    clf = sklearn.svm.SVC(gamma=2, C=1, probability=True, **kwargs)
-    clf.fit(data['X'], data['y'])
-    return clf
-
-def SVM_weighted_training(data):
-    return SVM(data, class_weight='balanced')
+    def __init__(self, data, gamma=2, C=1, probability=True, **kwargs):
+        super().__init__(gamma=gamma, C=C, probability=probability, **kwargs)
+        self.fit(data['X'], data['y'])
 
 
-# todo make a superclass  of sklearn classifier
-#   and incorportate input_balancer into:
-#       - predict_proba
-#       - predict
-class SVM_balance_boundary:
+class SVM_balance_boundary(SVM):
     '''
     train a 'black box' model on dataset but balance the model by pushing its
     boundary away from the minority class since we are less certain about
@@ -32,19 +27,15 @@ class SVM_balance_boundary:
     **currently only works with pushing minority class towards the majority class
     input:
         - data: dictionary with keys 'X', 'y'
-        - weight: scale to push the boundary
+        - boundary_weight: scale to push the boundary
 
     returns:
         - model: sklearn model trained on the dataset
     '''
-    def __init__(self, data, weight=1):
-        self.weight = weight
-        self.fit(data)
+    def __init__(self, data, boundary_weight=1, **kwargs):
+        super().__init__(data, **kwargs)
+        self.boundary_weight = boundary_weight
         self._get_vector_to_balance(data)
-
-    def fit(self, data):
-        self.clf = SVM(data)
-        self.fit_status_ = self.clf.fit_status_
 
     def _get_vector_to_balance(self, data):
         '''get the mean value of each class'''
@@ -75,18 +66,18 @@ class SVM_balance_boundary:
         self.diff_scale /= data['X'].shape[0]
 
     def _balance_input(self, x):
-        return x - (self.bal_vector*self.diff_scale*self.weight)
+        return x - (self.bal_vector*self.diff_scale*self.boundary_weight)
 
     def predict(self, x):
         bal_x = self._balance_input(x)
-        return self.clf.predict(bal_x)
+        return super().predict(bal_x)
 
     def predict_proba(self, x):
         bal_x = self._balance_input(x)
-        return self.clf.predict_proba(bal_x)
+        return super().predict_proba(bal_x)
 
 
-class SVM_balance_proba:
+class SVM_balance_proba(SVM):
     '''
     train a 'black box' model on dataset but balance the model by changing the
     probabilities output from the model by scaling them with respect to the
@@ -97,13 +88,9 @@ class SVM_balance_proba:
     returns:
         - model: sklearn model trained on the dataset
     '''
-    def __init__(self, data):
-        self._train_model(data)
+    def __init__(self, data, **kwargs):
+        super().__init__(data, **kwargs)
         self._class_weightings(data)
-
-    def _train_model(self, data):
-        self.clf = SVM(data)
-        self.fit_status_ = self.clf.fit_status_
 
     def _class_weightings(self, data):
         '''
@@ -115,14 +102,11 @@ class SVM_balance_proba:
         bin_count = np.bincount(y)
         self.class_weights = 1 / ((n_classes * bin_count) / n_classes)
 
-    def predict(self, x):
-        return self.clf.predict(x)
-
     def predict_proba(self, x):
         '''
         reduce the probability of less representative class
         '''
-        preds = self.clf.predict_proba(x)
+        preds = super().predict_proba(x)
         # adjust probability with the weights
         adjusted = preds * self.class_weights
         # normalise to make a probability again -- is this okay to be doing????
@@ -136,7 +120,7 @@ if __name__ == '__main__':
     import plot_utils
 
     # get dataset
-    train_data, test_data = data.get_moons()
+    train_data = data.get_moons()
     train_data = data.unbalance(train_data,[1,0.5])
 
     # train model

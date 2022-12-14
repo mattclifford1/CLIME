@@ -1,8 +1,8 @@
 import numpy as np
 import sklearn
 import clime
-# import fatf.transparency.predictions.surrogate_explainers as surrogates
-# import fatf.vis.lime as fatf_vis_lime
+import fatf.transparency.predictions.surrogate_explainers as surrogates
+import fatf.vis.lime as fatf_vis_lime
 
 
 def print_explanation(exp):
