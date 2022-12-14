@@ -28,39 +28,60 @@ class LIME:
 class bLIMEy:
     '''
     create our own version of LIME that has no access to the training data
+    current steps:
+        - sample around the query point in the feature domain (Guassian)
+        - get model probabilities from sampled data
+        - train ridge regression on the probabilities (weighted with exp. kernel)
+
+    Currently only work for binary classification tasks
+
+    Input:
+        - clf: classifier with .predict_proba() attribute
+        - query_point: data point to locally explain
+        - data_lim: *not yet implimented*
+
+    Attributes:
+        - get_explanation: returns the weights of the surrogate model
+                           (feature importance used to predict the prob of that class)
+        - predict_locally: returns the surrogate model's locally faithful prediction
     '''
     def __init__(self, clf, query_point, data_lims=None):
         self.clf = clf
         self.query_point = query_point
         self.data_lims = data_lims
         self.data = {}
-        self.sample_locally()
-        self.train_surrogate()
-        print(self.surrogate_model.coef_)
+        self._sample_locally()
+        self._train_surrogate()
 
-    def sample_locally(self):
-        cov = self.get_sampling_cov()
+    def get_explanation(self):
+        return self.surrogate_model.coef_[0, :] # just do for one class (is the negative for the other class) 
+
+    def predict_locally(self, x):
+        return self.surrogate_model.predict(x)
+
+    def _sample_locally(self):
+        cov = self._get_sampling_cov()
         samples = 10000
         self.data['X'] = np.random.multivariate_normal(self.query_point, cov, samples)
         self.data['y'] = self.clf.predict(self.data['X'])
         self.data['p(y)'] = self.clf.predict_proba(self.data['X'])
 
-    def get_sampling_cov(self):
+    def _get_sampling_cov(self):
         if self.data_lims == None:
             return np.eye(len(self.query_point))
         else:
             # calculate from data lims ?
             return np.eye(len(self.query_point))   # change this to implilmet var from data lims
 
-    def get_sample_weights(self):
+    def _get_sample_weights(self):
         '''get the weighting of each sample proportional to the distance to the query point
            weights generated using exponential kernel found in the original lime implementation'''
         euclidean_dist = np.sqrt(np.sum((self.data['X'] - self.query_point)**2, axis=1))
         kernel_width = np.sqrt(self.data['X'].shape[1]) * .75
         self.data['weights'] = np.sqrt(np.exp(-(euclidean_dist ** 2) / kernel_width ** 2))
 
-    def train_surrogate(self):
-        self.get_sample_weights()
+    def _train_surrogate(self):
+        self._get_sample_weights()
         self.surrogate_model = sklearn.linear_model.Ridge(alpha=1, fit_intercept=True,
                                     random_state=clime.RANDOM_SEED)
         self.surrogate_model.fit(self.data['X'],

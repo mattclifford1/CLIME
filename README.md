@@ -2,7 +2,7 @@
 Try out quickly in Colab: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/mattclifford1/CLIME/blob/main/pipeline.ipynb)
 
 ## To Do:
-make base function for surrogate model
+make vis pipeline and quantitive comparision pipeline
 
 ## Dev Setup
 Create python environment, e.g. via conda and install dependancies:
