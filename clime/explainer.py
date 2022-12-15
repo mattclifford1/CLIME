@@ -45,49 +45,57 @@ class bLIMEy:
                            (feature importance used to predict the prob of that class)
         - predict_locally: returns the surrogate model's locally faithful prediction
     '''
-    def __init__(self, clf, query_point, data_lims=None):
-        self.clf = clf
+    def __init__(self, black_box_model, query_point, data_lims=None):
+        # self.black_box_model = black_box_model
         self.query_point = query_point
         self.data_lims = data_lims
         self.data = {}
-        self._sample_locally()
+        self._sample_locally(black_box_model)
         self._train_surrogate()
 
     def get_explanation(self):
-        return self.surrogate_model.coef_[0, :] # just do for one class (is the negative for the other class) 
+        return self.surrogate_model.coef_[0, :] # just do for one class (is the negative for the other class)
 
-    def predict_locally(self, x):
-        return self.surrogate_model.predict(x)
+    def predict_proba_locally(self, X):
+        return self.surrogate_model.predict(X)
 
-    def _sample_locally(self):
-        cov = self._get_sampling_cov()
+    def predict_locally(self, X):
+        probability_class_1 = self.surrogate_model.predict(X)[:, 1]
+        class_prediction = np.heaviside(probability_class_1-0.5, 1)   # threshold class prediction at 0.5
+        return class_prediction.astype(np.int64)
+
+    def _sample_locally(self, black_box_model):
+        cov = self.get_local_sampling_cov()
         samples = 10000
         self.data['X'] = np.random.multivariate_normal(self.query_point, cov, samples)
-        self.data['y'] = self.clf.predict(self.data['X'])
-        self.data['p(y)'] = self.clf.predict_proba(self.data['X'])
+        self.data['y'] = black_box_model.predict(self.data['X'])
+        self.data['p(y)'] = black_box_model.predict_proba(self.data['X'])
 
-    def _get_sampling_cov(self):
+    def get_local_sampling_cov(self):
         if self.data_lims == None:
             return np.eye(len(self.query_point))
         else:
             # calculate from data lims ?
-            return np.eye(len(self.query_point))   # change this to implilmet var from data lims
-
-    def _get_sample_weights(self):
-        '''get the weighting of each sample proportional to the distance to the query point
-           weights generated using exponential kernel found in the original lime implementation'''
-        euclidean_dist = np.sqrt(np.sum((self.data['X'] - self.query_point)**2, axis=1))
-        kernel_width = np.sqrt(self.data['X'].shape[1]) * .75
-        self.data['weights'] = np.sqrt(np.exp(-(euclidean_dist ** 2) / kernel_width ** 2))
+            return np.eye(len(self.query_point))   # change this to implement var from data lims
 
     def _train_surrogate(self):
-        self._get_sample_weights()
+        weights = weights_based_on_distance(self.query_point, self.data['X'])
         self.surrogate_model = sklearn.linear_model.Ridge(alpha=1, fit_intercept=True,
                                     random_state=clime.RANDOM_SEED)
         self.surrogate_model.fit(self.data['X'],
                                  self.data['p(y)'],
-                                 sample_weight=self.data['weights'],
+                                 sample_weight=weights,
                                  )
+
+def weights_based_on_distance(query_point, X):
+    '''
+    get the weighting of each sample proportional to the distance to the query point
+    weights generated using exponential kernel found in the original lime implementation'''
+    euclidean_dist = np.sqrt(np.sum((X - query_point)**2, axis=1))
+    kernel_width = np.sqrt(X.shape[1]) * .75
+    weights = np.sqrt(np.exp(-(euclidean_dist ** 2) / kernel_width ** 2))
+    return weights
+
 
 
 if __name__ == '__main__':
@@ -103,6 +111,8 @@ if __name__ == '__main__':
 
     # BLIMEY!
     blimey = bLIMEy(clf, data['X'][0, :])
+    print(blimey.get_explanation())
+    print(blimey.predict_locally([[1, 2]]))
 
 
 
