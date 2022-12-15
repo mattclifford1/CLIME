@@ -1,5 +1,5 @@
 # CLIME --- Class-Balanced Local Interpretale Model-agnostic Explainer
-Try out quickly in Colab: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/mattclifford1/CLIME/blob/main/pipeline-visulisation.ipynb)
+Try out quickly in Colab: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/mattclifford1/CLIME/blob/main/pipeline-visualisation.ipynb)
 
 ## To Do:
 make vis pipeline and quantitive comparision pipeline
