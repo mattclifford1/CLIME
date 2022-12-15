@@ -1,4 +1,4 @@
-import explainer
+from clime import explainer
 import numpy as np
 
 
