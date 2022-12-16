@@ -67,6 +67,14 @@ def get_gaussian(samples=200,
     X, y = sklearn.utils.shuffle(X, y, random_state=clime.RANDOM_SEED)
     return {'X': X, 'y':y}
 
+def get_proportions_and_sample_num(class_samples):
+    ''' give class sample num eg. [25, 75] and will return proportions and total
+    number of a balanced dataset needed
+    '''
+    max_class = max(class_samples)
+    n_samples = max_class*len(class_samples)   # samples for balanced dataset
+    class_proportions = np.array(class_samples)/max_class # normalise
+    return n_samples, list(class_proportions)
 
 def unbalance(data, class_proportions=None, verbose=False):
     '''

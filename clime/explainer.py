@@ -5,28 +5,6 @@ import numpy as np
 import sklearn
 import clime
 from clime import costs
-import fatf.transparency.predictions.surrogate_explainers as surrogates
-import fatf.vis.lime as fatf_vis_lime
-
-
-def print_explanation(exp):
-    for key in exp.keys():
-        print(f'{key} ---')
-        for k in exp[key].keys():
-            print(f'    {k}: {exp[key][k]:.3f}')
-
-class LIME:
-    def __init__(self, data, clf):
-        self.data = data
-        self.clf = clf
-        self.lime = surrogates.TabularBlimeyLime(self.data['X'], self.clf)
-
-    def __call__(self, data_instance, samples_number=500):
-        self.expl = self.lime.explain_instance(data_instance, samples_number=samples_number)
-        return self.expl
-
-    def plot_explanation(self):
-        fatf_vis_lime.plot_lime(self.expl)
 
 
 class bLIMEy:
@@ -90,6 +68,29 @@ class bLIMEy:
                                  self.data['p(y)'],
                                  sample_weight=weights,
                                  )
+
+# import fatf.transparency.predictions.surrogate_explainers as surrogates
+# import fatf.vis.lime as fatf_vis_lime
+#
+#
+# def print_explanation(exp):
+#     for key in exp.keys():
+#         print(f'{key} ---')
+#         for k in exp[key].keys():
+#             print(f'    {k}: {exp[key][k]:.3f}')
+#
+# class LIME:
+#     def __init__(self, data, clf):
+#         self.data = data
+#         self.clf = clf
+#         self.lime = surrogates.TabularBlimeyLime(self.data['X'], self.clf)
+#
+#     def __call__(self, data_instance, samples_number=500):
+#         self.expl = self.lime.explain_instance(data_instance, samples_number=samples_number)
+#         return self.expl
+#
+#     def plot_explanation(self):
+#         fatf_vis_lime.plot_lime(self.expl)
 
 
 if __name__ == '__main__':
