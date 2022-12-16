@@ -118,9 +118,7 @@ def unbalance(data, class_proportions=None, verbose=False):
     random.seed(clime.RANDOM_SEED-1)
     random.shuffle(unbalanced_i)
 
-    unbalanced_data = {'X': data['X'][unbalanced_i],'y': data['y'][unbalanced_i]}
-
-    return unbalanced_data
+    return {'X': data['X'][unbalanced_i],'y': data['y'][unbalanced_i]}
 
 
 
@@ -138,7 +136,7 @@ def balance(data, verbose=False):
     labels = np.unique(data['y'][:])   # List of unique class labels
     balanced_i = []                  # List for appending sampling indices
 
-    # create dict for counting cl;ass frequencies
+    # create dict for counting class frequencies
     class_freq = {}
 
     for y in data['y']:
@@ -157,7 +155,7 @@ def balance(data, verbose=False):
      # For each class:
     #   Return index of every class instance
     #   Count class size and determine majority class
-    #   for all other classes oversample from obsrevations [NOT DISTRIBUTION]
+    #   for all other classes oversample from observations [NOT DISTRIBUTION]
     #       - shuffle data and take n samples where n = class proporition * class size
 
     for  l in range(0,len(labels)):
@@ -168,7 +166,8 @@ def balance(data, verbose=False):
 
         if class_size < max_freq:
             random.seed(int(clime.RANDOM_SEED+label))
-            balanced_i = [int(i) for i in np.append(balanced_i,random.sample(label_i,max_freq-class_size))]
+            balanced_i = [int(i) for i in np.append(balanced_i,random.choices(label_i,k=(max_freq-class_size)))] 
+            # random.choices => random sampling with replacement
             balanced_i = np.append(label_i,balanced_i)
         else:
             balanced_i = np.append(balanced_i,label_i)
@@ -179,9 +178,7 @@ def balance(data, verbose=False):
     random.seed(clime.RANDOM_SEED-1)
     random.shuffle(balanced_i)
 
-    balanced_data = {'X': data['X'][balanced_i],'y': data['y'][balanced_i]}
-
-    return balanced_data
+    return {'X': data['X'][balanced_i],'y': data['y'][balanced_i]}
 
 if __name__ == '__main__':
     import matplotlib.pyplot as plt
