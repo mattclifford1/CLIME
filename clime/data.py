@@ -2,6 +2,11 @@
 Generate toy data
 Data can be balanced or unbalanced
 '''
+# author: Jonny Erskine
+# email: jonathan.erskine@bristol.ac.uk
+
+# author2: Matt Clifford
+# email2: matt.clifford@bristol.ac.uk
 import os
 import sklearn.datasets
 import sklearn.model_selection
@@ -166,7 +171,7 @@ def balance(data, verbose=False):
 
         if class_size < max_freq:
             random.seed(int(clime.RANDOM_SEED+label))
-            balanced_i = [int(i) for i in np.append(balanced_i,random.choices(label_i,k=(max_freq-class_size)))] 
+            balanced_i = [int(i) for i in np.append(balanced_i,random.choices(label_i,k=(max_freq-class_size)))]
             # random.choices => random sampling with replacement
             balanced_i = np.append(label_i,balanced_i)
         else:

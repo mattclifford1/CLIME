@@ -1,7 +1,11 @@
+# author: Matt Clifford
+# email: matt.clifford@bristol.ac.uk
+
 import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap
 from sklearn.inspection import DecisionBoundaryDisplay
 import numpy as np
+
 # plot colours
 cm_bright = ListedColormap(["#0000FF", "#FF0000"])
 cm = plt.cm.RdBu
@@ -125,14 +129,13 @@ def plot_clfs(data_dict, ax_x=2):
 if __name__ == '__main__':
     import matplotlib.pyplot as plt
     from sklearn.inspection import DecisionBoundaryDisplay
-    import data_generation
-    import model
+    from clime import data, model
 
     # ax = plt.gca()
     _, [ax1, ax2] = plt.subplots(2)
     # get dataset
-    train_data, test_data = data.get_moons()
-    train_data = data_generation.unbalance(train_data,[1,0.5])
+    train_data = data.get_moons()
+    train_data = data.unbalance(train_data,[1,0.5])
     clf = model.SVM(train_data)
     plot_decision_boundary(clf, train_data, ax=ax1)
     plot_classes(train_data, ax=ax1)

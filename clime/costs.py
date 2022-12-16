@@ -1,3 +1,6 @@
+# author: Matt Clifford
+# email: matt.clifford@bristol.ac.uk
+
 '''
 utils for getting weightings/costs for data based on distance and class imbalance
 '''

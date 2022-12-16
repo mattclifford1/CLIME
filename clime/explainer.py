@@ -1,3 +1,6 @@
+# author: Matt Clifford
+# email: matt.clifford@bristol.ac.uk
+
 import numpy as np
 import sklearn
 import clime

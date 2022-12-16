@@ -1,3 +1,6 @@
+# author: Jonny Erskine
+# email: jonathan.erskine@bristol.ac.uk
+
 import numpy as np
 import random
 
