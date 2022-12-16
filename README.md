@@ -3,7 +3,7 @@ Investigation into how imbalanced data affects the surrogate explainer pipeline
 
 ![Alt text](https://github.com/mattclifford1/CLIME/blob/main/pics/overview.jpg?raw=true "Overview")
 
-Try out quickly in Colab: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/mattclifford1/CLIME/blob/main/experiments.ipynb)
+<!-- Try out quickly in Colab: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/mattclifford1/CLIME/blob/main/experiments.ipynb) -->
 
 ## To Do:
 quantitative comparison pipeline
