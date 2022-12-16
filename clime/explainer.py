@@ -1,6 +1,7 @@
 import numpy as np
 import sklearn
 import clime
+from clime import costs
 import fatf.transparency.predictions.surrogate_explainers as surrogates
 import fatf.vis.lime as fatf_vis_lime
 
@@ -43,7 +44,7 @@ class bLIMEy:
     Attributes:
         - get_explanation: returns the weights of the surrogate model
                            (feature importance used to predict the prob of that class)
-        - predict_locally: returns the surrogate model's locally faithful prediction
+        - predict returns the surrogate model's locally faithful prediction
     '''
     def __init__(self, black_box_model, query_point, data_lims=None):
         # self.black_box_model = black_box_model
@@ -56,10 +57,10 @@ class bLIMEy:
     def get_explanation(self):
         return self.surrogate_model.coef_[0, :] # just do for one class (is the negative for the other class)
 
-    def predict_proba_locally(self, X):
+    def predict_proba(self, X):
         return self.surrogate_model.predict(X)
 
-    def predict_locally(self, X):
+    def predict(self, X):
         probability_class_1 = self.surrogate_model.predict(X)[:, 1]
         class_prediction = np.heaviside(probability_class_1-0.5, 1)   # threshold class prediction at 0.5
         return class_prediction.astype(np.int64)
@@ -79,23 +80,13 @@ class bLIMEy:
             return np.eye(len(self.query_point))   # change this to implement var from data lims
 
     def _train_surrogate(self):
-        weights = weights_based_on_distance(self.query_point, self.data['X'])
+        weights = costs.weights_based_on_distance(self.query_point, self.data['X'])
         self.surrogate_model = sklearn.linear_model.Ridge(alpha=1, fit_intercept=True,
                                     random_state=clime.RANDOM_SEED)
         self.surrogate_model.fit(self.data['X'],
                                  self.data['p(y)'],
                                  sample_weight=weights,
                                  )
-
-def weights_based_on_distance(query_point, X):
-    '''
-    get the weighting of each sample proportional to the distance to the query point
-    weights generated using exponential kernel found in the original lime implementation'''
-    euclidean_dist = np.sqrt(np.sum((X - query_point)**2, axis=1))
-    kernel_width = np.sqrt(X.shape[1]) * .75
-    weights = np.sqrt(np.exp(-(euclidean_dist ** 2) / kernel_width ** 2))
-    return weights
-
 
 
 if __name__ == '__main__':
@@ -108,11 +99,12 @@ if __name__ == '__main__':
 
     # train model
     clf = model.SVM(data)
+    # import pdb; pdb.set_trace()
 
     # BLIMEY!
     blimey = bLIMEy(clf, data['X'][0, :])
     print(blimey.get_explanation())
-    print(blimey.predict_locally([[1, 2]]))
+    print(blimey.predict([[1, 2]]))
 
 
 

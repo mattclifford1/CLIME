@@ -1,5 +1,6 @@
 import sklearn.svm
 import numpy as np
+from clime import costs
 
 
 class SVM(sklearn.svm.SVC):
@@ -96,11 +97,7 @@ class SVM_balance_proba(SVM):
         '''
         get the weight of each class proportional to the number of instances
         '''
-        n_samples = len(data['y'])
-        y = np.array(data['y']).astype(np.int64)
-        n_classes = len(list(np.unique(y)))
-        bin_count = np.bincount(y)
-        self.class_weights = 1 / ((n_classes * bin_count) / n_classes)
+        self.class_weights = costs.weight_based_on_class_imbalance(data)
 
     def predict_proba(self, x):
         '''
