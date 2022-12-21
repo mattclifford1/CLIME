@@ -17,8 +17,9 @@ class SVM(sklearn.svm.SVC):
     to train with class balance weighting using the kwarg: class_weight='balanced'
     '''
     def __init__(self, data, gamma=2, C=1, probability=True, **kwargs):
+        self.data = data    # colab wont work unless we attribute data? (older python version)
         super().__init__(gamma=gamma, C=C, probability=probability, **kwargs)
-        self.fit(data['X'], data['y'])
+        self.fit(self.data['X'], self.data['y'])
 
 
 class SVM_balance_boundary(SVM):
