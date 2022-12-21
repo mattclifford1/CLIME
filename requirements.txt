@@ -3,4 +3,3 @@ numpy>=1.23.5
 matplotlib>=3.6.2
 ipython
 notebook
-fat-forensics[VIS]>=0.1.2
