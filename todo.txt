@@ -1,0 +1,9 @@
+things that still need to be implimented
+
+
+
+balancing data inside the explainer before training
+
+better pipeline
+  - (maybe run an avergae over multiple runs/data instances)
+  - compare different pipeline configs - graphs???

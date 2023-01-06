@@ -27,10 +27,16 @@ class bLIMEy:
                            (feature importance used to predict the prob of that class)
         - predict returns the surrogate model's locally faithful prediction
     '''
-    def __init__(self, black_box_model, query_point, data_lims=None):
+    def __init__(self, black_box_model,
+                       query_point,
+                       data_lims=None,
+                       samples=10000,
+                       class_weight=None):
         # self.black_box_model = black_box_model
         self.query_point = query_point
         self.data_lims = data_lims
+        self.samples = samples
+        self.class_weight = class_weight
         self.data = {}
         self._sample_locally(black_box_model)
         self._train_surrogate()
@@ -47,13 +53,12 @@ class bLIMEy:
         return class_prediction.astype(np.int64)
 
     def _sample_locally(self, black_box_model):
-        cov = self.get_local_sampling_cov()
-        samples = 10000
-        self.data['X'] = np.random.multivariate_normal(self.query_point, cov, samples)
+        cov = self._get_local_sampling_cov()
+        self.data['X'] = np.random.multivariate_normal(self.query_point, cov, self.samples)
         self.data['y'] = black_box_model.predict(self.data['X'])
         self.data['p(y)'] = black_box_model.predict_proba(self.data['X'])
 
-    def get_local_sampling_cov(self):
+    def _get_local_sampling_cov(self):
         if self.data_lims == None:
             return np.eye(len(self.query_point))
         else:
@@ -61,7 +66,17 @@ class bLIMEy:
             return np.eye(len(self.query_point))   # change this to implement var from data lims
 
     def _train_surrogate(self):
+        # get sample weighting based on distance
         weights = costs.weights_based_on_distance(self.query_point, self.data['X'])
+        # option to adjust weights based on class imbalance
+        if self.class_weight is True:
+            # get class imbalance weights
+            class_weights = costs.weight_based_on_class_imbalance(self.data)
+            class_preds_matrix = np.round(self.data['p(y)'])
+            # apply to all instances
+            instance_class_imbalance_weights = np.dot(class_preds_matrix, class_weights.T)
+            # now combine class imbalance weights with distance based weights
+            weights *= instance_class_imbalance_weights
         self.surrogate_model = sklearn.linear_model.Ridge(alpha=1, fit_intercept=True,
                                     random_state=clime.RANDOM_SEED)
         self.surrogate_model.fit(self.data['X'],
@@ -106,7 +121,9 @@ if __name__ == '__main__':
     # import pdb; pdb.set_trace()
 
     # BLIMEY!
-    blimey = bLIMEy(clf, data['X'][0, :])
+    blimey = bLIMEy(clf,
+                    data['X'][0, :],
+                    class_weight=True)
     print(blimey.get_explanation())
     print(blimey.predict([[1, 2]]))
 
