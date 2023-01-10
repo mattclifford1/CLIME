@@ -55,7 +55,7 @@ def run(opts):
         blimey = explainer.bLIMEy(clf, train_data['X'][opts['query point'], :])
     elif opts['explainer'] == 'cost sensitive training':
         blimey = explainer.bLIMEy(clf, train_data['X'][opts['query point'], :], class_weight=True)
-    elif opts['explainer'] == 'cost sensitive training':
+    elif opts['explainer'] == 'training data rebalance':
         blimey = explainer.bLIMEy(clf, train_data['X'][opts['query point'], :], class_weight=True)
     else:
         raise ValueError(f"explainer needs to be 'normal' or 'cost sensitive training' not {opts['explainer']}")

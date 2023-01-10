@@ -4,7 +4,7 @@
 import numpy as np
 import sklearn
 import clime
-from clime import costs
+from clime import costs, data
 
 
 class bLIMEy:
@@ -31,12 +31,14 @@ class bLIMEy:
                        query_point,
                        data_lims=None,
                        samples=10000,
-                       class_weight=None):
+                       class_weight=None,
+                       rebalance_sampled_data=False):
         # self.black_box_model = black_box_model
         self.query_point = query_point
         self.data_lims = data_lims
         self.samples = samples
         self.class_weight = class_weight
+        self.rebalance_sampled_data = rebalance_sampled_data
         self.data = {}
         self._sample_locally(black_box_model)
         self._train_surrogate()
@@ -69,6 +71,8 @@ class bLIMEy:
         # get sample weighting based on distance
         weights = costs.weights_based_on_distance(self.query_point, self.data['X'])
         # option to adjust weights based on class imbalance
+        if self.rebalance_sampled_data is True:
+            self.data = data.balance(self.data)
         if self.class_weight is True:
             # get class imbalance weights
             class_weights = costs.weight_based_on_class_imbalance(self.data)

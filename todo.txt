@@ -1,8 +1,14 @@
-things that still need to be implimented
+things that still need to be implemented
 
 
 balancing data inside the explainer before training
+  - change to just sample more from minority class
+
+rebalance by under sampling?? (makes different just cost sensitive training)
+
+
+
 
 better pipeline
-  - (maybe run an avergae over multiple runs/data instances)
+  - (maybe run an average over multiple runs/data instances)
   - compare different pipeline configs - graphs???

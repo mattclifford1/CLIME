@@ -1,0 +1,8 @@
+faithfulness (or fidelity) of surrogate and model assumes same decision process
+  - https://arxiv.org/pdf/2004.03685.pdf
+
+local fidelity with same weights used to train the surrogate model
+  - as the surrogate only aims to be interpreting this region well
+
+(in)fidelity paper:
+  - https://arxiv.org/pdf/1901.09392.pdf
