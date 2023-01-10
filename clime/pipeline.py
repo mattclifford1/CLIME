@@ -21,9 +21,12 @@ def run(opts):
     elif opts['dataset'] == 'guassian':
         train_data = data.get_gaussian(samples=n_samples)
     else:
-        raise InputError(f"dataset needs to be 'moons' or 'guassian' not {opts['dataset']}")
+        raise ValueError(f"dataset needs to be 'moons' or 'guassian' not {opts['dataset']}")
     # unbalance data
     train_data = data.unbalance(train_data, opts['class samples'])
+    # option to balance the data
+    if opts['rebalance data'] == True:
+        train_data = data.balance(train_data)
 
     '''
       __  __  ___  ___  ___ _
@@ -40,7 +43,7 @@ def run(opts):
     elif opts['model'] == 'probability adjust':
         clf = model.SVM_balance_proba(train_data)
     else:
-        raise InputError(f"model needs to be 'normal', 'cost sensitive', 'boundary adjust' or 'probability adjust' not: {opts['model']}")
+        raise ValueError(f"model needs to be 'normal', 'cost sensitive', 'boundary adjust' or 'probability adjust' not: {opts['model']}")
 
     '''
       _____  _____ _      _   ___ _  _ ___ ___
@@ -52,8 +55,10 @@ def run(opts):
         blimey = explainer.bLIMEy(clf, train_data['X'][opts['query point'], :])
     elif opts['explainer'] == 'cost sensitive training':
         blimey = explainer.bLIMEy(clf, train_data['X'][opts['query point'], :], class_weight=True)
+    elif opts['explainer'] == 'cost sensitive training':
+        blimey = explainer.bLIMEy(clf, train_data['X'][opts['query point'], :], class_weight=True)
     else:
-        raise InputError(f"explainer needs to be 'normal' or 'cost sensitive training' not {opts['explainer']}")
+        raise ValueError(f"explainer needs to be 'normal' or 'cost sensitive training' not {opts['explainer']}")
 
     '''
       _____   ___   _   _   _  _ _____ ___ ___  _  _
@@ -68,7 +73,7 @@ def run(opts):
     elif opts['evaluation'] == 'class balanced fidelity':
         fid = evaluation.bal_fidelity(blimey, clf, train_data)
     else:
-        raise InputError(f"evaluation needs to be 'normal fidelity', 'local fidelity' or 'class balanced fidelity' not: {opts['evaluation']}")
+        raise ValueError(f"evaluation needs to be 'normal fidelity', 'local fidelity' or 'class balanced fidelity' not: {opts['evaluation']}")
 
     return fid
 
@@ -77,6 +82,7 @@ if __name__ == '__main__':
     opts = {
         'dataset':       'moons',
         'class samples': [25, 75],
+        'rebalance data': False,
         'model':         'normal',
         'explainer':     'normal',
         'query point':   10,
