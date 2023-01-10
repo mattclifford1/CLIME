@@ -144,7 +144,7 @@ def balance(data, verbose=False):
     returns:
         - data: dictionary with keys 'X', 'y'
     '''
-    # make balanced usign oversampling
+    # make balanced using oversampling
 
     labels = np.unique(data['y'][:])   # List of unique class labels
     balanced_i = []                  # List for appending sampling indices
