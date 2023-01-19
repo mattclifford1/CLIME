@@ -14,58 +14,8 @@ import sklearn.utils
 import random
 import numpy as np
 import clime
-import clime.datasets
 import clime.utils
 
-
-
-def get_moons(samples=200):
-    '''
-    sample from the half moons data distribution
-    returns:
-        - data: dict containing 'X', 'y'
-    '''
-    X, y = sklearn.datasets.make_moons(noise=0.2,
-                                       random_state=clime.RANDOM_SEED,
-                                       n_samples=[int(samples/2)]*2)
-    X, y = sklearn.utils.shuffle(X, y, random_state=clime.RANDOM_SEED)
-    return {'X': X, 'y':y}
-
-
-def get_gaussian(samples=200,
-                 var=1,
-                 cov=[[1,0],[0,1]],
-                 test=False):
-    '''
-    sample from two Gaussian dataset
-
-    returns:
-        - data: dict containing 'X', 'y'
-    '''
-
-    X = np.empty([0, 2])
-    y = np.empty([0], dtype=np.int64)
-    labels = [0, 1]
-    class_means = [[0, 0], [1, 1]] # X1 and X2 cooridnates of mean
-    for mean, label in zip(class_means, labels):
-        # equal proportion of class samples
-        class_samples = int(samples/len(labels))
-        # set up current class' sampler
-        gaussclass = clime.datasets.GaussClass(mean[0],
-                                         mean[1],
-                                         variance=var,
-                                         covariance=cov)
-        # get random seed
-        seed = clime.RANDOM_SEED+label
-        if test == True:
-            seed += 1
-            seed *= 2
-        # sample points
-        gaussclass.gen_data(seed, class_samples)
-        X = np.vstack([X, gaussclass.data])
-        y = np.append(y, [label]*class_samples)
-    X, y = sklearn.utils.shuffle(X, y, random_state=clime.RANDOM_SEED)
-    return {'X': X, 'y':y}
 
 def get_proportions_and_sample_num(class_samples):
     ''' give class sample num eg. [25, 75] and will return proportions and total
@@ -76,7 +26,7 @@ def get_proportions_and_sample_num(class_samples):
     class_proportions = np.array(class_samples)/max_class # normalise
     return n_samples, list(class_proportions)
 
-def unbalance(data, class_proportions=None, verbose=False):
+def unbalance_undersample(data, class_proportions=None, verbose=False):
     '''
     Transfrom balanced dataset into unbalanced dataset
     Classes are unbalanced via undersampling (random sampling without replacement)
@@ -135,10 +85,10 @@ def unbalance(data, class_proportions=None, verbose=False):
 
 
 
-def balance(data, verbose=False):
+def balance_oversample(data, verbose=False):
     '''
     given a dataset, make the classes balanced
-    balancing is done via oversmaplign the minority class
+    balancing is done via oversampling the minority class
         - data: dictionary with keys 'X', 'y'
 
     returns:

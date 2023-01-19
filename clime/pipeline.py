@@ -4,7 +4,7 @@ put together all aspects of the training/explaination/evaluation pipeline
 # author: Matt Clifford
 # email: matt.clifford@bristol.ac.uk
 
-from clime import data, model, models, explainer, evaluation, utils
+from clime import data, models, explainer, evaluation, utils
 
 def run(opts):
     '''
@@ -16,17 +16,16 @@ def run(opts):
     # work out how much data to sample
     n_samples, class_proportions = data.get_proportions_and_sample_num(opts['class samples'])
     #  get dataset
-    if opts['dataset'] == 'moons':
-        train_data = data.get_moons(samples=n_samples)
-    elif opts['dataset'] == 'guassian':
-        train_data = data.get_gaussian(samples=n_samples)
+    if opts['dataset'] not in data.AVAILABLE_DATASETS.keys():
+        raise ValueError(utils.input_error_msg(opts['dataset'], data.AVAILABLE_DATASETS.keys(), 'dataset'))
     else:
-        raise ValueError(f"'dataset' needs to be 'moons' or 'guassian' not {opts['dataset']}")
+        train_data = data.AVAILABLE_DATASETS[opts['dataset']](samples=n_samples)
+
     # unbalance data
-    train_data = data.unbalance(train_data, opts['class samples'])
+    train_data = data.unbalance_undersample(train_data, opts['class samples'])
     # option to balance the data
     if opts['rebalance data'] == True:
-        train_data = data.balance(train_data)
+        train_data = data.balance_oversample(train_data)
 
     '''
       __  __  ___  ___  ___ _
