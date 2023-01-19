@@ -11,6 +11,7 @@ rebalance by under sampling?? (makes different just cost sensitive training)
 
 better pipeline
   - finish more automatic type pipeline getting method from __init__
+  - make generic function in pipeline for getting and calling AVAILABLE_****
   - write tests for all available pipeline params
 
 
