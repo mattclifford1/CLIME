@@ -4,7 +4,7 @@ put together all aspects of the training/explaination/evaluation pipeline
 # author: Matt Clifford
 # email: matt.clifford@bristol.ac.uk
 
-from clime import data, model, explainer, evaluation
+from clime import data, model, models, explainer, evaluation, utils
 
 def run(opts):
     '''
@@ -21,7 +21,7 @@ def run(opts):
     elif opts['dataset'] == 'guassian':
         train_data = data.get_gaussian(samples=n_samples)
     else:
-        raise ValueError(f"dataset needs to be 'moons' or 'guassian' not {opts['dataset']}")
+        raise ValueError(f"'dataset' needs to be 'moons' or 'guassian' not {opts['dataset']}")
     # unbalance data
     train_data = data.unbalance(train_data, opts['class samples'])
     # option to balance the data
@@ -34,16 +34,17 @@ def run(opts):
      | |\/| | (_) | |) | _|| |__
      |_|  |_|\___/|___/|___|____|
     '''
-    if opts['model'] == 'normal':
-        clf = model.SVM(train_data)
-    elif opts['model'] == 'cost sensitive':
-        clf = model.SVM(train_data, class_weight='balanced')
-    elif opts['model'] == 'boundary adjust':
-        clf = model.SVM_balance_boundary(train_data, boundary_weight=1)
-    elif opts['model'] == 'probability adjust':
-        clf = model.SVM_balance_proba(train_data)
+    # what model to use
+    if opts['model'] not in models.AVAILABLE_MODELS.keys():
+        raise ValueError(utils.input_error_msg(opts['model'], models.AVAILABLE_MODELS.keys(), 'model'))
     else:
-        raise ValueError(f"model needs to be 'normal', 'cost sensitive', 'boundary adjust' or 'probability adjust' not: {opts['model']}")
+        clf = models.AVAILABLE_MODELS[opts['model']](train_data)
+
+    # adjust model post training
+    if opts['model balancer'] not in models.AVAILABLE_MODEL_BALANCING.keys():
+        raise ValueError(utils.input_error_msg(opts['model balancer'], models.AVAILABLE_MODELS.keys(), 'model balancer'))
+    else:
+        clf = models.AVAILABLE_MODEL_BALANCING[opts['model balancer']](clf, train_data, weight=1)
 
     '''
       _____  _____ _      _   ___ _  _ ___ ___
@@ -73,20 +74,21 @@ def run(opts):
     elif opts['evaluation'] == 'class balanced fidelity':
         fid = evaluation.bal_fidelity(blimey, clf, train_data)
     else:
-        raise ValueError(f"evaluation needs to be 'normal fidelity', 'local fidelity' or 'class balanced fidelity' not: {opts['evaluation']}")
+        raise ValueError(f"'evaluation' needs to be 'normal fidelity', 'local fidelity' or 'class balanced fidelity' not: {opts['evaluation']}")
 
     return fid
 
 
 if __name__ == '__main__':
     opts = {
-        'dataset':       'moons',
-        'class samples': [25, 75],
-        'rebalance data': False,
-        'model':         'normal',
-        'explainer':     'normal',
-        'query point':   10,
-        'evaluation':    'normal fidelity',
+        'dataset':        'moons',
+        'class samples':  [25, 75],
+        'rebalance data':  False,
+        'model':          'SVM',
+        'model balancer': 'none',
+        'explainer':      'normal',
+        'query point':    10,
+        'evaluation':     'normal fidelity',
     }
     f = run(opts)
     print(f)

@@ -1,44 +1,30 @@
 # author: Matt Clifford
 # email: matt.clifford@bristol.ac.uk
-import sklearn.svm
+'''
+Balancing models post training
+models  --- todo: generic input as superclas?
+'''
 import numpy as np
 from clime import costs
 
-
-class SVM(sklearn.svm.SVC):
+class adjust_boundary():
     '''
-    train a 'black box' model on dataset - sub class of sklearn svm.SVC
-    input:
-        - data: dictionary with keys 'X', 'y'
-
-    returns:
-        - model: sklearn model trained on the dataset
-
-    to train with class balance weighting using the kwarg: class_weight='balanced'
-    '''
-    def __init__(self, data, gamma=2, C=1, probability=True, **kwargs):
-        self.data = data    # colab wont work unless we attribute data? (older python version)
-        super().__init__(gamma=gamma, C=C, probability=probability, **kwargs)
-        self.fit(self.data['X'], self.data['y'])
-
-
-class SVM_balance_boundary(SVM):
-    '''
-    train a 'black box' model on dataset but balance the model by pushing its
+    balance the model by pushing its
     boundary away from the minority class since we are less certain about
     predictions in that area, this is achieved by changing the data point before
     being input to the model.
     **currently only works with pushing minority class towards the majority class
     input:
+        - model: clime.models.base_model
         - data: dictionary with keys 'X', 'y'
-        - boundary_weight: scale to push the boundary
+        - weight: scale to push the boundary
 
     returns:
-        - model: sklearn model trained on the dataset
+        - model: model trained on the dataset
     '''
-    def __init__(self, data, boundary_weight=1, **kwargs):
-        super().__init__(data, **kwargs)
-        self.boundary_weight = boundary_weight
+    def __init__(self, model, data, weight=1):
+        self.model = model
+        self.weight = weight
         self._get_vector_to_balance(data)
 
     def _get_vector_to_balance(self, data):
@@ -70,30 +56,33 @@ class SVM_balance_boundary(SVM):
         self.diff_scale /= data['X'].shape[0]
 
     def _balance_input(self, x):
-        return x - (self.bal_vector*self.diff_scale*self.boundary_weight)
+        return x - (self.bal_vector*self.diff_scale*self.weight)
 
     def predict(self, x):
         bal_x = self._balance_input(x)
-        return super().predict(bal_x)
+        return self.model.predict(bal_x)
 
     def predict_proba(self, x):
         bal_x = self._balance_input(x)
-        return super().predict_proba(bal_x)
+        return self.model.predict_proba(bal_x)
 
 
-class SVM_balance_proba(SVM):
+class adjust_proba():
     '''
-    train a 'black box' model on dataset but balance the model by changing the
+    balance the model by changing the
     probabilities output from the model by scaling them with respect to the
     abundance of data points in that class
     input:
+        - model: clime.models.base_model
         - data: dictionary with keys 'X', 'y'
+        - weight: scale probabilty weight adjustment
 
     returns:
-        - model: sklearn model trained on the dataset
+        - model: model trained on the dataset
     '''
-    def __init__(self, data, **kwargs):
-        super().__init__(data, **kwargs)
+    def __init__(self, model, data, weight=1):
+        self.model = model
+        self.weight = weight
         self._class_weightings(data)
 
     def _class_weightings(self, data):
@@ -102,37 +91,31 @@ class SVM_balance_proba(SVM):
         '''
         self.class_weights = costs.weight_based_on_class_imbalance(data)
 
+    def predict(self, x):
+        '''
+        no change to predictions
+        '''
+        return self.model.predict(x)
+
     def predict_proba(self, x):
         '''
         reduce the probability of less representative class
         '''
-        preds = super().predict_proba(x)
+        pred_proba = self.model.predict_proba(x)
         # adjust probability with the weights
-        adjusted = preds * self.class_weights
+        adjusted = pred_proba * self.class_weights * self.weight
         # normalise to make a probability again -- is this okay to be doing????
         adjust_probs = adjusted / np.sum(adjusted, axis=1)[:, None]
         return adjust_probs
 
+class none():
+    '''dummy class to not adjust the model'''
+    def __init__(self, model, data, weight):
+        self.model = model
+        self.weight = weight
 
-if __name__ == '__main__':
-    import matplotlib.pyplot as plt
-    import data
-    import plot_utils
+    def predict(self, x):
+        return self.model.predict(x)
 
-    # get dataset
-    train_data = data.get_moons()
-    train_data = data.unbalance(train_data,[1,0.5])
-
-    # train model
-    # clf = SVM(train_data)
-    clf = SVM(train_data)
-    clf_bal_prob = SVM_balance_proba(train_data)
-    print(clf.predict_proba([[1,2]]), sum(sum(clf.predict_proba([[1,2]]))))
-    print(clf_bal_prob.predict_proba([[1,2]]), sum(sum(clf_bal_prob.predict_proba([[1,2]]))))
-
-
-    # # plot results
-    ax = plt.gca()
-    plot_utils.plot_decision_boundary(clf, train_data, ax=ax)
-    plot_utils.plot_classes(train_data, ax=ax)
-    plt.show()
+    def predict_proba(self, x):
+        return self.model.predict_proba(x)

@@ -10,5 +10,9 @@ rebalance by under sampling?? (makes different just cost sensitive training)
 
 
 better pipeline
+  - finish more automatic type pipeline getting method from __init__
+  - write tests for all available pipeline params
+
+
   - (maybe run an average over multiple runs/data instances)
   - compare different pipeline configs - graphs???
