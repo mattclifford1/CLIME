@@ -1,5 +1,6 @@
 from clime import data, models, explainer, evaluation
-from .make_pipeline import construct
+from .make_pipeline import *
+from .multiple_runs import *
 
 AVAILABLE_MODULES = {
     'dataset': data.AVAILABLE_DATASETS,

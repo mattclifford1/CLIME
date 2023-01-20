@@ -1,8 +1,6 @@
 # author: Matt Clifford
 # email: matt.clifford@bristol.ac.uk
-import itertools
-from tqdm import tqdm
-from clime import pipeline
+from clime import pipeline, utils
 
 def test_all_pipeline_configs():
     all_opts = {
@@ -13,10 +11,9 @@ def test_all_pipeline_configs():
     for name in pipeline.AVAILABLE_MODULE_NAMES:
         all_opts[name] = list(pipeline.AVAILABLE_MODULES[name].keys())
     # get all variations/permuations of the pipeline options
-    keys, values = zip(*all_opts.items())
-    opts_permutations = [dict(zip(keys, v)) for v in itertools.product(*values)]
+    opts_permutations = utils.get_all_dict_permutations(all_opts)
     # now test all variations of methods
-    for opts in tqdm(opts_permutations, leave=False):
+    for opts in opts_permutations:
         p = pipeline.construct(opts)
         p.run()
 

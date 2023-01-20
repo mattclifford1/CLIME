@@ -14,8 +14,6 @@ lime sampling cov (from data?)
 lime features split (from data?)
 
 
-better pipeline
-
-
-  - (maybe run an average over multiple runs/data instances)
+better pipeline ***************************************************** main.py
+  - multiple runs of multipl opts entries
   - compare different pipeline configs - graphs???

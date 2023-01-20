@@ -1,3 +1,8 @@
+'''
+main entry point to run the pipeline/experiments
+'''
+# author: Matt Clifford
+# email: matt.clifford@bristol.ac.uk
 import clime
 
 if __name__ == '__main__':
@@ -8,8 +13,6 @@ if __name__ == '__main__':
         'model':               'SVM',
         'model balancer':      'none',
         'explainer':           'normal',
-        'query point':         15,
         'evaluation':          'normal',
     }
-    p = clime.pipeline.construct(opts)
-    print(p.run())
+    print(clime.pipeline.get_avg(opts))
