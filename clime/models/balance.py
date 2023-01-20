@@ -5,7 +5,7 @@ Balancing models post training
 models  --- todo: generic input as superclas?
 '''
 import numpy as np
-from clime import costs
+from clime.data import costs
 
 class adjust_boundary():
     '''

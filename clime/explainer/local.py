@@ -7,7 +7,7 @@ Implimentation of build LIME yourself (bLIMEy): https://arxiv.org/abs/1910.13016
 import numpy as np
 import sklearn
 import clime
-from clime import costs, data
+from clime.data import costs
 
 
 class bLIMEy:

@@ -2,7 +2,7 @@
 # email: matt.clifford@bristol.ac.uk
 import sklearn.svm
 import numpy as np
-from clime import costs
+from clime.data import costs
 from clime.models import base_model
 
 

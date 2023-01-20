@@ -1,7 +1,7 @@
 # author: Matt Clifford
 # email: matt.clifford@bristol.ac.uk
 
-from clime import costs
+from clime.data import costs
 import numpy as np
 
 
