@@ -85,10 +85,10 @@ class pipeline:
         raises:
             - ValueError: if the requested option isn't available
         '''
-        if opts[section] not in available_modules.keys():
-            raise ValueError(utils.input_error_msg(opts[section], available_modules.keys(), section))
+        if self.opts[section] not in available_modules.keys():
+            raise ValueError(utils.input_error_msg(self.opts[section], available_modules.keys(), section))
         else:
-            return available_modules[opts[section]](**kwargs)
+            return available_modules[self.opts[section]](**kwargs)
 
 
 if __name__ == '__main__':
