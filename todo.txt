@@ -1,4 +1,8 @@
 things that still need to be implemented
+-------------------------------------------------------------
+look into class_proportions in the pipeline to verify it's working as expected
+
+more ABC for each part of the pipeline
 
 
 balancing data inside the explainer before training

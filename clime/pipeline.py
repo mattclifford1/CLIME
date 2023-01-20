@@ -3,91 +3,105 @@ put together all aspects of the training/explaination/evaluation pipeline
 '''
 # author: Matt Clifford
 # email: matt.clifford@bristol.ac.uk
-
+from dataclasses import dataclass
 from clime import data, models, explainer, evaluation, utils
 
-def run(opts):
-    '''
-      ___   _ _____ _
-     |   \ /_\_   _/_\
-     | |) / _ \| |/ _ \
-     |___/_/ \_\_/_/ \_\
-    '''
-    # work out how much data to sample
-    n_samples, class_proportions = data.get_proportions_and_sample_num(opts['class samples'])
-    #  get dataset
-    if opts['dataset'] not in data.AVAILABLE_DATASETS.keys():
-        raise ValueError(utils.input_error_msg(opts['dataset'], data.AVAILABLE_DATASETS.keys(), 'dataset'))
-    else:
-        train_data = data.AVAILABLE_DATASETS[opts['dataset']](samples=n_samples)
 
-    # unbalance data
-    train_data = data.unbalance_undersample(train_data, opts['class samples'])
-    # option to balance the data
-    if opts['rebalance data'] == True:
-        train_data = data.balance_oversample(train_data)
+@dataclass
+class pipeline:
+    opts: dict
 
-    '''
-      __  __  ___  ___  ___ _
-     |  \/  |/ _ \|   \| __| |
-     | |\/| | (_) | |) | _|| |__
-     |_|  |_|\___/|___/|___|____|
-    '''
-    # what model to use
-    if opts['model'] not in models.AVAILABLE_MODELS.keys():
-        raise ValueError(utils.input_error_msg(opts['model'], models.AVAILABLE_MODELS.keys(), 'model'))
-    else:
-        clf = models.AVAILABLE_MODELS[opts['model']](train_data)
+    def run(self):
+        '''
+          ___   _ _____ _
+         |   \ /_\_   _/_\
+         | |) / _ \| |/ _ \
+         |___/_/ \_\_/_/ \_\
+        '''
+        # work out how much data to sample
+        n_samples, class_proportions = data.get_proportions_and_sample_num(self.opts['class samples'])
+        #  get dataset
+        train_data = self._run_section('dataset',
+                                       data.AVAILABLE_DATASETS,
+                                       samples=n_samples)
+        # unbalance data
+        train_data = self._run_section('dataset unbalancing',
+                                       data.AVAILABLE_DATA_UNBALANCING,
+                                       data=train_data,
+                                       class_proportions=self.opts['class samples'])
+        # option to balance the data
+        train_data = self._run_section('dataset rebalancing',
+                                       data.AVAILABLE_DATA_BALANCING,
+                                       data=train_data)
 
-    # adjust model post training
-    if opts['model balancer'] not in models.AVAILABLE_MODEL_BALANCING.keys():
-        raise ValueError(utils.input_error_msg(opts['model balancer'], models.AVAILABLE_MODELS.keys(), 'model balancer'))
-    else:
-        clf = models.AVAILABLE_MODEL_BALANCING[opts['model balancer']](clf, train_data, weight=1)
+        '''
+          __  __  ___  ___  ___ _
+         |  \/  |/ _ \|   \| __| |
+         | |\/| | (_) | |) | _|| |__
+         |_|  |_|\___/|___/|___|____|
+        '''
+        # what model to use
+        clf = self._run_section('model', models.AVAILABLE_MODELS, data=train_data)
+        # adjust model post training
+        clf = self._run_section('model balancer',
+                                models.AVAILABLE_MODEL_BALANCING,
+                                model=clf,
+                                data=train_data,
+                                weight=1)
 
-    '''
-      _____  _____ _      _   ___ _  _ ___ ___
-     | __\ \/ / _ \ |    /_\ |_ _| \| | __| _ \
-     | _| >  <|  _/ |__ / _ \ | || .` | _||   /
-     |___/_/\_\_| |____/_/ \_\___|_|\_|___|_|_\
-    '''
-    if opts['explainer'] == 'normal':
-        blimey = explainer.bLIMEy(clf, train_data['X'][opts['query point'], :])
-    elif opts['explainer'] == 'cost sensitive training':
-        blimey = explainer.bLIMEy(clf, train_data['X'][opts['query point'], :], class_weight=True)
-    elif opts['explainer'] == 'training data rebalance':
-        blimey = explainer.bLIMEy(clf, train_data['X'][opts['query point'], :], class_weight=True)
-    else:
-        raise ValueError(f"explainer needs to be 'normal' or 'cost sensitive training' not {opts['explainer']}")
+        '''
+          _____  _____ _      _   ___ _  _ ___ ___
+         | __\ \/ / _ \ |    /_\ |_ _| \| | __| _ \
+         | _| >  <|  _/ |__ / _ \ | || .` | _||   /
+         |___/_/\_\_| |____/_/ \_\___|_|\_|___|_|_\
+        '''
+        expl = self._run_section('explainer',
+                                 explainer.AVAILABLE_EXPLAINERS,
+                                 black_box_model=clf,
+                                 query_point=train_data['X'][self.opts['query point'], :])
 
-    '''
-      _____   ___   _   _   _  _ _____ ___ ___  _  _
-     | __\ \ / /_\ | | | | | |/_\_   _|_ _/ _ \| \| |
-     | _| \ V / _ \| |_| |_| / _ \| |  | | (_) | .` |
-     |___| \_/_/ \_\____\___/_/ \_\_| |___\___/|_|\_|
-    '''
-    if opts['evaluation'] == 'normal fidelity':
-        fid = evaluation.fidelity(blimey, clf, train_data)
-    elif opts['evaluation'] == 'local fidelity':
-        fid = evaluation.local_fidelity(blimey, clf, train_data, opts['query point'])
-    elif opts['evaluation'] == 'class balanced fidelity':
-        fid = evaluation.bal_fidelity(blimey, clf, train_data)
-    else:
-        raise ValueError(f"'evaluation' needs to be 'normal fidelity', 'local fidelity' or 'class balanced fidelity' not: {opts['evaluation']}")
+        '''
+          _____   ___   _   _   _  _ _____ ___ ___  _  _
+         | __\ \ / /_\ | | | | | |/_\_   _|_ _/ _ \| \| |
+         | _| \ V / _ \| |_| |_| / _ \| |  | | (_) | .` |
+         |___| \_/_/ \_\____\___/_/ \_\_| |___\___/|_|\_|
+        '''
+        score = self._run_section('evaluation',
+                                  evaluation.AVAILABLE_FIDELITY_METRICS,
+                                  expl=expl,
+                                  black_box_model=clf,
+                                  data=train_data,
+                                  query_point=self.opts['query point'])
 
-    return fid
+        return score
+
+    def _run_section(self, section, available_modules, **kwargs):
+        '''
+        run a portion of the pipeline
+        inputs:
+            - section: which part of the pipeline to run eg. 'model'
+            - available_modules: dict holding all available methods from that sections of the pipeline
+            - kwargs: extra inputs to pass to that section of the pipeline eg. train_data
+        raises:
+            - ValueError: if the requested option isn't available
+        '''
+        if opts[section] not in available_modules.keys():
+            raise ValueError(utils.input_error_msg(opts[section], available_modules.keys(), section))
+        else:
+            return available_modules[opts[section]](**kwargs)
 
 
 if __name__ == '__main__':
     opts = {
-        'dataset':        'moons',
-        'class samples':  [25, 75],
-        'rebalance data':  False,
-        'model':          'SVM',
-        'model balancer': 'none',
-        'explainer':      'normal',
-        'query point':    10,
-        'evaluation':     'normal fidelity',
+        'dataset':             'moons',
+        'dataset unbalancing': 'undersampling',
+        'class samples':       [25, 75],
+        'dataset rebalancing': 'none',
+        'model':               'SVM',
+        'model balancer':      'none',
+        'explainer':           'normal',
+        'query point':         15,
+        'evaluation':          'normal',
     }
-    f = run(opts)
-    print(f)
+    p = pipeline(opts)
+    print(p.run())

@@ -9,5 +9,5 @@ def out(message,verbose):
         print(message)
 
 def input_error_msg(given_key, available_keys, key_name):
-    error_msg = f"'{key_name}' needs to be one of: {available_keys} not: {given_key}"
+    error_msg = f"'{key_name}' needs to be one of: {list(available_keys)} not: {given_key}"
     return error_msg

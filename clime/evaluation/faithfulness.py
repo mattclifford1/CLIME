@@ -5,26 +5,26 @@ from clime import costs
 import numpy as np
 
 
-def fidelity(blimey, black_box_model, data):
+def fidelity(expl, black_box_model, data, **kwargs):
     '''
     get fidelity accuracy between both models
     '''
     # get prediction from both models
     bb_preds = black_box_model.predict(data['X'])
-    expl_preds = blimey.predict(data['X'])
+    expl_preds = expl.predict(data['X'])
     same_preds = (bb_preds==expl_preds).astype(np.int64)
     # get the accuracy
     fidelity_acc = sum(same_preds)/len(bb_preds)
     return fidelity_acc
 
-def local_fidelity(blimey, black_box_model, data, query_point):
+def local_fidelity(expl, black_box_model, data, query_point):
     '''
     get fidelity accuracy between both models but weight based on
     distance from query point
     '''
     # get predictions from both models
     bb_preds = black_box_model.predict(data['X'])
-    expl_preds = blimey.predict(data['X'])
+    expl_preds = expl.predict(data['X'])
     same_preds = (bb_preds==expl_preds).astype(np.int64)
     # get weights dataset based on locality
     weights = costs.weights_based_on_distance(query_point, data['X'])
@@ -33,14 +33,14 @@ def local_fidelity(blimey, black_box_model, data, query_point):
     return fidelity_acc
 
 
-def bal_fidelity(blimey, black_box_model, data):
+def bal_fidelity(expl, black_box_model, data, **kwargs):
     '''
     get fidelity accuracy between both models but weight based on
     class imbalance - give higher weight to minority class (prop to instances)
     '''
     # get predictions from both models
     bb_preds = black_box_model.predict(data['X'])
-    expl_preds = blimey.predict(data['X'])
+    expl_preds = expl.predict(data['X'])
     same_preds = (bb_preds==expl_preds).astype(np.int64)
     # get weights dataset based on class imbalance
     weightings = costs.weight_based_on_class_imbalance(data)
@@ -68,11 +68,11 @@ if __name__ == '__main__':
 
     # BLIMEY!
     q_point = 10
-    blimey = explainer.bLIMEy(clf, train_data['X'][q_point, :])
+    expl = explainer.bLIMEy(clf, train_data['X'][q_point, :])
 
-    fid = fidelity(blimey, clf, train_data)
+    fid = fidelity(expl, clf, train_data)
     print(fid)
-    loc_fid = local_fidelity(blimey, clf, train_data, train_data['X'][q_point, :])
+    loc_fid = local_fidelity(expl, clf, train_data, train_data['X'][q_point, :])
     print(loc_fid)
-    bal_fid = bal_fidelity(blimey, clf, train_data)
+    bal_fid = bal_fidelity(expl, clf, train_data)
     print(bal_fid)

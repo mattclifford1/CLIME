@@ -1,3 +1,6 @@
+'''
+Implimentation of build LIME yourself (bLIMEy): https://arxiv.org/abs/1910.13016
+'''
 # author: Matt Clifford
 # email: matt.clifford@bristol.ac.uk
 
@@ -31,9 +34,8 @@ class bLIMEy:
                        query_point,
                        data_lims=None,
                        samples=10000,
-                       class_weight=None,
+                       class_weight=False,
                        rebalance_sampled_data=False):
-        # self.black_box_model = black_box_model
         self.query_point = query_point
         self.data_lims = data_lims
         self.samples = samples
