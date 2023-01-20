@@ -43,7 +43,7 @@ class bLIMEy:
         self.rebalance_sampled_data = rebalance_sampled_data
         self.data = {}
         self._sample_locally(black_box_model)
-        self._train_surrogate()
+        self._train_surrogate(black_box_model)
 
     def get_explanation(self):
         return self.surrogate_model.coef_[0, :] # just do for one class (is the negative for the other class)
@@ -60,7 +60,6 @@ class bLIMEy:
         cov = self._get_local_sampling_cov()
         self.data['X'] = np.random.multivariate_normal(self.query_point, cov, self.samples)
         self.data['y'] = black_box_model.predict(self.data['X'])
-        self.data['p(y)'] = black_box_model.predict_proba(self.data['X'])
 
     def _get_local_sampling_cov(self):
         if self.data_lims == None:
@@ -69,12 +68,14 @@ class bLIMEy:
             # calculate from data lims ?
             return np.eye(len(self.query_point))   # change this to implement var from data lims
 
-    def _train_surrogate(self):
-        # get sample weighting based on distance
-        weights = costs.weights_based_on_distance(self.query_point, self.data['X'])
+    def _train_surrogate(self, black_box_model):
         # option to adjust weights based on class imbalance
         if self.rebalance_sampled_data is True:
-            self.data = data.balance(self.data)
+            self.data = clime.data.balance_oversample(self.data)
+        # get probabilities to regress on
+        self.data['p(y)'] = black_box_model.predict_proba(self.data['X'])
+        # get sample weighting based on distance
+        weights = costs.weights_based_on_distance(self.query_point, self.data['X'])
         if self.class_weight is True:
             # get class imbalance weights
             class_weights = costs.weight_based_on_class_imbalance(self.data)
@@ -83,6 +84,7 @@ class bLIMEy:
             instance_class_imbalance_weights = np.dot(class_preds_matrix, class_weights.T)
             # now combine class imbalance weights with distance based weights
             weights *= instance_class_imbalance_weights
+        # regresssion model
         self.surrogate_model = sklearn.linear_model.Ridge(alpha=1, fit_intercept=True,
                                     random_state=clime.RANDOM_SEED)
         self.surrogate_model.fit(self.data['X'],

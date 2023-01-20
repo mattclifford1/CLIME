@@ -74,4 +74,28 @@ class GaussClass():
 
     def gen_data(self, randomseed, size):
         rng = np.random.default_rng(randomseed)
-        self.data    = np.array(rng.multivariate_normal(self.mean, self.cov, size))
+        self.data = np.array(rng.multivariate_normal(self.mean, self.cov, size))
+
+
+class sample_dataset_to_proportions():
+    '''
+    dataset wrapper to get desired unbalanced classes from any dataset
+    via undersampling the minority class
+    '''
+    def __init__(self, dataset):
+        '''
+        inputs:
+            - dataset: which dataset to sample from
+        '''
+        self.dataset = dataset
+
+    def __call__(self, class_samples):
+        '''
+        - class_samples: how many points to samples in each class eg. [30, 50]
+        '''
+        samples, _ = clime.data.get_proportions_and_sample_num(class_samples)
+        # sample the dataset
+        data = self.dataset(samples)
+        # undersample to get correct class proportions
+        data = clime.data.balance.unbalance_undersample(data, class_samples)
+        return data

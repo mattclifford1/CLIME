@@ -10,13 +10,11 @@ balancing data inside the explainer before training
 
 rebalance by under sampling?? (makes different just cost sensitive training)
 
-
+lime sampling cov (from data?)
+lime features split (from data?)
 
 
 better pipeline
-  - finish more automatic type pipeline getting method from __init__
-  - make generic function in pipeline for getting and calling AVAILABLE_****
-  - write tests for all available pipeline params
 
 
   - (maybe run an average over multiple runs/data instances)

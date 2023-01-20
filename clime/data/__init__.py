@@ -5,13 +5,8 @@ def _identity_data(data, *args):
     return data
 
 AVAILABLE_DATASETS = {
-    'moons': get_moons,
-    'guassian': get_gaussian,
-}
-
-AVAILABLE_DATA_UNBALANCING = {
-    'none': _identity_data,
-    'undersampling': unbalance_undersample,
+    'moons': sample_dataset_to_proportions(get_moons),
+    'guassian': sample_dataset_to_proportions(get_gaussian),
 }
 
 AVAILABLE_DATA_BALANCING = {
