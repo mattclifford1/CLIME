@@ -6,7 +6,6 @@ put together all aspects of the training/explaination/evaluation pipeline
 from dataclasses import dataclass
 import clime
 from clime import data, models, explainer, evaluation, utils
-# from clime.pipeline import AVAILABLE_MODULES
 
 
 @dataclass
