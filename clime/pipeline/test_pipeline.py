@@ -1,8 +1,16 @@
 # author: Matt Clifford
 # email: matt.clifford@bristol.ac.uk
 from clime import pipeline, utils
+import multiprocessing
 
-def test_all_pipeline_configs():
+
+def run_pipeline(opts):
+    p = pipeline.construct(opts)
+    p.run()
+
+def test_all_pipeline_configs(n_cpus=int(multiprocessing.cpu_count()/2)):
+    # change n_cpus to 1 if running out of memory on your device
+
     all_opts = {
         'class samples': [[10, 15]],   # keep low to reduce comp time
         'query point': [1],
@@ -13,9 +21,8 @@ def test_all_pipeline_configs():
     # get all variations/permuations of the pipeline options
     opts_permutations = utils.get_all_dict_permutations(all_opts)
     # now test all variations of methods
-    for opts in opts_permutations:
-        p = pipeline.construct(opts)
-        p.run()
+    with multiprocessing.Pool(processes=n_cpus) as pool:
+            pool.map(run_pipeline, opts_permutations)
 
 if __name__ == '__main__':
     test_all_pipeline_configs()
