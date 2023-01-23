@@ -23,6 +23,7 @@ def get_avg(opts, limited_data=False):
     if limited_data == True:
         end = min(len(opts['query point']), 10)
         opts['query point'] = opts['query point'][:end]
+    # get all pipeline configs  with each query point in the dataset
     opts_permutations = utils.get_all_dict_permutations(opts)
     scores = []
     for opts in opts_permutations:

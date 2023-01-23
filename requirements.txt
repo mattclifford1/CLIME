@@ -5,3 +5,4 @@ ipython
 notebook
 tqdm
 pytest
+ipywidgets

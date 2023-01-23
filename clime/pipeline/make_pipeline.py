@@ -21,9 +21,11 @@ class construct:
         '''
         #  get dataset
         train_data = self.run_section('dataset',
+                                       self.opts,
                                        class_samples=self.opts['class samples'])
         # option to rebalance the data
         train_data = self.run_section('dataset rebalancing',
+                                       self.opts,
                                        data=train_data)
 
         '''
@@ -34,9 +36,11 @@ class construct:
         '''
         # what model to use
         clf = self.run_section('model',
-                               data=train_data)
+                                self.opts,
+                                data=train_data)
         # adjust model post training
         clf = self.run_section('model balancer',
+                                self.opts,
                                 model=clf,
                                 data=train_data,
                                 weight=1)
@@ -48,6 +52,7 @@ class construct:
          |___/_/\_\_| |____/_/ \_\___|_|\_|___|_|_\
         '''
         expl = self.run_section('explainer',
+                                 self.opts,
                                  black_box_model=clf,
                                  query_point=train_data['X'][self.opts['query point'], :])
 
@@ -58,6 +63,7 @@ class construct:
          |___| \_/_/ \_\____\___/_/ \_\_| |___\___/|_|\_|
         '''
         score = self.run_section('evaluation',
+                                  self.opts,
                                   expl=expl,
                                   black_box_model=clf,
                                   data=train_data,
@@ -65,20 +71,22 @@ class construct:
 
         return score
 
-    def run_section(self, section, **kwargs):
+    @staticmethod     # make static so this can be called from outside the pipeline
+    def run_section(section, options, **kwargs):
         '''
         run a portion of the pipeline
         inputs:
             - section: which part of the pipeline to run eg. 'model'
+            - options: config for the pipeline
             - kwargs: extra inputs to pass to that section of the pipeline eg. train_data
         raises:
             - ValueError: if the requested option isn't available
         '''
         available_modules = clime.pipeline.AVAILABLE_MODULES[section]
-        if self.opts[section] not in available_modules.keys():
-            raise ValueError(utils.input_error_msg(self.opts[section], section))
+        if options[section] not in available_modules.keys():
+            raise ValueError(utils.input_error_msg(options[section], section))
         else:
-            return available_modules[self.opts[section]](**kwargs)
+            return available_modules[options[section]](**kwargs)
 
 
 if __name__ == '__main__':
