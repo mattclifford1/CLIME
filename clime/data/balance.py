@@ -94,14 +94,14 @@ def balance_oversample(data, verbose=False):
     returns:
         - data: dictionary with keys 'X', 'y'
     '''
-    # make balanced using oversampling
+    labels, counts = np.unique(data['y'][:], return_counts=True)
+    # check that classes aren't already balanced
+    if len(np.unique(counts)) == 1:
+        return data
 
-    labels = np.unique(data['y'][:])   # List of unique class labels
-    balanced_i = []                  # List for appending sampling indices
-
+    balanced_i = []    # List for appending sampling indices
     # create dict for counting class frequencies
     class_freq = {}
-
     for y in data['y']:
         if y in class_freq:
             class_freq[y]+=1
@@ -112,7 +112,6 @@ def balance_oversample(data, verbose=False):
     for key, value in class_freq.items():
         if value > max_freq:
             max_freq = value
-
         clime.utils.out('Class '+f"{int(key)} | {value}",verbose)
 
      # For each class:
@@ -123,10 +122,8 @@ def balance_oversample(data, verbose=False):
 
     for  l in range(0,len(labels)):
         label = labels[l]
-
         label_i = [i for i, x in enumerate(data['y']) if x== label]
         class_size = len(label_i)
-
         if class_size < max_freq:
             random.seed(int(clime.RANDOM_SEED+label))
             balanced_i = [int(i) for i in np.append(balanced_i,random.choices(label_i,k=(max_freq-class_size)))]
@@ -134,13 +131,10 @@ def balance_oversample(data, verbose=False):
             balanced_i = np.append(label_i,balanced_i)
         else:
             balanced_i = np.append(balanced_i,label_i)
-
         clime.utils.out('-'*50,verbose)
         clime.utils.out('Class '+ str(label) + ' | Unbalanced = ' + str(class_size) + ' , Balanced = ' + str(max_freq),verbose)
-
     random.seed(clime.RANDOM_SEED-1)
     random.shuffle(balanced_i)
-
     return {'X': data['X'][balanced_i],'y': data['y'][balanced_i]}
 
 if __name__ == '__main__':

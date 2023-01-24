@@ -6,7 +6,8 @@ def run_all(ev):
     display(Javascript('IPython.notebook.execute_cells_below()'))
 
 def get_run_button():
-    button = ipywidgets.widgets.Button(description="RUN PIPELINE")
+    # button = ipywidgets.widgets.Button(description=f"{'*'*10}RUN PIPELINE{'*'*10}")
+    button = ipywidgets.widgets.Button(description=f"RUN PIPELINE")
     button.on_click(run_all)
     display(button)
 
@@ -38,16 +39,37 @@ def get_config(interactive_data_store):
         config[key] = interactive_data_store[key].result
     return config
 
+def get_pipeline_widgets():
+    data_store = {}
+    # input class proportions
+    data_store = get_sliders(data_store)
+    # which dataset
+    data_store = get_drop_down('dataset', data_store)
+    # which balancing data method
+    data_store = get_drop_down('dataset rebalancing', data_store)
+    # which model to use
+    data_store = get_drop_down('model', data_store)
+    # which model to use
+    data_store = get_drop_down('model balancer', data_store)
+    # which explainer to use
+    data_store = get_drop_down('explainer', data_store)
+    # which evaluation to use
+    data_store = get_drop_down('evaluation', data_store)
+    return data_store
+
+def disp_section_name(section, data_store):
+    return f"{section}: {get_config(data_store)[section]}"
 
 def run_vis_pipeline(data_store):
     ############## DATA #################
     # get dataset
     dataset_unbal = clime.pipeline.construct.run_section('dataset', get_config(data_store), class_samples=get_config(data_store)['class samples'])
-
     # balalance data
     dataset_bal = clime.pipeline.construct.run_section('dataset rebalancing', get_config(data_store), data=dataset_unbal)
     # display datasets
-    clime.utils.plot_data_dict({'sampled': dataset_unbal, 'rebalanced':dataset_bal})
+    datasets = {disp_section_name('dataset', data_store): dataset_unbal,
+                disp_section_name('dataset rebalancing', data_store): dataset_bal}
+    clime.utils.plot_data_dict(datasets)
 
 
     ############## MODEL #################
@@ -60,8 +82,8 @@ def run_vis_pipeline(data_store):
                                     data=dataset_bal,
                                     weight=1)
     models = {
-              'model': {'model': clf, 'data': dataset_bal},
-              'model balanced': {'model': clf_bal, 'data': dataset_bal}
+              disp_section_name('model', data_store): {'model': clf, 'data': dataset_bal},
+              disp_section_name('model balancer', data_store): {'model': clf_bal, 'data': dataset_bal}
              }
     clime.utils.plots.plot_clfs(models)
 
