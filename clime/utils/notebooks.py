@@ -91,20 +91,25 @@ def run_vis_pipeline(data_store):
     ############## EVALUATE with EXPLAINER #####################
     # get average of all evaluation over all points in the data set
 
+    eval_scores = {
+        'unbal model': clime.pipeline.construct.get_avg_evaluation(get_config(data_store), clf, dataset_bal),
+        'bal model':  clime.pipeline.construct.get_avg_evaluation(get_config(data_store), clf_bal, dataset_bal)
+    }
+    clime.utils.plots.plot_bar_dict(eval_scores)
 
-def eval_explainer(opts, clf, data, query_point):
-
-    ############## EXPLAINER #################
-    expl = clime.pipeline.construct.run_section('explainer',
-                                     get_config(data_store),
-                                     black_box_model=clf_bal,
-                                     query_point=dataset_bal['X'][0, :])
-
-    ############## EVALUATION #################
-    evalu = clime.pipeline.construct.run_section('evaluation',
-                                      get_config(data_store),
-                                      expl=expl,
-                                      black_box_model=clf_bal,
-                                      data=dataset_bal,
-                                      query_point=0)
-    print(evalu)
+# def eval_explainer(opts, clf, data, query_point):
+#
+#     ############## EXPLAINER #################
+#     expl = clime.pipeline.construct.run_section('explainer',
+#                                      get_config(data_store),
+#                                      black_box_model=clf_bal,
+#                                      query_point=dataset_bal['X'][0, :])
+#
+#     ############## EVALUATION #################
+#     evalu = clime.pipeline.construct.run_section('evaluation',
+#                                       get_config(data_store),
+#                                       expl=expl,
+#                                       black_box_model=clf_bal,
+#                                       data=dataset_bal,
+#                                       query_point=0)
+#     print(evalu)
