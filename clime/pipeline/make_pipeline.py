@@ -1,9 +1,12 @@
 '''
 put together all aspects of the training/explaination/evaluation pipeline
+
+'score' is avg/std over all local explainers from all data points in the dataset
 '''
 # author: Matt Clifford
 # email: matt.clifford@bristol.ac.uk
 from dataclasses import dataclass
+import numpy as np
 import clime
 from clime import data, models, explainer, evaluation, utils
 
@@ -13,6 +16,12 @@ class construct:
     opts: dict
 
     def run(self):
+        train_data, clf = self.get_data_model()
+        # expl, score = self.get_explainer_evaluation(train_data, clf)
+        score_avg = self.get_avg_evaluation(self.opts, clf, train_data)
+        return score_avg
+
+    def get_data_model(self):
         '''
           ___   _ _____ _
          |   \ /_\_   _/_\
@@ -27,7 +36,6 @@ class construct:
         train_data = self.run_section('dataset rebalancing',
                                        self.opts,
                                        data=train_data)
-
         '''
           __  __  ___  ___  ___ _
          |  \/  |/ _ \|   \| __| |
@@ -44,34 +52,46 @@ class construct:
                                 model=clf,
                                 data=train_data,
                                 weight=1)
+        return train_data, clf
 
+    @staticmethod
+    def get_avg_evaluation(opts, clf, train_data):
+        scores = []
+        for i in range(len(train_data['y'])):
+            _, score = construct.get_explainer_evaluation(opts, train_data, clf, i)
+            scores.append(score)
+        scores = np.array(scores)
+        return {'avg': np.mean(scores), 'std': np.std(scores)}
+
+
+    @staticmethod
+    def get_explainer_evaluation(opts, train_data, clf, query_point_ind):
         '''
           _____  _____ _      _   ___ _  _ ___ ___
          | __\ \/ / _ \ |    /_\ |_ _| \| | __| _ \
          | _| >  <|  _/ |__ / _ \ | || .` | _||   /
          |___/_/\_\_| |____/_/ \_\___|_|\_|___|_|_\
         '''
-        expl = self.run_section('explainer',
-                                 self.opts,
+        expl = construct.run_section('explainer',
+                                 opts,
                                  black_box_model=clf,
-                                 query_point=train_data['X'][self.opts['query point'], :])
-
+                                 query_point=train_data['X'][query_point_ind, :])
         '''
           _____   ___   _   _   _  _ _____ ___ ___  _  _
          | __\ \ / /_\ | | | | | |/_\_   _|_ _/ _ \| \| |
          | _| \ V / _ \| |_| |_| / _ \| |  | | (_) | .` |
          |___| \_/_/ \_\____\___/_/ \_\_| |___\___/|_|\_|
         '''
-        score = self.run_section('evaluation',
-                                  self.opts,
+        score = construct.run_section('evaluation',
+                                  opts,
                                   expl=expl,
                                   black_box_model=clf,
                                   data=train_data,
-                                  query_point=self.opts['query point'])
+                                  query_point=query_point_ind)
 
-        return score
+        return expl, score
 
-    @staticmethod     # make static so this can be called from outside the pipeline
+    @staticmethod  # make static so this can be called from outside the pipeline
     def run_section(section, options, **kwargs):
         '''
         run a portion of the pipeline
@@ -93,13 +113,11 @@ if __name__ == '__main__':
     opts = {
         'dataset':             'moons',
         'class samples':       [25, 75],
-        'number of samples':   1000,
         'dataset rebalancing': 'none',
         'model':               'SVM',
         'model balancer':      'none',
         'explainer':           'normal',
-        'query point':         15,
         'evaluation':          'normal',
     }
-    p = contruct(opts)
+    p = construct(opts)
     print(p.run())

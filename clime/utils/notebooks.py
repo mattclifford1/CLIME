@@ -1,3 +1,4 @@
+import multiprocessing
 import ipywidgets
 from IPython.display import display, Javascript
 import clime
@@ -87,13 +88,17 @@ def run_vis_pipeline(data_store):
              }
     clime.utils.plots.plot_clfs(models)
 
+    ############## EVALUATE with EXPLAINER #####################
+    # get average of all evaluation over all points in the data set
+
+
+def eval_explainer(opts, clf, data, query_point):
 
     ############## EXPLAINER #################
     expl = clime.pipeline.construct.run_section('explainer',
                                      get_config(data_store),
                                      black_box_model=clf_bal,
                                      query_point=dataset_bal['X'][0, :])
-    print(expl)
 
     ############## EVALUATION #################
     evalu = clime.pipeline.construct.run_section('evaluation',
