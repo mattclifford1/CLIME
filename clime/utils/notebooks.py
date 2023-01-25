@@ -70,7 +70,7 @@ def run_vis_pipeline(data_store):
     # display datasets
     datasets = {disp_section_name('dataset', data_store): dataset_unbal,
                 disp_section_name('dataset rebalancing', data_store): dataset_bal}
-    clime.utils.plot_data_dict(datasets)
+    # clime.utils.plot_data_dict(datasets)
 
 
     ############## MODEL #################

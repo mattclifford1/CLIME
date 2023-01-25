@@ -17,9 +17,9 @@ from clime import data, models, explainer, evaluation, utils
 class construct:
     opts: dict
 
-    def run(self):
+    def run(self, parallel_eval=False):
         train_data, clf = self.get_data_model()
-        score_avg = self.get_avg_evaluation(self.opts, clf, train_data)
+        score_avg = self.get_avg_evaluation(self.opts, clf, train_data, run_parallel=parallel_eval)
         return score_avg
 
     def get_data_model(self):

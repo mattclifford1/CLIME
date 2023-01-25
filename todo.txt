@@ -4,6 +4,8 @@ more ABC for each part of the pipeline
 
 tests for input error msg in the pipeline
 
+fix pipeline.get_avg  -> multiple_runs.py
+
 
 balancing data inside the explainer before training
   - change to just sample more from minority class
