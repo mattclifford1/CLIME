@@ -13,7 +13,7 @@ def get_run_button():
     display(button)
 
 # set up interactive functionality
-def _get_class_values(class_1, class_2):
+def _get_class_values(class_1=25, class_2=75):
     return [class_1, class_2]
 
 def get_sliders(interactive_data_store):
