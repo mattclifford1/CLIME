@@ -10,12 +10,12 @@ def out(message,verbose):
     if verbose:
         print(message)
 
-def input_error_msg(given_key, key_name):
+def input_error_msg(options, section):
     '''
     error message when a module method is not available
     '''
-    available_keys = clime.pipeline.AVAILABLE_MODULES[section][key_name]
-    error_msg = f"'{key_name}' needs to be one of: {list(available_keys)} not: {given_key}"
+    available_keys = list(clime.pipeline.AVAILABLE_MODULES[section].keys())
+    error_msg = f"'{section}' needs to be one of: {list(available_keys)} not: {options[section]}"
     return error_msg
 
 def get_all_dict_permutations(dict_):

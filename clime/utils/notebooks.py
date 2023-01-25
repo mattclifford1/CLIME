@@ -92,10 +92,11 @@ def run_vis_pipeline(data_store):
     # get average of all evaluation over all points in the data set
 
     eval_scores = {
-        'unbal model': clime.pipeline.construct.get_avg_evaluation(get_config(data_store), clf, dataset_bal),
-        'bal model':  clime.pipeline.construct.get_avg_evaluation(get_config(data_store), clf_bal, dataset_bal)
+        disp_section_name('model', data_store): clime.pipeline.construct.get_avg_evaluation(get_config(data_store), clf, dataset_bal, run_parallel=True),
+        disp_section_name('model balancer', data_store):  clime.pipeline.construct.get_avg_evaluation(get_config(data_store), clf_bal, dataset_bal, run_parallel=True)
     }
-    clime.utils.plots.plot_bar_dict(eval_scores)
+    title = f"{get_config(data_store)['evaluation']} avg of all {get_config(data_store)['explainer']}"
+    clime.utils.plots.plot_bar_dict(eval_scores, title=title)
 
 # def eval_explainer(opts, clf, data, query_point):
 #

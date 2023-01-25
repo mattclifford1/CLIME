@@ -6,6 +6,8 @@ put together all aspects of the training/explaination/evaluation pipeline
 # author: Matt Clifford
 # email: matt.clifford@bristol.ac.uk
 from dataclasses import dataclass
+from functools import partial
+import multiprocessing
 import numpy as np
 import clime
 from clime import data, models, explainer, evaluation, utils
@@ -17,7 +19,6 @@ class construct:
 
     def run(self):
         train_data, clf = self.get_data_model()
-        # expl, score = self.get_explainer_evaluation(train_data, clf)
         score_avg = self.get_avg_evaluation(self.opts, clf, train_data)
         return score_avg
 
@@ -55,17 +56,24 @@ class construct:
         return train_data, clf
 
     @staticmethod
-    def get_avg_evaluation(opts, clf, train_data):
-        scores = []
-        for i in range(len(train_data['y'])):
-            _, score = construct.get_explainer_evaluation(opts, train_data, clf, i)
-            scores.append(score)
+    def get_avg_evaluation(opts, clf, train_data, run_parallel=False):
+        _get_explainer_evaluation_wrapper=partial(construct.get_explainer_evaluation,
+                                                  opts=opts,
+                                                  train_data=train_data,
+                                                  clf=clf)
+        data_list = list(range(len(train_data['y'])))
+        if run_parallel == True:
+            n_cpus = int(multiprocessing.cpu_count())
+            with multiprocessing.Pool(processes=n_cpus) as pool:
+                scores = pool.map(_get_explainer_evaluation_wrapper, data_list)
+        else:
+            scores = list(map(_get_explainer_evaluation_wrapper, data_list))
         scores = np.array(scores)
         return {'avg': np.mean(scores), 'std': np.std(scores)}
 
 
     @staticmethod
-    def get_explainer_evaluation(opts, train_data, clf, query_point_ind):
+    def get_explainer_evaluation(query_point_ind, opts, train_data, clf, get_expl=False):
         '''
           _____  _____ _      _   ___ _  _ ___ ___
          | __\ \/ / _ \ |    /_\ |_ _| \| | __| _ \
@@ -88,8 +96,10 @@ class construct:
                                   black_box_model=clf,
                                   data=train_data,
                                   query_point=query_point_ind)
-
-        return expl, score
+        if get_expl == True:
+            return score, expl
+        else:
+            return score
 
     @staticmethod  # make static so this can be called from outside the pipeline
     def run_section(section, options, **kwargs):
@@ -104,10 +114,14 @@ class construct:
         '''
         available_modules = clime.pipeline.AVAILABLE_MODULES[section]
         if options[section] not in available_modules.keys():
-            raise ValueError(utils.input_error_msg(options[section], section))
+            raise ValueError(utils.input_error_msg(options, section))
         else:
             return available_modules[options[section]](**kwargs)
 
+
+def _get_explainer_evaluation_wrapper(args):
+    # for use with pool.starmap to unpack all the args (but keep defualt args)
+    return get_explainer_evaluation(*args)
 
 if __name__ == '__main__':
     opts = {
@@ -116,8 +130,8 @@ if __name__ == '__main__':
         'dataset rebalancing': 'none',
         'model':               'SVM',
         'model balancer':      'none',
-        'explainer':           'normal',
-        'evaluation':          'normal',
+        'explainer':           'bLIMEy (normal)',
+        'evaluation':          'fidelity (normal)',
     }
     p = construct(opts)
     print(p.run())

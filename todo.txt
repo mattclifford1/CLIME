@@ -2,6 +2,8 @@ things that still need to be implemented
 -------------------------------------------------------------
 more ABC for each part of the pipeline
 
+tests for input error msg in the pipeline
+
 
 balancing data inside the explainer before training
   - change to just sample more from minority class

@@ -1,7 +1,7 @@
 from .faithfulness import *
 
 AVAILABLE_FIDELITY_METRICS = {
-    'normal': fidelity,
-    'local': local_fidelity,
-    'class balanced': bal_fidelity,
+    'fidelity (normal)': fidelity,
+    'fidelity (local)': local_fidelity,
+    'fidelity (class balanced)': bal_fidelity,
 }
