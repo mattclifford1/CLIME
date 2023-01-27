@@ -7,6 +7,11 @@ tests for input error msg in the pipeline
 fix pipeline.get_avg  -> multiple_runs.py
 
 
+#### make test/val data part of the pipeline
+  - think how to encorporate other datasets (e.g. adult/credit)
+    - might have to remove sample numbers (fix them as defaults for loaders and dont specify them)
+
+
 balancing data inside the explainer before training
   - change to just sample more from minority class
 
