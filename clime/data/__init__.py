@@ -1,4 +1,4 @@
-from .datasets import *
+from .synthetic_datasets import *
 from .balance import *
 from .checkers import *
 
