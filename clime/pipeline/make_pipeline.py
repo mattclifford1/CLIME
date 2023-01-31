@@ -1,7 +1,7 @@
 '''
 put together all aspects of the training/explaination/evaluation pipeline
 
-'score' is avg/std over all local explainers from all data points in the dataset
+'score' returned is avg/std over all local explainers from all data points in the dataset
 '''
 # author: Matt Clifford
 # email: matt.clifford@bristol.ac.uk
@@ -18,8 +18,8 @@ class construct:
     opts: dict
 
     def run(self, parallel_eval=False):
-        train_data, clf = self.get_data_model()
-        score_avg = self.get_avg_evaluation(self.opts, clf, train_data, run_parallel=parallel_eval)
+        train_data, test_data, clf = self.get_data_model()
+        score_avg = self.get_avg_evaluation(self.opts, clf, test_data, run_parallel=parallel_eval)
         return score_avg
 
     def get_data_model(self):
@@ -45,15 +45,15 @@ class construct:
                                 model=clf,
                                 data=train_data,
                                 weight=1)
-        return train_data, clf
+        return train_data, test_data, clf
 
     @staticmethod
-    def get_avg_evaluation(opts, clf, train_data, run_parallel=False):
+    def get_avg_evaluation(opts, clf, data_dict, run_parallel=False):
         _get_explainer_evaluation_wrapper=partial(construct.get_explainer_evaluation,
                                                   opts=opts,
-                                                  train_data=train_data,
+                                                  data_dict=data_dict,
                                                   clf=clf)
-        data_list = list(range(len(train_data['y'])))
+        data_list = list(range(len(data_dict['y'])))
         if run_parallel == True:
             n_cpus = int(multiprocessing.cpu_count())
             with multiprocessing.Pool(processes=n_cpus) as pool:
@@ -65,18 +65,18 @@ class construct:
 
 
     @staticmethod
-    def get_explainer_evaluation(query_point_ind, opts, train_data, clf, get_expl=False):
+    def get_explainer_evaluation(query_point_ind, opts, data_dict, clf, get_expl=False):
         '''EXPLAINER'''
         expl = construct.run_section('explainer',
                                  opts,
                                  black_box_model=clf,
-                                 query_point=train_data['X'][query_point_ind, :])
+                                 query_point=data_dict['X'][query_point_ind, :])
         '''EVALUATION'''
         score = construct.run_section('evaluation',
                                   opts,
                                   expl=expl,
                                   black_box_model=clf,
-                                  data=train_data,
+                                  data=data_dict,
                                   query_point=query_point_ind)
         if get_expl == True:
             return score, expl

@@ -31,3 +31,5 @@ def test_correct_data_types():
         sampled_data, _ = data.AVAILABLE_DATASETS[dataset](class_samples)
         for key in DATA_KEYS:
             assert type(sampled_data[key]) == np.ndarray
+
+### write tests to check raise error with check_data_dict
