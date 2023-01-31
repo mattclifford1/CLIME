@@ -84,6 +84,8 @@ class sample_dataset_to_proportions():
     '''
     dataset wrapper to get desired unbalanced classes from any dataset
     via undersampling the minority class
+
+    train_data and test_data both have the same class samples
     '''
     def __init__(self, dataset):
         '''
@@ -92,13 +94,19 @@ class sample_dataset_to_proportions():
         '''
         self.dataset = dataset
 
-    def __call__(self, class_samples):
+    def get_data(self, test_set=False):
+        data = self.dataset(self.total_samples, test=test_set)
+        # undersample to get correct class proportions according to class_samples
+        data = clime.data.balance.unbalance_undersample(data, self.class_samples)
+        return data
+
+    def __call__(self, class_samples, test_set=False):
         '''
         - class_samples: how many points to samples in each class eg. [30, 50]
         '''
-        samples, _ = clime.data.get_proportions_and_sample_num(class_samples)
-        # sample the dataset
-        data = self.dataset(samples)
-        # undersample to get correct class proportions
-        data = clime.data.balance.unbalance_undersample(data, class_samples)
-        return data
+        self.class_samples = class_samples
+        self.total_samples, _ = clime.data.get_proportions_and_sample_num(self.class_samples)
+        # sample the datasets
+        train_data = self.get_data(test_set=False)
+        test_data = self.get_data(test_set=True)
+        return train_data, test_data

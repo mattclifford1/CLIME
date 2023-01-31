@@ -25,10 +25,11 @@ class construct:
     def get_data_model(self):
         '''DATA'''
         #  get dataset
-        train_data = self.run_section('dataset',
+        train_data, test_data = self.run_section('dataset',
                                        self.opts,
                                        class_samples=self.opts['class samples'])
         train_data = data.check_data_dict(train_data)
+        test_data = data.check_data_dict(test_data)
         # option to rebalance the data
         train_data = self.run_section('dataset rebalancing',
                                        self.opts,
