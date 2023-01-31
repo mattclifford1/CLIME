@@ -15,17 +15,21 @@ import numpy as np
 import clime
 
 
-def get_moons(samples=200):
+def get_moons(samples=200, test=False):
     '''
     sample from the half moons data distribution
     returns:
         - data: dict containing 'X', 'y'
     '''
+    seed = clime.RANDOM_SEED
+    if test == True:
+        seed += 1
     X, y = sklearn.datasets.make_moons(noise=0.2,
-                                       random_state=clime.RANDOM_SEED,
+                                       random_state=seed,
                                        n_samples=[int(samples/2)]*2)
-    X, y = sklearn.utils.shuffle(X, y, random_state=clime.RANDOM_SEED)
-    return {'X': X, 'y':y}
+    X, y = sklearn.utils.shuffle(X, y, random_state=seed)
+    data = {'X': X, 'y':y}
+    return data
 
 
 def get_gaussian(samples=200,
@@ -55,12 +59,11 @@ def get_gaussian(samples=200,
         seed = clime.RANDOM_SEED+label
         if test == True:
             seed += 1
-            seed *= 2
         # sample points
         gaussclass.gen_data(seed, class_samples)
         X = np.vstack([X, gaussclass.data])
         y = np.append(y, [label]*class_samples)
-    X, y = sklearn.utils.shuffle(X, y, random_state=clime.RANDOM_SEED)
+    X, y = sklearn.utils.shuffle(X, y, random_state=seed)
     return {'X': X, 'y':y}
 
 class GaussClass():

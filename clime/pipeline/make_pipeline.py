@@ -23,25 +23,17 @@ class construct:
         return score_avg
 
     def get_data_model(self):
-        '''___   _ _____ _
-          |   \ /_\_   _/_\
-          | |) / _ \| |/ _ \
-          |___/_/ \_\_/_/ \_\
-        '''
+        '''DATA'''
         #  get dataset
         train_data = self.run_section('dataset',
                                        self.opts,
                                        class_samples=self.opts['class samples'])
+        train_data = data.check_data_dict(train_data)
         # option to rebalance the data
         train_data = self.run_section('dataset rebalancing',
                                        self.opts,
                                        data=train_data)
-        '''
-          __  __  ___  ___  ___ _
-         |  \/  |/ _ \|   \| __| |
-         | |\/| | (_) | |) | _|| |__
-         |_|  |_|\___/|___/|___|____|
-        '''
+        '''MODEL'''
         # what model to use
         clf = self.run_section('model',
                                 self.opts,
@@ -73,22 +65,12 @@ class construct:
 
     @staticmethod
     def get_explainer_evaluation(query_point_ind, opts, train_data, clf, get_expl=False):
-        '''
-          _____  _____ _      _   ___ _  _ ___ ___
-         | __\ \/ / _ \ |    /_\ |_ _| \| | __| _ \
-         | _| >  <|  _/ |__ / _ \ | || .` | _||   /
-         |___/_/\_\_| |____/_/ \_\___|_|\_|___|_|_\
-        '''
+        '''EXPLAINER'''
         expl = construct.run_section('explainer',
                                  opts,
                                  black_box_model=clf,
                                  query_point=train_data['X'][query_point_ind, :])
-        '''
-          _____   ___   _   _   _  _ _____ ___ ___  _  _
-         | __\ \ / /_\ | | | | | |/_\_   _|_ _/ _ \| \| |
-         | _| \ V / _ \| |_| |_| / _ \| |  | | (_) | .` |
-         |___| \_/_/ \_\____\___/_/ \_\_| |___\___/|_|\_
-         '''
+        '''EVALUATION'''
         score = construct.run_section('evaluation',
                                   opts,
                                   expl=expl,

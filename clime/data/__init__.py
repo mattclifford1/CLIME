@@ -1,5 +1,6 @@
 from .datasets import *
 from .balance import *
+from .checkers import *
 
 def _identity_data(data, *args):
     return data
