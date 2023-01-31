@@ -75,13 +75,11 @@ def unbalance_undersample(data, class_proportions=None, verbose=False):
         clime.utils.out('-'*50,verbose)
         clime.utils.out('Class '+ str(label) + ' | Balanced = ' + str(class_size) + ' , Unbalanced = ' + str(unbalanced_class_size),verbose)
 
-
-
-
     random.seed(clime.RANDOM_SEED-1)
     random.shuffle(unbalanced_i)
-
-    return {'X': data['X'][unbalanced_i],'y': data['y'][unbalanced_i]}
+    data['X'] = data['X'][unbalanced_i]
+    data['y'] = data['y'][unbalanced_i]
+    return data
 
 
 
@@ -135,7 +133,9 @@ def balance_oversample(data, verbose=False):
         clime.utils.out('Class '+ str(label) + ' | Unbalanced = ' + str(class_size) + ' , Balanced = ' + str(max_freq),verbose)
     random.seed(clime.RANDOM_SEED-1)
     random.shuffle(balanced_i)
-    return {'X': data['X'][balanced_i],'y': data['y'][balanced_i]}
+    data['X'] = data['X'][balanced_i]
+    data['y'] = data['y'][balanced_i]
+    return data
 
 if __name__ == '__main__':
     import matplotlib.pyplot as plt
