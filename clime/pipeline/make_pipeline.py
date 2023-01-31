@@ -23,10 +23,10 @@ class construct:
         return score_avg
 
     def get_data_model(self):
-       '''___   _ _____ _
-         |   \ /_\_   _/_\
-         | |) / _ \| |/ _ \
-         |___/_/ \_\_/_/ \_\
+        '''___   _ _____ _
+          |   \ /_\_   _/_\
+          | |) / _ \| |/ _ \
+          |___/_/ \_\_/_/ \_\
         '''
         #  get dataset
         train_data = self.run_section('dataset',
@@ -36,7 +36,8 @@ class construct:
         train_data = self.run_section('dataset rebalancing',
                                        self.opts,
                                        data=train_data)
-       '''__  __  ___  ___  ___ _
+        '''
+          __  __  ___  ___  ___ _
          |  \/  |/ _ \|   \| __| |
          | |\/| | (_) | |) | _|| |__
          |_|  |_|\___/|___/|___|____|
@@ -72,7 +73,8 @@ class construct:
 
     @staticmethod
     def get_explainer_evaluation(query_point_ind, opts, train_data, clf, get_expl=False):
-       '''_____  _____ _      _   ___ _  _ ___ ___
+        '''
+          _____  _____ _      _   ___ _  _ ___ ___
          | __\ \/ / _ \ |    /_\ |_ _| \| | __| _ \
          | _| >  <|  _/ |__ / _ \ | || .` | _||   /
          |___/_/\_\_| |____/_/ \_\___|_|\_|___|_|_\
@@ -81,11 +83,12 @@ class construct:
                                  opts,
                                  black_box_model=clf,
                                  query_point=train_data['X'][query_point_ind, :])
-       '''_____   ___   _   _   _  _ _____ ___ ___  _  _
+        '''
+          _____   ___   _   _   _  _ _____ ___ ___  _  _
          | __\ \ / /_\ | | | | | |/_\_   _|_ _/ _ \| \| |
          | _| \ V / _ \| |_| |_| / _ \| |  | | (_) | .` |
-         |___| \_/_/ \_\____\___/_/ \_\_| |___\___/|_|\_|
-        '''
+         |___| \_/_/ \_\____\___/_/ \_\_| |___\___/|_|\_
+         '''
         score = construct.run_section('evaluation',
                                   opts,
                                   expl=expl,
