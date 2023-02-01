@@ -1,3 +1,7 @@
+# Datasets that are too bgig
+cup98*.txt
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
