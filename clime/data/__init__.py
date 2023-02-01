@@ -1,4 +1,5 @@
 from .synthetic_datasets import *
+from german_credit import *
 from .balance import *
 from .checkers import *
 

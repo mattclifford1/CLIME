@@ -6,3 +6,4 @@ notebook
 tqdm
 pytest
 ipywidgets
+pandas
