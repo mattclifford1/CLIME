@@ -1,27 +1,24 @@
-things that still need to be implemented
--------------------------------------------------------------
-more ABC for each part of the pipeline
 
-tests for input error msg in the pipeline
+TODOS
+ - Graphs of comparisions of runs
+ - pipeline options to run multiple options for graph comparison (select multiple rather than a dropdown)
+ - downsample datasets
+ - pipeline option to reduce dataset size instead of sample nums (defualt size for synthic data - slider for class proportions)
 
+
+
+
+
+--------------------------------------------------------------------------------
+
+BUGS
 fix pipeline.get_avg  -> multiple_runs.py
 
-
-#### eval added as test set for all expl/evaluations
-====== started at german credit (added csv) need to now get data dict from this
-  - think how to encorporate other datasets (e.g. adult/credit)
-    - might have to remove sample numbers (fix them as defaults for loaders and dont specify them)
-
-
-balancing data inside the explainer before training
-  - change to just sample more from minority class
-
+FUTURE
 rebalance by under sampling?? (makes different just cost sensitive training)
+more ABC for each part of the pipeline (and docs for expected formats)
+tests for input error msg in the pipeline
 
-lime sampling cov (from data?)
-lime features split (from data?)
 
-
-better pipeline ***************************************************** main.py
-  - multiple runs of multiple opts entries
-  - compare different pipeline configs - graphs???
+THOUGHTS
+ - change lime internals as options rather than fixed methods e.g. can change model, sampling, balancing etc.
