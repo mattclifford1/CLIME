@@ -9,6 +9,7 @@ from dataclasses import dataclass
 from functools import partial
 import multiprocessing
 import numpy as np
+from tqdm import tqdm
 import clime
 from clime import data, models, explainer, evaluation, utils
 
@@ -19,6 +20,8 @@ class construct:
 
     def run(self, parallel_eval=False):
         train_data, test_data, clf = self.get_data_model()
+        print(train_data['y'].shape)
+        print(test_data['y'].shape)
         score_avg = self.get_avg_evaluation(self.opts, clf, test_data, run_parallel=parallel_eval)
         return score_avg
 
@@ -107,6 +110,7 @@ def _get_explainer_evaluation_wrapper(args):
 
 if __name__ == '__main__':
     opts = {
+        # 'dataset':             'credit scoring 1',
         'dataset':             'moons',
         'class samples':       [25, 75],
         'dataset rebalancing': 'none',
@@ -116,4 +120,4 @@ if __name__ == '__main__':
         'evaluation':          'fidelity (normal)',
     }
     p = construct(opts)
-    print(p.run())
+    print(p.run(parallel_eval=True))

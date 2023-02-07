@@ -77,8 +77,12 @@ def unbalance_undersample(data, class_proportions=None, verbose=False):
 
     random.seed(clime.RANDOM_SEED-1)
     random.shuffle(unbalanced_i)
-    data['X'] = data['X'][unbalanced_i]
-    data['y'] = data['y'][unbalanced_i]
+    # now create new data sizes
+    instances = data['X'].shape[0]
+    for key in data.keys():
+        # apply to all numpy arrays that are data rows
+        if type(data[key]) == np.ndarray and data[key].shape[0] == instances:
+            data[key] = data[key][unbalanced_i]
     return data
 
 

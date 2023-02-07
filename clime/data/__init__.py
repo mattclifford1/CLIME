@@ -2,6 +2,7 @@ from .synthetic_datasets import *
 from .german_credit import *
 from .costcla import *
 from .balance import *
+from .downsample_data import *
 from .checkers import *
 
 def _identity_data(data, *args):
@@ -10,7 +11,7 @@ def _identity_data(data, *args):
 AVAILABLE_DATASETS = {
     'moons': sample_dataset_to_proportions(get_moons),
     'guassian': sample_dataset_to_proportions(get_gaussian),
-    'costcla': get_costcla_dataset(),
+    'credit scoring 1': costcla_dataset('CreditScoring_Kaggle2011_costcla'),
 }
 
 AVAILABLE_DATA_BALANCING = {
