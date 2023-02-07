@@ -20,13 +20,13 @@ def save_data_locally(costcla_dataset):
     os.makedirs(dataset_dir, exist_ok=True)
     # features
     df = pd.DataFrame(data['data'], columns=data['feature_names'])
-    df.to_csv(os.path.join(dataset_dir, 'X.csv'))
+    df.to_csv(os.path.join(dataset_dir, 'X.csv'), index=False)
     # target varable
     df = pd.DataFrame(data['target'])
-    df.to_csv(os.path.join(dataset_dir, 'y.csv'))
+    df.to_csv(os.path.join(dataset_dir, 'y.csv'), index=False)
     # costs
     df = pd.DataFrame(data['cost_mat'])
-    df.to_csv(os.path.join(dataset_dir, 'cost_matrix.csv'))
+    df.to_csv(os.path.join(dataset_dir, 'cost_matrix.csv'), index=False)
     # dataset description
     with open(os.path.join(dataset_dir, 'description.txt'), 'w') as f:
         f.write(data['DESCR'])

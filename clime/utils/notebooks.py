@@ -64,11 +64,11 @@ def disp_section_name(section, data_store):
 def run_vis_pipeline(data_store):
     ############## DATA #################
     # get dataset
-    dataset_unbal = clime.pipeline.construct.run_section('dataset', get_config(data_store), class_samples=get_config(data_store)['class samples'])
+    train_data, test_data = clime.pipeline.construct.run_section('dataset', get_config(data_store), class_samples=get_config(data_store)['class samples'])
     # balalance data
-    dataset_bal = clime.pipeline.construct.run_section('dataset rebalancing', get_config(data_store), data=dataset_unbal)
+    dataset_bal = clime.pipeline.construct.run_section('dataset rebalancing', get_config(data_store), data=train_data)
     # display datasets
-    datasets = {disp_section_name('dataset', data_store): dataset_unbal,
+    datasets = {disp_section_name('dataset', data_store): train_data,
                 disp_section_name('dataset rebalancing', data_store): dataset_bal}
     # clime.utils.plot_data_dict(datasets)
 
@@ -92,8 +92,8 @@ def run_vis_pipeline(data_store):
     # get average of all evaluation over all points in the data set
 
     eval_scores = {
-        disp_section_name('model', data_store): clime.pipeline.construct.get_avg_evaluation(get_config(data_store), clf, dataset_bal, run_parallel=True),
-        disp_section_name('model balancer', data_store):  clime.pipeline.construct.get_avg_evaluation(get_config(data_store), clf_bal, dataset_bal, run_parallel=True)
+        disp_section_name('model', data_store): clime.pipeline.construct.get_avg_evaluation(get_config(data_store), clf, test_data, run_parallel=True),
+        disp_section_name('model balancer', data_store):  clime.pipeline.construct.get_avg_evaluation(get_config(data_store), clf_bal, test_data, run_parallel=True)
     }
     title = f"{get_config(data_store)['evaluation']} avg of all {get_config(data_store)['explainer']}"
     clime.utils.plots.plot_bar_dict(eval_scores, title=title)
