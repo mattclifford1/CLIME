@@ -13,12 +13,6 @@ def get_run_button():
     display(button)
 
 # set up interactive functionality
-def _get_class_values(class_1=25, class_2=75):
-    return [class_1, class_2]
-
-def _get_percent_data(percent=1):
-    return percent
-
 def get_sliders(interactive_data_store):
     # class samples
     print('synthetic datasets')
@@ -38,19 +32,19 @@ def get_sliders(interactive_data_store):
     interactive_data_store['percent of data'] = percent_data
     return interactive_data_store
 
-def _get_option_value(x):
-    return x
-
-def get_drop_down(pipeline_section, interactive_data_store):
-    print(f'{pipeline_section.upper()}:')
-    dropdown = ipywidgets.interactive(_get_option_value, x=list(clime.pipeline.AVAILABLE_MODULES[pipeline_section].keys()))
-    display(dropdown)
-    interactive_data_store[pipeline_section] = dropdown
-    return interactive_data_store
-
 def get_toggle(pipeline_section, interactive_data_store):
     toggle = ipywidgets.ToggleButtons(options=list(clime.pipeline.AVAILABLE_MODULES[pipeline_section].keys()),
                                       description=f'{pipeline_section.upper()}:',
+                                      )
+    display(toggle)
+    interactive_data_store[pipeline_section] = toggle
+    return interactive_data_store
+
+def get_multiple(pipeline_section, interactive_data_store):
+    init_value = [list(clime.pipeline.AVAILABLE_MODULES[pipeline_section].keys())[0]]
+    toggle = ipywidgets.SelectMultiple(options=list(clime.pipeline.AVAILABLE_MODULES[pipeline_section].keys()),
+                                       value=init_value,
+                                       description=f'{pipeline_section.upper()}:',
                                       )
     display(toggle)
     interactive_data_store[pipeline_section] = toggle
@@ -60,7 +54,11 @@ def get_config(interactive_data_store):
     # need to read results from interactive widgets
     config = {}
     for key in interactive_data_store.keys():
-        config[key] = interactive_data_store[key].value
+        val = interactive_data_store[key].value
+        if type(val) != tuple or key == 'class samples':
+            config[key] = [interactive_data_store[key].value]
+        else:
+            config[key] = interactive_data_store[key].value
     return config
 
 def get_pipeline_widgets():
@@ -74,12 +72,23 @@ def get_pipeline_widgets():
     # which model to use
     data_store = get_toggle('model', data_store)
     # which model to use
-    data_store = get_toggle('model balancer', data_store)
+    data_store = get_multiple('model balancer', data_store)
     # which explainer to use
     data_store = get_toggle('explainer', data_store)
     # which evaluation to use
     data_store = get_toggle('evaluation', data_store)
     return data_store
+
+def run_experiments(data_store):
+    all_opts = get_config(data_store)
+    opts_permutations = clime.utils.get_all_dict_permutations(all_opts)
+    scores = {}
+    for i, opts in enumerate(opts_permutations):
+        print('='*100)
+        print(f"{i}: {opts}")
+        scores[i] = clime.pipeline.run_pipeline(opts, parallel_eval=True)
+    clime.utils.plots.plot_bar_dict(scores)
+
 
 def disp_section_name(section, data_store):
     return f"{section}: {get_config(data_store)[section]}"

@@ -20,8 +20,8 @@ class construct:
 
     def run(self, parallel_eval=False):
         train_data, test_data, clf = self.get_data_model()
-        print(f"Model     accuracy. train: {utils.accuracy(clf, train_data)} test: {utils.accuracy(clf, test_data)}")
-        print(f"Model bal accuracy. train: {utils.bal_accuracy(clf, train_data)} test: {utils.bal_accuracy(clf, test_data)}")
+        print(f"            Model     accuracy. train: {utils.accuracy(clf, train_data)} test: {utils.accuracy(clf, test_data)}")
+        print(f"            Model bal accuracy. train: {utils.bal_accuracy(clf, train_data)} test: {utils.bal_accuracy(clf, test_data)}")
         score_avg = self.get_avg_evaluation(self.opts, clf, test_data, run_parallel=parallel_eval)
         return score_avg
 
@@ -108,6 +108,10 @@ class construct:
 def _get_explainer_evaluation_wrapper(args):
     # for use with pool.starmap to unpack all the args (but keep defualt args)
     return get_explainer_evaluation(*args)
+
+def run_pipeline(opts, parallel_eval=False):
+    p = construct(opts)
+    return p.run(parallel_eval=parallel_eval)
 
 if __name__ == '__main__':
     opts = {

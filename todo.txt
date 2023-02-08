@@ -5,6 +5,7 @@ TODOS
  - pipeline option to reduce dataset size instead of sample nums (defualt size for synthic data - slider for class proportions)
 
  - normalise the datasets (check attributes to see if this is okay to do)
+ - use the test data cov for lime sampling
 
 
 
@@ -12,6 +13,7 @@ TODOS
 
 BUGS
 fix pipeline.get_avg  -> multiple_runs.py
+fix vis pipeline with new widgets
 
 FUTURE
 rebalance by under sampling?? (makes different just cost sensitive training)
