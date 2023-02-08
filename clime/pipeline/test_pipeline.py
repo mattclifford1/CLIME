@@ -24,5 +24,7 @@ def test_all_pipeline_configs(n_cpus=int(multiprocessing.cpu_count())):
     with multiprocessing.Pool(processes=n_cpus) as pool:
             pool.map(run_pipeline, opts_permutations)
 
+# make one to test running in parrelel p.run()
+
 if __name__ == '__main__':
     test_all_pipeline_configs()

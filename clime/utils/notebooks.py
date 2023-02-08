@@ -21,13 +21,19 @@ def _get_percent_data(percent=1):
 
 def get_sliders(interactive_data_store):
     # class samples
-    print('CLASS SAMPLES (synthetic datasets):')
-    class_samples = ipywidgets.interactive(_get_class_values, class_1=(1,200), class_2=(1,200))
+    print('synthetic datasets')
+    class_samples = ipywidgets.IntRangeSlider(value=[25, 75],
+                                              min=1,
+                                              max=200,
+                                              description='CLASS SAMPLES (synthetic datasets):')
     display(class_samples)
     interactive_data_store['class samples'] = class_samples
     # percent data
-    print('PERCENT DATA (real datasets):')
-    percent_data = ipywidgets.interactive(_get_percent_data, percent=(0.01, 10))
+    print('real datasets')
+    percent_data = ipywidgets.FloatSlider(value=0.1,
+                                          min=0.01,
+                                          max=10,
+                                          description='PERCENT DATA (real datasets):')
     display(percent_data)
     interactive_data_store['percent of data'] = percent_data
     return interactive_data_store
@@ -42,11 +48,19 @@ def get_drop_down(pipeline_section, interactive_data_store):
     interactive_data_store[pipeline_section] = dropdown
     return interactive_data_store
 
+def get_toggle(pipeline_section, interactive_data_store):
+    toggle = ipywidgets.ToggleButtons(options=list(clime.pipeline.AVAILABLE_MODULES[pipeline_section].keys()),
+                                      description=f'{pipeline_section.upper()}:',
+                                      )
+    display(toggle)
+    interactive_data_store[pipeline_section] = toggle
+    return interactive_data_store
+
 def get_config(interactive_data_store):
     # need to read results from interactive widgets
     config = {}
     for key in interactive_data_store.keys():
-        config[key] = interactive_data_store[key].result
+        config[key] = interactive_data_store[key].value
     return config
 
 def get_pipeline_widgets():
@@ -54,17 +68,17 @@ def get_pipeline_widgets():
     # input class proportions
     data_store = get_sliders(data_store)
     # which dataset
-    data_store = get_drop_down('dataset', data_store)
+    data_store = get_toggle('dataset', data_store)
     # which balancing data method
-    data_store = get_drop_down('dataset rebalancing', data_store)
+    data_store = get_toggle('dataset rebalancing', data_store)
     # which model to use
-    data_store = get_drop_down('model', data_store)
+    data_store = get_toggle('model', data_store)
     # which model to use
-    data_store = get_drop_down('model balancer', data_store)
+    data_store = get_toggle('model balancer', data_store)
     # which explainer to use
-    data_store = get_drop_down('explainer', data_store)
+    data_store = get_toggle('explainer', data_store)
     # which evaluation to use
-    data_store = get_drop_down('evaluation', data_store)
+    data_store = get_toggle('evaluation', data_store)
     return data_store
 
 def disp_section_name(section, data_store):

@@ -27,7 +27,7 @@ class costcla_dataset:
 
 
 
-def _get_costcla_dataset(dataset="CreditScoring_Kaggle2011_costcla"):
+def _get_costcla_dataset(dataset="CreditScoring_Kaggle2011_costcla", normalise=True):
     '''
     load the costcla csv dataset files
     available datasets:
@@ -44,6 +44,9 @@ def _get_costcla_dataset(dataset="CreditScoring_Kaggle2011_costcla"):
         data[csv] = df.to_numpy()
         if data[csv].shape[1] == 1:
             data[csv] = data[csv].ravel()
+    # normalise X data
+    if normalise == True:
+        data['X'] = data['X'] / data['X'].max(axis=0)
     # add name and description
     with open(os.path.join(CURRENT_FILE, 'datasets', dataset, 'description.txt'), 'r') as f:
         data['description'] = f.read()
