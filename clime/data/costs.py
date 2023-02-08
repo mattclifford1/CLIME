@@ -20,9 +20,11 @@ def weight_based_on_class_imbalance(data):
     '''
     get the weight of each class proportional to the number of instances
     '''
-    n_samples = len(data['y'])
     y = np.array(data['y']).astype(np.int64)
     n_classes = len(list(np.unique(y)))
+    # if we only have one class then we can't say anything about the weighting
+    if n_classes == 1:
+        return np.array([1, 1])
     bin_count = np.bincount(y)
     weights = 1 / ((n_classes * bin_count) / n_classes)
 

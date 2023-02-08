@@ -100,7 +100,7 @@ class sample_dataset_to_proportions():
         data = clime.data.balance.unbalance_undersample(data, self.class_samples)
         return data
 
-    def __call__(self, class_samples, test_set=False):
+    def __call__(self, class_samples, test_set=False, **kwargs):
         '''
         - class_samples: how many points to samples in each class eg. [30, 50]
         '''

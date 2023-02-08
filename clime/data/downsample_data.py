@@ -44,6 +44,8 @@ def proportional_downsample(data, percentage=1, seed=True, **kwargs):
     classes, counts = np.unique(data['y'], return_counts=True)
     # now downsample
     new_data_counts = (counts*(percentage/100)).astype(np.uint64)
+    # make sure we have at least a sample for train/test splits
+    new_data_counts[new_data_counts<2] = 2
     new_inds = []
     for i, cls in enumerate(classes):
         # get all the inds of current class

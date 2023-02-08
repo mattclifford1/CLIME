@@ -20,7 +20,6 @@ class construct:
 
     def run(self, parallel_eval=False):
         train_data, test_data, clf = self.get_data_model()
-        print(train_data['y'].shape)
         print(test_data['y'].shape)
         score_avg = self.get_avg_evaluation(self.opts, clf, test_data, run_parallel=parallel_eval)
         return score_avg
@@ -30,7 +29,8 @@ class construct:
         #  get dataset
         train_data, test_data = self.run_section('dataset',
                                        self.opts,
-                                       class_samples=self.opts['class samples'])
+                                       class_samples=self.opts['class samples'],
+                                       percentage=self.opts['percent of data'])
         train_data = data.check_data_dict(train_data)
         test_data = data.check_data_dict(test_data)
         # option to rebalance the data
@@ -110,14 +110,15 @@ def _get_explainer_evaluation_wrapper(args):
 
 if __name__ == '__main__':
     opts = {
-        # 'dataset':             'credit scoring 1',
-        'dataset':             'moons',
-        'class samples':       [25, 75],
+        'dataset':             'credit scoring 1',
+        # 'dataset':             'moons',
+        'class samples':       [25, 75],    # only for syntheic datasets
+        'percent of data':      0.05,
         'dataset rebalancing': 'none',
         'model':               'SVM',
         'model balancer':      'none',
-        'explainer':           'bLIMEy (normal)',
-        'evaluation':          'fidelity (normal)',
+        'explainer':           'bLIMEy (cost sensitive training)',
+        'evaluation':          'fidelity (class balanced)',
     }
     p = construct(opts)
-    print(p.run(parallel_eval=True))
+    print(p.run(parallel_eval=False))

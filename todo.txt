@@ -2,7 +2,6 @@
 TODOS
  - Graphs of comparisions of runs
  - pipeline options to run multiple options for graph comparison (select multiple rather than a dropdown)
- - downsample datasets
  - pipeline option to reduce dataset size instead of sample nums (defualt size for synthic data - slider for class proportions)
 
 

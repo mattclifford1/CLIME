@@ -12,7 +12,8 @@ def test_all_pipeline_configs(n_cpus=int(multiprocessing.cpu_count())):
     # change n_cpus to 1 if a memory/cpu intensive model training method is used
 
     all_opts = {
-        'class samples': [[2, 3]],   # keep low to reduce comp time
+        'class samples': [[1, 1]],   # keep low to reduce comp time
+        'percent of data': [0.005]    # super small proportion of real dataset
     }
     # add all available methods for each part of the pipeline
     for name in pipeline.AVAILABLE_MODULE_NAMES:

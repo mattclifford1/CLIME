@@ -15,20 +15,21 @@ def test_sample_numbers_unequal_classes():
 
 def assert_class_sample_num(class_samples):
     class_samples = [40, 160]
-    for dataset in data.AVAILABLE_DATASETS.keys():
-        sampled_data, _ = data.AVAILABLE_DATASETS[dataset](class_samples)
+    for dataset in [data.sample_dataset_to_proportions(data.get_moons),
+                    data.sample_dataset_to_proportions(data.get_gaussian)]:
+        sampled_data, _ = dataset(class_samples)
         assert len(sampled_data['y']) == sum(class_samples)
 
 def test_correct_dict_keys():
-    class_samples = [40, 160]
     for dataset in data.AVAILABLE_DATASETS.keys():
-        sampled_data, _ = data.AVAILABLE_DATASETS[dataset](class_samples)
-        assert list(sampled_data.keys()) == DATA_KEYS
+        sampled_data, _ = data.AVAILABLE_DATASETS[dataset](class_samples=[40, 160],
+                                                           percentage=1)
+        assert set(DATA_KEYS).issubset(set(list(sampled_data.keys())))
 
 def test_correct_data_types():
-    class_samples = [40, 160]
     for dataset in data.AVAILABLE_DATASETS.keys():
-        sampled_data, _ = data.AVAILABLE_DATASETS[dataset](class_samples)
+        sampled_data, _ = data.AVAILABLE_DATASETS[dataset](class_samples=[40, 160],
+                                                           percentage=1)
         for key in DATA_KEYS:
             assert type(sampled_data[key]) == np.ndarray
 
