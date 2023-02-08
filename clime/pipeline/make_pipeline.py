@@ -113,7 +113,7 @@ if __name__ == '__main__':
         'dataset':             'credit scoring 1',
         # 'dataset':             'moons',
         'class samples':       [25, 75],    # only for syntheic datasets
-        'percent of data':      0.05,
+        'percent of data':      0.05,       # for real datasets
         'dataset rebalancing': 'none',
         'model':               'SVM',
         'model balancer':      'none',

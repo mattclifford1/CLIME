@@ -17,7 +17,7 @@ def _get_class_values(class_1=25, class_2=75):
     return [class_1, class_2]
 
 def get_sliders(interactive_data_store):
-    print('CLASS SAMPLES:')
+    print('CLASS SAMPLES (synthetic datasets):')
     class_samples = ipywidgets.interactive(_get_class_values, class_1=(1,200), class_2=(1,200))
     display(class_samples)
     interactive_data_store['class samples'] = class_samples

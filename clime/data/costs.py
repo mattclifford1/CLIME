@@ -25,6 +25,7 @@ def weight_based_on_class_imbalance(data):
     # if we only have one class then we can't say anything about the weighting
     if n_classes == 1:
         return np.array([1, 1])
+    # otherwise get the weightings
     bin_count = np.bincount(y)
     weights = 1 / ((n_classes * bin_count) / n_classes)
 
