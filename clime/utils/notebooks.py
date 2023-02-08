@@ -70,13 +70,13 @@ def get_pipeline_widgets():
     # which balancing data method
     data_store = get_toggle('dataset rebalancing', data_store)
     # which model to use
-    data_store = get_toggle('model', data_store)
+    data_store = get_multiple('model', data_store)
     # which model to use
     data_store = get_multiple('model balancer', data_store)
     # which explainer to use
-    data_store = get_toggle('explainer', data_store)
+    data_store = get_multiple('explainer', data_store)
     # which evaluation to use
-    data_store = get_toggle('evaluation', data_store)
+    data_store = get_multiple('evaluation', data_store)
     return data_store
 
 def run_experiments(data_store):
@@ -85,7 +85,8 @@ def run_experiments(data_store):
     scores = {}
     for i, opts in enumerate(opts_permutations):
         print('='*100)
-        print(f"{i}: {opts}")
+        print(f"{i}: ")
+        print(f"    {opts}")
         scores[i] = clime.pipeline.run_pipeline(opts, parallel_eval=True)
     clime.utils.plots.plot_bar_dict(scores)
 

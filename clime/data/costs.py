@@ -10,9 +10,10 @@ import numpy as np
 def weights_based_on_distance(query_point, X):
     '''
     get the weighting of each sample proportional to the distance to the query point
-    weights generated using exponential kernel found in the original lime implementation'''
-    euclidean_dist = np.sqrt(np.sum((X - query_point)**2, axis=1))
+    weights generated using exponential kernel found in the original lime implementation
+    '''
     kernel_width = np.sqrt(X.shape[1]) * .75
+    euclidean_dist = np.sqrt(np.sum((X - query_point)**2, axis=1))
     weights = np.sqrt(np.exp(-(euclidean_dist ** 2) / kernel_width ** 2))
     return weights
 

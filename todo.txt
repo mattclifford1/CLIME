@@ -7,6 +7,9 @@ TODOS
  - normalise the datasets (check attributes to see if this is okay to do)
  - use the test data cov for lime sampling
 
+ - output nice graph names
+ - save model accuracies (and plot)
+
 
 
 --------------------------------------------------------------------------------

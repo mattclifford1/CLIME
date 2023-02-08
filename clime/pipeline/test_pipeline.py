@@ -1,6 +1,7 @@
 # author: Matt Clifford
 # email: matt.clifford@bristol.ac.uk
 import multiprocessing
+import numpy as np
 from clime import pipeline, utils
 
 
@@ -22,7 +23,10 @@ def test_all_pipeline_configs(n_cpus=int(multiprocessing.cpu_count())):
     opts_permutations = utils.get_all_dict_permutations(all_opts)
     # now test all variations of methods
     with multiprocessing.Pool(processes=n_cpus) as pool:
-            pool.map(run_pipeline, opts_permutations)
+            scores = list(pool.map(pipeline.run_pipeline, opts_permutations))
+    for score in scores:
+        assert type(score['avg']) == np.float64
+        assert type(score['std']) == np.float64
 
 # make one to test running in parrelel p.run()
 

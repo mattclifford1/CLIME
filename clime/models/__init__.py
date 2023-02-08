@@ -8,7 +8,7 @@ AVAILABLE_MODELS = {
 }
 
 AVAILABLE_MODEL_BALANCING = {
+    'none': none,
     'boundary adjust': adjust_boundary,
     'probability adjust': adjust_proba,
-    'none': none,
 }

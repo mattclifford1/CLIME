@@ -81,7 +81,7 @@ class construct:
                                   expl=expl,
                                   black_box_model=clf,
                                   data=data_dict,
-                                  query_point=query_point_ind)
+                                  query_point=data_dict['X'][query_point_ind, :])
         if get_expl == True:
             return score, expl
         else:
@@ -115,15 +115,15 @@ def run_pipeline(opts, parallel_eval=False):
 
 if __name__ == '__main__':
     opts = {
-        'dataset':             'credit scoring 1',
-        # 'dataset':             'moons',
+        # 'dataset':             'credit scoring 1',
+        'dataset':             'moons',
         'class samples':       [25, 75],    # only for syntheic datasets
         'percent of data':      0.05,       # for real datasets
         'dataset rebalancing': 'none',
         'model':               'SVM',
         'model balancer':      'none',
         'explainer':           'bLIMEy (cost sensitive training)',
-        'evaluation':          'fidelity (class balanced)',
+        'evaluation':          'fidelity (local)',
     }
     p = construct(opts)
     print(p.run(parallel_eval=True))
