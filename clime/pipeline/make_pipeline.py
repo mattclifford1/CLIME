@@ -20,7 +20,6 @@ class construct:
 
     def run(self, parallel_eval=False):
         train_data, test_data, clf = self.get_data_model()
-        print(test_data['y'].shape)
         score_avg = self.get_avg_evaluation(self.opts, clf, test_data, run_parallel=parallel_eval)
         return score_avg
 

@@ -16,11 +16,20 @@ def get_run_button():
 def _get_class_values(class_1=25, class_2=75):
     return [class_1, class_2]
 
+def _get_percent_data(percent=1):
+    return percent
+
 def get_sliders(interactive_data_store):
+    # class samples
     print('CLASS SAMPLES (synthetic datasets):')
     class_samples = ipywidgets.interactive(_get_class_values, class_1=(1,200), class_2=(1,200))
     display(class_samples)
     interactive_data_store['class samples'] = class_samples
+    # percent data
+    print('PERCENT DATA (real datasets):')
+    percent_data = ipywidgets.interactive(_get_percent_data, percent=(0.01, 10))
+    display(percent_data)
+    interactive_data_store['percent of data'] = percent_data
     return interactive_data_store
 
 def _get_option_value(x):

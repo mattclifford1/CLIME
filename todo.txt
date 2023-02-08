@@ -4,7 +4,7 @@ TODOS
  - pipeline options to run multiple options for graph comparison (select multiple rather than a dropdown)
  - pipeline option to reduce dataset size instead of sample nums (defualt size for synthic data - slider for class proportions)
 
-
+ - normalise the datasets (check attributes to see if this is okay to do)
 
 
 
