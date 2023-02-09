@@ -1,4 +1,4 @@
-from .faithfulness import *
+from .faithfulness import fidelity, local_fidelity, bal_fidelity
 
 AVAILABLE_FIDELITY_METRICS = {
     'fidelity (normal)': fidelity,

@@ -8,6 +8,7 @@ Data can be balanced or unbalanced
 # author2: Matt Clifford
 # email2: matt.clifford@bristol.ac.uk
 import os
+import logging
 import sklearn.datasets
 import sklearn.model_selection
 import sklearn.utils
@@ -26,7 +27,7 @@ def get_proportions_and_sample_num(class_samples):
     class_proportions = np.array(class_samples)/max_class # normalise
     return n_samples, list(class_proportions)
 
-def unbalance_undersample(data, class_proportions=None, verbose=False):
+def unbalance_undersample(data, class_proportions=None):
     '''
     Transfrom balanced dataset into unbalanced dataset
     Classes are unbalanced via undersampling (random sampling without replacement)
@@ -43,11 +44,11 @@ def unbalance_undersample(data, class_proportions=None, verbose=False):
         - data: dictionary with keys 'X', 'y'
     '''
 
-    clime.utils.out('\n rebalancing classes... \n',verbose)
+    logging.info('\n rebalancing classes... \n')
     # If class proportions left blank, 100% of each class included
     if class_proportions == None:
         class_proportions=[1.0]*len(np.unique(data['y']))
-        clime.utils.out("unbalance warning: No class proportions provided.",verbose)
+        logging.info("unbalance warning: No class proportions provided.")
 
     # make sure class_proportions not higher than 1:
     if max(class_proportions) > 1:
@@ -72,22 +73,19 @@ def unbalance_undersample(data, class_proportions=None, verbose=False):
         random.seed(int(clime.RANDOM_SEED+label))
         unbalanced_i = [int(i) for i in np.append(unbalanced_i,random.sample(label_i,unbalanced_class_size))]
 
-        clime.utils.out('-'*50,verbose)
-        clime.utils.out('Class '+ str(label) + ' | Balanced = ' + str(class_size) + ' , Unbalanced = ' + str(unbalanced_class_size),verbose)
+        logging.info('-'*50 + '\nClass '+ str(label) + ' | Balanced = ' + str(class_size) + ' , Unbalanced = ' + str(unbalanced_class_size))
 
     random.seed(clime.RANDOM_SEED-1)
     random.shuffle(unbalanced_i)
     # now create new data sizes
     instances = data['X'].shape[0]
-    for key in data.keys():
+    for key, val in data.items():
         # apply to all numpy arrays that are data rows
-        if type(data[key]) == np.ndarray and data[key].shape[0] == instances:
-            data[key] = data[key][unbalanced_i]
+        if isinstance(val, np.ndarray) and data[key].shape[0] == instances:
+            data[key] = val[unbalanced_i]
     return data
 
-
-
-def balance_oversample(data, verbose=False):
+def balance_oversample(data):
     '''
     given a dataset, make the classes balanced
     balancing is done via oversampling the minority class
@@ -114,7 +112,7 @@ def balance_oversample(data, verbose=False):
     for key, value in class_freq.items():
         if value > max_freq:
             max_freq = value
-        clime.utils.out('Class '+f"{int(key)} | {value}",verbose)
+        logging.info('Class '+f"{int(key)} | {value}")
 
      # For each class:
     #   Return index of every class instance
@@ -133,22 +131,28 @@ def balance_oversample(data, verbose=False):
             balanced_i = np.append(label_i,balanced_i)
         else:
             balanced_i = np.append(balanced_i,label_i)
-        clime.utils.out('-'*50,verbose)
-        clime.utils.out('Class '+ str(label) + ' | Unbalanced = ' + str(class_size) + ' , Balanced = ' + str(max_freq),verbose)
+        logging.info('-'*50 + '\nClass '+ str(label) + ' | Unbalanced = ' + str(class_size) + ' , Balanced = ' + str(max_freq))
     random.seed(clime.RANDOM_SEED-1)
     random.shuffle(balanced_i)
-    data['X'] = data['X'][balanced_i]
-    data['y'] = data['y'][balanced_i]
+    # now create new data sizes
+    instances = data['X'].shape[0]
+    for key, val in data.items():
+        # apply to all numpy arrays that are data rows
+        if isinstance(val, np.ndarray) and data[key].shape[0] == instances:
+            data[key] = val[balanced_i]
     return data
 
 if __name__ == '__main__':
+    logging.basicConfig(level=logging.INFO)
+
+    train_data = clime.data.get_moons()
+    unbalanced_train_data = unbalance_undersample(train_data, [1, 0.5])
+
     import matplotlib.pyplot as plt
     from matplotlib.colors import ListedColormap
     cm_bright = ListedColormap(["#FF0000", "#0000FF"])
+    balanced_train_data = balance_oversample(unbalanced_train_data)
 
-    train_data, test_data = get_moons()
-    unbalanced_train_data = unbalance(train_data,[1,0.5])
-    balanced_train_data = balance(unbalanced_train_data,verbose=True)
     plt.subplot(3,1,1)
     plt.scatter(train_data['X'][:, 0], train_data['X'][:, 1], c=train_data['y'], cmap=cm_bright, edgecolors="k")
     plt.subplot(3,1,2)

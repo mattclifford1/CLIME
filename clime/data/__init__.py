@@ -1,9 +1,8 @@
-from .synthetic_datasets import *
-from .german_credit import *
-from .costcla import *
-from .balance import *
-from .downsample_data import *
-from .checkers import *
+from .synthetic_datasets import get_moons, get_gaussian, sample_dataset_to_proportions
+from .costcla import costcla_dataset
+from .balance import get_proportions_and_sample_num, unbalance_undersample, balance_oversample
+from .downsample_data import shuffle_dataset, proportional_downsample, proportional_split
+from .checkers import check_data_dict, get_generic_feature_names
 
 def _identity_data(data, *args):
     return data

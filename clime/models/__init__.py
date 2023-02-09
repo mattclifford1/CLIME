@@ -1,6 +1,6 @@
 from .base import base_model
-from .svm import *
-from .balance import *
+from .svm import SVM, SVM_balanced_training
+from .balance import adjust_boundary, adjust_proba, none
 
 AVAILABLE_MODELS = {
     'SVM': SVM,

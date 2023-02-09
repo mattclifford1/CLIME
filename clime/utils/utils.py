@@ -6,10 +6,6 @@
 import itertools
 import clime
 
-def out(message,verbose):
-    if verbose:
-        print(message)
-
 def input_error_msg(options, section):
     '''
     error message when a module method is not available

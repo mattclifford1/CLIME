@@ -15,7 +15,7 @@ def check_data_dict(data):
     # check required keys in data
     data_keys = ['X', 'y', 'feature_names']
     for key in data_keys:
-        if key not in data.keys():
+        if key not in data:
             raise ValueError(f'data dictionary needs to have key {key}')
     return data
 

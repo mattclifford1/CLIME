@@ -53,9 +53,9 @@ def get_multiple(pipeline_section, interactive_data_store):
 def get_config(interactive_data_store):
     # need to read results from interactive widgets
     config = {}
-    for key in interactive_data_store.keys():
-        val = interactive_data_store[key].value
-        if type(val) != tuple or key == 'class samples':
+    for key, val in interactive_data_store.items():
+        read_widget = interactive_data_store[key].value
+        if not isinstance(read_widget, tuple) or key == 'class samples':
             config[key] = [interactive_data_store[key].value]
         else:
             config[key] = interactive_data_store[key].value

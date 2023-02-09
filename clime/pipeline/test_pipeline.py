@@ -9,9 +9,7 @@ def run_pipeline(opts):
     p = pipeline.construct(opts)
     p.run()
 
-def test_all_pipeline_configs(n_cpus=int(multiprocessing.cpu_count())):
-    # change n_cpus to 1 if a memory/cpu intensive model training method is used
-
+def test_all_pipeline_configs():
     all_opts = {
         'class samples': [[1, 1]],   # keep low to reduce comp time
         'percent of data': [0.005]    # super small proportion of real dataset
@@ -22,8 +20,8 @@ def test_all_pipeline_configs(n_cpus=int(multiprocessing.cpu_count())):
     # get all variations/permuations of the pipeline options
     opts_permutations = utils.get_all_dict_permutations(all_opts)
     # now test all variations of methods
-    with multiprocessing.Pool(processes=n_cpus) as pool:
-            scores = list(pool.map(pipeline.run_pipeline, opts_permutations))
+    with multiprocessing.Pool() as pool:
+            scores = list(pool.imap_unordered(pipeline.run_pipeline, opts_permutations))
     for score in scores:
         assert type(score['avg']) == np.float64
         assert type(score['std']) == np.float64

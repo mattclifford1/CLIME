@@ -60,11 +60,11 @@ def proportional_downsample(data, percentage=1, seed=True, **kwargs):
     new_inds = np.concatenate(new_inds)
     # now only take new_inds from all data arrays
     instances = data['X'].shape[0]
-    for key in data.keys():
+    for key, val in data.items():
         # apply to all numpy arrays that are data rows
-        if type(data[key]) == np.ndarray and data[key].shape[0] == instances:
+        if isinstance(val, np.ndarray) and data[key].shape[0] == instances:
             # apply the shuffle
-            data[key] = data[key][new_inds]
+            data[key] = val[new_inds]
     return data
 
 def proportional_split(data, size=0.8, seed=True):
@@ -96,12 +96,12 @@ def proportional_split(data, size=0.8, seed=True):
     # now apply the split to all data arrays
     test_split = {}
     instances = data['X'].shape[0]
-    for key in data.keys():
+    for key, val in data.items():
         # apply to all numpy arrays that are data rows
-        if type(data[key]) == np.ndarray and data[key].shape[0] == instances:
+        if isinstance(val, np.ndarray) and data[key].shape[0] == instances:
             # extract and store the splits
-            test_split[key] = data[key][test_inds]  # important to do this one first!
-            data[key] = data[key][train_inds]       # as test data is now deleted
+            test_split[key] = val[test_inds]  # important to do this one first!
+            data[key] = val[train_inds]       # as test data is now deleted
     return data, test_split
 
 

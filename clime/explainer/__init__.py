@@ -1,4 +1,4 @@
-from .local import *
+from .local import bLIMEy
 
 def class_weighted_bLIMEy(*args, **kwargs):
     return bLIMEy(*args, class_weight=True, **kwargs)

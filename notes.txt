@@ -6,3 +6,11 @@ local fidelity with same weights used to train the surrogate model
 
 (in)fidelity paper:
   - https://arxiv.org/pdf/1901.09392.pdf
+
+
+
+
+Research ideas:
+show that local weighting of lime helps local fidelity
+show class balanced helps class balanced fidelity
+show other cost sensitive trained models where you need to do other things for lime (e.g. for boundary adjust we find that you shoudln't do cost sensitive lime for some reason?)

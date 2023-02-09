@@ -8,6 +8,7 @@ put together all aspects of the training/explaination/evaluation pipeline
 from dataclasses import dataclass
 from functools import partial
 import multiprocessing
+import logging
 import numpy as np
 from tqdm import tqdm
 import clime
@@ -20,8 +21,8 @@ class construct:
 
     def run(self, parallel_eval=False):
         train_data, test_data, clf = self.get_data_model()
-        print(f"            Model     accuracy. train: {utils.accuracy(clf, train_data)} test: {utils.accuracy(clf, test_data)}")
-        print(f"            Model bal accuracy. train: {utils.bal_accuracy(clf, train_data)} test: {utils.bal_accuracy(clf, test_data)}")
+        logging.info(f"Model     accuracy. train: {utils.accuracy(clf, train_data)} test: {utils.accuracy(clf, test_data)}")
+        logging.info(f"Model bal accuracy. train: {utils.bal_accuracy(clf, train_data)} test: {utils.bal_accuracy(clf, test_data)}")
         score_avg = self.get_avg_evaluation(self.opts, clf, test_data, run_parallel=parallel_eval)
         return score_avg
 
@@ -59,9 +60,8 @@ class construct:
                                                   clf=clf)
         data_list = list(range(len(data_dict['y'])))
         if run_parallel == True:
-            n_cpus = int(multiprocessing.cpu_count())
-            with multiprocessing.Pool(processes=n_cpus) as pool:
-                scores = list(tqdm(pool.imap(_get_explainer_evaluation_wrapper, data_list), total=len(data_list), leave=False, desc='Evaluation'))
+            with multiprocessing.Pool() as pool:
+                scores = list(tqdm(pool.imap_unordered(_get_explainer_evaluation_wrapper, data_list), total=len(data_list), leave=False, desc='Evaluation'))
         else:
             scores = list(map(_get_explainer_evaluation_wrapper, data_list))
         scores = np.array(scores)
@@ -114,6 +114,7 @@ def run_pipeline(opts, parallel_eval=False):
     return p.run(parallel_eval=parallel_eval)
 
 if __name__ == '__main__':
+    logging.basicConfig(level=logging.INFO)
     opts = {
         # 'dataset':             'credit scoring 1',
         'dataset':             'moons',
