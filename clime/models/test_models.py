@@ -1,7 +1,20 @@
 # author: Matt Clifford
 # email: matt.clifford@bristol.ac.uk
-from clime import models
+import clime
 
 def test_model_attribues():
-    for model in models.AVAILABLE_MODELS.keys():
-        assert issubclass(models.AVAILABLE_MODELS[model], models.base_model)
+    '''
+    test that the model is a sub class of the abstract base_model class
+    '''
+    train_data, _ = clime.pipeline.construct.run_section('dataset',
+                                                         {'dataset': 'moons'},
+                                                         class_samples=[2, 3])
+    for model in clime.models.AVAILABLE_MODELS:
+        clf = clime.pipeline.construct.run_section('model',
+                                                   {'model': model},
+                                                   data=train_data)
+        assert issubclass(type(clf), clime.models.base_model)
+
+
+if __name__ == '__main__':
+    test_model_attribues()
