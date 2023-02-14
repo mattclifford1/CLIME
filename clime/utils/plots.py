@@ -124,7 +124,7 @@ def plot_clfs(data_dict, ax_x=2):
             ax.set_title(key)
             count += 1
 
-def plot_bar_dict(data_dict, title=''):
+def plot_bar_dict(data_dict, title='', ylabel=''):
     fig, ax = plt.subplots()
     keys = list(data_dict.keys())
     x_pos = np.arange(len(keys))
@@ -137,6 +137,7 @@ def plot_bar_dict(data_dict, title=''):
     ax.set_xticks(x_pos)
     ax.set_xticklabels(keys, rotation=30, ha='right')
     ax.set_title(title)
+    ax.set_ylabel(ylabel)
     ax.yaxis.grid(True)
 
 

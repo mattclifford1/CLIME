@@ -20,8 +20,9 @@ def test_all_pipeline_configs():
     opts_permutations = utils.get_all_dict_permutations(all_opts)
     # now test all variations of methods
     with multiprocessing.Pool() as pool:
-            scores = list(pool.imap_unordered(pipeline.run_pipeline, opts_permutations))
-    for score in scores:
+            results = list(pool.imap_unordered(pipeline.run_pipeline, opts_permutations))
+    for result in results:
+        score, model_stats = result
         assert type(score['avg']) == np.float64
         assert type(score['std']) == np.float64
 

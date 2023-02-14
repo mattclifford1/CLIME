@@ -23,7 +23,7 @@ class construct:
         train_data, test_data, clf = self.get_data_model()
         model_stats = utils.get_model_stats(clf, train_data, test_data)
         score_avg = self.get_avg_evaluation(self.opts, clf, test_data, run_parallel=parallel_eval)
-        return score_avg
+        return score_avg, model_stats
 
     def get_data_model(self):
         '''DATA'''

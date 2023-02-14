@@ -6,8 +6,8 @@ from .balance import adjust_boundary, adjust_proba, none
 AVAILABLE_MODELS = {
     'SVM': SVM,
     'SVM balanced training': SVM_balanced_training,
-    'Ridge': logistic,
-    'Ridge balanced training': logistic_balanced_training
+    'Logistic': logistic,
+    'Logistic balanced training': logistic_balanced_training
 }
 
 AVAILABLE_MODEL_BALANCING = {

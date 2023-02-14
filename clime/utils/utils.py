@@ -26,9 +26,9 @@ def get_opt_differences(opts):
     is different, this is useful for plots etc.
     '''
     if len(opts) == 1:
-        return opts, [0]
+        return opts[0], [0]
     if isinstance(opts, dict):
-        return [opts], [0]
+        return opts, [0]
     # get keys that all have the same or different values
     same_values = {}
     list_of_diff_keys = []
