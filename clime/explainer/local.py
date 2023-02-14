@@ -62,7 +62,7 @@ class bLIMEy:
         self.data['y'] = black_box_model.predict(self.data['X'])
 
     def _get_local_sampling_cov(self):
-        if self.data_lims == None:
+        if self.data_lims is None:
             return np.eye(len(self.query_point))
         else:
             # calculate from data lims ?

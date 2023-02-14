@@ -1,10 +1,13 @@
 from .base import base_model
 from .svm import SVM, SVM_balanced_training
+from .linear import logistic, logistic_balanced_training
 from .balance import adjust_boundary, adjust_proba, none
 
 AVAILABLE_MODELS = {
     'SVM': SVM,
     'SVM balanced training': SVM_balanced_training,
+    'Ridge': logistic,
+    'Ridge balanced training': logistic_balanced_training
 }
 
 AVAILABLE_MODEL_BALANCING = {
