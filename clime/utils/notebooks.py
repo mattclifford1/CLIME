@@ -83,12 +83,14 @@ def run_experiments(data_store):
     all_opts = get_config(data_store)
     opts_permutations = clime.utils.get_all_dict_permutations(all_opts)
     scores = {}
+    title, labels = clime.utils.get_opt_differences(opts_permutations)
     for i, opts in enumerate(opts_permutations):
         print('='*100)
         print(f"{i}: ")
         print(f"    {opts}")
-        scores[i] = clime.pipeline.run_pipeline(opts, parallel_eval=True)
-    clime.utils.plots.plot_bar_dict(scores)
+        scores[str(labels[i])] = clime.pipeline.run_pipeline(opts, parallel_eval=True)
+
+    clime.utils.plots.plot_bar_dict(scores, title=title)
 
 
 def disp_section_name(section, data_store):

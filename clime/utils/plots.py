@@ -126,19 +126,18 @@ def plot_clfs(data_dict, ax_x=2):
 
 def plot_bar_dict(data_dict, title=''):
     fig, ax = plt.subplots()
-    items = list(data_dict.keys())
-    x_pos = np.arange(len(items))
+    keys = list(data_dict.keys())
+    x_pos = np.arange(len(keys))
     avgs = []
     stds = []
-    for item in items:
-        avgs.append(data_dict[item]['avg'])
-        stds.append(data_dict[item]['std'])
+    for key in keys:
+        avgs.append(data_dict[key]['avg'])
+        stds.append(data_dict[key]['std'])
     ax.bar(x_pos, avgs, yerr=stds, align='center', alpha=0.5, ecolor='black', capsize=10)
     ax.set_xticks(x_pos)
-    ax.set_xticklabels(items)
+    ax.set_xticklabels(keys, rotation=30, ha='right')
     ax.set_title(title)
     ax.yaxis.grid(True)
-
 
 
 if __name__ == '__main__':
