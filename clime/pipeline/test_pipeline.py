@@ -1,13 +1,12 @@
+'''
+test all configurations of the pipeline to make sure all combos will run
+'''
 # author: Matt Clifford
 # email: matt.clifford@bristol.ac.uk
 import multiprocessing
 import numpy as np
 from clime import pipeline, utils
 
-
-def run_pipeline(opts):
-    p = pipeline.construct(opts)
-    p.run()
 
 def test_all_pipeline_configs():
     all_opts = {
