@@ -21,8 +21,7 @@ class construct:
 
     def run(self, parallel_eval=False):
         train_data, test_data, clf = self.get_data_model()
-        logging.info(f"Model     accuracy. train: {utils.accuracy(clf, train_data)} test: {utils.accuracy(clf, test_data)}")
-        logging.info(f"Model bal accuracy. train: {utils.bal_accuracy(clf, train_data)} test: {utils.bal_accuracy(clf, test_data)}")
+        model_stats = utils.get_model_stats(clf, train_data, test_data)
         score_avg = self.get_avg_evaluation(self.opts, clf, test_data, run_parallel=parallel_eval)
         return score_avg
 

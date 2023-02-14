@@ -34,3 +34,11 @@ def bal_accuracy(clf, data):
     # adjust score with weights
     w_acc = sum(same_preds*weights)/ sum(weights)
     return w_acc
+
+def get_model_stats(clf, train_data, test_data):
+    return {
+        'train accurracy': accuracy(clf, train_data),
+        'test accurracy': accuracy(clf, test_data),
+        'train balanced accurracy': bal_accuracy(clf, train_data),
+        'test balanced accurracy': bal_accuracy(clf, test_data),
+    }
