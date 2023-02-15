@@ -22,3 +22,5 @@ pytest
 
 ## Package structure
 Available methods for each part of the pipeline are declared in the `__init__.py` of each subfolder. Add all new methods developed there.
+
+The pipeline is run from [make_pipeline.py](clime/pipeline/make_pipeline.py).
