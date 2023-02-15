@@ -76,7 +76,8 @@ class construct:
         expl = construct.run_section('explainer',
                                  opts,
                                  black_box_model=clf,
-                                 query_point=data_dict['X'][query_point_ind, :])
+                                 query_point=data_dict['X'][query_point_ind, :],
+                                 data=data_dict)
         '''EVALUATION'''
         score = construct.run_section('evaluation',
                                   opts,

@@ -27,13 +27,7 @@ class logistic(sklearn.linear_model.LogisticRegression, base_model):
     def train(self, data):
         if self.balanced_training is True:
             # get class imbalance weights
-            class_weights = costs.weight_based_on_class_imbalance(data)
-            # get class labels as a matrix
-            y = np.expand_dims(data['y'], axis=1)
-            Y = np.concatenate((y, np.abs(1-y)), axis=1)
-            class_matrix = data['y']
-            # apply to all instances
-            instance_weights = np.dot(Y, class_weights.T)
+            instance_weights = costs.get_instance_class_weights(data)
         else:
             instance_weights = None
         self.fit(data['X'], data['y'], sample_weight=instance_weights)

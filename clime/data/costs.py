@@ -33,3 +33,16 @@ def weight_based_on_class_imbalance(data):
     weights /= min(weights)
     # weights /= sum(weights)
     return weights
+
+def get_instance_class_weights(data):
+    '''
+    get cost based on classs imbalance but in a matrix form
+    useful when weighting training examples during model training
+    '''
+    class_weights = weight_based_on_class_imbalance(data)
+    # get class labels as a matrix
+    y = np.expand_dims(data['y'], axis=1)
+    Y = np.concatenate((y, np.abs(1-y)), axis=1)
+    # apply to all instances
+    instance_weights = np.dot(Y, class_weights.T)
+    return instance_weights

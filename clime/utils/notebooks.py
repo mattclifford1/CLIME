@@ -124,9 +124,6 @@ def plot_model_and_stats(inp):
     print('Model train/test statistics')
     clime.utils.plot_multiple_bar_dicts(model_stats_)
 
-
-
-
 def disp_section_name(section, data_store):
     return f"{section}: {get_config(data_store)[section]}"
 

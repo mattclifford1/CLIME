@@ -32,14 +32,18 @@ class bLIMEy:
     '''
     def __init__(self, black_box_model,
                        query_point,
+                       data=None,
                        data_lims=None,
                        samples=10000,
-                       class_weight=False,
+                       class_weight_data=False,
+                       class_weight_sampled=False,
                        rebalance_sampled_data=False):
         self.query_point = query_point
+        self.data_test = data   # test set to get statistics from
         self.data_lims = data_lims
         self.samples = samples
-        self.class_weight = class_weight
+        self.class_weight_data = class_weight_data
+        self.class_weight_sampled = class_weight_sampled
         self.rebalance_sampled_data = rebalance_sampled_data
         self.data = {}
         self._sample_locally(black_box_model)
@@ -76,7 +80,14 @@ class bLIMEy:
         self.data['p(y)'] = black_box_model.predict_proba(self.data['X'])
         # get sample weighting based on distance
         weights = costs.weights_based_on_distance(self.query_point, self.data['X'])
-        if self.class_weight is True:
+        if self.class_weight_data is True:   # weight from given weights
+            class_weights = costs.weight_based_on_class_imbalance(self.data_test)
+            class_preds_matrix = np.round(self.data['p(y)'])
+            # apply to all instances
+            instance_class_imbalance_weights = np.dot(class_preds_matrix, class_weights.T)
+            # now combine class imbalance weights with distance based weights
+            weights *= instance_class_imbalance_weights
+        if self.class_weight_sampled is True: # weight based on imbalance of the samples
             # get class imbalance weights
             class_weights = costs.weight_based_on_class_imbalance(self.data)
             class_preds_matrix = np.round(self.data['p(y)'])
