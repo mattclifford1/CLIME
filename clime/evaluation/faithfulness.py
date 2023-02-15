@@ -4,28 +4,39 @@
 from clime.data import costs
 import numpy as np
 
+def _get_preds(expl, black_box_model, data):
+    # get prediction from both models
+    bb_preds = black_box_model.predict(data['X'])
+    expl_preds = expl.predict(data['X'])
+    same_preds = (bb_preds==expl_preds).astype(np.int64)
+    return same_preds
+
+def _get_class_weights(data):
+    # get weights dataset based on class imbalance
+    weightings = costs.weight_based_on_class_imbalance(data)
+    weights = data['y'].copy()
+    masks = {}
+    for i in range(len(weightings)):
+        masks[i] = (weights==i)
+    for i in range(len(weightings)):
+        weights[masks[i]] = weightings[i]
+    return weights
 
 def fidelity(expl, black_box_model, data, **kwargs):
     '''
     get fidelity accuracy between both models
     '''
-    # get prediction from both models
-    bb_preds = black_box_model.predict(data['X'])
-    expl_preds = expl.predict(data['X'])
-    same_preds = (bb_preds==expl_preds).astype(np.int64)
+    same_preds = _get_preds(expl, black_box_model, data)
     # get the accuracy
-    fidelity_acc = sum(same_preds)/len(bb_preds)
+    fidelity_acc = sum(same_preds)/len(same_preds)
     return fidelity_acc
 
-def local_fidelity(expl, black_box_model, data, query_point):
+def local_fidelity(expl, black_box_model, data, query_point, **kwargs):
     '''
     get fidelity accuracy between both models but weight based on
     distance from query point
     '''
-    # get predictions from both models
-    bb_preds = black_box_model.predict(data['X'])
-    expl_preds = expl.predict(data['X'])
-    same_preds = (bb_preds==expl_preds).astype(np.int64)
+    same_preds = _get_preds(expl, black_box_model, data)
     # get weights dataset based on locality
     weights = costs.weights_based_on_distance(query_point, data['X'])
     # adjust score with weights
@@ -38,18 +49,19 @@ def bal_fidelity(expl, black_box_model, data, **kwargs):
     get fidelity accuracy between both models but weight based on
     class imbalance - give higher weight to minority class (prop to instances)
     '''
-    # get predictions from both models
-    bb_preds = black_box_model.predict(data['X'])
-    expl_preds = expl.predict(data['X'])
-    same_preds = (bb_preds==expl_preds).astype(np.int64)
-    # get weights dataset based on class imbalance
-    weightings = costs.weight_based_on_class_imbalance(data)
-    weights = data['y'].copy()
-    masks = {}
-    for i in range(len(weightings)):
-        masks[i] = (weights==i)
-    for i in range(len(weightings)):
-        weights[masks[i]] = weightings[i]
+    same_preds = _get_preds(expl, black_box_model, data)
+    weights = _get_class_weights(data)
+    # adjust score with weights
+    fidelity_acc = sum(same_preds*weights)/ sum(weights)
+    return fidelity_acc
+
+def local_and_bal_fidelity(expl, black_box_model, data, query_point, **kwargs):
+    '''
+    combine the weights of both bal and local
+    '''
+    same_preds = _get_preds(expl, black_box_model, data)
+    weights = costs.weights_based_on_distance(query_point, data['X'])
+    weights *= _get_class_weights(data)
     # adjust score with weights
     fidelity_acc = sum(same_preds*weights)/ sum(weights)
     return fidelity_acc
