@@ -89,6 +89,12 @@ def run_experiments(data_store):
     all_opts = get_config(data_store)
     opts_permutations = clime.utils.get_all_dict_permutations(all_opts)
     title, labels = clime.utils.get_opt_differences(opts_permutations)
+    # get plot details
+    if 'evaluation' in list(title.keys()):
+        ylabels = [title['evaluation']]*len(opts_permutations)
+        title.pop('evaluation')
+    else:
+        ylabels = [label.pop('evaluation') for label in labels]
     # run pipelines
     scores = {}
     model_stats_ = {}
@@ -97,17 +103,12 @@ def run_experiments(data_store):
     test_datas = {}
     for i, opts in tqdm(enumerate(opts_permutations), total=len(opts_permutations), desc='Pipeline runs', leave=False):
         result = clime.pipeline.run_pipeline(opts, parallel_eval=True)
-        scores[str(labels[i])] = {str(labels[i]): result['score']}
-        model_stats_[str(labels[i])] = result['model_stats']
-        clfs[str(labels[i])] = result['clf']
-        train_datas[str(labels[i])] = result['train_data']
-        test_datas[str(labels[i])] = result['test_data']
-    # get plot details
-    if 'evaluation' in list(title.keys()):
-        ylabels = [title['evaluation']]*len(scores)
-        title.pop('evaluation')
-    else:
-        ylabels = [label.pop('evaluation') for label in labels]
+        scores[i] = {str(labels[i]): result['score']}
+        model_stats_[i] = result['model_stats']
+        clfs[i] = result['clf']
+        train_datas[i] = result['train_data']
+        test_datas[i] = result['test_data']
+
     print(f'Params: {title}')
     # plot evaluation graphs
     clime.utils.plots.plot_multiple_bar_dicts(scores, title=title, ylabels=ylabels, stds=True)

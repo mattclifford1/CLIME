@@ -169,7 +169,6 @@ def plot_multiple_bar_dicts(data_dicts, ylabels=None, stds=False, ylims=[0, 1], 
             else:
                 ylims[1] = max(ylims[1], bar_value)
                 ylims[0] = min(ylims[0], bar_value)
-    print(ylims)
     # make subplots
     fig, axs = plt.subplots(1, len(data_dicts))
     if len(data_dicts) == 1:
