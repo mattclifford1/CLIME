@@ -10,7 +10,7 @@ from functools import partial
 import multiprocessing
 import logging
 import numpy as np
-from tqdm import tqdm
+from tqdm.autonotebook import tqdm
 import clime
 from clime import data, models, explainer, evaluation, utils
 
@@ -19,16 +19,20 @@ from clime import data, models, explainer, evaluation, utils
 class construct:
     opts: dict
 
-    def run(self, parallel_eval=False, return_all=False):
-        train_data, test_data, clf = self.get_data_model()
+    def run(self, parallel_eval=False):
+        '''
+        run the whole pipeline
+        '''
+        train_data, test_data, clf = self.get_data_and_model()
         model_stats = utils.get_model_stats(clf, train_data, test_data)
         score_avg = self.get_avg_evaluation(self.opts, clf, test_data, run_parallel=parallel_eval)
-        if return_all is False:
-            return score_avg, model_stats
-        else:
-            return score_avg, model_stats, clf, train_data, test_data
+        return {'score': score_avg,
+                'model_stats': model_stats,
+                'clf': clf,
+                'train_data': train_data,
+                'test_data': test_data}
 
-    def get_data_model(self):
+    def get_data_and_model(self):
         '''DATA'''
         #  get dataset
         train_data, test_data = self.run_section('dataset',
@@ -126,8 +130,9 @@ if __name__ == '__main__':
         'dataset rebalancing': 'none',
         'model':               'SVM',
         'model balancer':      'none',
-        'explainer':           'bLIMEy (cost sensitive training)',
+        'explainer':           'bLIMEy (cost sensitive sampled)',
         'evaluation':          'fidelity (local)',
     }
     p = construct(opts)
-    print(p.run(parallel_eval=True))
+    result = p.run(parallel_eval=True)
+    print(result['score'])

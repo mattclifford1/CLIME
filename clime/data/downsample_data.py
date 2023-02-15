@@ -51,7 +51,6 @@ def proportional_downsample(data, percentage=1, seed=True, **kwargs):
         # get all the inds of current class
         cls_inds = np.where(data['y']==cls)[0]
         # shuffle all the inds to get a random selection
-        set_seed(seed)
         np.random.shuffle(cls_inds)
         # now store a subsample of class inds
         sub_sample_of_inds = cls_inds[:new_data_counts[i]]

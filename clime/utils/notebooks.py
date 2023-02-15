@@ -1,4 +1,5 @@
 import multiprocessing
+from tqdm.autonotebook import tqdm
 import ipywidgets
 from IPython.display import display, Javascript
 import clime
@@ -94,13 +95,13 @@ def run_experiments(data_store):
     clfs = {}
     train_datas = {}
     test_datas = {}
-    for i, opts in enumerate(opts_permutations):
-        score_avg, model_stats, clf, train_data, test_data = clime.pipeline.run_pipeline(opts, parallel_eval=True, return_all=True)
-        scores[str(labels[i])] = {str(labels[i]): score_avg}
-        model_stats_[str(labels[i])] = model_stats
-        clfs[str(labels[i])] = clf
-        train_datas[str(labels[i])] = train_data
-        test_datas[str(labels[i])] = test_data
+    for i, opts in tqdm(enumerate(opts_permutations), total=len(opts_permutations), desc='Pipeline runs', leave=False):
+        result = clime.pipeline.run_pipeline(opts, parallel_eval=True)
+        scores[str(labels[i])] = {str(labels[i]): result['score']}
+        model_stats_[str(labels[i])] = result['model_stats']
+        clfs[str(labels[i])] = result['clf']
+        train_datas[str(labels[i])] = result['train_data']
+        test_datas[str(labels[i])] = result['test_data']
     # get plot details
     if 'evaluation' in list(title.keys()):
         ylabels = [title['evaluation']]*len(scores)

@@ -22,9 +22,8 @@ def test_all_pipeline_configs():
     with multiprocessing.Pool() as pool:
             results = list(pool.imap_unordered(pipeline.run_pipeline, opts_permutations))
     for result in results:
-        score, model_stats = result
-        assert type(score['avg']) == np.float64
-        assert type(score['std']) == np.float64
+        assert type(result['score']['avg']) == np.float64
+        assert type(result['score']['std']) == np.float64
 
 # make one to test running in parrelel p.run()
 

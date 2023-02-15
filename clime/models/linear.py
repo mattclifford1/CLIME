@@ -6,6 +6,7 @@ Inherits from sckit-learn classifiers
 # email: matt.clifford@bristol.ac.uk
 import sklearn
 import numpy as np
+import clime
 from clime.data import costs
 from clime.models import base_model
 
@@ -21,7 +22,7 @@ class logistic(sklearn.linear_model.LogisticRegression, base_model):
     '''
     def __init__(self, data, balanced_training=False, fit_intercept=True, **kwargs):
         self.balanced_training = balanced_training
-        super().__init__(fit_intercept=fit_intercept, **kwargs)
+        super().__init__(fit_intercept=fit_intercept, random_state=clime.RANDOM_SEED, **kwargs)
         self.train(data)
 
     def train(self, data):

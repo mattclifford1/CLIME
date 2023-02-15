@@ -15,7 +15,7 @@ conda activate clime
 pip install -e .
 ```
 
-Test can be run with pytest:
+Test can be run with pytest (all configurations of the pipeline are run so this can take a few minutes when using a laptop):
 ```
 pytest
 ```
