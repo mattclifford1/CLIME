@@ -100,20 +100,25 @@ def plot_data_dict(data_dict):
 #         plot_utils.plot_decision_boundary(models[key], datasets[key], ax=axs[i])
 #         axs[i].set_title(key)
 
-def plot_clfs(data_dict, ax_x=2):
+def plot_clfs(data_dict, ax_x=2, title=True):
     '''
     data dict has keys:
         - model
         - data
     '''
-    ax_y = int(np.ceil(len(data_dict.keys())/2))
+    ax_y = int(np.ceil(len(data_dict.keys())/ax_x))
     fig, axs = plt.subplots(ax_y, ax_x)
+    if ax_y == 1 and ax_x == 1:
+        axs = [axs]
     count = 0
     keys = list(data_dict.keys())
     for i in range(ax_x):
         for j in range(ax_y):
             key = keys[count]
             data = data_dict[key]['data']
+            if data['X'].shape[1] > 2:
+                # TODO: impliment PCA or TSNE to reduce data dims for plotting
+                continue
             model = data_dict[key]['model']
             if ax_y > 1:
                 ax = axs[i][j]
@@ -121,24 +126,43 @@ def plot_clfs(data_dict, ax_x=2):
                 ax = axs[i]
             plot_classes(data, ax)
             plot_decision_boundary(model, data, ax=ax)
-            ax.set_title(key)
+            if title is True:
+                ax.set_title(key)
             count += 1
 
-def plot_bar_dict(data_dict, title='', ylabel=''):
-    fig, ax = plt.subplots()
+def plot_bar_dict(data_dict, title='', ylabel=None, stds=True, ax=None):
+    if ax is None:
+        fig, ax = plt.subplots()
     keys = list(data_dict.keys())
     x_pos = np.arange(len(keys))
-    avgs = []
-    stds = []
-    for key in keys:
-        avgs.append(data_dict[key]['avg'])
-        stds.append(data_dict[key]['std'])
-    ax.bar(x_pos, avgs, yerr=stds, align='center', alpha=0.5, ecolor='black', capsize=10)
+    if stds is True:
+        avgs = []
+        stds = []
+        for key in keys:
+            avgs.append(data_dict[key]['avg'])
+            stds.append(data_dict[key]['std'])
+        ax.bar(x_pos, avgs, yerr=stds, align='center', alpha=0.5, ecolor='black', capsize=10)
+    else:
+        ax.bar(x_pos, list(data_dict.values()), align='center', alpha=0.5, ecolor='black', capsize=10)
     ax.set_xticks(x_pos)
-    ax.set_xticklabels(keys, rotation=30, ha='right')
+    ax.set_xticklabels(keys, rotation=45, ha='right')
     ax.set_title(title)
+    if ylabel is None:
+        ylabel = ''
     ax.set_ylabel(ylabel)
     ax.yaxis.grid(True)
+
+def plot_multiple_bar_dicts(data_dicts, ylabels=None, stds=False, **kwargs):
+    '''
+    use plot_bar_dict but on sub axes
+    data_dicts: dict of data dictionaries
+    '''
+    fig, axs = plt.subplots(1, len(data_dicts))
+    if len(data_dicts) == 1:
+        axs = [axs]
+    for i, key in enumerate(data_dicts):
+        ylabel = ylabels[i] if ylabels is not None else None
+        plot_bar_dict(data_dicts[key], stds=stds, ax=axs[i], ylabel=ylabel)
 
 
 if __name__ == '__main__':

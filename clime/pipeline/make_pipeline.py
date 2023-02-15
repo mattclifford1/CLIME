@@ -19,11 +19,14 @@ from clime import data, models, explainer, evaluation, utils
 class construct:
     opts: dict
 
-    def run(self, parallel_eval=False):
+    def run(self, parallel_eval=False, return_all=False):
         train_data, test_data, clf = self.get_data_model()
         model_stats = utils.get_model_stats(clf, train_data, test_data)
         score_avg = self.get_avg_evaluation(self.opts, clf, test_data, run_parallel=parallel_eval)
-        return score_avg, model_stats
+        if return_all is False:
+            return score_avg, model_stats
+        else:
+            return score_avg, model_stats, clf, train_data, test_data
 
     def get_data_model(self):
         '''DATA'''
@@ -108,9 +111,9 @@ def _get_explainer_evaluation_wrapper(args):
     # for use with pool.starmap to unpack all the args (but keep defualt args)
     return get_explainer_evaluation(*args)
 
-def run_pipeline(opts, parallel_eval=False):
+def run_pipeline(opts, **kwargs):
     p = construct(opts)
-    return p.run(parallel_eval=parallel_eval)
+    return p.run(**kwargs)
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)

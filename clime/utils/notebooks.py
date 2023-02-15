@@ -2,6 +2,8 @@ import multiprocessing
 import ipywidgets
 from IPython.display import display, Javascript
 import clime
+import matplotlib.pyplot as plt
+plt.rcParams["figure.figsize"] = (12, 6)
 
 def run_all(ev):
     display(Javascript('IPython.notebook.execute_cells_below()'))
@@ -59,6 +61,8 @@ def get_config(interactive_data_store):
             config[key] = [interactive_data_store[key].value]
         else:
             config[key] = interactive_data_store[key].value
+        if isinstance(config[key], float):
+            config[key] = round(config[key], 3)
     return config
 
 def get_pipeline_widgets():
@@ -86,19 +90,41 @@ def run_experiments(data_store):
     title, labels = clime.utils.get_opt_differences(opts_permutations)
     # run pipelines
     scores = {}
-    model_stats = {}
+    model_stats_ = {}
+    clfs = {}
+    train_datas = {}
+    test_datas = {}
     for i, opts in enumerate(opts_permutations):
-        s, m = clime.pipeline.run_pipeline(opts, parallel_eval=True)
-        scores[str(labels[i])] = s
-        model_stats[str(labels[i])] = m
+        score_avg, model_stats, clf, train_data, test_data = clime.pipeline.run_pipeline(opts, parallel_eval=True, return_all=True)
+        scores[str(labels[i])] = {str(labels[i]): score_avg}
+        model_stats_[str(labels[i])] = model_stats
+        clfs[str(labels[i])] = clf
+        train_datas[str(labels[i])] = train_data
+        test_datas[str(labels[i])] = test_data
     # get plot details
     if 'evaluation' in list(title.keys()):
-        ylabel = title['evaluation']
+        ylabels = [title['evaluation']]*len(scores)
         title.pop('evaluation')
     else:
-        ylabel = 'Explainer Evaluation'
-    # plot
-    clime.utils.plots.plot_bar_dict(scores, title=title, ylabel=ylabel)
+        ylabels = [label.pop('evaluation') for label in labels]
+    print(f'Params: {title}')
+    # plot evaluation graphs
+    clime.utils.plots.plot_multiple_bar_dicts(scores, title=title, ylabels=ylabels, stds=True)
+    # visualise pipeline
+    return model_stats_, clfs, train_datas, test_datas
+
+def plot_model_and_stats(inp):
+    model_stats_, clfs, train_datas, test_datas = inp
+    # get all train data and models in plotable dict
+    model_plots = {}
+    for run in clfs:
+        model_plots[run] = {'model': clfs[run], 'data': train_datas[run]}
+    print('Model probabilities')
+    clime.utils.plots.plot_clfs(model_plots, ax_x=len(model_plots), title=False)
+    print('Model train/test statistics')
+    clime.utils.plot_multiple_bar_dicts(model_stats_)
+
+
 
 
 def disp_section_name(section, data_store):
