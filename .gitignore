@@ -1,6 +1,6 @@
 # Datasets that are too bgig
 cup98*.txt
-
+experiments.ipynb
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
