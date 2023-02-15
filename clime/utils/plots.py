@@ -130,7 +130,7 @@ def plot_clfs(data_dict, ax_x=2, title=True):
                 ax.set_title(key)
             count += 1
 
-def plot_bar_dict(data_dict, title='', ylabel=None, stds=True, ax=None):
+def plot_bar_dict(data_dict, title='', ylabel=None, stds=True, ax=None, ylim=None):
     if ax is None:
         fig, ax = plt.subplots()
     keys = list(data_dict.keys())
@@ -151,18 +151,32 @@ def plot_bar_dict(data_dict, title='', ylabel=None, stds=True, ax=None):
         ylabel = ''
     ax.set_ylabel(ylabel)
     ax.yaxis.grid(True)
+    if ylim is not None:
+        ax.set_ylim(ylim)
 
-def plot_multiple_bar_dicts(data_dicts, ylabels=None, stds=False, **kwargs):
+def plot_multiple_bar_dicts(data_dicts, ylabels=None, stds=False, ylims=[0, 1], **kwargs):
     '''
     use plot_bar_dict but on sub axes
     data_dicts: dict of data dictionaries
     '''
+    # get the max value in the plots
+    for plot in data_dicts.values():
+        for bar_value in plot.values():
+            if isinstance(bar_value, dict):
+                for bar_avg_and_std in bar_value.values():
+                    ylims[1] = max(ylims[1], bar_avg_and_std)
+                    ylims[0] = min(ylims[0], bar_avg_and_std)
+            else:
+                ylims[1] = max(ylims[1], bar_value)
+                ylims[0] = min(ylims[0], bar_value)
+    print(ylims)
+    # make subplots
     fig, axs = plt.subplots(1, len(data_dicts))
     if len(data_dicts) == 1:
         axs = [axs]
     for i, key in enumerate(data_dicts):
         ylabel = ylabels[i] if ylabels is not None else None
-        plot_bar_dict(data_dicts[key], stds=stds, ax=axs[i], ylabel=ylabel)
+        plot_bar_dict(data_dicts[key], stds=stds, ax=axs[i], ylabel=ylabel, ylim=ylims)
 
 
 if __name__ == '__main__':

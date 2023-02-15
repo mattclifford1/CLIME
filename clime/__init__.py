@@ -1,4 +1,6 @@
 import os
+import warnings
+warnings.filterwarnings("ignore")   # for tqdm notebook warning
 import numpy as np
 from .pipeline import make_pipeline
 
