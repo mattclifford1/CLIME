@@ -6,11 +6,8 @@ put together all aspects of the training/explaination/evaluation pipeline
 # author: Matt Clifford
 # email: matt.clifford@bristol.ac.uk
 from dataclasses import dataclass
-from functools import partial
-import multiprocessing
 import logging
 import numpy as np
-from tqdm.autonotebook import tqdm
 import clime
 from clime import data, models, explainer, evaluation, utils
 
@@ -25,8 +22,8 @@ class construct:
         '''
         train_data, test_data, clf = self.get_data_and_model()
         model_stats = utils.get_model_stats(clf, train_data, test_data)
-        score_avg = self.get_avg_evaluation(self.opts, clf, test_data, run_parallel=parallel_eval)
-        return {'score': score_avg,
+        score = self.get_evaluation(self.opts, clf, test_data, run_parallel=parallel_eval)
+        return {'score': score,
                 'model_stats': model_stats,
                 'clf': clf,
                 'train_data': train_data,
@@ -59,42 +56,22 @@ class construct:
         return train_data, test_data, clf
 
     @staticmethod
-    def get_avg_evaluation(opts, clf, data_dict, run_parallel=False):
-        _get_explainer_evaluation_wrapper=partial(construct.get_explainer_evaluation,
-                                                  opts=opts,
-                                                  data_dict=data_dict,
-                                                  clf=clf)
-        data_list = list(range(len(data_dict['y'])))
-        if run_parallel == True:
-            with multiprocessing.Pool() as pool:
-                scores = list(tqdm(pool.imap_unordered(_get_explainer_evaluation_wrapper, data_list), total=len(data_list), leave=False, desc='Evaluation'))
-        else:
-            scores = list(map(_get_explainer_evaluation_wrapper, data_list))
-        scores = np.array(scores)
-        return {'avg': np.mean(scores), 'std': np.std(scores)}
-
-
-    @staticmethod
-    def get_explainer_evaluation(query_point_ind, opts, data_dict, clf, get_expl=False):
-        '''EXPLAINER'''
-        expl = construct.run_section('explainer',
-                                 opts,
-                                 black_box_model=clf,
-                                 query_point=data_dict['X'][query_point_ind, :],
-                                 data=data_dict)
-        '''EVALUATION'''
+    def get_evaluation(opts, clf, data_dict, run_parallel=False):
+        '''
+        get an evaluation of a given model and data
+        '''
+        # object to generate explanations
+        expl_gen = explainer_generator(opts)
+        # evaluation
         score = construct.run_section('evaluation',
                                   opts,
-                                  expl=expl,
+                                  explainer_generator=expl_gen,
                                   black_box_model=clf,
                                   data=data_dict,
-                                  query_point=data_dict['X'][query_point_ind, :])
-        if get_expl == True:
-            return score, expl
-        else:
-            return score
+                                  run_parallel=run_parallel)
+        return score   # score is either a dict with keys: 'avg', 'std' or a number
 
-    @staticmethod  # make static so this can be called from outside the pipeline
+    @staticmethod
     def run_section(section, options, **kwargs):
         '''
         run a portion of the pipeline
@@ -112,6 +89,24 @@ class construct:
             return available_modules[options[section]](**kwargs)
 
 
+class explainer_generator():
+    '''
+    object that can be called to generate an explainer from given set of options
+    '''
+    def __init__(self, opts):
+        self.opts = opts
+
+    def __call__(self, clf, data_dict, query_point_ind):
+        '''
+        get an explainer given a query point, data, and model
+        '''
+        expl = construct.run_section('explainer',
+                                 self.opts,
+                                 black_box_model=clf,
+                                 query_point=data_dict['X'][query_point_ind, :],
+                                 data=data_dict)
+        return expl
+
 def _get_explainer_evaluation_wrapper(args):
     # for use with pool.starmap to unpack all the args (but keep defualt args)
     return get_explainer_evaluation(*args)
@@ -121,7 +116,7 @@ def run_pipeline(opts, **kwargs):
     return p.run(**kwargs)
 
 if __name__ == '__main__':
-    logging.basicConfig(level=logging.INFO)
+    # logging.basicConfig(level=logging.INFO)
     opts = {
         # 'dataset':             'credit scoring 1',
         'dataset':             'moons',

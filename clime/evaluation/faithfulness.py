@@ -1,26 +1,47 @@
 # author: Matt Clifford
 # email: matt.clifford@bristol.ac.uk
-
+from functools import partial
+import multiprocessing
+from tqdm.autonotebook import tqdm
 from clime.data import costs
 import numpy as np
 
-def _get_preds(expl, black_box_model, data):
-    # get prediction from both models
-    bb_preds = black_box_model.predict(data['X'])
-    expl_preds = expl.predict(data['X'])
-    same_preds = (bb_preds==expl_preds).astype(np.int64)
-    return same_preds
+class get_avg_score():
+    '''
+    wrapper of fidelity metrics to loop over the whole dataset when called
+    '''
+    def __init__(self, metric):
+        self.metric = metric
 
-def _get_class_weights(data):
-    # get weights dataset based on class imbalance
-    weightings = costs.weight_based_on_class_imbalance(data)
-    weights = data['y'].copy()
-    masks = {}
-    for i in range(len(weightings)):
-        masks[i] = (weights==i)
-    for i in range(len(weightings)):
-        weights[masks[i]] = weightings[i]
-    return weights
+    def __call__(self, explainer_generator, black_box_model, data, run_parallel=False):
+        '''
+        get avg/std score given an explainer, black_box_model and data to test on
+        '''
+        _get_explainer_evaluation_wrapper=partial(get_avg_score._get_single_score,
+                                                  explainer_generator=explainer_generator,
+                                                  data_dict=data,
+                                                  clf=black_box_model,
+                                                  metric=self.metric)
+        data_list = list(range(len(data['y'])))
+        if run_parallel == True:
+            with multiprocessing.Pool() as pool:
+                scores = list(tqdm(pool.imap_unordered(_get_explainer_evaluation_wrapper, data_list), total=len(data_list), leave=False, desc='Evaluation'))
+        else:
+            scores = list(map(_get_explainer_evaluation_wrapper, data_list))
+        scores = np.array(scores)
+        return {'avg': np.mean(scores), 'std': np.std(scores)}
+
+    @staticmethod
+    def _get_single_score(query_point_ind, explainer_generator, clf, data_dict, metric):
+        '''
+        wrapper to use with multiprocessing
+        '''
+        expl = explainer_generator(clf, data_dict, query_point_ind)
+        score = metric(expl, black_box_model=clf,
+                             data=data_dict,
+                             query_point=data_dict['X'][query_point_ind, :])
+        return score
+
 
 def fidelity(expl, black_box_model, data, **kwargs):
     '''
@@ -43,7 +64,6 @@ def local_fidelity(expl, black_box_model, data, query_point, **kwargs):
     fidelity_acc = sum(same_preds*weights)/ sum(weights)
     return fidelity_acc
 
-
 def bal_fidelity(expl, black_box_model, data, **kwargs):
     '''
     get fidelity accuracy between both models but weight based on
@@ -65,6 +85,24 @@ def local_and_bal_fidelity(expl, black_box_model, data, query_point, **kwargs):
     # adjust score with weights
     fidelity_acc = sum(same_preds*weights)/ sum(weights)
     return fidelity_acc
+
+def _get_preds(expl, black_box_model, data):
+    # get prediction from both models
+    bb_preds = black_box_model.predict(data['X'])
+    expl_preds = expl.predict(data['X'])
+    same_preds = (bb_preds==expl_preds).astype(np.int64)
+    return same_preds
+
+def _get_class_weights(data):
+    # get weights dataset based on class imbalance
+    weightings = costs.weight_based_on_class_imbalance(data)
+    weights = data['y'].copy()
+    masks = {}
+    for i in range(len(weightings)):
+        masks[i] = (weights==i)
+    for i in range(len(weightings)):
+        weights[masks[i]] = weightings[i]
+    return weights
 
 
 if __name__ == '__main__':

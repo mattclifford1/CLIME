@@ -103,6 +103,11 @@ class bLIMEy:
                                  sample_weight=weights,
                                  )
 
+
+'''
+legacy code below to use original lime (from fatf)
+TODO: integrate orginal lime back into pipeline to have as a comparision
+'''
 # import fatf.transparency.predictions.surrogate_explainers as surrogates
 # import fatf.vis.lime as fatf_vis_lime
 #
