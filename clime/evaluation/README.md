@@ -10,6 +10,8 @@ When called the evaluation method is expected to take the key word arguments:
 
 Use `**kwargs` to peel off any arguments you dont want to use
 
+The evaluation needs to return either a dict with keys 'avg' and 'std' or simply just a number of the evaluation score (float).
+
 ## Generating explanations
 To generate an explanation from the given generator use:
 ```
