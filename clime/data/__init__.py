@@ -1,4 +1,6 @@
-from .synthetic_datasets import get_moons, get_gaussian, sample_dataset_to_proportions
+from .synthetic_datasets import sample_dataset_to_proportions
+from .gaussian import get_gaussian
+from .moons import get_moons
 from .costcla import costcla_dataset
 from .balance import get_proportions_and_sample_num, unbalance_undersample, balance_oversample
 from .downsample_data import shuffle_dataset, proportional_downsample, proportional_split

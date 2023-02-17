@@ -1,5 +1,6 @@
 '''
 Implimentation of build LIME yourself (bLIMEy): https://arxiv.org/abs/1910.13016
+Use a simplified version where there is no interpretable domain
 '''
 # author: Matt Clifford
 # email: matt.clifford@bristol.ac.uk
@@ -63,7 +64,6 @@ class bLIMEy:
     def _sample_locally(self, black_box_model):
         cov = self._get_local_sampling_cov()
         self.data['X'] = np.random.multivariate_normal(self.query_point, cov, self.samples)
-        self.data['y'] = black_box_model.predict(self.data['X'])
 
     def _get_local_sampling_cov(self):
         if self.data_lims is None:
@@ -88,6 +88,8 @@ class bLIMEy:
             # now combine class imbalance weights with distance based weights
             weights *= instance_class_imbalance_weights
         if self.class_weight_sampled is True: # weight based on imbalance of the samples
+            # get the class predictions from the sampled data
+            self.data['y'] = black_box_model.predict(self.data['X'])
             # get class imbalance weights
             class_weights = costs.weight_based_on_class_imbalance(self.data)
             class_preds_matrix = np.round(self.data['p(y)'])
@@ -103,103 +105,15 @@ class bLIMEy:
                                  sample_weight=weights,
                                  )
 
-
-'''
-legacy code below to use original lime (from fatf)
-TODO: integrate orginal lime back into pipeline to have as a comparision
-'''
-# import fatf.transparency.predictions.surrogate_explainers as surrogates
-# import fatf.vis.lime as fatf_vis_lime
-#
-#
-# def print_explanation(exp):
-#     for key in exp.keys():
-#         print(f'{key} ---')
-#         for k in exp[key].keys():
-#             print(f'    {k}: {exp[key][k]:.3f}')
-#
-# class LIME:
-#     def __init__(self, data, clf):
-#         self.data = data
-#         self.clf = clf
-#         self.lime = surrogates.TabularBlimeyLime(self.data['X'], self.clf)
-#
-#     def __call__(self, data_instance, samples_number=500):
-#         self.expl = self.lime.explain_instance(data_instance, samples_number=samples_number)
-#         return self.expl
-#
-#     def plot_explanation(self):
-#         fatf_vis_lime.plot_lime(self.expl)
-
-
 if __name__ == '__main__':
-    import data
-    import model
-    import matplotlib.pyplot as plt
+    import clime
 
     # get dataset
-    data = data.get_moons()
+    data = clime.data.get_moons()
 
     # train model
-    clf = model.SVM(data)
+    clf = clime.models.SVM(data)
     # import pdb; pdb.set_trace()
 
-    # BLIMEY!
-    blimey = bLIMEy(clf,
-                    data['X'][0, :],
-                    class_weight=True)
-    print(blimey.get_explanation())
-    print(blimey.predict([[1, 2]]))
-
-
-
-
-
-    # # get lime explainer
-    # lime = LIME(data, clf)
-    #
-    # lime_explanation = lime(data['X'][0, :])
-    # print_explanation(lime_explanation)
-    #
-    # import lime
-    # import lime.lime_tabular
-    #
-    # explainer = lime.lime_tabular.LimeTabularExplainer(data['X'],
-    #                                                discretize_continuous=True,
-    #                                                )
-    # exp = explainer.explain_instance(data['X'][0, :],
-    #                              clf.predict_proba,
-    #                              # num_features=2,
-    #                              # top_labels=1,
-    #                              )
-    #
-    # print(exp.as_list())
-    # # lime.plot_explanation()
-    # # plt.show()
-    #
-    # dataset = data['X']
-    # feature_names = ['f1', 'f2']
-    #
-    # import fatf.utils.array.tools as fuat
-    # import fatf.utils.data.discretisation as fudd
-    # import fatf.utils.data.augmentation as fuda
-    #
-    # indices = fuat.indices_by_type(dataset)
-    # num_indices = set(indices[0])
-    # cat_indices = set(indices[1])
-    # all_indices = num_indices.union(cat_indices)
-    #
-    # numerical_indices = list(num_indices)
-    # categorical_indices = list(cat_indices)
-    # column_indices = list(range(dataset.shape[1]))
-    #
-    # discretiser = fudd.QuartileDiscretiser(
-    #         dataset,
-    #         categorical_indices=categorical_indices,
-    #         feature_names=feature_names)
-    # dataset_discretised = discretiser.discretise(dataset)
-    # print(dataset_discretised[:2, :])
-    # print(dataset[:2, :])
-    # augmenter = fuda.NormalSampling(
-    #         dataset_discretised, categorical_indices=column_indices)
-    # print(augmenter.sample())
+    lime = bLIMEy(clf, data['X'][1, :], data)
+    print(lime.predict(data['X'][2:3, :]))

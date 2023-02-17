@@ -126,6 +126,7 @@ if __name__ == '__main__':
         'model':               'SVM',
         'model balancer':      'none',
         'explainer':           'bLIMEy (cost sensitive sampled)',
+        # 'explainer':           'LIME',
         'evaluation':          'fidelity (local)',
     }
     p = construct(opts)
