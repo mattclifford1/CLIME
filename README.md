@@ -7,7 +7,7 @@ Investigation into how imbalanced data affects the surrogate explainer pipeline.
 
 The pipeline can be run from the jupyter-notebook [experiments](experiments.ipynb).
 
-## Dev Setup
+## Setup
 Create python environment, e.g. via conda and install dependancies:
 ```
 conda create -n clime python=3.9 -y
@@ -15,6 +15,13 @@ conda activate clime
 pip install -e .
 ```
 
+## Running the pipeline
+For running experiments and playing around it is easiest to run the notebook via jupyter:
+```
+jupyter-notebook
+```
+
+## Dev tools
 Test can be run with pytest (all configurations of the pipeline are run so this can take a few minutes when using a laptop):
 ```
 pytest
