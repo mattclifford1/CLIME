@@ -4,7 +4,6 @@ Use a simplified version where there is no interpretable domain
 '''
 # author: Matt Clifford
 # email: matt.clifford@bristol.ac.uk
-
 import numpy as np
 import sklearn
 import clime
@@ -34,14 +33,14 @@ class bLIMEy:
     def __init__(self, black_box_model,
                        query_point,
                        data=None,
-                       data_lims=None,
+                       sampling_cov=None,  # provide covariance to sample data
                        samples=10000,
                        class_weight_data=False,
                        class_weight_sampled=False,
                        rebalance_sampled_data=False):
         self.query_point = query_point
         self.data_test = data   # test set to get statistics from
-        self.data_lims = data_lims
+        self.sampling_cov = sampling_cov
         self.samples = samples
         self.class_weight_data = class_weight_data
         self.class_weight_sampled = class_weight_sampled
@@ -68,11 +67,14 @@ class bLIMEy:
         self.sampled_data['y'] = black_box_model.predict(self.sampled_data['X'])
 
     def _get_local_sampling_cov(self):
-        if self.data_lims is None:
-            return np.eye(len(self.query_point))
+        if self.sampling_cov is None:
+            if self.data_test is None:
+                return np.eye(len(self.query_point)) # dont know anything so assume cov is identity matrix
+            else:
+                # calc cov of data given
+                return np.cov(self.data_test['X'].T)
         else:
-            # calculate from data lims ?
-            return np.eye(len(self.query_point))   # change this to implement var from data lims
+            return self.sampling_cov
 
     def _train_surrogate(self, black_box_model):
         # option to adjust weights based on class imbalance

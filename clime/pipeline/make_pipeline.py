@@ -116,6 +116,10 @@ def run_pipeline(opts, **kwargs):
     return p.run(**kwargs)
 
 if __name__ == '__main__':
+    import argparse
+    parser=argparse.ArgumentParser()
+    parser.add_argument('--single', action='store_false')
+    args=parser.parse_args()
     # logging.basicConfig(level=logging.INFO)
     opts = {
         # 'dataset':             'credit scoring 1',
@@ -130,5 +134,5 @@ if __name__ == '__main__':
         'evaluation':          'fidelity (local)',
     }
     p = construct(opts)
-    result = p.run(parallel_eval=True)
+    result = p.run(parallel_eval=args.single)
     print(result['score'])
