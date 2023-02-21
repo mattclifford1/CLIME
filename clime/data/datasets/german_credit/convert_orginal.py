@@ -2,8 +2,8 @@
 convert the german credit original dataset (german.data) to a readable csv
 refer to 'german.doc' for details about the dataset
 '''
-# author: Matt Clifford
-# email: matt.clifford@bristol.ac.uk
+# author: Matt Clifford <matt.clifford@bristol.ac.uk>
+
 import os
 import pandas as pd
 

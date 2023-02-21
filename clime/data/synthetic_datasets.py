@@ -1,8 +1,8 @@
 '''
 sample synthetic datasets (e.g. moons/gaussian) to the desired class proportions
 '''
-# author: Matt Clifford
-# email: matt.clifford@bristol.ac.uk
+# author: Matt Clifford <matt.clifford@bristol.ac.uk>
+
 import clime
 
 class sample_dataset_to_proportions():

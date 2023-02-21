@@ -6,8 +6,8 @@ so we need to extract the data locally from it to use with newer versions
 
 NOTE: this script needs to be run with python 3.7 and scikit-learn==0.22
 '''
-# author: Matt Clifford
-# email: matt.clifford@bristol.ac.uk
+# author: Matt Clifford <matt.clifford@bristol.ac.uk>
+
 import os
 import pandas as pd
 from costcla.datasets import load_bankmarketing, load_creditscoring1, load_creditscoring2

@@ -1,4 +1,4 @@
-# Author: Matt Clifford <matt.clifford@bristol.ac.uk>
+# author: Matt Clifford <matt.clifford@bristol.ac.uk> <matt.clifford@bristol.ac.uk>
 from setuptools import setup, find_packages
 
 def dependencies_from_file(file_path):

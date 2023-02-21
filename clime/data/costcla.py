@@ -2,8 +2,8 @@
 Get datasets from the costcla package
     - credit scoring and direct marketing
 '''
-# author: Matt Clifford
-# email: matt.clifford@bristol.ac.uk
+# author: Matt Clifford <matt.clifford@bristol.ac.uk>
+
 import os
 import pandas as pd
 import clime

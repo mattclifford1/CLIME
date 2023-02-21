@@ -2,11 +2,9 @@
 Generate toy data
 Data can be balanced or unbalanced
 '''
-# author: Jonny Erskine
-# email: jonathan.erskine@bristol.ac.uk
+# author: Jonny Erskine <jonathan.erskine@bristol.ac.uk>
+# author2: Matt Clifford <matt.clifford@bristol.ac.uk>
 
-# author2: Matt Clifford
-# email2: matt.clifford@bristol.ac.uk
 import os
 import logging
 import sklearn.datasets

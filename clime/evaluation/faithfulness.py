@@ -1,5 +1,5 @@
-# author: Matt Clifford
-# email: matt.clifford@bristol.ac.uk
+# author: Matt Clifford <matt.clifford@bristol.ac.uk>
+
 from functools import partial
 import multiprocessing
 from tqdm.autonotebook import tqdm

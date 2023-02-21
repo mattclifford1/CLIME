@@ -1,8 +1,8 @@
 '''
 downsample dataset, keeping class proportions
 '''
-# author: Matt Clifford
-# email: matt.clifford@bristol.ac.uk
+# author: Matt Clifford <matt.clifford@bristol.ac.uk>
+
 import numpy as np
 import clime
 

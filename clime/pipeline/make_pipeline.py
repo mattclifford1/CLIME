@@ -3,8 +3,8 @@ put together all aspects of the training/explaination/evaluation pipeline
 
 'score' returned is avg/std over all local explainers from all data points in the dataset
 '''
-# author: Matt Clifford
-# email: matt.clifford@bristol.ac.uk
+# author: Matt Clifford <matt.clifford@bristol.ac.uk>
+
 from dataclasses import dataclass
 import logging
 import numpy as np

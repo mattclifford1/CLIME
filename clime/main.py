@@ -1,8 +1,8 @@
 '''
 main entry point to run the pipeline/experiments
 '''
-# author: Matt Clifford
-# email: matt.clifford@bristol.ac.uk
+# author: Matt Clifford <matt.clifford@bristol.ac.uk>
+
 import clime
 
 if __name__ == '__main__':

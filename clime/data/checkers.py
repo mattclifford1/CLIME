@@ -1,9 +1,7 @@
 '''
 utils to check and make sure the data is in the correct format for the pipeline
 '''
-# author: Matt Clifford
-# email: matt.clifford@bristol.ac.uk
-
+# author: Matt Clifford <matt.clifford@bristol.ac.uk>
 
 def check_data_dict(data):
     '''

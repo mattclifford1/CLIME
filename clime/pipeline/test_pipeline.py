@@ -1,8 +1,8 @@
 '''
 test all configurations of the pipeline to make sure all combos will run
 '''
-# author: Matt Clifford
-# email: matt.clifford@bristol.ac.uk
+# author: Matt Clifford <matt.clifford@bristol.ac.uk>
+
 import multiprocessing
 import numpy as np
 from tqdm import tqdm

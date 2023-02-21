@@ -4,8 +4,8 @@ LINKS:
     - https://www.kaggle.com/datasets/uciml/german-credit
     - https://archive.ics.uci.edu/ml/datasets/statlog+(german+credit+data)
 '''
-# author: Matt Clifford
-# email: matt.clifford@bristol.ac.uk
+# author: Matt Clifford <matt.clifford@bristol.ac.uk>
+
 import os
 import pandas as pd
 

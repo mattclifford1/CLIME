@@ -2,8 +2,8 @@
 Implimentation of build LIME yourself (bLIMEy): https://arxiv.org/abs/1910.13016
 Use a simplified version where there is no interpretable domain
 '''
-# author: Matt Clifford
-# email: matt.clifford@bristol.ac.uk
+# author: Matt Clifford <matt.clifford@bristol.ac.uk>
+
 import numpy as np
 import sklearn
 import clime

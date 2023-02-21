@@ -4,8 +4,8 @@ resource: https://xavierbourretsicotte.github.io/Optimal_Bayes_Classifier.html
 
 means/covs are estimated using gaussian assumption if they aren't given (i.e. non gaussian known dataset)
 '''
-# author: Matt Clifford
-# email: matt.clifford@bristol.ac.uk
+# author: Matt Clifford <matt.clifford@bristol.ac.uk>
+
 import scipy.stats
 import numpy as np
 from clime.models import base_model

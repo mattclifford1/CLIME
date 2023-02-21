@@ -1,5 +1,5 @@
-# author: Matt Clifford
-# email: matt.clifford@bristol.ac.uk
+# author: Matt Clifford <matt.clifford@bristol.ac.uk>
+
 
 from clime.data import costs
 import numpy as np

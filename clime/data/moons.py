@@ -1,8 +1,8 @@
 '''
 Generate toy data from the moons dataset
 '''
-# author: Matt Clifford
-# email: matt.clifford@bristol.ac.uk
+# author: Matt Clifford <matt.clifford@bristol.ac.uk>
+
 import sklearn.datasets
 import sklearn.utils
 import clime

@@ -1,8 +1,8 @@
 '''
 Quadratic Discriminant Analysis (Quadratic decision boundary after fitting guassian bayes rule to the data)
 '''
-# author: Matt Clifford
-# email: matt.clifford@bristol.ac.uk
+# author: Matt Clifford <matt.clifford@bristol.ac.uk>
+
 import sklearn
 from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
 import numpy as np

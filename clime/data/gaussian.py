@@ -1,11 +1,9 @@
 '''
 Generate guassian data
 '''
-# author: Jonny Erskine
-# email: jonathan.erskine@bristol.ac.uk
+# author: Jonny Erskine <jonathan.erskine@bristol.ac.uk>
+# author2: Matt Clifford <matt.clifford@bristol.ac.uk>
 
-# author2: Matt Clifford
-# email2: matt.clifford@bristol.ac.uk
 import sklearn.utils
 import random
 import numpy as np

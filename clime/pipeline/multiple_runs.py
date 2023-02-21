@@ -1,8 +1,8 @@
 '''
 run the pipeline multiple times to get avg/std of aspects
 '''
-# author: Matt Clifford
-# email: matt.clifford@bristol.ac.uk
+# author: Matt Clifford <matt.clifford@bristol.ac.uk>
+
 import multiprocessing
 import numpy as np
 from clime import pipeline, utils

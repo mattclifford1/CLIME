@@ -1,5 +1,5 @@
-# author: Matt Clifford
-# email: matt.clifford@bristol.ac.uk
+# author: Matt Clifford <matt.clifford@bristol.ac.uk>
+
 '''
 Balancing models post training
 models  --- todo: generic input as superclas?

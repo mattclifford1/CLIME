@@ -2,8 +2,8 @@
 Support vector machine classifiers
 Inherits from sckit-learn classifiers
 '''
-# author: Matt Clifford
-# email: matt.clifford@bristol.ac.uk
+# author: Matt Clifford <matt.clifford@bristol.ac.uk>
+
 import sklearn.svm
 import numpy as np
 import clime

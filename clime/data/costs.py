@@ -1,11 +1,9 @@
-# author: Matt Clifford
-# email: matt.clifford@bristol.ac.uk
-
 '''
 utils for getting weightings/costs for data based on distance and class imbalance
 '''
-import numpy as np
+# author: Matt Clifford <matt.clifford@bristol.ac.uk>
 
+import numpy as np
 
 def weights_based_on_distance(query_point, X):
     '''
