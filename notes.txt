@@ -14,3 +14,25 @@ Research ideas:
 show that local weighting of lime helps local fidelity
 show class balanced helps class balanced fidelity
 show other cost sensitive trained models where you need to do other things for lime (e.g. for boundary adjust we find that you shoudln't do cost sensitive lime for some reason?)
+
+
+
+
+
+Papers:
+
+Class imbalance paper that uses LIME to give explanation: https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010144
+LIME after using over sampling 1: https://ieeexplore.ieee.org/abstract/document/9720806
+LIMe after using over sampling 2: https://ieeexplore.ieee.org/abstract/document/9906532
+
+
+
+
+Potential datasets:
+Stroke https://www.kaggle.com/datasets/shashwatwork/cerebral-stroke-predictionimbalaced-dataset
+
+
+
+
+Methods:
+oversampling: K-Means SMOTE (Synthetic Minority Oversampling Technique)

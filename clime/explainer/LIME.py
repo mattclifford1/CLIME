@@ -4,7 +4,7 @@ original version of LIME from https://github.com/marcotcr/lime
 # author: Matt Clifford
 # email: matt.clifford@bristol.ac.uk
 import numpy as np
-from lime.lime_tabular import LimeTabularExplainer
+# from lime.lime_tabular import LimeTabularExplainer
 import fatf.transparency.predictions.surrogate_explainers as surrogates
 import fatf.utils.models.validation as fumv
 
