@@ -1,22 +1,12 @@
 
 TODOS
- - Graphs of comparisions of runs
- - pipeline options to run multiple options for graph comparison (select multiple rather than a dropdown)
- - pipeline option to reduce dataset size instead of sample nums (defualt size for synthic data - slider for class proportions)
-
  - normalise the datasets (check attributes to see if this is okay to do)
- - use the test data cov for lime sampling
-
- - output nice graph names
- - save model accuracies (and plot)
-
-
 
 --------------------------------------------------------------------------------
 
 BUGS
 fix pipeline.get_avg  -> multiple_runs.py
-fix vis pipeline with new widgets
+
 
 FUTURE
 rebalance by under sampling?? (makes different just cost sensitive training)

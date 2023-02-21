@@ -5,7 +5,6 @@ Inherits from sckit-learn classifiers
 # author: Matt Clifford
 # email: matt.clifford@bristol.ac.uk
 import sklearn
-import numpy as np
 import clime
 from clime.data import costs
 from clime.models import base_model
