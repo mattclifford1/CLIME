@@ -13,7 +13,8 @@ def get_gaussian(samples=200,
                  class_means=[[0, 0], [1, 1]],
                  covs=[[[1,0],[0,1]],
                        [[2,1],[1,2]]],
-                 test=False):
+                 test=False,
+                 **kwargs):
     '''
     sample from two Gaussian dataset
 

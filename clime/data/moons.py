@@ -8,7 +8,7 @@ import sklearn.utils
 import clime
 
 
-def get_moons(samples=200, test=False):
+def get_moons(samples=200, test=False, **kwargs):
     '''
     sample from the half moons data distribution
     returns:
