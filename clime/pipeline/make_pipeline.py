@@ -118,16 +118,18 @@ def run_pipeline(opts, **kwargs):
 if __name__ == '__main__':
     import argparse
     parser=argparse.ArgumentParser()
-    parser.add_argument('--single', action='store_false')
+    parser.add_argument('--single', '-s', action='store_false')
     args=parser.parse_args()
     # logging.basicConfig(level=logging.INFO)
     opts = {
         # 'dataset':             'credit scoring 1',
         'dataset':             'moons',
+        # 'dataset':             'Gaussian',
         'class samples':       [25, 75],    # only for syntheic datasets
         'percent of data':      0.05,       # for real datasets
         'dataset rebalancing': 'none',
         'model':               'SVM',
+        'model':               'Bayes Optimal',
         'model balancer':      'none',
         'explainer':           'bLIMEy (cost sensitive sampled)',
         # 'explainer':           'LIME',
