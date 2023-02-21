@@ -35,7 +35,14 @@ class Guassian_class_conditional(base_model):
             for cl in range(self.classes):
                 X_c = data['X'][data['y']==cl, :]
                 self.means.append(np.mean(X_c, axis=0))
-                self.covs.append(np.cov(X_c.T))
+                if X_c.shape[0] > 1:
+                    cov = np.cov(X_c.T)
+                else:
+                    cov = np.eye(X_c.shape[1])
+                if not np.all(np.linalg.eigvals(cov) > 0):
+                    # not positive semi definite so make identiy as a quick fix
+                    cov = np.eye(X_c.shape[1])
+                self.covs.append(cov)
 
     def predict(self, X):
         scores_list = []

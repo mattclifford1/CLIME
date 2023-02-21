@@ -8,6 +8,11 @@ import numpy as np
 from clime import pipeline, utils
 
 
+def run_and_print(opts):
+    # use for debugging to get opts used
+    print(f'{opts=}')
+    return pipeline.run_pipeline
+
 def test_all_pipeline_configs():
     all_opts = {
         'class samples': [[1, 1]],   # keep low to reduce comp time
