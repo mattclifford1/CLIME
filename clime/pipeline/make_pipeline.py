@@ -132,10 +132,9 @@ if __name__ == '__main__':
         'model':               'Bayes Optimal',
         'model balancer':      'none',
         'explainer':           'bLIMEy (cost sensitive sampled)',
-        # 'explainer':           'LIME',
+        'explainer':           'LIME (original)',
         'evaluation':          'fidelity (local)',
     }
-    opts={'class samples': [1, 1], 'percent of data': 0.005, 'dataset': 'direct marketing', 'dataset rebalancing': 'oversampling', 'model': 'Bayes Optimal', 'model balancer': 'probability adjust', 'explainer': 'bLIMEy (rebalance data training)', 'evaluation': 'fidelity (normal)'}
 
     p = construct(opts)
     result = p.run(parallel_eval=args.single)

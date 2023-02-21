@@ -49,7 +49,7 @@ def all_pipeline_configs():
     opts_permutations = utils.get_all_dict_permutations(all_opts)
     # now test all variations of methods
     with multiprocessing.Pool() as pool:
-            results = list(tqdm(pool.imap_unordered(pipeline.run_pipeline, opts_permutations), total=len(opts_permutations), leave=False, desc='all opts'))
+            results = list(tqdm(pool.imap_unordered(pipeline.run_pipeline, opts_permutations), total=len(opts_permutations), desc='all opts'))
     for result in results:
         assert type(result['score']['avg']) == np.float64
         assert type(result['score']['std']) == np.float64

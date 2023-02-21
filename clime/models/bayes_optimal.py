@@ -48,6 +48,8 @@ class Guassian_class_conditional(base_model):
         scores_list = []
         for cl in range(self.classes):
             score = scipy.stats.multivariate_normal.pdf(X, mean=self.means[cl], cov=self.covs[cl])
+            if score.shape is ():
+                score = np.expand_dims(score, axis=0)
             scores_list.append(np.expand_dims(score, axis=1))
         scores = np.concatenate(scores_list, axis=1)
         return np.argmax(scores, axis=1)
@@ -55,4 +57,5 @@ class Guassian_class_conditional(base_model):
     def predict_proba(self, X):
         # TODO: make probs
         class_1 = np.expand_dims(self.predict(X), axis=1)
-        return np.concatenate([np.abs(1-class_1), class_1], axis=1)
+        p = np.concatenate([np.abs(1-class_1), class_1], axis=1)
+        return p

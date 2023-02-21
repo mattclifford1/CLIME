@@ -5,7 +5,8 @@ original version of LIME from https://github.com/marcotcr/lime
 # email: matt.clifford@bristol.ac.uk
 import numpy as np
 from lime.lime_tabular import LimeTabularExplainer
-# import fatf.transparency.predictions.surrogate_explainers as surrogates
+import fatf.transparency.predictions.surrogate_explainers as surrogates
+import fatf.utils.models.validation as fumv
 
 
 def print_explanation(exp):
@@ -28,20 +29,26 @@ class LIME_fatf:
                        **kwargs):
         self.black_box_model = black_box_model
         self.data = data
-        print(data['X'].shape)
-        print(hasattr(black_box_model, 'predict_proba'))
-        print(fumv.check_model_functionality(
-                black_box_model, True, True))
+        # print(data['X'].shape)
+        # print(hasattr(black_box_model, 'predict_proba'))
+        # print(fumv.check_model_functionality(black_box_model, True, True))
         # print(self.black_box_model.predict_proba)
         self.lime = surrogates.TabularBlimeyLime(self.data['X'], self.black_box_model)
         expl, surrogate_models = self.lime.explain_instance(query_point, samples_number=samples_number, return_models=True)
         self.surrogate_model = surrogate_models['class 1']
 
-    def predict_proba(self, X):
+    def _predict(self, X):
+        '''
+        need to transform input data into the 'explanable' domain before prediction
+        '''
+        X_discretised = self.lime.discretiser.discretise(X)
         return self.surrogate_model.predict(X)
 
+    def predict_proba(self, X):
+        return self._predict(X)
+
     def predict(self, X):
-        probability_class_1 = self.surrogate_model.predict(X)
+        probability_class_1 = self._predict(X)
         class_prediction = np.heaviside(probability_class_1-0.5, 1)   # threshold class prediction at 0.5
         return class_prediction.astype(np.int64)
 
@@ -85,5 +92,9 @@ if __name__ == '__main__':
 
     # now wrap with the clime.model.balancer to see why we get an error with predict_proba
 
-    lime = LIME(clf, data['X'][1, :], data)
-    # print(lime.predict(data['X'][2:3, :]))
+    lime = LIME_fatf(clf, data['X'][1, :], data)
+    # lime = LIME(clf, data['X'][1, :], data)
+
+
+    print(lime.predict(data['X'][2:3, :]))
+    print(lime.predict_proba(data['X'][2:5, :]))

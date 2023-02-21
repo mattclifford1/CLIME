@@ -7,7 +7,26 @@ models  --- todo: generic input as superclas?
 import numpy as np
 from clime.data import costs
 
-class adjust_boundary():
+
+class base_balance():
+    '''dummy class to not adjust the model but still have as an identity wrapper in pipeline'''
+    def __init__(self, model, data, weight):
+        self.model = model
+        self.weight = weight
+
+    def predict(self, x):
+        return self.model.predict(x)
+
+    def predict_proba(self, x):
+        return self.model.predict_proba(x)
+
+    def fit(self, X, y):
+        '''
+        need to keep the class have all attr of a sklean model
+        '''
+        self.model.fit(X, y)
+
+class adjust_boundary(base_balance):
     '''
     balance the model by pushing its
     boundary away from the minority class since we are less certain about
@@ -23,8 +42,7 @@ class adjust_boundary():
         - model: model trained on the dataset
     '''
     def __init__(self, model, data, weight=1):
-        self.model = model
-        self.weight = weight
+        super().__init__(model, data, weight)
         self._get_vector_to_balance(data)
 
     def _get_vector_to_balance(self, data):
@@ -67,7 +85,7 @@ class adjust_boundary():
         return self.model.predict_proba(bal_x)
 
 
-class adjust_proba():
+class adjust_proba(base_balance):
     '''
     balance the model by changing the
     probabilities output from the model by scaling them with respect to the
@@ -81,8 +99,7 @@ class adjust_proba():
         - model: model trained on the dataset
     '''
     def __init__(self, model, data, weight=1):
-        self.model = model
-        self.weight = weight
+        super().__init__(model, data, weight)
         self._class_weightings(data)
 
     def _class_weightings(self, data):
@@ -107,15 +124,3 @@ class adjust_proba():
         # normalise to make a probability again -- is this okay to be doing????
         adjust_probs = adjusted / np.sum(adjusted, axis=1)[:, None]
         return adjust_probs
-
-class none():
-    '''dummy class to not adjust the model'''
-    def __init__(self, model, data, weight):
-        self.model = model
-        self.weight = weight
-
-    def predict(self, x):
-        return self.model.predict(x)
-
-    def predict_proba(self, x):
-        return self.model.predict_proba(x)

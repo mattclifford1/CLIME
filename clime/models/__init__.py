@@ -4,7 +4,7 @@ from .random_forest import random_forest, random_forest_balanced_training
 # from .QDA import QDA
 from .bayes_optimal import Guassian_class_conditional
 from .svm import SVM, SVM_balanced_training
-from .balance import adjust_boundary, adjust_proba, none
+from .balance import adjust_boundary, adjust_proba, base_balance
 
 AVAILABLE_MODELS = {
     'Random Forest': random_forest,
@@ -18,7 +18,7 @@ AVAILABLE_MODELS = {
 }
 
 AVAILABLE_MODEL_BALANCING = {
-    'none': none,
+    'none': base_balance,
     'boundary adjust': adjust_boundary,
     'probability adjust': adjust_proba,
 }
