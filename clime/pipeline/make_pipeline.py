@@ -139,7 +139,7 @@ if __name__ == '__main__':
         'model':               'Random Forest',
         'model balancer':      'none',
         'explainer':           'bLIMEy (cost sensitive sampled)',
-        # 'explainer':           'LIME (original)',
+        'explainer':           'LIME (original)',
         'evaluation':          'fidelity (local)',
     }
 

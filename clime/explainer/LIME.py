@@ -4,9 +4,12 @@ original version of LIME from https://github.com/marcotcr/lime
 # author: Matt Clifford <matt.clifford@bristol.ac.uk>
 
 import numpy as np
-# from lime.lime_tabular import LimeTabularExplainer
 import fatf.transparency.predictions.surrogate_explainers as surrogates
-import fatf.utils.models.validation as fumv
+import fatf.utils.data.transformation as fudt
+import fatf.utils.array.tools as fuat
+# import fatf.utils.models.validation as fumv
+# from lime.lime_tabular import LimeTabularExplainer
+
 
 
 def print_explanation(exp):
@@ -17,10 +20,7 @@ def print_explanation(exp):
 
 class LIME_fatf:
     '''
-    issue/bug with fatf lime version not accepting our black_box_model
-        due to False from fatf fumv.check_model_functionality (import fatf.utils.models.validation as fumv)
-            even though the black_box_model hasattr(black_box_model, 'predict_proba'))
-
+    version of LIME from fat-forensics so we have access to the models and domain transformers
     '''
     def __init__(self, black_box_model,
                        query_point,
@@ -35,14 +35,19 @@ class LIME_fatf:
         # print(self.black_box_model.predict_proba)
         self.lime = surrogates.TabularBlimeyLime(self.data['X'], self.black_box_model)
         expl, surrogate_models = self.lime.explain_instance(query_point, samples_number=samples_number, return_models=True)
+        self.query_point_discretised = self.lime.discretiser.discretise(query_point)
         self.surrogate_model = surrogate_models['class 1']
 
     def _predict(self, X):
         '''
         need to transform input data into the 'explanable' domain before prediction
+        using discretiser: https://github.com/fat-forensics/fat-forensics/blob/master/fatf/transparency/predictions/surrogate_explainers.py#L1012
+        and binariser: https://github.com/fat-forensics/fat-forensics/blob/master/fatf/transparency/predictions/surrogate_explainers.py#L1365-L1367
         '''
         X_discretised = self.lime.discretiser.discretise(X)
-        return self.surrogate_model.predict(X)
+        X_bin = fudt.dataset_row_masking(X_discretised, self.query_point_discretised)
+        X_bin = fuat.as_unstructured(X_bin)
+        return self.surrogate_model.predict(X_bin)
 
     def predict_proba(self, X):
         return self._predict(X)

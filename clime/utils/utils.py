@@ -20,11 +20,25 @@ def get_all_dict_permutations(dict_):
     dict_permutations = [dict(zip(keys, v)) for v in itertools.product(*values)]
     return dict_permutations
 
+def check_unique(values, same_values, list_of_diff_keys, key):
+    '''
+    check whethere a list of values are all the same, and add to the correct list store
+    '''
+    try:
+        set(values)
+    except:
+        values = [str(v) for v in values]
+    if len(set(values)) == 1:  # mean no unique items
+        same_values[key] = values[0]
+    else:
+        list_of_diff_keys.append(key)
+
 def get_opt_differences(opts):
     '''
     given a list of different pipeline options sort out what is the same and what
     is different, this is useful for plots etc.
     '''
+    # give empty name for a single option
     if len(opts) == 1:
         return opts[0].copy(), [0]
     if isinstance(opts, dict):
@@ -32,17 +46,29 @@ def get_opt_differences(opts):
     # get keys that all have the same or different values
     same_values = {}
     list_of_diff_keys = []
+    diff_inner_keys = {}
     for key in opts[0]:
-        values = [opt[key] for opt in opts]
-        if len(set(values)) == 1:  # mean no unique items
-            same_values[key] = values[0]
+        if isinstance(opts[0][key], dict):
+            # get items out of inner dict e.g. 'data_params' dict
+            list_of_diff_inner_keys = []
+            for key2 in opts[0][key]:
+                values = [opt[key][key2] for opt in opts]
+                check_unique(values, same_values, list_of_diff_inner_keys, key2)
+            diff_inner_keys[key] = list_of_diff_inner_keys
         else:
-            list_of_diff_keys.append(key)
+            values = [opt[key] for opt in opts]
+            check_unique(values, same_values, list_of_diff_keys, key)
+    # get the values of the differences in opts as a unique name for each
     diff_values = []
     for i, opt in enumerate(opts):
         diff_values.append({})
+        # get all the normal items
         for key in list_of_diff_keys:
             diff_values[i][key] = opt[key]
+        # get all the inner keys (e.g. from 'data_params' dict)
+        for key, item in diff_inner_keys.items():
+            for key2 in item:
+                diff_values[i][key2] = opt[key2]
     return same_values, diff_values
 
 
