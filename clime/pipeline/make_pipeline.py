@@ -135,11 +135,11 @@ if __name__ == '__main__':
                         },
         'dataset rebalancing': 'none',
         # 'model':               'SVM',
-        # 'model':               'Bayes Optimal',
-        'model':               'Random Forest',
+        # 'model':               'Random Forest',
+        'model':               'Bayes Optimal',
         'model balancer':      'none',
         'explainer':           'bLIMEy (cost sensitive sampled)',
-        'explainer':           'LIME (original)',
+        # 'explainer':           'LIME (original)',
         'evaluation':          'fidelity (local)',
     }
 

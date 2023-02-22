@@ -1,11 +1,8 @@
 
 TODOS
- - include changing Guassian/ moons params in pipeline
-    - (have added kwargs to dataset, now need to input these in the pipeline and notebook)
  - eval with just key points rather than an average
 
  - make oversample point more obvious
- - simple eval example for Alex 
 
  - normalise the datasets (check attributes to see if this is okay to do)
 

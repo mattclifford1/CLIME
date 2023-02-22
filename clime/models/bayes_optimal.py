@@ -9,6 +9,7 @@ means/covs are estimated using gaussian assumption if they aren't given (i.e. no
 import scipy.stats
 import numpy as np
 from clime.models import base_model
+from sklearn.preprocessing import normalize
 
 
 class Guassian_class_conditional(base_model):
@@ -44,18 +45,21 @@ class Guassian_class_conditional(base_model):
                     cov = np.eye(X_c.shape[1])
                 self.covs.append(cov)
 
-    def predict(self, X):
+    def predict_proba(self, X):
+        '''
+        get the conditional for each class P(y=i | X) and normalise to make it a probability
+        '''
         scores_list = []
         for cl in range(self.classes):
             score = scipy.stats.multivariate_normal.pdf(X, mean=self.means[cl], cov=self.covs[cl])
             if score.shape is ():
                 score = np.expand_dims(score, axis=0)
             scores_list.append(np.expand_dims(score, axis=1))
-        scores = np.concatenate(scores_list, axis=1)
-        return np.argmax(scores, axis=1)
+        cond_probs = np.concatenate(scores_list, axis=1)
+        probs_norm = normalize(cond_probs, axis=1, norm='l1')
+        return probs_norm
 
-    def predict_proba(self, X):
-        # TODO: make probs
-        class_1 = np.expand_dims(self.predict(X), axis=1)
-        p = np.concatenate([np.abs(1-class_1), class_1], axis=1)
-        return p
+    def predict(self, X):
+        probs = self.predict_proba(X)
+        x = np.argmax(probs, axis=1)
+        return x
