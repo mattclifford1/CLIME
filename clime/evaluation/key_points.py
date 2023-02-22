@@ -22,7 +22,6 @@ class get_key_points_score():
         for cl in range(classes):
             X_c = data['X'][data['y']==cl, :]
             means.append(np.mean(X_c, axis=0))
-        print(means)
         return means
 
 

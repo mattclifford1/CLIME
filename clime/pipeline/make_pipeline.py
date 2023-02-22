@@ -44,7 +44,6 @@ class construct:
         train_data = self.run_section('dataset rebalancing',
                                        self.opts,
                                        data=train_data)
-        print(train_data['X'].shape)
         '''MODEL'''
         # what model to use
         clf = self.run_section('model',
