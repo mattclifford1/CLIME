@@ -110,7 +110,7 @@ class explainer_generator():
         return expl
 
 def _get_explainer_evaluation_wrapper(args):
-    # for use with pool.starmap to unpack all the args (but keep defualt args)
+    # for use with pool.starmap to unpack all the args (but keep default args)
     return get_explainer_evaluation(*args)
 
 def run_pipeline(opts, **kwargs):
@@ -129,6 +129,7 @@ if __name__ == '__main__':
         # 'dataset':             'Gaussian',
         'data params': {'class samples':  [25, 75], # only for syntheic datasets
                         'percent of data': 0.05,    # for real datasets
+                        'moons_noise': 0.2
                         },
         'dataset rebalancing': 'none',
         # 'model':               'SVM',
