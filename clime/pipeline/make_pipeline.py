@@ -44,6 +44,7 @@ class construct:
         train_data = self.run_section('dataset rebalancing',
                                        self.opts,
                                        data=train_data)
+        print(train_data['X'].shape)
         '''MODEL'''
         # what model to use
         clf = self.run_section('model',
@@ -127,8 +128,8 @@ if __name__ == '__main__':
         # 'dataset':             'credit scoring 1',
         'dataset':             'moons',
         'dataset':             'Gaussian',
-        'data params': {'class samples':  [25, 75], # only for syntheic datasets
-                        'percent of data': 0.05,    # for real datasets
+        'data params': {'class_samples':  [25, 75], # only for syntheic datasets
+                        'percent_of_data': 0.05,    # for real datasets
                         'moons_noise': 0.2,
                         'gaussian_means': [[1, 0], [1, 1]],
                         'gaussian_covs': [[[1,0],[0,1]], [[2,1],[1,2]]],

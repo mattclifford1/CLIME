@@ -1,4 +1,5 @@
 import multiprocessing
+import ast
 from tqdm.autonotebook import tqdm
 import ipywidgets
 from IPython.display import display, Javascript
@@ -24,7 +25,7 @@ def get_sliders(interactive_data_store):
                                               max=200,
                                               description='CLASS SAMPLES (synthetic datasets):')
     display(class_samples)
-    interactive_data_store['class samples'] = class_samples
+    interactive_data_store['data params']['class_samples'] = class_samples
     # percent data
     print('real datasets')
     percent_data = ipywidgets.FloatSlider(value=0.1,
@@ -32,8 +33,34 @@ def get_sliders(interactive_data_store):
                                           max=10,
                                           description='PERCENT DATA (real datasets):')
     display(percent_data)
-    interactive_data_store['percent of data'] = percent_data
+    interactive_data_store['data params']['percent of data'] = percent_data
+    print('moons noise')
+    percent_data = ipywidgets.FloatSlider(value=0.2,
+                                          min=0,
+                                          max=4,
+                                          description='Gaussian')
+    display(percent_data)
+    interactive_data_store['data params']['percent_of_data'] = percent_data
     return interactive_data_store
+
+def get_list_input(interactive_data_store):
+    # get input to make lists but as a text input
+    print('Gaussian Means')
+    means = ipywidgets.Text(value='[[0, 0], [1, 1]]',
+                            placeholder='Type something',
+                            description='MEANS:',
+                            disabled=False)
+    display(means)
+    interactive_data_store['data params']['gaussian_means'] = means
+    print('Gaussian Covs')
+    covs = ipywidgets.Text(value='[[[1, 0], [0, 1]],    [[2, 1],[1, 2]]]',
+                            placeholder='Type something',
+                            description='COVS:',
+                            disabled=False)
+    display(covs)
+    interactive_data_store['data params']['gaussian_covs'] = covs
+    return interactive_data_store
+
 
 def get_toggle(pipeline_section, interactive_data_store):
     toggle = ipywidgets.ToggleButtons(options=list(clime.pipeline.AVAILABLE_MODULES[pipeline_section].keys()),
@@ -57,21 +84,37 @@ def get_config(interactive_data_store):
     # need to read results from interactive widgets
     config = {}
     for key, val in interactive_data_store.items():
-        read_widget = interactive_data_store[key].value
-        if not isinstance(read_widget, tuple) or key == 'class samples':
-            config[key] = [interactive_data_store[key].value]
+        # dataset params
+        if isinstance(interactive_data_store[key], dict):
+            config[key] = {}
+            for key2, val2 in interactive_data_store[key].items():
+                read_widget2 = val2.value
+                if not isinstance(read_widget2, str):
+                    config[key][key2] = read_widget2
+                else:
+                    config[key][key2] = ast.literal_eval(read_widget2)
+                if isinstance(config[key][key2], float):
+                    config[key][key2] = round(config[key][key2], 3)
+            config[key] = [config[key]]
+        # other params
         else:
-            config[key] = interactive_data_store[key].value
-        if isinstance(config[key], float):
-            config[key] = round(config[key], 3)
+            read_widget = val.value
+            if not isinstance(read_widget, tuple) or key == 'class_samples':
+                config[key] = [val.value]
+            else:
+                config[key] = read_widget
+            if isinstance(config[key], float):
+                config[key] = round(config[key], 3)
     return config
 
 def get_pipeline_widgets():
-    data_store = {}
-    # input class proportions
-    data_store = get_sliders(data_store)
+    data_store = {'data params': {}}
     # which dataset
     data_store = get_toggle('dataset', data_store)
+    # dataset params (sliders)
+    data_store = get_sliders(data_store)
+    # dataset params (text/lists)
+    data_store = get_list_input(data_store)
     # which balancing data method
     data_store = get_toggle('dataset rebalancing', data_store)
     # which model to use

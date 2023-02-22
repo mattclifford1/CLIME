@@ -29,21 +29,21 @@ def shuffle_dataset(data, seed=True):
             data[key] = data[key][p]
     return data
 
-def proportional_downsample(data, percentage=1, seed=True, **kwargs):
+def proportional_downsample(data, percent_of_data=1, seed=True, **kwargs):
     '''
     downsample data whilst keep the represenetaed class proportion distribution
     the same
         data: data dict holder
-        percentage: % of the dataset to downsample to
+        percent_of_data: % of the dataset to downsample to
         seed: True, False, or random seed number
     '''
-    if percentage <= 0 or percentage > 100:
-        raise InputError(f'percentage needs to be between 0 and 100 instead of :{percentage}')
+    if percent_of_data <= 0 or percent_of_data > 100:
+        raise InputError(f'percent_of_data needs to be between 0 and 100 instead of :{percent_of_data}')
     set_seed(seed)
     # get current class proportions
     classes, counts = np.unique(data['y'], return_counts=True)
     # now downsample
-    new_data_counts = (counts*(percentage/100)).astype(np.uint64)
+    new_data_counts = (counts*(percent_of_data/100)).astype(np.uint64)
     # make sure we have at least a sample for train/test splits
     new_data_counts[new_data_counts<2] = 2
     new_inds = []
