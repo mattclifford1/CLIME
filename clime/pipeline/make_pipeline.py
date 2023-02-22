@@ -34,8 +34,10 @@ class construct:
         #  get dataset
         train_data, test_data = self.run_section('dataset',
                                        self.opts,
-                                       class_samples=self.opts['class samples'],
-                                       percentage=self.opts['percent of data'])
+                                       **self.opts['data params']
+                                       # class_samples=self.opts['class samples'],
+                                       # percentage=self.opts['percent of data']
+                                       )
         train_data = data.check_data_dict(train_data)
         test_data = data.check_data_dict(test_data)
         # option to rebalance the data
@@ -125,14 +127,16 @@ if __name__ == '__main__':
         # 'dataset':             'credit scoring 1',
         'dataset':             'moons',
         # 'dataset':             'Gaussian',
-        'class samples':       [25, 75],    # only for syntheic datasets
-        'percent of data':      0.05,       # for real datasets
+        'data params': {'class samples':  [25, 75], # only for syntheic datasets
+                        'percent of data': 0.05,    # for real datasets
+                        },
         'dataset rebalancing': 'none',
-        'model':               'SVM',
-        'model':               'Bayes Optimal',
+        # 'model':               'SVM',
+        # 'model':               'Bayes Optimal',
+        'model':               'Random Forest',
         'model balancer':      'none',
         'explainer':           'bLIMEy (cost sensitive sampled)',
-        'explainer':           'LIME (original)',
+        # 'explainer':           'LIME (original)',
         'evaluation':          'fidelity (local)',
     }
 
