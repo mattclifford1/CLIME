@@ -126,10 +126,12 @@ if __name__ == '__main__':
     opts = {
         # 'dataset':             'credit scoring 1',
         'dataset':             'moons',
-        # 'dataset':             'Gaussian',
+        'dataset':             'Gaussian',
         'data params': {'class samples':  [25, 75], # only for syntheic datasets
                         'percent of data': 0.05,    # for real datasets
-                        'moons_noise': 0.2
+                        'moons_noise': 0.2,
+                        'gaussian_means': [[1, 0], [1, 1]],
+                        'gaussian_covs': [[[1,0],[0,1]], [[2,1],[1,2]]],
                         },
         'dataset rebalancing': 'none',
         # 'model':               'SVM',

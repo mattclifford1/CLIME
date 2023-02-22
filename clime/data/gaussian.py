@@ -10,8 +10,8 @@ import numpy as np
 import clime
 
 def get_gaussian(samples=200,
-                 class_means=[[0, 0], [1, 1]],
-                 covs=[[[1,0],[0,1]],
+                 gaussian_means=[[0, 0], [1, 1]],
+                 gaussian_covs=[[[1,0],[0,1]],
                        [[2,1],[1,2]]],
                  test=False,
                  **kwargs):
@@ -25,7 +25,7 @@ def get_gaussian(samples=200,
     X = np.empty([0, 2])
     y = np.empty([0], dtype=np.int64)
     labels = [0, 1]
-    for mean, cov, label in zip(class_means, covs, labels):
+    for mean, cov, label in zip(gaussian_means, gaussian_covs, labels):
         # equal proportion of class samples
         class_samples = int(samples/len(labels))
         # set up current class' sampler
@@ -39,7 +39,7 @@ def get_gaussian(samples=200,
         X = np.vstack([X, gaussclass.data])
         y = np.append(y, [label]*class_samples)
     X, y = sklearn.utils.shuffle(X, y, random_state=seed)
-    return {'X': X, 'y':y, 'means':class_means, 'covariances':covs}
+    return {'X': X, 'y':y, 'means':gaussian_means, 'covariances':gaussian_covs}
 
 class GaussClass():
     def __init__(self, mean, covariance):
