@@ -16,7 +16,7 @@ class get_key_points_score():
         self.metric = metric
 
     def determine_key_points(self, data):
-        # estimate mean and cov from the data
+        # estimate mean of the data
         classes = len(np.unique(data['y']))
         means = []
         for cl in range(classes):
@@ -43,7 +43,7 @@ class get_key_points_score():
         else:
             scores = list(map(_get_explainer_evaluation_wrapper, data_list))
         scores = np.array(scores)
-        return {'avg': np.mean(scores), 'std': np.std(scores)}
+        return {'avg': np.mean(scores), 'std': np.std(scores), 'eval_points': data_points}
 
     @staticmethod
     def _get_single_score(query_point_ind, explainer_generator, clf, data_dict, query_data, metric):

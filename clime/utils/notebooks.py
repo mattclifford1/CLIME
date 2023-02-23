@@ -126,6 +126,7 @@ def get_pipeline_widgets():
     data_store = get_multiple('evaluation', data_store)
     return data_store
 
+# running the pipeline
 def run_experiments(data_store):
     # get all pipeline combinations
     all_opts = get_config(data_store)
@@ -139,6 +140,7 @@ def run_experiments(data_store):
         ylabels = [label.pop('evaluation') for label in labels]
     # run pipelines
     scores = {}
+    scores_no_label = {}
     model_stats_ = {}
     clfs = {}
     train_datas = {}
@@ -146,31 +148,32 @@ def run_experiments(data_store):
     for i, opts in tqdm(enumerate(opts_permutations), total=len(opts_permutations), desc='Pipeline runs', leave=False):
         result = clime.pipeline.run_pipeline(opts, parallel_eval=True)
         scores[i] = {str(labels[i]): result['score']}
+        scores_no_label[i] = result['score']
         model_stats_[i] = {'result': result['model_stats']}
         model_stats_[i] = result['model_stats']
         clfs[i] = result['clf']
         train_datas[i] = result['train_data']
         test_datas[i] = result['test_data']
-    return model_stats_, clfs, train_datas, test_datas, title, scores, ylabels
+    return model_stats_, clfs, train_datas, test_datas, title, scores, scores_no_label, ylabels
 
-
+# plot pipeline and results
 def plot_exp_results(inp):
-    model_stats_, clfs, train_datas, test_datas, title, scores, ylabels = inp
+    model_stats_, clfs, train_datas, test_datas, title, scores, scores_no_label, ylabels = inp
     print(f'Params: {title}')
     # plot evaluation graphs
     clime.utils.plots.plot_multiple_bar_dicts(scores, title=title, ylabels=ylabels)
     # visualise pipeline
-    return model_stats_, clfs, train_datas, test_datas
+    return model_stats_, clfs, train_datas, test_datas, scores, scores_no_label
 
 def plot_model_and_stats(inp):
-    model_stats_, clfs, train_datas, test_datas = inp
+    model_stats_, clfs, train_datas, test_datas, scores, scores_no_label = inp
     # get all train data and models in plotable dict
     model_plots = {}
     for run in clfs:
         model_plots[run] = {'model': clfs[run], 'data': train_datas[run]}
-    print('Model probabilities')
+        if 'eval_points' in scores_no_label[run].keys():
+            model_plots[run]['query_points'] = scores_no_label[run]['eval_points']
     clime.utils.plots.plot_clfs(model_plots, ax_x=len(model_plots), title=False)
-    print('Model train/test statistics')
     clime.utils.plot_multiple_bar_dicts(model_stats_)
 
 def disp_section_name(section, data_store):

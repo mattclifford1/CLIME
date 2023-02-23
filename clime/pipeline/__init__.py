@@ -8,7 +8,7 @@ AVAILABLE_MODULES = {
     'model': models.AVAILABLE_MODELS,
     'model balancer': models.AVAILABLE_MODEL_BALANCING,
     'explainer': explainer.AVAILABLE_EXPLAINERS,
-    'evaluation': evaluation.AVAILABLE_FIDELITY_METRICS,
+    'evaluation': evaluation.AVAILABLE_EVALUATION_METRICS,
 }
 
 AVAILABLE_MODULE_NAMES = list(AVAILABLE_MODULES.keys())

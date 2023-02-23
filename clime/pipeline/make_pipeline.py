@@ -140,7 +140,8 @@ if __name__ == '__main__':
         'model balancer':      'none',
         'explainer':           'bLIMEy (cost sensitive sampled)',
         # 'explainer':           'LIME (original)',
-        'evaluation':          'fidelity (local)',
+        # 'evaluation':          'fidelity (local)',
+        'evaluation':          'fidelity key (normal)',
     }
 
     p = construct(opts)

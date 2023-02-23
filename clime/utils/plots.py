@@ -68,6 +68,14 @@ def plot_decision_boundary(clf, data, ax=None):
     if show == True:
         plt.show()
 
+def plot_query_points(query_points, ax):
+    '''
+    point eval points as black, are a list of values
+    '''
+    ax, show = _get_axes(ax)
+    for q in query_points:
+        ax.scatter(q[0], q[1], color='black')
+
 '''
 helper functions
 '''
@@ -126,6 +134,8 @@ def plot_clfs(data_dict, ax_x=2, title=True):
                 ax = axs[i]
             plot_classes(data, ax)
             plot_decision_boundary(model, data, ax=ax)
+            if 'query_points' in data_dict[key].keys():
+                plot_query_points(data_dict[key]['query_points'], ax)
             if title is True:
                 ax.set_title(key)
             count += 1
@@ -179,8 +189,11 @@ def plot_multiple_bar_dicts(data_dicts, ylabels=None, ylims=[0, 1], **kwargs):
         for bar_value in plot.values():
             if isinstance(bar_value, dict):
                 for bar_avg_and_std in bar_value.values():
-                    ylims[1] = max(ylims[1], bar_avg_and_std)
-                    ylims[0] = min(ylims[0], bar_avg_and_std)
+                    if isinstance(bar_avg_and_std, list):
+                        continue
+                    else:
+                        ylims[1] = max(ylims[1], bar_avg_and_std)
+                        ylims[0] = min(ylims[0], bar_avg_and_std)
             else:
                 ylims[1] = max(ylims[1], bar_value)
                 ylims[0] = min(ylims[0], bar_value)
