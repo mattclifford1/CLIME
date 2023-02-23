@@ -1,6 +1,9 @@
+'''
+plotting functions and helpers for graphs and notebooks
+'''
 # author: Matt Clifford <matt.clifford@bristol.ac.uk>
 
-
+from collections import Counter
 import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap
 from sklearn.inspection import DecisionBoundaryDisplay
@@ -12,12 +15,19 @@ cm = plt.cm.RdBu
 
 def plot_classes(data, ax=None):
     '''
-    plot classes in different colour on an axes
+    plot classes in different colour on an axes, duplicate points in the data are enlarged for clarity
     input:
         - data: dictionary with keys 'X', 'y'
     '''
     ax, show = _get_axes(ax)
-    ax.scatter(data['X'][:, 0], data['X'][:, 1], c=data['y'], cmap=cm_bright, edgecolors="k")
+    x1 = list(data['X'][:, 0])
+    x2 = list(data['X'][:, 1])
+    # count the occurrences of each point
+    point_count = Counter(zip(x1, x2))
+    # create a list of the sizes, here multiplied by 10 for scale
+    size = [30*point_count[(xx1, xx2)] for xx1, xx2 in zip(x1, x2)]
+
+    ax.scatter(x1, x2, s=size, c=data['y'], cmap=cm_bright, edgecolors="k")
     ax.grid(False)
     if show == True:
         plt.show()
