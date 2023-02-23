@@ -23,7 +23,9 @@ def get_sliders(interactive_data_store):
     class_samples = ipywidgets.IntRangeSlider(value=[25, 75],
                                               min=1,
                                               max=200,
-                                              description='CLASS SAMPLES (synthetic datasets):')
+                                              description='CLASS SAMPLES (synthetic datasets):',
+                                              layout=ipywidgets.Layout(width='100%'),
+                                              style={'description_width': 'initial'})
     display(class_samples)
     interactive_data_store['data params']['class_samples'] = class_samples
     # percent data
@@ -31,14 +33,18 @@ def get_sliders(interactive_data_store):
     percent_data = ipywidgets.FloatSlider(value=0.1,
                                           min=0.01,
                                           max=10,
-                                          description='PERCENT DATA (real datasets):')
+                                          description='PERCENT DATA (real datasets):',
+                                          layout=ipywidgets.Layout(width='100%'),
+                                          style={'description_width': 'initial'})
     display(percent_data)
     interactive_data_store['data params']['percent of data'] = percent_data
     print('moons noise')
     percent_data = ipywidgets.FloatSlider(value=0.2,
                                           min=0,
                                           max=4,
-                                          description='Gaussian')
+                                          description='noise var (moons)',
+                                          layout=ipywidgets.Layout(width='100%'),
+                                          style={'description_width': 'initial'})
     display(percent_data)
     interactive_data_store['data params']['percent_of_data'] = percent_data
     return interactive_data_store
@@ -74,6 +80,8 @@ def get_multiple(pipeline_section, interactive_data_store):
     toggle = ipywidgets.SelectMultiple(options=list(clime.pipeline.AVAILABLE_MODULES[pipeline_section].keys()),
                                        value=init_value,
                                        description=f'{pipeline_section.upper()}:',
+                                       layout={'width': 'max-content'},
+                                       style={'description_width': 'initial'}
                                       )
     display(toggle)
     interactive_data_store[pipeline_section] = toggle

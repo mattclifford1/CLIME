@@ -7,5 +7,6 @@ AVAILABLE_EVALUATION_METRICS = {
     'fidelity (local)': get_avg_score(local_fidelity),
     'fidelity (local and balanced)': get_avg_score(local_and_bal_fidelity),
     'fidelity (normal)': get_avg_score(fidelity),
-    'fidelity key (normal)': get_key_points_score(fidelity),
+    'fidelity means (normal)': get_key_points_score(fidelity, key_points='means'),
+    'fidelity between means (normal)': get_key_points_score(fidelity, key_points='between_means'),
 }

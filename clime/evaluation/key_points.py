@@ -8,21 +8,46 @@ import multiprocessing
 from tqdm.autonotebook import tqdm
 import numpy as np
 
+
+def get_class_means(data):
+    # estimate mean of the data
+    classes = len(np.unique(data['y']))
+    means = []
+    for cl in range(classes):
+        X_c = data['X'][data['y']==cl, :]
+        means.append(np.mean(X_c, axis=0))
+    return means
+
+def get_points_between_class_means(data, num_samples=7):
+    # estimate mean of the data and get points between
+    # !!! currently only works for 2 classes !!!
+    classes = len(np.unique(data['y']))
+    means = []
+    for cl in range(classes):
+        X_c = data['X'][data['y']==cl, :]
+        means.append(np.mean(X_c, axis=0))
+    if len(means) > 2:
+        raise Exception(f"'get_points_between_class_means' only supports 2 classes, was given {len(means)}")
+    c_vector = means[1] - means[0]
+    points = []
+    for i in np.linspace(0, 1, num_samples):
+        points.append(means[0] + i*c_vector)
+    print(points)
+    return points
+
 class get_key_points_score():
     '''
     wrapper of metrics to loop over the whole dataset when called
     '''
-    def __init__(self, metric):
+    def __init__(self, metric, key_points='means'):
         self.metric = metric
+        self.key_points = key_points
 
     def determine_key_points(self, data):
-        # estimate mean of the data
-        classes = len(np.unique(data['y']))
-        means = []
-        for cl in range(classes):
-            X_c = data['X'][data['y']==cl, :]
-            means.append(np.mean(X_c, axis=0))
-        return means
+        if self.key_points is 'means':
+            return get_class_means(data)
+        elif self.key_points is 'between_means':
+            return get_points_between_class_means(data)
 
 
     def __call__(self, explainer_generator, black_box_model, data, run_parallel=False):

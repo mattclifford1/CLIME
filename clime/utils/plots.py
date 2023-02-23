@@ -12,6 +12,7 @@ import numpy as np
 # plot colours
 cm_bright = ListedColormap(["#0000FF", "#FF0000"])
 cm = plt.cm.RdBu
+scatter_point_size = 30
 
 def plot_classes(data, ax=None):
     '''
@@ -25,7 +26,7 @@ def plot_classes(data, ax=None):
     # count the occurrences of each point
     point_count = Counter(zip(x1, x2))
     # create a list of the sizes, here multiplied by 10 for scale
-    size = [30*point_count[(xx1, xx2)] for xx1, xx2 in zip(x1, x2)]
+    size = [scatter_point_size*point_count[(xx1, xx2)] for xx1, xx2 in zip(x1, x2)]
 
     ax.scatter(x1, x2, s=size, c=data['y'], cmap=cm_bright, edgecolors="k")
     ax.grid(False)
@@ -84,7 +85,7 @@ def plot_query_points(query_points, ax):
     '''
     ax, show = _get_axes(ax)
     for q in query_points:
-        ax.scatter(q[0], q[1], color='black')
+        ax.scatter(q[0], q[1], s=scatter_point_size, color='black')
 
 '''
 helper functions
