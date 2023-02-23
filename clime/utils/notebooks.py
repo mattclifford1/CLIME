@@ -61,7 +61,6 @@ def get_list_input(interactive_data_store):
     interactive_data_store['data params']['gaussian_covs'] = covs
     return interactive_data_store
 
-
 def get_toggle(pipeline_section, interactive_data_store):
     toggle = ipywidgets.ToggleButtons(options=list(clime.pipeline.AVAILABLE_MODULES[pipeline_section].keys()),
                                       description=f'{pipeline_section.upper()}:',
@@ -147,14 +146,19 @@ def run_experiments(data_store):
     for i, opts in tqdm(enumerate(opts_permutations), total=len(opts_permutations), desc='Pipeline runs', leave=False):
         result = clime.pipeline.run_pipeline(opts, parallel_eval=True)
         scores[i] = {str(labels[i]): result['score']}
+        model_stats_[i] = {'result': result['model_stats']}
         model_stats_[i] = result['model_stats']
         clfs[i] = result['clf']
         train_datas[i] = result['train_data']
         test_datas[i] = result['test_data']
+    return model_stats_, clfs, train_datas, test_datas, title, scores, ylabels
 
+
+def plot_exp_results(inp):
+    model_stats_, clfs, train_datas, test_datas, title, scores, ylabels = inp
     print(f'Params: {title}')
     # plot evaluation graphs
-    clime.utils.plots.plot_multiple_bar_dicts(scores, title=title, ylabels=ylabels, stds=True)
+    clime.utils.plots.plot_multiple_bar_dicts(scores, title=title, ylabels=ylabels)
     # visualise pipeline
     return model_stats_, clfs, train_datas, test_datas
 

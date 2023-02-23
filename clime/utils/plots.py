@@ -130,20 +130,35 @@ def plot_clfs(data_dict, ax_x=2, title=True):
                 ax.set_title(key)
             count += 1
 
-def plot_bar_dict(data_dict, title='', ylabel=None, stds=True, ax=None, ylim=None):
+def plot_bar_dict(data_dict, title='', ylabel=None, ax=None, ylim=None):
     if ax is None:
         fig, ax = plt.subplots()
     keys = list(data_dict.keys())
     x_pos = np.arange(len(keys))
-    if stds is True:
-        avgs = []
-        stds = []
-        for key in keys:
-            avgs.append(data_dict[key]['avg'])
-            stds.append(data_dict[key]['std'])
-        ax.bar(x_pos, avgs, yerr=stds, align='center', alpha=0.5, ecolor='black', capsize=10)
-    else:
-        ax.bar(x_pos, list(data_dict.values()), align='center', alpha=0.5, ecolor='black', capsize=10)
+    avgs = []
+    stds = []
+    for key, item in data_dict.items():
+        if isinstance(item, dict):
+            # get results
+            if 'avg' in item.keys():
+                avgs.append(item['avg'])
+            elif 'result' in item.keys():
+                avgs.append(item['result'])
+            else:
+                raise ValueError(f"plotting dict needs key 'avg' or 'result', got: {item.keys()}")
+            # get standard deviations
+            if 'std' in item.keys():
+                stds.append(item['std'])
+            else:
+                stds.append(None)
+        else:
+            avgs.append(item)
+            stds.append(None)
+    ax.bar(x_pos, avgs, align='center', alpha=0.5)
+    # plot error bars
+    for pos, avg, std  in zip(x_pos, avgs, stds):
+        if std is not None:
+            ax.errorbar(pos, avg, std, color='black', capsize=10)
     ax.set_xticks(x_pos)
     ax.set_xticklabels(keys, rotation=45, ha='right')
     ax.set_title(title)
@@ -154,7 +169,7 @@ def plot_bar_dict(data_dict, title='', ylabel=None, stds=True, ax=None, ylim=Non
     if ylim is not None:
         ax.set_ylim(ylim)
 
-def plot_multiple_bar_dicts(data_dicts, ylabels=None, stds=False, ylims=[0, 1], **kwargs):
+def plot_multiple_bar_dicts(data_dicts, ylabels=None, ylims=[0, 1], **kwargs):
     '''
     use plot_bar_dict but on sub axes
     data_dicts: dict of data dictionaries
@@ -175,7 +190,7 @@ def plot_multiple_bar_dicts(data_dicts, ylabels=None, stds=False, ylims=[0, 1], 
         axs = [axs]
     for i, key in enumerate(data_dicts):
         ylabel = ylabels[i] if ylabels is not None else None
-        plot_bar_dict(data_dicts[key], stds=stds, ax=axs[i], ylabel=ylabel, ylim=ylims)
+        plot_bar_dict(data_dicts[key], ax=axs[i], ylabel=ylabel, ylim=ylims)
 
 
 if __name__ == '__main__':
