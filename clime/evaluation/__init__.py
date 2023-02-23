@@ -1,12 +1,16 @@
 from .faithfulness import fidelity, local_fidelity, bal_fidelity, local_and_bal_fidelity
 from .average_score import get_avg_score
-from .key_points import get_key_points_score
+from .key_points import get_key_points_means_score, get_key_points_points_between_means_score
 
 AVAILABLE_EVALUATION_METRICS = {
-    'fidelity (class balanced)': get_avg_score(bal_fidelity),
-    'fidelity (local)': get_avg_score(local_fidelity),
-    'fidelity (local and balanced)': get_avg_score(local_and_bal_fidelity),
-    'fidelity (normal)': get_avg_score(fidelity),
-    'fidelity means (normal)': get_key_points_score(fidelity, key_points='means'),
-    'fidelity between means (normal)': get_key_points_score(fidelity, key_points='between_means'),
+    'fidelity (class balanced)': bal_fidelity,
+    'fidelity (local)': local_fidelity,
+    'fidelity (local and balanced)': local_and_bal_fidelity,
+    'fidelity (normal)': fidelity,
+}
+
+AVAILABLE_EVALUATION_POINTS = {
+    'all_test_points': get_avg_score(),
+    'class_means': get_key_points_means_score(),
+    'between_class_means': get_key_points_points_between_means_score(),
 }

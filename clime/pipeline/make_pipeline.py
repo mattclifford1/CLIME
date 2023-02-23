@@ -64,14 +64,17 @@ class construct:
         '''
         # object to generate explanations
         expl_gen = explainer_generator(opts)
-        # evaluation
-        score = construct.run_section('evaluation',
+        # get_ evaluation metric
+        eval_metric = construct.get_section('evaluation metric', opts)
+        # run evaluation
+        score = construct.run_section('evaluation run',
                                   opts,
+                                  metric=eval_metric,
                                   explainer_generator=expl_gen,
                                   black_box_model=clf,
                                   data=data_dict,
                                   run_parallel=run_parallel)
-        return score   # score is either a dict with keys: 'avg', 'std' or a number
+        return score   # score is a dict with minumim keys: 'avg', 'std'
 
     @staticmethod
     def run_section(section, options, **kwargs):
@@ -90,6 +93,22 @@ class construct:
         else:
             return available_modules[options[section]](**kwargs)
 
+    @staticmethod
+    def get_section(section, options):
+        '''
+        get a portion of the pipeline (i.e. dont call)
+        inputs:
+            - section: which part of the pipeline to run eg. 'evaluation metric'
+            - options: config for the pipeline
+        raises:
+            - ValueError: if the requested option isn't available
+        '''
+        available_modules = clime.pipeline.AVAILABLE_MODULES[section]
+        if options[section] not in available_modules.keys():
+            raise ValueError(utils.input_error_msg(options, section))
+        else:
+            return available_modules[options[section]]
+
 
 class explainer_generator():
     '''
@@ -98,14 +117,14 @@ class explainer_generator():
     def __init__(self, opts):
         self.opts = opts
 
-    def __call__(self, clf, data_dict, query_point_ind):
+    def __call__(self, clf, data_dict, query_point):
         '''
         get an explainer given a query point, data, and model
         '''
         expl = construct.run_section('explainer',
                                  self.opts,
                                  black_box_model=clf,
-                                 query_point=data_dict['X'][query_point_ind, :],
+                                 query_point=query_point,
                                  data=data_dict)
         return expl
 
@@ -135,13 +154,16 @@ if __name__ == '__main__':
                         },
         'dataset rebalancing': 'none',
         # 'model':               'SVM',
-        # 'model':               'Random Forest',
-        'model':               'Bayes Optimal',
+        'model':               'Random Forest',
+        # 'model':               'Bayes Optimal',
         'model balancer':      'none',
         'explainer':           'bLIMEy (cost sensitive sampled)',
-        # 'explainer':           'LIME (original)',
-        # 'evaluation':          'fidelity (local)',
-        'evaluation':          'fidelity key (normal)',
+        'explainer':           'bLIMEy (normal)',
+        # 'explainer':         'LIME (original)',
+        'evaluation metric': 'fidelity (local)',
+        # 'evaluation metric':   'fidelity (normal)',
+        'evaluation run':   'between_class_means',
+        # 'evaluation run':   'all_test_points',
     }
 
     p = construct(opts)

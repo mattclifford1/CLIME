@@ -32,15 +32,13 @@ def get_points_between_class_means(data, num_samples=7):
     points = []
     for i in np.linspace(0, 1, num_samples):
         points.append(means[0] + i*c_vector)
-    print(points)
     return points
 
 class get_key_points_score():
     '''
     wrapper of metrics to loop over the whole dataset when called
     '''
-    def __init__(self, metric, key_points='means'):
-        self.metric = metric
+    def __init__(self, key_points='means'):
         self.key_points = key_points
 
     def determine_key_points(self, data):
@@ -50,7 +48,7 @@ class get_key_points_score():
             return get_points_between_class_means(data)
 
 
-    def __call__(self, explainer_generator, black_box_model, data, run_parallel=False):
+    def __call__(self, metric, explainer_generator, black_box_model, data, run_parallel=False):
         '''
         get score given an explainer, black_box_model and data to test on
         '''
@@ -59,8 +57,8 @@ class get_key_points_score():
                                                   explainer_generator=explainer_generator,
                                                   clf=black_box_model,
                                                   data_dict=data,
-                                                  query_data=data_points,
-                                                  metric=self.metric)
+                                                  query_data_list=data_points,
+                                                  metric=metric)
         data_list = list(range(len(data_points)))
         if run_parallel == True:
             with multiprocessing.Pool() as pool:
@@ -71,12 +69,20 @@ class get_key_points_score():
         return {'avg': np.mean(scores), 'std': np.std(scores), 'eval_points': data_points}
 
     @staticmethod
-    def _get_single_score(query_point_ind, explainer_generator, clf, data_dict, query_data, metric):
+    def _get_single_score(query_point_ind, explainer_generator, clf, data_dict, query_data_list, metric):
         '''
         wrapper to use with multiprocessing
         '''
-        expl = explainer_generator(clf, data_dict, query_point_ind)
+        query_point = query_data_list[query_point_ind]
+        expl = explainer_generator(clf, data_dict, query_point=query_point)
         score = metric(expl, black_box_model=clf,
                              data=data_dict,
-                             query_point=data_dict['X'][query_point_ind, :])
+                             query_point=query_point)
         return score
+
+
+def get_key_points_means_score():
+    return get_key_points_score(key_points='means')
+
+def get_key_points_points_between_means_score():
+    return get_key_points_score(key_points='between_means')

@@ -130,8 +130,10 @@ def get_pipeline_widgets():
     data_store = get_multiple('model balancer', data_store)
     # which explainer to use
     data_store = get_multiple('explainer', data_store)
-    # which evaluation to use
-    data_store = get_multiple('evaluation', data_store)
+    # which evaluation metric to use
+    data_store = get_multiple('evaluation metric', data_store)
+    # which evaluation points to run
+    data_store = get_multiple('evaluation run', data_store)
     return data_store
 
 # running the pipeline
@@ -141,11 +143,11 @@ def run_experiments(data_store):
     opts_permutations = clime.utils.get_all_dict_permutations(all_opts)
     title, labels = clime.utils.get_opt_differences(opts_permutations)
     # get plot details
-    if 'evaluation' in list(title.keys()):
-        ylabels = [title['evaluation']]*len(opts_permutations)
-        title.pop('evaluation')
+    if 'evaluation metric' in list(title.keys()):
+        ylabels = [title['evaluation metric']]*len(opts_permutations)
+        title.pop('evaluation metric')
     else:
-        ylabels = [label.pop('evaluation') for label in labels]
+        ylabels = [label.pop('evaluation metric') for label in labels]
     # run pipelines
     scores = {}
     scores_no_label = {}

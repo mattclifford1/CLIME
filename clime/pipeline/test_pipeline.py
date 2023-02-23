@@ -49,7 +49,7 @@ def all_pipeline_configs():
     # get all variations/permuations of the pipeline options
     opts_permutations = utils.get_all_dict_permutations(opts)
     # now test all variations of methods
-    with multiprocessing.Pool() as pool:
+    with multiprocessing.Pool(1) as pool:
             results = list(tqdm(pool.imap_unordered(run_and_test, opts_permutations), total=len(opts_permutations), desc='all opts'))
 
 

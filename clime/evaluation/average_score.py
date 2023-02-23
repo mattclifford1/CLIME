@@ -12,10 +12,7 @@ class get_avg_score():
     '''
     wrapper of metrics to loop over the whole dataset when called
     '''
-    def __init__(self, metric):
-        self.metric = metric
-
-    def __call__(self, explainer_generator, black_box_model, data, run_parallel=False):
+    def __call__(self, metric, explainer_generator, black_box_model, data, run_parallel=False):
         '''
         get avg/std score given an explainer, black_box_model and data to test on
         '''
@@ -23,7 +20,7 @@ class get_avg_score():
                                                   explainer_generator=explainer_generator,
                                                   clf=black_box_model,
                                                   data_dict=data,
-                                                  metric=self.metric)
+                                                  metric=metric)
         data_list = list(range(len(data['y'])))
         if run_parallel == True:
             with multiprocessing.Pool() as pool:
@@ -38,8 +35,9 @@ class get_avg_score():
         '''
         wrapper to use with multiprocessing
         '''
-        expl = explainer_generator(clf, data_dict, query_point_ind)
+        query_point = data_dict['X'][query_point_ind, :]
+        expl = explainer_generator(clf, data_dict, query_point=query_point)
         score = metric(expl, black_box_model=clf,
                              data=data_dict,
-                             query_point=data_dict['X'][query_point_ind, :])
+                             query_point=query_point)
         return score
