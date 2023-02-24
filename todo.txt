@@ -1,9 +1,11 @@
 
 TODOS
- - eval with just key points rather than an average
+ - eval with just key points sampled around gaussian of query point
+ - KL div (fit a Gaussian or other way to compare probabilites?)
 
  - normalise the datasets (check attributes to see if this is okay to do)
 
+ - Think how to display/illustrate experiments better?
 
 --------------------------------------------------------------------------------
 
