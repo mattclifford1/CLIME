@@ -59,9 +59,10 @@ def get_list_input(interactive_data_store):
     display(means)
     interactive_data_store['data params']['gaussian_means'] = means
     print('Gaussian Covs')
-    covs = ipywidgets.Text(value='[[[1, 0], [0, 1]],    [[2, 1],[1, 2]]]',
+    covs = ipywidgets.Text(value='[[[1, 0], [0, 1]],    [[1, 0], [0, 1]]]',
                             placeholder='Type something',
                             description='COVS:',
+                            layout={'width': '50%'},
                             disabled=False)
     display(covs)
     interactive_data_store['data params']['gaussian_covs'] = covs

@@ -11,8 +11,8 @@ import clime
 
 def get_gaussian(samples=200,
                  gaussian_means=[[0, 0], [1, 1]],
-                 gaussian_covs=[[[1,0],[0,1]],
-                       [[2,1],[1,2]]],
+                 gaussian_covs=[[[1, 0], [0, 1]],
+                                [[1, 0], [0, 1]]],
                  test=False,
                  **kwargs):
     '''
