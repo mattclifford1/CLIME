@@ -190,7 +190,7 @@ def plot_bar_dict(data_dict, title='', ylabel=None, ax=None, ylim=None):
     if ylim is not None:
         ax.set_ylim(ylim)
 
-def plot_multiple_bar_dicts(data_dicts, ylabels=None, ylims=[0, 1], **kwargs):
+def plot_multiple_bar_dicts(data_dicts, title=None, ylabels=None, ylims=[0, 1], **kwargs):
     '''
     use plot_bar_dict but on sub axes
     data_dicts: dict of data dictionaries
@@ -215,6 +215,8 @@ def plot_multiple_bar_dicts(data_dicts, ylabels=None, ylims=[0, 1], **kwargs):
     for i, key in enumerate(data_dicts):
         ylabel = ylabels[i] if ylabels is not None else None
         plot_bar_dict(data_dicts[key], ax=axs[i], ylabel=ylabel, ylim=ylims)
+    if title is not None:
+        fig.suptitle(title)
 
 
 if __name__ == '__main__':

@@ -170,9 +170,10 @@ def run_experiments(data_store):
 # plot pipeline and results
 def plot_exp_results(inp):
     model_stats_, clfs, train_datas, test_datas, title, scores, scores_no_label, ylabels = inp
+    subtitle = title.pop('evaluation run')
     print(f'Params: {title}')
     # plot evaluation graphs
-    clime.utils.plots.plot_multiple_bar_dicts(scores, title=title, ylabels=ylabels)
+    clime.utils.plots.plot_multiple_bar_dicts(scores, title=subtitle, ylabels=ylabels)
     # visualise pipeline
     return model_stats_, clfs, train_datas, test_datas, scores, scores_no_label
 
