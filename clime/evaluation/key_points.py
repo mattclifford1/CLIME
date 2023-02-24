@@ -18,7 +18,7 @@ def get_class_means(data):
         means.append(np.mean(X_c, axis=0))
     return means
 
-def get_points_between_class_means(data, num_samples=7):
+def get_points_between_class_means(data, num_samples=5):
     # estimate mean of the data and get points between
     # !!! currently only works for 2 classes !!!
     classes = len(np.unique(data['y']))
