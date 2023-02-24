@@ -150,6 +150,7 @@ def plot_clfs(data_dict, ax_x=2, title=True):
             if title is True:
                 ax.set_title(key)
             count += 1
+    fig.tight_layout()
 
 def plot_bar_dict(data_dict, title='', ylabel=None, ax=None, ylim=None):
     if ax is None:
@@ -181,7 +182,7 @@ def plot_bar_dict(data_dict, title='', ylabel=None, ax=None, ylim=None):
         if std is not None:
             ax.errorbar(pos, avg, std, color='black', capsize=10)
     ax.set_xticks(x_pos)
-    ax.set_xticklabels(keys, rotation=45, ha='right')
+    ax.set_xticklabels(keys, rotation=75, ha='right')
     ax.set_title(title)
     if ylabel is None:
         ylabel = ''
@@ -217,6 +218,7 @@ def plot_multiple_bar_dicts(data_dicts, title=None, ylabels=None, ylims=[0, 1], 
         plot_bar_dict(data_dicts[key], ax=axs[i], ylabel=ylabel, ylim=ylims)
     if title is not None:
         fig.suptitle(title)
+    fig.tight_layout()
 
 
 if __name__ == '__main__':

@@ -71,6 +71,8 @@ def get_list_input(interactive_data_store):
 def get_toggle(pipeline_section, interactive_data_store):
     toggle = ipywidgets.ToggleButtons(options=list(clime.pipeline.AVAILABLE_MODULES[pipeline_section].keys()),
                                       description=f'{pipeline_section.upper()}:',
+                                      layout=ipywidgets.Layout(width='auto'),
+                                      style= {'width': 'initial'},
                                       )
     display(toggle)
     interactive_data_store[pipeline_section] = toggle
@@ -81,9 +83,10 @@ def get_multiple(pipeline_section, interactive_data_store):
     toggle = ipywidgets.SelectMultiple(options=list(clime.pipeline.AVAILABLE_MODULES[pipeline_section].keys()),
                                        value=init_value,
                                        description=f'{pipeline_section.upper()}:',
-                                       layout={'width': 'max-content'},
-                                       style={'description_width': 'initial'}
+                                       # layout={'width': 'max-content'},
+                                       # style={'button_width': "100px"}
                                       )
+    # toggle.style.button_width=''
     display(toggle)
     interactive_data_store[pipeline_section] = toggle
     return interactive_data_store
@@ -134,7 +137,7 @@ def get_pipeline_widgets():
     # which evaluation metric to use
     data_store = get_multiple('evaluation metric', data_store)
     # which evaluation points to run
-    data_store = get_multiple('evaluation run', data_store)
+    data_store = get_toggle('evaluation run', data_store)
     return data_store
 
 # running the pipeline
@@ -170,7 +173,7 @@ def run_experiments(data_store):
 # plot pipeline and results
 def plot_exp_results(inp):
     model_stats_, clfs, train_datas, test_datas, title, scores, scores_no_label, ylabels = inp
-    subtitle = title.pop('evaluation run')
+    subtitle = 'evaluation run: ' + title.pop('evaluation run')
     print(f'Params: {title}')
     # plot evaluation graphs
     clime.utils.plots.plot_multiple_bar_dicts(scores, title=subtitle, ylabels=ylabels)
