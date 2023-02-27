@@ -34,9 +34,19 @@ def get_points_between_class_means(data, num_samples=5):
         points.append(means[0] + i*c_vector)
     return points
 
+def get_all_points(data):
+    points = []
+    for i in range(data['X'].shape[0]):
+        points.append(data['X'][i, :])
+    return points
+
+def get_local_points(data):
+    # sample locally around the query point with a smaller variance that the dataset
+    return None
+
 class get_key_points_score():
     '''
-    wrapper of metrics to loop over the whole dataset when called
+    wrapper of metrics to evaluate on key points when called
     '''
     def __init__(self, key_points='means'):
         self.key_points = key_points
@@ -46,6 +56,8 @@ class get_key_points_score():
             return get_class_means(data)
         elif self.key_points is 'between_means':
             return get_points_between_class_means(data)
+        elif self.key_points is 'all_points':
+            return get_all_points(data)
 
 
     def __call__(self, metric, explainer_generator, black_box_model, data, run_parallel=False):
@@ -66,7 +78,10 @@ class get_key_points_score():
         else:
             scores = list(map(_get_explainer_evaluation_wrapper, data_list))
         scores = np.array(scores)
-        return {'avg': np.mean(scores), 'std': np.std(scores), 'eval_points': data_points}
+        results = {'avg': np.mean(scores), 'std': np.std(scores)}
+        if self.key_points is not 'all_points':
+            results['eval_points'] = data_points
+        return results
 
     @staticmethod
     def _get_single_score(query_point_ind, explainer_generator, clf, data_dict, query_data_list, metric):
@@ -79,10 +94,3 @@ class get_key_points_score():
                              data=data_dict,
                              query_point=query_point)
         return score
-
-
-def get_key_points_means_score():
-    return get_key_points_score(key_points='means')
-
-def get_key_points_points_between_means_score():
-    return get_key_points_score(key_points='between_means')

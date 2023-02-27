@@ -164,6 +164,7 @@ if __name__ == '__main__':
         # 'evaluation metric':   'fidelity (normal)',
         'evaluation run':   'between_class_means',
         # 'evaluation run':   'all_test_points',
+        # 'evaluation run':   'class_means',
     }
 
     p = construct(opts)
