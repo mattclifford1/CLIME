@@ -2,11 +2,11 @@
 TODOS
  - param for weight of LIME balancer
         - not started
-        
+
+ - have Bayes CLF to compare against???
 
  - situations from mean to boarder -> how does this affect LIME balancer?
-        - have added a return of indivdual scores for key points
-            - now make a graph of this
+        - made graphs, now label them properly and get useful results
 
 
  - KL div (fit a Gaussian or other way to compare probabilites?)
