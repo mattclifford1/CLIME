@@ -1,6 +1,10 @@
 
 TODOS
  - eval with just key points sampled around gaussian of query point
+ - param for weight of LIME balancer
+ - situations from mean to boarder0> how does this affect LIME balancer?
+
+
  - KL div (fit a Gaussian or other way to compare probabilites?)
 
  - normalise the datasets (check attributes to see if this is okay to do)
