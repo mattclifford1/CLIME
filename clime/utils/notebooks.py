@@ -46,7 +46,7 @@ def get_sliders(interactive_data_store):
                                           layout=ipywidgets.Layout(width='100%'),
                                           style={'description_width': 'initial'})
     display(percent_data)
-    interactive_data_store['data params']['percent_of_data'] = percent_data
+    interactive_data_store['data params']['moons_noise'] = percent_data
     return interactive_data_store
 
 def get_list_input(interactive_data_store):

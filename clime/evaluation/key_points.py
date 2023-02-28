@@ -43,7 +43,7 @@ def get_all_points(data):
 def get_local_points(data, query_point, samples=20):
     # sample locally around the query point with a smaller variance that the dataset
     data_cov = np.cov(data['X'].T)
-    local_sample_cov = data_cov / 10    # maybe justify this?
+    local_sample_cov = data_cov / 5    # maybe justify this?
     samples = np.random.multivariate_normal(query_point, local_sample_cov, samples)
     return {'X': samples}
 
@@ -103,7 +103,7 @@ class get_key_points_score():
         if self.key_points is not 'all_points':
             results['eval_points'] = data_points
         if self.key_points == 'between_means':
-            results['scores': scores]  # structered scores are useful for analysis
+            results['scores'] = scores  # structered scores are useful for analysis
         return results
 
     @staticmethod

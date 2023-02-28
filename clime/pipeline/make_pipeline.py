@@ -128,10 +128,6 @@ class explainer_generator():
                                  data=data_dict)
         return expl
 
-def _get_explainer_evaluation_wrapper(args):
-    # for use with pool.starmap to unpack all the args (but keep default args)
-    return get_explainer_evaluation(*args)
-
 def run_pipeline(opts, **kwargs):
     p = construct(opts)
     return p.run(**kwargs)
@@ -170,4 +166,6 @@ if __name__ == '__main__':
 
     p = construct(opts)
     result = p.run(parallel_eval=args.single)
-    print(result['score'])
+    score = result['score']
+    for key, item in score.items():
+        print(f"{key}: {item}")

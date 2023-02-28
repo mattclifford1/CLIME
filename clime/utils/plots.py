@@ -201,12 +201,10 @@ def plot_multiple_bar_dicts(data_dicts, title=None, ylabels=None, ylims=[0, 1], 
         for bar_value in plot.values():
             if isinstance(bar_value, dict):
                 for bar_avg_and_std in bar_value.values():
-                    if isinstance(bar_avg_and_std, list):
-                        continue
-                    else:
+                    if isinstance(bar_avg_and_std, float) or isinstance(bar_avg_and_std, int):
                         ylims[1] = max(ylims[1], bar_avg_and_std)
                         ylims[0] = min(ylims[0], bar_avg_and_std)
-            else:
+            elif isinstance(bar_value, float) or isinstance(bar_value, int):
                 ylims[1] = max(ylims[1], bar_value)
                 ylims[0] = min(ylims[0], bar_value)
     # make subplots
