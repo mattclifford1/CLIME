@@ -40,9 +40,12 @@ def get_all_points(data):
         points.append(data['X'][i, :])
     return points
 
-def get_local_points(data):
+def get_local_points(data, query_point, samples=20):
     # sample locally around the query point with a smaller variance that the dataset
-    return None
+    data_cov = np.cov(data['X'].T)
+    local_sample_cov = data_cov / 10    # maybe justify this?
+    samples = np.random.multivariate_normal(query_point, local_sample_cov, samples)
+    return {'X': samples}
 
 class get_key_points_score():
     '''
@@ -67,7 +70,7 @@ class get_key_points_score():
             return get_all_points(data)
 
     @staticmethod
-    def get_test_points(data, test_points):
+    def get_test_points(data, test_points, query_point):
         '''
         get points to test the explainer against
          - data: the test or train dataset given from the pipeline
@@ -75,7 +78,7 @@ class get_key_points_score():
         if test_points == 'all':
             return data
         if test_points == 'local':
-            return data # change this!!!!
+            return get_local_points(data, query_point)
 
     def __call__(self, metric, explainer_generator, black_box_model, data, run_parallel=False):
         '''
@@ -109,8 +112,7 @@ class get_key_points_score():
         query_point = query_data_list[query_point_ind]
         expl = explainer_generator(clf, data_dict, query_point=query_point)
 
-        # !!!! get this working!!!!
-        test_points = get_key_points_score.get_test_points(data_dict, test_points)
+        test_points = get_key_points_score.get_test_points(data_dict, test_points, query_point)
         score = metric(expl, black_box_model=clf,
                              data=test_points,
                              query_point=query_point)

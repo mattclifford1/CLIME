@@ -165,6 +165,7 @@ if __name__ == '__main__':
         'evaluation run':   'between_class_means',
         # 'evaluation run':   'all_test_points',
         # 'evaluation run':   'class_means',
+        'evaluation run':   'between_class_means_local',
     }
 
     p = construct(opts)
