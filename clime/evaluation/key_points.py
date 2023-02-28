@@ -82,7 +82,6 @@ class get_key_points_score():
         get score given an explainer, black_box_model and data to test on
         '''
         data_points = self.determine_key_points(data)
-        print(data_points)
         _get_explainer_evaluation_wrapper=partial(get_key_points_score._get_single_score,
                                                   explainer_generator=explainer_generator,
                                                   clf=black_box_model,
@@ -112,7 +111,9 @@ class get_key_points_score():
 
         # !!!! get this working!!!!
         test_points = get_key_points_score.get_test_points(data_dict, test_points)
+        # print(f"{test_points=}")
         test_points = data_dict
+        # print(f"{test_points=}")
         score = metric(expl, black_box_model=clf,
                              data=test_points,
                              query_point=query_point)

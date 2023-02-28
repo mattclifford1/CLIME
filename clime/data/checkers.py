@@ -21,5 +21,9 @@ def get_generic_feature_names(data):
     '''
     add generic feature names to data
     '''
-    names = [f'feature {i}' for i in range(len(data['y']))]
+    if isinstance(data['X'], list):
+        num_features = len(data['X'][0])
+    else:
+        num_features = data['X'].shape[1]
+    names = [f'feature {i}' for i in range(num_features)]
     return names
