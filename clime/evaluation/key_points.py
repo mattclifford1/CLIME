@@ -102,6 +102,8 @@ class get_key_points_score():
         results = {'avg': np.mean(scores), 'std': np.std(scores)}
         if self.key_points is not 'all_points':
             results['eval_points'] = data_points
+        if self.key_points == 'between_means':
+            results['scores': scores]  # structered scores are useful for analysis
         return results
 
     @staticmethod

@@ -1,8 +1,12 @@
 
 TODOS
- - eval with just key points sampled around gaussian of query point
  - param for weight of LIME balancer
- - situations from mean to boarder0> how does this affect LIME balancer?
+        - not started
+        
+
+ - situations from mean to boarder -> how does this affect LIME balancer?
+        - have added a return of indivdual scores for key points
+            - now make a graph of this
 
 
  - KL div (fit a Gaussian or other way to compare probabilites?)
