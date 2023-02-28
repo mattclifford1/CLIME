@@ -59,11 +59,11 @@ class get_key_points_score():
         get points to build the explainer from
          - data: the test or train dataset given from the pipeline
         '''
-        if self.key_points is 'means':
+        if self.key_points == 'means':
             return get_class_means(data)
-        elif self.key_points is 'between_means':
+        elif self.key_points == 'between_means':
             return get_points_between_class_means(data)
-        elif self.key_points is 'all_points':
+        elif self.key_points == 'all_points':
             return get_all_points(data)
 
     @staticmethod
@@ -72,9 +72,9 @@ class get_key_points_score():
         get points to test the explainer against
          - data: the test or train dataset given from the pipeline
         '''
-        if test_points is 'all':
+        if test_points == 'all':
             return data
-        if test_points is 'local':
+        if test_points == 'local':
             return data # change this!!!!
 
     def __call__(self, metric, explainer_generator, black_box_model, data, run_parallel=False):
@@ -111,9 +111,6 @@ class get_key_points_score():
 
         # !!!! get this working!!!!
         test_points = get_key_points_score.get_test_points(data_dict, test_points)
-        # print(f"{test_points=}")
-        test_points = data_dict
-        # print(f"{test_points=}")
         score = metric(expl, black_box_model=clf,
                              data=test_points,
                              query_point=query_point)
