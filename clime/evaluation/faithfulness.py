@@ -1,5 +1,6 @@
 # author: Matt Clifford <matt.clifford@bristol.ac.uk>
 
+import warnings
 from clime.data import costs
 import numpy as np
 
@@ -55,6 +56,10 @@ def _get_preds(expl, black_box_model, data):
     return same_preds
 
 def _get_class_weights(data):
+    # make sure we have class data (sampled data from LIME won't have this)
+    if 'y' not in data.keys():
+        warnings.warn("No class data 'y': not using class balanced weightings", Warning)
+        return np.zeros(data['X'].shape[0])
     # get weights dataset based on class imbalance
     weightings = costs.weight_based_on_class_imbalance(data)
     weights = data['y'].copy()

@@ -158,9 +158,10 @@ if __name__ == '__main__':
         # 'explainer':         'LIME (original)',
         'evaluation metric': 'fidelity (local)',
         # 'evaluation metric':   'fidelity (normal)',
+        'evaluation metric':   'fidelity (class balanced)',
         'evaluation run':   'between_class_means',
         # 'evaluation run':   'all_test_points',
-        # 'evaluation run':   'class_means',
+        'evaluation run':   'class_means',
         'evaluation run':   'between_class_means_local',
     }
 

@@ -3,6 +3,7 @@ utils for getting weightings/costs for data based on distance and class imbalanc
 '''
 # author: Matt Clifford <matt.clifford@bristol.ac.uk>
 
+import warnings
 import numpy as np
 
 def weights_based_on_distance(query_point, X):
@@ -19,6 +20,10 @@ def weight_based_on_class_imbalance(data):
     '''
     get the weight of each class proportional to the number of instances
     '''
+    # make sure we have class data (sampled data from LIME won't have this)
+    if 'y' not in data.keys():
+        warnings.warn("No class data 'y': not use class balanced weightings", Warning)
+        return np.array([1, 1])
     y = np.array(data['y']).astype(np.int64)
     n_classes = len(list(np.unique(y)))
     # if we only have one class then we can't say anything about the weighting
