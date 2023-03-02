@@ -3,8 +3,8 @@ from .average_score import get_avg_score
 from .key_points import get_key_points_score
 
 AVAILABLE_EVALUATION_METRICS = {
-    'fidelity (class balanced)': bal_fidelity,
     'fidelity (local)': local_fidelity,
+    'fidelity (class balanced)': bal_fidelity,
     'fidelity (local and balanced)': local_and_bal_fidelity,
     'fidelity (normal)': fidelity,
 }

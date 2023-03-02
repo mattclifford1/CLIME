@@ -112,6 +112,22 @@ def plot_data_dict(data_dict):
         plot_classes(data_dict[key], axs[i])
         axs[i].set_title(key)
 
+def plot_line_graphs(data_dict, ylims=[0, 1]):
+    # first get the min and max values
+    for key, item1 in data_dict.items():
+        for key, item2 in item1.items():
+            scores = item2['scores']
+            for score in scores:
+                ylims[1] = max(ylims[1], score)
+                ylims[0] = min(ylims[0], score)
+    # now plot
+    fig, axs = plt.subplots(1, len(data_dict))
+    if len(data_dict) == 1:
+        axs = [axs]
+    for i, key in enumerate(data_dict.keys()):
+        plot_multiple_lines(data_dict[key], axs[i], ylims=ylims)
+    fig.tight_layout()
+
 # def plot_clfs():
 #     fig, axs = plt.subplots(1, len(datasets.keys()))
 #     for i, key in enumerate(datasets.keys()):
@@ -217,6 +233,27 @@ def plot_multiple_bar_dicts(data_dicts, title=None, ylabels=None, ylims=[0, 1], 
     if title is not None:
         fig.suptitle(title)
     fig.tight_layout()
+
+def plot_multiple_lines(data_dict, ax=None, ylims=[0, 1]):
+    '''
+    plot multiple line charts
+        - data_dict: dictionary with scores/results from pipeline
+    '''
+    ax, show = _get_axes(ax)
+    for key, item in data_dict.items():
+        if 'eval_points' in item.keys():
+            x = [f[0] for f in item['eval_points']]
+        else:
+            x = list(range(len(item['scores'])))
+        ax.plot(x, item['scores'], label=key)
+        ax.set_xlabel('Feature 0 value')
+        ax.set_ylabel('Evaluation Score')
+        ax.set_ylim(ylims)
+
+    if len(data_dict) > 1:
+        ax.legend()
+    if show == True:
+        plt.show()
 
 
 if __name__ == '__main__':
