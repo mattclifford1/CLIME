@@ -178,10 +178,10 @@ def plot_exp_results(inp):
     # plot evaluation graphs
     clime.utils.plots.plot_multiple_bar_dicts(scores, title=subtitle, ylabels=ylabels)
     # visualise pipeline
-    return model_stats_, clfs, train_datas, test_datas, scores, scores_no_label
+    return model_stats_, clfs, train_datas, test_datas, scores, scores_no_label, ylabels
 
 def plot_model_and_stats(inp):
-    model_stats_, clfs, train_datas, test_datas, scores, scores_no_label = inp
+    model_stats_, clfs, train_datas, test_datas, scores, scores_no_label, ylabels = inp
     # get all train data and models in plotable dict
     model_plots = {}
     for run in clfs:
@@ -190,7 +190,7 @@ def plot_model_and_stats(inp):
             model_plots[run]['query_points'] = scores_no_label[run]['eval_points']
     clime.utils.plots.plot_clfs(model_plots, ax_x=len(model_plots), title=False)
     if 'scores' in scores[0][list(scores[0].keys())[0]].keys():
-        clime.utils.plots.plot_line_graphs(scores)
+        clime.utils.plots.plot_line_graphs(scores, ylabels=ylabels)
     clime.utils.plot_multiple_bar_dicts(model_stats_)
 
 def disp_section_name(section, data_store):

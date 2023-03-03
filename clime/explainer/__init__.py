@@ -14,6 +14,6 @@ AVAILABLE_EXPLAINERS = {
     'bLIMEy (normal)': bLIMEy,
     'bLIMEy (cost sensitive sampled)': sample_weighted_bLIMEy,
     'bLIMEy (cost sensitive class)': class_weighted_bLIMEy,
-    'bLIMEy (rebalance data training)': data_rebalanced_bLIMEy,
+    # 'bLIMEy (rebalance data training)': data_rebalanced_bLIMEy,
     'LIME (original)': LIME_fatf,
 }

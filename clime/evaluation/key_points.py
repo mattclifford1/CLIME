@@ -18,7 +18,7 @@ def get_class_means(data):
         means.append(np.mean(X_c, axis=0))
     return means
 
-def get_points_between_class_means(data, num_samples=5):
+def get_points_between_class_means(data, num_samples=10):
     # estimate mean of the data and get points between
     # !!! currently only works for 2 classes !!!
     classes = len(np.unique(data['y']))
@@ -30,9 +30,11 @@ def get_points_between_class_means(data, num_samples=5):
         raise Exception(f"'get_points_between_class_means' only supports 2 classes, was given {len(means)}")
     c_vector = means[1] - means[0]
     points = []
-    for i in np.linspace(0, 1, num_samples):
+    for i in np.linspace(-0.25, 1.25, num_samples):
         points.append(means[0] + i*c_vector)
-    return points
+    # data for plotting
+    plot_data = {'means': means}
+    return points, plot_data
 
 def get_all_points(data):
     points = []
@@ -63,11 +65,11 @@ class get_key_points_score():
          - data: the test or train dataset given from the pipeline
         '''
         if self.key_points == 'means':
-            return get_class_means(data)
+            return get_class_means(data), None
         elif self.key_points == 'between_means':
             return get_points_between_class_means(data)
         elif self.key_points == 'all_points':
-            return get_all_points(data)
+            return get_all_points(data), None
 
     @staticmethod
     def get_test_points(data, test_points, query_point):
@@ -84,7 +86,7 @@ class get_key_points_score():
         '''
         get score given an explainer, black_box_model and data to test on
         '''
-        data_points = self.determine_key_points(data)
+        data_points, plot_data = self.determine_key_points(data)
         _get_explainer_evaluation_wrapper=partial(get_key_points_score._get_single_score,
                                                   explainer_generator=explainer_generator,
                                                   clf=black_box_model,
