@@ -95,7 +95,7 @@ class get_key_points_score():
         data_list = list(range(len(data_points)))
         if run_parallel == True:
             with multiprocessing.Pool() as pool:
-                scores = list(tqdm(pool.imap_unordered(_get_explainer_evaluation_wrapper, data_list), total=len(data_list), leave=False, desc='Evaluation'))
+                scores = list(tqdm(pool.imap(_get_explainer_evaluation_wrapper, data_list), total=len(data_list), leave=False, desc='Evaluation'))
         else:
             scores = list(map(_get_explainer_evaluation_wrapper, data_list))
         scores = np.array(scores)
