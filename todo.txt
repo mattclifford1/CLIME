@@ -14,6 +14,10 @@ TODOS
  - normalise the datasets (check attributes to see if this is okay to do)
 
  - Think how to display/illustrate experiments better?
+  - single plot for between means?
+
+- pipeline param for eval between means length
+
 
 --------------------------------------------------------------------------------
 
