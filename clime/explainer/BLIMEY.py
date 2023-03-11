@@ -37,13 +37,16 @@ class bLIMEy:
                        samples=10000,
                        class_weight_data=False,
                        class_weight_sampled=False,
-                       rebalance_sampled_data=False):
+                       weight_locally=True,
+                       rebalance_sampled_data=False,
+                       ):
         self.query_point = query_point
         self.data_test = data   # test set to get statistics from
         self.sampling_cov = sampling_cov
         self.samples = samples
         self.class_weight_data = class_weight_data
         self.class_weight_sampled = class_weight_sampled
+        self.weight_locally = weight_locally
         self.rebalance_sampled_data = rebalance_sampled_data
         self._sample_locally(black_box_model)
         self._train_surrogate(black_box_model)
@@ -83,7 +86,10 @@ class bLIMEy:
         # get probabilities to regress on
         self.sampled_data['p(y)'] = black_box_model.predict_proba(self.sampled_data['X'])
         # get sample weighting based on distance
-        weights = costs.weights_based_on_distance(self.query_point, self.sampled_data['X'])
+        if self.weight_locally is True:
+            weights = costs.weights_based_on_distance(self.query_point, self.sampled_data['X'])
+        else:
+            weights = np.ones(self.sampled_data['X'].shape[0])
         if self.class_weight_data is True:   # weight from given weights
             class_weights = costs.weight_based_on_class_imbalance(self.data_test)
             class_preds_matrix = np.round(self.sampled_data['p(y)'])
