@@ -4,6 +4,33 @@ import warnings
 from clime.data import costs
 import numpy as np
 
+from rbig._src.mutual_info import MutualInfoRBIG
+from scipy.stats import spearmanr
+
+
+def rbig_kl(expl, black_box_model, data, query_class, **kwargs):
+    '''
+    calculate KL between the probabilities outputted by both models
+    '''
+    bb_preds = black_box_model.predict_proba(data['X'])[:, query_class]
+    expl_preds = expl.predict_proba(data['X'])[:, 0]
+    # Initialize RBIG class
+    rbig_model = MutualInfoRBIG(max_layers=100)
+
+    # fit model to the data
+    rbig_model.fit(bb_preds, expl_preds[:, np.newaxis])
+    MI_rbig = rbig_model.mutual_info()
+    return MI_rbig
+
+def spearman(expl, black_box_model, data, query_class, **kwargs):
+    '''
+    calculate Spearman correlation between probabilities outputted by both 
+    models
+    '''
+    bb_preds = black_box_model.predict_proba(data['X'])[:, query_class]
+    expl_preds = expl.predict_proba(data['X'])[:, 0]
+    corr = spearmanr(bb_preds, expl_preds)[0]
+    return corr
 
 def fidelity(expl, black_box_model, data, **kwargs):
     '''
