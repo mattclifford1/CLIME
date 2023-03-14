@@ -9,3 +9,5 @@ pytest
 ipywidgets
 pandas
 lime
+git+https://github.com/ipl-uv/rbig.git
+scipy
