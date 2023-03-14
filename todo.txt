@@ -25,6 +25,7 @@ TODOS
 
 BUGS
 fix pipeline.get_avg  -> multiple_runs.py
+fix incompatibilty with scikit-learn==1.2.2
 
 
 FUTURE

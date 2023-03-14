@@ -1,4 +1,4 @@
-scikit-learn>=1.1.3
+scikit-learn==1.1.3
 numpy==1.23.5
 matplotlib>=3.6.2
 fat-forensics
@@ -11,3 +11,6 @@ pandas
 lime
 git+https://github.com/ipl-uv/rbig.git
 scipy
+astropy
+statsmodels
+python-picard
