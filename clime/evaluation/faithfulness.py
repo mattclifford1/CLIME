@@ -8,7 +8,7 @@ from rbig._src.mutual_info import MutualInfoRBIG
 from scipy.stats import spearmanr
 
 
-def rbig_kl(expl, black_box_model, data, query_class, **kwargs):
+def rbig_kl(expl, black_box_model, data, query_class=0, **kwargs):
     '''
     calculate KL between the probabilities outputted by both models
     '''
@@ -22,9 +22,9 @@ def rbig_kl(expl, black_box_model, data, query_class, **kwargs):
     MI_rbig = rbig_model.mutual_info()
     return MI_rbig
 
-def spearman(expl, black_box_model, data, query_class, **kwargs):
+def spearman(expl, black_box_model, data, query_class=0, **kwargs):
     '''
-    calculate Spearman correlation between probabilities outputted by both 
+    calculate Spearman correlation between probabilities outputted by both
     models
     '''
     bb_preds = black_box_model.predict_proba(data['X'])[:, query_class]
