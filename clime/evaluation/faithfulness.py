@@ -18,7 +18,7 @@ def rbig_kl(expl, black_box_model, data, query_class=0, **kwargs):
     rbig_model = MutualInfoRBIG(max_layers=100)
 
     # fit model to the data
-    rbig_model.fit(bb_preds, expl_preds[:, np.newaxis])
+    rbig_model.fit(bb_preds[:, np.newaxis], expl_preds[:, np.newaxis])
     MI_rbig = rbig_model.mutual_info()
     return MI_rbig
 
