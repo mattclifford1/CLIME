@@ -130,7 +130,36 @@ def plot_line_graphs(data_dict, ylabels=None, ylims=[0, 1]):
         else:
             ylabel = 'Evaluation Score'
         plot_multiple_lines(data_dict[key], axs[i], ylims=ylims, ylabel=ylabel)
+
     fig.tight_layout()
+
+def plot_line_graphs_on_one_graph(data_dict, ylabel=None, ylims=[0, 1], ax=None):
+    # first get the min and max values
+    for key, item2 in data_dict.items():
+        scores = item2['scores']
+        for score in scores:
+            ylims[1] = max(ylims[1], score)
+            ylims[0] = min(ylims[0], score)
+    # now plot
+    if ax == None:
+        fig, ax = plt.subplots(1, 1)
+    if ylabel is None:
+        ylabel = 'Evaluation Score'
+    print(data_dict)
+    for key, item in data_dict.items():
+        if 'eval_points' in item.keys():
+            x = [f[0] for f in item['eval_points']]
+        else:
+            x = list(range(len(item['scores'])))
+        ax.plot(x, item['scores'],  label=key)
+        ax.plot(x, item['scores'], 'ko',  label=None)
+        ax.set_xlabel('Query Point Value')
+        ax.set_ylabel(ylabel)
+        ax.set_ylim(ylims)
+
+    if len(data_dict) > 1:
+        ax.legend()
+    # fig.tight_layout()
 
 def plot_clfs(data_dict, ax_x=2, title=True):
     '''
@@ -242,8 +271,9 @@ def plot_multiple_lines(data_dict, ax=None, ylims=[0, 1], ylabel='Evaluation Sco
             x = [f[0] for f in item['eval_points']]
         else:
             x = list(range(len(item['scores'])))
-        ax.plot(x, item['scores'], label=key)
-        ax.set_xlabel('Feature 0 value')
+        ax.plot(x, item['scores'],  label=key)
+        ax.plot(x, item['scores'], 'ko',  label=None)
+        ax.set_xlabel('Query Point Value')
         ax.set_ylabel(ylabel)
         ax.set_ylim(ylims)
 
@@ -256,19 +286,36 @@ def plot_multiple_lines(data_dict, ax=None, ylims=[0, 1], ylabel='Evaluation Sco
 if __name__ == '__main__':
     import matplotlib.pyplot as plt
     from sklearn.inspection import DecisionBoundaryDisplay
-    from clime import data, model
+    import clime
+    params_normal = {'data params': {'class_samples': (200, 200), 'percent of data': 0.11, 'moons_noise': 0.2, 'gaussian_means': [[0, 0], [1, 1]], 'gaussian_covs': [[[1, 0], [0, 1]], [[1, 0], [0, 1]]]}, 'dataset': 'moons', 'dataset rebalancing': 'none', 'model': 'Random Forest', 'model balancer': 'none', 'explainer': 'bLIMEy (normal)', 'evaluation metric': 'fidelity (local)', 'evaluation run': 'between_class_means'}
+    params_class_bal = {'data params': {'class_samples': (200, 200), 'percent of data': 0.11, 'moons_noise': 0.2, 'gaussian_means': [[0, 0], [1, 1]], 'gaussian_covs': [[[1, 0], [0, 1]], [[1, 0], [0, 1]]]}, 'dataset': 'moons', 'dataset rebalancing': 'none', 'model': 'Random Forest', 'model balancer': 'none', 'explainer': 'bLIMEy (cost sensitive sampled)', 'evaluation metric': 'fidelity (local)', 'evaluation run': 'between_class_means'}
+    params_SVM = {'data params': {'class_samples': (200, 200), 'percent of data': 0.11, 'moons_noise': 0.2, 'gaussian_means': [[0, 0], [1, 1]], 'gaussian_covs': [[[1, 0], [0, 1]], [[1, 0], [0, 1]]]}, 'dataset': 'moons', 'dataset rebalancing': 'none', 'model': 'SVM', 'model balancer': 'none', 'explainer': 'bLIMEy (cost sensitive sampled)', 'evaluation metric': 'fidelity (local)', 'evaluation run': 'between_class_means'}
 
-    # ax = plt.gca()
-    _, [ax1, ax2] = plt.subplots(2)
-    # get dataset
-    train_data = data.get_moons()
-    train_data = data.unbalance(train_data,[1,0.5])
-    clf = model.SVM(train_data)
-    plot_decision_boundary(clf, train_data, ax=ax1)
-    plot_classes(train_data, ax=ax1)
+    result_noraml = clime.pipeline.run_pipeline(params_normal, parallel_eval=True)
+    result_bal = clime.pipeline.run_pipeline(params_class_bal, parallel_eval=True)
 
-    clf_bal = model.SVM_balance_boundary(train_data)
-    plot_decision_boundary(clf_bal, train_data, ax=ax2)
-    plot_classes(train_data, ax=ax2)
+    ax = plt.gca()
+
+    # plot_classes(result['train_data'], ax=ax)
+    # plot_decision_boundary(result['clf'], result['train_data'], ax=ax)
+    # plot_query_points(result['score']['eval_points'], ax)
+
+    scores = {'class balancing': result_bal['score'],'normal': result_noraml['score']}
+    plot_line_graphs_on_one_graph(scores, ylabel='Fidelity (local)', ax=ax)
+
 
     plt.show()
+
+    # _, [ax1, ax2] = plt.subplots(2)
+    # # get dataset
+    # train_data = data.get_moons()
+    # train_data = data.unbalance(train_data,[1,0.5])
+    # clf = model.SVM(train_data)
+    # plot_decision_boundary(clf, train_data, ax=ax1)
+    # plot_classes(train_data, ax=ax1)
+    #
+    # clf_bal = model.SVM_balance_boundary(train_data)
+    # plot_decision_boundary(clf_bal, train_data, ax=ax2)
+    # plot_classes(train_data, ax=ax2)
+    #
+    # plt.show()

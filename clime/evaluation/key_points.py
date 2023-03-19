@@ -30,7 +30,7 @@ def get_points_between_class_means(data, num_samples=10):
         raise Exception(f"'get_points_between_class_means' only supports 2 classes, was given {len(means)}")
     c_vector = means[1] - means[0]
     points = []
-    for i in np.linspace(-0.5, 1.5, num_samples):
+    for i in np.linspace(-0.75, 1.75, num_samples):
         points.append(means[0] + i*c_vector)
     # data for plotting
     plot_data = {'means': means}
