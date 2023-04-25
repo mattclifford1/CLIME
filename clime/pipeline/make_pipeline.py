@@ -159,10 +159,11 @@ if __name__ == '__main__':
         'evaluation metric': 'fidelity (local)',
         # 'evaluation metric':   'fidelity (normal)',
         'evaluation metric':   'fidelity (class balanced)',
+        'evaluation metric':   'log loss',
         'evaluation run':   'between_class_means',
         # 'evaluation run':   'all_test_points',
         'evaluation run':   'class_means',
-        'evaluation run':   'between_class_means_local',
+        'evaluation run':   'between_class_means',
     }
 
     p = construct(opts)

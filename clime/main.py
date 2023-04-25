@@ -13,7 +13,8 @@ if __name__ == '__main__':
         'model':               ['SVM'],
         'model balancer':      ['none'],
         'explainer':           ['bLIMEy (normal)'],
-        'evaluation':          ['fidelity (normal)'],
+        # 'evaluation':          ['fidelity (normal)'],
+        'evaluation':          ['log loss'],
     }
     # get all experiments to run
     opts_permutations = clime.utils.get_all_dict_permutations(opts)

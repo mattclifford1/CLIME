@@ -4,6 +4,7 @@ import warnings
 from clime.data import costs
 import numpy as np
 
+# from sklearn.metrics import log_loss
 from rbig._src.mutual_info import MutualInfoRBIG
 from scipy.stats import spearmanr
 
@@ -31,6 +32,16 @@ def spearman(expl, black_box_model, data, query_class=0, **kwargs):
     expl_preds = expl.predict_proba(data['X'])[:, 0]
     corr = spearmanr(bb_preds, expl_preds)[0]
     return corr
+
+def log_loss_score(expl, black_box_model, data, query_class=0, **kwargs):
+    y = black_box_model.predict_proba(
+        data['X'])[:, query_class].astype(np.float64) + 1e-7
+    p = expl.predict_proba(data['X'])[:, query_class].astype(np.float64) + 1e-7
+    print(f'{p=}')
+    print(f'{y=}')
+    log_loss = y*np.log(p) + (1-y)*np.log((1-p))
+    print(f'{log_loss=}')
+    return log_loss.mean()
 
 def fidelity(expl, black_box_model, data, **kwargs):
     '''
