@@ -55,7 +55,8 @@ class bLIMEy:
         return self.surrogate_model.coef_[0, :] # just do for one class (is the negative for the other class)
 
     def predict_proba(self, X):
-        return self.surrogate_model.predict(X)
+        y_ = self.surrogate_model.predict(X)
+        return np.clip(y_, 0, 1)  # make probability (might need to run through logistic function?)
 
     def predict(self, X):
         probability_class_1 = self.surrogate_model.predict(X)[:, 1]

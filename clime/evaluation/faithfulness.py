@@ -33,14 +33,11 @@ def spearman(expl, black_box_model, data, query_class=0, **kwargs):
     corr = spearmanr(bb_preds, expl_preds)[0]
     return corr
 
-def log_loss_score(expl, black_box_model, data, query_class=0, **kwargs):
-    y = black_box_model.predict_proba(
-        data['X'])[:, query_class].astype(np.float64) + 1e-7
-    p = expl.predict_proba(data['X'])[:, query_class].astype(np.float64) + 1e-7
-    print(f'{p=}')
-    print(f'{y=}')
-    log_loss = y*np.log(p) + (1-y)*np.log((1-p))
-    print(f'{log_loss=}')
+def log_loss_score(expl, black_box_model, data, **kwargs):
+    stabilty_constant = 1e-7
+    y = black_box_model.predict_proba(data['X']).astype(np.float64) + stabilty_constant
+    p = expl.predict_proba(data['X']).astype(np.float64) + stabilty_constant
+    log_loss = - (y[:, 0]*np.log(p[:, 0]) + (y[:, 1])*np.log((p[:, 1])))
     return log_loss.mean()
 
 def fidelity(expl, black_box_model, data, **kwargs):

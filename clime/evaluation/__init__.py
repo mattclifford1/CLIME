@@ -7,7 +7,7 @@ AVAILABLE_EVALUATION_METRICS = {
     'fidelity (class balanced)': bal_fidelity,
     'fidelity (local and balanced)': local_and_bal_fidelity,
     'fidelity (normal)': fidelity,
-    # 'log loss': log_loss_score,
+    'log loss': log_loss_score,
     'KL': rbig_kl,
     'spearman': spearman
 }
