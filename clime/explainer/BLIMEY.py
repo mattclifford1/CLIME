@@ -37,6 +37,7 @@ class bLIMEy:
                        samples=10000,
                        class_weight_data=False,
                        class_weight_sampled=False,
+                       class_weight_sampled_probs=False,
                        weight_locally=True,
                        rebalance_sampled_data=False,
                        ):
@@ -46,6 +47,7 @@ class bLIMEy:
         self.samples = samples
         self.class_weight_data = class_weight_data
         self.class_weight_sampled = class_weight_sampled
+        self.class_weight_sampled_probs = class_weight_sampled_probs
         self.weight_locally = weight_locally
         self.rebalance_sampled_data = rebalance_sampled_data
         self._sample_locally(black_box_model)
@@ -69,6 +71,11 @@ class bLIMEy:
         self.sampled_data['X'] = np.random.multivariate_normal(self.query_point, cov, self.samples)
         # get the class predictions from the sampled data (for use with class balanced learning and metrics)
         self.sampled_data['y'] = black_box_model.predict(self.sampled_data['X'])
+        # option to adjust weights based on class imbalance
+        if self.rebalance_sampled_data is True:
+            self.sampled_data = clime.data.balance_oversample(
+                self.sampled_data)
+
 
     def _get_local_sampling_cov(self):
         if self.sampling_cov is None:
@@ -81,36 +88,63 @@ class bLIMEy:
             return self.sampling_cov
 
     def _train_surrogate(self, black_box_model):
-        # option to adjust weights based on class imbalance
-        if self.rebalance_sampled_data is True:
-            self.sampled_data = clime.data.balance_oversample(self.sampled_data)
+        
+        ''' get behaviour of the blackbox model at the sampled data '''
         # get probabilities to regress on
-        self.sampled_data['p(y)'] = black_box_model.predict_proba(self.sampled_data['X'])
+        self.sampled_data['p(y|x)'] = black_box_model.predict_proba(self.sampled_data['X'])
+
+        ''' training cost weights '''
         # get sample weighting based on distance
         if self.weight_locally is True:
             weights = costs.weights_based_on_distance(self.query_point, self.sampled_data['X'])
         else:
             weights = np.ones(self.sampled_data['X'].shape[0])
-        if self.class_weight_data is True:   # weight from given weights
+
+        # black box training data class imbalance weights/costs
+        if self.class_weight_data is True:
             class_weights = costs.weight_based_on_class_imbalance(self.data_test)
-            class_preds_matrix = np.round(self.sampled_data['p(y)'])
+            class_preds_matrix = np.round(self.sampled_data['p(y|x)'])
             # apply to all instances
             instance_class_imbalance_weights = np.dot(class_preds_matrix, class_weights.T)
             # now combine class imbalance weights with distance based weights
             weights *= instance_class_imbalance_weights
-        if self.class_weight_sampled is True: # weight based on imbalance of the samples
+
+        # weights/costs based on class imbalance of the samples
+        if self.class_weight_sampled is True: 
             # get class imbalance weights
             class_weights = costs.weight_based_on_class_imbalance(self.sampled_data)
-            class_preds_matrix = np.round(self.sampled_data['p(y)'])
+            class_preds_matrix = np.round(self.sampled_data['p(y|x)'])
             # apply to all instances
             instance_class_imbalance_weights = np.dot(class_preds_matrix, class_weights.T)
             # now combine class imbalance weights with distance based weights
             weights *= instance_class_imbalance_weights
+
+        if self.class_weight_sampled_probs is True:
+            # adjust probs based on query point's prob
+            
+            # get class imbalance weights
+            query_probs = black_box_model.predict_proba([self.query_point])
+            _adjusted_probs = self.sampled_data['p(y|x)'] - query_probs # get around 0
+            _adjusted_probs += 0.5   # get to abve and below 0.5 proba
+            _query_adjusted_classes = np.round(np.clip(_adjusted_probs, 0, 1))
+            adjusted_data = {
+                'X': self.sampled_data['X'], 'y': _query_adjusted_classes[:, 0]}
+
+            # get weights from query point adjust probability
+            class_weights = costs.weight_based_on_class_imbalance(
+                adjusted_data)
+            # apply to all instances
+            instance_class_imbalance_weights = np.dot(
+                _query_adjusted_classes, class_weights.T)
+            # now combine class imbalance weights with distance based weights
+            weights *= instance_class_imbalance_weights
+
+        ''' train surrogate '''
         # regresssion model
         self.surrogate_model = sklearn.linear_model.Ridge(alpha=1, fit_intercept=True,
                                     random_state=clime.RANDOM_SEED)
         self.surrogate_model.fit(self.sampled_data['X'],
-                                 self.sampled_data['p(y)'],
+                                 self.sampled_data['p(y|x)'],
                                  sample_weight=weights,
                                  )
 

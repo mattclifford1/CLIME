@@ -108,14 +108,14 @@ def _get_class_weights(data):
 
 if __name__ == '__main__':
     import data
-    import model
+    import models
     import explainer
     # get dataset
     train_data = data.get_moons()
     train_data = data.unbalance(train_data,[1,0.5])
 
     # train model
-    clf = model.SVM(train_data)
+    clf = models.SVM(train_data)
 
     # BLIMEY!
     q_point = 10

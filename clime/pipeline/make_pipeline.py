@@ -155,6 +155,7 @@ if __name__ == '__main__':
         'model balancer':      'none',
         'explainer':           'bLIMEy (cost sensitive sampled)',
         'explainer':           'bLIMEy (normal)',
+        'explainer':           'bLIMEy (cost sensitive sampled - probs)',
         # 'explainer':         'LIME (original)',
         'evaluation metric': 'fidelity (local)',
         # 'evaluation metric':   'fidelity (normal)',
