@@ -117,24 +117,24 @@ def _get_class_weights(data):
     return weights
 
 
-if __name__ == '__main__':
-    import data
-    import models
-    import explainer
-    # get dataset
-    train_data = data.get_moons()
-    train_data = data.unbalance(train_data,[1,0.5])
+# if __name__ == '__main__':
+#     import data
+#     import models
+#     import explainer
+#     # get dataset
+#     train_data = data.get_moons()
+#     # train_data = data.unbalance(train_data,[1,0.5])
 
-    # train model
-    clf = models.SVM(train_data)
+#     # train model
+#     clf = models.SVM(train_data)
 
-    # BLIMEY!
-    q_point = 10
-    expl = explainer.bLIMEy(clf, train_data['X'][q_point, :])
+#     # BLIMEY!
+#     q_point = 10
+#     expl = explainer.bLIMEy(clf, train_data['X'][q_point, :])
 
-    fid = fidelity(expl, clf, train_data)
-    print(fid)
-    loc_fid = local_fidelity(expl, clf, train_data, train_data['X'][q_point, :])
-    print(loc_fid)
-    bal_fid = bal_fidelity(expl, clf, train_data)
-    print(bal_fid)
+#     fid = fidelity(expl, clf, train_data)
+#     print(fid)
+#     loc_fid = local_fidelity(expl, clf, train_data, train_data['X'][q_point, :])
+#     print(loc_fid)
+#     bal_fid = bal_fidelity(expl, clf, train_data)
+#     print(bal_fid)
