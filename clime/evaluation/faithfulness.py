@@ -51,6 +51,20 @@ def local_log_loss_score(expl, black_box_model, data, query_point, **kwargs):
     mean_loss = sum(log_loss*weights) / sum(weights)
     return mean_loss
 
+def Brier_score(expl, black_box_model, data, **kwargs):
+    y = black_box_model.predict_proba(data['X']).astype(np.float64)[:, 0]
+    p = expl.predict_proba(data['X']).astype(np.float64)[:, 0]
+    scores = (p - y)**2
+    return scores.mean()
+
+def local_Brier_score(expl, black_box_model, data, query_point, **kwargs):
+    y = black_box_model.predict_proba(data['X']).astype(np.float64)[:, 0]
+    p = expl.predict_proba(data['X']).astype(np.float64)[:, 0]
+    scores = (p - y)**2
+    weights = costs.weights_based_on_distance(query_point, data['X'])
+    mean_score = sum(scores*weights) / sum(weights)
+    return mean_score
+
 def fidelity(expl, black_box_model, data, **kwargs):
     '''
     get fidelity accuracy between both models

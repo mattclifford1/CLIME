@@ -1,4 +1,13 @@
-from .faithfulness import fidelity, local_fidelity, bal_fidelity, local_and_bal_fidelity, rbig_kl, spearman, log_loss_score, local_log_loss_score
+from .faithfulness import (fidelity, 
+                           local_fidelity, 
+                           bal_fidelity, 
+                           local_and_bal_fidelity, 
+                           rbig_kl, 
+                           spearman, 
+                           log_loss_score, 
+                           local_log_loss_score,
+                           Brier_score,
+                           local_Brier_score)
 from .average_score import get_avg_score
 from .key_points import get_key_points_score
 
@@ -9,6 +18,8 @@ AVAILABLE_EVALUATION_METRICS = {
     'fidelity (normal)': fidelity,
     'log loss': log_loss_score,
     'log loss (local)': local_log_loss_score,
+    'Brier score': Brier_score,
+    'Brier score (local)': local_Brier_score,
     'KL': rbig_kl,
     'spearman': spearman
 }
