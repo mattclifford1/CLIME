@@ -40,13 +40,24 @@ def log_loss_score(expl, black_box_model, data, **kwargs):
     log_loss = - (y[:, 0]*np.log(p[:, 0]) + (y[:, 1])*np.log((p[:, 1])))
     return log_loss.mean()
 
+def local_log_loss_score(expl, black_box_model, data, query_point, **kwargs):
+    # get log loss
+    stabilty_constant = 1e-7
+    y = black_box_model.predict_proba(data['X']).astype(np.float64) + stabilty_constant
+    p = expl.predict_proba(data['X']).astype(np.float64) + stabilty_constant
+    log_loss = - (y[:, 0]*np.log(p[:, 0]) + (y[:, 1])*np.log((p[:, 1])))
+    # weight locally
+    weights = costs.weights_based_on_distance(query_point, data['X'])
+    mean_loss = sum(log_loss*weights) / sum(weights)
+    return mean_loss
+
 def fidelity(expl, black_box_model, data, **kwargs):
     '''
     get fidelity accuracy between both models
     '''
     same_preds = _get_preds(expl, black_box_model, data)
     # get the accuracy
-    fidelity_acc = sum(same_preds)/len(same_preds)
+    fidelity_acc = sum(same_preds) / len(same_preds)
     return fidelity_acc
 
 def local_fidelity(expl, black_box_model, data, query_point, **kwargs):
@@ -58,7 +69,7 @@ def local_fidelity(expl, black_box_model, data, query_point, **kwargs):
     # get weights dataset based on locality
     weights = costs.weights_based_on_distance(query_point, data['X'])
     # adjust score with weights
-    fidelity_acc = sum(same_preds*weights)/ sum(weights)
+    fidelity_acc = sum(same_preds*weights) / sum(weights)
     return fidelity_acc
 
 def bal_fidelity(expl, black_box_model, data, **kwargs):
