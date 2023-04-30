@@ -49,3 +49,23 @@ def get_instance_class_weights(data):
     # apply to all instances
     instance_weights = np.dot(Y, class_weights.T)
     return instance_weights
+
+
+def weights_based_on_class_either_side_of_prob(data, query_probs):
+    ''' 
+    get the class imbalance weights based on if points are above 
+    or below the probabilty value of the query point
+    '''
+    if 'p(y|x)' not in data.keys():
+        raise ValueError(f"data needs to have key 'p(y|x)' to get weights for either side of query probability")
+    _adjusted_probs = data['p(y|x)'] - query_probs  # get around 0
+    _adjusted_probs += 0.5   # get to abve and below 0.5 proba
+    _query_adjusted_classes = np.round(np.clip(_adjusted_probs, 0, 1))
+    adjusted_data = {
+        'X': data['X'], 'y': _query_adjusted_classes[:, 0]}
+    # get weights from query point adjust probability
+    class_weights = weight_based_on_class_imbalance(adjusted_data)
+    # apply to all instances
+    instance_class_imbalance_weights = np.dot(
+        _query_adjusted_classes, class_weights.T)
+    return instance_class_imbalance_weights

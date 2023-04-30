@@ -121,21 +121,9 @@ class bLIMEy:
 
         if self.class_weight_sampled_probs is True:
             # adjust probs based on query point's prob
-            
             # get class imbalance weights
             query_probs = black_box_model.predict_proba([self.query_point])
-            _adjusted_probs = self.sampled_data['p(y|x)'] - query_probs # get around 0
-            _adjusted_probs += 0.5   # get to abve and below 0.5 proba
-            _query_adjusted_classes = np.round(np.clip(_adjusted_probs, 0, 1))
-            adjusted_data = {
-                'X': self.sampled_data['X'], 'y': _query_adjusted_classes[:, 0]}
-
-            # get weights from query point adjust probability
-            class_weights = costs.weight_based_on_class_imbalance(
-                adjusted_data)
-            # apply to all instances
-            instance_class_imbalance_weights = np.dot(
-                _query_adjusted_classes, class_weights.T)
+            instance_class_imbalance_weights = costs.weights_based_on_class_either_side_of_prob(self.sampled_data, query_probs)
             # now combine class imbalance weights with distance based weights
             weights *= instance_class_imbalance_weights
 
