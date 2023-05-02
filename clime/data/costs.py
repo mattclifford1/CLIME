@@ -62,7 +62,7 @@ def weights_based_on_class_either_side_of_prob(data, query_probs):
     _adjusted_probs += 0.5   # get to abve and below 0.5 proba
     _query_adjusted_classes = np.round(np.clip(_adjusted_probs, 0, 1))
     adjusted_data = {
-        'X': data['X'], 'y': _query_adjusted_classes[:, 0]}
+        'X': data['X'], 'y': _query_adjusted_classes[:, 1]}
     # get weights from query point adjust probability
     class_weights = weight_based_on_class_imbalance(adjusted_data)
     # apply to all instances

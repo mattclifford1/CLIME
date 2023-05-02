@@ -7,7 +7,9 @@ from .faithfulness import (fidelity,
                            log_loss_score, 
                            local_log_loss_score,
                            Brier_score,
-                           local_Brier_score)
+                           local_Brier_score,
+                           query_probs_fidelity,
+                           query_probs_local_fidelity)
 from .average_score import get_avg_score
 from .key_points import get_key_points_score
 
@@ -21,7 +23,9 @@ AVAILABLE_EVALUATION_METRICS = {
     'Brier score': Brier_score,
     'Brier score (local)': local_Brier_score,
     'KL': rbig_kl,
-    'spearman': spearman
+    'spearman': spearman,
+    'fidelity (query probs)': query_probs_fidelity,
+    'fidelity (local query probs)': query_probs_fidelity,
 }
 
 AVAILABLE_EVALUATION_POINTS = {

@@ -108,12 +108,54 @@ def local_and_bal_fidelity(expl, black_box_model, data, query_point, **kwargs):
     fidelity_acc = sum(same_preds*weights)/ sum(weights)
     return fidelity_acc
 
+
+def query_probs_fidelity(expl, black_box_model, data, query_point, **kwargs):
+    '''
+    use classes as having above and below the query point probability,
+    get fidelity accuracy between both models
+    '''
+    query_probs = black_box_model.predict_proba([query_point])
+    same_preds = _get_proba_adjusted_preds(
+        expl, black_box_model, data, query_probs)
+    # get the accuracy
+    fidelity_acc = sum(same_preds) / len(same_preds)
+    return fidelity_acc
+
+
+def query_probs_local_fidelity(expl, black_box_model, data, query_point, **kwargs):
+    '''
+    use classes as having above and below the query point probability,
+    get fidelity accuracy between both models but weight based on
+    distance from query point
+    '''
+    query_probs = black_box_model.predict_proba([query_point])
+    same_preds = _get_proba_adjusted_preds(
+        expl, black_box_model, data, query_probs)
+    # get weights dataset based on locality
+    weights = costs.weights_based_on_distance(query_point, data['X'])
+    # adjust score with weights
+    fidelity_acc = sum(same_preds*weights) / sum(weights)
+    return fidelity_acc
+
 def _get_preds(expl, black_box_model, data):
     # get prediction from both models
     bb_preds = black_box_model.predict(data['X'])
     expl_preds = expl.predict(data['X'])
     same_preds = (bb_preds==expl_preds).astype(np.int64)
     return same_preds
+
+def _get_proba_adjusted_preds(expl, black_box_model, data, query_probs):
+    ''' same as _get_preds but adjust probability based on query point '''
+    bb_preds = _adjust_probs(black_box_model.predict_proba(data['X']), query_probs)
+    expl_preds = _adjust_probs(expl.predict_proba(data['X']), query_probs)
+    same_preds = (bb_preds == expl_preds).astype(np.int64)
+    return same_preds
+
+def _adjust_probs(preds, query_probs):
+    _adjusted_probs = preds - query_probs  # get around 0
+    _adjusted_probs += 0.5   # get to abve and below 0.5 proba
+    _query_adjusted_classes = np.round(np.clip(_adjusted_probs, 0, 1))
+    return _query_adjusted_classes[:, 1]   # just binary of prob of being class 1
 
 def _get_class_weights(data):
     # make sure we have class data (sampled data from LIME won't have this)
