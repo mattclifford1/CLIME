@@ -20,7 +20,7 @@ def get_run_button():
 def get_sliders(interactive_data_store):
     # class samples
     print('synthetic datasets')
-    class_samples = ipywidgets.IntRangeSlider(value=[25, 75],
+    class_samples = ipywidgets.IntRangeSlider(value=[200, 200],
                                               min=1,
                                               max=200,
                                               description='CLASS SAMPLES (synthetic datasets):',
@@ -174,7 +174,7 @@ def run_experiments(data_store):
 def plot_exp_results(inp):
     model_stats_, clfs, train_datas, test_datas, title, scores, scores_no_label, ylabels = inp
     subtitle = 'evaluation run: ' + title.pop('evaluation run')
-    print(f'Params: {title}')
+    # print(f'Params: {title}')
     # plot evaluation graphs
     clime.utils.plots.plot_multiple_bar_dicts(scores, title=subtitle, ylabels=ylabels)
     # visualise pipeline
