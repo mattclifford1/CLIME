@@ -11,10 +11,13 @@ def run_all(ev):
     display(Javascript('IPython.notebook.execute_cells_below()'))
 
 def get_run_button():
-    # button = ipywidgets.widgets.Button(description=f"{'*'*10}RUN PIPELINE{'*'*10}")
-    button = ipywidgets.widgets.Button(description=f"RUN PIPELINE")
-    button.on_click(run_all)
-    display(button)
+    if 'google.colab' in str(get_ipython()):
+        print('When you have selected the parameters, click in this cell then select:\n    Runtime > Run After')
+    else:
+        # button = ipywidgets.widgets.Button(description=f"{'*'*10}RUN PIPELINE{'*'*10}")
+        button = ipywidgets.widgets.Button(description=f"RUN PIPELINE")
+        button.on_click(run_all)
+        display(button)
 
 # set up interactive functionality
 def get_sliders(interactive_data_store):
