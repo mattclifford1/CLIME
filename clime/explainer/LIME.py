@@ -24,11 +24,11 @@ class LIME_fatf:
     '''
     def __init__(self, black_box_model,
                        query_point,
-                       data,
+                       test_data,
                        samples_number=500,
                        **kwargs):
         self.black_box_model = black_box_model
-        self.data = data
+        self.data = test_data
         # print(data['X'].shape)
         # print(hasattr(black_box_model, 'predict_proba'))
         # print(fumv.check_model_functionality(black_box_model, True, True))
@@ -60,11 +60,11 @@ class LIME_fatf:
 class LIME:
     def __init__(self, black_box_model,
                        query_point,
-                       data,
+                       test_data,
                        samples_number=500,
                        **kwargs):
         self.black_box_model = black_box_model
-        self.data = data
+        self.data = test_data
         explainer = LimeTabularExplainer(self.data['X'], random_state=clime.RANDOM_SEED)
         expl = explainer.explain_instance(query_point, black_box_model.predict_proba)
         print(query_point)

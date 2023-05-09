@@ -22,7 +22,7 @@ class construct:
         '''
         train_data, test_data, clf = self.get_data_and_model()
         model_stats = utils.get_model_stats(clf, train_data, test_data)
-        score = self.get_evaluation(self.opts, clf, test_data, run_parallel=parallel_eval)
+        score = self.get_evaluation(self.opts, clf, train_data, test_data, run_parallel=parallel_eval)
         return {'score': score,
                 'model_stats': model_stats,
                 'clf': clf,
@@ -58,7 +58,7 @@ class construct:
         return train_data, test_data, clf
 
     @staticmethod
-    def get_evaluation(opts, clf, data_dict, run_parallel=False):
+    def get_evaluation(opts, clf, train_data, test_data, run_parallel=False):
         '''
         get an evaluation of a given model and data
         '''
@@ -72,7 +72,8 @@ class construct:
                                   metric=eval_metric,
                                   explainer_generator=expl_gen,
                                   black_box_model=clf,
-                                  data=data_dict,
+                                  test_data=test_data,
+                                  train_data=train_data,
                                   run_parallel=run_parallel)
         return score   # score is a dict with minumim keys: 'avg', 'std'
 
@@ -117,7 +118,7 @@ class explainer_generator():
     def __init__(self, opts):
         self.opts = opts
 
-    def __call__(self, clf, data_dict, query_point):
+    def __call__(self, clf, train_data, test_data, query_point):
         '''
         get an explainer given a query point, data, and model
         '''
@@ -125,7 +126,8 @@ class explainer_generator():
                                  self.opts,
                                  black_box_model=clf,
                                  query_point=query_point,
-                                 data=data_dict)
+                                 train_data=train_data,
+                                 test_data=test_data)
         return expl
 
 def run_pipeline(opts, **kwargs):

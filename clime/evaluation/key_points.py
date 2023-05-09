@@ -82,15 +82,16 @@ class get_key_points_score():
         if test_points == 'local':
             return get_local_points(data, query_point)
 
-    def __call__(self, metric, explainer_generator, black_box_model, data, run_parallel=False):
+    def __call__(self, metric, explainer_generator, black_box_model, train_data, test_data, run_parallel=False):
         '''
         get score given an explainer, black_box_model and data to test on
         '''
-        data_points, plot_data = self.determine_key_points(data)
+        data_points, plot_data = self.determine_key_points(test_data)
         _get_explainer_evaluation_wrapper=partial(get_key_points_score._get_single_score,
                                                   explainer_generator=explainer_generator,
                                                   clf=black_box_model,
-                                                  data_dict=data,
+                                                  train_data=train_data,
+                                                  test_data=test_data,
                                                   query_data_list=data_points,
                                                   metric=metric,
                                                   test_points=self.test_points)
@@ -109,14 +110,14 @@ class get_key_points_score():
         return results
 
     @staticmethod
-    def _get_single_score(query_point_ind, explainer_generator, clf, data_dict, query_data_list, metric, test_points):
+    def _get_single_score(query_point_ind, explainer_generator, clf, train_data, test_data, query_data_list, metric, test_points):
         '''
         wrapper to use with multiprocessing
         '''
         query_point = query_data_list[query_point_ind]
-        expl = explainer_generator(clf, data_dict, query_point=query_point)
+        expl = explainer_generator(clf, train_data=train_data, test_data=test_data, query_point=query_point)
 
-        test_points = get_key_points_score.get_test_points(data_dict, test_points, query_point)
+        test_points = get_key_points_score.get_test_points(test_data, test_points, query_point)
         score = metric(expl, black_box_model=clf,
                              data=test_points,
                              query_point=query_point)

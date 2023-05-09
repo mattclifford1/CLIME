@@ -1,5 +1,6 @@
 from .BLIMEY import bLIMEy
 from .LIME import LIME_fatf
+from .SHAP import kernal_SHAP
 
 def sample_weighted_bLIMEy(*args, **kwargs):
     # add weights to the samples based on inverse 
@@ -33,11 +34,12 @@ def just_class_weight_sampled_bLIMEy(*args, **kwargs):
 
 AVAILABLE_EXPLAINERS = {
     'bLIMEy (normal)': bLIMEy,
+    'LIME (original)': LIME_fatf,
+    'Kernel SHAP': kernal_SHAP,
     'bLIMEy (cost sensitive sampled)': sample_weighted_bLIMEy,
     'bLIMEy (cost sensitive sampled - probs)': sample_weighted_bLIMEy_probs,
     'bLIMEy (cost sensitive class)': class_weighted_bLIMEy,
     'bLIMEy (not local)': dont_weight_locally_bLIMEy,
     'bLIMEy (just cost sensitive sampled)': just_class_weight_sampled_bLIMEy,
     # 'bLIMEy (rebalance data training)': data_rebalanced_bLIMEy,
-    'LIME (original)': LIME_fatf,
 }

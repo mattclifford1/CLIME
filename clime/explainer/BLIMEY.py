@@ -32,17 +32,18 @@ class bLIMEy:
     '''
     def __init__(self, black_box_model,
                        query_point,
-                       data=None,
-                       sampling_cov=None,  # provide covariance to sample data
+                       test_data=None,
+                       sampling_cov=None,  # provide covariance to sample test_
                        samples=10000,
                        class_weight_data=False,
                        class_weight_sampled=False,
                        class_weight_sampled_probs=False,
                        weight_locally=True,
                        rebalance_sampled_data=False,
+                       **kwargs
                        ):
         self.query_point = query_point
-        self.data_test = data   # test set to get statistics from
+        self.test_data = test_data   # test set to get statistics from
         self.sampling_cov = sampling_cov
         self.samples = samples
         self.class_weight_data = class_weight_data
@@ -79,11 +80,11 @@ class bLIMEy:
 
     def _get_local_sampling_cov(self):
         if self.sampling_cov is None:
-            if self.data_test is None:
+            if self.test_data is None:
                 return np.eye(len(self.query_point)) # dont know anything so assume cov is identity matrix
             else:
                 # calc cov of data given
-                return np.cov(self.data_test['X'].T)
+                return np.cov(self.test_data['X'].T)
         else:
             return self.sampling_cov
 
@@ -102,7 +103,7 @@ class bLIMEy:
 
         # black box training data class imbalance weights/costs
         if self.class_weight_data is True:
-            class_weights = costs.weight_based_on_class_imbalance(self.data_test)
+            class_weights = costs.weight_based_on_class_imbalance(self.test_data)
             class_preds_matrix = np.round(self.sampled_data['p(y|x)'])
             # apply to all instances
             instance_class_imbalance_weights = np.dot(class_preds_matrix, class_weights.T)
