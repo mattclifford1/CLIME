@@ -50,13 +50,19 @@ class LIME_fatf:
         return self.surrogate_model.predict(X_bin)
 
     def predict_proba(self, X):
-        return self._predict(X)
+        p_class0 = np.expand_dims(self._predict(X), axis=1)
+        return np.concatenate([p_class0, 1 - p_class0], axis=1)
 
     def predict(self, X):
         probability_class_1 = self._predict(X)
         class_prediction = np.heaviside(probability_class_1-0.5, 1)   # threshold class prediction at 0.5
         return class_prediction.astype(np.int64)
 
+
+
+'''
+original LIME implementation below (use only to validate against the fatf version)
+'''
 class LIME:
     def __init__(self, black_box_model,
                        query_point,

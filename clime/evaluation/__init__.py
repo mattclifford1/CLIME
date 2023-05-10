@@ -15,17 +15,17 @@ from .key_points import get_key_points_score
 
 AVAILABLE_EVALUATION_METRICS = {
     'fidelity (local)': local_fidelity,
-    'fidelity (class balanced)': bal_fidelity,
-    'fidelity (local and balanced)': local_and_bal_fidelity,
-    'fidelity (normal)': fidelity,
-    'log loss': log_loss_score,
     'log loss (local)': local_log_loss_score,
-    'Brier score': Brier_score,
     'Brier score (local)': local_Brier_score,
+    'fidelity (class balanced)': bal_fidelity,
     'KL': rbig_kl,
     'spearman': spearman,
+    'fidelity (local and balanced)': local_and_bal_fidelity,
+    'fidelity (normal)': fidelity,
     'fidelity (query probs)': query_probs_fidelity,
     'fidelity (local query probs)': query_probs_fidelity,
+    'log loss': log_loss_score,
+    'Brier score': Brier_score,
 }
 
 AVAILABLE_EVALUATION_POINTS = {

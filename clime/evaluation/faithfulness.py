@@ -45,6 +45,7 @@ def local_log_loss_score(expl, black_box_model, data, query_point, **kwargs):
     stabilty_constant = 1e-7
     y = black_box_model.predict_proba(data['X']).astype(np.float64) + stabilty_constant
     p = expl.predict_proba(data['X']).astype(np.float64) + stabilty_constant
+    print(p.shape)
     log_loss = - (y[:, 0]*np.log(p[:, 0]) + (y[:, 1])*np.log((p[:, 1])))
     # weight locally
     weights = costs.weights_based_on_distance(query_point, data['X'])
