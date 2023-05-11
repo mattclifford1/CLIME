@@ -21,6 +21,21 @@ def get_all_dict_permutations(dict_):
     dict_permutations = [dict(zip(keys, v)) for v in itertools.product(*values)]
     return dict_permutations
 
+def get_one_dict_permutation(dict_):
+    ''' for use with pytest as all permutations is too computationally intense
+    this way just makes sure we test each method at least once but not against all combinations'''
+    combos = []
+    generic = {}
+    for name, methods in dict_.items():
+        generic[name] = methods[0]
+
+    for name, methods in dict_.items():
+        for method_ in methods:
+            opt = generic.copy()
+            opt[name] = method_
+            combos.append(opt)
+    return combos
+
 def check_unique(values, same_values, list_of_diff_keys, key):
     '''
     check whethere a list of values are all the same, and add to the correct list store
