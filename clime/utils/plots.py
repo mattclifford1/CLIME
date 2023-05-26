@@ -7,6 +7,7 @@ from collections import Counter
 import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap
 from sklearn.inspection import DecisionBoundaryDisplay
+from sklearn.decomposition import PCA
 import numpy as np
 
 # plot colours
@@ -14,15 +15,20 @@ cm_bright = ListedColormap(["#0000FF", "#FF0000"])
 cm = plt.cm.RdBu
 scatter_point_size = 30
 
-def plot_classes(data, ax=None):
+def plot_classes(data, ax=None, pca=None):
     '''
     plot classes in different colour on an axes, duplicate points in the data are enlarged for clarity
     input:
         - data: dictionary with keys 'X', 'y'
     '''
     ax, show = _get_axes(ax)
-    x1 = list(data['X'][:, 0])
-    x2 = list(data['X'][:, 1])
+    if pca == None:
+        x1 = list(data['X'][:, 0])
+        x2 = list(data['X'][:, 1])
+    else:
+        X = pca.transform(data['X'])
+        x1 = list(X[:, 0])
+        x2 = list(X[:, 1])
     # count the occurrences of each point
     point_count = Counter(zip(x1, x2))
     # create a list of the sizes, here multiplied by 10 for scale
@@ -44,12 +50,16 @@ def plot_decision_boundary_sklearn(clf, data, ax=None):
     if show == True:
         plt.show()
 
-def plot_decision_boundary(clf, data, ax=None):
+
+def plot_decision_boundary(clf, data, ax=None, pca=None):
     '''
     plot a decision boundary on axes
     input:
         - clf: sklearn classifier object
     '''
+    if pca != None:
+        # need to impliment this to encorportant n dimensions
+        return
     ax, show = _get_axes(ax)
     # get X from data
     X = data['X']
@@ -79,13 +89,20 @@ def plot_decision_boundary(clf, data, ax=None):
     if show == True:
         plt.show()
 
-def plot_query_points(query_points, ax):
+def plot_query_points(query_points, ax, pca=None):
     '''
     point eval points as black, are a list of values
     '''
-    ax, show = _get_axes(ax)
+    ax, _ = _get_axes(ax)
     for q in query_points:
-        ax.scatter(q[0], q[1], s=scatter_point_size, color='black')
+        if pca == None:
+            q0= q[0]
+            q1 = q[1]
+        else:
+            q_ = pca.transform(q.reshape(1, -1)).reshape(-1, 1)
+            q0 = q_[0]
+            q1 = q_[1]
+        ax.scatter(q0, q1, s=scatter_point_size, color='black')
 
 '''
 helper functions
@@ -178,17 +195,20 @@ def plot_clfs(data_dict, ax_x=2, title=True):
             key = keys[count]
             data = data_dict[key]['data']
             if data['X'].shape[1] > 2:
-                # TODO: impliment PCA or TSNE to reduce data dims for plotting
-                continue
+                # get pca with 2 components to visualise in 2D
+                pca = PCA(n_components=2, svd_solver='full')
+                pca.fit(data['X'])
+            else:
+                pca = None
             model = data_dict[key]['model']
             if ax_y > 1:
                 ax = axs[i][j]
             else:
                 ax = axs[i]
-            plot_classes(data, ax)
-            plot_decision_boundary(model, data, ax=ax)
+            plot_classes(data, ax, pca=pca)
+            plot_decision_boundary(model, data, ax=ax, pca=pca)
             if 'query_points' in data_dict[key].keys():
-                plot_query_points(data_dict[key]['query_points'], ax)
+                plot_query_points(data_dict[key]['query_points'], ax, pca=pca)
             if title is True:
                 ax.set_title(key)
             count += 1
@@ -287,12 +307,20 @@ if __name__ == '__main__':
     import matplotlib.pyplot as plt
     from sklearn.inspection import DecisionBoundaryDisplay
     import clime
+
+    params_breast = {'data params': {'class_samples': (200, 200), 'percent of data': 0.11, 'moons_noise': 0.2, 'gaussian_means': [[0, 0], [1, 1]], 'gaussian_covs': [[[1, 0], [0, 1]], [[1, 0], [0, 1]]]}, 'dataset': 'breast cancer', 'dataset rebalancing': 'none', 'model': 'Random Forest', 'model balancer': 'none', 'explainer': 'bLIMEy (normal)', 'evaluation metric': 'fidelity (local)', 'evaluation run': 'between_class_means'}
+    result_breast = clime.pipeline.run_pipeline(params_breast, parallel_eval=True)
+    plot_clfs({0: {'data': result_breast['train_data'], 'model':result_breast['clf']}})
+
     params_normal = {'data params': {'class_samples': (200, 200), 'percent of data': 0.11, 'moons_noise': 0.2, 'gaussian_means': [[0, 0], [1, 1]], 'gaussian_covs': [[[1, 0], [0, 1]], [[1, 0], [0, 1]]]}, 'dataset': 'moons', 'dataset rebalancing': 'none', 'model': 'Random Forest', 'model balancer': 'none', 'explainer': 'bLIMEy (normal)', 'evaluation metric': 'fidelity (local)', 'evaluation run': 'between_class_means'}
     params_class_bal = {'data params': {'class_samples': (200, 200), 'percent of data': 0.11, 'moons_noise': 0.2, 'gaussian_means': [[0, 0], [1, 1]], 'gaussian_covs': [[[1, 0], [0, 1]], [[1, 0], [0, 1]]]}, 'dataset': 'moons', 'dataset rebalancing': 'none', 'model': 'Random Forest', 'model balancer': 'none', 'explainer': 'bLIMEy (cost sensitive sampled)', 'evaluation metric': 'fidelity (local)', 'evaluation run': 'between_class_means'}
     params_SVM = {'data params': {'class_samples': (200, 200), 'percent of data': 0.11, 'moons_noise': 0.2, 'gaussian_means': [[0, 0], [1, 1]], 'gaussian_covs': [[[1, 0], [0, 1]], [[1, 0], [0, 1]]]}, 'dataset': 'moons', 'dataset rebalancing': 'none', 'model': 'SVM', 'model balancer': 'none', 'explainer': 'bLIMEy (cost sensitive sampled)', 'evaluation metric': 'fidelity (local)', 'evaluation run': 'between_class_means'}
 
     result_noraml = clime.pipeline.run_pipeline(params_normal, parallel_eval=True)
     result_bal = clime.pipeline.run_pipeline(params_class_bal, parallel_eval=True)
+
+
+
 
     ax = plt.gca()
 
