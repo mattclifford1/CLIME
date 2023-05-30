@@ -7,6 +7,7 @@ from collections import Counter
 import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap
 from sklearn.inspection import DecisionBoundaryDisplay
+from sklearn.decomposition import PCA
 import numpy as np
 
 # plot colours
@@ -14,15 +15,20 @@ cm_bright = ListedColormap(["#0000FF", "#FF0000"])
 cm = plt.cm.RdBu
 scatter_point_size = 30
 
-def plot_classes(data, ax=None):
+def plot_classes(data, ax=None, dim_reducer=None):
     '''
     plot classes in different colour on an axes, duplicate points in the data are enlarged for clarity
     input:
         - data: dictionary with keys 'X', 'y'
     '''
     ax, show = _get_axes(ax)
-    x1 = list(data['X'][:, 0])
-    x2 = list(data['X'][:, 1])
+    if dim_reducer == None:
+        x1 = list(data['X'][:, 0])
+        x2 = list(data['X'][:, 1])
+    else:
+        X = dim_reducer.transform(data['X'])
+        x1 = list(X[:, 0])
+        x2 = list(X[:, 1])
     # count the occurrences of each point
     point_count = Counter(zip(x1, x2))
     # create a list of the sizes, here multiplied by 10 for scale
@@ -44,48 +50,81 @@ def plot_decision_boundary_sklearn(clf, data, ax=None):
     if show == True:
         plt.show()
 
-def plot_decision_boundary(clf, data, ax=None):
+def plot_decision_boundary(clf, data, ax=None, dim_reducer=None):
     '''
     plot a decision boundary on axes
     input:
         - clf: sklearn classifier object
     '''
+    # if dim_reducer != None:
+    #     X = dim_reducer.transform(data['X'])
+    #     # need to impliment this to encorportant n dimensions
+    #     print('non impliment')
+    #     return
+    
     ax, show = _get_axes(ax)
     # get X from data
     X = data['X']
+    if dim_reducer != None:
+        X = dim_reducer.transform(X)
+    n_features = X.shape[1]
+
     # define bounds of the domain
-    min1, max1 = X[:, 0].min()-1, X[:, 0].max()+1
-    min2, max2 = X[:, 1].min()-1, X[:, 1].max()+1
+    lims = []
+    for f in range(n_features):
+        min = X[:, f].min()-1
+        max = X[:, f].max()+1
+        lims.append((min, max))
+
     # define the x and y scale
-    x1grid = np.arange(min1, max1, 0.1)
-    x2grid = np.arange(min2, max2, 0.1)
+    res = 25
+    xranges = []
+    for f in range(n_features):
+        step = (lims[f][1] - lims[f][0])/ res
+        xranges.append(np.arange(lims[f][0], lims[f][1], step))
+
     # create all of the lines and rows of the grid
-    xx, yy = np.meshgrid(x1grid, x2grid)
+    xgrids = np.meshgrid(*xranges)
     # flatten each grid to a vector
-    r1, r2 = xx.flatten(), yy.flatten()
-    r1, r2 = r1.reshape((len(r1), 1)), r2.reshape((len(r2), 1))
-    # horizontal stack vectors to create x1,x2 input for the model
-    grid = np.hstack((r1,r2))
-    # make predictions for the grid
-    yhat = clf.predict_proba(grid)
+    flats = []
+    for f in range(n_features):
+        flats.append(xgrids[f].flatten().reshape(-1, 1))
+
+    # horizontal stack vectors to create x1, x2 input for the model
+    flat_grid = np.hstack(flats)
+    if dim_reducer != None:
+        flat_grid = dim_reducer.inverse_transform(flat_grid)
+
+    # make predictions for the flat_grid
+    yhat = clf.predict_proba(flat_grid)
     # keep just the probabilities for class 0
     yhat = yhat[:, 0]
+
     # reshape the predictions back into a grid
-    zz = yhat.reshape(xx.shape)
+    zz = yhat.reshape(xgrids[0].shape)
+
     # plot the grid of x, y and z values as a surface
-    c = ax.contourf(xx, yy, zz, cmap=cm, alpha=0.8)
+    c = ax.contourf(xgrids[0], xgrids[1], zz, cmap=cm, alpha=0.7)
+
     # add a legend, called a color bar
     plt.colorbar(c)
     if show == True:
         plt.show()
 
-def plot_query_points(query_points, ax):
+def plot_query_points(query_points, ax, dim_reducer=None):
     '''
     point eval points as black, are a list of values
     '''
-    ax, show = _get_axes(ax)
+    ax, _ = _get_axes(ax)
     for q in query_points:
-        ax.scatter(q[0], q[1], s=scatter_point_size, color='black')
+        if dim_reducer == None:
+            q0= q[0]
+            q1 = q[1]
+        else:
+            q_ = dim_reducer.transform(q.reshape(1, -1)).reshape(-1, 1)
+            q0 = q_[0]
+            q1 = q_[1]
+        ax.scatter(q0, q1, s=scatter_point_size, color='black')
 
 '''
 helper functions
@@ -167,7 +206,10 @@ def plot_clfs(data_dict, ax_x=2, title=True):
         - model
         - data
     '''
-    ax_y = int(np.ceil(len(data_dict.keys())/ax_x))
+    num_plots = len(data_dict.keys())
+    ax_y = int(np.ceil(num_plots/ax_x))
+    if num_plots == 1:
+        ax_x = 1
     fig, axs = plt.subplots(ax_y, ax_x)
     if ax_y == 1 and ax_x == 1:
         axs = [axs]
@@ -178,17 +220,20 @@ def plot_clfs(data_dict, ax_x=2, title=True):
             key = keys[count]
             data = data_dict[key]['data']
             if data['X'].shape[1] > 2:
-                # TODO: impliment PCA or TSNE to reduce data dims for plotting
-                continue
+                # get pca with 2 components to visualise in 2D
+                pca = PCA(n_components=2, svd_solver='full')
+                pca.fit(data['X'])
+            else:
+                pca = None
             model = data_dict[key]['model']
             if ax_y > 1:
                 ax = axs[i][j]
             else:
                 ax = axs[i]
-            plot_classes(data, ax)
-            plot_decision_boundary(model, data, ax=ax)
+            plot_classes(data, ax, dim_reducer=pca)
+            plot_decision_boundary(model, data, ax=ax, dim_reducer=pca)
             if 'query_points' in data_dict[key].keys():
-                plot_query_points(data_dict[key]['query_points'], ax)
+                plot_query_points(data_dict[key]['query_points'], ax, dim_reducer=pca)
             if title is True:
                 ax.set_title(key)
             count += 1
@@ -287,29 +332,42 @@ if __name__ == '__main__':
     import matplotlib.pyplot as plt
     from sklearn.inspection import DecisionBoundaryDisplay
     import clime
-    params_normal = {'data params': {'class_samples': (200, 200), 'percent of data': 0.11, 'moons_noise': 0.2, 'gaussian_means': [[0, 0], [1, 1]], 'gaussian_covs': [[[1, 0], [0, 1]], [[1, 0], [0, 1]]]}, 'dataset': 'moons', 'dataset rebalancing': 'none', 'model': 'Random Forest', 'model balancer': 'none', 'explainer': 'bLIMEy (normal)', 'evaluation metric': 'fidelity (local)', 'evaluation run': 'between_class_means'}
-    params_class_bal = {'data params': {'class_samples': (200, 200), 'percent of data': 0.11, 'moons_noise': 0.2, 'gaussian_means': [[0, 0], [1, 1]], 'gaussian_covs': [[[1, 0], [0, 1]], [[1, 0], [0, 1]]]}, 'dataset': 'moons', 'dataset rebalancing': 'none', 'model': 'Random Forest', 'model balancer': 'none', 'explainer': 'bLIMEy (cost sensitive sampled)', 'evaluation metric': 'fidelity (local)', 'evaluation run': 'between_class_means'}
-    params_SVM = {'data params': {'class_samples': (200, 200), 'percent of data': 0.11, 'moons_noise': 0.2, 'gaussian_means': [[0, 0], [1, 1]], 'gaussian_covs': [[[1, 0], [0, 1]], [[1, 0], [0, 1]]]}, 'dataset': 'moons', 'dataset rebalancing': 'none', 'model': 'SVM', 'model balancer': 'none', 'explainer': 'bLIMEy (cost sensitive sampled)', 'evaluation metric': 'fidelity (local)', 'evaluation run': 'between_class_means'}
+
+    params_breast = {'data params': {'class_samples': (200, 200), 'percent of data': 0.11, 'moons_noise': 0.2, 'gaussian_means': [[0, 0], [1, 1]], 'gaussian_covs': [[[1, 0], [0, 1]], [[1, 0], [0, 1]]]}, 
+                     'dataset': 'moons', 
+                     'dataset': 'breast cancer', 
+                     'dataset rebalancing': 'none', 'model': 'Random Forest', 'model balancer': 'none', 'explainer': 'bLIMEy (normal)', 'evaluation metric': 'fidelity (local)', 'evaluation run': 'between_class_means'}
+    result_breast = clime.pipeline.run_pipeline(params_breast, parallel_eval=True)
+    plot_clfs({0: {'data': result_breast['train_data'], 'model':result_breast['clf']}})
+
+    compare_bal = False
+    if compare_bal == True:
+        params_normal = {'data params': {'class_samples': (200, 200), 'percent of data': 0.11, 'moons_noise': 0.2, 'gaussian_means': [[0, 0], [1, 1]], 'gaussian_covs': [[[1, 0], [0, 1]], [[1, 0], [0, 1]]]}, 'dataset': 'moons', 'dataset rebalancing': 'none', 'model': 'Random Forest', 'model balancer': 'none', 'explainer': 'bLIMEy (normal)', 'evaluation metric': 'fidelity (local)', 'evaluation run': 'between_class_means'}
+        params_class_bal = {'data params': {'class_samples': (200, 200), 'percent of data': 0.11, 'moons_noise': 0.2, 'gaussian_means': [[0, 0], [1, 1]], 'gaussian_covs': [[[1, 0], [0, 1]], [[1, 0], [0, 1]]]}, 'dataset': 'moons', 'dataset rebalancing': 'none', 'model': 'Random Forest', 'model balancer': 'none', 'explainer': 'bLIMEy (cost sensitive sampled)', 'evaluation metric': 'fidelity (local)', 'evaluation run': 'between_class_means'}
+        params_SVM = {'data params': {'class_samples': (200, 200), 'percent of data': 0.11, 'moons_noise': 0.2, 'gaussian_means': [[0, 0], [1, 1]], 'gaussian_covs': [[[1, 0], [0, 1]], [[1, 0], [0, 1]]]}, 'dataset': 'moons', 'dataset rebalancing': 'none', 'model': 'SVM', 'model balancer': 'none', 'explainer': 'bLIMEy (cost sensitive sampled)', 'evaluation metric': 'fidelity (local)', 'evaluation run': 'between_class_means'}
     
-    params_normal_guass = {'data params': {'class_samples': (200, 200), 'percent of data': 0.11, 'moons_noise': 0.2, 'gaussian_means': [[0, 0], [1, 1]], 'gaussian_covs': [[[0.5, 0], [0, 0.5]],    [[0.5, 0], [
+        params_normal_guass = {'data params': {'class_samples': (200, 200), 'percent of data': 0.11, 'moons_noise': 0.2, 'gaussian_means': [[0, 0], [1, 1]], 'gaussian_covs': [[[0.5, 0], [0, 0.5]],    [[0.5, 0], [
         0, 0.5]]]}, 'dataset': 'Gaussian', 'dataset rebalancing': 'none', 'model': 'Random Forest', 'model balancer': 'none', 'explainer': 'bLIMEy (normal)', 'evaluation metric': 'fidelity (local)', 'evaluation run': 'between_class_means'}
-    params_class_bal_guass = {'data params': {'class_samples': (200, 200), 'percent of data': 0.11, 'moons_noise': 0.2, 'gaussian_means': [[0, 0], [1, 1]], 'gaussian_covs': [[[0.5, 0], [0, 0.5]],    [[0.5, 0], [
-        0, 0.5]]]}, 'dataset': 'Gaussian', 'dataset rebalancing': 'none', 'model': 'Random Forest', 'model balancer': 'none', 'explainer': 'bLIMEy (cost sensitive sampled)', 'evaluation metric': 'fidelity (local)', 'evaluation run': 'between_class_means'}
+        params_class_bal_guass = {'data params': {'class_samples': (200, 200), 'percent of data': 0.11, 'moons_noise': 0.2, 'gaussian_means': [[0, 0], [1, 1]], 'gaussian_covs': [[[0.5, 0], [0, 0.5]],    [[0.5, 0], [
+            0, 0.5]]]}, 'dataset': 'Gaussian', 'dataset rebalancing': 'none', 'model': 'Random Forest', 'model balancer': 'none', 'explainer': 'bLIMEy (cost sensitive sampled)', 'evaluation metric': 'fidelity (local)', 'evaluation run': 'between_class_means'}
 
 
-    result_noraml = clime.pipeline.run_pipeline(
-        params_normal_guass, parallel_eval=True)
-    result_bal = clime.pipeline.run_pipeline(
-        params_class_bal_guass, parallel_eval=True)
+        result_noraml = clime.pipeline.run_pipeline(
+            params_normal_guass, parallel_eval=True)
+        result_bal = clime.pipeline.run_pipeline(
+            params_class_bal_guass, parallel_eval=True)
 
-    ax = plt.gca()
 
-    # plot_classes(result['train_data'], ax=ax)
-    # plot_decision_boundary(result['clf'], result['train_data'], ax=ax)
-    # plot_query_points(result['score']['eval_points'], ax)
 
-    scores = {'class balancing': result_bal['score'],'normal': result_noraml['score']}
-    plot_line_graphs_on_one_graph(scores, ylabel='Fidelity (local)', ax=ax)
+
+        ax = plt.gca()
+
+        # plot_classes(result['train_data'], ax=ax)
+        # plot_decision_boundary(result['clf'], result['train_data'], ax=ax)
+        # plot_query_points(result['score']['eval_points'], ax)
+
+        scores = {'class balancing': result_bal['score'],'normal': result_noraml['score']}
+        plot_line_graphs_on_one_graph(scores, ylabel='Fidelity (local)', ax=ax)
 
 
     plt.show()
