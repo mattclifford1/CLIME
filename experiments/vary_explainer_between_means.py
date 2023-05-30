@@ -9,12 +9,12 @@ args=parser.parse_args()
 opts = {
     # 'dataset':             'credit scoring 1',
     'dataset':             'moons',
-    # 'dataset':             'Gaussian',
+    'dataset':             'Gaussian',
     'data params': {'class_samples':  [5, 75], # only for syntheic datasets
                     'percent_of_data': 0.05,    # for real datasets
                     'moons_noise': 0.2,
                     'gaussian_means': [[1, 0], [1, 1]],
-                    'gaussian_covs': [[[1,0],[0,1]], [[2,1],[1,2]]],
+                    'gaussian_covs': [[[0.5, 0], [0, 0.5]],    [[0.5, 0], [0, 0.5]]],
                     },
     'dataset rebalancing': 'none',
     # 'model':               'SVM',
@@ -30,7 +30,7 @@ opts = {
     'evaluation run':   'between_class_means',
     # 'evaluation run':   'all_test_points',
     # 'evaluation run':   'class_means',
-    'evaluation run':   'between_class_means_local',
+    # 'evaluation run':   'between_class_means_local',
 }
 
 p = clime.pipeline.construct(opts)

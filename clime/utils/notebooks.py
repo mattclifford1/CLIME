@@ -62,7 +62,7 @@ def get_list_input(interactive_data_store):
     display(means)
     interactive_data_store['data params']['gaussian_means'] = means
     print('Gaussian Covs')
-    covs = ipywidgets.Text(value='[[[1, 0], [0, 1]],    [[1, 0], [0, 1]]]',
+    covs = ipywidgets.Text(value='[[[0.5, 0], [0, 0.5]],    [[0.5, 0], [0, 0.5]]]',
                             placeholder='Type something',
                             description='COVS:',
                             layout={'width': '50%'},
@@ -194,7 +194,7 @@ def plot_model_and_stats(inp):
     clime.utils.plots.plot_clfs(model_plots, ax_x=len(model_plots), title=False)
     if 'scores' in scores[0][list(scores[0].keys())[0]].keys():
         clime.utils.plots.plot_line_graphs(scores, ylabels=ylabels)
-    clime.utils.plot_multiple_bar_dicts(model_stats_)
+    # clime.utils.plot_multiple_bar_dicts(model_stats_)
 
 def disp_section_name(section, data_store):
     return f"{section}: {get_config(data_store)[section]}"
