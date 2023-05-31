@@ -1,6 +1,6 @@
 from .synthetic_datasets import sample_dataset_to_proportions
 from .gaussian import get_gaussian
-from .moons import get_moons
+from .sklearn_synthetic import get_moons, get_circles, get_blobs
 from .costcla import costcla_dataset
 from .sklearn_toy import get_breast_cancer, get_wine, get_iris
 from .balance import get_proportions_and_sample_num, unbalance_undersample, balance_oversample
@@ -12,6 +12,8 @@ def _identity_data(data, *args):
 
 AVAILABLE_DATASETS = {
     'moons': sample_dataset_to_proportions(get_moons),
+    'circles': sample_dataset_to_proportions(get_circles),
+    'blobs': sample_dataset_to_proportions(get_blobs),
     'Gaussian': sample_dataset_to_proportions(get_gaussian),
     'breast cancer': get_breast_cancer,
     'iris': get_iris,
