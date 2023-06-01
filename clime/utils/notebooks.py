@@ -71,6 +71,18 @@ def get_list_input(interactive_data_store):
     interactive_data_store['data params']['gaussian_covs'] = covs
     return interactive_data_store
 
+def get_boolean(interactive_data_store):
+    print('DATASET STANDARDISATION:')
+    std = ipywidgets.Checkbox(
+        value=True,
+        description='Standardise',
+        disabled=False,
+        indent=False
+    )
+    display(std)
+    interactive_data_store['standardise data'] = std
+    return interactive_data_store
+
 def get_toggle(pipeline_section, interactive_data_store):
     toggle = ipywidgets.ToggleButtons(options=list(clime.pipeline.AVAILABLE_MODULES[pipeline_section].keys()),
                                       description=f'{pipeline_section.upper()}:',
@@ -129,6 +141,8 @@ def get_pipeline_widgets():
     data_store = get_sliders(data_store)
     # dataset params (text/lists)
     data_store = get_list_input(data_store)
+    # standardise data
+    data_store = get_boolean(data_store)
     # which balancing data method
     data_store = get_toggle('dataset rebalancing', data_store)
     # which model to use

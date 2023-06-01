@@ -40,6 +40,14 @@ class construct:
                                        )
         train_data = data.check_data_dict(train_data)
         test_data = data.check_data_dict(test_data)
+
+        # see if to make the data between 0,1
+        if 'standardise data' in self.opts:
+            if self.opts['standardise data'] == True:
+                normaliser = data.normaliser(train_data)
+                train_data = normaliser(train_data)
+                test_data = normaliser(test_data)
+
         # option to rebalance the data
         train_data = self.run_section('dataset rebalancing',
                                        self.opts,
