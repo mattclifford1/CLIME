@@ -1,7 +1,7 @@
 # author: Matt Clifford <matt.clifford@bristol.ac.uk>
 
 import warnings
-from clime.data import costs
+from clime.data.utils import costs
 import numpy as np
 
 # from sklearn.metrics import log_loss

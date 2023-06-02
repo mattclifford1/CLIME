@@ -7,7 +7,7 @@ Inherits from sckit-learn classifiers
 import sklearn
 import numpy as np
 import clime
-from clime.data import costs
+from clime.data.utils import costs
 from clime.models import base_model
 
 

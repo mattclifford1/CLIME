@@ -22,7 +22,7 @@ class sample_dataset_to_proportions():
     def get_data(self, test_set=False, **kwargs):
         data = self.dataset(self.total_samples, test=test_set, **kwargs)
         # undersample to get correct class proportions according to class_samples
-        data = clime.data.balance.unbalance_undersample(data, self.class_samples)
+        data = clime.data.unbalance_undersample(data, self.class_samples)
         return data
 
     def __call__(self, class_samples=[5, 10], test_set=False, **kwargs):

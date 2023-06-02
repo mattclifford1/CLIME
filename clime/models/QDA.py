@@ -7,7 +7,7 @@ import sklearn
 from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
 import numpy as np
 import clime
-from clime.data import costs
+from clime.data.utils import costs
 from clime.models import base_model
 
 

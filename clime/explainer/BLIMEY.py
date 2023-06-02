@@ -7,7 +7,7 @@ Use a simplified version where there is no interpretable domain
 import numpy as np
 import sklearn
 import clime
-from clime.data import costs
+from clime.data.utils import costs
 
 
 class bLIMEy:
