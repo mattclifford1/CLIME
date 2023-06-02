@@ -27,7 +27,7 @@ class costcla_dataset:
 
 
 
-def _get_costcla_dataset(dataset="CreditScoring_Kaggle2011_costcla", normalise=True):
+def _get_costcla_dataset(dataset="CreditScoring_Kaggle2011_costcla", normalise=False):
     '''
     load the costcla csv dataset files
     available datasets:
@@ -39,7 +39,7 @@ def _get_costcla_dataset(dataset="CreditScoring_Kaggle2011_costcla", normalise=T
     csvs = ['X', 'y', 'cost_matrix']
     # read and store all csv data
     for csv in csvs:
-        df = pd.read_csv(os.path.join(CURRENT_FILE, 'datasets', dataset, f'{csv}.csv'))
+        df = pd.read_csv(os.path.join(CURRENT_FILE, '..', 'datasets', dataset, f'{csv}.csv'))
         # split into train and test
         data[csv] = df.to_numpy()
         if data[csv].shape[1] == 1:
@@ -48,7 +48,7 @@ def _get_costcla_dataset(dataset="CreditScoring_Kaggle2011_costcla", normalise=T
     if normalise == True:
         data['X'] = data['X'] / data['X'].max(axis=0)
     # add name and description
-    with open(os.path.join(CURRENT_FILE, 'datasets', dataset, 'description.txt'), 'r') as f:
+    with open(os.path.join(CURRENT_FILE, '..', 'datasets', dataset, 'description.txt'), 'r') as f:
         data['description'] = f.read()
     return data
 

@@ -1,8 +1,8 @@
 from .processing.synthetic_datasets import sample_dataset_to_proportions
-from .gaussian import get_gaussian
-from .sklearn_synthetic import get_moons, get_circles, get_blobs
-from .costcla import costcla_dataset
-from .sklearn_toy import get_breast_cancer, get_wine, get_iris
+from .loaders.gaussian import get_gaussian
+from .loaders.sklearn_synthetic import get_moons, get_circles, get_blobs
+from .loaders.costcla import costcla_dataset
+from .loaders.sklearn_toy import get_breast_cancer, get_wine, get_iris
 from .processing.balance import get_proportions_and_sample_num, unbalance_undersample, balance_oversample
 from .processing.downsample_data import shuffle_dataset, proportional_downsample, proportional_split
 from .utils.checkers import check_data_dict, get_generic_feature_names
