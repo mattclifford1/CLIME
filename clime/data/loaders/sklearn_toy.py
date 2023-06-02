@@ -59,6 +59,11 @@ def get_iris(**kwargs):
     data = {'X': data.data, 'y': y}
     # shuffle the dataset
     data = clime.data.shuffle_dataset(data)
+    # add the feature names
+    data['feature_names'] = ['Sepal length',
+                             'Sepal width',
+                             'Petal length',
+                             'Petal width']
     # reduce the size of the dataset
     # data = clime.data.proportional_downsample(data, **kwargs)
     # split into train, test

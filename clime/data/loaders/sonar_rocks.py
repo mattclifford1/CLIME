@@ -1,5 +1,6 @@
 '''
 Sonar rocks vs mines UCI dataset: https://archive.ics.uci.edu/ml/datasets/Connectionist+Bench+(Sonar,+Mines+vs.+Rocks)
+instances: 208
 
 Each pattern is a set of 60 numbers in the range 0.0 to 1.0. 
 Each number represents the energy within a particular frequency band, 
@@ -27,7 +28,7 @@ def get_sonar(**kwargs):
     df = pd.read_csv(os.path.join(CURRENT_FILE, '..',
                      'datasets', 'sonar_rocks_mines', 'data.csv'), header=None)
     df = df.replace({60: {'R': 0, 'M': 1}})
-    data['y'] = df.pop(60).to_numpy()
+    data['y'] = df.pop(60).to_numpy() # type: ignore
     data['X'] = df.to_numpy()
     data['feature_names'] = df.columns.to_list()
     # add name and description
