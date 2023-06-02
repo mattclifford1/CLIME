@@ -18,11 +18,11 @@ class costcla_dataset:
         # get dataset
         data = _get_costcla_dataset()
         # shuffle the dataset
-        data = clime.data.shuffle_dataset(data)
+        data = clime.data.shuffle_dataset(data) # type: ignore
         # reduce the size of the dataset
-        data = clime.data.proportional_downsample(data, **kwargs)
+        data = clime.data.proportional_downsample(data, **kwargs) # type: ignore
         # split into train, test
-        train_data, test_data = clime.data.proportional_split(data, size=0.8)
+        train_data, test_data = clime.data.proportional_split(data, size=0.8) # type: ignore
         return train_data, test_data
 
 
@@ -44,10 +44,15 @@ def _get_costcla_dataset(dataset="CreditScoring_Kaggle2011_costcla", normalise=F
         data[csv] = df.to_numpy()
         if data[csv].shape[1] == 1:
             data[csv] = data[csv].ravel()
+        # get feature names
+        if csv == 'X':
+            data['feature_names'] = df.columns.to_list()
+
     # normalise X data
     if normalise == True:
         data['X'] = data['X'] / data['X'].max(axis=0)
-    # add name and description
+
+    # add  description
     with open(os.path.join(CURRENT_FILE, '..', 'datasets', dataset, 'description.txt'), 'r') as f:
         data['description'] = f.read()
     return data

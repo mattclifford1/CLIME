@@ -95,6 +95,8 @@ def get_toggle(pipeline_section, interactive_data_store):
 
 def get_multiple(pipeline_section, interactive_data_store):
     init_value = [list(clime.pipeline.AVAILABLE_MODULES[pipeline_section].keys())[0]]
+    if pipeline_section == 'explainer':
+        init_value.append(list(clime.pipeline.AVAILABLE_MODULES[pipeline_section].keys())[3])
     toggle = ipywidgets.SelectMultiple(options=list(clime.pipeline.AVAILABLE_MODULES[pipeline_section].keys()),
                                        value=init_value,
                                        description=f'{pipeline_section.upper()}:',
