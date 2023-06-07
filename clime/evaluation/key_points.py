@@ -11,27 +11,53 @@ import numpy as np
 
 def get_class_means(data):
     # estimate mean of the data
-    classes = len(np.unique(data['y']))
+    classes = np.unique(data['y'])
     means = []
-    for cl in range(classes):
+    for cl in classes:
         X_c = data['X'][data['y']==cl, :]
         means.append(np.mean(X_c, axis=0))
     return means
 
-def get_points_between_class_means(data, num_samples=10):
-    # estimate mean of the data and get points between
-    # !!! currently only works for 2 classes !!!
-    classes = len(np.unique(data['y']))
-    means = []
-    for cl in range(classes):
-        X_c = data['X'][data['y']==cl, :]
-        means.append(np.mean(X_c, axis=0))
+def get_points_between_class_means(data, num_samples=20):
+    '''
+    estimate mean of the data and get points between 
+    !!! currently only works for 2 classes !!!
+    '''
+    # get means for each class
+    means = get_class_means(data)
     if len(means) > 2:
         raise Exception(f"'get_points_between_class_means' only supports 2 classes, was given {len(means)}")
-    c_vector = means[1] - means[0]
+    # vector between the two classes
+    gradients = means[1] - means[0]
+    gradients /= np.sum(gradients)   # noramlise
+
+    # max and min extension of the data along the vector
+    min_data = np.min(data['X'], axis=0)
+    max_data = np.max(data['X'], axis=0)
+
+    # determine the min and max values for x allowed based on the sign of the gradient
+    x_mins = []
+    x_maxs = []
+    for i, g in enumerate(gradients):
+        if g > 0:
+            x_mins.append(min_data[i])
+            x_maxs.append(max_data[i])
+        elif g < 0:
+            x_mins.append(max_data[i])
+            x_maxs.append(min_data[i])
+    x_mins = np.array(x_mins)
+    x_maxs = np.array(x_maxs)
+
+    # solve and find closest point (first remove indices with 0 gradient as cannot divide by 0)
+    means_0 = np.delete(means[0], np.where(gradients==0))
+    non_0_gradients = np.delete(gradients, np.where(gradients==0))
+    min_ = np.max((x_mins-means_0)/non_0_gradients)
+    max_ = np.min((x_maxs-means_0)/non_0_gradients)
+
+    # store query points along the vector
     points = []
-    for i in np.linspace(-0.75, 1.75, num_samples):
-        points.append(means[0] + i*c_vector)
+    for i in np.linspace(min_, max_, num_samples):
+        points.append(means[0] + i*gradients)
     # data for plotting
     plot_data = {'means': means}
     return points, plot_data

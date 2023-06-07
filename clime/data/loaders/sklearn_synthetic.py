@@ -14,7 +14,7 @@ def _generic_loader(load_func, samples=200, test=False, **kwargs):
         - data: dict containing 'X', 'y'
     '''
     seed = clime.RANDOM_SEED
-    if test == True:
+    if test == True and load_func != sklearn.datasets.make_blobs:
         seed += 1
 
     X, y = load_func(n_samples=[int(samples/2)]*2,
