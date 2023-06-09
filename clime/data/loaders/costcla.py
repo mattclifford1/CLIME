@@ -12,11 +12,17 @@ CURRENT_FILE = os.path.dirname(os.path.abspath(__file__))
 
 class costcla_dataset:
     def __init__(self, dataset):
+        available_datasets = ['CreditScoring_Kaggle2011_costcla',
+                              'CreditScoring_PAKDD2009_costcla',
+                              'DirectMarketing_costcla']
+        if dataset not in available_datasets:
+            raise Exception(
+                f'dataset: {dataset} not in costcla available datasets: {available_datasets}')
         self.dataset = dataset
 
     def __call__(self, **kwargs):
         # get dataset
-        data = _get_costcla_dataset()
+        data = _get_costcla_dataset(self.dataset)
         # shuffle the dataset
         data = clime.data.shuffle_dataset(data) # type: ignore
         # reduce the size of the dataset
