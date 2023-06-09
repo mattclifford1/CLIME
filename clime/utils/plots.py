@@ -172,7 +172,24 @@ def plot_line_graphs(data_dict, ylabels=None, ylims=[0, 1]):
 
     fig.tight_layout()
 
-def plot_line_graphs_on_one_graph(data_dict, ylabel=None, ylims=[0, 1], ax=None):
+def plot_mean_std_graphs(data_dict, ylabel=None, ylims=[0, 1], ax=None):
+    if ax == None:
+        fig, ax = plt.subplots(1, 1)
+    for key, item in data_dict.items():
+        x = list(range(len(item[0])))
+        scores = np.array(item)
+        mean = np.mean(scores, axis=0)
+        std = np.std(scores, axis=0)
+        p = ax.plot(x, mean,  label=key)
+        ax.fill_between(x, mean-std, mean+std, color=p[0].get_color(), alpha=0.3)
+        ax.set_xlabel('Query Point')
+        ax.set_ylabel(ylabel)
+        ax.set_ylim(ylims)
+
+    if len(data_dict) > 1:
+        ax.legend()
+
+def plot_line_graphs_on_one_graph(data_dict, ylabel=None, ylims=[0, 1], ax=None, query_values=True):
     # first get the min and max values
     for key, item2 in data_dict.items():
         scores = item2['scores']
@@ -184,15 +201,14 @@ def plot_line_graphs_on_one_graph(data_dict, ylabel=None, ylims=[0, 1], ax=None)
         fig, ax = plt.subplots(1, 1)
     if ylabel is None:
         ylabel = 'Evaluation Score'
-    print(data_dict)
     for key, item in data_dict.items():
-        if 'eval_points' in item.keys():
+        if 'eval_points' in item.keys() and query_values == True:
             x = [f[0] for f in item['eval_points']]
         else:
             x = list(range(len(item['scores'])))
         ax.plot(x, item['scores'],  label=key)
         ax.plot(x, item['scores'], 'ko',  label=None)
-        ax.set_xlabel('Query Point Value')
+        ax.set_xlabel('Query Point')
         ax.set_ylabel(ylabel)
         ax.set_ylim(ylims)
 
