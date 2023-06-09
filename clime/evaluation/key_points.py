@@ -54,6 +54,9 @@ def get_points_between_class_means(data, num_samples=20):
     min_ = np.max((x_mins-means_0)/non_0_gradients)
     max_ = np.min((x_maxs-means_0)/non_0_gradients)
 
+    # min_ = np.median((x_mins-means_0)/non_0_gradients)
+    # max_ = np.median((x_maxs-means_0)/non_0_gradients)
+
     # store query points along the vector
     points = []
     for i in np.linspace(min_, max_, num_samples):
