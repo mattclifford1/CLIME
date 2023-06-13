@@ -7,6 +7,7 @@ from functools import partial
 import multiprocessing
 from tqdm.autonotebook import tqdm
 import numpy as np
+from clime.data.utils import costs
 
 
 def get_class_means(data):
@@ -74,7 +75,7 @@ def get_all_points(data):
 def get_local_points(data, query_point, samples=20):
     # sample locally around the query point with a smaller variance that the dataset
     data_cov = np.cov(data['X'].T)
-    local_sample_cov = data_cov / 5    # maybe justify this?
+    local_sample_cov = data_cov #/ 5    # maybe justify this?
     samples = np.random.multivariate_normal(query_point, local_sample_cov, samples)
     return {'X': samples}
 
@@ -127,15 +128,22 @@ class get_key_points_score():
         data_list = list(range(len(data_points)))
         if run_parallel == True:
             with multiprocessing.Pool() as pool:
-                scores = list(tqdm(pool.imap(_get_explainer_evaluation_wrapper, data_list), total=len(data_list), leave=False, desc='Evaluation'))
+                results = list(tqdm(pool.imap(_get_explainer_evaluation_wrapper, data_list), total=len(data_list), leave=False, desc='Evaluation'))
         else:
-            scores = list(map(_get_explainer_evaluation_wrapper, data_list))
-        scores = np.array(scores)
-        results = {'avg': np.mean(scores), 'std': np.std(scores)}
+            results = list(map(_get_explainer_evaluation_wrapper, data_list))
+        
+        results = np.array(results)
+        evaluation = results[:, 0]
+        class_weights = results[:, 1]
+        maj_influ = results[:, 2]
+        results = {'avg': np.mean(evaluation), 'std': np.std(evaluation)}
         if self.key_points is not 'all_points':
             results['eval_points'] = data_points
         if self.key_points == 'between_means':
-            results['scores'] = scores  # structered scores are useful for analysis
+            results['scores'] = evaluation  # structered scores are useful for analysis
+        if class_weights[0] != None:
+            results['class_weights'] = class_weights
+        results['majority influence'] = maj_influ
         return results
 
     @staticmethod
@@ -145,9 +153,23 @@ class get_key_points_score():
         '''
         query_point = query_data_list[query_point_ind]
         expl = explainer_generator(clf, train_data=train_data, test_data=test_data, query_point=query_point)
-
+        if hasattr(expl, 'class_weights'):
+            class_weights = 1/(sum(expl.class_weights))
+        else:
+            class_weights = None
         test_points = get_key_points_score.get_test_points(test_data, test_points, query_point)
         score = metric(expl, black_box_model=clf,
                              data=test_points,
                              query_point=query_point)
-        return score
+        maj_influ = minority_class_weight_from_black_box(clf, test_points, query_point)
+        return [score, class_weights, maj_influ]
+
+
+def minority_class_weight_from_black_box(black_box_model, data, query_point):
+    '''get the influence over how balanced the distance is on local eval'''
+    bb_preds = black_box_model.predict(data['X'])
+    distance_weights = costs.weights_based_on_distance(query_point, data['X'])   
+    cls_influences = []
+    for cls in np.unique(bb_preds):
+        cls_influences.append(sum(distance_weights[bb_preds == cls]))
+    return max(cls_influences) / sum(distance_weights)

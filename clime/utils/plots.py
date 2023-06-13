@@ -126,7 +126,7 @@ def plot_query_points(query_points, ax, dim_reducer=None):
             q0 = q_[0]
             q1 = q_[1]
         ax.scatter(q0, q1, s=scatter_point_size, color='black')
-        ax.annotate(num, (q0, q1))
+        ax.annotate(num, (q0, q1), ha='right', va='bottom')
 
 '''
 helper functions
@@ -153,7 +153,7 @@ def plot_data_dict(data_dict):
         plot_classes(data_dict[key], axs[i])
         axs[i].set_title(key)
 
-def plot_line_graphs(data_dict, ylabels=None, ylims=[0, 1]):
+def plot_line_graphs(data_dict, ylabels=None, ylims=[0, 1], extra_lines=False):
     # first get the min and max values
     for key, item1 in data_dict.items():
         for key, item2 in item1.items():
@@ -170,7 +170,7 @@ def plot_line_graphs(data_dict, ylabels=None, ylims=[0, 1]):
             ylabel = ylabels[i]
         else:
             ylabel = 'Evaluation Score'
-        plot_multiple_lines(data_dict[key], axs[i], ylims=ylims, ylabel=ylabel)
+        plot_multiple_lines(data_dict[key], axs[i], ylims=ylims, ylabel=ylabel, extra_lines=True)
 
     fig.tight_layout()
 
@@ -323,19 +323,27 @@ def plot_multiple_bar_dicts(data_dicts, title=None, ylabels=None, ylims=[0, 1], 
         fig.suptitle(title)
     fig.tight_layout()
 
-def plot_multiple_lines(data_dict, ax=None, ylims=[0, 1], ylabel='Evaluation Score'):
+
+def plot_multiple_lines(data_dict, ax=None, ylims=[0, 1], ylabel='Evaluation Score', extra_lines=False, query_values=False):
     '''
     plot multiple line charts
         - data_dict: dictionary with scores/results from pipeline
     '''
     ax, show = _get_axes(ax)
     for key, item in data_dict.items():
-        if 'eval_points' in item.keys():
+        if 'eval_points' in item.keys()  and query_values == True:
             x = [f[0] for f in item['eval_points']]
         else:
             x = list(range(len(item['scores'])))
         ax.plot(x, item['scores'],  label=key)
         ax.plot(x, item['scores'], 'ko',  label=None)
+        if 'class_weights' in item and extra_lines == True:
+            ax.plot(x, item['class_weights'], label='minority class proportion (sampling data)')
+            ax.legend()
+        if 'majority influence' in item and extra_lines == True:
+            ax.plot(x, item['majority influence'],
+                    label='majority class evaluation influence (distance weights)')
+            ax.legend()
         ax.set_xlabel('Query Point Value')
         ax.set_ylabel(ylabel)
         ax.set_ylim(ylims)

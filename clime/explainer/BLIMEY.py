@@ -111,12 +111,12 @@ class bLIMEy:
             weights *= instance_class_imbalance_weights
 
         # weights/costs based on class imbalance of the samples
+        self.class_weights = costs.weight_based_on_class_imbalance(self.sampled_data) # save for plotting
         if self.class_weight_sampled is True: 
             # get class imbalance weights
-            class_weights = costs.weight_based_on_class_imbalance(self.sampled_data)
             class_preds_matrix = np.round(self.sampled_data['p(y|x)'])
             # apply to all instances
-            instance_class_imbalance_weights = np.dot(class_preds_matrix, class_weights.T)
+            instance_class_imbalance_weights = np.dot(class_preds_matrix, self.class_weights.T)
             # now combine class imbalance weights with distance based weights
             weights *= instance_class_imbalance_weights
 

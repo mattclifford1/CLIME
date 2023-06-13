@@ -209,7 +209,7 @@ def plot_model_and_stats(inp):
             model_plots[run]['query_points'] = scores_no_label[run]['eval_points']
     clime.utils.plots.plot_clfs(model_plots, ax_x=len(model_plots), title=False)
     if 'scores' in scores[0][list(scores[0].keys())[0]].keys():
-        clime.utils.plots.plot_line_graphs(scores, ylabels=ylabels)
+        clime.utils.plots.plot_line_graphs(scores, ylabels=ylabels, extra_lines=True)
     clime.utils.plot_multiple_bar_dicts(model_stats_)
 
 def disp_section_name(section, data_store):
