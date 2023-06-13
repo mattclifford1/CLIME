@@ -116,7 +116,8 @@ def plot_query_points(query_points, ax, dim_reducer=None):
     point eval points as black, are a list of values
     '''
     ax, _ = _get_axes(ax)
-    for q in query_points:
+    q_nums = list(range(len(query_points)))
+    for num, q in zip(q_nums, query_points):
         if dim_reducer == None:
             q0= q[0]
             q1 = q[1]
@@ -125,6 +126,7 @@ def plot_query_points(query_points, ax, dim_reducer=None):
             q0 = q_[0]
             q1 = q_[1]
         ax.scatter(q0, q1, s=scatter_point_size, color='black')
+        ax.annotate(num, (q0, q1))
 
 '''
 helper functions
