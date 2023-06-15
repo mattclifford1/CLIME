@@ -108,10 +108,15 @@ def plot_decision_boundary(clf, data, ax=None, dim_reducer=None):
 
     # add a legend, called a color bar
     plt.colorbar(c)
+
+    # set labels
+    ax.set_xlabel('PCA Component 0')
+    ax.set_ylabel('PCA Component 1')
+
     if show == True:
         plt.show()
 
-def plot_query_points(query_points, ax, dim_reducer=None):
+def plot_query_points(query_points, ax, dim_reducer=None, model=None):
     '''
     point eval points as black, are a list of values
     '''
@@ -218,19 +223,24 @@ def plot_line_graphs_on_one_graph(data_dict, ylabel=None, ylims=[0, 1], ax=None,
         ax.legend()
     # fig.tight_layout()
 
-def plot_clfs(data_dict, ax_x=2, title=True):
+def plot_clfs(data_dict, ax_x=2, title=True, axs=False, fig=None):
     '''
     data dict has keys:
         - model
         - data
     '''
-    num_plots = len(data_dict.keys())
-    ax_y = int(np.ceil(num_plots/ax_x))
-    if num_plots == 1:
+    if axs == False:
+        num_plots = len(data_dict.keys())
+        ax_y = int(np.ceil(num_plots/ax_x))
+        if num_plots == 1:
+            ax_x = 1
+        fig, axs = plt.subplots(ax_y, ax_x)
+        if ax_y == 1 and ax_x == 1:
+            axs = [axs]
+    else:
         ax_x = 1
-    fig, axs = plt.subplots(ax_y, ax_x)
-    if ax_y == 1 and ax_x == 1:
-        axs = [axs]
+        ax_y = len(axs)
+
     count = 0
     keys = list(data_dict.keys())
     for i in range(ax_x):
@@ -248,14 +258,36 @@ def plot_clfs(data_dict, ax_x=2, title=True):
                 ax = axs[i][j]
             else:
                 ax = axs[i]
+            # flip plot if query points are decending
+            if pca != None:
+                start = data_dict[key]['query_points'][0]
+                end = data_dict[key]['query_points'][-1]
+                start = pca.transform(start.reshape(1, -1)).reshape(-1, 1)
+                end = pca.transform(end.reshape(1, -1)).reshape(-1, 1)
+                if start[0] > end[0]:
+                    pca = flip_pca(pca)
+            # plot all
             plot_classes(data, ax, dim_reducer=pca)
             plot_decision_boundary(model, data, ax=ax, dim_reducer=pca)
             if 'query_points' in data_dict[key].keys():
-                plot_query_points(data_dict[key]['query_points'], ax, dim_reducer=pca)
+                plot_query_points(data_dict[key]['query_points'], ax, dim_reducer=pca, model=model)
             if title is True:
                 ax.set_title(key)
             count += 1
     fig.tight_layout()
+
+class flip_pca:
+    def __init__(self, pca):
+        self.pca = pca
+
+    def transform(self, X):
+        X_ = self.pca.transform(X)
+        X_[:, 0] = - X_[:, 0]
+        return X_
+    
+    def inverse_transform(self, X_):
+        X_[:, 0] = - X_[:, 0]
+        return self.pca.inverse_transform(X_)
 
 def plot_bar_dict(data_dict, title='', ylabel=None, ax=None, ylim=None):
     if ax is None:
@@ -342,7 +374,7 @@ def plot_multiple_lines(data_dict, ax=None, ylims=[0, 1], ylabel='Evaluation Sco
             ax.legend()
         if 'majority influence' in item and extra_lines == True:
             ax.plot(x, item['majority influence'],
-                    label='majority class evaluation influence (distance weights)')
+                    label='minority class evaluation influence (distance weights)')
             ax.legend()
         ax.set_xlabel('Query Point Value')
         ax.set_ylabel(ylabel)

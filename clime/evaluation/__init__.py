@@ -30,6 +30,7 @@ AVAILABLE_EVALUATION_METRICS = {
 
 AVAILABLE_EVALUATION_POINTS = {
     'between_class_means': get_key_points_score(key_points='between_means', test_points='all'),
+    'data_limits': get_key_points_score(key_points='data_edges', test_points='all'),
     'class_means': get_key_points_score(key_points='means', test_points='all'),
     'all_test_points': get_key_points_score(key_points='all_points', test_points='all'),
     'between_class_means_local': get_key_points_score(key_points='between_means', test_points='local'),

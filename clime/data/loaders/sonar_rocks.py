@@ -38,5 +38,5 @@ def get_sonar(**kwargs):
     data = clime.data.shuffle_dataset(data)  # type: ignore
     # split into train, test
     train_data, test_data = clime.data.proportional_split(  # type: ignore
-        data, size=0.8)  # type: ignore
+        data, size=0.7)  # type: ignore
     return train_data, test_data

@@ -22,7 +22,7 @@ class random_forest(sklearn.ensemble.RandomForestClassifier, base_model):
     '''
     def __init__(self, data, balanced_training=False, fit_intercept=True, **kwargs):
         self.balanced_training = balanced_training
-        super().__init__(max_depth=3, random_state=clime.RANDOM_SEED, **kwargs)
+        super().__init__(max_depth=None, random_state=clime.RANDOM_SEED, **kwargs)
         self.train(data)
 
     def train(self, data):

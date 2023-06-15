@@ -199,7 +199,7 @@ def plot_exp_results(inp):
     # visualise pipeline
     return model_stats_, clfs, train_datas, test_datas, scores, scores_no_label, ylabels
 
-def plot_model_and_stats(inp):
+def plot_model_and_query_points(inp):
     model_stats_, clfs, train_datas, test_datas, scores, scores_no_label, ylabels = inp
     # get all train data and models in plotable dict
     model_plots = {}
@@ -210,7 +210,12 @@ def plot_model_and_stats(inp):
     clime.utils.plots.plot_clfs(model_plots, ax_x=len(model_plots), title=False)
     if 'scores' in scores[0][list(scores[0].keys())[0]].keys():
         clime.utils.plots.plot_line_graphs(scores, ylabels=ylabels, extra_lines=True)
+    
+def plot_stats(inp):
+    model_stats_, clfs, train_datas, test_datas, scores, scores_no_label, ylabels = inp
     clime.utils.plot_multiple_bar_dicts(model_stats_)
+    print(model_stats_[0])
+
 
 def disp_section_name(section, data_store):
     return f"{section}: {get_config(data_store)[section]}"
