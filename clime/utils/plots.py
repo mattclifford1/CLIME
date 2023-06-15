@@ -240,9 +240,9 @@ def plot_line_graphs_on_one_graph(data_dict, ylabel=None, ylims=[0, 1], ax=None,
         else:
             x = list(range(len(item['scores'])))
         ax.plot(x, item['scores'],  label=key,
-                linewidth=5)
+                linewidth=10)
         ax.plot(x, item['scores'], 'ko',  label=None,
-                markersize=10,
+                markersize=20,
                 markeredgecolor='black',
                 markerfacecolor='yellow')
         
