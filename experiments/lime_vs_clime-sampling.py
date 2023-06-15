@@ -9,6 +9,15 @@ datasets = clime.data.AVAILABLE_DATASETS
 datasets.pop('Credit Scoring 1')
 datasets.pop('Credit Scoring 2')
 datasets.pop('Direct Marketing')
+datasets.pop('Gaussian')
+datasets.pop('Moons')
+datasets.pop('Iris')
+datasets.pop('Wine')
+datasets.pop('Sonar Rocks vs Mines')
+datasets.pop('Ionosphere')
+datasets.pop('Circles')
+datasets.pop('Blobs')
+datasets.pop('Wheat Seeds')
 
 all_normal = []
 all_CB = []
@@ -28,38 +37,40 @@ for dataset in tqdm(datasets):
         params_class_bal, parallel_eval=True)
 
     fig_single, ax_single = plt.subplots(1, 1)
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 6))
+    fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(
+        18, 12), gridspec_kw={'height_ratios': [1, 1.7]},
+        linewidth=4, edgecolor="black")
 
     scores = {'Class Balanced Weights: $w_{xc}$': result_bal['score'], 'Standard Weights: $w_x$': result_normal['score']}
     all_normal.append(result_normal['score']['scores'])
     all_CB.append(result_bal['score']['scores'])
 
-    for ax in [ax_single, ax2]:
+    for ax in [ax_single, ax1]:
         clime.utils.plots.plot_line_graphs_on_one_graph(
             scores, 
-            ylabel='Local Fidelity (Accuracy)', 
+            ylabel='Local Fidelity', 
             ax=ax,
             query_values=False,
-            # ylims=[0.5, 1]
+            ylims=[0.4, 1]
             )
 
-        ax.set_title(f'Dataset: {dataset}')
+        # ax.set_title(f'Dataset: {dataset}')
     # fig_single.savefig(os.path.join(file_path, 'figs', 'sampling',
     #             f'CB-{dataset}.png'), bbox_inches="tight")
     # plt.show()
     fig_single.clf()
 
-    for ax, figure in zip([ax_single, ax1], [fig_single, fig]):
+    for ax, figure in zip([ax_single, ax2], [fig_single, fig]):
         # save clf decision surface
         plt_data = {
-            0: {'data': result_normal['train_data'], 
+            0: {'data': result_normal['test_data'], 
                 'model': result_normal['clf'],
                 'query_points': result_normal['score']['eval_points']}}
         clime.utils.plots.plot_clfs(plt_data, 
                                     title=False, 
                                     axs=[ax],
                                     fig=figure)
-        ax.set_title(f'Random Forest trained on {dataset}')
+        # ax.set_title(f'Random Forest trained on {dataset}')
     # fig_single.savefig(os.path.join(file_path, 'figs', 'sampling',
     #             f'RF-{dataset}.png'), bbox_inches="tight")
     # plt.show()
@@ -71,13 +82,13 @@ all_scores = {
     'Class Balanced Sampling': all_CB, 'Normal Sampling': all_normal}
 
 
-ax = plt.gca()
-clime.utils.plots.plot_mean_std_graphs(all_scores, 
-                                       ax=ax,
-                                       ylabel='Local Fidelity (Accuracy)',
-                                    #    ylims=[0.5, 1]
-                                       )
-ax.set_title('Mean/Std over all datasets')
+# ax = plt.gca()
+# clime.utils.plots.plot_mean_std_graphs(all_scores, 
+#                                        ax=ax,
+#                                        ylabel='Local Fidelity (Accuracy)',
+#                                     #    ylims=[0.5, 1]
+#                                        )
+# ax.set_title('Mean/Std over all datasets')
 # plt.savefig(os.path.join(file_path, 'figs', 'sampling', f'mean-std-over-all-datasets.png'), bbox_inches="tight")
 # plt.show()
 

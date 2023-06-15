@@ -13,7 +13,9 @@ import numpy as np
 # plot colours
 cm_bright = ListedColormap(["#0000FF", "#FF0000"])
 cm = plt.cm.RdBu
-scatter_point_size = 30
+scatter_point_size = 200
+font_size = 30
+ticks_size = 24
 
 def plot_classes(data, ax=None, dim_reducer=None):
     '''
@@ -34,7 +36,9 @@ def plot_classes(data, ax=None, dim_reducer=None):
     # create a list of the sizes, here multiplied by 10 for scale
     size = [scatter_point_size*point_count[(xx1, xx2)] for xx1, xx2 in zip(x1, x2)]
 
-    ax.scatter(x1, x2, s=size, c=data['y'], cmap=cm_bright, edgecolors="k")
+    ax.scatter(x1, x2, s=scatter_point_size,
+               c=data['y'], cmap=cm_bright, edgecolors="k", alpha=0.4,
+               linewidths=2)
     ax.grid(False)
     if show == True:
         plt.show()
@@ -110,18 +114,26 @@ def plot_decision_boundary(clf, data, ax=None, dim_reducer=None):
     plt.colorbar(c)
 
     # set labels
-    ax.set_xlabel('PCA Component 0')
-    ax.set_ylabel('PCA Component 1')
+    if dim_reducer != None:
+        ax.set_xlabel('PCA Component 1', fontsize=font_size)
+        ax.set_ylabel('PCA Component 2', fontsize=font_size)
+    else:
+        ax.set_xlabel('Feature 1', fontsize=font_size)
+        ax.set_ylabel('Feature 2', fontsize=font_size)
+
 
     if show == True:
         plt.show()
 
-def plot_query_points(query_points, ax, dim_reducer=None, model=None):
+def plot_query_points(query_points, ax, dim_reducer=None):
     '''
     point eval points as black, are a list of values
     '''
     ax, _ = _get_axes(ax)
     q_nums = list(range(len(query_points)))
+    # get lims 
+    qs = np.array(query_points)
+    lim = np.max(qs[:, 1]) - np.min(qs[:, 1])
     for num, q in zip(q_nums, query_points):
         if dim_reducer == None:
             q0= q[0]
@@ -130,8 +142,22 @@ def plot_query_points(query_points, ax, dim_reducer=None, model=None):
             q_ = dim_reducer.transform(q.reshape(1, -1)).reshape(-1, 1)
             q0 = q_[0]
             q1 = q_[1]
-        ax.scatter(q0, q1, s=scatter_point_size, color='black')
-        ax.annotate(num, (q0, q1), ha='right', va='bottom')
+        ax.scatter(q0, q1, s=scatter_point_size*1.5, color='yellow',
+                   edgecolors="k")  # , zorder=100)
+        if num % 2 == 0:
+            ax.annotate(num, (q0, q1), 
+                        xytext=(q0, q1+0.3),
+                        # xytext=(q0, q1+lim/5),
+                        ha='center', 
+                        # va='bottom', 
+                        fontsize=font_size,
+                        color="yellow")  # , zorder=100)
+            # ax.annotate(num, (q0, q1), ha='right', va='bottom', fontsize=font_size)#, zorder=100)
+
+    # set lims to focus on query points
+    qs = np.array(query_points)
+    # ax.set_xlim([np.min(qs[:, 0])-1, np.max(qs[:, 0])+1])
+    # ax.set_ylim([np.min(qs[:, 1])-1, np.max(qs[:, 1])+1])
 
 '''
 helper functions
@@ -189,14 +215,14 @@ def plot_mean_std_graphs(data_dict, ylabel=None, ylims=[0, 1], ax=None):
         std = np.std(scores, axis=0)
         p = ax.plot(x, mean,  label=key)
         ax.fill_between(x, mean-std, mean+std, color=p[0].get_color(), alpha=0.3)
-        ax.set_xlabel('Query Point')
-        ax.set_ylabel(ylabel)
+        ax.set_xlabel('Query Point', fontsize=font_size)
+        ax.set_ylabel(ylabel, fontsize=font_size)
         ax.set_ylim(ylims)
 
     if len(data_dict) > 1:
         ax.legend()
 
-def plot_line_graphs_on_one_graph(data_dict, ylabel=None, ylims=[0, 1], ax=None, query_values=True):
+def plot_line_graphs_on_one_graph(data_dict, ylabel=None, ylims=[0, 1], ax=None, query_values=True, model=None):
     # first get the min and max values
     for key, item2 in data_dict.items():
         scores = item2['scores']
@@ -213,14 +239,26 @@ def plot_line_graphs_on_one_graph(data_dict, ylabel=None, ylims=[0, 1], ax=None,
             x = [f[0] for f in item['eval_points']]
         else:
             x = list(range(len(item['scores'])))
-        ax.plot(x, item['scores'],  label=key)
-        ax.plot(x, item['scores'], 'ko',  label=None)
-        ax.set_xlabel('Query Point')
-        ax.set_ylabel(ylabel)
-        ax.set_ylim(ylims)
+        ax.plot(x, item['scores'],  label=key,
+                linewidth=5)
+        ax.plot(x, item['scores'], 'ko',  label=None,
+                markersize=10,
+                markeredgecolor='black',
+                markerfacecolor='yellow')
+        
+    ax.set_xlabel('Query Point', fontsize=font_size)
+    ax.set_ylabel(ylabel, fontsize=font_size)
+    xticks = []
+    for i in x:
+        if i % 2 == 0:
+            xticks.append(i)
+    if len(xticks) < 15:
+        ax.set_xticks(xticks)
+    ax.tick_params(axis='both', which='major', labelsize=ticks_size)
 
+    ax.set_ylim(ylims)
     if len(data_dict) > 1:
-        ax.legend()
+        ax.legend(fontsize=font_size) #, loc='lower right')
     # fig.tight_layout()
 
 def plot_clfs(data_dict, ax_x=2, title=True, axs=False, fig=None):
@@ -267,10 +305,10 @@ def plot_clfs(data_dict, ax_x=2, title=True, axs=False, fig=None):
                 if start[0] > end[0]:
                     pca = flip_pca(pca)
             # plot all
-            plot_classes(data, ax, dim_reducer=pca)
             plot_decision_boundary(model, data, ax=ax, dim_reducer=pca)
+            plot_classes(data, ax, dim_reducer=pca)
             if 'query_points' in data_dict[key].keys():
-                plot_query_points(data_dict[key]['query_points'], ax, dim_reducer=pca, model=model)
+                plot_query_points(data_dict[key]['query_points'], ax, dim_reducer=pca)
             if title is True:
                 ax.set_title(key)
             count += 1

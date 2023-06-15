@@ -16,3 +16,4 @@ astropy
 statsmodels
 python-picard
 shap
+adjustText
