@@ -47,7 +47,7 @@ def get_wine(**kwargs):
 
 def get_iris(**kwargs):
     '''
-    iris dataset (0 vs 1,2)
+    iris dataset (0,2 vs 1)
     returns:
         - data: dict containing 'X', 'y'
     '''
@@ -55,7 +55,7 @@ def get_iris(**kwargs):
     data = load_iris()
     # convert to binary datatset (0 vs 1,2)
     y = data.target
-    y[np.where(y > 1)] = 1
+    y[np.where(y == 2)] = 0
     data = {'X': data.data, 'y': y}
     # shuffle the dataset
     data = clime.data.shuffle_dataset(data)

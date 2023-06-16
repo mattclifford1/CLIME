@@ -5,6 +5,7 @@ plotting functions and helpers for graphs and notebooks
 
 from collections import Counter
 import matplotlib.pyplot as plt
+import matplotlib.patheffects as pe
 from matplotlib.colors import ListedColormap
 from sklearn.inspection import DecisionBoundaryDisplay
 from sklearn.decomposition import PCA
@@ -16,6 +17,7 @@ cm = plt.cm.RdBu
 scatter_point_size = 200
 font_size = 30
 ticks_size = 24
+ticks_size_small = 20
 
 def plot_classes(data, ax=None, dim_reducer=None):
     '''
@@ -104,14 +106,20 @@ def plot_decision_boundary(clf, data, ax=None, dim_reducer=None):
     # keep just the probabilities for class 0
     yhat = yhat[:, 0]
 
+    # yhat = clf.predict(flat_grid)
+    
     # reshape the predictions back into a grid
     zz = yhat.reshape(xgrids[0].shape)
 
     # plot the grid of x, y and z values as a surface
-    c = ax.contourf(xgrids[0], xgrids[1], zz, cmap=cm, alpha=0.7)
+    c = ax.contourf(xgrids[0], xgrids[1], zz, cmap=cm,
+                    vmin=0, vmax=1, alpha=0.7)
+    c.set_clim(0, 1)
 
     # add a legend, called a color bar
-    plt.colorbar(c)
+    cbar = plt.colorbar(c, ticks=[0, 0.5, 1])
+    cbar.ax.tick_params(labelsize=ticks_size)
+    cbar.ax.set_ylabel('Probability', size=ticks_size)
 
     # set labels
     if dim_reducer != None:
@@ -120,6 +128,7 @@ def plot_decision_boundary(clf, data, ax=None, dim_reducer=None):
     else:
         ax.set_xlabel('Feature 1', fontsize=font_size)
         ax.set_ylabel('Feature 2', fontsize=font_size)
+    ax.tick_params(axis='both', which='major', labelsize=ticks_size_small)
 
 
     if show == True:
@@ -151,7 +160,8 @@ def plot_query_points(query_points, ax, dim_reducer=None):
                         ha='center', 
                         # va='bottom', 
                         fontsize=font_size,
-                        color="yellow")  # , zorder=100)
+                        color="yellow",
+                        path_effects=[pe.withStroke(linewidth=4, foreground="black")])  # , zorder=100)
             # ax.annotate(num, (q0, q1), ha='right', va='bottom', fontsize=font_size)#, zorder=100)
 
     # set lims to focus on query points
@@ -201,7 +211,7 @@ def plot_line_graphs(data_dict, ylabels=None, ylims=[0, 1], extra_lines=False):
             ylabel = ylabels[i]
         else:
             ylabel = 'Evaluation Score'
-        plot_multiple_lines(data_dict[key], axs[i], ylims=ylims, ylabel=ylabel, extra_lines=True)
+        plot_multiple_lines(data_dict[key], axs[i], ylims=ylims, ylabel=ylabel, extra_lines=extra_lines)
 
     fig.tight_layout()
 

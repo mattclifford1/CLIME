@@ -5,32 +5,30 @@ from tqdm import tqdm
 
 file_path = os.path.dirname(os.path.abspath(__file__))
 
-datasets = clime.data.AVAILABLE_DATASETS
-datasets.pop('Credit Scoring 1')
-datasets.pop('Credit Scoring 2')
-datasets.pop('Direct Marketing')
-datasets.pop('Gaussian')
-datasets.pop('Moons')
-datasets.pop('Abalone')
-datasets.pop('Iris')
-datasets.pop('Wine')
-datasets.pop('Sonar Rocks vs Mines')
-datasets.pop('Ionosphere')
-datasets.pop('Circles')
-datasets.pop('Blobs')
-datasets.pop('Wheat Seeds')
+small = 1
+big = 5
+means = [
+    [[-small, -small], [small, small]],
+    [[-big, -big], [big, big]]
+]
+
+ms = [0.8, 1, 3, 5, 8, 10, 20]
+ms = [3]
+means = []
+for x in ms:
+    means.append([[-x, -x], [x, x]])
 
 all_normal = []
 all_CB = []
 
 # datasets = ['moons', 'breast cancer']
 
-for dataset in tqdm(datasets):
+for mean_ in tqdm(means):
 
-    params_normal = {'data params': {'class_samples': (200, 200), 'percent of data': 0.11, 'moons_noise': 0.2, 'gaussian_means': [[-1, -1], [1, 1]], 'gaussian_covs': [[[1, 0], [0, 1]], [[1, 0], [
-        0, 1]]]}, 'dataset': dataset, 'dataset rebalancing': 'none', 'model': 'Random Forest', 'model balancer': 'none', 'explainer': 'bLIMEy (normal)', 'evaluation metric': 'fidelity (local)', 'evaluation run': 'between_class_means'}
-    params_class_bal = {'data params': {'class_samples': (200, 200), 'percent of data': 0.11, 'moons_noise': 0.2, 'gaussian_means': [[-1, -1], [1, 1]], 'gaussian_covs': [[[1, 0], [0, 1]], [[1, 0], [
-        0, 1]]]}, 'dataset': dataset, 'dataset rebalancing': 'none', 'model': 'Random Forest', 'model balancer': 'none', 'explainer': 'bLIMEy (cost sensitive sampled)', 'evaluation metric': 'fidelity (local)', 'evaluation run': 'between_class_means'}
+    params_normal = {'standardise data': False, 'data params': {'class_samples': (200, 200), 'percent of data': 0.11, 'moons_noise': 0.2, 'gaussian_means': mean_, 'gaussian_covs': [[[1, 0], [0, 1]], [[1, 0], [
+        0, 1]]]}, 'dataset': 'Gaussian', 'dataset rebalancing': 'none', 'model': 'Random Forest', 'model balancer': 'none', 'explainer': 'bLIMEy (normal)', 'evaluation metric': 'fidelity (local)', 'evaluation run': 'between_class_means'}
+    params_class_bal = {'standardise data': False, 'data params': {'class_samples': (200, 200), 'percent of data': 0.11, 'moons_noise': 0.2, 'gaussian_means': mean_, 'gaussian_covs': [[[1, 0], [0, 1]], [[1, 0], [
+        0, 1]]]}, 'dataset': 'Gaussian', 'dataset rebalancing': 'none', 'model': 'Random Forest', 'model balancer': 'none', 'explainer': 'bLIMEy (cost sensitive sampled)', 'evaluation metric': 'fidelity (local)', 'evaluation run': 'between_class_means'}
 
     result_normal = clime.pipeline.run_pipeline(
         params_normal, parallel_eval=True)
@@ -42,18 +40,19 @@ for dataset in tqdm(datasets):
         18, 12), gridspec_kw={'height_ratios': [1, 1.7]},
         linewidth=4, edgecolor="black")
 
-    scores = {'Class Balanced Weights: $w_{xc}$': result_bal['score'], 'Standard Weights: $w_x$': result_normal['score']}
+    scores = {'Class Balanced Weights: $w_{xc}$':
+              result_bal['score'], 'Standard Weights: $w_x$': result_normal['score']}
     all_normal.append(result_normal['score']['scores'])
     all_CB.append(result_bal['score']['scores'])
 
     for ax in [ax_single, ax1]:
         clime.utils.plots.plot_line_graphs_on_one_graph(
-            scores, 
-            ylabel='Local Fidelity', 
+            scores,
+            ylabel='Local Fidelity',
             ax=ax,
             query_values=False,
-            ylims=[0.4, 1]
-            )
+            ylims=[0.4, 1.03]
+        )
 
         # ax.set_title(f'Dataset: {dataset}')
     # fig_single.savefig(os.path.join(file_path, 'figs', 'sampling',
@@ -64,11 +63,11 @@ for dataset in tqdm(datasets):
     for ax, figure in zip([ax_single, ax2], [fig_single, fig]):
         # save clf decision surface
         plt_data = {
-            0: {'data': result_normal['test_data'], 
+            0: {'data': result_normal['test_data'],
                 'model': result_normal['clf'],
                 'query_points': result_normal['score']['eval_points']}}
-        clime.utils.plots.plot_clfs(plt_data, 
-                                    title=False, 
+        clime.utils.plots.plot_clfs(plt_data,
+                                    title=False,
                                     axs=[ax],
                                     fig=figure)
         # ax.set_title(f'Random Forest trained on {dataset}')
@@ -77,14 +76,15 @@ for dataset in tqdm(datasets):
     # plt.show()
     fig_single.clf()
 
-    fig.savefig(os.path.join(file_path, 'figs', 'sampling', f'combined-{dataset}.png'), bbox_inches="tight")
+    fig.savefig(os.path.join(file_path, 'figs', 'sampling',
+                f'combined-Gaussian-{mean_[1][1]}.png'), bbox_inches="tight")
 
 all_scores = {
     'Class Balanced Sampling': all_CB, 'Normal Sampling': all_normal}
 
 
 # ax = plt.gca()
-# clime.utils.plots.plot_mean_std_graphs(all_scores, 
+# clime.utils.plots.plot_mean_std_graphs(all_scores,
 #                                        ax=ax,
 #                                        ylabel='Local Fidelity (Accuracy)',
 #                                     #    ylims=[0.5, 1]
@@ -100,4 +100,3 @@ all_scores = {
 # for i in all_normal:
 #     ax.plot(x, i)
 # plt.show()
-
