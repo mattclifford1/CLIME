@@ -100,8 +100,14 @@ class bLIMEy:
         sample_weights = self._get_sampled_weights(sampled_data)
         ''' train surrogate '''
         # regresssion model
-        self.surrogate_model = sklearn.linear_model.Ridge(alpha=1, fit_intercept=True,
-                                    random_state=clime.RANDOM_SEED)
+        if self.train_logits == True:
+            self.surrogate_model = clime.models.logit_ridge(alpha=1, 
+                                                         fit_intercept=True,
+                                                         random_state=clime.RANDOM_SEED)
+        else:
+            self.surrogate_model = sklearn.linear_model.Ridge(alpha=1, 
+                                                           fit_intercept=True,
+                                                           random_state=clime.RANDOM_SEED)
         self.surrogate_model.fit(sampled_data['X'],
                                  sampled_data['p(y|x)'],
                                  sample_weight=sample_weights,

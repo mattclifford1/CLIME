@@ -6,6 +6,7 @@ from .bayes_optimal import Guassian_class_conditional
 from .svm import SVM, SVM_balanced_training
 from .MLP import MLP_simple
 from .balance import adjust_boundary, adjust_proba, base_balance
+from .logit_regression import logit_ridge
 
 AVAILABLE_MODELS = {
     'Random Forest': random_forest,

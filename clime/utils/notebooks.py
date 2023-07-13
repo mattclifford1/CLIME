@@ -179,7 +179,7 @@ def run_experiments(data_store):
     train_datas = {}
     test_datas = {}
     for i, opts in tqdm(enumerate(opts_permutations), total=len(opts_permutations), desc='Pipeline runs', leave=False):
-        result = clime.pipeline.run_pipeline(opts, parallel_eval=True)
+        result = clime.pipeline.run_pipeline(opts, parallel_eval=False)
         scores[i] = {str(labels[i]): result['score']}
         scores_no_label[i] = result['score']
         model_stats_[i] = {'result': result['model_stats']}
