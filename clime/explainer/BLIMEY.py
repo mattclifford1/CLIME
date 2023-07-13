@@ -40,6 +40,7 @@ class bLIMEy:
                        class_weight_sampled_probs=False,
                        weight_locally=True,
                        rebalance_sampled_data=False,
+                       train_logits=False,
                        **kwargs
                        ):
         self.query_point = query_point
@@ -51,8 +52,9 @@ class bLIMEy:
         self.class_weight_sampled_probs = class_weight_sampled_probs
         self.weight_locally = weight_locally
         self.rebalance_sampled_data = rebalance_sampled_data
-        self._sample_locally(black_box_model)
-        self._train_surrogate(black_box_model)
+        self.train_logits = train_logits
+        sampled_data = self._sample_locally(black_box_model)
+        self._train_surrogate(black_box_model, sampled_data)
 
     def get_explanation(self):
         return self.surrogate_model.coef_[0, :] # just do for one class (is the negative for the other class)
@@ -68,14 +70,20 @@ class bLIMEy:
 
     def _sample_locally(self, black_box_model):
         cov = self._get_local_sampling_cov()
-        self.sampled_data = {}
-        self.sampled_data['X'] = np.random.multivariate_normal(self.query_point, cov, self.samples)
+        sampled_data = {}
+        sampled_data['X'] = np.random.multivariate_normal(self.query_point, cov, self.samples)
         # get the class predictions from the sampled data (for use with class balanced learning and metrics)
-        self.sampled_data['y'] = black_box_model.predict(self.sampled_data['X'])
+        sampled_data['y'] = black_box_model.predict(sampled_data['X'])
         # option to adjust weights based on class imbalance
         if self.rebalance_sampled_data is True:
-            self.sampled_data = clime.data.balance_oversample(
-                self.sampled_data)
+            sampled_data = clime.data.balance_oversample(
+                sampled_data)
+        ''' get behaviour of the blackbox model at the sampled data '''
+        # get probabilities to regress on
+        sampled_data['p(y|x)'] = black_box_model.predict_proba(sampled_data['X'])
+
+        self.query_probs = black_box_model.predict_proba([self.query_point])
+        return sampled_data
 
 
     def _get_local_sampling_cov(self):
@@ -88,33 +96,39 @@ class bLIMEy:
         else:
             return self.sampling_cov
 
-    def _train_surrogate(self, black_box_model):
-        
-        ''' get behaviour of the blackbox model at the sampled data '''
-        # get probabilities to regress on
-        self.sampled_data['p(y|x)'] = black_box_model.predict_proba(self.sampled_data['X'])
+    def _train_surrogate(self, black_box_model, sampled_data):
+        sample_weights = self._get_sampled_weights(sampled_data)
+        ''' train surrogate '''
+        # regresssion model
+        self.surrogate_model = sklearn.linear_model.Ridge(alpha=1, fit_intercept=True,
+                                    random_state=clime.RANDOM_SEED)
+        self.surrogate_model.fit(sampled_data['X'],
+                                 sampled_data['p(y|x)'],
+                                 sample_weight=sample_weights,
+                                 )
 
+    def _get_sampled_weights(self, sampled_data):
         ''' training cost weights '''
         # get sample weighting based on distance
         if self.weight_locally is True:
-            weights = costs.weights_based_on_distance(self.query_point, self.sampled_data['X'])
+            weights = costs.weights_based_on_distance(self.query_point, sampled_data['X'])
         else:
-            weights = np.ones(self.sampled_data['X'].shape[0])
+            weights = np.ones(sampled_data['X'].shape[0])
 
         # black box training data class imbalance weights/costs
         if self.class_weight_data is True:
             class_weights = costs.weight_based_on_class_imbalance(self.test_data)
-            class_preds_matrix = np.round(self.sampled_data['p(y|x)'])
+            class_preds_matrix = np.round(sampled_data['p(y|x)'])
             # apply to all instances
             instance_class_imbalance_weights = np.dot(class_preds_matrix, class_weights.T)
             # now combine class imbalance weights with distance based weights
             weights *= instance_class_imbalance_weights
 
         # weights/costs based on class imbalance of the samples
-        self.class_weights = costs.weight_based_on_class_imbalance(self.sampled_data) # save for plotting
+        self.class_weights = costs.weight_based_on_class_imbalance(sampled_data) # save for plotting
         if self.class_weight_sampled is True: 
             # get class imbalance weights
-            class_preds_matrix = np.round(self.sampled_data['p(y|x)'])
+            class_preds_matrix = np.round(sampled_data['p(y|x)'])
             # apply to all instances
             instance_class_imbalance_weights = np.dot(class_preds_matrix, self.class_weights.T)
             # now combine class imbalance weights with distance based weights
@@ -123,19 +137,12 @@ class bLIMEy:
         if self.class_weight_sampled_probs is True:
             # adjust probs based on query point's prob
             # get class imbalance weights
-            query_probs = black_box_model.predict_proba([self.query_point])
-            instance_class_imbalance_weights = costs.weights_based_on_class_either_side_of_prob(self.sampled_data, query_probs)
+            instance_class_imbalance_weights = costs.weights_based_on_class_either_side_of_prob(sampled_data, self.query_probs)
             # now combine class imbalance weights with distance based weights
             weights *= instance_class_imbalance_weights
+        return weights
 
-        ''' train surrogate '''
-        # regresssion model
-        self.surrogate_model = sklearn.linear_model.Ridge(alpha=1, fit_intercept=True,
-                                    random_state=clime.RANDOM_SEED)
-        self.surrogate_model.fit(self.sampled_data['X'],
-                                 self.sampled_data['p(y|x)'],
-                                 sample_weight=weights,
-                                 )
+        
 
 if __name__ == '__main__':
     import clime
