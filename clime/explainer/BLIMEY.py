@@ -41,6 +41,7 @@ class bLIMEy:
                        weight_locally=True,
                        rebalance_sampled_data=False,
                        train_logits=False,
+                       logistic_regression=False,
                        **kwargs
                        ):
         self.query_point = query_point
@@ -53,8 +54,10 @@ class bLIMEy:
         self.weight_locally = weight_locally
         self.rebalance_sampled_data = rebalance_sampled_data
         self.train_logits = train_logits
+        self.logistic_regression = logistic_regression
+
         sampled_data = self._sample_locally(black_box_model)
-        self._train_surrogate(black_box_model, sampled_data)
+        self._train_surrogate(sampled_data)
 
     def get_explanation(self):
         return self.surrogate_model.coef_[0, :] # just do for one class (is the negative for the other class)
@@ -96,13 +99,16 @@ class bLIMEy:
         else:
             return self.sampling_cov
 
-    def _train_surrogate(self, black_box_model, sampled_data):
+    def _train_surrogate(self, sampled_data):
         sample_weights = self._get_sampled_weights(sampled_data)
         ''' train surrogate '''
         # regresssion model
         if self.train_logits == True:
             self.surrogate_model = clime.models.logit_ridge(alpha=1, 
                                                          fit_intercept=True,
+                                                         random_state=clime.RANDOM_SEED)
+        elif self.logistic_regression == True:
+            self.surrogate_model = clime.models.logistic_regression(
                                                          random_state=clime.RANDOM_SEED)
         else:
             self.surrogate_model = sklearn.linear_model.Ridge(alpha=1, 
