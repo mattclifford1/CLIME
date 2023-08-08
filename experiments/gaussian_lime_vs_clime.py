@@ -12,8 +12,7 @@ means = [
     [[-big, -big], [big, big]]
 ]
 
-ms = [0.8, 1, 3, 5, 8, 10, 20]
-ms = [3]
+ms = [1, 3]
 means = []
 for x in ms:
     means.append([[-x, -x], [x, x]])
@@ -24,10 +23,14 @@ all_CB = []
 # datasets = ['moons', 'breast cancer']
 
 for mean_ in tqdm(means):
+    if mean_[0][0] == -1:
+        std = True
+    else: 
+        std = False   # dont normalise far away as we are trying to not let the other class be captured in the distance measure
 
-    params_normal = {'standardise data': False, 'data params': {'class_samples': (200, 200), 'percent of data': 0.11, 'moons_noise': 0.2, 'gaussian_means': mean_, 'gaussian_covs': [[[1, 0], [0, 1]], [[1, 0], [
+    params_normal = {'standardise data': std, 'data params': {'class_samples': (200, 200), 'percent of data': 0.11, 'moons_noise': 0.2, 'gaussian_means': mean_, 'gaussian_covs': [[[1, 0], [0, 1]], [[1, 0], [
         0, 1]]]}, 'dataset': 'Gaussian', 'dataset rebalancing': 'none', 'model': 'Random Forest', 'model balancer': 'none', 'explainer': 'bLIMEy (normal)', 'evaluation metric': 'fidelity (local)', 'evaluation run': 'between_class_means'}
-    params_class_bal = {'standardise data': False, 'data params': {'class_samples': (200, 200), 'percent of data': 0.11, 'moons_noise': 0.2, 'gaussian_means': mean_, 'gaussian_covs': [[[1, 0], [0, 1]], [[1, 0], [
+    params_class_bal = {'standardise data': std, 'data params': {'class_samples': (200, 200), 'percent of data': 0.11, 'moons_noise': 0.2, 'gaussian_means': mean_, 'gaussian_covs': [[[1, 0], [0, 1]], [[1, 0], [
         0, 1]]]}, 'dataset': 'Gaussian', 'dataset rebalancing': 'none', 'model': 'Random Forest', 'model balancer': 'none', 'explainer': 'bLIMEy (cost sensitive sampled)', 'evaluation metric': 'fidelity (local)', 'evaluation run': 'between_class_means'}
 
     result_normal = clime.pipeline.run_pipeline(
@@ -37,11 +40,13 @@ for mean_ in tqdm(means):
 
     fig_single, ax_single = plt.subplots(1, 1)
     fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(
-        18, 12), gridspec_kw={'height_ratios': [1, 1.7]},
+        18, 9), gridspec_kw={'height_ratios': [1, 1.7]},
         linewidth=4, edgecolor="black")
 
     scores = {'Class Balanced Weights: $w_{xc}$':
               result_bal['score'], 'Standard Weights: $w_x$': result_normal['score']}
+    # scores = {'Standard Weights: $w_x$': result_normal['score'], 'Class Balanced Weights: $w_{xc}$': result_bal['score']}
+
     all_normal.append(result_normal['score']['scores'])
     all_CB.append(result_bal['score']['scores'])
 
