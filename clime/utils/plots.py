@@ -56,7 +56,7 @@ def plot_decision_boundary_sklearn(clf, data, ax=None):
     if show == True:
         plt.show()
 
-def plot_decision_boundary(clf, data, ax=None, dim_reducer=None):
+def plot_decision_boundary(clf, data, ax=None, dim_reducer=None, labels=True):
     '''
     plot a decision boundary on axes
     input:
@@ -118,17 +118,19 @@ def plot_decision_boundary(clf, data, ax=None, dim_reducer=None):
 
     # add a legend, called a color bar
     cbar = plt.colorbar(c, ticks=[0, 0.5, 1])
-    cbar.ax.tick_params(labelsize=ticks_size)
-    cbar.ax.set_ylabel('Probability', size=ticks_size)
+    if labels == True:
+        cbar.ax.tick_params(labelsize=ticks_size)
+        cbar.ax.set_ylabel('Probability', size=ticks_size)
 
     # set labels
-    if dim_reducer != None:
-        ax.set_xlabel('PCA Component 1', fontsize=font_size)
-        ax.set_ylabel('PCA Component 2', fontsize=font_size)
-    else:
-        ax.set_xlabel('Feature 1', fontsize=font_size)
-        ax.set_ylabel('Feature 2', fontsize=font_size)
-    ax.tick_params(axis='both', which='major', labelsize=ticks_size_small)
+    if labels == True:
+        if dim_reducer != None:
+            ax.set_xlabel('PCA Component 1', fontsize=font_size)
+            ax.set_ylabel('PCA Component 2', fontsize=font_size)
+        else:
+            ax.set_xlabel('Feature 1', fontsize=font_size)
+            ax.set_ylabel('Feature 2', fontsize=font_size)
+        ax.tick_params(axis='both', which='major', labelsize=ticks_size_small)
 
 
     if show == True:
@@ -279,7 +281,7 @@ def plot_line_graphs_on_one_graph(data_dict, ylabel=None, ylims=[0, 1], ax=None,
         ax.legend(fontsize=font_size) #, loc='lower right')
     # fig.tight_layout()
 
-def plot_clfs(data_dict, ax_x=2, title=True, axs=False, fig=None):
+def plot_clfs(data_dict, ax_x=2, title=True, axs=False, fig=None, labels=True):
     '''
     data dict has keys:
         - model
@@ -323,7 +325,7 @@ def plot_clfs(data_dict, ax_x=2, title=True, axs=False, fig=None):
                 if start[0] > end[0]:
                     pca = flip_pca(pca)
             # plot all
-            plot_decision_boundary(model, data, ax=ax, dim_reducer=pca)
+            plot_decision_boundary(model, data, ax=ax, dim_reducer=pca, labels=labels)
             plot_classes(data, ax, dim_reducer=pca)
             if 'query_points' in data_dict[key].keys():
                 plot_query_points(data_dict[key]['query_points'], ax, dim_reducer=pca)

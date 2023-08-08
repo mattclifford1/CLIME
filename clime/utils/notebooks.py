@@ -207,7 +207,7 @@ def plot_model_and_query_points(inp):
         model_plots[run] = {'model': clfs[run], 'data': train_datas[run]}
         if 'eval_points' in scores_no_label[run].keys():
             model_plots[run]['query_points'] = scores_no_label[run]['eval_points']
-    clime.utils.plots.plot_clfs(model_plots, ax_x=len(model_plots), title=False)
+    clime.utils.plots.plot_clfs(model_plots, ax_x=len(model_plots), title=False, labels=False)
     if 'scores' in scores[0][list(scores[0].keys())[0]].keys():
         clime.utils.plots.plot_line_graphs(scores, ylabels=ylabels, extra_lines=False)
     

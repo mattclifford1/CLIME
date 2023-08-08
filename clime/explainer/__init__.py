@@ -17,6 +17,16 @@ def bLIMEy_logit(*args, **kwargs):
     # occurance of minority class in the SAMPLED data
     return bLIMEy(*args, train_logits=True, **kwargs)
 
+def bLIMEy_logistic_regression(*args, **kwargs):
+    # add weights to the samples based on inverse 
+    # occurance of minority class in the SAMPLED data
+    return bLIMEy(*args, logistic_regression=True, **kwargs)
+
+def sample_weighted_bLIMEy_logistic_regression(*args, **kwargs):
+    # add weights to the samples based on inverse 
+    # occurance of minority class in the SAMPLED data
+    return bLIMEy(*args, logistic_regression=True, class_weight_sampled=True, **kwargs)
+
 def sample_weighted_bLIMEy_probs(*args, **kwargs):
     # add weights to the samples based on inverse
     # occurance of minority class in the SAMPLED data
@@ -53,5 +63,7 @@ AVAILABLE_EXPLAINERS = {
     'bLIMEy (just cost sensitive sampled)': just_class_weight_sampled_bLIMEy,
     'bLIMEy (logit)': bLIMEy_logit,
     'bLIMEy (logit and sample weights)': sample_weighted_bLIMEy_logit,
+    'bLIMEy (logistic regression)': bLIMEy_logistic_regression,
+    'bLIMEy (logistic regression and sample weights)': sample_weighted_bLIMEy_logistic_regression,
     # 'bLIMEy (rebalance data training)': data_rebalanced_bLIMEy,
 }
