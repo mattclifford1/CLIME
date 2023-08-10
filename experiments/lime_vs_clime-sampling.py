@@ -41,7 +41,7 @@ for dataset in tqdm(datasets):
 
     fig_single, ax_single = plt.subplots(1, 1)
     fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(
-        18, 9), gridspec_kw={'height_ratios': [1, 1.7]},
+        18, 9.5), gridspec_kw={'height_ratios': [1, 1.7]},
         linewidth=4, edgecolor="black")
 
     scores = {'Class Balanced Weights: $w_{xc}$':
