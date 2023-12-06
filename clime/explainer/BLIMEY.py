@@ -111,6 +111,9 @@ class bLIMEy:
             self.surrogate_model = clime.models.logistic_regression(
                                                          random_state=clime.RANDOM_SEED)
         else:
+            # self.surrogate_model = sklearn.linear_model.Lasso(alpha=1, 
+            #                                                fit_intercept=True,
+            #                                                random_state=clime.RANDOM_SEED)
             self.surrogate_model = sklearn.linear_model.Ridge(alpha=1, 
                                                            fit_intercept=True,
                                                            random_state=clime.RANDOM_SEED)

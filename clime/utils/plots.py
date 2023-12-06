@@ -246,13 +246,21 @@ def plot_line_graphs_on_one_graph(data_dict, ylabel=None, ylims=[0, 1], ax=None,
         fig, ax = plt.subplots(1, 1)
     if ylabel is None:
         ylabel = 'Evaluation Score'
+    
+    line_style = '-'
     for key, item in data_dict.items():
         if 'eval_points' in item.keys() and query_values == True:
             x = [f[0] for f in item['eval_points']]
         else:
             x = list(range(len(item['scores'])))
         ax.plot(x, item['scores'],  label=key,
-                linewidth=10)
+                linewidth=10, linestyle=line_style)
+        if line_style == '-':
+            # uncomment to show dashed on every other
+            line_style = '-'
+            # line_style = '--'
+        else:
+            line_style = '-'
         ax.plot(x, item['scores'], 'ko',  label=None,
                 markersize=20,
                 markeredgecolor='black',

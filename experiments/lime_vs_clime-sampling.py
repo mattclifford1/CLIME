@@ -11,7 +11,7 @@ datasets.pop('Credit Scoring 2')
 datasets.pop('Direct Marketing')
 datasets.pop('Gaussian')
 datasets.pop('Moons')
-datasets.pop('Abalone')
+datasets.pop('Abalone Gender')
 datasets.pop('Iris')
 datasets.pop('Wine')
 datasets.pop('Sonar Rocks vs Mines')
@@ -23,14 +23,16 @@ datasets.pop('Wheat Seeds')
 all_normal = []
 all_CB = []
 
+model = 'Random Forest'
+
 # datasets = ['moons', 'breast cancer']
 
 for dataset in tqdm(datasets):
 
     params_normal = {'data params': {'class_samples': (200, 200), 'percent of data': 0.11, 'moons_noise': 0.2, 'gaussian_means': [[-1, -1], [1, 1]], 'gaussian_covs': [[[1, 0], [0, 1]], [[1, 0], [
-        0, 1]]]}, 'dataset': dataset, 'dataset rebalancing': 'none', 'model': 'Random Forest', 'model balancer': 'none', 'explainer': 'bLIMEy (normal)', 'evaluation metric': 'fidelity (local)', 'evaluation run': 'between_class_means'}
+        0, 1]]]}, 'dataset': dataset, 'dataset rebalancing': 'none', 'model': model, 'model balancer': 'none', 'explainer': 'bLIMEy (normal)', 'evaluation metric': 'fidelity (local)', 'evaluation run': 'between_class_means'}
     params_class_bal = {'data params': {'class_samples': (200, 200), 'percent of data': 0.11, 'moons_noise': 0.2, 'gaussian_means': [[-1, -1], [1, 1]], 'gaussian_covs': [[[1, 0], [0, 1]], [[1, 0], [
-        0, 1]]]}, 'dataset': dataset, 'dataset rebalancing': 'none', 'model': 'Random Forest', 'model balancer': 'none', 'explainer': 'bLIMEy (cost sensitive sampled)', 'evaluation metric': 'fidelity (local)', 'evaluation run': 'between_class_means'}
+        0, 1]]]}, 'dataset': dataset, 'dataset rebalancing': 'none', 'model': model, 'model balancer': 'none', 'explainer': 'bLIMEy (cost sensitive sampled)', 'evaluation metric': 'fidelity (local)', 'evaluation run': 'between_class_means'}
 
     result_normal = clime.pipeline.run_pipeline(
         params_normal, parallel_eval=True)
@@ -39,10 +41,13 @@ for dataset in tqdm(datasets):
 
     fig_single, ax_single = plt.subplots(1, 1)
     fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(
-        18, 12), gridspec_kw={'height_ratios': [1, 1.7]},
+        18, 9.5), gridspec_kw={'height_ratios': [1, 1.7]},
         linewidth=4, edgecolor="black")
 
-    scores = {'Class Balanced Weights: $w_{xc}$': result_bal['score'], 'Standard Weights: $w_x$': result_normal['score']}
+    scores = {'Class Balanced Weights: $w_{xc}$':
+              result_bal['score'], 'Standard Weights: $w_x$': result_normal['score']}
+    # scores = {'Standard Weights: $w_x$': result_normal['score'], 'Class Balanced Weights: $w_{xc}$': result_bal['score']}
+
     all_normal.append(result_normal['score']['scores'])
     all_CB.append(result_bal['score']['scores'])
 

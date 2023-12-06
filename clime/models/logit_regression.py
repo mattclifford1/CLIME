@@ -20,19 +20,22 @@ MAX_P = 0.99999999
 #     soft_scaled = soft - MIN_P
 #     return soft_scaled / (MAX_P - MIN_P)
 
-# def logits(x):
-#     # first make in the range 0.0000001 and 0.9999999 for numerical stability
-#     x = x * (MAX_P - MIN_P)
-#     x += MIN_P
-#     # return np.log(x/(1-x))
-#     return logit(x)
+def logits(x):
+    # first make in the range 0.0000001 and 0.9999999 for numerical stability
+    x = x * (MAX_P - MIN_P)
+    x += MIN_P
+    return np.log(x/(1-x))
+    # return 1/(1-x)
+    # return logit(x)
 
 def softmax(x):
     """Compute softmax values for each sets of scores in x."""
     return np.exp(x) / np.sum(np.exp(x), axis=0)
 
-def logits(x):
-    return 1/(1+np.exp(-x))
+# def logits(x):
+#     # return 1/(1+np.exp(-x))
+    # return 1/(1-x)   # float overload
+
 
 
 class logit_ridge(sklearn.linear_model.Ridge):
@@ -44,10 +47,10 @@ class logit_ridge(sklearn.linear_model.Ridge):
 
     def fit(self, X, y, **kwargs):
         y = y[:, 1]
-        print(logits(y))
-        print(y)
-        print(len(y))
-        print(sum(y))
+        # print(logits(y))
+        # print(y)
+        # print(len(y))
+        # print(sum(y))
         super().fit(X, logits(y), **kwargs)
 
     def predict(self, X):

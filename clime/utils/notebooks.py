@@ -55,14 +55,14 @@ def get_sliders(interactive_data_store):
 def get_list_input(interactive_data_store):
     # get input to make lists but as a text input
     print('Gaussian Means')
-    means = ipywidgets.Text(value='[[0, 0], [1, 1]]',
+    means = ipywidgets.Text(value='[[-1, -1], [1, 1]]',
                             placeholder='Type something',
                             description='MEANS:',
                             disabled=False)
     display(means)
     interactive_data_store['data params']['gaussian_means'] = means
     print('Gaussian Covs')
-    covs = ipywidgets.Text(value='[[[0.5, 0], [0, 0.5]],    [[0.5, 0], [0, 0.5]]]',
+    covs = ipywidgets.Text(value='[[[1, 0], [0, 1]],    [[1, 0], [0, 1]]]',
                             placeholder='Type something',
                             description='COVS:',
                             layout={'width': '50%'},
