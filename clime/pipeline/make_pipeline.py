@@ -75,7 +75,10 @@ class construct:
         expl_gen = explainer_generator(opts)
         # get_ evaluation metric
         eval_metric = construct.get_section('evaluation metric', opts)
+
         # run evaluation
+
+        # old way - update __main__ ways of doing this to new way still
         # score = construct.run_section('evaluation run',
         #                           opts,
         #                           metric=eval_metric,

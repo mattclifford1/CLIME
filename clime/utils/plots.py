@@ -281,6 +281,15 @@ def plot_line_graphs_on_one_graph(data_dict, ylabel=None, ylims=[0, 1], ax=None,
         ax.legend(fontsize=font_size) #, loc='lower right')
     # fig.tight_layout()
 
+
+def plot_heatmaps(scores, ylabels=ylabels):
+    '''scores is from pipeline eval so contains:
+        - eval_points
+        - scores
+    which is what we will construct the heat map from
+    '''
+    
+
 def plot_clfs(data_dict, ax_x=2, title=True, axs=False, fig=None, labels=True):
     '''
     data dict has keys:

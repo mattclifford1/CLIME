@@ -160,10 +160,13 @@ class get_key_points_score():
         class_weights = results[:, 1]
         maj_influ = results[:, 2]
         results = {'avg': np.mean(evaluation), 'std': np.std(evaluation)}
-        if self.key_points is not 'all_points':
-            results['eval_points'] = data_points
-        if self.key_points in ['between_means', 'data_edges']:
-            results['scores'] = evaluation  # structered scores are useful for analysis
+        # if self.key_points is not 'all_points':
+        results['eval_points'] = data_points
+        if self.key_points in ['between_means', 'data_edges', 'means']:
+            results['2D results'] = True
+        else:
+            results['2D results'] = False
+        results['scores'] = evaluation  # structered scores are useful for analysis
         if class_weights[0] != None:
             results['class_weights'] = class_weights
         results['majority influence'] = maj_influ

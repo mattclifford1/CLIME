@@ -184,7 +184,7 @@ def run_experiments(data_store):
     train_datas = {}
     test_datas = {}
     for i, opts in tqdm(enumerate(opts_permutations), total=len(opts_permutations), desc='Pipeline runs', leave=False):
-        result = clime.pipeline.run_pipeline(opts, parallel_eval=data_store['parallel evaluation'])
+        result = clime.pipeline.run_pipeline(opts, parallel_eval=data_store['parallel evaluation'].value)
         scores[i] = {str(labels[i]): result['score']}
         scores_no_label[i] = result['score']
         model_stats_[i] = {'result': result['model_stats']}
@@ -214,8 +214,11 @@ def plot_model_and_query_points(inp):
         if 'eval_points' in scores_no_label[run].keys():
             model_plots[run]['query_points'] = scores_no_label[run]['eval_points']
     clime.utils.plots.plot_clfs(model_plots, ax_x=len(model_plots), title=False, labels=False)
-    if 'scores' in scores[0][list(scores[0].keys())[0]].keys():
+    if scores[0][list(scores[0].keys())[0]]['2D results'] == True:
         clime.utils.plots.plot_line_graphs(scores, ylabels=ylabels, extra_lines=False)
+    else:
+        clime.utils.plots.plot_heatmaps(
+            scores, ylabels=ylabels)
     
 def plot_stats(inp):
     model_stats_, clfs, train_datas, test_datas, scores, scores_no_label, ylabels = inp
