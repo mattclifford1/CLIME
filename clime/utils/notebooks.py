@@ -71,16 +71,17 @@ def get_list_input(interactive_data_store):
     interactive_data_store['data params']['gaussian_covs'] = covs
     return interactive_data_store
 
-def get_boolean(interactive_data_store):
+
+def get_boolean(interactive_data_store, name='standardise data'):
     print('DATASET STANDARDISATION:')
     std = ipywidgets.Checkbox(
         value=True,
-        description='Standardise',
+        description=name,
         disabled=False,
         indent=False
     )
     display(std)
-    interactive_data_store['standardise data'] = std
+    interactive_data_store[name] = std
     return interactive_data_store
 
 def get_toggle(pipeline_section, interactive_data_store):
@@ -144,7 +145,7 @@ def get_pipeline_widgets():
     # dataset params (text/lists)
     data_store = get_list_input(data_store)
     # standardise data
-    data_store = get_boolean(data_store)
+    data_store = get_boolean(data_store, name='standardise data')
     # which balancing data method
     data_store = get_toggle('dataset rebalancing', data_store)
     # which model to use
@@ -159,6 +160,8 @@ def get_pipeline_widgets():
     data_store = get_toggle('evaluation points', data_store)
     # which data to evaluate on
     data_store = get_toggle('evaluation data', data_store)
+    # parallel evaluation
+    data_store = get_boolean(data_store, name='parallel evaluation')
     return data_store
 
 # running the pipeline
@@ -181,7 +184,7 @@ def run_experiments(data_store):
     train_datas = {}
     test_datas = {}
     for i, opts in tqdm(enumerate(opts_permutations), total=len(opts_permutations), desc='Pipeline runs', leave=False):
-        result = clime.pipeline.run_pipeline(opts, parallel_eval=False)
+        result = clime.pipeline.run_pipeline(opts, parallel_eval=data_store['parallel evaluation'])
         scores[i] = {str(labels[i]): result['score']}
         scores_no_label[i] = result['score']
         model_stats_[i] = {'result': result['model_stats']}
