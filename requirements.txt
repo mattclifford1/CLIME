@@ -10,7 +10,7 @@ pytest
 ipywidgets
 pandas
 lime
-py_rbig @ git+https://github.com/ipl-uv/rbig@master
+# py_rbig @ git+https://github.com/ipl-uv/rbig@master
 scipy
 astropy
 statsmodels

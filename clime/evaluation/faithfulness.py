@@ -5,7 +5,10 @@ from clime.data.utils import costs
 import numpy as np
 
 # from sklearn.metrics import log_loss
-from rbig._src.mutual_info import MutualInfoRBIG
+try:
+    from rbig._src.mutual_info import MutualInfoRBIG
+except ModuleNotFoundError:
+    print('Running without RBIG')
 from scipy.stats import spearmanr
 
 

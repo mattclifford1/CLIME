@@ -91,8 +91,8 @@ def get_all_points(data):
         points.append(data['X'][i, :])
     return points
 
-def get_local_points(data, query_point, samples=20):
-    # sample locally around the query point with a smaller variance that the dataset
+def get_local_points(data, query_point, samples=100):
+    # sample locally around the query point with a variance of the dataset
     data_cov = np.cov(data['X'].T)
     local_sample_cov = data_cov #/ 5    # maybe justify this?
     samples = np.random.multivariate_normal(query_point, local_sample_cov, samples)

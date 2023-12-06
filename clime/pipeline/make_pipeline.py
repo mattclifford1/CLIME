@@ -76,14 +76,25 @@ class construct:
         # get_ evaluation metric
         eval_metric = construct.get_section('evaluation metric', opts)
         # run evaluation
-        score = construct.run_section('evaluation run',
-                                  opts,
-                                  metric=eval_metric,
-                                  explainer_generator=expl_gen,
-                                  black_box_model=clf,
-                                  test_data=test_data,
-                                  train_data=train_data,
-                                  run_parallel=run_parallel)
+        # score = construct.run_section('evaluation run',
+        #                           opts,
+        #                           metric=eval_metric,
+        #                           explainer_generator=expl_gen,
+        #                           black_box_model=clf,
+        #                           test_data=test_data,
+        #                           train_data=train_data,
+        #                           run_parallel=run_parallel)
+        eval_func = evaluation.get_key_points_score(
+            key_points=clime.pipeline.AVAILABLE_MODULES['evaluation points'][opts['evaluation points']],
+            test_points=clime.pipeline.AVAILABLE_MODULES['evaluation data'][opts['evaluation data']],
+            )
+        score = eval_func(
+            metric=eval_metric,
+            explainer_generator=expl_gen,
+            black_box_model=clf,
+            test_data=test_data,
+            train_data=train_data,
+            run_parallel=run_parallel)
         return score   # score is a dict with minumim keys: 'avg', 'std'
 
     @staticmethod

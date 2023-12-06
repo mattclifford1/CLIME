@@ -156,7 +156,9 @@ def get_pipeline_widgets():
     # which evaluation metric to use
     data_store = get_multiple('evaluation metric', data_store)
     # which evaluation points to run
-    data_store = get_toggle('evaluation run', data_store)
+    data_store = get_toggle('evaluation points', data_store)
+    # which data to evaluate on
+    data_store = get_toggle('evaluation data', data_store)
     return data_store
 
 # running the pipeline
@@ -192,7 +194,8 @@ def run_experiments(data_store):
 # plot pipeline and results
 def plot_exp_results(inp):
     model_stats_, clfs, train_datas, test_datas, title, scores, scores_no_label, ylabels = inp
-    subtitle = 'evaluation run: ' + title.pop('evaluation run')
+    print(title)
+    subtitle = f"evaluation run: {title['evaluation data']} on {title['evaluation data']}"
     # print(f'Params: {title}')
     # plot evaluation graphs
     clime.utils.plots.plot_multiple_bar_dicts(scores, title=subtitle, ylabels=ylabels)
