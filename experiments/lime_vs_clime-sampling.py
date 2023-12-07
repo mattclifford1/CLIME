@@ -29,10 +29,30 @@ model = 'Random Forest'
 
 for dataset in tqdm(datasets):
 
-    params_normal = {'data params': {'class_samples': (200, 200), 'percent of data': 0.11, 'moons_noise': 0.2, 'gaussian_means': [[-1, -1], [1, 1]], 'gaussian_covs': [[[1, 0], [0, 1]], [[1, 0], [
-        0, 1]]]}, 'dataset': dataset, 'dataset rebalancing': 'none', 'model': model, 'model balancer': 'none', 'explainer': 'bLIMEy (normal)', 'evaluation metric': 'fidelity (local)', 'evaluation run': 'between_class_means'}
-    params_class_bal = {'data params': {'class_samples': (200, 200), 'percent of data': 0.11, 'moons_noise': 0.2, 'gaussian_means': [[-1, -1], [1, 1]], 'gaussian_covs': [[[1, 0], [0, 1]], [[1, 0], [
-        0, 1]]]}, 'dataset': dataset, 'dataset rebalancing': 'none', 'model': model, 'model balancer': 'none', 'explainer': 'bLIMEy (cost sensitive sampled)', 'evaluation metric': 'fidelity (local)', 'evaluation run': 'between_class_means'}
+    params_normal = {'data params': {'class_samples': (200, 200), 'percent of data': 0.11, 
+                                     'moons_noise': 0.2, 'gaussian_means': [[-1, -1], [1, 1]], 
+                                     'gaussian_covs': [[[1, 0], [0, 1]], [[1, 0], [0, 1]]]}, 
+                     'dataset': dataset, 
+                     'dataset rebalancing': 'none', 
+                     'model': model, 
+                     'model balancer': 'none', 
+                     'explainer': 'bLIMEy (normal)', 
+                     'evaluation metric': 'fidelity (local)', 
+                     'evaluation points': 'between_class_means',
+                     'evaluation data': 'test data'
+                     }
+    params_class_bal = {'data params': {'class_samples': (200, 200), 'percent of data': 0.11, 
+                                        'moons_noise': 0.2, 'gaussian_means': [[-1, -1], [1, 1]], 
+                                        'gaussian_covs': [[[1, 0], [0, 1]], [[1, 0], [0, 1]]]}, 
+                        'dataset': dataset, 
+                        'dataset rebalancing': 'none', 
+                        'model': model, 
+                        'model balancer': 'none', 
+                        'explainer': 'bLIMEy (cost sensitive sampled)', 
+                        'evaluation metric': 'fidelity (local)', 
+                        'evaluation points': 'between_class_means',
+                        'evaluation data': 'test data'
+                        }
 
     result_normal = clime.pipeline.run_pipeline(
         params_normal, parallel_eval=True)

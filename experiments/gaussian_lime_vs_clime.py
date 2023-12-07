@@ -28,10 +28,32 @@ for mean_ in tqdm(means):
     else: 
         std = False   # dont normalise far away as we are trying to not let the other class be captured in the distance measure
 
-    params_normal = {'standardise data': std, 'data params': {'class_samples': (200, 200), 'percent of data': 0.11, 'moons_noise': 0.2, 'gaussian_means': mean_, 'gaussian_covs': [[[1, 0], [0, 1]], [[1, 0], [
-        0, 1]]]}, 'dataset': 'Gaussian', 'dataset rebalancing': 'none', 'model': 'Random Forest', 'model balancer': 'none', 'explainer': 'bLIMEy (normal)', 'evaluation metric': 'fidelity (local)', 'evaluation run': 'between_class_means'}
-    params_class_bal = {'standardise data': std, 'data params': {'class_samples': (200, 200), 'percent of data': 0.11, 'moons_noise': 0.2, 'gaussian_means': mean_, 'gaussian_covs': [[[1, 0], [0, 1]], [[1, 0], [
-        0, 1]]]}, 'dataset': 'Gaussian', 'dataset rebalancing': 'none', 'model': 'Random Forest', 'model balancer': 'none', 'explainer': 'bLIMEy (cost sensitive sampled)', 'evaluation metric': 'fidelity (local)', 'evaluation run': 'between_class_means'}
+    params_normal = {'standardise data': std, 
+                     'data params': {'class_samples': (200, 200), 'percent of data': 0.11, 
+                                     'moons_noise': 0.2, 'gaussian_means': mean_, 
+                                     'gaussian_covs': [[[1, 0], [0, 1]], [[1, 0], [0, 1]]]}, 
+                     'dataset': 'Gaussian', 
+                     'dataset rebalancing': 'none', 
+                     'model': 'Random Forest', 
+                     'model balancer': 'none', 
+                     'explainer': 'bLIMEy (normal)', 
+                     'evaluation metric': 'fidelity (local)', 
+                     'evaluation points': 'between_class_means',
+                     'evaluation data': 'test data'
+                     }
+    params_class_bal = {'standardise data': std, 
+                        'data params': {'class_samples': (200, 200), 'percent of data': 0.11, 
+                                        'moons_noise': 0.2, 'gaussian_means': mean_, 
+                                        'gaussian_covs': [[[1, 0], [0, 1]], [[1, 0], [0, 1]]]}, 
+                        'dataset': 'Gaussian', 
+                        'dataset rebalancing': 'none', 
+                        'model': 'Random Forest', 
+                        'model balancer': 'none', 
+                        'explainer': 'bLIMEy (cost sensitive sampled)', 
+                        'evaluation metric': 'fidelity (local)', 
+                        'evaluation points': 'between_class_means',
+                        'evaluation data': 'test data'
+                        }
 
     result_normal = clime.pipeline.run_pipeline(
         params_normal, parallel_eval=True)

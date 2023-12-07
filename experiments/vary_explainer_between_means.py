@@ -27,10 +27,8 @@ opts = {
     # 'explainer':         'LIME (original)',
     'evaluation metric': 'fidelity (local)',
     # 'evaluation metric':   'fidelity (normal)',
-    'evaluation run':   'between_class_means',
-    # 'evaluation run':   'all_test_points',
-    # 'evaluation run':   'class_means',
-    # 'evaluation run':   'between_class_means_local',
+    'evaluation points': 'between_class_means',
+    'evaluation data': 'test data'
 }
 
 p = clime.pipeline.construct(opts)

@@ -189,10 +189,8 @@ if __name__ == '__main__':
         'evaluation metric':   'log loss (local)',
         'evaluation metric':   'Brier score',
         'evaluation metric':   'Brier score (local)',
-        'evaluation run':   'between_class_means',
-        # 'evaluation run':   'all_test_points',
-        'evaluation run':   'class_means',
-        'evaluation run':   'between_class_means',
+        'evaluation points': 'between_class_means',
+        'evaluation data': 'test data'
     }
 
     p = construct(opts)
