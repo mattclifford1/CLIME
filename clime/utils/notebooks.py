@@ -192,38 +192,51 @@ def run_experiments(data_store):
         clfs[i] = result['clf']
         train_datas[i] = result['train_data']
         test_datas[i] = result['test_data']
-    return model_stats_, clfs, train_datas, test_datas, title, scores, scores_no_label, ylabels
+    return {'model_stats_': model_stats_,
+            'clfs': clfs,
+            'train_datas': train_datas,
+            'test_datas': test_datas,
+            'title': title,
+            'scores': scores,
+            'scores_no_label': scores_no_label,
+            'ylabels': ylabels}
 
 # plot pipeline and results
-def plot_exp_results(inp):
-    model_stats_, clfs, train_datas, test_datas, title, scores, scores_no_label, ylabels = inp
-    print(title)
-    subtitle = f"evaluation run: {title['evaluation data']} on {title['evaluation data']}"
+def plot_exp_results(run_datas):
+    subtitle = f"evaluation run: {run_datas['title']['evaluation data']} on {run_datas['title']['evaluation points']}"
     # print(f'Params: {title}')
     # plot evaluation graphs
-    clime.utils.plots.plot_multiple_bar_dicts(scores, title=subtitle, ylabels=ylabels)
+    clime.utils.plots.plot_multiple_bar_dicts(
+        run_datas['scores'], title=subtitle, ylabels=run_datas['ylabels'])
     # visualise pipeline
-    return model_stats_, clfs, train_datas, test_datas, scores, scores_no_label, ylabels
+    return run_datas
 
-def plot_model_and_query_points(inp):
-    model_stats_, clfs, train_datas, test_datas, scores, scores_no_label, ylabels = inp
+
+def plot_model_and_query_points(run_datas):
     # get all train data and models in plotable dict
     model_plots = {}
-    for run in clfs:
-        model_plots[run] = {'model': clfs[run], 'data': train_datas[run]}
-        if 'eval_points' in scores_no_label[run].keys():
-            model_plots[run]['query_points'] = scores_no_label[run]['eval_points']
+    for run in run_datas['clfs']:
+        model_plots[run] = {
+            'model': run_datas['clfs'][run], 'data': run_datas['train_datas'][run]}
+        # if 'eval_points' in run_datas['scores_no_label'][run].keys():
+        if run_datas['scores'][0][list(run_datas['scores'][0].keys())[0]]['2D results'] == True:
+            model_plots[run]['query_points'] = run_datas['scores_no_label'][run]['eval_points']
+
+    # plot classifier and data
     clime.utils.plots.plot_clfs(model_plots, ax_x=len(model_plots), title=False, labels=False)
-    if scores[0][list(scores[0].keys())[0]]['2D results'] == True:
-        clime.utils.plots.plot_line_graphs(scores, ylabels=ylabels, extra_lines=False)
+
+    # second plot of the eval values
+    if run_datas['scores'][0][list(run_datas['scores'][0].keys())[0]]['2D results'] == True:
+        clime.utils.plots.plot_line_graphs(
+            run_datas['scores'], ylabels=run_datas['ylabels'], extra_lines=False)
     else:
         clime.utils.plots.plot_heatmaps(
-            scores, ylabels=ylabels)
+            run_datas['scores'], ylabels=run_datas['ylabels'])
     
-def plot_stats(inp):
-    model_stats_, clfs, train_datas, test_datas, scores, scores_no_label, ylabels = inp
-    clime.utils.plot_multiple_bar_dicts(model_stats_)
-    print(model_stats_[0])
+
+def plot_stats(run_datas):
+    clime.utils.plot_multiple_bar_dicts(run_datas['model_stats_'])
+    print(run_datas['model_stats_'][0])
 
 def disp_section_name(section, data_store):
     return f"{section}: {get_config(data_store)[section]}"

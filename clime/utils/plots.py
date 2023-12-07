@@ -3,6 +3,7 @@ plotting functions and helpers for graphs and notebooks
 '''
 # author: Matt Clifford <matt.clifford@bristol.ac.uk>
 
+import scipy
 from collections import Counter
 import matplotlib.pyplot as plt
 import matplotlib.patheffects as pe
@@ -282,13 +283,60 @@ def plot_line_graphs_on_one_graph(data_dict, ylabel=None, ylims=[0, 1], ax=None,
     # fig.tight_layout()
 
 
-def plot_heatmaps(scores, ylabels=None):
+def plot_heatmaps(scores, axs=False, fig=None, ylabels=None):
     '''scores is from pipeline eval so contains:
         - eval_points
         - scores
     which is what we will construct the heat map from
     '''
-    print(scores)
+    if axs == False:
+        ax_x = len(scores.keys())
+        ax_y = 1
+        # ax_y = int(np.ceil(num_plots/ax_x))
+        fig, axs = plt.subplots(ax_y, ax_x)
+        if ax_y == 1 and ax_x == 1:
+            axs = [axs]
+    else:
+        ax_x = 1
+        ax_y = len(axs)
+
+    count = 0
+
+    for num, runs in scores.items():
+        for title, run_data in runs.items():
+            eval_points = np.array(run_data['eval_points'])
+            x = eval_points[:, 0]
+            y = eval_points[:, 1]
+            z = run_data['scores']
+            heatmap = _heatmap_interpolate(x, y, z, axs[count])
+            axs[count].set_title(title)
+            # axs[count].set_colorbar(heatmap)
+            plt.colorbar(heatmap, label=ylabels[count])
+            # plt.show()
+            count += 1
+    
+    fig.tight_layout()
+
+
+def _heatmap_interpolate(x, y, z, ax=None, aspect=1, cmap=plt.cm.rainbow):
+    # Create regular grid
+    xi, yi = np.linspace(x.min(), x.max(), 100), np.linspace(
+        y.min(), y.max(), 100)
+    xi, yi = np.meshgrid(xi, yi)
+
+    # Interpolate missing data
+    rbf = scipy.interpolate.Rbf(x, y, z, function='linear')
+    zi = rbf(xi, yi)
+
+    if ax == None:
+        _, ax = plt.subplots(figsize=(6, 6))
+
+    hm = ax.imshow(zi, interpolation='nearest', cmap=cmap,
+                    extent=[x.min(), x.max(), y.max(), y.min()])
+    ax.scatter(x, y, s=0.5)
+    ax.set_aspect(aspect)
+    return hm
+
 
 def plot_clfs(data_dict, ax_x=2, title=True, axs=False, fig=None, labels=True):
     '''
