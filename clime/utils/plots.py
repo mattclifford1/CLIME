@@ -377,7 +377,7 @@ def plot_clfs(data_dict, ax_x=2, title=True, axs=False, fig=None, labels=True):
             else:
                 ax = axs[i]
             # flip plot if query points are decending
-            if pca != None:
+            if pca != None and 'query_points' in data_dict[key].keys():
                 start = data_dict[key]['query_points'][0]
                 end = data_dict[key]['query_points'][-1]
                 start = pca.transform(start.reshape(1, -1)).reshape(-1, 1)
