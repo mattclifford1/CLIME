@@ -28,21 +28,12 @@ AVAILABLE_EVALUATION_METRICS = {
     'Brier score': Brier_score,
 }
 
-# AVAILABLE_EVALUATION_POINTS = {
-#     'between_class_means': get_key_points_score(key_points='between_means', test_points='all'),
-#     'data_limits': get_key_points_score(key_points='data_edges', test_points='all'),
-#     'class_means': get_key_points_score(key_points='means', test_points='all'),
-#     'all_test_points': get_key_points_score(key_points='all_points', test_points='all'),
-#     'between_class_means_local': get_key_points_score(key_points='between_means', test_points='local'),
-#     'class_means_local': get_key_points_score(key_points='means', test_points='local'),
-#     'all_test_points_local': get_key_points_score(key_points='all_points', test_points='local'),
-# }
-
 AVAILABLE_EVALUATION_POINTS ={   # give the value to 'key_points' arg in get_key_points_score func
     'between_class_means': 'between_means',
     'data_limits': 'data_edges',
     'class_means': 'means',
     'all_test_points': 'all_points',
+    'grid': 'grid',
 }
 
 AVAILABLE_EVALUATION_DATA = {   # give the value to 'test_points' arg in get_key_points_score func

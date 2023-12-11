@@ -21,21 +21,42 @@ def get_class_means(data):
     return means
 
 def get_data_edges(data, num_samples=20):
-    '''get data going across the dataset on first PCA component'''
-    # max and min extension of the data along the vector
-    # pca = PCA(n_components=2, svd_solver='full')
-    # pca.fit(data['X'])
-    # X = pca.transform(data['X'])
-
     X = data['X']
-    # find min and max in the first component
     min_data = np.min(X, axis=0)
     max_data = np.max(X, axis=0)
-    # sample across first component
+    # sample across
     linspace = np.linspace(min_data, max_data, num_samples)
-    # return to original dataspace
-    # return pca.inverse_transform(linspace)
     return linspace
+
+
+def get_data_grid(data, num_samples=20):
+    '''get data going across the dataset on first two PCA components'''
+    # max and min extension of the data along the vector
+    pca = PCA(n_components=2, svd_solver='full')
+    pca.fit(data['X'])
+    X = pca.transform(data['X'])
+
+    # find min and max in the first two components
+    min_1 = np.min(X[:, 0])
+    max_1 = np.max(X[:, 0])
+    min_2 = np.min(X[:, 1])
+    max_2 = np.max(X[:, 1])
+    # sample across first two components
+    linspace_1 = np.linspace(min_1, max_1, num_samples)
+    linspace_2 = np.linspace(min_2, max_2, num_samples)
+
+    print(linspace_1)
+    print(linspace_2)
+    X_1, X_2 = np.meshgrid(linspace_1, linspace_2)
+    query_points = np.vstack([X_1.ravel(), X_2.ravel()])
+    # return to original dataspace
+    query_points = pca.inverse_transform(query_points)
+
+    import matplotlib.pyplot as plt
+    plt.scatter(query_points[:, 0], query_points[:, 1])
+    plt.show()
+
+    return query_points
 
 
 def get_points_between_class_means(data, num_samples=20):
@@ -121,6 +142,8 @@ class get_key_points_score():
             return get_all_points(data), None
         elif self.key_points == 'data_edges':
             return get_data_edges(data), None
+        elif self.key_points == 'grid':
+            return get_data_grid(data), None
         else:
             raise Exception(f'key points not accecpted, was given: {self.key_points}')
 

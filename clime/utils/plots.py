@@ -308,6 +308,9 @@ def plot_heatmaps(scores, axs=False, fig=None, ylabels=None):
             x = eval_points[:, 0]
             y = eval_points[:, 1]
             z = run_data['scores']
+            print(x.shape)
+            print(y.shape)
+            print(z.shape)
             heatmap = _heatmap_interpolate(x, y, z, axs[count])
             axs[count].set_title(title)
             plt.colorbar(heatmap, ax=axs[count], label=ylabels[count])
@@ -325,6 +328,7 @@ def _heatmap_interpolate(x, y, z, ax=None, aspect=1, cmap=plt.cm.rainbow, clip=T
     # Interpolate missing data
     rbf = scipy.interpolate.Rbf(x, y, z, function='linear')
     zi = rbf(xi, yi)
+    # clip interpolation
     if clip == True:
         zi = np.clip(zi, 0, 1)
         kwargs = {'vmin':0, 'vmax':1}

@@ -180,7 +180,8 @@ if __name__ == '__main__':
         'evaluation metric':   'Brier score',
         'evaluation metric':   'Brier score (local)',
         'evaluation points': 'between_class_means',
-        'evaluation data': 'test data'
+        'evaluation points': 'grid',
+        'evaluation data': 'test data',
     }
 
     p = construct(opts)
