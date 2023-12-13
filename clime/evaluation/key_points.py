@@ -29,12 +29,15 @@ def get_data_edges(data, num_samples=20):
     return linspace
 
 
-def get_data_grid(data, num_samples=20):
+def get_data_grid(train_data, test_data, num_samples=20):
     '''get data going across the dataset on first two PCA components'''
-    # max and min extension of the data along the vector
-    pca = PCA(n_components=2, svd_solver='full')
-    pca.fit(data['X'])
-    X = pca.transform(data['X'])
+    if train_data['X'].shape[1] > 2:
+        # max and min extension of the data along the vector
+        pca = PCA(n_components=2, svd_solver='full')
+        pca.fit(train_data['X'])
+        X = pca.transform(test_data['X'])
+    else:
+        X = test_data['X']
 
     # find min and max in the first two components
     min_1 = np.min(X[:, 0])
@@ -47,8 +50,10 @@ def get_data_grid(data, num_samples=20):
 
     X_1, X_2 = np.meshgrid(linspace_1, linspace_2)
     query_points = np.vstack([X_1.ravel(), X_2.ravel()]).T
+
     # return to original dataspace
-    query_points = pca.inverse_transform(query_points)
+    if train_data['X'].shape[1] > 2:
+        query_points = pca.inverse_transform(query_points)
 
     # import matplotlib.pyplot as plt
     # plt.scatter(query_points[:, 0], query_points[:, 1])
@@ -127,21 +132,22 @@ class get_key_points_score():
         self.key_points = key_points
         self.test_points = test_points
 
-    def determine_key_points(self, data):
+    def determine_key_points(self, train_data, test_data):
         '''
         get points to build the explainer from
-         - data: the test or train dataset given from the pipeline
+         - train_data: the train test_dataset given from the pipeline
+         - test_data: the test test_dataset given from the pipeline
         '''
         if self.key_points == 'means':
-            return get_class_means(data), None
+            return get_class_means(test_data), None
         elif self.key_points == 'between_means':
-            return get_points_between_class_means(data)
+            return get_points_between_class_means(test_data)
         elif self.key_points == 'all_points':
-            return get_all_points(data), None
+            return get_all_points(test_data), None
         elif self.key_points == 'data_edges':
-            return get_data_edges(data), None
+            return get_data_edges(test_data), None
         elif self.key_points == 'grid':
-            return get_data_grid(data), None
+            return get_data_grid(train_data, test_data), None
         else:
             raise Exception(f'key points not accecpted, was given: {self.key_points}')
 
@@ -160,7 +166,7 @@ class get_key_points_score():
         '''
         get score given an explainer, black_box_model and data to test on
         '''
-        data_points, plot_data = self.determine_key_points(test_data)
+        data_points, plot_data = self.determine_key_points(train_data, test_data)
         _get_explainer_evaluation_wrapper=partial(get_key_points_score._get_single_score,
                                                   explainer_generator=explainer_generator,
                                                   clf=black_box_model,

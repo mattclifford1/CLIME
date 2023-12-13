@@ -4,9 +4,8 @@ put together all aspects of the training/explaination/evaluation pipeline
 'score' returned is avg/std over all local explainers from all data points in the dataset
 '''
 # author: Matt Clifford <matt.clifford@bristol.ac.uk>
-
+from functools import cache
 from dataclasses import dataclass
-import logging
 import numpy as np
 import clime
 from clime import data, models, explainer, evaluation, utils
@@ -143,6 +142,9 @@ class explainer_generator():
                                  test_data=test_data)
         return expl
 
+
+@utils.freezeargs
+@cache
 def run_pipeline(opts, **kwargs):
     p = construct(opts)
     return p.run(**kwargs)

@@ -223,15 +223,17 @@ def plot_model_and_query_points(run_datas):
             model_plots[run]['query_points'] = run_datas['scores_no_label'][run]['eval_points']
 
     # plot classifier and data
-    clime.utils.plots.plot_clfs(model_plots, ax_x=len(model_plots), title=False, labels=False)
+    pca = clime.utils.plots.plot_clfs(model_plots, ax_x=len(model_plots), title=False, labels=False)
 
-    # second plot of the eval values
+    # plot of the eval values
+    # line graph if possible
     if run_datas['scores'][0][list(run_datas['scores'][0].keys())[0]]['2D results'] == True:
         clime.utils.plots.plot_line_graphs(
             run_datas['scores'], ylabels=run_datas['ylabels'], extra_lines=False)
+    # otherwise heatmap
     else:
         clime.utils.plots.plot_heatmaps(
-            run_datas['scores'], ylabels=run_datas['ylabels'])
+            run_datas['scores'], ylabels=run_datas['ylabels'], pca=pca)
     
 
 def plot_stats(run_datas):

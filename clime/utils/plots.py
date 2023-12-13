@@ -283,7 +283,7 @@ def plot_line_graphs_on_one_graph(data_dict, ylabel=None, ylims=[0, 1], ax=None,
     # fig.tight_layout()
 
 
-def plot_heatmaps(scores, axs=False, fig=None, ylabels=None):
+def plot_heatmaps(scores, axs=False, fig=None, ylabels=None, pca=None):
     '''scores is from pipeline eval so contains:
         - eval_points
         - scores
@@ -305,6 +305,8 @@ def plot_heatmaps(scores, axs=False, fig=None, ylabels=None):
     for num, runs in scores.items():
         for title, run_data in runs.items():
             eval_points = np.array(run_data['eval_points'])
+            if pca != None:
+                eval_points = pca.transform(eval_points)
             x = eval_points[:, 0]
             y = eval_points[:, 1]
             z = run_data['scores']
@@ -394,6 +396,7 @@ def plot_clfs(data_dict, ax_x=2, title=True, axs=False, fig=None, labels=True):
                 ax.set_title(key)
             count += 1
     fig.tight_layout()
+    return pca
 
 class flip_pca:
     def __init__(self, pca):

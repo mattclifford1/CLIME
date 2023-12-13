@@ -17,3 +17,4 @@ statsmodels
 python-picard
 shap
 adjustText
+frozendict
