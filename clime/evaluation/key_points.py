@@ -45,16 +45,14 @@ def get_data_grid(data, num_samples=20):
     linspace_1 = np.linspace(min_1, max_1, num_samples)
     linspace_2 = np.linspace(min_2, max_2, num_samples)
 
-    print(linspace_1)
-    print(linspace_2)
     X_1, X_2 = np.meshgrid(linspace_1, linspace_2)
-    query_points = np.vstack([X_1.ravel(), X_2.ravel()])
+    query_points = np.vstack([X_1.ravel(), X_2.ravel()]).T
     # return to original dataspace
     query_points = pca.inverse_transform(query_points)
 
-    import matplotlib.pyplot as plt
-    plt.scatter(query_points[:, 0], query_points[:, 1])
-    plt.show()
+    # import matplotlib.pyplot as plt
+    # plt.scatter(query_points[:, 0], query_points[:, 1])
+    # plt.show()
 
     return query_points
 

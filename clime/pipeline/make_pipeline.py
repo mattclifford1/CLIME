@@ -181,6 +181,7 @@ if __name__ == '__main__':
         'evaluation metric':   'Brier score (local)',
         'evaluation points': 'between_class_means',
         'evaluation points': 'grid',
+        # 'evaluation points': 'all_test_points',
         'evaluation data': 'test data',
     }
 
