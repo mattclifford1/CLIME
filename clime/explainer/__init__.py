@@ -54,14 +54,14 @@ def just_class_weight_sampled_bLIMEy(*args, **kwargs):
 
 AVAILABLE_EXPLAINERS = {
     'bLIMEy (normal)': bLIMEy,
+    'bLIMEy (cost sensitive sampled)': sample_weighted_bLIMEy,
+    'bLIMEy (logit)': bLIMEy_logit,
     'LIME (original)': LIME_fatf,
     'Kernel SHAP': kernal_SHAP,
-    'bLIMEy (cost sensitive sampled)': sample_weighted_bLIMEy,
     'bLIMEy (cost sensitive sampled - probs)': sample_weighted_bLIMEy_probs,
     'bLIMEy (cost sensitive class)': class_weighted_bLIMEy,
     'bLIMEy (not local)': dont_weight_locally_bLIMEy,
     'bLIMEy (just cost sensitive sampled)': just_class_weight_sampled_bLIMEy,
-    'bLIMEy (logit)': bLIMEy_logit,
     'bLIMEy (logit and sample weights)': sample_weighted_bLIMEy_logit,
     'bLIMEy (logistic regression)': bLIMEy_logistic_regression,
     'bLIMEy (logistic regression and sample weights)': sample_weighted_bLIMEy_logistic_regression,

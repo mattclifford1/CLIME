@@ -36,7 +36,7 @@ def get_sliders(interactive_data_store):
     percent_data = ipywidgets.FloatSlider(value=0.1,
                                           min=0.01,
                                           max=10,
-                                          description='PERCENT DATA (real datasets):',
+                                          description='PERCENT DATA (costcla datasets):',
                                           layout=ipywidgets.Layout(width='100%'),
                                           style={'description_width': 'initial'})
     display(percent_data)
@@ -97,7 +97,8 @@ def get_toggle(pipeline_section, interactive_data_store):
 def get_multiple(pipeline_section, interactive_data_store):
     init_value = [list(clime.pipeline.AVAILABLE_MODULES[pipeline_section].keys())[0]]
     if pipeline_section == 'explainer':
-        init_value.append(list(clime.pipeline.AVAILABLE_MODULES[pipeline_section].keys())[3])
+        init_value.append(list(clime.pipeline.AVAILABLE_MODULES[pipeline_section].keys())[1])
+        init_value.append(list(clime.pipeline.AVAILABLE_MODULES[pipeline_section].keys())[2])
     toggle = ipywidgets.SelectMultiple(options=list(clime.pipeline.AVAILABLE_MODULES[pipeline_section].keys()),
                                        value=init_value,
                                        description=f'{pipeline_section.upper()}:',

@@ -19,19 +19,19 @@ def _identity_data(data, *args):
 
 AVAILABLE_DATASETS = {
     'Gaussian': sample_dataset_to_proportions(get_gaussian),
-    'Moons': sample_dataset_to_proportions(get_moons),
     'Breast Cancer': get_breast_cancer,
+    'Banknote Authentication': get_banknote,
+    'Pima Indian Diabetes': get_diabetes_indian,
     'Iris': get_iris,
     'Wine': get_wine,
-    'Pima Indian Diabetes': get_diabetes_indian,
     'Sonar Rocks vs Mines': get_sonar,
-    'Banknote Authentication': get_banknote,
     'Abalone Gender': get_abalone,
     'Ionosphere': get_ionosphere,
     'Wheat Seeds': get_wheat_seeds,
     'Credit Scoring 1': costcla_dataset('CreditScoring_Kaggle2011_costcla'),
     'Credit Scoring 2': costcla_dataset('CreditScoring_PAKDD2009_costcla'),
     'Direct Marketing': costcla_dataset('DirectMarketing_costcla'),
+    'Moons': sample_dataset_to_proportions(get_moons),
     'Circles': sample_dataset_to_proportions(get_circles),
     'Blobs': sample_dataset_to_proportions(get_blobs),
 }

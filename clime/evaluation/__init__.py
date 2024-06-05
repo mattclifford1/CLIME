@@ -14,9 +14,9 @@ from .average_score import get_avg_score
 from .key_points import get_key_points_score
 
 AVAILABLE_EVALUATION_METRICS = {
-    'fidelity (local)': local_fidelity,
-    'log loss (local)': local_log_loss_score,
     'Brier score (local)': local_Brier_score,
+    'log loss (local)': local_log_loss_score,
+    'fidelity (local)': local_fidelity,
     'fidelity (class balanced)': bal_fidelity,
     'KL': rbig_kl,
     'spearman': spearman,
@@ -29,14 +29,14 @@ AVAILABLE_EVALUATION_METRICS = {
 }
 
 AVAILABLE_EVALUATION_POINTS ={   # give the value to 'key_points' arg in get_key_points_score func
+    'grid': 'grid',
     'between_class_means': 'between_means',
     'data_limits': 'data_edges',
     'class_means': 'means',
     'all_test_points': 'all_points',
-    'grid': 'grid',
 }
 
 AVAILABLE_EVALUATION_DATA = {   # give the value to 'test_points' arg in get_key_points_score func
-    'test data': 'all',
     'sample locally': 'local',
+    'test data': 'all',
 }

@@ -36,7 +36,8 @@ def softmax(x):
 #     # return 1/(1+np.exp(-x))
     # return 1/(1-x)   # float overload
 
-
+def sigmoid(x):
+    return 1 / (1 + np.exp(-x))
 
 class logit_ridge(sklearn.linear_model.Ridge):
     '''
@@ -54,6 +55,7 @@ class logit_ridge(sklearn.linear_model.Ridge):
         super().fit(X, logits(y), **kwargs)
 
     def predict(self, X):
-        preds = softmax(super().predict(X))
-        preds = np.stack([preds, 1-preds], axis=1)
+        # preds = softmax(super().predict(X))
+        preds = sigmoid(super().predict(X))
+        preds = np.stack([1-preds, preds], axis=1)
         return preds
