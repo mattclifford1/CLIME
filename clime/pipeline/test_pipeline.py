@@ -9,12 +9,14 @@ from tqdm import tqdm
 from clime import pipeline, utils
 
 opts = {
-    'data params': [{'class_samples': [20, 20],  # keep low to reduce comp time
-                    'percent_of_data': 0.01},  # super small proportion of real dataset
-                    {'class_samples': [1, 1],
-                    'percent_of_data': 0.01},
-                    {'class_samples': [201, 49],
-                    'percent_of_data': 0.01}]
+    'data params': [
+        {'class_samples': [20, 20],  # keep low to reduce comp time
+        'percent_of_data': 0.01},  # super small proportion of real dataset
+        {'class_samples': [1, 1],
+        'percent_of_data': 0.01},
+        {'class_samples': [201, 49],
+        'percent_of_data': 0.01}
+                    ]
 }
 
 def test_all_pipeline_configs(dev=False):
