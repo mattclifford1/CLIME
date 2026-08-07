@@ -90,11 +90,11 @@ constructed per query point and expose `.predict`, `.predict_proba`,
 
 `run_pipeline` is `@utils.freezeargs`-decorated then `@cache`d, so repeated identical
 `opts` return the memoised result. `freezeargs` recursively converts dicts to
-`frozendict` and lists to tuples. Two consequences to be aware of:
+`frozendict` and lists to tuples, building new containers rather than freezing in place
+(it used to mutate the caller's dict — `FINDINGS.md` B9).
 
-- It **mutates the caller's dict in place** while freezing.
-- If you change code mid-session in the notebook, `%autoreload` will not invalidate the
-  cache. Restart the kernel when comparing before/after a code change.
+If you change code mid-session in the notebook, `%autoreload` will not invalidate the
+cache. Restart the kernel when comparing before/after a code change.
 
 ## Conventions
 
@@ -125,6 +125,17 @@ comparing behaviour before and after editing a module.
 **Plot axes are metric-aware.** `clime.evaluation.METRIC_RANGES` declares a fixed range
 for bounded metrics and `None` for unbounded ones. A new metric must be added there or
 `test_every_metric_has_a_plot_range` fails.
+
+**Prefer `'KL divergence (local)'` over `'log loss (local)'`.** The log loss metrics are
+cross-entropy and carry an irreducible floor equal to the black box's own entropy, which
+can be most of the reported number. `'mutual information (RBIG)'` is not a divergence
+despite once being called `'KL'`.
+
+**Degenerate neighbourhoods are a real regime, not an edge case.** Far from the decision
+boundary the black box predicts one class over the whole local sample. Two surrogates used
+to crash there (`FINDINGS.md` B12, B13). Any new explainer or weighting scheme must handle
+it; `test_explainer_builds_far_from_the_boundary` enforces this for every registered
+explainer.
 
 **The query-point line runs class 0 → class 1.** This orientation was arbitrary before
 B7 was fixed, so figures regenerated for Breast Cancer come out mirrored relative to the

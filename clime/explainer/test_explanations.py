@@ -51,3 +51,22 @@ def test_predict_proba_is_a_probability(name, setup):
     probs = np.asarray(expl.predict_proba(test_data['X'][:10, :]))
     assert probs.shape == (10, 2)
     assert (probs >= 0).all() and (probs <= 1).all(), 'probabilities must be in [0, 1]'
+
+
+@pytest.mark.parametrize('name', list(AVAILABLE_EXPLAINERS))
+def test_explainer_builds_far_from_the_boundary(name, setup):
+    '''
+    regression test: away from the decision boundary the black box predicts a single
+    class over the whole neighbourhood. The logistic regression surrogate used to raise
+    'This solver needs samples of at least 2 classes' and take the pipeline down with it
+    '''
+    clf, train_data, test_data = setup
+    far_query_point = np.full(test_data['X'].shape[1], 12.0)   # deep in one class' region
+    expl = AVAILABLE_EXPLAINERS[name](clf,
+                                      query_point=far_query_point,
+                                      train_data=train_data,
+                                      test_data=test_data,
+                                      samples=500)
+    probs = np.asarray(expl.predict_proba(test_data['X'][:5, :]))
+    assert probs.shape == (5, 2)
+    assert np.isfinite(probs).all()

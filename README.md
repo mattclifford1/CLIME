@@ -29,6 +29,12 @@ access to the test distribution.
 Source: `~/Repos/Overleaf/CIKM-2023-camera-ready`. Figures reproduced by
 `experiments/lime_vs_clime-sampling.py` and `experiments/gaussian_lime_vs_clime.py`.
 
+A follow-up study — *Logit-LIME: The Right Surrogate Depends on the Black Box* — is
+drafted in `~/Repos/Overleaf/Logit-LIME/`. It finds that fitting the surrogate in logit
+space helps by up to four orders of magnitude for some black boxes and not at all for
+others, and gives a cheap diagnostic that predicts which. See [FINDINGS.md](FINDINGS.md)
+§4.
+
 ## Documentation
 
 | file | contents |

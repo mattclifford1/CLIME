@@ -8,6 +8,7 @@ from .MLP import MLP_simple
 from .balance import adjust_boundary, adjust_proba, base_balance
 from .logit_regression import logit_ridge
 from .logistic_regression import logistic_regression
+from .calibrated import random_forest_platt, random_forest_isotonic, gradient_boosting
 
 AVAILABLE_MODELS = {
     'Random Forest': random_forest,
@@ -19,6 +20,9 @@ AVAILABLE_MODELS = {
     # 'QDA': QDA,
     'Bayes Optimal': Guassian_class_conditional,
     'MLP': MLP_simple,
+    'Gradient Boosting': gradient_boosting,
+    'Random Forest (Platt calibrated)': random_forest_platt,
+    'Random Forest (isotonic calibrated)': random_forest_isotonic,
 }
 
 AVAILABLE_MODEL_BALANCING = {

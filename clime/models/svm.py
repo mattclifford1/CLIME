@@ -22,7 +22,11 @@ class SVM(sklearn.svm.SVC, base_model):
 
     *** to train with class balance weighting using the kwarg: class_weight='balanced'
     '''
-    def __init__(self, data, gamma=2, C=1, probability=True, balanced_training=False, **kwargs):
+    def __init__(self, data, gamma='scale', C=1, probability=True, balanced_training=False, **kwargs):
+        # N.B. gamma was previously hard coded to 2, which is far too wide a kernel for
+        # standardised data with more than a couple of features - it drove the SVM to
+        # near chance accuracy on Breast Cancer (0.63) and Pima (0.65). 'scale' is
+        # sklearn's default, 1/(n_features * X.var())
         self.balanced_training = balanced_training
         super().__init__(gamma=gamma, C=C, probability=probability, random_state=clime.RANDOM_SEED, **kwargs)
         self.train(data)

@@ -36,18 +36,51 @@ def spearman(expl, black_box_model, data, query_class=0, **kwargs):
     corr = spearmanr(bb_preds, expl_preds)[0]
     return corr
 
-def log_loss_score(expl, black_box_model, data, **kwargs):
+def _probs(expl, black_box_model, data):
     stabilty_constant = 1e-7
     y = black_box_model.predict_proba(data['X']).astype(np.float64) + stabilty_constant
     p = expl.predict_proba(data['X']).astype(np.float64) + stabilty_constant
+    return y, p
+
+
+def _kl_terms(expl, black_box_model, data):
+    '''
+    per instance KL divergence between the black box's probabilities and the
+    surrogate's, KL(y || p) = sum_c y_c log(y_c/p_c)
+
+    this is the cross entropy (see log_loss_score) minus the black box's own
+    entropy, so unlike the cross entropy it is 0 exactly when the surrogate
+    reproduces the black box
+    '''
+    y, p = _probs(expl, black_box_model, data)
+    return y[:, 0]*np.log(y[:, 0]/p[:, 0]) + y[:, 1]*np.log(y[:, 1]/p[:, 1])
+
+
+def kl_divergence(expl, black_box_model, data, **kwargs):
+    return _kl_terms(expl, black_box_model, data).mean()
+
+
+def local_kl_divergence(expl, black_box_model, data, query_point, **kwargs):
+    kl = _kl_terms(expl, black_box_model, data)
+    weights = costs.weights_based_on_distance(query_point, data['X'])
+    return sum(kl*weights) / sum(weights)
+
+
+def log_loss_score(expl, black_box_model, data, **kwargs):
+    '''
+    N.B. this is the CROSS entropy H(y, p), whose minimum is the black box's own
+    entropy H(y) rather than 0. That floor can dominate the score and hide large
+    differences between surrogates - prefer kl_divergence unless you specifically
+    want the cross entropy
+    '''
+    y, p = _probs(expl, black_box_model, data)
     log_loss = - (y[:, 0]*np.log(p[:, 0]) + (y[:, 1])*np.log((p[:, 1])))
     return log_loss.mean()
 
 def local_log_loss_score(expl, black_box_model, data, query_point, **kwargs):
+    '''see log_loss_score - this is a cross entropy and has an irreducible floor'''
     # get log loss
-    stabilty_constant = 1e-7
-    y = black_box_model.predict_proba(data['X']).astype(np.float64) + stabilty_constant
-    p = expl.predict_proba(data['X']).astype(np.float64) + stabilty_constant
+    y, p = _probs(expl, black_box_model, data)
     log_loss = - (y[:, 0]*np.log(p[:, 0]) + (y[:, 1])*np.log((p[:, 1])))
     # weight locally
     weights = costs.weights_based_on_distance(query_point, data['X'])

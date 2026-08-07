@@ -68,4 +68,12 @@ def weights_based_on_class_either_side_of_prob(data, query_probs):
     # apply to all instances
     instance_class_imbalance_weights = np.dot(
         _query_adjusted_classes, class_weights.T)
+    # in a saturated neighbourhood every sample sits at the same probability as the
+    # query point, so nothing lies to either side of it and every weight comes out 0.
+    # there is no information to weight by, so fall back to weighting everything equally
+    # rather than handing an all zero weight vector to the surrogate
+    if np.sum(instance_class_imbalance_weights) == 0:
+        warnings.warn('no sampled points either side of the query point probability: '
+                      'not using query probability weightings', Warning)
+        return np.ones(instance_class_imbalance_weights.shape[0])
     return instance_class_imbalance_weights

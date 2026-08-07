@@ -12,7 +12,7 @@ Three threads, in order of maturity:
 | Thread | Status | Overleaf | Code |
 |---|---|---|---|
 | **CIKM'23 — location-agnostic surrogates** | Published, DOI `10.1145/3583780.3615284` | `~/Repos/Overleaf/CIKM-2023-camera-ready` | complete, figures reproducible |
-| **Logit-LIME** | Sketch only (~1 page of prose, no results) | `~/Repos/Overleaf/Logit-LIME` | implemented and running, never written up |
+| **Logit-LIME** | Sketch (~1 page) + first real results, see §4 | `~/Repos/Overleaf/Logit-LIME` | implemented, working, operating regime now characterised |
 | **aLIMEgn / aLIMEgnment** | Framing note (~1 page, 3 open questions) | `~/Repos/Overleaf/aLIMEgn` | not started |
 
 `~/Repos/Overleaf/CLIME/` is **empty** — that clone has no content. The paper you're
@@ -150,10 +150,71 @@ heatmaps are three flat purple squares. **The experiment ran; the plotting hid t
 result.** Fixing the axis scaling (see §6) and re-running that exact cached config is
 the cheapest next step in the whole repo — the numbers may well already separate.
 
-**Known gap.** `bLIMEy.get_explanation()` raises `IndexError` for the logit surrogate
-(§6). Fidelity metrics don't touch it, so the pipeline runs clean, but you cannot
-currently extract feature importances from a Logit-LIME explainer — which is the actual
-explanation. This must be fixed before any qualitative or feature-agreement result.
+**Known gap (now fixed).** `bLIMEy.get_explanation()` used to raise `IndexError` for the
+logit surrogate (§6, B4). Fidelity metrics don't touch it, so the pipeline ran clean, but
+feature importances — the actual explanation — could not be extracted. Fixed and tested.
+
+### When is Logit-LIME actually better? (answered 2026-08-07)
+
+Full study: 4 datasets x 7 black boxes x 3 surrogates x 2 metrics, 20 query points each,
+run serially. **Written up as a paper in `~/Repos/Overleaf/Logit-LIME/` (10 pages,
+compiles clean).** Headline: the June 2024 comparison used a random forest, which is close
+to the worst possible choice.
+
+**The decisive check.** If the black box *is* a logistic regression its log-odds are
+exactly linear in `x`, so a ridge fit in logit space should recover it while a line fitted
+to the sigmoid cannot. It does — by **12 797x** on Gaussian, 287x on Banknote, 17x on
+Breast Cancer. The implementation is sound.
+
+**The benefit is a property of the black box, not the explainer.**
+
+| black box family | Logit-LIME better | median Brier ratio |
+|---|---|---|
+| logistic regression, MLP | **8/8** | **13.7x** |
+| SVM, gradient boosting | 8/8 | 1.28x |
+| random forest (raw, Platt, isotonic) | 6/12 | 0.93x |
+
+**The predictor.** Fit a locality-weighted linear model to the black box's log-odds and to
+its probabilities on the locally sampled points, and take the difference in weighted R².
+This "log-odds linearity gap" Δ predicts the benefit: **Spearman ρ = 0.77, p = 2e-06,
+n = 28**. Every configuration with Δ > 0.35 is a logistic regression or MLP, and all six
+show a benefit (3.6x to 1.3e4). Δ needs only the black box, so it can be computed *before*
+choosing a surrogate.
+
+Caveat worth keeping: a large Δ implies a large benefit, but not the converse. Pima
+Indian Diabetes + logistic regression has Δ = 0.16 yet a huge measured ratio, because
+Logit-LIME recovers that black box essentially exactly (3e-09) and the ratio's denominator
+collapses. Δ measures how much *worse* probability space is, not how good logit space can
+get.
+
+**Saturation is NOT the mechanism** — the discriminating experiment. Platt-calibrating a
+random forest takes saturation from **65.9% to 0.0%** while leaving Δ at ~0.04 and the
+benefit at 1.5x (slightly *worse* than uncalibrated). Across the sweep saturation has no
+relationship with benefit at all (**ρ = −0.13, p = 0.5**). Platt scaling composes a sigmoid
+with the forest's unchanged piecewise-constant score, so `logit p` stays a step function
+of `x`. This is the cleanest result in the study.
+
+**Where the benefit lives.** Concentrated in the **transition region near the decision
+boundary**, zero in the tails — the opposite of my initial guess. Saturated tails are easy
+for both surrogates because the black box is locally flat there; the difficulty is where
+the probability surface actually curves.
+
+**Unexpected: the two proper scoring rules disagree, informatively.** The hard-label
+variant (`bLIMEy (logistic regression)`, which thresholds the black box's probabilities)
+attains the **best local Brier score in 16/28** configurations — more than either other
+surrogate, median 24% better. But it is best on **KL in only 9/28**, with a median
+divergence **4.2x** the better of the others and a worst case eight orders of magnitude
+out. It is *well ranked and badly calibrated*: fitting to hard labels throws away the
+black box's uncertainty, squared error forgives confident-and-right, KL punishes
+confident-and-wrong without limit. Practical upshot: **report Brier and KL together — a
+disagreement between their rankings is a cheap detector of an overconfident surrogate.**
+
+**What this means for the paper.** Not "our surrogate is better" — that dies on random
+forests. It is *"the right surrogate depends on the black box's local log-odds geometry,
+and here is a cheap diagnostic that tells you which to use"*. That framing explains the
+random forest result rather than being embarrassed by it, mirrors the CIKM contribution
+("don't be location agnostic" → "don't be black-box agnostic"), and connects to aLIMEgn,
+which is likewise about aligning to properties of the black box rather than the data.
 
 ---
 
@@ -199,8 +260,8 @@ rather than two.
 
 All verified by running the code, not by reading it. Ordered by how much they'd cost you.
 
-> **B1–B9 were fixed on 2026-08-07** and each has a regression test. B10 was found while
-> verifying those fixes and is **still open** — it needs a decision from you, because
+> **B1–B9 and B11–B14 were fixed on 2026-08-07** and each has a regression test. B10 was
+> found while verifying those fixes and is **still open** — it needs a decision from you, because
 > fixing it re-bases every number in the repo.
 >
 > The fixes were checked against a before/after snapshot of the paper's configurations
@@ -401,8 +462,13 @@ logit-explainer                                   max|Δ| = 6.3e-04
 
 `bLIMEy._sample_locally` draws its 10 000 samples from the **global** numpy RNG, which is
 seeded once at `import clime`. Results therefore depend on how many draws happened
-before — and under `multiprocessing`, on which worker handles which query point. Serial
-runs (`parallel_eval=False`) *are* deterministic; parallel runs are not.
+before — and under `multiprocessing`, on which worker handles which query point.
+
+A single serial sweep is deterministic, but the scope is narrower than that sounds: the
+same configuration run from a differently structured script drifts at the third decimal,
+because the preceding draws differ. `key_points.get_local_points` has the same problem, so
+`evaluation data: 'sample locally'` **and the Logit-LIME diagnostic** are both affected
+(measured: saturation 65.9% vs 65.6%, gap 0.044 vs 0.042 for the same configuration).
 
 The effect is small (~1e-3, well below the effects the paper reports, which are ~0.1–0.4)
 so **no conclusion in the paper is at risk**. But the exact figures cannot be regenerated,
@@ -423,6 +489,73 @@ sampled_data['X'] = rng.multivariate_normal(self.query_point, cov, self.samples)
 `key_points.get_local_points` has the same problem and needs the same treatment for
 `evaluation data: 'sample locally'`. Use a stable hash (`hashlib`, not `hash()`, which is
 salted per process).
+
+### B11 — `log loss` is cross-entropy, not KL — **FIXED**
+
+`log_loss_score` computes the cross entropy `H(y, p)` between the black box's
+probabilities and the surrogate's. Its minimum is `H(y)`, not zero, and that floor is
+often most of the number. Measured on the logistic black box: floor **0.111 of a reported
+0.132 — 84%**, compressing a genuine 24 500x difference between surrogates into an
+apparent 1.19x.
+
+**Fixed** by adding proper KL divergence metrics — `'KL divergence'` and
+`'KL divergence (local)'` — which are zero exactly when the surrogate reproduces the black
+box. `'log loss'` is kept (the cross entropy is sometimes what you want) but its docstring
+now states the floor. The pre-existing `'KL'` key was renamed
+`'mutual information (RBIG)'`, which is what `rbig_kl` actually computes — it estimates
+mutual information via RBIG, not a divergence, and having it sit next to a real KL metric
+under the name "KL" was misleading.
+
+### B12 — the logistic-regression surrogate crashes far from the boundary — **FIXED**
+
+`bLIMEy (logistic regression)` thresholds the black box's probabilities and fits sklearn's
+`LogisticRegression`. Away from the decision boundary the black box predicts a single
+class over the whole neighbourhood, and sklearn raises
+`ValueError: This solver needs samples of at least 2 classes`. This **took down the entire
+experiment sweep** partway through.
+
+The failure regime is exactly the one this project studies: high-confidence regions far
+from the boundary. `pytest` missed it because the existing fixtures happen to place every
+query point where both classes appear locally.
+
+**Fixed** — the surrogate now detects the single-class case and falls back to a constant
+predictor (zero coefficients, constant probability) instead of raising.
+Test: `test_explainer_builds_far_from_the_boundary`, parameterised over every registered
+explainer.
+
+### B13 — query-probability weighting produces all-zero weights — **FIXED**
+
+Found by the test written for B12. `bLIMEy (cost sensitive sampled - probs)` weights
+samples by which side of the *query point's* probability they fall on. In a saturated
+neighbourhood every sample sits at the same probability as the query point, so nothing
+lies to either side, every weight comes out zero, and the ridge fit dies with
+`ZeroDivisionError: Weights sum to zero`.
+
+(The proximate cause is that `np.round(0.5)` is `0` under banker's rounding, so exact ties
+are assigned to *neither* side rather than one.)
+
+**Fixed** — `weights_based_on_class_either_side_of_prob` now detects the degenerate case,
+warns, and falls back to uniform weights. The tie-assignment rule is left alone
+deliberately: changing it would alter the semantics of an existing metric.
+
+### B14 — the SVM black box is badly misconfigured — **FIXED**
+
+`clime/models/svm.py` hard-coded `gamma=2`, an extremely wide RBF kernel for standardised
+data with more than a couple of features. Measured test accuracy:
+
+```
+Breast Cancer   0.626      (majority class rate ~0.63)
+Pima Diabetes   0.654      (majority class rate ~0.65)
+Banknote        0.998
+Gaussian        0.920
+```
+
+So on the two higher-dimensional datasets the SVM was at chance, emitting a near-constant
+probability (~0.63, s.d. 0.0005 within a neighbourhood). Any result using the SVM on those
+datasets was meaningless — both surrogates trivially fit a constant.
+
+**Fixed** to sklearn's default `gamma='scale'`. Accuracies become 0.925 / 0.957 / 1.000 /
+0.779. Does not affect any published figure: the CIKM paper uses a random forest.
 
 ### Effect on published results
 
@@ -455,31 +588,16 @@ the published version. The curve's content is unchanged. The published PNGs in
 
 Roughly in cost order. The first two are hours, not days.
 
-**E1 — re-run the June 2024 Logit-LIME comparison.** ***Done — see the preliminary
-result below.*** Add log loss alongside Brier next; the two disagree about tail
-calibration, which is exactly what logit-space regression should change. Run it with
-`parallel_eval=False` until B10 is fixed.
-
-> **Preliminary result (2026-08-07).** Ran the saved notebook config (Gaussian μ=±1, RF,
-> 400 grid query points, local Brier, evaluated on locally sampled data) in serial, after
-> fixing B5. The heatmaps now show clear structure instead of three flat purple squares.
->
-> | explainer | mean | min | max | std |
-> |---|---|---|---|---|
-> | bLIMEy (normal) | **0.01833** | 0.00002 | 0.05711 | 0.01344 |
-> | bLIMEy (cost sensitive sampled) | 0.02290 | 0.00009 | 0.05714 | 0.01241 |
-> | bLIMEy (logit) | 0.02189 | 0.00001 | **0.09149** | 0.01833 |
->
-> On this config **Logit-LIME is worse calibrated than standard LIME**, and its worst case
-> is 60% worse. The gaps (~4e-3) sit above B10's noise floor (~1e-3), but not hugely.
->
-> One dataset, one black box, one metric — not a result yet. But it argues for testing the
-> *premise* before writing the paper: on well-behaved overlapping Gaussians, standard
-> LIME's unbounded linear surrogate may not be costing much. If Logit-LIME has an
-> advantage it should show up where the black box's probabilities are extreme —
-> near-separable classes, high-confidence regions far from the boundary. That is also
-> exactly where the CIKM paper found standard LIME breaking down, so the two threads
-> predict the same regime of interest.
+**E1 — Logit-LIME's operating regime.** ***Done — see §4, and the paper in
+`~/Repos/Overleaf/Logit-LIME/`.*** Remaining follow-ups, in order of value:
+(a) test the Δ diagnostic on black boxes outside the seven used here, and establish a
+threshold rather than the eyeballed 0.35;
+(b) sweep the locality kernel width `k`, which defines "local" for both the surrogate's
+training data and the evaluation metric and so partly determines the effect being
+measured — this is the obvious reviewer question;
+(c) test whether the effect survives an interpretable-domain transform, where the
+surrogate operates on binary indicators rather than raw features;
+(d) more seeds and splits — everything so far is a single split per configuration.
 
 **E2 — the aLIMEgn evaluation-target sweep.** Fix the black box and the query points,
 toggle `evaluation data` between `'test data'` and `'sample locally'`, and sweep across
@@ -539,6 +657,11 @@ open generality question, and the most work.
    known inputs. B2 and B3 would both have been caught by these.
 5. ~~Delete dead code~~ — done: `main.py`, `multiple_runs.py`, `average_score.py`, the
    reference `LIME` class, `Untitled.ipynb`, `.ipynb_checkpoints/`.
+
+Also done since: B11 (KL divergence metrics), B12 (logistic-regression surrogate crashing
+far from the boundary), B13 (all-zero query-probability weights), B14 (SVM `gamma=2`),
+plus three new models in the registry — gradient boosting and Platt/isotonic-calibrated
+random forests — which the calibration control needed.
 
 **Still open**, roughly in order of value:
 
