@@ -10,7 +10,6 @@ from .faithfulness import (fidelity,
                            local_Brier_score,
                            query_probs_fidelity,
                            query_probs_local_fidelity)
-from .average_score import get_avg_score
 from .key_points import get_key_points_score
 
 AVAILABLE_EVALUATION_METRICS = {
@@ -23,9 +22,29 @@ AVAILABLE_EVALUATION_METRICS = {
     'fidelity (local and balanced)': local_and_bal_fidelity,
     'fidelity (normal)': fidelity,
     'fidelity (query probs)': query_probs_fidelity,
-    'fidelity (local query probs)': query_probs_fidelity,
+    'fidelity (local query probs)': query_probs_local_fidelity,
     'log loss': log_loss_score,
     'Brier score': Brier_score,
+}
+
+# display range of each metric, used to scale plot axes
+#   (min, max) -> a bounded metric, always plot on this fixed scale
+#   None       -> unbounded (or very small range), derive limits from the data
+# without this, scores such as Brier (~0.02) or log loss (unbounded) are
+# squashed into - or clipped out of - a hard coded [0, 1] axis
+METRIC_RANGES = {
+    'Brier score (local)': None,
+    'log loss (local)': None,
+    'fidelity (local)': (0, 1),
+    'fidelity (class balanced)': (0, 1),
+    'KL': None,
+    'spearman': (-1, 1),
+    'fidelity (local and balanced)': (0, 1),
+    'fidelity (normal)': (0, 1),
+    'fidelity (query probs)': (0, 1),
+    'fidelity (local query probs)': (0, 1),
+    'log loss': None,
+    'Brier score': None,
 }
 
 AVAILABLE_EVALUATION_POINTS ={   # give the value to 'key_points' arg in get_key_points_score func

@@ -60,7 +60,16 @@ class bLIMEy:
         self._train_surrogate(sampled_data)
 
     def get_explanation(self):
-        return self.surrogate_model.coef_[0, :] # just do for one class (is the negative for the other class)
+        '''
+        feature importances of the surrogate model - just do for one class
+        (is the negative for the other class)
+
+        N.B. surrogates that regress a single target (e.g. logit_ridge, which
+        fits on p(class 1) alone) have a 1D coef_, so promote to 2D first.
+        Coefficients live on different scales between surrogates (probability,
+        logit, log-odds) so are not directly comparable across explainers.
+        '''
+        return np.atleast_2d(self.surrogate_model.coef_)[0, :]
 
     def predict_proba(self, X):
         y_ = self.surrogate_model.predict(X)

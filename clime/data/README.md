@@ -30,8 +30,8 @@ datasets/     the CSVs themselves
 tests/        pytest
 ```
 
-> The `__init__` files in `loaders/`, `utils/` and `tests/` are named `__init__,py` with
-> a **comma**. Editable installs tolerate this; built wheels do not. See `FINDINGS.md` B1.
+> These `__init__.py` files were previously named `__init__,py` with a **comma**, which
+> silently excluded them from built wheels. Fixed — see `FINDINGS.md` B1.
 
 ## Available datasets
 
@@ -77,5 +77,6 @@ direction that was not pursued.
 - `weights_based_on_class_either_side_of_prob(data, query_probs)` — same idea but the
   class split is taken relative to the query point's predicted probability instead of
   0.5.
-- `get_instance_class_weights(data)` — matrix form for model training. **Currently
-  returns the weights swapped**, see `FINDINGS.md` B2.
+- `get_instance_class_weights(data)` — per instance weights for model training, equal to
+  sklearn's `class_weight='balanced'`. Used by all three `*_balanced_training` models.
+  (Previously returned the weights swapped — `FINDINGS.md` B2.)

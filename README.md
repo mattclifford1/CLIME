@@ -50,8 +50,8 @@ conda activate clime
 pip install -e .
 ```
 
-The editable install is required — a non-editable `pip install` currently produces a
-broken wheel (`FINDINGS.md` B1), which also means the Colab badge below does not work.
+The Colab badge below is commented out: it installs from GitHub, and the packaging fix
+(`FINDINGS.md` B1) is in the working tree but not yet pushed. Re-enable it once it is.
 
 Do not upgrade scikit-learn past the pinned `1.1.3`; there is an unresolved
 incompatibility with 1.2.2.
@@ -99,11 +99,12 @@ for sweeping over several at once.
 ## Dev tools
 
 ```bash
-pytest    # ~10 min: runs every pipeline module once
+pytest    # ~10 min: sweeps every pipeline module, plus numerical regression tests
 ```
 
-The suite checks that each configuration *completes*, not that it produces correct
-values. See `FINDINGS.md` §8 for what's missing.
+`test_pipeline.py` checks that every configuration *completes*; the `test_costs.py`,
+`test_metrics.py`, `test_utils.py` and `test_explanations.py` suites assert actual
+values, and cover the bugs recorded in `FINDINGS.md` §6.
 
 ## Package structure
 

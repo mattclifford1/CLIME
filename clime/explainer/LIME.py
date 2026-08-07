@@ -60,37 +60,6 @@ class LIME_fatf:
 
 
 
-'''
-original LIME implementation below (use only to validate against the fatf version)
-'''
-class LIME:
-    def __init__(self, black_box_model,
-                       query_point,
-                       test_data,
-                       samples_number=500,
-                       **kwargs):
-        self.black_box_model = black_box_model
-        self.data = test_data
-        explainer = LimeTabularExplainer(self.data['X'], random_state=clime.RANDOM_SEED)
-        expl = explainer.explain_instance(query_point, black_box_model.predict_proba)
-        print(query_point)
-        print(explainer.convert_and_round(query_point))
-        print(explainer.discretizer.discretize(query_point))
-        ###
-        '''
-        need to figure out how to extract the interpretable domain mapper and get linear model (can get weights from expl)
-        here helps: https://github.com/marcotcr/lime/blob/master/lime/lime_tabular.py#L427
-        '''
-
-    def predict_proba(self, X):
-        return self.surrogate_model.predict(X)
-
-    def predict(self, X):
-        probability_class_1 = self.surrogate_model.predict(X)
-        class_prediction = np.heaviside(probability_class_1-0.5, 1)   # threshold class prediction at 0.5
-        return class_prediction.astype(np.int64)
-
-
 if __name__ == '__main__':
     import clime
 
@@ -104,7 +73,6 @@ if __name__ == '__main__':
     # now wrap with the clime.model.balancer to see why we get an error with predict_proba
 
     lime = LIME_fatf(clf, data['X'][1, :], data)
-    # lime = LIME(clf, data['X'][1, :], data)
 
 
     print(lime.predict(data['X'][2:3, :]))

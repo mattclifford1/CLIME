@@ -1,6 +1,5 @@
 from clime import data, models, explainer, evaluation
 from .make_pipeline import construct, run_pipeline
-from .multiple_runs import get_avg
 
 AVAILABLE_MODULES = {
     'dataset': data.AVAILABLE_DATASETS,

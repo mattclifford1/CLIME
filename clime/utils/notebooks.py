@@ -238,7 +238,8 @@ def plot_model_and_query_points(run_datas):
     
 
 def plot_stats(run_datas):
-    clime.utils.plot_multiple_bar_dicts(run_datas['model_stats_'])
+    # model stats are all accuracies, so pin the axis to [0, 1]
+    clime.utils.plot_multiple_bar_dicts(run_datas['model_stats_'], ylims=[0, 1])
     print(run_datas['model_stats_'][0])
 
 def disp_section_name(section, data_store):

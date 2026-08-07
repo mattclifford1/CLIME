@@ -175,6 +175,41 @@ def plot_query_points(query_points, ax, dim_reducer=None):
 '''
 helper functions
 '''
+def _metric_range(metric_name):
+    '''
+    fixed display range of a metric, or None if the limits should come from the data
+    (see clime.evaluation.METRIC_RANGES)
+    '''
+    if metric_name is None:
+        return None
+    import clime
+    return clime.evaluation.METRIC_RANGES.get(metric_name, None)
+
+def _data_ylims(values, pad=0.05):
+    '''axis limits that actually contain the data, with a small margin'''
+    values = np.asarray(list(values), dtype=np.float64).ravel()
+    values = values[np.isfinite(values)]
+    if values.size == 0:
+        return [0, 1]
+    low, high = float(values.min()), float(values.max())
+    if high == low:
+        margin = max(abs(high)*0.1, 0.5)
+    else:
+        margin = (high - low)*pad
+    return [low - margin, high + margin]
+
+def _get_ylims(values, metric_name=None):
+    '''
+    limits for an axis showing 'metric_name'. bounded metrics (e.g. fidelity) keep a
+    fixed scale so plots are comparable; unbounded ones (log loss) or ones with a tiny
+    range (Brier score, ~0.02) are scaled to the data - a hard coded [0, 1] makes them
+    unreadable
+    '''
+    fixed = _metric_range(metric_name)
+    if fixed is not None:
+        return list(fixed)
+    return _data_ylims(values)
+
 def _get_axes(ax):
     '''
     determine whether to make an axes or not, making axes also means show them
@@ -197,30 +232,31 @@ def plot_data_dict(data_dict):
         plot_classes(data_dict[key], axs[i])
         axs[i].set_title(key)
 
-def plot_line_graphs(data_dict, ylabels=None, ylims=[0, 1], extra_lines=False):
-    # first get the min and max values
-    for key, item1 in data_dict.items():
-        for key, item2 in item1.items():
-            scores = item2['scores']
-            for score in scores:
-                ylims[1] = max(ylims[1], score)
-                ylims[0] = min(ylims[0], score)
+def plot_line_graphs(data_dict, ylabels=None, ylims=None, extra_lines=False):
+    keys = list(data_dict.keys())
+    # gather every score belonging to each metric, so that subplots showing the same
+    # metric share a scale and stay comparable with each other
+    scores_per_metric = {}
+    for i, key in enumerate(keys):
+        ylabel = ylabels[i] if ylabels is not None else 'Evaluation Score'
+        for item in data_dict[key].values():
+            scores_per_metric.setdefault(ylabel, []).extend(list(item['scores']))
     # now plot
     fig, axs = plt.subplots(1, len(data_dict))
     if len(data_dict) == 1:
         axs = [axs]
-    for i, key in enumerate(data_dict.keys()):
-        if ylabels is not None:
-            ylabel = ylabels[i]
-        else:
-            ylabel = 'Evaluation Score'
-        plot_multiple_lines(data_dict[key], axs[i], ylims=ylims, ylabel=ylabel, extra_lines=extra_lines)
+    for i, key in enumerate(keys):
+        ylabel = ylabels[i] if ylabels is not None else 'Evaluation Score'
+        lims = ylims if ylims is not None else _get_ylims(scores_per_metric[ylabel], ylabel)
+        plot_multiple_lines(data_dict[key], axs[i], ylims=lims, ylabel=ylabel, extra_lines=extra_lines)
 
     fig.tight_layout()
 
-def plot_mean_std_graphs(data_dict, ylabel=None, ylims=[0, 1], ax=None):
+def plot_mean_std_graphs(data_dict, ylabel=None, ylims=None, ax=None):
     if ax == None:
         fig, ax = plt.subplots(1, 1)
+    if ylims is None:
+        ylims = _get_ylims([np.array(item) for item in data_dict.values()], ylabel)
     for key, item in data_dict.items():
         x = list(range(len(item[0])))
         scores = np.array(item)
@@ -235,13 +271,10 @@ def plot_mean_std_graphs(data_dict, ylabel=None, ylims=[0, 1], ax=None):
     if len(data_dict) > 1:
         ax.legend()
 
-def plot_line_graphs_on_one_graph(data_dict, ylabel=None, ylims=[0, 1], ax=None, query_values=True, model=None):
-    # first get the min and max values
-    for key, item2 in data_dict.items():
-        scores = item2['scores']
-        for score in scores:
-            ylims[1] = max(ylims[1], score)
-            ylims[0] = min(ylims[0], score)
+def plot_line_graphs_on_one_graph(data_dict, ylabel=None, ylims=None, ax=None, query_values=True, model=None):
+    # limits from the metric if it is bounded, otherwise from the data itself
+    if ylims is None:
+        ylims = _get_ylims([item['scores'] for item in data_dict.values()], ylabel)
     # now plot
     if ax == None:
         fig, ax = plt.subplots(1, 1)
@@ -300,8 +333,18 @@ def plot_heatmaps(scores, axs=False, fig=None, ylabels=None, pca=None):
         ax_x = 1
         ax_y = len(axs)
 
+    # gather the scores for each metric first, so that heatmaps of the same metric
+    # share a colour scale (and so are comparable) but are not squashed onto a
+    # hard coded [0, 1] that hides small ranges such as Brier score
+    scores_per_metric = {}
     count = 0
+    for num, runs in scores.items():
+        for title, run_data in runs.items():
+            ylabel = ylabels[count] if ylabels is not None else None
+            scores_per_metric.setdefault(ylabel, []).extend(list(run_data['scores']))
+            count += 1
 
+    count = 0
     for num, runs in scores.items():
         for title, run_data in runs.items():
             eval_points = np.array(run_data['eval_points'])
@@ -310,15 +353,22 @@ def plot_heatmaps(scores, axs=False, fig=None, ylabels=None, pca=None):
             x = eval_points[:, 0]
             y = eval_points[:, 1]
             z = run_data['scores']
-            heatmap = _heatmap_interpolate(x, y, z, axs[count])
+            ylabel = ylabels[count] if ylabels is not None else None
+            vmin, vmax = _get_ylims(scores_per_metric[ylabel], ylabel)
+            heatmap = _heatmap_interpolate(x, y, z, axs[count], vmin=vmin, vmax=vmax)
             axs[count].set_title(title)
-            plt.colorbar(heatmap, ax=axs[count], label=ylabels[count])
+            plt.colorbar(heatmap, ax=axs[count], label=ylabel)
             count += 1
-    
+
     fig.tight_layout()
 
 
-def _heatmap_interpolate(x, y, z, ax=None, aspect=1, cmap=plt.cm.rainbow, clip=True):
+def _heatmap_interpolate(x, y, z, ax=None, aspect=1, cmap=plt.cm.rainbow, vmin=None, vmax=None):
+    '''
+    vmin/vmax bound the colour scale and clip the interpolation to it. Pass the
+    limits for the metric being plotted - clipping to [0, 1] regardless of metric
+    flattens anything with a small range into a single colour
+    '''
     # Create regular grid
     xi, yi = np.linspace(x.min(), x.max(), 100), np.linspace(
         y.min(), y.max(), 100)
@@ -327,10 +377,10 @@ def _heatmap_interpolate(x, y, z, ax=None, aspect=1, cmap=plt.cm.rainbow, clip=T
     # Interpolate missing data
     rbf = scipy.interpolate.Rbf(x, y, z, function='linear')
     zi = rbf(xi, yi)
-    # clip interpolation
-    if clip == True:
-        zi = np.clip(zi, 0, 1)
-        kwargs = {'vmin':0, 'vmax':1}
+    # clip interpolation to the colour scale
+    if vmin is not None and vmax is not None:
+        zi = np.clip(zi, vmin, vmax)
+        kwargs = {'vmin': vmin, 'vmax': vmax}
     else:
         kwargs = {}
 
@@ -450,40 +500,51 @@ def plot_bar_dict(data_dict, title='', ylabel=None, ax=None, ylim=None):
     if ylim is not None:
         ax.set_ylim(ylim)
 
-def plot_multiple_bar_dicts(data_dicts, title=None, ylabels=None, ylims=[0, 1], **kwargs):
+def _bar_values(plot):
+    '''pull every plottable number out of one bar plot's data dict'''
+    values = []
+    for bar_value in plot.values():
+        if isinstance(bar_value, dict):
+            # only the bar height matters for the scale, not the error bar
+            for name in ['avg', 'result']:
+                if name in bar_value and isinstance(bar_value[name], (float, int)):
+                    values.append(bar_value[name])
+        elif isinstance(bar_value, (float, int)):
+            values.append(bar_value)
+    return values
+
+def plot_multiple_bar_dicts(data_dicts, title=None, ylabels=None, ylims=None, **kwargs):
     '''
     use plot_bar_dict but on sub axes
     data_dicts: dict of data dictionaries
     '''
-    # get the max value in the plots
-    for plot in data_dicts.values():
-        for bar_value in plot.values():
-            if isinstance(bar_value, dict):
-                for bar_avg_and_std in bar_value.values():
-                    if isinstance(bar_avg_and_std, float) or isinstance(bar_avg_and_std, int):
-                        ylims[1] = max(ylims[1], bar_avg_and_std)
-                        ylims[0] = min(ylims[0], bar_avg_and_std)
-            elif isinstance(bar_value, float) or isinstance(bar_value, int):
-                ylims[1] = max(ylims[1], bar_value)
-                ylims[0] = min(ylims[0], bar_value)
+    keys = list(data_dicts.keys())
+    # gather the bar heights for each metric so subplots sharing a metric share a scale
+    values_per_metric = {}
+    for i, key in enumerate(keys):
+        ylabel = ylabels[i] if ylabels is not None else None
+        values_per_metric.setdefault(ylabel, []).extend(_bar_values(data_dicts[key]))
     # make subplots
     fig, axs = plt.subplots(1, len(data_dicts))
     if len(data_dicts) == 1:
         axs = [axs]
-    for i, key in enumerate(data_dicts):
+    for i, key in enumerate(keys):
         ylabel = ylabels[i] if ylabels is not None else None
-        plot_bar_dict(data_dicts[key], ax=axs[i], ylabel=ylabel, ylim=ylims)
+        lims = ylims if ylims is not None else _get_ylims(values_per_metric[ylabel], ylabel)
+        plot_bar_dict(data_dicts[key], ax=axs[i], ylabel=ylabel, ylim=lims)
     if title is not None:
         fig.suptitle(title)
     fig.tight_layout()
 
 
-def plot_multiple_lines(data_dict, ax=None, ylims=[0, 1], ylabel='Evaluation Score', extra_lines=False, query_values=False):
+def plot_multiple_lines(data_dict, ax=None, ylims=None, ylabel='Evaluation Score', extra_lines=False, query_values=False):
     '''
     plot multiple line charts
         - data_dict: dictionary with scores/results from pipeline
     '''
     ax, show = _get_axes(ax)
+    if ylims is None:
+        ylims = _get_ylims([item['scores'] for item in data_dict.values()], ylabel)
     for key, item in data_dict.items():
         if 'eval_points' in item.keys()  and query_values == True:
             x = [f[0] for f in item['eval_points']]

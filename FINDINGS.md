@@ -199,7 +199,16 @@ rather than two.
 
 All verified by running the code, not by reading it. Ordered by how much they'd cost you.
 
-### B1 — the package doesn't install. `setup.py`, `clime/data/*`
+> **B1–B9 were fixed on 2026-08-07** and each has a regression test. B10 was found while
+> verifying those fixes and is **still open** — it needs a decision from you, because
+> fixing it re-bases every number in the repo.
+>
+> The fixes were checked against a before/after snapshot of the paper's configurations
+> run in serial mode. **All four Gaussian configurations are bit-identical**, and both
+> Breast Cancer configurations produce the *same set* of query points. See "Effect on
+> published results" at the end of this section.
+
+### B1 — the package doesn't install. `setup.py`, `clime/data/*` — **FIXED**
 
 Three files are named `__init__,py` — **comma instead of dot**:
 
@@ -219,9 +228,12 @@ runs `pip install git+https://github.com/mattclifford1/CLIME` on Colab. It has b
 broken since the loaders were split out (`7482111`, June 2023) — i.e. for the entire
 period after the paper was submitted.
 
-Fix: rename to `__init__.py` (three `git mv`s), then rebuild and check the wheel.
+**Fixed** by renaming to `__init__.py`. `find_packages()` now reports
+`clime.data.loaders`, `clime.data.utils` and `clime.data.tests`, and they appear in a
+built wheel. The Colab badge is still commented out in the README until the fix is
+pushed to GitHub, since Colab installs from the remote.
 
-### B2 — `'Logistic balanced training'` trains anti-balanced. `clime/data/utils/costs.py:40`
+### B2 — `'Logistic balanced training'` trains anti-balanced. `clime/data/utils/costs.py` — **FIXED**
 
 `get_instance_class_weights` builds `Y = concat(y, 1-y)`, putting the class-1 indicator
 in column 0, then dots it with `class_weights = [w_class0, w_class1]`. The weights come
@@ -239,10 +251,17 @@ this path; `random_forest_balanced_training` and `SVM_balanced_training` pass sk
 `balanced_training` branch that is dead code, since its wrapper never sets the flag.
 Inconsistent and misleading either way.
 
-Fix: `Y = concat(1-y, y)` (or index-based construction), unify all three wrappers onto
-one mechanism, add a test asserting the minority class gets the larger weight.
+**Fixed** by rewriting `get_instance_class_weights` on top of sklearn's
+`compute_sample_weight('balanced', y)`, which removes the hand-rolled label matrix
+entirely. All three balanced-training wrappers now go through the same
+`balanced_training=True` path; because the weights are numerically identical to
+sklearn's `class_weight='balanced'`, Random Forest and SVM predictions are unchanged
+(verified). The visible effect is on `'Logistic balanced training'`: on 300:60 Gaussian
+data the black box's **balanced accuracy rises from 0.833 to 0.905** while overall
+accuracy is flat (0.944 → 0.942) — exactly the trade balancing is meant to make.
+Tests: `clime/data/tests/test_costs.py`.
 
-### B3 — class-balanced fidelity metrics truncate their weights. `clime/evaluation/faithfulness.py:170`
+### B3 — class-balanced fidelity metrics truncate their weights. `clime/evaluation/faithfulness.py` — **FIXED**
 
 `weights = data['y'].copy()` inherits `int64` from the labels, then float weights are
 assigned into it and silently floor. Measured on 7:3 data: minority weight `2.333` is
@@ -251,9 +270,12 @@ stored as `2`.
 Affects `'fidelity (class balanced)'` and `'fidelity (local and balanced)'`. Not used in
 any paper figure (those use `'fidelity (local)'`), but any result using them is wrong.
 
-Fix: `weights = np.ones(len(data['y']), dtype=float)`.
+**Fixed** — weights are now built in a fresh float array. On imbalanced (300:60) data
+`'fidelity (class balanced)'` moves from 0.7255 to 0.6638. On balanced data there is no
+change, since every weight is 1.0 either way.
+Test: `test_class_weights_are_not_truncated`.
 
-### B4 — `get_explanation()` fails for the logit surrogate. `clime/explainer/BLIMEY.py:63`
+### B4 — `get_explanation()` fails for the logit surrogate. `clime/explainer/BLIMEY.py` — **FIXED**
 
 ```
 normal        -> [-0.187, -0.209]
@@ -264,12 +286,13 @@ logistic reg  -> [2.764, 2.888]
 `logit_ridge.fit` targets a 1-D `y[:, 1]`, so `coef_` is 1-D and `coef_[0, :]` blows up.
 Blocks all feature-importance work on Logit-LIME.
 
-Fix: `np.atleast_2d(self.surrogate_model.coef_)[0, :]`, or give `logit_ridge` a
-`get_explanation`. Note the three surrogates' coefficients live on **different scales**
-(probability, logit, log-odds) — they are not directly comparable and a longer write-up
-needs to say how it normalises them.
+**Fixed** with `np.atleast_2d(self.surrogate_model.coef_)[0, :]`. All explainers now
+return one finite importance per feature. Note the surrogates' coefficients live on
+**different scales** (probability, logit, log-odds) — they are not directly comparable
+and a longer write-up needs to say how it normalises them.
+Test: `clime/explainer/test_explanations.py`.
 
-### B5 — every plot is hard-clipped to [0, 1]. `clime/utils/plots.py`
+### B5 — every plot is hard-clipped to [0, 1]. `clime/utils/plots.py` — **FIXED**
 
 `_heatmap_interpolate` clips `zi` to `[0,1]` with `vmin=0, vmax=1`;
 `plot_multiple_bar_dicts` and `plot_line_graphs` default `ylims=[0,1]` and only ever
@@ -277,12 +300,18 @@ expand. Correct for fidelity/accuracy, actively destructive for Brier score (~0.
 invisible) and log loss (unbounded, clipped away). **This is what made the June 2024
 Logit-LIME comparison look like a null result.**
 
-Fix: derive limits from the data, or attach a `range` / `higher_is_better` attribute to
-each metric in `AVAILABLE_EVALUATION_METRICS` and let the plotters read it. The mutable
-default `ylims=[0, 1]` in those signatures is also a latent bug — Python reuses the list
-across calls, so limits leak between plots within one session.
+**Fixed** by adding `clime.evaluation.METRIC_RANGES`, which declares a fixed display
+range for bounded metrics (fidelity → `(0, 1)`, spearman → `(-1, 1)`) and `None` for
+unbounded ones (Brier, log loss, KL). Line, bar and heatmap plots look the metric up and
+either pin the axis or scale it to the data. Subplots showing the *same* metric still
+share a scale, so comparisons between explainers stay honest.
 
-### B6 — a metric key is unreachable. `clime/evaluation/__init__.py`
+The mutable `ylims=[0, 1]` defaults were a second, worse bug: Python reuses that list
+across calls, so one plot with a score of 5.0 permanently rescaled every later plot in
+the session. All such defaults are now `None`.
+Tests: `clime/utils/test_utils.py`.
+
+### B6 — a metric key is unreachable. `clime/evaluation/__init__.py` — **FIXED**
 
 ```python
 'fidelity (query probs)':       query_probs_fidelity,
@@ -295,17 +324,35 @@ Selecting the "local" variant silently runs the global one. These metrics implem
 `'bLIMEy (cost sensitive sampled - probs)'`, via
 `costs.weights_based_on_class_either_side_of_prob`) — an unwritten-up variant that
 redefines the class split relative to `q` instead of at 0.5. Worth revisiting under the
-aLIMEgn framing; fix the key first.
+aLIMEgn framing.
 
-### B7 — `get_points_between_class_means` normalises by the wrong quantity. `clime/evaluation/key_points.py:76`
+**Fixed** — the key now points at `query_probs_local_fidelity`. Selecting it changes the
+score materially (0.854 → 0.680 on the Gaussian config), confirming the two metrics were
+never the same thing.
+Test: `test_local_query_probs_metric_is_actually_local`.
+
+### B7 — `get_points_between_class_means` normalises by the wrong quantity. `clime/evaluation/key_points.py` — **FIXED**
 
 `gradients /= np.sum(gradients)` divides the mean-difference vector by the **sum of its
 components**, not its norm. If the components roughly cancel — which happens whenever the
 class means differ in opposite directions across features — the denominator approaches
-zero and the query-point line's scale explodes. It works on the paper's datasets by
-luck. Should be `np.linalg.norm(gradients)`.
+zero and the query-point line's scale explodes. Constructed a case with exactly
+cancelling components: **every query point comes back `nan`**.
 
-### B8 — dead / stale code
+**Fixed** with `np.linalg.norm(gradients)`, plus an explicit exception when the two class
+means coincide. Two things worth knowing:
+
+- The normalisation constant **cancels out** of the resulting query points (scaling
+  `gradients` by `c` scales the `min_`/`max_` solve by `1/c`), so the line is unchanged
+  wherever the old code didn't blow up. Verified to 1e-16.
+- `np.sum(gradients)` could be **negative**, which silently *reversed the direction* of
+  the line. The orientation is now canonical: always class 0 → class 1. Breast Cancer is
+  one of the datasets whose line was reversed — see "Effect on published results".
+
+Tests: `test_between_class_means_survives_cancelling_means`, `..._line_spans_the_data`,
+`..._identical_means_raises`.
+
+### B8 — dead / stale code — **FIXED**
 
 - `clime/pipeline/multiple_runs.py::get_avg` reads `opts['class samples']`; the key has
   been `opts['data params']['class_samples']` since the June 2023 refactor. It raises
@@ -323,12 +370,84 @@ luck. Should be `np.linalg.norm(gradients)`.
 - `.ipynb_checkpoints/` and `__pycache__/` are on disk but correctly gitignored — they
   are stale build artefacts from 2023 and can be cleared.
 
-### B9 — `freezeargs` mutates its caller's dict
+**Fixed** — deleted `multiple_runs.py`, `average_score.py`, `main.py`, `Untitled.ipynb`,
+the unfinished reference `LIME` class and `.ipynb_checkpoints/`, and dropped the now-dead
+imports from `clime/pipeline/__init__.py` and `clime/evaluation/__init__.py`. `QDA.py` is
+left in place — it is a real model that just needs re-enabling, not dead code.
+
+### B9 — `freezeargs` mutates its caller's dict — **FIXED**
 
 `recursive_freeze` assigns `value[k] = recursive_freeze(v)` into the original dict before
 wrapping it. Callers' `opts` come back with `frozendict`/`tuple` values. Combined with
 `@cache`, this makes stale results after a code edit easy to get in a notebook (restart
-the kernel when comparing before/after a change). Copy before freezing.
+the kernel when comparing before/after a change).
+
+**Fixed** — `recursive_freeze` now builds new containers instead of freezing in place, so
+callers keep their plain dicts. The cache still cannot see code changes, so restarting the
+kernel when comparing before/after an edit is still necessary.
+Tests: `test_freezeargs_does_not_mutate_the_caller`, `test_freezeargs_result_is_hashable`.
+
+### B10 — results are not reproducible with `parallel_eval=True` — **OPEN**
+
+Found while verifying the fixes above. Running the *same* configuration with the *same*
+code twice gives different numbers:
+
+```
+Gaussian | bLIMEy (cost sensitive sampled)        max|Δ| = 2.2e-03
+Breast Cancer | bLIMEy (normal)                   max|Δ| = 5.6e-03
+logistic-balanced-training                        max|Δ| = 3.6e-03
+logit-explainer                                   max|Δ| = 6.3e-04
+```
+
+`bLIMEy._sample_locally` draws its 10 000 samples from the **global** numpy RNG, which is
+seeded once at `import clime`. Results therefore depend on how many draws happened
+before — and under `multiprocessing`, on which worker handles which query point. Serial
+runs (`parallel_eval=False`) *are* deterministic; parallel runs are not.
+
+The effect is small (~1e-3, well below the effects the paper reports, which are ~0.1–0.4)
+so **no conclusion in the paper is at risk**. But the exact figures cannot be regenerated,
+and it makes small effects — precisely the regime the Logit-LIME comparison lives in —
+impossible to distinguish from noise.
+
+Not fixed, because the fix re-bases every number in the repo and that should be your call.
+The fix is to give each explainer its own seeded generator derived deterministically from
+the query point, so the result is independent of scheduling and call order:
+
+```python
+# clime/explainer/BLIMEY.py, in _sample_locally
+seed = int.from_bytes(hashlib.sha256(np.ascontiguousarray(self.query_point).tobytes()).digest()[:4], 'big')
+rng = np.random.default_rng(clime.RANDOM_SEED + seed)
+sampled_data['X'] = rng.multivariate_normal(self.query_point, cov, self.samples)
+```
+
+`key_points.get_local_points` has the same problem and needs the same treatment for
+`evaluation data: 'sample locally'`. Use a stable hash (`hashlib`, not `hash()`, which is
+salted per process).
+
+### Effect on published results
+
+Before/after snapshots of the paper's configurations, run in **serial** mode so the
+comparison isn't confounded by B10:
+
+| configuration | before | after | verdict |
+|---|---|---|---|
+| Gaussian μ=±1, standard `w_x` | 0.949500 | 0.949500 | identical |
+| Gaussian μ=±1, class balanced `w_xc` | 0.976112 | 0.976112 | identical |
+| Gaussian μ=±3, standard `w_x` | 0.999992 | 0.999992 | identical |
+| Gaussian μ=±3, class balanced `w_xc` | 0.999992 | 0.999992 | identical |
+| Breast Cancer, standard `w_x` | 0.839371 | 0.834625 | same query points, order reversed |
+| Breast Cancer, class balanced `w_xc` | 0.962554 | 0.963615 | same query points, order reversed |
+
+All four synthetic configurations are bit-identical. For Breast Cancer the *set* of query
+points is identical (max difference 0.0) but B7 reversed the traversal direction, so
+query point 0 is now the one that used to be 19. Because the surrogate at each point draws
+from the shared global RNG (B10), visiting them in the other order shifts each score by
+~5e-3 — the same magnitude as B10's run-to-run noise, and two orders of magnitude below
+the ~0.4 fidelity drop the paper reports.
+
+**If you regenerate Figure 3(a) (Breast Cancer), its x-axis will be mirrored** relative to
+the published version. The curve's content is unchanged. The published PNGs in
+`experiments/figs/sampling/` have not been touched.
 
 ---
 
@@ -336,11 +455,31 @@ the kernel when comparing before/after a change). Copy before freezing.
 
 Roughly in cost order. The first two are hours, not days.
 
-**E1 — re-run the June 2024 Logit-LIME comparison with working axes.** Fix B5, rerun the
-saved notebook config (Gaussian μ=±1, RF, grid, local Brier). The result may already be
-there. Add log loss alongside Brier — they disagree about tail calibration, which is
-exactly what logit-space regression should change. Cheap, and it either unblocks the
-Logit-LIME paper or kills it.
+**E1 — re-run the June 2024 Logit-LIME comparison.** ***Done — see the preliminary
+result below.*** Add log loss alongside Brier next; the two disagree about tail
+calibration, which is exactly what logit-space regression should change. Run it with
+`parallel_eval=False` until B10 is fixed.
+
+> **Preliminary result (2026-08-07).** Ran the saved notebook config (Gaussian μ=±1, RF,
+> 400 grid query points, local Brier, evaluated on locally sampled data) in serial, after
+> fixing B5. The heatmaps now show clear structure instead of three flat purple squares.
+>
+> | explainer | mean | min | max | std |
+> |---|---|---|---|---|
+> | bLIMEy (normal) | **0.01833** | 0.00002 | 0.05711 | 0.01344 |
+> | bLIMEy (cost sensitive sampled) | 0.02290 | 0.00009 | 0.05714 | 0.01241 |
+> | bLIMEy (logit) | 0.02189 | 0.00001 | **0.09149** | 0.01833 |
+>
+> On this config **Logit-LIME is worse calibrated than standard LIME**, and its worst case
+> is 60% worse. The gaps (~4e-3) sit above B10's noise floor (~1e-3), but not hugely.
+>
+> One dataset, one black box, one metric — not a result yet. But it argues for testing the
+> *premise* before writing the paper: on well-behaved overlapping Gaussians, standard
+> LIME's unbounded linear surrogate may not be costing much. If Logit-LIME has an
+> advantage it should show up where the black box's probabilities are extreme —
+> near-separable classes, high-confidence regions far from the boundary. That is also
+> exactly where the CIKM paper found standard LIME breaking down, so the two threads
+> predict the same regime of interest.
 
 **E2 — the aLIMEgn evaluation-target sweep.** Fix the black box and the query points,
 toggle `evaluation data` between `'test data'` and `'sample locally'`, and sweep across
@@ -362,8 +501,9 @@ plus one model config.
 `pics/rf balanced, sampled cost helps but class cost hurts slightly.png` into a real
 result: `'bLIMEy (cost sensitive sampled)'` vs `'bLIMEy (cost sensitive class)'` vs
 `'bLIMEy (normal)'`, across all UCI datasets, both balanced and imbalanced black boxes.
-Requires B2 fixed first, since the balanced-training models are currently anti-balanced.
-A clean "local imbalance is the signal, global imbalance is not" result strengthens both
+B2 is fixed, so the balanced-training models now actually balance (this changed Logistic
+balanced training's balanced accuracy from 0.833 to 0.905 on 300:60 data), making this
+comparison meaningful for the first time. A clean "local imbalance is the signal, global imbalance is not" result strengthens both
 threads.
 
 **E5 — grid heatmaps for the paper's datasets.** `evaluation points: grid` exists and was
@@ -389,29 +529,37 @@ open generality question, and the most work.
 
 ## 8. Suggested code changes
 
-Ordered so each is independently useful.
+**Done on 2026-08-07** (see §6 for detail):
 
-1. **B1** — rename the three `__init__,py` files, rebuild the wheel, verify the Colab
-   badge. Unblocks anyone else running this.
-2. **B5** — metric-aware plot limits. Highest ratio of insight-unblocked to effort.
-3. **B4** — `get_explanation()` for logit surrogates.
-4. **B2, B3, B6, B7** — the correctness fixes, each with a regression test. `pytest`
-   currently only asserts that runs *complete* (`isinstance(score, np.float64)`); it
-   never asserts a value. A handful of numerical assertions on known inputs would have
-   caught B2 and B3.
-5. **Delete B8's dead code** — `main.py`/`get_avg`, `average_score.py`, the reference
-   `LIME` class, `Untitled.ipynb`, and untrack `__pycache__`/`.ipynb_checkpoints`.
-6. **Persist results.** `run_pipeline` caches in-process only; every notebook restart
+1. ~~B1 — rename the three `__init__,py` files~~ — done, wheel verified.
+2. ~~B5 — metric-aware plot limits~~ — done via `clime.evaluation.METRIC_RANGES`.
+3. ~~B4 — `get_explanation()` for logit surrogates~~ — done.
+4. ~~B2, B3, B6, B7 — correctness fixes with regression tests~~ — done. The suite went
+   from 7 tests that only assert runs *complete* to 50, including numerical assertions on
+   known inputs. B2 and B3 would both have been caught by these.
+5. ~~Delete dead code~~ — done: `main.py`, `multiple_runs.py`, `average_score.py`, the
+   reference `LIME` class, `Untitled.ipynb`, `.ipynb_checkpoints/`.
+
+**Still open**, roughly in order of value:
+
+1. **B10 — deterministic sampling.** See §6. Needs your decision because it re-bases every
+   number. Until then, use `parallel_eval=False` for anything where the effect is small.
+2. **Persist results.** `run_pipeline` caches in-process only; every notebook restart
    re-runs everything, and a 400-point grid sweep is expensive. A `joblib.Memory` cache
    keyed on the frozen `opts` would make E5 comfortable and make results reproducible
-   across sessions.
-7. **A headless experiment runner.** `experiments/*.py` each hard-code a full `opts` dict
+   across sessions. Worth doing *after* B10, since caching nondeterministic results
+   freezes whichever draw you happened to get.
+3. **A headless experiment runner.** `experiments/*.py` each hard-code a full `opts` dict
    and duplicate ~40 lines. A YAML/JSON config plus one runner script would make the
    sweeps in §7 tractable and, more importantly, make the exact configuration behind
    each figure recoverable — right now the only record of the last experiment is
    widget state serialised inside a notebook.
-8. **Pin the environment properly.** `requirements.txt` pins only sklearn; numpy,
+4. **Pin the environment properly.** `requirements.txt` pins only sklearn; numpy,
    scipy and matplotlib float. Given the known sklearn 1.2.2 breakage, a lockfile (or at
    least an `environment.yml` capturing the working conda env) would protect the
    published results. Also: the sklearn incompatibility itself is worth 30 minutes to
    diagnose — being stuck on a 2022 release will get more painful, not less.
+5. **Re-enable `QDA`.** It is implemented and commented out of the registry with no
+   recorded reason.
+6. **Push B1 and un-comment the Colab badge.** The badge installs from GitHub, so it
+   stays broken until the rename is pushed.

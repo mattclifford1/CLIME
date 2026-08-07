@@ -73,7 +73,15 @@ def get_points_between_class_means(data, num_samples=20):
         raise Exception(f"'get_points_between_class_means' only supports 2 classes, was given {len(means)}")
     # vector between the two classes
     gradients = means[1] - means[0]
-    gradients /= np.sum(gradients)   # noramlise
+    # normalise by the magnitude, NOT the sum of the components - the components
+    # can cancel (e.g. class means differing in opposite directions), which sends
+    # the sum to zero and every query point to nan.
+    # the query points themselves are invariant to this constant: scaling
+    # 'gradients' by c scales min_/max_ below by 1/c, so it cancels out
+    norm = np.linalg.norm(gradients)
+    if norm == 0:
+        raise Exception("'get_points_between_class_means' cannot make a line: the two class means are identical")
+    gradients /= norm
 
     # max and min extension of the data along the vector
     min_data = np.min(data['X'], axis=0)

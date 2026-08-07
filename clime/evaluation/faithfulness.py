@@ -167,12 +167,12 @@ def _get_class_weights(data):
         return np.ones(data['X'].shape[0])
     # get weights dataset based on class imbalance
     weightings = costs.weight_based_on_class_imbalance(data)
-    weights = data['y'].copy()
-    masks = {}
+    # N.B. must be a float array - assigning into a copy of the (integer) labels
+    # silently truncates the weights
+    y = np.array(data['y']).astype(np.int64)
+    weights = np.ones(y.shape[0], dtype=np.float64)
     for i in range(len(weightings)):
-        masks[i] = (weights==i)
-    for i in range(len(weightings)):
-        weights[masks[i]] = weightings[i]
+        weights[y == i] = weightings[i]
     return weights
 
 

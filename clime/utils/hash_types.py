@@ -7,14 +7,14 @@ makes dict and lists hashable for use with caching
 '''
 
 def recursive_freeze(value):
+    '''
+    N.B. builds new containers rather than freezing in place - freezing in place
+    would hand the caller's own dict back to them with frozendict/tuple values
+    '''
     if isinstance(value, dict):
-        for k, v in value.items():
-            value[k] = recursive_freeze(v)
-        return frozendict(value)
+        return frozendict({k: recursive_freeze(v) for k, v in value.items()})
     elif isinstance(value, list):
-        for i, v in enumerate(value):
-            value[i] = recursive_freeze(v)
-        return tuple(value)
+        return tuple(recursive_freeze(v) for v in value)
     else:
         return value
 

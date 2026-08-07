@@ -5,6 +5,7 @@ utils for getting weightings/costs for data based on distance and class imbalanc
 
 import warnings
 import numpy as np
+from sklearn.utils.class_weight import compute_sample_weight
 
 def weights_based_on_distance(query_point, X):
     '''
@@ -39,16 +40,15 @@ def weight_based_on_class_imbalance(data):
 
 def get_instance_class_weights(data):
     '''
-    get cost based on classs imbalance but in a matrix form
+    get a per instance weight based on class imbalance
     useful when weighting training examples during model training
+
+    uses the same definition as sklearn's class_weight='balanced', namely
+    n_samples / (n_classes * bincount(y)), so that passing these as
+    sample_weight is equivalent to setting class_weight='balanced'
     '''
-    class_weights = weight_based_on_class_imbalance(data)
-    # get class labels as a matrix
-    y = np.expand_dims(data['y'], axis=1)
-    Y = np.concatenate((y, np.abs(1-y)), axis=1)
-    # apply to all instances
-    instance_weights = np.dot(Y, class_weights.T)
-    return instance_weights
+    y = np.array(data['y']).astype(np.int64)
+    return compute_sample_weight('balanced', y)
 
 
 def weights_based_on_class_either_side_of_prob(data, query_probs):

@@ -36,6 +36,6 @@ class random_forest(sklearn.ensemble.RandomForestClassifier, base_model):
 
 def random_forest_balanced_training(data, **kwargs):
     '''
-    wrapper to call balanced training version of ridge
+    wrapper to call balanced training version of random forest
     '''
-    return random_forest(data, class_weight='balanced', **kwargs)
+    return random_forest(data, balanced_training=True, **kwargs)

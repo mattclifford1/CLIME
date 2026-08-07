@@ -111,20 +111,25 @@ constructed per query point and expose `.predict`, `.predict_proba`,
 
 ## Known traps
 
-Detailed in `FINDINGS.md` under "Bugs and rough edges". The ones most likely to bite:
+**Results are not reproducible with `parallel_eval=True`.** `bLIMEy._sample_locally`
+draws from the global numpy RNG, so results depend on which worker handles which query
+point. Same code, same config, two runs → differences of ~1e-3. Serial runs *are*
+deterministic. Use `parallel_eval=False` whenever the effect you are measuring is small
+(the Logit-LIME comparisons live in exactly this regime). Tracked as B10 in
+`FINDINGS.md`, with the fix written out but deliberately not applied — applying it
+changes every number in the repo.
 
-- `clime/data/loaders/__init__,py`, `clime/data/utils/__init__,py` and
-  `clime/data/tests/__init__,py` have a **comma instead of a dot**. Editable installs
-  work by luck (namespace packages); `find_packages()` misses these directories, so a
-  real `pip install` produces a broken wheel.
-- `costs.get_instance_class_weights` returns class weights **swapped**, so
-  `'Logistic balanced training'` trains anti-balanced.
-- `faithfulness._get_class_weights` writes float weights into an int array, truncating
-  them — affects `'fidelity (class balanced)'` and `'fidelity (local and balanced)'`.
-- `bLIMEy.get_explanation()` raises `IndexError` for the logit surrogate.
-- Heatmap and line plots hard-clip to `[0, 1]`, which is meaningless for Brier score
-  (~0.02) and log loss (unbounded).
+**The `@cache` on `run_pipeline` cannot see code changes.** Restart the kernel when
+comparing behaviour before and after editing a module.
 
-Fix these deliberately and re-run affected experiments; do not fix them as a drive-by
-while doing something else, because several published figures depend on current
-behaviour.
+**Plot axes are metric-aware.** `clime.evaluation.METRIC_RANGES` declares a fixed range
+for bounded metrics and `None` for unbounded ones. A new metric must be added there or
+`test_every_metric_has_a_plot_range` fails.
+
+**The query-point line runs class 0 → class 1.** This orientation was arbitrary before
+B7 was fixed, so figures regenerated for Breast Cancer come out mirrored relative to the
+published version (same content — see `FINDINGS.md`, "Effect on published results").
+
+B1–B9 in `FINDINGS.md` were fixed on 2026-08-07 and each has a regression test. Before
+changing any weighting, metric or query-point code, read that section — it records what
+the old behaviour was and which published numbers were checked against the change.

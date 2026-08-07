@@ -25,8 +25,8 @@ Peel off anything you don't need with `**kwargs`. Must then provide:
 | `get_explanation()` | feature importances, shape `(n_features,)` |
 
 Only `predict` / `predict_proba` are exercised by the fidelity metrics.
-`get_explanation()` is the actual human-facing explanation and is currently **broken for
-the logit surrogate** — see `FINDINGS.md` B4.
+`get_explanation()` is the actual human-facing explanation, and is covered for every
+explainer by `test_explanations.py`.
 
 ## bLIMEy
 
