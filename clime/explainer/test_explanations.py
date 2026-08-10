@@ -40,6 +40,63 @@ def test_get_explanation(name, setup):
     assert np.isfinite(explanation).all()
 
 
+@pytest.fixture(scope='module')
+def logistic_setup():
+    '''a black box with exactly linear log-odds, so the correct answer is known'''
+    train_data, test_data = clime.data.AVAILABLE_DATASETS['Gaussian'](
+        class_samples=[200, 200],
+        gaussian_means=[[-1, -1], [1, 1]],
+        gaussian_covs=[[[1, 0], [0, 1]], [[1, 0], [0, 1]]])
+    normaliser = clime.data.normaliser(train_data)
+    train_data, test_data = normaliser(train_data), normaliser(test_data)
+    clf = clime.models.AVAILABLE_MODELS['Logistic'](data=train_data)
+    return clf, train_data, test_data
+
+
+def test_explanations_all_describe_the_same_class(logistic_setup):
+    '''
+    B15. The probability ridge has one coef_ row per class, while logit_ridge and the
+    logistic regression regress class 1 alone and have a single row. Reading row 0 from
+    both gives class 0 for the first and class 1 for the rest, so every feature's sign
+    flips between explainers - which silently inverts any comparison of explanations.
+    On a black box whose class 1 log-odds increase with x, every surrogate must agree.
+    '''
+    clf, train_data, test_data = logistic_setup
+    variants = ['bLIMEy (normal)', 'bLIMEy (logit)', 'bLIMEy (logistic regression)']
+    explanations = {}
+    for name in variants:
+        expl = AVAILABLE_EXPLAINERS[name](clf,
+                                          query_point=test_data['X'][0, :],
+                                          train_data=train_data,
+                                          test_data=test_data,
+                                          samples=2000)
+        explanations[name] = np.asarray(expl.get_explanation())
+
+    reference = explanations['bLIMEy (logit)']
+    strong = np.argmax(np.abs(reference))      # least likely to be sign-noise
+    for name, values in explanations.items():
+        assert np.sign(values[strong]) == np.sign(reference[strong]), (
+            f"{name} disagrees with the others on the sign of feature {strong}: "
+            f"{values[strong]:.4f} vs {reference[strong]:.4f}")
+
+
+def test_logit_surrogate_recovers_a_logistic_black_box(logistic_setup):
+    '''
+    A logistic black box has exactly linear log-odds, so the logit surrogate's
+    coefficients should reproduce the black box's own - the strongest statement of
+    what fitting in the right space buys. Loose tolerance: the surrogate is ridge
+    penalised and fitted on a finite local sample.
+    '''
+    clf, train_data, test_data = logistic_setup
+    expl = AVAILABLE_EXPLAINERS['bLIMEy (logit)'](clf,
+                                                  query_point=test_data['X'][0, :],
+                                                  train_data=train_data,
+                                                  test_data=test_data,
+                                                  samples=5000)
+    truth = np.atleast_2d(clf.coef_)[-1, :]
+    np.testing.assert_allclose(expl.get_explanation(), truth, rtol=0.15, atol=0.05)
+
+
 @pytest.mark.parametrize('name', list(AVAILABLE_EXPLAINERS))
 def test_predict_proba_is_a_probability(name, setup):
     clf, train_data, test_data = setup

@@ -209,6 +209,287 @@ black box's uncertainty, squared error forgives confident-and-right, KL punishes
 confident-and-wrong without limit. Practical upshot: **report Brier and KL together — a
 disagreement between their rankings is a cheap detector of an overconfident surrogate.**
 
+### The pre-registered test (registered 2026-08-07, before running)
+
+Everything above is a *post-hoc* correlation over seven black boxes, which invites the
+objection that Δ is a curve fit to the models I happened to try. So before running
+anything I wrote `experiments/logit_lime/PREREGISTRATION.md`: black boxes grouped by the
+analytic form of their log-odds — a property of each model's *definition*, derivable
+without running it — plus four falsifiable statements and an explicit list of what would
+falsify the account.
+
+| group | black boxes | log-odds in `x` | predicted |
+|---|---|---|---|
+| **A** | logistic, **LDA** | exactly linear | largest Δ, largest benefit |
+| **B** | **QDA**, **Gaussian NB** | quadratic | clear but inexact benefit |
+| **C** | MLP, SVM | smooth, non-polynomial | modest |
+| **D** | **decision tree**, RF, **kNN** | piecewise constant | Δ ≈ 0, no benefit |
+| **E** | RF + Platt, RF + isotonic | piecewise constant, calibrated | as D |
+
+Bold = never run before the prediction was registered, so their results cannot have
+informed the grouping. Gradient boosting was deliberately left unassigned.
+
+Statement 3 is the one carrying real information. The competing intuition — that what
+helps is *smoothness* rather than *linearity* — predicts QDA and naive Bayes join group A.
+If they had, Δ would be the wrong diagnostic and would need redefining around smoothness.
+
+Scale: 14 datasets × 12 black boxes × 3 surrogates × 2 metrics, run serially, with
+sampling seeded per query point (B10). Two further sweeps accompany it: kernel width over
+seven scales spanning LIME's default, and five seeds for error bars.
+
+#### Outcome (168/168 configurations, 0 failures)
+
+| group | n | median Δ | median benefit | better |
+|---|---|---|---|---|
+| **A** linear | 28 | +0.382 | **1393.8×** | 28/28 |
+| **B** quadratic | 28 | +0.136 | 0.97× | 11/28 |
+| **C** smooth | 28 | +0.066 | 1.16× | 25/28 |
+| **D** piecewise constant | 42 | +0.000 | 0.76× | 6/42 |
+| **E** calibrated forest | 28 | +0.025 | 1.01× | 14/28 |
+| gradient boosting | 14 | +0.082 | 1.07× | 11/14 |
+
+**Three of the four statements confirmed, one refuted.**
+
+1. **LDA lands in group A — CONFIRMED.** Δ = +0.362, benefit 98×. Note Δ only just clears
+   the registered threshold of 0.35; the benefit clears its threshold by an order of
+   magnitude.
+2. **Decision tree and kNN land in group D — CONFIRMED.** Tree Δ = +0.000, benefit 0.79×;
+   kNN Δ = −0.051, benefit 0.64×. Both *below* break-even: logit-space fitting actively
+   harms piecewise-constant black boxes, which is sharper than the registered "no benefit".
+3. **QDA and naive Bayes strictly between A and D — CONFIRMED as registered**, on both Δ
+   (+0.136, between +0.382 and +0.000) and benefit (0.97×, between 1394× and 0.76×). But
+   read the substance, not the letter: group B's median benefit is *below 1.0*. It passes
+   the ordering test while delivering no practical benefit at all. The competing
+   smoothness account is still refuted — B is nowhere near A — but "intermediate" here
+   means "indistinguishable from no effect".
+4. **Ordering A > B > C > D — NOT CONFIRMED.** C (1.16×) overtakes B (0.97×), and far more
+   consistently (25/28 vs 11/28). The registered reasoning — that quadratic log-odds are
+   "closer to linear" than a smooth non-polynomial — was wrong. In practice a trained MLP
+   often learns near-linear log-odds on real data, while QDA's quadratic term is large and
+   its probabilities saturate hard.
+
+**What survives.** The binary distinction — *exactly linear* log-odds versus everything
+else — is enormous and perfectly consistent (28/28, three orders of magnitude). The graded
+ordering among the non-linear families is not supported. Δ still predicts the benefit
+across the whole set (Spearman ρ = **+0.698**, p = 2e-25, n = 165), so the continuous
+diagnostic works where the discrete taxonomy does not.
+
+**The saturation control got stronger, and changed sign** — but read it carefully.
+ρ = **−0.381**, p = 3.6e-07 (was −0.13, p = 0.5 at n = 28). Four pieces of evidence, in
+descending order of how much weight they carry:
+
+1. **The Platt manipulation** (the only causal one): holding the model family fixed,
+   calibration removes saturation entirely (65% → 0%) while leaving Δ unchanged (+0.043 →
+   +0.041) and the benefit unchanged (1.56× → 1.34×, if anything slightly worse).
+2. **Counterexamples**: groups C, E and gradient boosting all have ~0% median saturation
+   and still show no substantial benefit (1.16×, 1.01×, 1.07×). If saturation were what
+   blocked logit-space fitting, these should have benefited.
+3. **Δ is not a saturation proxy**: sat vs Δ is ρ = −0.116, p = 0.14 — essentially
+   independent. Δ's association with benefit barely moves when saturation is partialled
+   out (0.698 → 0.682).
+4. **The aggregate correlation** is the wrong sign for the saturation account.
+
+**Do not overclaim point 4 as a mechanism.** Within groups the sign of the
+saturation–benefit relationship is inconsistent: A −0.40, B −0.00, C **+0.46**, D +0.19,
+E −0.74. The aggregate negative is driven by between-family structure (the saturating
+families happen to be the non-benefiting ones), not by saturation acting on the benefit.
+The defensible claim is the *negative* one — saturation does not explain which black boxes
+benefit — and it rests on 1 and 2, not on the correlation.
+
+**Three degenerate configurations** — Ionosphere|QDA, Direct Marketing|QDA, Direct
+Marketing|Gaussian NB — are 100% saturated: the black box returns exactly 0 or 1 across
+the entire neighbourhood, so the probability target has zero variance and Δ is undefined.
+They are excluded from the gap correlation and reported separately, never imputed. A
+related artefact affects near-degenerate cases: R²_logit is then set by where probabilities
+were clipped, producing values as low as −180, which is why the figures clamp their axes
+and report the count clamped.
+
+**Scoring rules still disagree** at scale: by Brier the hard-label variant wins 69/168 vs
+logit's 65; by KL logit wins 83/168 vs hard-label's 54. Same pattern as at n = 28.
+
+#### Kernel width sweep (140/140, 0 failures)
+
+The locality kernel width `k = scale * sqrt(D)` sets what "local" means for the surrogate's
+training weights *and* for the evaluation metric, so the obvious objection is that the
+whole effect is an artefact of LIME's default scale of 0.75. It is not.
+
+| scale | Logistic | LDA | MLP | Random Forest | GBoost |
+|---|---|---|---|---|---|
+| 0.15 | 8.4 | 3.3 | 4.6 | 0.76 | 1.05 |
+| 0.3 | 1890 | 703 | 6.0 | 0.82 | 1.18 |
+| 0.5 | **51807** | **28495** | 4.5 | 0.83 | 1.22 |
+| 0.75 *(default)* | 6862 | 815 | 3.9 | 0.82 | 1.23 |
+| 1.25 | 605 | 77 | 3.7 | 0.81 | 1.23 |
+| 2.0 | 320 | 35 | 3.6 | 0.81 | 1.24 |
+| 3.0 | 265 | 27 | 3.5 | 0.81 | 1.25 |
+
+**No pair of black boxes changes order at any width**, over a twentyfold range. The
+conclusions do not depend on `k`.
+
+The magnitude does. Half of the registered expectation held: at very small widths the
+advantage collapses (5e4 → 8x for logistic), because a smooth function is approximately
+linear in *both* spaces over a small enough neighbourhood. The other half was wrong — I
+expected the advantage to keep growing at large widths as the neighbourhood came to span
+the whole sigmoid. Instead it peaks near scale 0.5 and declines, presumably because a wide
+neighbourhood eventually exceeds the region over which the log-odds are linear at all.
+
+Consequence worth stating: **LIME's default of 0.75 is not a favourable choice for this
+effect** — 0.5 gives a larger one. Useful to say explicitly, since it forecloses the
+suspicion that the default was chosen to flatter the result.
+
+#### Repeated trials (5 seeds × 5 datasets × 8 black boxes)
+
+Every number above is a single train/test split. Re-running a subset under seeds
+42, 1, 2, 3, 4 (a separate process each, because `run_pipeline` caches on the options dict
+alone and would otherwise return the previous seed's result):
+
+| model | median | min seed | max seed | benefit sign unstable |
+|---|---|---|---|---|
+| Logistic | 2959.70 | 328.19 | 22198.11 | 0/5 |
+| LDA | 1190.22 | 70.70 | 8087.77 | 0/5 |
+| Gaussian NB | 4.79 | 1.30 | 6.40 | 2/5 |
+| MLP | 3.67 | 2.91 | 5.03 | 1/5 |
+| QDA | 0.94 | 0.89 | 1.10 | 1/5 |
+| Random Forest | 0.89 | 0.78 | 1.05 | 2/5 |
+| Decision Tree | 0.87 | 0.75 | 0.92 | 1/5 |
+| kNN | 0.78 | 0.56 | 0.83 | 1/5 |
+
+**The group A / everything-else split is seed-stable.** Logistic and LDA never once drop
+below break-even on any dataset under any seed; every group D model stays below 1 on
+median. The across-seed relative spread is 27–53% for group A, but that is on a quantity
+spanning four orders of magnitude — on a log scale it is small.
+
+**Near break-even the sign is not stable.** For QDA, random forest, decision tree and kNN
+the min-to-max seed range straddles 1.0 on 1–2 of 5 datasets. Any claim of the form "model
+X benefits slightly" at ratios of 0.9–1.3 is within seed noise and should not be made.
+
+**A caveat that qualifies statement 4.** On this 5-dataset subset Gaussian NB (4.79x)
+*beats* MLP (3.67x) — i.e. B > C, the opposite of the full 14-dataset result. The subset
+includes the synthetic Gaussian data, where equal covariances make naive Bayes's log-odds
+linear and flatter group B. So the B-vs-C ordering flips with dataset selection. This
+does not rescue statement 4 — it failed on the pre-registered 14-dataset set, and that
+is the result — but it does show the failure is "B and C are too close to order", not
+"C is reliably better than B".
+
+### Exploratory extension (added 2026-08-09, AFTER the registered test)
+
+Kept in `results_extended.json`, deliberately **not** merged into
+`results_taxonomy.json`. Datasets and models chosen after seeing the registered results
+cannot be folded back into the registered claim without destroying what registering was
+for. Report the two separately.
+
+**15 further datasets**, exported from `~/Repos/toy_datasets`. That package pins
+numpy ≥2.3.5 / sklearn ≥1.7.2 and cannot share a process with this env, so
+`experiments/logit_lime/export_toy_datasets.py` runs under its venv and writes `.npz`
+that `clime/data/loaders/exported_npz.py` registers automatically. The grid widens from
+2–60 features to **2–279** (Arrhythmia) and from roughly balanced to a **4.9% minority
+class** (Stroke Prediction, Thyroid Sick).
+
+**4 further black boxes**, in `clime/models/constructed_log_odds.py`. These exist because
+of *why* statement 4 failed: group membership was argued from model family rather than
+measured, and the two came apart — QDA is quadratic but also saturates at 68%, while a
+trained MLP is nominally "smooth" yet often learns near-linear log-odds. Each new model is
+a logistic regression on a fixed feature map, so its log-odds geometry is imposed by
+construction with saturation controlled separately:
+
+| model | log-odds | why |
+|---|---|---|
+| Polynomial Logistic (deg 2) | exactly quadratic | the clean group B member QDA was not |
+| RBF Logistic (Nystroem) | smooth, non-polynomial | group C by construction |
+| Bagged Logistic | each member exactly linear, the average of their *probabilities* is not | tests family vs resulting geometry |
+| Nearest Class Mean | exactly linear, yet ~80% saturated | **linearity and saturation predict opposite outcomes — separates the two accounts within one model** |
+
+`projection_models` was the original source for Nearest Class Mean but needs sklearn ≥1.6;
+reimplemented natively in ~15 lines instead. Its other models duplicate ones already here.
+
+#### Outcome (464 configurations, 0 failures)
+
+| group | n | median Δ | median benefit | better |
+|---|---|---|---|---|
+| **A** linear | 87 | +0.282 | **6739×** | **87/87** |
+| **B** quadratic | 87 | +0.150 | 0.93× | 30/87 |
+| **C** smooth | 87 | +0.027 | 1.07× | 68/87 |
+| **D** piecewise constant | 87 | −0.008 | 0.76× | 9/87 |
+| **E** calibrated forest | 58 | +0.014 | 0.99× | 26/58 |
+| gradient boosting | 58 | +0.109 | 1.27× | 47/58 |
+
+Δ vs benefit: ρ = **+0.642**, p = 1.5e-53, n = 450. Saturation vs benefit: ρ = −0.364.
+
+**1. The exactly-linear claim is now very strong.** Three black boxes have exactly linear
+log-odds — logistic, LDA and Nearest Class Mean. Across 29 datasets spanning 2–279 features
+and a 4.9%–50% minority class, each is better in **29/29**, worst case 1.10×. Group A as a
+whole: **87/87, no exceptions.**
+
+**2. Quadratic log-odds give nothing, even with saturation controlled.** This settles why
+registered statement 3's "intermediate" reading was too generous. QDA could be dismissed as
+confounded — it saturates at 75.6%. Polynomial Logistic has log-odds *exactly quadratic by
+construction* and saturates at only **8.6%**, and it still shows **0.97×, better on 13/29**:
+
+| | log-odds | saturation | benefit | better |
+|---|---|---|---|---|
+| Polynomial Logistic (deg 2) | exactly quadratic | 8.6% | 0.97× | 13/29 |
+| QDA | quadratic | 75.6% | 0.84× | 5/29 |
+
+So the taxonomy really does collapse to **binary**: exactly linear, or nothing. Quadratic is
+already too far. The graded ordering was wrong not just in the B/C order but in premise.
+
+**3. Saturation does not decide *whether* it helps, but strongly decides *how much*.**
+This refines — and partly corrects — the earlier "saturation is not the mechanism" claim.
+Nearest Class Mean has exactly linear log-odds on every dataset, and its saturation varies
+by dataset, so it is a within-model control:
+
+| Nearest Class Mean | n | median saturation | median benefit | better |
+|---|---|---|---|---|
+| low saturation | 19 | 1.0% | **280 009×** | 19/19 |
+| high saturation | 10 | 67.7% | **2.6×** | 10/10 |
+
+Saturation never flips the sign — 10/10 still benefit at 68% saturation — but it costs
+**five orders of magnitude** of benefit. Both accounts were partly right: linearity
+determines *whether* logit space helps, saturation modulates *how much*. The paper's
+current wording is too binary and needs this.
+
+**4. Bagged Logistic degrades gracefully.** Each member has exactly linear log-odds, but
+bagging averages probabilities, so the ensemble's log-odds are not linear. Result: 24.9×,
+**29/29** — a real benefit, three orders of magnitude below its own components. Δ tracks
+this (+0.192, between group A's +0.282 and group C's +0.027), which is evidence Δ measures
+a genuine continuum rather than a family label.
+
+**5. Degenerate configurations are systematic, not incidental.** 14 of 464, every one of
+them QDA or Gaussian naive Bayes at exactly 100% saturation. On real tabular data those two
+models routinely return hard 0/1 over an entire neighbourhood, which makes Δ undefined.
+Worth stating as a limitation of the diagnostic rather than a curiosity.
+
+#### Ground truth: which surrogate is actually right? (87 configurations)
+
+Everything else measures fidelity or agreement. For the three black boxes with exactly
+linear log-odds the *true* local feature importances are known — they are the model's own
+coefficients — so the surrogates can be scored against truth instead of each other.
+
+| surrogate | rank ρ | top-1 | cosine |
+|---|---|---|---|
+| standard LIME | 0.872 | 0.80 | 0.913 |
+| **Logit-LIME** | **0.930** | **0.87** | **0.947** |
+| logistic-regression LIME | 0.839 | 0.79 | 0.918 |
+
+Paired against standard LIME: cosine better on **85/87** (Wilcoxon p = 3e-15), rank ρ on
+59/87 with 27 ties (p = 6e-13), top-1 on 27/87 with 57 ties (p = 1e-4).
+
+**Two corrections to earlier readings of the partial data.**
+
+- On n = 3 the hard-label surrogate looked like the *best* at recovering true coefficients,
+  which suggested calibration and explanation quality were separate axes. At n = 87 it is
+  the **worst** on rank ρ (0.839) and top-1 (0.79). It wins only on Nearest Class Mean. The
+  n = 3 observation did not generalise; there is no "well-oriented but badly calibrated"
+  story to tell.
+- "Standard LIME never identifies the true top feature" was a single configuration
+  (Breast Cancer + logistic, 0.00 vs Logit-LIME's 0.70), not a general result. Overall
+  standard LIME gets it right 80% of the time. The advantage is consistent and significant
+  but usually modest.
+
+**A limitation the ground truth exposes:** above 60 features *neither* surrogate recovers
+the true most important feature (top-1 ≈ 0.0 for both, n = 3). Local feature-ranking
+recovery in high dimensions is hard regardless of the space fitted in.
+
 **What this means for the paper.** Not "our surrogate is better" — that dies on random
 forests. It is *"the right surrogate depends on the black box's local log-odds geometry,
 and here is a cheap diagnostic that tells you which to use"*. That framing explains the
@@ -260,9 +541,9 @@ rather than two.
 
 All verified by running the code, not by reading it. Ordered by how much they'd cost you.
 
-> **B1–B9 and B11–B14 were fixed on 2026-08-07** and each has a regression test. B10 was
-> found while verifying those fixes and is **still open** — it needs a decision from you, because
-> fixing it re-bases every number in the repo.
+> **B1–B14 were all fixed on 2026-08-07** and each has a regression test. B10 was found
+> while verifying the others and was fixed last, once it became clear the pre-registered
+> taxonomy experiment could not be run on top of nondeterministic sampling.
 >
 > The fixes were checked against a before/after snapshot of the paper's configurations
 > run in serial mode. **All four Gaussian configurations are bit-identical**, and both
@@ -448,7 +729,7 @@ callers keep their plain dicts. The cache still cannot see code changes, so rest
 kernel when comparing before/after an edit is still necessary.
 Tests: `test_freezeargs_does_not_mutate_the_caller`, `test_freezeargs_result_is_hashable`.
 
-### B10 — results are not reproducible with `parallel_eval=True` — **OPEN**
+### B10 — results are not reproducible with `parallel_eval=True` — **FIXED**
 
 Found while verifying the fixes above. Running the *same* configuration with the *same*
 code twice gives different numbers:
@@ -475,20 +756,36 @@ so **no conclusion in the paper is at risk**. But the exact figures cannot be re
 and it makes small effects — precisely the regime the Logit-LIME comparison lives in —
 impossible to distinguish from noise.
 
-Not fixed, because the fix re-bases every number in the repo and that should be your call.
-The fix is to give each explainer its own seeded generator derived deterministically from
-the query point, so the result is independent of scheduling and call order:
+**Fixed on 2026-08-07**, as part of the pre-registered taxonomy experiment — a study whose
+effects sit at the same order of magnitude as this noise cannot be run on top of it.
+
+`clime/utils/seeding.py::rng_from_point` derives a generator deterministically from the
+query point itself, so the draw no longer depends on scheduling or on how many draws came
+before. `hashlib.sha256` rather than `hash()`, which is salted per process and would break
+reproducibility across runs:
 
 ```python
-# clime/explainer/BLIMEY.py, in _sample_locally
-seed = int.from_bytes(hashlib.sha256(np.ascontiguousarray(self.query_point).tobytes()).digest()[:4], 'big')
-rng = np.random.default_rng(clime.RANDOM_SEED + seed)
-sampled_data['X'] = rng.multivariate_normal(self.query_point, cov, self.samples)
+digest = hashlib.sha256(point.tobytes() + str(salt).encode()).digest()[:8]
+rng = np.random.default_rng((int(clime.RANDOM_SEED) + int.from_bytes(digest, 'big')) % (2**63))
 ```
 
-`key_points.get_local_points` has the same problem and needs the same treatment for
-`evaluation data: 'sample locally'`. Use a stable hash (`hashlib`, not `hash()`, which is
-salted per process).
+Both draw sites use it: `BLIMEY._sample_locally` (`salt='surrogate training sample'`) and
+`key_points.get_local_points` (`salt='local evaluation sample'`). **The two salts must
+differ.** With a shared salt both sites derive the same generator from the same query
+point and return the *same points*, so every surrogate would be evaluated on its own
+training sample and every fidelity score would be optimistic.
+
+This re-bases the exact figures in the repo, as anticipated — the shifts are ~1e-3, two
+orders of magnitude below the effects the paper reports, so no conclusion changed.
+Tests: `test_sampling_is_reproducible_regardless_of_order`,
+`test_different_salts_give_different_draws`, `test_different_query_points_give_different_draws`.
+
+A related trap surfaced with it: `freezeargs` wraps the cached function without carrying
+`cache_clear` across, because `functools.cache` exposes it on the object rather than in
+`__dict__`, so `@wraps` does not copy it. There was no way to invalidate the pipeline cache
+when something *outside* the options dict changed — which the kernel-width sweep needs, as
+the kernel width is a module constant, not an option. Fixed by explicit passthrough, with
+`test_freezeargs_preserves_cache_control`.
 
 ### B11 — `log loss` is cross-entropy, not KL — **FIXED**
 
@@ -663,26 +960,27 @@ far from the boundary), B13 (all-zero query-probability weights), B14 (SVM `gamm
 plus three new models in the registry — gradient boosting and Platt/isotonic-calibrated
 random forests — which the calibration control needed.
 
+B10 (deterministic sampling) was fixed after those, together with the `freezeargs`
+`cache_clear` passthrough it exposed.
+
 **Still open**, roughly in order of value:
 
-1. **B10 — deterministic sampling.** See §6. Needs your decision because it re-bases every
-   number. Until then, use `parallel_eval=False` for anything where the effect is small.
-2. **Persist results.** `run_pipeline` caches in-process only; every notebook restart
+1. **Persist results.** `run_pipeline` caches in-process only; every notebook restart
    re-runs everything, and a 400-point grid sweep is expensive. A `joblib.Memory` cache
    keyed on the frozen `opts` would make E5 comfortable and make results reproducible
-   across sessions. Worth doing *after* B10, since caching nondeterministic results
-   freezes whichever draw you happened to get.
-3. **A headless experiment runner.** `experiments/*.py` each hard-code a full `opts` dict
+   across sessions. Now safe to do: before B10 was fixed this would have frozen whichever
+   draw you happened to get.
+2. **A headless experiment runner.** `experiments/*.py` each hard-code a full `opts` dict
    and duplicate ~40 lines. A YAML/JSON config plus one runner script would make the
    sweeps in §7 tractable and, more importantly, make the exact configuration behind
    each figure recoverable — right now the only record of the last experiment is
-   widget state serialised inside a notebook.
-4. **Pin the environment properly.** `requirements.txt` pins only sklearn; numpy,
+   widget state serialised inside a notebook. `experiments/logit_lime/sweep.py` is a
+   first step: a resumable, checkpointing sweep over `(dataset, model, explainer,
+   metric)`, but its configuration is still Python constants rather than a config file.
+3. **Pin the environment properly.** `requirements.txt` pins only sklearn; numpy,
    scipy and matplotlib float. Given the known sklearn 1.2.2 breakage, a lockfile (or at
    least an `environment.yml` capturing the working conda env) would protect the
    published results. Also: the sklearn incompatibility itself is worth 30 minutes to
    diagnose — being stuck on a 2022 release will get more painful, not less.
-5. **Re-enable `QDA`.** It is implemented and commented out of the registry with no
-   recorded reason.
-6. **Push B1 and un-comment the Colab badge.** The badge installs from GitHub, so it
+4. **Push B1 and un-comment the Colab badge.** The badge installs from GitHub, so it
    stays broken until the rename is pushed.

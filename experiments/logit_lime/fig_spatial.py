@@ -6,7 +6,8 @@ import sys, os; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from style import *
 import json, numpy as np
 
-d = json.load(open('results.json'))
+import sys
+d = json.load(open(sys.argv[1] if len(sys.argv) > 1 else 'results_taxonomy.json'))
 PANELS = [('Gaussian|Logistic', 'Logistic regression'),
           ('Gaussian|MLP', 'MLP'),
           ('Gaussian|Random Forest', 'Random forest')]

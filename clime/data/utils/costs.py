@@ -7,12 +7,22 @@ import warnings
 import numpy as np
 from sklearn.utils.class_weight import compute_sample_weight
 
-def weights_based_on_distance(query_point, X):
+# scale of the exponential locality kernel, as a multiple of sqrt(n_features).
+# 0.75 is the default from the original LIME implementation. It defines "local" for the
+# surrogate's training weights AND for the local evaluation metrics simultaneously, so it
+# partly determines the size of any locality effect being measured - set it here to sweep
+# it, and it stays consistent on both sides (see experiments/logit_lime/sweep_kernel.py)
+KERNEL_WIDTH_SCALE = 0.75
+
+
+def weights_based_on_distance(query_point, X, kernel_width_scale=None):
     '''
     get the weighting of each sample proportional to the distance to the query point
     weights generated using exponential kernel found in the original lime implementation
     '''
-    kernel_width = np.sqrt(X.shape[1]) * .75
+    if kernel_width_scale is None:
+        kernel_width_scale = KERNEL_WIDTH_SCALE
+    kernel_width = np.sqrt(X.shape[1]) * kernel_width_scale
     euclidean_dist = np.sqrt(np.sum((X - query_point)**2, axis=1))
     weights = np.sqrt(np.exp(-(euclidean_dist ** 2) / kernel_width ** 2))
     return weights

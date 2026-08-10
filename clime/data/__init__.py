@@ -9,6 +9,7 @@ from .loaders.abalone_gender import get_abalone
 from .loaders.ionosphere import get_ionosphere
 from .loaders.wheat_seeds import get_wheat_seeds
 from .loaders.sklearn_toy import get_breast_cancer, get_wine, get_iris
+from .loaders.exported_npz import available_exported
 from .processing.balance import get_proportions_and_sample_num, unbalance_undersample, balance_oversample
 from .processing.downsample_data import shuffle_dataset, proportional_downsample, proportional_split
 from .utils.checkers import check_data_dict, get_generic_feature_names
@@ -35,6 +36,12 @@ AVAILABLE_DATASETS = {
     'Circles': sample_dataset_to_proportions(get_circles),
     'Blobs': sample_dataset_to_proportions(get_blobs),
 }
+
+# datasets exported from ~/Repos/toy_datasets, if any have been exported. Added last so a
+# name clash cannot silently shadow one of the loaders above
+AVAILABLE_DATASETS.update({name: loader
+                           for name, loader in available_exported().items()
+                           if name not in AVAILABLE_DATASETS})
 
 AVAILABLE_DATA_BALANCING = {
     'none': _identity_data,

@@ -8,6 +8,7 @@ import multiprocessing
 from tqdm.autonotebook import tqdm
 import numpy as np
 from sklearn.decomposition import PCA
+import clime
 from clime.data.utils import costs
 
 
@@ -127,7 +128,10 @@ def get_local_points(data, query_point, samples=100):
     # sample locally around the query point with a variance of the dataset
     data_cov = np.cov(data['X'].T)
     local_sample_cov = data_cov #/ 5    # maybe justify this?
-    samples = np.random.multivariate_normal(query_point, local_sample_cov, samples)
+    # different salt to the surrogate's own sample, otherwise the surrogate would be
+    # evaluated on exactly the points it was trained on
+    rng = clime.utils.rng_from_point(query_point, salt='local evaluation sample')
+    samples = rng.multivariate_normal(query_point, local_sample_cov, samples)
     return {'X': samples}
 
 class get_key_points_score():

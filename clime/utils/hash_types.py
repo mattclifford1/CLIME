@@ -41,4 +41,11 @@ def freezeargs(func):
         kwargs = {k: recursive_freeze(v) if isinstance(
             v, dict) else v for k, v in kwargs.items()}
         return func(*args, **kwargs)
+
+    # functools.cache exposes these on the object rather than in __dict__, so @wraps does
+    # not carry them across. Without this there is no way to invalidate the cache of a
+    # function that is both frozen and cached - needed when something outside the options
+    # dict changes, e.g. the locality kernel width or the random seed
+    wrapped.cache_clear = getattr(func, 'cache_clear', lambda: None)
+    wrapped.cache_info = getattr(func, 'cache_info', lambda: None)
     return wrapped

@@ -111,16 +111,30 @@ cache. Restart the kernel when comparing before/after a code change.
 
 ## Known traps
 
-**Results are not reproducible with `parallel_eval=True`.** `bLIMEy._sample_locally`
-draws from the global numpy RNG, so results depend on which worker handles which query
-point. Same code, same config, two runs → differences of ~1e-3. Serial runs *are*
-deterministic. Use `parallel_eval=False` whenever the effect you are measuring is small
-(the Logit-LIME comparisons live in exactly this regime). Tracked as B10 in
-`FINDINGS.md`, with the fix written out but deliberately not applied — applying it
-changes every number in the repo.
+**Neighbourhood sampling is seeded per query point, and the salts must differ.**
+`clime/utils/seeding.py::rng_from_point` derives a generator from the query point via
+`hashlib.sha256`, so sampling no longer depends on call order or on which worker handles
+which point (B10). The two draw sites pass *different* `salt` strings —
+`'surrogate training sample'` in `bLIMEy._sample_locally`, `'local evaluation sample'` in
+`key_points.get_local_points`. Give a new draw site its own salt. Reusing an existing one
+makes two sites return identical points; sharing the evaluation salt would score every
+surrogate on its own training sample.
 
 **The `@cache` on `run_pipeline` cannot see code changes.** Restart the kernel when
-comparing behaviour before and after editing a module.
+comparing behaviour before and after editing a module. For changes to module-level
+constants that are not part of `opts` — the locality kernel width
+(`costs.KERNEL_WIDTH_SCALE`), `clime.RANDOM_SEED` — call `run_pipeline.cache_clear()`;
+`freezeargs` passes it through explicitly, since `@wraps` does not carry it across.
+
+**`~/Repos/toy_datasets` and `~/Repos/projection_models` cannot be imported here.**
+`toy_datasets` pins numpy ≥2.3.5 and sklearn ≥1.7.2; `projection_models` needs sklearn
+≥1.6 for `validate_data`. This env is pinned to sklearn 1.1.3 and must stay there. Cross
+the boundary with **data, not code**: `experiments/logit_lime/export_toy_datasets.py` runs
+under `~/Repos/toy_datasets/.venv/bin/python` and writes `.npz` into
+`experiments/logit_lime/extra_datasets/`, which `clime/data/loaders/exported_npz.py` picks
+up automatically — dropping a new `.npz` there registers a new dataset with no code change.
+Save string columns as `dtype=str`, never `dtype=object`: an object array is pickled and
+the pickle carries a numpy 2.x module path that numpy 1.24 cannot import.
 
 **Plot axes are metric-aware.** `clime.evaluation.METRIC_RANGES` declares a fixed range
 for bounded metrics and `None` for unbounded ones. A new metric must be added there or

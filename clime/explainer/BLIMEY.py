@@ -61,15 +61,22 @@ class bLIMEy:
 
     def get_explanation(self):
         '''
-        feature importances of the surrogate model - just do for one class
-        (is the negative for the other class)
+        feature importances of the surrogate model, always for CLASS 1
+        (class 0's are the negative of these)
 
-        N.B. surrogates that regress a single target (e.g. logit_ridge, which
-        fits on p(class 1) alone) have a 1D coef_, so promote to 2D first.
-        Coefficients live on different scales between surrogates (probability,
-        logit, log-odds) so are not directly comparable across explainers.
+        The surrogates disagree about the shape of coef_. The probability ridge
+        regresses both columns of p(y|x) and has one row per class; logit_ridge and
+        the logistic regression regress class 1 alone and have a single row. Taking
+        row 0 in every case - as this did until B15 - returns class 0 for the first
+        and class 1 for the others, so every feature's sign flips between explainers
+        and any comparison of their explanations is inverted. Take the last row: it
+        is class 1 for both layouts.
+
+        Coefficients still live on different scales between surrogates (probability
+        vs logit) so magnitudes are not comparable across explainers; rankings and
+        signs are.
         '''
-        return np.atleast_2d(self.surrogate_model.coef_)[0, :]
+        return np.atleast_2d(self.surrogate_model.coef_)[-1, :]
 
     def predict_proba(self, X):
         y_ = self.surrogate_model.predict(X)
@@ -83,7 +90,10 @@ class bLIMEy:
     def _sample_locally(self, black_box_model):
         cov = self._get_local_sampling_cov()
         sampled_data = {}
-        sampled_data['X'] = np.random.multivariate_normal(self.query_point, cov, self.samples)
+        # seeded from the query point so the neighbourhood does not depend on
+        # evaluation order or parallelism (see clime.utils.seeding)
+        rng = clime.utils.rng_from_point(self.query_point, salt='surrogate training sample')
+        sampled_data['X'] = rng.multivariate_normal(self.query_point, cov, self.samples)
         # get the class predictions from the sampled data (for use with class balanced learning and metrics)
         sampled_data['y'] = black_box_model.predict(sampled_data['X'])
         # option to adjust weights based on class imbalance

@@ -84,3 +84,63 @@ def test_bar_plot_axis_defaults_do_not_leak():
     limits = matplotlib.pyplot.gcf().axes[0].get_ylim()
     assert limits[1] < 1.0, f'axis leaked from the previous plot: {limits}'
     matplotlib.pyplot.close('all')
+
+
+def test_sampling_is_reproducible_regardless_of_order():
+    '''
+    regression test (FINDINGS.md B10): neighbourhood sampling used to come from the
+    global numpy stream, so results depended on how many draws preceded them - and under
+    multiprocessing, on which worker took which query point
+    '''
+    import clime
+    from clime.utils import rng_from_point
+    q = np.array([0.3, -1.2, 4.0])
+    first = rng_from_point(q, salt='a').normal(size=5)
+    np.random.normal(size=54321)          # unrelated draws from the global stream
+    second = rng_from_point(q, salt='a').normal(size=5)
+    np.testing.assert_array_equal(first, second)
+
+
+def test_different_salts_give_different_draws():
+    '''
+    the surrogate's training sample and the evaluation sample are both drawn around the
+    query point - without different salts the surrogate would be scored on exactly the
+    points it was fitted to
+    '''
+    from clime.utils import rng_from_point
+    q = np.array([0.3, -1.2, 4.0])
+    a = rng_from_point(q, salt='surrogate training sample').normal(size=5)
+    b = rng_from_point(q, salt='local evaluation sample').normal(size=5)
+    assert not np.allclose(a, b)
+
+
+def test_different_query_points_give_different_draws():
+    from clime.utils import rng_from_point
+    a = rng_from_point(np.array([0.0, 0.0]), salt='s').normal(size=5)
+    b = rng_from_point(np.array([0.0, 1.0]), salt='s').normal(size=5)
+    assert not np.allclose(a, b)
+
+
+def test_freezeargs_preserves_cache_control():
+    '''
+    functools.cache exposes cache_clear on the object, not in __dict__, so @wraps drops
+    it. Without it there is no way to invalidate run_pipeline's cache when something
+    outside the options dict changes (kernel width, random seed)
+    '''
+    from functools import cache
+    from clime.utils import freezeargs
+
+    calls = []
+
+    @freezeargs
+    @cache
+    def counted(opts):
+        calls.append(1)
+        return len(calls)
+
+    counted({'a': 1})
+    counted({'a': 1})
+    assert len(calls) == 1, 'second call should have been cached'
+    counted.cache_clear()
+    counted({'a': 1})
+    assert len(calls) == 2, 'cache_clear did not invalidate'

@@ -1,7 +1,15 @@
-'''generate table1.tex from results.json'''
-import json, numpy as np
+'''
+generate table1.tex
 
-d = json.load(open('results.json'))
+usage:  python gen_table.py [results_taxonomy.json]
+
+Defaults to the taxonomy sweep rather than results.json: results.json predates the
+per-query-point seeding fix, and the taxonomy sweep re-runs every configuration in this
+table, so reading from it keeps the paper's numbers on one footing.
+'''
+import sys, json, numpy as np
+
+d = json.load(open(sys.argv[1] if len(sys.argv) > 1 else 'results_taxonomy.json'))
 DATASETS = ['Gaussian', 'Breast Cancer', 'Banknote Authentication', 'Pima Indian Diabetes']
 MODELS = ['Logistic', 'MLP', 'SVM', 'Gradient Boosting', 'Random Forest',
           'Random Forest (Platt calibrated)', 'Random Forest (isotonic calibrated)']
@@ -70,9 +78,11 @@ for model in ['Random Forest', 'Random Forest (Platt calibrated)']:
     print(f"Gaussian/{model}: sat={e['diagnostic']['saturation']:.1%} "
           f"gap={e['diagnostic']['gap']:+.3f} ratio={m[E[0]]['mean']/m[E[1]]['mean']:.3g}")
 from scipy.stats import spearmanr
+# only the configurations shown in this table - the taxonomy file holds many more, and
+# the correlation over the full set is reported separately by analyse.py
 rows = [(v['diagnostic']['gap'], v['diagnostic']['saturation'],
          v['metrics']['Brier score (local)'][E[0]]['mean']/max(v['metrics']['Brier score (local)'][E[1]]['mean'],1e-12))
-        for v in d.values()]
+        for v in (d[f'{ds}|{m}'] for ds in DATASETS for m in MODELS)]
 g, s, a = zip(*rows)
 print(f"n={len(rows)}  spearman(gap, advantage)={spearmanr(g,a)[0]:.3f} p={spearmanr(g,a)[1]:.2g}")
 print(f"          spearman(sat, advantage)={spearmanr(s,a)[0]:.3f} p={spearmanr(s,a)[1]:.2g}")

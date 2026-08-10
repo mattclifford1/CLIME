@@ -1,0 +1,46 @@
+\begin{table}[t]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{5pt}
+\caption{The pre-registered test. Each row aggregates one black box over the 14 datasets: median log-odds linearity gap $\Delta$, median saturation, median Logit-LIME advantage (ratio of local Brier scores, ${>}1$ favours Logit-LIME), and the number of datasets on which Logit-LIME is better. Groups and their predicted ordering were registered before any of these runs (Section~\ref{sec:prereg}). Rows marked $\dagger$ are model families that had never been run, so their results could not have informed the grouping.}
+\label{tab:groups}
+\begin{tabular}{lrrrr}
+\toprule
+Black box & $\Delta$ & sat. & advantage & better \\
+\midrule
+\multicolumn{5}{l}{\textbf{A} --- exactly linear log-odds} \\
+\quad LDA$^\dagger$ & $+0.36$ & $7\%$ & $98.22$ & 14/14 \\
+\quad Logistic regression & $+0.41$ & $2\%$ & $8.3\!\cdot\!10^{3}$ & 14/14 \\
+\cmidrule(l){2-5}
+\quad \emph{group median} & $+0.38$ & $4\%$ & $1.4\!\cdot\!10^{3}$ & 28/28 \\
+\addlinespace
+\multicolumn{5}{l}{\textbf{B} --- quadratic log-odds} \\
+\quad Gaussian naive Bayes$^\dagger$ & $+0.23$ & $46\%$ & $1.23$ & 8/14 \\
+\quad QDA$^\dagger$ & $+0.10$ & $68\%$ & $0.90$ & 3/14 \\
+\cmidrule(l){2-5}
+\quad \emph{group median} & $+0.14$ & $58\%$ & $0.97$ & 11/28 \\
+\addlinespace
+\multicolumn{5}{l}{\textbf{C} --- smooth, non-polynomial} \\
+\quad MLP & $+0.41$ & $5\%$ & $1.90$ & 12/14 \\
+\quad SVM & $+0.04$ & $0\%$ & $1.15$ & 13/14 \\
+\cmidrule(l){2-5}
+\quad \emph{group median} & $+0.07$ & $0\%$ & $1.16$ & 25/28 \\
+\addlinespace
+\multicolumn{5}{l}{\textbf{D} --- piecewise constant} \\
+\quad Decision tree$^\dagger$ & $+0.00$ & $100\%$ & $0.79$ & 1/14 \\
+\quad Random forest & $-0.04$ & $10\%$ & $0.78$ & 4/14 \\
+\quad $k$-nearest neighbours$^\dagger$ & $-0.05$ & $37\%$ & $0.64$ & 1/14 \\
+\cmidrule(l){2-5}
+\quad \emph{group median} & $+0.00$ & $62\%$ & $0.76$ & 6/42 \\
+\addlinespace
+\multicolumn{5}{l}{\textbf{E} --- calibrated forest} \\
+\quad Random forest + Platt & $+0.05$ & $0\%$ & $1.10$ & 12/14 \\
+\quad Random forest + isotonic & $+0.00$ & $36\%$ & $0.75$ & 2/14 \\
+\cmidrule(l){2-5}
+\quad \emph{group median} & $+0.02$ & $0\%$ & $1.01$ & 14/28 \\
+\addlinespace
+\multicolumn{5}{l}{unassigned} \\
+\quad Gradient boosting & $+0.08$ & $0\%$ & $1.07$ & 11/14 \\
+\bottomrule
+\end{tabular}
+\end{table}
