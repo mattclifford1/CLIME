@@ -8,10 +8,15 @@ usage:  python analyse_explanations.py [results_explanations.json]
 '''
 # author: Matt Clifford <matt.clifford@bristol.ac.uk>
 
+import sys, os
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from common import paths
+
 import sys
 import json
 import numpy as np
-from analyse import GROUP_ORDER, GROUP_LABEL
+from analysis.analyse import GROUP_ORDER, GROUP_LABEL
 
 MIN_FEATURES = 6
 
@@ -33,7 +38,7 @@ def report(rows, label):
 
 
 if __name__ == '__main__':
-    all_rows = load(sys.argv[1] if len(sys.argv) > 1 else 'results_explanations.json')
+    all_rows = load(sys.argv[1] if len(sys.argv) > 1 else paths.results('results_explanations.json'))
     rows = [r for r in all_rows if r.get('n_features', 0) >= MIN_FEATURES]
     print(f'{len(all_rows)} configurations, {len(rows)} on datasets with '
           f'>= {MIN_FEATURES} features\n')

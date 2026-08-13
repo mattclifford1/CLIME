@@ -1,15 +1,20 @@
 '''
-generate table1.tex
+generate tables/brier-kl-by-blackbox.tex (Table 1 of the paper)
 
-usage:  python gen_table.py [results_taxonomy.json]
+usage:  python analysis/table_brier_kl.py [results_taxonomy.json]
 
 Defaults to the taxonomy sweep rather than results.json: results.json predates the
 per-query-point seeding fix, and the taxonomy sweep re-runs every configuration in this
 table, so reading from it keeps the paper's numbers on one footing.
 '''
+import sys, os
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from common import paths
+
 import sys, json, numpy as np
 
-d = json.load(open(sys.argv[1] if len(sys.argv) > 1 else 'results_taxonomy.json'))
+d = json.load(open(sys.argv[1] if len(sys.argv) > 1 else paths.results('results_taxonomy.json')))
 DATASETS = ['Gaussian', 'Breast Cancer', 'Banknote Authentication', 'Pima Indian Diabetes']
 MODELS = ['Logistic', 'MLP', 'SVM', 'Gradient Boosting', 'Random Forest',
           'Random Forest (Platt calibrated)', 'Random Forest (isotonic calibrated)']
@@ -63,8 +68,8 @@ for di, ds in enumerate(DATASETS):
         lines.append(r'\addlinespace')
 
 lines += [r'\bottomrule', r'\end{tabular}', r'\end{table}']
-open('table1.tex', 'w').write('\n'.join(lines) + '\n')
-print('table1.tex written')
+open(paths.table('brier-kl-by-blackbox.tex'), 'w').write('\n'.join(lines) + '\n')
+print('tables/brier-kl-by-blackbox.tex written')
 
 # summary numbers quoted in the text, so the prose cannot drift from the data
 print('\n--- numbers used in the prose ---')

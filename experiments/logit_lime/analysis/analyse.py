@@ -6,6 +6,11 @@ usage:  python analyse.py [results_taxonomy.json]
 '''
 # author: Matt Clifford <matt.clifford@bristol.ac.uk>
 
+import sys, os
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from common import paths
+
 import sys
 import json
 import glob
@@ -44,15 +49,34 @@ def load(path):
     return rows, errors
 
 
+# Both R^2 are at most 1, so a meaningful gap cannot exceed 1 either. Beyond that the
+# logit fit has been driven by probability clipping rather than by any geometry.
+GAP_PLAUSIBLE = 1.0
+
+
 def degenerate(rows):
     '''
-    Configurations where the black box is constant over the whole local neighbourhood.
-    The probability target then has zero variance, so R^2_p - and hence the gap - is
-    undefined; R^2_logit is meaningless too, being driven entirely by where the
-    probabilities were clipped. These are dropped from anything involving the gap and
-    reported separately rather than silently imputed.
+    Configurations where the gap is not a meaningful quantity, dropped from anything
+    involving it and reported separately rather than silently imputed.
+
+    Two cases:
+
+    - the gap is not finite. The black box is constant over the whole neighbourhood, the
+      probability target has zero variance and R^2_p is undefined.
+    - the gap is finite but absurd. When the probabilities differ only in their last bits,
+      R^2_p is defined but the clipped logit target is garbage: Ionosphere/Gaussian naive
+      Bayes gives a gap of -179 on one stack and -108 on another, with an identical
+      advantage of 1.5e11 either way. Both R^2 are bounded above by 1, so any |gap| > 1
+      means the logit fit was determined by where we clipped.
+
+    N.B. do NOT test saturation instead. A decision tree saturates every sampled point -
+    every leaf value is exactly 0 or 1 - yet the target still *varies* across the
+    neighbourhood, so R^2_p is perfectly well defined and the gap is a real 0.000.
+    Excluding on saturation throws away most of group D, which is the evidence that logit
+    space actively harms piecewise-constant black boxes.
     '''
-    return [r for r in rows if not np.isfinite(r['gap'])]
+    return [r for r in rows
+            if not np.isfinite(r['gap']) or abs(r['gap']) > GAP_PLAUSIBLE]
 
 
 def by_group(rows):
@@ -132,13 +156,14 @@ def summary(rows):
 
     deg = degenerate(rows)
     if deg:
-        print(f"\n{len(deg)} degenerate configuration(s) - black box constant over the "
-              f"whole neighbourhood, gap undefined, excluded from the gap correlation:")
+        print(f"\n{len(deg)} degenerate configuration(s) - the black box is constant, or "
+              f"near enough, over the whole neighbourhood, so the gap is not a meaningful "
+              f"quantity. Excluded from the gap correlation:")
         for r in deg:
-            print(f"   {r['dataset']}|{r['model']:22s} saturation = {r['sat']:.1%}  "
-                  f"benefit = {r['adv']:.2f}x")
+            print(f"   {r['dataset']}|{r['model']:22s} saturation = {r['sat']:6.1%}  "
+                  f"gap = {r['gap']:+9.3f}  benefit = {r['adv']:.3g}x")
 
-    ok = [r for r in rows if np.isfinite(r['gap'])]
+    ok = [r for r in rows if r not in deg]
     rg, pg = spearmanr([r['gap'] for r in ok], [r['adv'] for r in ok])
     rs, ps = spearmanr([r['sat'] for r in rows], [r['adv'] for r in rows])
     print(f"\nSpearman(gap, benefit)        rho = {rg:+.3f}  p = {pg:.2g}  (n = {len(ok)})")
@@ -155,20 +180,20 @@ def summary(rows):
 
 def seed_spread(prefix='results'):
     '''spread across repeated trials, if the seed sweep has run'''
-    paths = sorted(glob.glob(f'{prefix}_seed*.json'))
-    if len(paths) < 2:
+    files = sorted(glob.glob(paths.results(f'{prefix}_seed*.json')))
+    if len(files) < 2:
         return None
     per_seed = {}
-    for p in paths:
+    for p in files:
         rows, _ = load(p)
         for r in rows:
             per_seed.setdefault((r['dataset'], r['model']), []).append(r['adv'])
     print('\n' + '='*78)
-    print(f'REPEATED TRIALS  ({len(paths)} seeds)')
+    print(f'REPEATED TRIALS  ({len(files)} seeds)')
     print('='*78)
     by_model = {}
     for (ds, m), vals in per_seed.items():
-        if len(vals) == len(paths):
+        if len(vals) == len(files):
             by_model.setdefault(m, []).append(vals)
     print(f"\n{'model':<24s} {'median benefit':>15s} {'across-seed spread':>22s}")
     for m, groups in sorted(by_model.items()):
@@ -180,7 +205,7 @@ def seed_spread(prefix='results'):
 
 
 if __name__ == '__main__':
-    path = sys.argv[1] if len(sys.argv) > 1 else 'results_taxonomy.json'
+    path = sys.argv[1] if len(sys.argv) > 1 else paths.results('results_taxonomy.json')
     rows, errors = load(path)
     if errors:
         print(f'{len(errors)} configurations failed:')

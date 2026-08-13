@@ -25,6 +25,17 @@ def weights_based_on_distance(query_point, X, kernel_width_scale=None):
     kernel_width = np.sqrt(X.shape[1]) * kernel_width_scale
     euclidean_dist = np.sqrt(np.sum((X - query_point)**2, axis=1))
     weights = np.sqrt(np.exp(-(euclidean_dist ** 2) / kernel_width ** 2))
+    # B16. The kernel width is in raw feature units, so on unstandardised data with large
+    # feature magnitudes every distance dwarfs it and exp(-d^2/k^2) underflows to zero for
+    # every sample. sklearn then raises "Weights sum to zero" from inside Ridge.fit. An
+    # all-zero kernel carries no locality information at all, so fall back to uniform
+    # weights and say so - the real fix for the caller is to standardise the data.
+    if not np.any(weights > 0):
+        warnings.warn(
+            'locality kernel underflowed to zero for every sample: the feature scale is '
+            'far larger than the kernel width. Falling back to uniform weights - '
+            'standardise the data to get meaningful locality.', Warning)
+        return np.ones(X.shape[0], dtype=np.float64)
     return weights
 
 def weight_based_on_class_imbalance(data):

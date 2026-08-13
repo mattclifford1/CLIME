@@ -15,6 +15,11 @@ usage:  python sweep_kernel.py <output.json>
 '''
 # author: Matt Clifford <matt.clifford@bristol.ac.uk>
 
+import sys, os
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from common import paths
+
 import sys
 import os
 import json
@@ -22,7 +27,7 @@ import warnings
 import numpy as np
 import clime
 from clime.data.utils import costs
-from sweep import opts, diagnostic, EXPLAINERS
+from sweeps.sweep import opts, diagnostic, EXPLAINERS
 from clime.evaluation.key_points import get_points_between_class_means
 
 warnings.filterwarnings('ignore')
@@ -34,6 +39,8 @@ METRIC = 'Brier score (local)'
 
 
 def run(out_path):
+    out_path = paths.results(out_path)   # a bare name lands in results/
+
     out = {'_meta': {'scales': SCALES, 'default_scale': 0.75}}
     if os.path.exists(out_path):        # see the note on resuming in sweep.py
         done = json.load(open(out_path))

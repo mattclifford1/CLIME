@@ -15,6 +15,7 @@ See experiments/logit_lime/.
 '''
 # author: Matt Clifford <matt.clifford@bristol.ac.uk>
 
+import numpy as np
 import sklearn.tree
 import sklearn.neighbors
 import sklearn.naive_bayes
@@ -66,6 +67,19 @@ class _sklearn_model(base_model):
 class LDA(_sklearn_model):
     '''linear discriminant analysis - log-odds are exactly linear in x'''
     estimator = LinearDiscriminantAnalysis
+
+    def train(self, data):
+        try:
+            super().train(data)
+        except np.linalg.LinAlgError:
+            # The pooled covariance is rank deficient - fewer samples than features,
+            # which happens on wide datasets (Arrhythmia has 279) and on the tiny
+            # fixtures the pipeline tests use. The default 'svd' solver raises on this;
+            # 'lsqr' with automatic shrinkage is defined for it. scikit-learn <1.2 fitted
+            # these anyway and returned an ill defined model. Only a fallback, so well
+            # conditioned problems keep the default solver and their previous values.
+            self.model = self.estimator(solver='lsqr', shrinkage='auto')
+            super().train(data)
 
 
 class gaussian_naive_bayes(_sklearn_model):

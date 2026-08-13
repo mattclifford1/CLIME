@@ -241,7 +241,7 @@ seven scales spanning LIME's default, and five seeds for error bars.
 
 | group | n | median Δ | median benefit | better |
 |---|---|---|---|---|
-| **A** linear | 28 | +0.382 | **1393.8×** | 28/28 |
+| **A** linear | 28 | +0.382 | **1384.4×** | 28/28 |
 | **B** quadratic | 28 | +0.136 | 0.97× | 11/28 |
 | **C** smooth | 28 | +0.066 | 1.16× | 25/28 |
 | **D** piecewise constant | 42 | +0.000 | 0.76× | 6/42 |
@@ -271,11 +271,11 @@ seven scales spanning LIME's default, and five seeds for error bars.
 **What survives.** The binary distinction — *exactly linear* log-odds versus everything
 else — is enormous and perfectly consistent (28/28, three orders of magnitude). The graded
 ordering among the non-linear families is not supported. Δ still predicts the benefit
-across the whole set (Spearman ρ = **+0.698**, p = 2e-25, n = 165), so the continuous
+across the whole set (Spearman ρ = **+0.735**, p = 3e-29, n = 165), so the continuous
 diagnostic works where the discrete taxonomy does not.
 
 **The saturation control got stronger, and changed sign** — but read it carefully.
-ρ = **−0.381**, p = 3.6e-07 (was −0.13, p = 0.5 at n = 28). Four pieces of evidence, in
+ρ = **−0.364**, p = 1.2e-06 (was −0.13, p = 0.5 at n = 28). Four pieces of evidence, in
 descending order of how much weight they carry:
 
 1. **The Platt manipulation** (the only causal one): holding the model family fixed,
@@ -287,7 +287,25 @@ descending order of how much weight they carry:
 3. **Δ is not a saturation proxy**: sat vs Δ is ρ = −0.116, p = 0.14 — essentially
    independent. Δ's association with benefit barely moves when saturation is partialled
    out (0.698 → 0.682).
-4. **The aggregate correlation** is the wrong sign for the saturation account.
+4. **The aggregate correlation** is the wrong sign for the saturation account
+   (ρ = −0.364, p = 1.2e-06).
+
+**Methodology correction (2026-08-10): which configurations count as degenerate.**
+`analyse.degenerate` originally excluded only configurations whose Δ was *NaN*. That is
+not enough. When a black box's probabilities differ only in their last bits, R²_p is
+finite but the clipped logit target is garbage, giving finite-but-meaningless Δ values —
+Ionosphere/Gaussian NB reports −179 on one library stack and −108 on another with an
+*identical* advantage of 1.5e11 either way. Both R² are bounded above by 1, so any
+|Δ| > 1 means the logit fit was decided by where the probabilities were clipped. Excluding
+those as well takes the registered-grid correlation from **ρ = 0.698 to ρ = 0.735**
+(n = 165): the pathological points were suppressing it.
+
+An intermediate version of this rule excluded on *saturation* instead, and that was wrong
+in an instructive way. A decision tree saturates every sampled point — every leaf value is
+exactly 0 or 1 — yet the target still varies across the neighbourhood, so R²_p is well
+defined and Δ is a genuine 0.000. Excluding on saturation removed 14 of the 15 decision
+tree configurations, i.e. most of the evidence that logit space actively *harms*
+piecewise-constant black boxes. Saturation is not degeneracy.
 
 **Do not overclaim point 4 as a mechanism.** Within groups the sign of the
 saturation–benefit relationship is inconsistent: A −0.40, B −0.00, C **+0.46**, D +0.19,
@@ -304,8 +322,8 @@ related artefact affects near-degenerate cases: R²_logit is then set by where p
 were clipped, producing values as low as −180, which is why the figures clamp their axes
 and report the count clamped.
 
-**Scoring rules still disagree** at scale: by Brier the hard-label variant wins 69/168 vs
-logit's 65; by KL logit wins 83/168 vs hard-label's 54. Same pattern as at n = 28.
+**Scoring rules still disagree** at scale: by Brier the hard-label variant wins 70/168 vs
+logit's 65; by KL logit wins 83/168 vs hard-label's 56. Same pattern as at n = 28.
 
 #### Kernel width sweep (140/140, 0 failures)
 
@@ -380,7 +398,7 @@ for. Report the two separately.
 
 **15 further datasets**, exported from `~/Repos/toy_datasets`. That package pins
 numpy ≥2.3.5 / sklearn ≥1.7.2 and cannot share a process with this env, so
-`experiments/logit_lime/export_toy_datasets.py` runs under its venv and writes `.npz`
+`experiments/logit_lime/sweeps/export_toy_datasets.py` runs under its venv and writes `.npz`
 that `clime/data/loaders/exported_npz.py` registers automatically. The grid widens from
 2–60 features to **2–279** (Arrhythmia) and from roughly balanced to a **4.9% minority
 class** (Stroke Prediction, Thyroid Sick).
@@ -787,6 +805,123 @@ when something *outside* the options dict changed — which the kernel-width swe
 the kernel width is a module constant, not an option. Fixed by explicit passthrough, with
 `test_freezeargs_preserves_cache_control`.
 
+### B15 — the explainers described opposite classes — **FIXED**
+
+Found by comparing explanations rather than fidelity. `get_explanation()` took row 0 of
+`coef_` for every surrogate, but the layouts differ:
+
+| explainer | `coef_` | row 0 is |
+|---|---|---|
+| `bLIMEy (normal)` | (2, D), one row per class | **class 0** |
+| `bLIMEy (logit)` | (D,), regresses class 1 alone | **class 1** |
+| `bLIMEy (logistic regression)` | (1, D) | **class 1** |
+
+So standard LIME reported class-0 importances and the others class-1 — **every feature's
+sign inverted between them**. On Gaussian/logistic: `[-0.224, -0.255]` against
+`[+2.63, +2.94]`. Any comparison of explanations across explainers was silently reversed.
+
+The earlier B4 fix (`np.atleast_2d(coef_)[0, :]`) made the logit surrogate *run* without
+noticing the two layouts disagree about what row 0 holds. Now `[-1, :]`, which is class 1
+under both. **No previously reported number changed** — every result in the paper comes
+from `predict_proba`, not from coefficients, which is exactly why it survived so long.
+Tests: `test_explanations_all_describe_the_same_class`,
+`test_logit_surrogate_recovers_a_logistic_black_box`.
+
+### B16 — the locality kernel underflows to all-zero weights — **FIXED**
+
+Exposed by adding datasets with large raw feature magnitudes (Heart Failure ~8e5), but
+**latent since before them**: the pre-existing Credit Scoring 1 (~6e4) has the same
+property. The kernel width is `0.75*sqrt(D)` in *raw feature units*, so when the data is
+not standardised every distance dwarfs it, `exp(-d^2/k^2)` underflows to zero for every
+sample, and sklearn raises `ZeroDivisionError: Weights sum to zero` from inside
+`Ridge.fit`. It only surfaced now because the pipeline permutation test does not
+standardise, and no previously registered dataset had a large enough scale.
+
+`weights_based_on_distance` now falls back to uniform weights with a warning when the
+whole kernel underflows — an all-zero kernel carries no locality information, so uniform
+is the honest fallback. The real fix for a caller hitting this is to standardise; all
+sweeps in this study do. Tests:
+`test_distance_weights_survive_an_unstandardised_feature_scale`,
+`test_distance_weights_are_unchanged_on_a_normal_scale`.
+
+### B17 — the scikit-learn 1.2.2 incompatibility — **DIAGNOSED AND FIXED, stack upgraded**
+
+> **Upgraded on 2026-08-10** to python 3.13 / scikit-learn 1.9.0 / numpy 2.4.6 / scipy
+> 1.18.0, and everything re-run. The diagnosis below was the first of **six** latent bugs,
+> all of them real defects that 1.1.3 never exercised:
+>
+> 1. six model classes never stored their `data` init argument (the diagnosis below)
+> 2. `random_forest` accepted `fit_intercept`, copy-pasted from the logistic model and
+>    silently ignored — a forest has no intercept. Removed.
+> 3. `bagged_logistic` used `base_estimator=`, renamed to `estimator=` in sklearn 1.2 and
+>    removed in 1.4
+> 4. the synthetic loaders passed `n_samples=[n, n]` as a **list**; sklearn's parameter
+>    validation accepts an int or a tuple and rejects a list
+> 5. Sonar, Abalone Gender and Ionosphere returned `y` as `dtype=object`; sklearn now
+>    reports "Unknown label type: unknown". Fixed centrally in `check_data_dict` so every
+>    loader is covered, and only when the values are genuinely integral
+> 6. LDA and QDA **raise** on rank-deficient covariance where 1.1.3 silently fitted an
+>    ill-defined model. Both now fall back to regularisation (LDA to `lsqr` with automatic
+>    shrinkage, QDA to an escalating `reg_param`), so wide datasets such as Arrhythmia
+>    still produce results
+>
+> Items 2, 4 and 5 were pre-existing defects unrelated to the upgrade. Item 6 means some
+> old QDA and naive Bayes numbers came from a regime scikit-learn now refuses to compute —
+> the 14 "degenerate" configurations were the visible part of that.
+>
+> **QDA is now simply unavailable on Arrhythmia** (279 features, 144 samples in the
+> smaller class). sklearn checks the rank of the empirical covariance *before* applying
+> `reg_param`, so no amount of regularisation helps — the escalating fallback fails at
+> every level and the configuration is recorded as an error. On 1.1.3 it produced a
+> result: 100% saturation and an advantage of 0.00, i.e. garbage. Refusing is the more
+> honest outcome, but note the consequence — the new results have one fewer QDA
+> configuration than the old ones, and it is not a like-for-like row.
+>
+> `astropy`, `python-picard` and `adjustText` were dropped: imported nowhere in the repo.
+
+`todo.txt` has carried "fix incompatibilty with scikit-learn==1.2.2" since 2023 with no
+diagnosis. It is one bug, and it is not subtle once seen:
+
+```
+AttributeError: 'logistic' object has no attribute 'data'
+  sklearn/base.py in _validate_params -> get_params -> getattr(self, key)
+```
+
+Eight model classes **subclass** sklearn estimators and add a `data` argument to
+`__init__` — `logistic`, `random_forest`, `SVM`, `QDA`, `MLP_simple`, `gradient_boosting`,
+`logistic_regression`, `logit_ridge`. sklearn's `BaseEstimator.get_params()` reads the
+`__init__` signature and does `getattr(self, name)` for every parameter it finds, so it
+looks for `self.data`, which is consumed by `train()` and never stored.
+
+This is a real violation of sklearn's estimator contract — `__init__` parameters must be
+stored unmodified under the same name — that 1.1.3 simply never exercised. **sklearn 1.2
+began calling `_validate_params()` from `fit()`**, and `_validate_params` calls
+`get_params`. Nothing about our maths changed; a latent API violation started being
+checked.
+
+**How deep does it go?** Not deep. Neutralising only `get_params` (a diagnostic monkey
+patch, not a fix) is enough to run the full pipeline under **scikit-learn 1.9.0 and numpy
+2.4.6** on python 3.13. `fat-forensics`, `lime` and `shap` all install and import on that
+stack too. So "we cannot upgrade" is false as an engineering claim.
+
+**The real reason not to upgrade is that it moves the numbers.** Same configuration,
+pinned versus modern:
+
+```
+pinned  (sklearn 1.1.3, numpy 1.24): 0.00304427 0.00296552 0.0032939  0.00368762
+modern  (sklearn 1.9.0, numpy 2.4 ): 0.00304353 0.00297267 0.00327164 0.00365696
+max abs diff 3.8e-05    max relative diff 1.0e-02
+```
+
+A 1% relative shift is harmless against the effects the paper reports (ratios of 1.5x to
+10^5), but it is *not* zero, and re-basing means re-running all 1,491 configurations and
+re-checking every number in the paper. That is a deliberate choice to make between
+projects, not something to do incidentally.
+
+**If you do upgrade**, the fix is to stop subclassing and use composition — a model that
+*has* an sklearn estimator rather than *is* one. `clime/models/log_odds_families.py::_sklearn_model`
+already does exactly this and needs no change; the eight older classes are the work.
+
 ### B11 — `log loss` is cross-entropy, not KL — **FIXED**
 
 `log_loss_score` computes the cross entropy `H(y, p)` between the black box's
@@ -974,7 +1109,7 @@ B10 (deterministic sampling) was fixed after those, together with the `freezearg
    and duplicate ~40 lines. A YAML/JSON config plus one runner script would make the
    sweeps in §7 tractable and, more importantly, make the exact configuration behind
    each figure recoverable — right now the only record of the last experiment is
-   widget state serialised inside a notebook. `experiments/logit_lime/sweep.py` is a
+   widget state serialised inside a notebook. `experiments/logit_lime/sweeps/sweep.py` is a
    first step: a resumable, checkpointing sweep over `(dataset, model, explainer,
    metric)`, but its configuration is still Python constants rather than a config file.
 3. **Pin the environment properly.** `requirements.txt` pins only sklearn; numpy,

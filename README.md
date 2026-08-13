@@ -51,16 +51,24 @@ others, and gives a cheap diagnostic that predicts which. See [FINDINGS.md](FIND
 ## Setup
 
 ```bash
-conda create -n clime python=3.9 -y
-conda activate clime
-pip install -e .
+uv sync --extra notebook --extra datasets
 ```
+
+That is the whole setup — `uv` creates the environment, installs this project editable,
+and `uv run <cmd>` uses it without anything to activate. There is no conda step and no
+`pip install -e .`. Name every extra you want on each sync: `uv sync` makes the
+environment match exactly what you ask for, so omitting one removes it.
+
+The `datasets` extra points at `~/Repos/toy_datasets` by local path. Drop it if you do not
+have that repo — nothing in the core pipeline needs it.
 
 The Colab badge below is commented out: it installs from GitHub, and the packaging fix
 (`FINDINGS.md` B1) is in the working tree but not yet pushed. Re-enable it once it is.
 
-Do not upgrade scikit-learn past the pinned `1.1.3`; there is an unresolved
-incompatibility with 1.2.2.
+Versions are pinned exactly in `pyproject.toml` and `uv.lock` is committed, because they
+decide the numbers this repo exists to compare. scikit-learn was upgraded from `1.1.3` to
+`1.9.0` on 2026-08-10 (`FINDINGS.md` B17); the long-standing "unresolved incompatibility
+with 1.2.2" turned out to be six latent bugs in this repo, not a problem with sklearn.
 
 <!-- Broken until FINDINGS.md B1 is fixed:
 Try out quickly in Colab: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/mattclifford1/CLIME/blob/main/experiments.ipynb)
@@ -71,7 +79,7 @@ Try out quickly in Colab: [![Open In Colab](https://colab.research.google.com/as
 Interactively, via widgets — pick options, click **RUN PIPELINE**:
 
 ```bash
-jupyter-notebook experiments.ipynb
+uv run jupyter-notebook experiments.ipynb
 ```
 
 Selecting several models / explainers / metrics runs every permutation and plots one
@@ -105,7 +113,7 @@ for sweeping over several at once.
 ## Dev tools
 
 ```bash
-pytest    # ~10 min: sweeps every pipeline module, plus numerical regression tests
+uv run --group dev pytest    # ~10 min: sweeps every pipeline module, plus numerical regression tests
 ```
 
 `test_pipeline.py` checks that every configuration *completes*; the `test_costs.py`,

@@ -19,11 +19,16 @@ usage:  python analyse_extended.py [results_extended.json]
 '''
 # author: Matt Clifford <matt.clifford@bristol.ac.uk>
 
+import sys, os
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from common import paths
+
 import sys
 import json
 import numpy as np
 from scipy.stats import spearmanr
-from analyse import load, by_group, degenerate, GROUP_ORDER, GROUP_LABEL
+from analysis.analyse import load, by_group, degenerate, GROUP_ORDER, GROUP_LABEL
 
 REGISTERED_MODELS = ['Logistic', 'LDA', 'QDA', 'Gaussian Naive Bayes', 'MLP', 'SVM',
                      'Decision Tree', 'Random Forest', 'k Nearest Neighbours',
@@ -50,7 +55,7 @@ def table(rows, title):
         v = g[name]
         print(f"{GROUP_LABEL[name]:<32s} {v['n']:>4d} {v['gap']:>+11.3f} "
               f"{v['adv']:>14.2f}x {v['wins']}/{v['n']:>3d}")
-    ok = [r for r in rows if np.isfinite(r['gap'])]
+    ok = [r for r in rows if r not in degenerate(rows)]
     if len(ok) > 3:
         rg, pg = spearmanr([r['gap'] for r in ok], [r['adv'] for r in ok])
         rs, ps = spearmanr([r['sat'] for r in rows], [r['adv'] for r in rows])
@@ -88,9 +93,9 @@ def by_dimensionality(rows, dims):
 
 
 if __name__ == '__main__':
-    path = sys.argv[1] if len(sys.argv) > 1 else 'results_extended.json'
+    path = sys.argv[1] if len(sys.argv) > 1 else paths.results('results_extended.json')
     rows, errors = load(path)
-    reg_meta = json.load(open('results_taxonomy.json'))
+    reg_meta = json.load(open(paths.results('results_taxonomy.json')))
     registered_datasets = sorted({k.split('|')[0] for k in reg_meta
                                   if not k.startswith('_')})
 

@@ -84,6 +84,7 @@ class gradient_boosting(sklearn.ensemble.GradientBoostingClassifier, base_model)
     between a random forest's vote fraction and a genuinely linear log-odds surface
     '''
     def __init__(self, data, balanced_training=False, **kwargs):
+        self.data = data      # sklearn contract: see FINDINGS.md B17
         self.balanced_training = balanced_training
         super().__init__(random_state=clime.RANDOM_SEED, **kwargs)
         self.train(data)

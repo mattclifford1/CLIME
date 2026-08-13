@@ -1,7 +1,7 @@
 # Pre-registered prediction
 
 Written **2026-08-07, before running the taxonomy sweep**, and deliberately not edited
-afterwards. Results go in `results_taxonomy.json`; the outcome is assessed in
+afterwards. Results go in `results/results_taxonomy.json`; the outcome is assessed in
 `FINDINGS.md` §4 and the paper's discussion.
 
 ## Why register anything

@@ -1,17 +1,22 @@
 '''
-Generate table2.tex - the pre-registered test, aggregated per black box over all datasets.
+Generate tables/preregistered-groups.tex (Table 2 of the paper) - the pre-registered test, aggregated per black box over all datasets.
 
 Rows are grouped by the a priori log-odds geometry registered in PREREGISTRATION.md, and
 the five model families that had never been run are marked, since those are what make the
 test a prediction rather than a description.
 
-usage:  python gen_table2.py [results_taxonomy.json]
+usage:  python analysis/table_groups.py [results_taxonomy.json]
 '''
 # author: Matt Clifford <matt.clifford@bristol.ac.uk>
 
+import sys, os
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from common import paths
+
 import sys
 import numpy as np
-from analyse import load, GROUP_ORDER
+from analysis.analyse import load, GROUP_ORDER
 
 NICE = {'Logistic': 'Logistic regression', 'LDA': 'LDA', 'QDA': 'QDA',
         'Gaussian Naive Bayes': 'Gaussian naive Bayes', 'MLP': 'MLP', 'SVM': 'SVM',
@@ -37,7 +42,7 @@ def fmt_adv(v):
     return f'${v:,.2f}$'
 
 
-rows, _ = load(sys.argv[1] if len(sys.argv) > 1 else 'results_taxonomy.json')
+rows, _ = load(sys.argv[1] if len(sys.argv) > 1 else paths.results('results_taxonomy.json'))
 n_datasets = len({r['dataset'] for r in rows})
 
 lines = [
@@ -81,5 +86,5 @@ for gi, g in enumerate(GROUP_ORDER):
                  fr"{sum(r['adv'] > 1 for r in sub)}/{len(sub)} \\")
 
 lines += [r'\bottomrule', r'\end{tabular}', r'\end{table}']
-open('table2.tex', 'w').write('\n'.join(lines) + '\n')
-print(f'table2.tex written  ({len(rows)} rows, {n_datasets} datasets)')
+open(paths.table('preregistered-groups.tex'), 'w').write('\n'.join(lines) + '\n')
+print(f'tables/preregistered-groups.tex written  ({len(rows)} rows, {n_datasets} datasets)')

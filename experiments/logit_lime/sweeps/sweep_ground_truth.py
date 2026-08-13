@@ -19,6 +19,11 @@ usage:  python sweep_ground_truth.py [results_ground_truth.json]
 '''
 # author: Matt Clifford <matt.clifford@bristol.ac.uk>
 
+import sys, os
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from common import paths
+
 import sys
 import os
 import json
@@ -26,7 +31,7 @@ import warnings
 import numpy as np
 from scipy.stats import spearmanr
 import clime
-from sweep import opts, METRICS
+from sweeps.sweep import opts, METRICS
 from clime.data.loaders.exported_npz import available_exported
 from clime.evaluation.key_points import get_points_between_class_means
 
@@ -68,8 +73,10 @@ def cosine(a, b):
 
 
 def run(out_path):
+    out_path = paths.results(out_path)   # a bare name lands in results/
+
     datasets = list(dict.fromkeys(
-        __import__('sweep').DATASETS + sorted(available_exported())))
+        __import__('sweeps.sweep', fromlist=['DATASETS']).DATASETS + sorted(available_exported())))
     out = {}
     if os.path.exists(out_path):
         out = {k: v for k, v in json.load(open(out_path)).items() if 'error' not in v}
@@ -123,4 +130,4 @@ def run(out_path):
 
 
 if __name__ == '__main__':
-    run(sys.argv[1] if len(sys.argv) > 1 else 'results_ground_truth.json')
+    run(sys.argv[1] if len(sys.argv) > 1 else paths.results('results_ground_truth.json'))

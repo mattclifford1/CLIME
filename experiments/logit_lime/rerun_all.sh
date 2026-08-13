@@ -1,0 +1,41 @@
+#!/bin/bash
+# Re-run every sweep on the upgraded stack (python 3.13, scikit-learn 1.9, numpy 2.4).
+#
+# The previous results were produced on scikit-learn 1.1.3 / numpy 1.24 and are archived
+# under results/archive/sklearn1.1.3/ rather than deleted: the point of re-running is to
+# find out how much the upgrade moved the numbers, which needs both sets.
+#
+# Every sweep resumes from its output file, so this is safe to re-run after an
+# interruption. Order matters only for machine load, not correctness.
+set -u
+cd "$(dirname "$0")" || exit 1
+
+ARCHIVE=results/archive/sklearn1.1.3
+if [ ! -d "$ARCHIVE" ]; then
+    mkdir -p "$ARCHIVE"
+    cp results/results_*.json "$ARCHIVE"/ 2>/dev/null
+    echo "archived $(ls "$ARCHIVE" | wc -l) result files to $ARCHIVE/"
+fi
+
+# start each sweep from scratch on the new stack - resuming into a file written by the
+# old stack would silently mix the two
+rm -f results/results_taxonomy.json results/results_extended.json \
+      results/results_kernel.json results/results_explanations.json \
+      results/results_explanations_extended.json results/results_ground_truth.json \
+      results/results_fidelity.json results/results_seed*.json
+
+run () {
+    echo "=== $1 ==="
+    uv run python -u "$@" || { echo "FAILED: $1"; exit 1; }
+}
+
+run sweeps/sweep.py results_taxonomy.json
+run sweeps/sweep_extended.py results_extended.json
+run sweeps/sweep_kernel.py results_kernel.json
+run sweeps/sweep_explanations.py results_explanations.json
+run sweeps/sweep_explanations_extended.py results_explanations_extended.json
+run sweeps/sweep_ground_truth.py results_ground_truth.json
+run sweeps/sweep_fidelity.py results_fidelity.json
+run sweeps/sweep_seeds.py results
+
+echo "=== ALL SWEEPS COMPLETE ==="

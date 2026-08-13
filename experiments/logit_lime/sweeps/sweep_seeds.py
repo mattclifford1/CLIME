@@ -15,6 +15,11 @@ usage:  python sweep_seeds.py <output_prefix> [n_seeds]
 '''
 # author: Matt Clifford <matt.clifford@bristol.ac.uk>
 
+import sys, os
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from common import paths
+
 import sys
 import os
 import json
@@ -29,7 +34,8 @@ MODELS = ['Logistic', 'LDA', 'QDA', 'Gaussian Naive Bayes', 'MLP',
 CHILD = '''
 import json, sys, warnings, numpy as np
 warnings.filterwarnings('ignore')
-import sweep
+sys.path.insert(0, {root!r})
+from sweeps import sweep
 sweep.DATASETS = {datasets!r}
 sweep.MODELS = {models!r}
 sweep.run({out!r}, seed={seed!r})
@@ -37,12 +43,12 @@ sweep.run({out!r}, seed={seed!r})
 
 
 def run(prefix, n_seeds=len(SEEDS)):
-    here = os.path.dirname(os.path.abspath(__file__))
     for seed in SEEDS[:n_seeds]:
-        out = f'{prefix}_seed{seed}.json'
+        out = paths.results(f'{prefix}_seed{seed}.json')
         print(f'=== seed {seed} -> {out} ===', flush=True)
-        code = CHILD.format(datasets=DATASETS, models=MODELS, out=out, seed=seed)
-        subprocess.run([sys.executable, '-c', code], cwd=here, check=True)
+        code = CHILD.format(root=str(paths.ROOT), datasets=DATASETS,
+                            models=MODELS, out=out, seed=seed)
+        subprocess.run([sys.executable, '-c', code], cwd=paths.ROOT, check=True)
     print('all seeds done')
 
 

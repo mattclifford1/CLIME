@@ -9,10 +9,12 @@ A > B > C > D is the prediction, not a post-hoc fit.
 
 import sys
 import os
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from style import *
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from common import paths
+from common.style import *
 import numpy as np
-from analyse import load, GROUP_ORDER
+from analysis.analyse import load, GROUP_ORDER
 
 # ordinal ramp: darker = larger predicted effect. Steps 650/500/400/250 of the blue
 # sequential ramp - the lightest clears the 2:1 ordinal floor on a light surface.
@@ -26,7 +28,7 @@ GROUP_COLOUR = {'A linear': '#104281', 'B quadratic': '#256abf',
 SHORT = {'A linear': 'A', 'B quadratic': 'B', 'C smooth': 'C',
          'D piecewise constant': 'D', 'E calibrated forest': 'E', 'unassigned': 'GB'}
 
-rows, _ = load(sys.argv[1] if len(sys.argv) > 1 else 'results_taxonomy.json')
+rows, _ = load(sys.argv[1] if len(sys.argv) > 1 else paths.results('results_taxonomy.json'))
 groups = [g for g in GROUP_ORDER if any(r['group'] == g for r in rows)]
 
 # Both quantities have long tails driven by near-degenerate neighbourhoods, where the
@@ -96,6 +98,6 @@ ax.text(-0.01, 1.04, '(b)', transform=ax.transAxes, fontsize=9, color=INK)
 print(f'clamped to axis edge: {n_out_adv} advantage, {n_out_gap} gap')
 fig.tight_layout(w_pad=1.4)
 os.makedirs('figs', exist_ok=True)
-fig.savefig('figs/fig_groups.pdf')
-fig.savefig('figs/fig_groups.png')
+fig.savefig(paths.fig('fig_groups.pdf'))
+fig.savefig(paths.fig('fig_groups.png'))
 print('fig_groups written')

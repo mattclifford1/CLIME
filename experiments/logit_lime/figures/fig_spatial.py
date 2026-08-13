@@ -2,12 +2,16 @@
 Figure 3 - where along the decision surface the advantage lives.
 Local Brier score at each query point on the line between the class means.
 '''
-import sys, os; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from style import *
+import sys, os
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from common import paths
+
+from common.style import *
 import json, numpy as np
 
 import sys
-d = json.load(open(sys.argv[1] if len(sys.argv) > 1 else 'results_taxonomy.json'))
+d = json.load(open(sys.argv[1] if len(sys.argv) > 1 else paths.results('results_taxonomy.json')))
 PANELS = [('Gaussian|Logistic', 'Logistic regression'),
           ('Gaussian|MLP', 'MLP'),
           ('Gaussian|Random Forest', 'Random forest')]
@@ -28,5 +32,5 @@ for ax, (key, nice) in zip(axs, PANELS):
 axs[0].set_ylabel('local Brier score\n(lower is better)')
 axs[0].legend(loc='upper left', handlelength=1.4, borderpad=0.2)
 fig.tight_layout(w_pad=1.2)
-fig.savefig('figs/fig3_spatial.pdf'); fig.savefig('figs/fig3_spatial.png')
+fig.savefig(paths.fig('fig3_spatial.pdf')); fig.savefig(paths.fig('fig3_spatial.png'))
 print('fig3 written')

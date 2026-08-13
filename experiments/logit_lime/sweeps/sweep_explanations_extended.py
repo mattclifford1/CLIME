@@ -8,19 +8,26 @@ usage:  python sweep_explanations_extended.py [results_explanations_extended.jso
 '''
 # author: Matt Clifford <matt.clifford@bristol.ac.uk>
 
+import sys, os
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from common import paths
+
 import sys
 import os
 import shutil
 import json
-import sweep
-import sweep_explanations
-from sweep_extended import NEW_MODELS, NEW_GROUPS
+from sweeps import sweep
+from sweeps import sweep_explanations
+from sweeps.sweep_extended import NEW_MODELS, NEW_GROUPS
 from clime.data.loaders.exported_npz import available_exported
 
-REGISTERED = 'results_explanations.json'
+REGISTERED = paths.results('results_explanations.json')
 
 
-def main(out_path='results_explanations_extended.json'):
+def main(out_path=paths.results('results_explanations_extended.json')):
+    out_path = paths.results(out_path)   # a bare name lands in results/
+
     if not os.path.exists(out_path) and os.path.exists(REGISTERED):
         shutil.copy(REGISTERED, out_path)
         n = len([k for k in json.load(open(out_path)) if not k.startswith('_')])
@@ -42,4 +49,4 @@ def main(out_path='results_explanations_extended.json'):
 
 
 if __name__ == '__main__':
-    main(sys.argv[1] if len(sys.argv) > 1 else 'results_explanations_extended.json')
+    main(sys.argv[1] if len(sys.argv) > 1 else paths.results('results_explanations_extended.json'))

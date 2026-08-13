@@ -20,6 +20,12 @@ class logistic(sklearn.linear_model.LogisticRegression, base_model):
         - model: sklearn model trained on the dataset
     '''
     def __init__(self, data, balanced_training=False, fit_intercept=True, **kwargs):
+        # sklearn's estimator contract requires every __init__ parameter to be stored
+        # unmodified under the same name: get_params() reads the signature and does
+        # getattr(self, name) for each. `data` was consumed by train() and never stored,
+        # which raised AttributeError once sklearn 1.2 began calling _validate_params()
+        # from fit(). FINDINGS.md B17.
+        self.data = data
         self.balanced_training = balanced_training
         super().__init__(fit_intercept=fit_intercept, random_state=clime.RANDOM_SEED, **kwargs)
         self.train(data)

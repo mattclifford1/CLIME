@@ -11,11 +11,13 @@ usage:  python fig_kernel.py [results_kernel.json]
 
 import sys
 import os
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from style import *
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from common import paths
+from common.style import *
 import json
 import numpy as np
-from analyse import GROUP_ORDER
+from analysis.analyse import GROUP_ORDER
 
 # same ordinal ramp as fig_groups, so the groups read consistently across figures
 GROUP_COLOUR = {'A linear': '#104281', 'B quadratic': '#256abf',
@@ -53,7 +55,7 @@ def median_by_scale(rows, model, field):
     return np.array(xs), np.array(ys)
 
 
-rows = load(sys.argv[1] if len(sys.argv) > 1 else 'results_kernel.json')
+rows = load(sys.argv[1] if len(sys.argv) > 1 else paths.results('results_kernel.json'))
 models = [m for m in GROUP_OF if any(r['model'] == m for r in rows)]
 
 fig, axs = plt.subplots(1, 2, figsize=(6.9, 3.0))
@@ -88,6 +90,6 @@ axs[1].legend(loc='best', fontsize=7)
 
 fig.tight_layout(w_pad=1.4)
 os.makedirs('figs', exist_ok=True)
-fig.savefig('figs/fig_kernel.pdf')
-fig.savefig('figs/fig_kernel.png')
+fig.savefig(paths.fig('fig_kernel.pdf'))
+fig.savefig(paths.fig('fig_kernel.png'))
 print('fig_kernel written')

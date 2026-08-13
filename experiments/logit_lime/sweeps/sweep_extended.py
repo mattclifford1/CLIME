@@ -26,14 +26,19 @@ usage:  python sweep_extended.py [results_extended.json]
 '''
 # author: Matt Clifford <matt.clifford@bristol.ac.uk>
 
+import sys, os
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from common import paths
+
 import sys
 import os
 import json
 import shutil
-import sweep
+from sweeps import sweep
 from clime.data.loaders.exported_npz import available_exported
 
-REGISTERED = 'results_taxonomy.json'
+REGISTERED = paths.results('results_taxonomy.json')
 
 NEW_MODELS = ['Nearest Class Mean', 'Polynomial Logistic (deg 2)',
               'RBF Logistic (Nystroem)', 'Bagged Logistic']
@@ -44,7 +49,9 @@ NEW_GROUPS = {'Nearest Class Mean': 'A linear',
               'Bagged Logistic': 'unassigned'}
 
 
-def main(out_path='results_extended.json'):
+def main(out_path=paths.results('results_extended.json')):
+    out_path = paths.results(out_path)   # a bare name lands in results/
+
     # the registered configurations are identical computations, so carry them over rather
     # than spend another five hours reproducing them
     if not os.path.exists(out_path) and os.path.exists(REGISTERED):
@@ -66,4 +73,4 @@ def main(out_path='results_extended.json'):
 
 
 if __name__ == '__main__':
-    main(sys.argv[1] if len(sys.argv) > 1 else 'results_extended.json')
+    main(sys.argv[1] if len(sys.argv) > 1 else paths.results('results_extended.json'))

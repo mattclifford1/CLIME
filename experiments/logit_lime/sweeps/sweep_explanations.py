@@ -18,6 +18,11 @@ usage:  python sweep_explanations.py <output.json>
 '''
 # author: Matt Clifford <matt.clifford@bristol.ac.uk>
 
+import sys, os
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from common import paths
+
 import sys
 import os
 import json
@@ -25,7 +30,7 @@ import warnings
 import numpy as np
 from scipy.stats import spearmanr
 import clime
-from sweep import opts, DATASETS, MODELS, GROUP_OF, METRICS
+from sweeps.sweep import opts, DATASETS, MODELS, GROUP_OF, METRICS
 from clime.evaluation.key_points import get_points_between_class_means
 
 warnings.filterwarnings('ignore')
@@ -71,6 +76,8 @@ def compare(clf, train_data, test_data, query_points):
 
 
 def run(out_path):
+    out_path = paths.results(out_path)   # a bare name lands in results/
+
     out = {}
     if os.path.exists(out_path):
         out = {k: v for k, v in json.load(open(out_path)).items()
@@ -103,4 +110,4 @@ def run(out_path):
 
 
 if __name__ == '__main__':
-    run(sys.argv[1] if len(sys.argv) > 1 else 'results_explanations.json')
+    run(sys.argv[1] if len(sys.argv) > 1 else paths.results('results_explanations.json'))

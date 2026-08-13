@@ -7,6 +7,7 @@ well typed but wrong numbers went unnoticed - these assert the actual values
 # author: Matt Clifford <matt.clifford@bristol.ac.uk>
 
 import numpy as np
+import pytest
 from clime.data.utils import costs
 
 
@@ -61,3 +62,33 @@ def test_distance_weights_decay_with_distance():
     weights = costs.weights_based_on_distance(query_point, X)
     assert weights[0] == 1.0, 'the query point itself has weight 1'
     assert weights[0] > weights[1] > weights[2], 'weights must decay with distance'
+
+
+def test_distance_weights_survive_an_unstandardised_feature_scale():
+    '''
+    B16. The kernel width is in raw feature units. On data with large feature magnitudes
+    - Heart Failure has values around 8e5, Credit Scoring 1 around 6e4 - every distance
+    dwarfs it, exp(-d^2/k^2) underflows to zero for every sample, and sklearn raises
+    "Weights sum to zero, can't be normalized" from inside Ridge.fit.
+    '''
+    rng = np.random.default_rng(0)
+    query_point = np.zeros(12)
+    X = rng.normal(scale=1e6, size=(500, 12))
+
+    with pytest.warns(Warning, match='underflowed'):
+        weights = costs.weights_based_on_distance(query_point, X)
+
+    assert weights.sum() > 0, 'must never hand sklearn an all-zero sample_weight'
+    assert np.isfinite(weights).all()
+    assert weights.shape == (500,)
+
+
+def test_distance_weights_are_unchanged_on_a_normal_scale():
+    '''the B16 guard must not touch the ordinary case'''
+    rng = np.random.default_rng(0)
+    query_point = np.zeros(4)
+    X = rng.normal(size=(200, 4))
+
+    weights = costs.weights_based_on_distance(query_point, X)
+    assert weights.max() <= 1.0
+    assert len(np.unique(weights)) > 1, 'should still vary with distance, not be uniform'

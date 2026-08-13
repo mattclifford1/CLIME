@@ -1,26 +1,36 @@
 '''
-Export datasets from ~/Repos/toy_datasets into .npz files CLIME can read.
+Freeze datasets from ~/Repos/toy_datasets into .npz files, which
+clime/data/loaders/exported_npz.py registers automatically.
 
-Run this with the toy_datasets virtualenv, NOT the clime env:
+    uv run python sweeps/export_toy_datasets.py [output_dir]
 
-    ~/Repos/toy_datasets/.venv/bin/python export_toy_datasets.py
+This used to need the toy_datasets virtualenv, because clime was pinned to
+scikit-learn 1.1.3 and the two could not share a process. That is no longer true: since
+the 2026-08-10 upgrade toy_datasets is a declared dependency here (the `datasets` extra),
+and this runs in the clime env like everything else.
 
-toy_datasets requires numpy>=2.3.5 and scikit-learn>=1.7.2; clime is pinned to
-scikit-learn 1.1.3 and upgrading it silently changes every result in this repo
-(CLAUDE.md). The two cannot share a process, so we cross the boundary with data on
-disk rather than by importing code.
+The export survives the change on different grounds. Its UCI loaders fetch over the
+network at load time and cache nothing, so importing them live would make a published
+sweep depend on an endpoint staying up and returning identical bytes. Writing .npz is
+what pins the data. **Re-running this overwrites the datasets behind
+results_extended.json**, so pass an output directory if you only mean to look.
 
 Candidates are chosen to widen the sweep along the axes that matter for the log-odds
 linearity question: feature count (3 to 279) and class imbalance.
 '''
 # author: Matt Clifford <matt.clifford@bristol.ac.uk>
 
+import sys, os
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from common import paths
+
 import os
 import sys
 import traceback
 import numpy as np
 
-OUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'extra_datasets')
+OUT_DIR = sys.argv[1] if len(sys.argv) > 1 else str(paths.DATASETS)
 
 CANDIDATES = [
     'XOR',                        # synthetic, deliberately non-linear

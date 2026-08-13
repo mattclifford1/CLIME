@@ -8,6 +8,11 @@ usage:  python analyse_ground_truth.py [results_ground_truth.json]
 '''
 # author: Matt Clifford <matt.clifford@bristol.ac.uk>
 
+import sys, os
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from common import paths
+
 import sys
 import json
 import numpy as np
@@ -52,7 +57,7 @@ def paired_test(rows, stat):
 
 
 if __name__ == '__main__':
-    rows = load(sys.argv[1] if len(sys.argv) > 1 else 'results_ground_truth.json')
+    rows = load(sys.argv[1] if len(sys.argv) > 1 else paths.results('results_ground_truth.json'))
     summarise(rows, 'ALL LINEAR BLACK BOXES')
     for model in sorted({r['model'] for r in rows}):
         summarise([r for r in rows if r['model'] == model], model)

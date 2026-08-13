@@ -17,7 +17,9 @@ def _generic_loader(load_func, samples=200, test=False, **kwargs):
     if test == True and load_func != sklearn.datasets.make_blobs:
         seed += 1
 
-    X, y = load_func(n_samples=[int(samples/2)]*2,
+    # tuple, not list: sklearn's parameter validation accepts an int or a tuple for
+    # n_samples and rejects a list outright (it used to accept either)
+    X, y = load_func(n_samples=(int(samples/2),)*2,
                      random_state=seed,
                      shuffle=False,
                      **kwargs)

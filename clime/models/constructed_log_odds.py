@@ -73,8 +73,10 @@ class bagged_logistic(_sklearn_model):
     '''
     @staticmethod
     def estimator(**kwargs):
+        # `estimator=`, not `base_estimator=`: sklearn renamed it in 1.2 and removed the
+        # old name in 1.4
         return sklearn.ensemble.BaggingClassifier(
-            base_estimator=_logistic(), n_estimators=25, max_samples=0.6,
+            estimator=_logistic(), n_estimators=25, max_samples=0.6,
             random_state=clime.RANDOM_SEED, **kwargs)
 
 

@@ -18,24 +18,54 @@ aLIMEgn). See `FINDINGS.md` for the research state, results and open questions.
 
 ## Environment
 
+**uv, not conda.** `pyproject.toml` + `uv.lock` are the source of truth.
+
 ```bash
-conda activate clime          # python 3.9, sklearn 1.1.3, numpy 1.24.4
+uv sync --extra notebook --extra datasets   # create/refresh .venv (python 3.13, sklearn 1.9, numpy 2.4)
+uv run python -m clime.pipeline.make_pipeline
+uv run --group dev pytest
 ```
 
-The env already exists at `~/anaconda3/envs/clime`. `pip install -e .` was used, so the
-repo is on the path directly — there is no build step and edits take effect immediately.
+`uv run` resolves the env itself — there is nothing to activate. The project installs
+editable, so edits take effect immediately with no build step.
 
-**Do not upgrade scikit-learn.** `requirements.txt` pins `1.1.3`; `todo.txt` records a
-known incompatibility with 1.2.2 that was never diagnosed. Bumping it will silently
-change results across every experiment.
+**Name every extra you want on each `uv sync`.** It makes the environment match exactly
+what is asked for, so `uv sync --extra datasets` alone *uninstalls* the notebook packages.
+
+The `datasets` extra is `~/Repos/toy_datasets`, as an editable path source. It is optional
+because that path only exists on this machine; without it the repo still resolves and syncs
+anywhere. It is also what `clime/data/loaders/exported_npz.py` exists to avoid needing —
+see the note on crossing that boundary below.
+
+**Versions are pinned exactly and `uv.lock` is committed** — they decide the numbers, and
+this repo's output is results compared across months. Do not delete the lock to "fix" a
+resolution problem. `uv` resolves for linux only (`tool.uv.environments`), because shap's
+macOS numba requirement caps numpy below the version pinned here.
+
+`requirements.txt` is superseded and kept only for reference; `setup.py` is gone. The old
+`~/anaconda3/envs/clime` still exists and is unused.
+
+**On upgrading scikit-learn.** The repo sat on 1.1.3 for years behind an undiagnosed
+"incompatibility with 1.2.2" note. It was upgraded to 1.9 on 2026-08-10; the blocker was
+six latent bugs, not the science (`FINDINGS.md` B17). If you upgrade again, expect the
+same *class* of breakage rather than numerical drift:
+
+- sklearn validates estimator parameters from `fit()` — every `__init__` argument must be
+  stored unmodified under the same name. CLIME's models subclass sklearn estimators and
+  take a `data` argument, which is exactly the pattern that breaks.
+- parameter *types* are validated now (a list where a tuple is wanted is rejected).
+- `y` must be an integer array, not `dtype=object`. `check_data_dict` normalises this
+  centrally, so new loaders are covered.
+- LDA and QDA raise on rank-deficient covariance instead of silently fitting one. Both
+  have escalating-regularisation fallbacks; without them, wide datasets fail outright.
 
 ## Running things
 
 ```bash
-python -m clime.pipeline.make_pipeline     # single hard-coded run, edit opts at bottom of file
-jupyter-notebook experiments.ipynb         # widget UI: pick options, click RUN PIPELINE
-python experiments/lime_vs_clime-sampling.py   # paper figure scripts
-pytest                                     # ~10 min, sweeps every pipeline module once
+uv run python -m clime.pipeline.make_pipeline   # single hard-coded run, edit opts at bottom of file
+uv run jupyter-notebook experiments.ipynb       # widget UI: pick options, click RUN PIPELINE
+uv run python experiments/lime_vs_clime-sampling.py   # paper figure scripts
+uv run --group dev pytest                       # ~10 min, sweeps every pipeline module once
 ```
 
 `experiments.ipynb` is the primary interface. Cell 3 builds ipywidgets, cell 5 runs every
@@ -126,15 +156,33 @@ constants that are not part of `opts` — the locality kernel width
 (`costs.KERNEL_WIDTH_SCALE`), `clime.RANDOM_SEED` — call `run_pipeline.cache_clear()`;
 `freezeargs` passes it through explicitly, since `@wraps` does not carry it across.
 
-**`~/Repos/toy_datasets` and `~/Repos/projection_models` cannot be imported here.**
-`toy_datasets` pins numpy ≥2.3.5 and sklearn ≥1.7.2; `projection_models` needs sklearn
-≥1.6 for `validate_data`. This env is pinned to sklearn 1.1.3 and must stay there. Cross
-the boundary with **data, not code**: `experiments/logit_lime/export_toy_datasets.py` runs
-under `~/Repos/toy_datasets/.venv/bin/python` and writes `.npz` into
+**`~/Repos/toy_datasets` is a real dependency now (the `datasets` extra), not a forbidden
+import.** The old "this env is pinned to sklearn 1.1.3, cross the boundary with data not
+code" rule died with the 2026-08-10 upgrade; `toy_datasets` wants numpy ≥2.3.5 / sklearn
+≥1.7.2 / scipy ≥1.16.3 / pandas ≥2.3.3 / python ≥3.11 and this env clears all of them.
+`~/Repos/projection_models` (sklearn ≥1.6 for `validate_data`) also imports fine but is
+not yet declared — `PYTHONPATH` for now.
+
+Adding it cost four light packages and moved no pin, but that is a property of how
+`toy_datasets` is packaged and it is easy to lose. Its heavy loaders live behind its own
+`image` / `medmnist` / `embeddings` extras, which we do not request, and it imports torch
+inside the methods that use it rather than at module scope. Ask for `toy-datasets[image]`
+here, or let a module-level `import torch` back into that package, and this repo's lock
+acquires the CUDA stack (+36 packages) for datasets it never loads.
+
+**Depending on it does not make `experiments/logit_lime/sweeps/export_toy_datasets.py`
+obsolete.** That script survives as a deliberate **snapshot** step: the UCI loaders fetch
+over the network at load time and cache nothing, so freezing them to `.npz` is what keeps
+a published sweep reproducible against an endpoint that may move or disappear. It now runs
+under plain `uv run` rather than that repo's interpreter, and writes into
 `experiments/logit_lime/extra_datasets/`, which `clime/data/loaders/exported_npz.py` picks
 up automatically — dropping a new `.npz` there registers a new dataset with no code change.
-Save string columns as `dtype=str`, never `dtype=object`: an object array is pickled and
-the pickle carries a numpy 2.x module path that numpy 1.24 cannot import.
+Re-running it **overwrites the data behind `results_extended.json`**; it takes an output
+directory argument, so pass one when you only mean to look. A fresh export reproduces 14 of
+the 15 files byte-for-byte; XOR differs because it is generated, which is the same reason
+`AVAILABLE_DATASETS` keeps live loaders for the synthetic datasets instead of snapshots.
+Save string columns as `dtype=str`, never `dtype=object`: an object array is pickled, and
+the pickle carries an absolute numpy module path that a different numpy cannot import.
 
 **Plot axes are metric-aware.** `clime.evaluation.METRIC_RANGES` declares a fixed range
 for bounded metrics and `None` for unbounded ones. A new metric must be added there or

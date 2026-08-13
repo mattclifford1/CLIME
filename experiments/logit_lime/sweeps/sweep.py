@@ -13,6 +13,11 @@ usage:  python sweep.py <output.json> [seed]
 '''
 # author: Matt Clifford <matt.clifford@bristol.ac.uk>
 
+import sys, os
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from common import paths
+
 import sys
 import os
 import json
@@ -85,6 +90,8 @@ def diagnostic(clf, test_data, query_points):
 
 
 def run(out_path, seed=None):
+    out_path = paths.results(out_path)   # a bare name lands in results/
+
     if seed is not None:
         # models and dataset splits read this at construction time
         clime.RANDOM_SEED = int(seed)

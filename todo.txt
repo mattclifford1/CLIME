@@ -26,6 +26,13 @@ TODOS
 BUGS
 fix pipeline.get_avg  -> multiple_runs.py
 fix incompatibilty with scikit-learn==1.2.2
+    DIAGNOSED 2026-08-10, see FINDINGS.md B17. Eight model classes subclass sklearn
+    estimators and take a `data` __init__ arg that is never stored as self.data.
+    sklearn 1.2 started calling _validate_params() from fit(), which calls get_params(),
+    which does getattr(self, 'data') -> AttributeError. Fix is composition instead of
+    subclassing (see models/log_odds_families.py::_sklearn_model). Verified: with that
+    one issue neutralised the pipeline runs on sklearn 1.9 / numpy 2.4, but results
+    shift ~1% relative, so upgrading means re-running everything.
 
 
 FUTURE

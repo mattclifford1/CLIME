@@ -3,7 +3,7 @@ Loader for datasets exported from ~/Repos/toy_datasets as .npz.
 
 That package pins numpy>=2.3.5 and scikit-learn>=1.7.2, which cannot coexist with the
 scikit-learn 1.1.3 this repo is pinned to, so its datasets are exported to disk by
-experiments/logit_lime/export_toy_datasets.py rather than imported.
+experiments/logit_lime/sweeps/export_toy_datasets.py rather than imported.
 
 Each .npz holds 'X', 'y' and 'feature_names'. Registration is driven by whatever files
 are present, so exporting more datasets makes them available without touching the

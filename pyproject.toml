@@ -1,0 +1,77 @@
+[project]
+name = "clime"
+version = "0.1"
+description = "CLIME: Class balanced Local Interpretable Model-agnostic Explanations."
+readme = "README.md"
+authors = [{ name = "Matt Clifford", email = "matt.clifford@bristol.ac.uk" }]
+
+# Upgraded from python 3.9 / scikit-learn 1.1.3 on 2026-08-10 (FINDINGS.md B17). The
+# blocker was never the science: six model classes subclassed sklearn estimators and took
+# a `data` __init__ argument they never stored, which scikit-learn 1.2 began rejecting
+# when it started calling _validate_params() from fit(). Storing it fixed that.
+requires-python = ">=3.13,<3.14"
+
+# Versions are pinned exactly, not lower-bounded. This repo's output is numerical results
+# that are compared across months, and scikit-learn in particular changes them silently:
+# requirements.txt already pinned 1.1.3 because 1.2.2 broke something that was never
+# diagnosed (todo.txt). numpy and scipy are pinned for the same reason - they decide the
+# RNG, the linear algebra and therefore the surrogate coefficients. See FINDINGS.md.
+dependencies = [
+    "scikit-learn==1.9.0",
+    "numpy==2.4.6",
+    "scipy==1.18.0",
+    "pandas==3.0.5",
+    "matplotlib==3.11.1",
+    "frozendict==2.4.7",
+    "fat-forensics==0.1.2",
+    "lime==0.2.0.1",
+    "shap==0.52.0",
+    "numba>=0.61",          # shap resolves an unbuildable llvmlite without this floor
+    "statsmodels==0.14.6",
+    "tqdm==4.70.0",
+    # provides `rbig`, used by the 'mutual information (RBIG)' metric. Not on PyPI; it was
+    # a commented-out git line in requirements.txt and had to be installed by hand.
+    "py-rbig",
+]
+
+[project.optional-dependencies]
+# the notebook interface (experiments.ipynb). Not needed to run the sweeps or the tests.
+notebook = [
+    "notebook",
+    "ipywidgets",
+    "ipython",
+]
+# ~/Repos/toy_datasets, as an editable path source (see [tool.uv.sources]). Optional
+# because the path is local to this machine: without this extra the repo still resolves
+# and syncs anywhere. It adds four light packages (imbalanced-learn, sklearn-compat,
+# ucimlrepo, toy-datasets) and moves no existing pin. It stays lean only because
+# toy_datasets keeps torch, torchvision, medmnist and umap-learn behind its own extras,
+# which we do not request - ask for `toy-datasets[image]` here and CUDA comes with it.
+datasets = [
+    "toy-datasets",
+]
+
+[dependency-groups]
+dev = [
+    "pytest",
+]
+
+[tool.uv]
+# Resolve for linux only. uv otherwise solves for every platform at once, and shap's macOS
+# numba requirement (numba<0.63, which caps numpy<2.4) is unsatisfiable alongside the numpy
+# pinned here. Nothing in this repo has ever run anywhere but linux.
+environments = ["sys_platform == 'linux'"]
+
+[tool.uv.sources]
+py-rbig = { git = "https://github.com/ipl-uv/rbig", rev = "master" }
+toy-datasets = { path = "../../Repos/toy_datasets", editable = true }
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["clime*"]
+
+[tool.setuptools.package-data]
+clime = ["data/datasets/**/*"]
