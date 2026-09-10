@@ -16,6 +16,12 @@ A loader returns `(train_data, test_data)`, each a dict:
 
 Synthetic loaders also return `'means'` and `'covariances'`.
 
+`proportional_split` splits every value that is a per-instance array and copies everything
+else — `'feature_names'`, `'description'`, a dataset-level `'costs'` — into both splits
+unchanged, so a loader can set them once before splitting. It did not always: they used to
+be dropped from the test split, which is the split an explanation is labelled from
+(`FINDINGS.md` B18).
+
 **Binary classification only.** Several components (`get_points_between_class_means`,
 the fidelity metrics, `bLIMEy.get_explanation`) assume two classes and will raise or
 silently misbehave otherwise.

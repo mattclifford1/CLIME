@@ -3,6 +3,7 @@ downsample dataset, keeping class proportions
 '''
 # author: Matt Clifford <matt.clifford@bristol.ac.uk>
 
+import copy
 import numpy as np
 import clime
 
@@ -101,6 +102,13 @@ def proportional_split(data, size=0.8, seed=True):
             # extract and store the splits
             test_split[key] = val[test_inds]  # important to do this one first!
             data[key] = val[train_inds]       # as test data is now deleted
+        else:
+            # everything else describes the dataset rather than its rows -
+            # feature_names, description, a cost matrix - and belongs to both splits
+            # equally. Dropping it left the test split unnamed, which is where every
+            # explanation gets its labels from (FINDINGS.md B18). Copied rather than
+            # shared so that editing one split cannot alter the other.
+            test_split[key] = copy.copy(val)
     return data, test_split
 
 

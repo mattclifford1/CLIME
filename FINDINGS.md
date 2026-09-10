@@ -1014,6 +1014,30 @@ the ~0.4 fidelity drop the paper reports.
 the published version. The curve's content is unchanged. The published PNGs in
 `experiments/figs/sampling/` have not been touched.
 
+### B18 — feature names never reached the test split. `clime/data/processing/downsample_data.py` — **FIXED**
+
+Found on 2026-08-14 while building the worked explanation example for the Logit-LIME paper
+(§4), which needs to name the features it lists.
+
+`proportional_split` copies a key into the test split only when its value is a numpy array
+with one row per instance. `feature_names` is a list, so **every** loader that sets it
+before splitting — Banknote, Wheat Seeds, Abalone Gender, Sonar, Diabetes, the costcla
+loaders, the `.npz` exports and Iris, i.e. all of them — kept its names in `train_data` and
+lost them from `test_data`, where `check_data_dict` then filled in `feature 0 … feature n`.
+Explanations are labelled from the *test* split, so the names were never visible where they
+were wanted, and the failure is silent: generic names look like a dataset that simply has
+none. `description` and any non-per-instance `costs` were dropped the same way.
+
+Fixed centrally rather than per loader: `proportional_split` now carries every key that is
+*not* a per-instance array into the test split as well, copied rather than shared. Breast
+Cancer and Wine were additionally discarding sklearn's names outright, and now pass them
+through like the other loaders.
+
+Nothing numerical changes — feature names take no part in any fit — but the Logit-LIME
+paper's Table 3 lists *worst texture*, *radius error* and so on rather than *feature 21*,
+*feature 10*. Tests: `test_both_splits_describe_the_same_features` (over every registered
+dataset), `test_named_datasets_keep_their_names`.
+
 ---
 
 ## 7. Suggested next experiments

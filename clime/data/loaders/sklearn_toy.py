@@ -16,7 +16,8 @@ def get_breast_cancer(**kwargs):
     '''
     # get dataset
     data = load_breast_cancer()
-    data = {'X': data.data, 'y': data.target}
+    data = {'X': data.data, 'y': data.target,
+            'feature_names': [str(n) for n in data.feature_names]}
     # shuffle the dataset
     data = clime.data.shuffle_dataset(data)
     # reduce the size of the dataset
@@ -36,7 +37,8 @@ def get_wine(**kwargs):
     # convert to binary datatset (0 vs 1,2)
     y = data.target
     y[np.where(y>1)] = 1
-    data = {'X': data.data, 'y': y}
+    data = {'X': data.data, 'y': y,
+            'feature_names': [str(n) for n in data.feature_names]}
     # shuffle the dataset
     data = clime.data.shuffle_dataset(data)
     # reduce the size of the dataset

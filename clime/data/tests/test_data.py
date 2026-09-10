@@ -33,4 +33,28 @@ def test_correct_data_types():
         for key in DATA_KEYS:
             assert type(sampled_data[key]) == np.ndarray
 
+def test_both_splits_describe_the_same_features():
+    '''
+    B18: proportional_split only carried keys that are per-instance numpy arrays, so a
+    loader that set feature_names before the split kept them in the train split and lost
+    them from the test split, which then silently picked up generic names. Explanations
+    are labelled from the test split, so the names were never seen where they were wanted.
+    '''
+    for dataset in data.AVAILABLE_DATASETS:
+        train_data, test_data = data.AVAILABLE_DATASETS[dataset](class_samples=[40, 160],
+                                                                 percentage=1)
+        train_names = list(data.utils.checkers.check_data_dict(train_data)['feature_names'])
+        test_names = list(data.utils.checkers.check_data_dict(test_data)['feature_names'])
+        assert train_names == test_names, f'{dataset}: splits disagree about features'
+        assert len(test_names) == test_data['X'].shape[1]
+
+
+def test_named_datasets_keep_their_names():
+    '''the same bug, in the form it was noticed: real names replaced by generic ones'''
+    for dataset in ['Breast Cancer', 'Wine', 'Iris', 'Banknote Authentication']:
+        for split in data.AVAILABLE_DATASETS[dataset]():
+            names = data.utils.checkers.check_data_dict(split)['feature_names']
+            assert not any(str(n).startswith('feature ') for n in names), dataset
+
+
 ### write tests to check raise error with check_data_dict
