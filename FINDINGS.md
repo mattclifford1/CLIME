@@ -515,6 +515,97 @@ random forest result rather than being embarrassed by it, mirrors the CIKM contr
 ("don't be location agnostic" → "don't be black-box agnostic"), and connects to aLIMEgn,
 which is likewise about aligning to properties of the black box rather than the data.
 
+#### Gradient ground truth: the same question for 11 black boxes (added 2026-08-14)
+
+`coef_` is the true local importance vector only where the log-odds are exactly linear.
+The **local** generalisation is `g(q) = d/dx logit f(q)` — what a linear surrogate should
+recover at `q` — which exists for any differentiable black box and equals `coef_` when the
+log-odds are linear. `experiments/logit_lime/common/gradients.py` derives it in closed form
+for 11 of the registered black boxes; `sweeps/validate_gradients.py` checks each against
+central finite differences (all 11 agree in direction to 1e-7 at every unsaturated point).
+
+Both surrogates are scored fairly against it: `∇p = p(1-p)·∇logit p`, a **positive**
+multiple, so the two spaces differ on the target's length and not its direction, and
+cosine / rank ρ / top-1 are all scale-invariant.
+
+Closed form rather than finite differences because **11.3% of query points are saturated**,
+where a difference quotient of `logit f` is identically zero; 2 of the 154 configurations
+are saturated at all 20 points. Working from the parameters, all 154 yield a usable truth
+at every query point. In 45 of them the gradient is constant in `x` (= `coef_`), and the
+scores reproduce the 87-configuration coefficient sweep exactly — it is the same
+measurement, extended.
+
+**Result (14 datasets × 11 black boxes, `results_gradient_truth.json`):** Logit-LIME's
+explanation is closer to the truth in **140/153** configurations (Wilcoxon p = 2e-19);
+mean cosine 0.889 vs 0.851, rank ρ 0.813 vs 0.744, top-1 0.77 vs 0.69.
+
+**The new result is where the wins are.** Group B has a median Brier advantage of 0.97×
+(no fidelity benefit at all) yet its *explanation* improves on 50/55; group C, at 1.16×,
+on 35/42. **Fitting in logit space gives a better explanation of a quadratic or smooth
+black box without giving a better prediction of it.** A surrogate can trade slope against
+intercept to repair its probabilities over the neighbourhood while leaving the slope — the
+explanation — wrong. The scoring rule integrates over the neighbourhood; the explanation is
+a derivative at its centre.
+
+**Groups D and E have no ground truth at all.** Piecewise-constant log-odds are flat almost
+everywhere and undefined on the splits, so `g` is zero or non-existent. Worth stating as a
+result: "which surrogate is right on a random forest?" has no answer, because the local
+linear behaviour LIME claims to approximate is not there to approximate. Tree
+`feature_importances_` is not a substitute — it is global, unsigned and constant in `x`,
+so scoring a local explanation against it would reward ignoring locality.
+
+#### Does fidelity predict a correct explanation? (the proxy, checked at last)
+
+The study measures Brier/KL; users read importances. `sweep_gradient_truth.py` records both
+from the *same* surrogate at the *same* query point, so the assumption can be tested.
+Three parts, two favourable:
+
+| | KL | Brier |
+|---|---|---|
+| **level** — ρ(log score, cosine), pooled over surrogates and 3,080 points | **−0.42** | −0.38 |
+| **direction** — fidelity names the same winner as the truth | 115/153 (75%) | 108/153 (71%) |
+| **magnitude** — ρ(fidelity gain, explanation gain), paired | −0.29 | −0.18 |
+
+A proper scoring rule is a sound instrument for **ranking** two surrogates and a poor one
+for **sizing** the difference: the four-to-seven-order-of-magnitude fidelity wins are the
+exactly-linear black boxes, where the standard surrogate's explanation was already nearly
+right, so the largest fidelity gains come with the *smallest* explanation gains. KL beats
+Brier on every part of this test — another reason to prefer it.
+
+#### The explanation-targeted surrogate (registered 2026-08-14, before running)
+
+The open question above — whether targeting `g(q)` directly beats fitting `f` over a
+neighbourhood — was registered as four predictions in `PREREGISTRATION.md` (second
+registration) and then run as `sweeps/sweep_taylor.py`. The surrogate is the first-order
+expansion of the log-odds, `logit g(x) = logit f(q) + g(q)·(x-q)`, in two versions:
+**analytic** (needs the black box's parameters — an oracle, whose cosine to the truth is
+1 *by construction* and is never a finding) and **finite difference** (2d black-box
+queries, so a real method).
+
+| prediction | outcome |
+|---|---|
+| 1. Group A: no trade | **confirmed** — Taylor better on 41/42, median 2.4e10× better KL. The expansion *is* the black box; the fitted surrogate carries finite-sample error |
+| 2. Groups B, C: trade in the registered direction | **confirmed** (the risky one) — worse KL on 53/56 (B, median 1.8×) and 41/42 (C, median 3.0×), with a perfect explanation |
+| 3. FD tracks analytic except under saturation | **confirmed** — cosine 0.9994 unsaturated vs 0.9560 saturated; collapses entirely at 7.7% of points |
+| 4. No prediction for D/E | n/a — no gradient exists |
+
+Prediction 2 is the point: it would have refuted the slope-for-intercept account had Taylor
+won on both axes. **The fitted surrogates are buying their fidelity with explanation error,
+and the price is a factor of 2–3 in divergence.**
+
+**The practical finding.** The finite-difference version needs exactly what LIME needs, and
+beats standard LIME on explanation accuracy in **152/152** configurations and Logit-LIME in
+**150/152** (p ≈ 1e-25): cosine 0.996 vs 0.851/0.883, top-1 0.92 vs 0.69/0.76, using **40
+black-box queries against LIME's 10,000**.
+
+Not a replacement for LIME, and worth stating plainly in the paper: it is a numerical
+gradient (gradient saliency is an existing literature), its fidelity is worse than
+Logit-LIME's, it describes only an infinitesimal neighbourhood, it fails outright in the
+7.7% of saturated neighbourhoods where LIME still returns something, and it does nothing
+for groups D/E. What it establishes is the shape of the problem: if what the user reads is
+a local slope, then 10,000 samples through a kernel and a regularised regression is an
+indirect and measurably lossy way to estimate it.
+
 ---
 
 ## 5. Thread 3 — aLIMEgn
