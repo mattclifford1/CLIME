@@ -22,6 +22,7 @@ fi
 rm -f results/results_taxonomy.json results/results_extended.json \
       results/results_kernel.json results/results_explanations.json \
       results/results_explanations_extended.json results/results_ground_truth.json \
+      results/results_gradient_truth.json results/results_taylor.json \
       results/results_fidelity.json results/results_seed*.json
 
 run () {
@@ -35,6 +36,11 @@ run sweeps/sweep_kernel.py results_kernel.json
 run sweeps/sweep_explanations.py results_explanations.json
 run sweeps/sweep_explanations_extended.py results_explanations_extended.json
 run sweeps/sweep_ground_truth.py results_ground_truth.json
+# the analytic gradients the next sweep trusts, checked against finite differences first:
+# a wrong closed form would silently corrupt every explanation score downstream
+run sweeps/validate_gradients.py
+run sweeps/sweep_gradient_truth.py results_gradient_truth.json
+run sweeps/sweep_taylor.py results_taylor.json
 run sweeps/sweep_fidelity.py results_fidelity.json
 run sweeps/sweep_seeds.py results
 

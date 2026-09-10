@@ -11,7 +11,10 @@ PAPER=${1:-$HOME/Repos/Overleaf/Logit-LIME}
 
 for f in figures/fig_mechanism.py figures/fig_diagnostic.py figures/fig_spatial.py \
          figures/fig_groups.py figures/fig_kernel.py figures/fig_setup.py \
-         analysis/table_brier_kl.py analysis/table_groups.py analysis/table_fidelity.py; do
+         figures/fig_justification.py figures/fig_group_gallery.py \
+         figures/fig_fidelity_explanation.py figures/fig_taylor_tradeoff.py \
+         analysis/table_brier_kl.py analysis/table_groups.py analysis/table_fidelity.py \
+         analysis/table_example_explanation.py analysis/table_gradient_truth.py; do
     echo "=== $f"
     uv run python "$f" > /dev/null
 done

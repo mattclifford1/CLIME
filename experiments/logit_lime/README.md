@@ -15,7 +15,9 @@ any surrogate is built.
 ## Layout
 
 ```
-common/      style.py (shared matplotlib style), paths.py (where everything lives)
+common/      style.py (shared matplotlib style), paths.py (where everything lives),
+             gradients.py (analytic d/dx logit f for every differentiable black box),
+             taylor.py (the explanation-targeted surrogate built from that gradient)
 sweeps/      the experiments; each writes one results/*.json and resumes from it
 analysis/    reads results/*.json, prints findings, writes tables/*.tex
 figures/     reads results/*.json, writes figs/*.pdf and .png
@@ -69,8 +71,20 @@ wrong.
 | `sweep_kernel.py` | `results_kernel.json` | the locality kernel width swept over a twentyfold range |
 | `sweep_explanations.py` | `results_explanations.json` | do the two surrogates give the same feature ranking? |
 | `sweep_ground_truth.py` | `results_ground_truth.json` | for exactly-linear black boxes, score each surrogate against the model's own coefficients |
+| `sweep_gradient_truth.py` | `results_gradient_truth.json` | the same question for every *differentiable* black box, against the analytic gradient of its log-odds — and the surrogate's fidelity at the same query point, so the two can be correlated |
+| `validate_gradients.py` | — | checks every closed-form gradient against finite differences; run it before trusting the sweep above |
+| `sweep_taylor.py` | `results_taylor.json` | the explanation-targeted surrogate (`common/taylor.py`): what an exact explanation costs in fidelity, and how well the same gradient can be estimated from black-box queries alone |
 | `sweep_fidelity.py` | `results_fidelity.json` | the 2×2 of (Brier vs fidelity) × (local sample vs test set) — whether the result survives the CIKM'23 evaluation protocol |
 | `sweep_seeds.py` | `results_seed*.json` | a subset repeated under five random seeds |
+
+One analysis script does not read a `results/*.json`:
+`analysis/table_example_explanation.py` re-runs a single configuration to print one
+explanation feature by feature, against the black box's own coefficients, and writes
+`tables/example-explanation.tex`. It defaults to the case quoted in the paper and takes
+`--dataset`, `--model` and `--point` to look at any other; the contrasting LDA numbers in
+the same subsection come from `--model LDA`. The model has to be one of the exactly-linear
+family that `sweep_ground_truth.py` uses, since it is their coefficients that supply the
+ground truth.
 
 `sweeps/export_toy_datasets.py` freezes 15 further datasets from `~/Repos/toy_datasets`
 into `extra_datasets/`, where `clime/data/loaders/exported_npz.py` registers them
@@ -90,6 +104,16 @@ uv run python sweeps/export_toy_datasets.py /tmp/check
 **Everything runs with `parallel_eval=False`.** The differences that matter here are
 ~1e-3, and that is also the size of the run-to-run nondeterminism parallel evaluation
 introduces. Do not switch it on for these experiments.
+
+**A ground truth for the explanation exists more often than it looks.** `coef_` is the
+true local importance vector only for exactly-linear log-odds, but its local
+generalisation — `d/dx logit f(q)` — is defined for every differentiable black box and
+reduces to `coef_` when the log-odds are linear. `common/gradients.py` derives it in
+closed form for eleven of them, which is what makes `sweep_gradient_truth.py` possible.
+Closed form rather than finite differences because 11% of query points are saturated,
+where a difference quotient of `logit f` collapses to zero and the truth would be lost.
+Two of the 154 configurations are saturated at *every* query point. There is deliberately
+no gradient for the piecewise-constant families: they have none, and that is a result.
 
 **The diagnostic is the point.** `sweep.py::diagnostic` fits a locality-weighted linear
 model to the black box's log-odds and to its probabilities on the same locally sampled
