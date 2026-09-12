@@ -477,6 +477,42 @@ them QDA or Gaussian naive Bayes at exactly 100% saturation. On real tabular dat
 models routinely return hard 0/1 over an entire neighbourhood, which makes Δ undefined.
 Worth stating as a limitation of the diagnostic rather than a curiosity.
 
+#### Explanation agreement on the extended grid (added 2026-09-12)
+
+`sweeps/sweep_explanations_extended.py` repeats the agreement measurement on the
+exploratory grid: 29 datasets × 16 black boxes, 462 of 464 configurations, of which 334 are
+on datasets with ≥ 6 features (below that a rank correlation takes only a handful of values
+and a top-3 overlap is always 1.0). Exploratory and kept in its own file, like every other
+extended result.
+
+| grid | n (≥ 6 features) | top-1 agree | rank ρ | sign | disagree at > 1 point in 4 |
+|---|---|---|---|---|---|
+| registered | 108 | 74.9% | 0.843 | 0.99 | 44/108 |
+| extended | 334 | 76.9% | 0.860 | 0.99 | 116/334 |
+
+**The registered picture holds at three times the size.** Nothing qualitative changes: the
+two surrogates still disagree about the single most important feature at roughly one query
+point in four, while agreeing on direction almost always.
+
+**By group.** Agreement is lowest on quadratic log-odds (B: top-1 0.65, and the only group
+whose sign agreement falls below 0.99, at 0.97) and highest on smooth and calibrated black
+boxes (C and E: 0.81). Piecewise-constant (D) sits between at 0.77 — worth holding next to
+the fact that D has no explanation ground truth at all, so "they mostly agree" there is not
+evidence that either is right.
+
+**Dimension correlates but does not control.** ρ = −0.32 between feature count and top-1
+agreement (p = 2e-09), yet Sonar (60f) agrees at 0.41 and Breast Cancer (30f) at 0.48 while
+Stroke Prediction (10f) reaches 0.98 and Thyroid Sick (28f) 0.88.
+
+**Correction: the write-up was quoting pre-upgrade numbers.** Until 2026-09-12 the paper's
+agreement paragraph read 75.6% / rank ρ 0.846 / 42 of 108 / sign 0.98 / Breast Cancer 0.54 /
+ρ(features, top-1) = −0.29. Those reproduce *exactly* from
+`results/archive/sklearn1.1.3/results_explanations.json`, i.e. they are pre-2026-08-10-stack
+numbers; the current run gives 74.9% / 0.843 / 44 of 108 / 0.99 / 0.50 / −0.30. The paper now
+quotes the current run. This was the one hand-written paragraph carrying stale numbers,
+because `make_paper.sh` regenerates the tables and figures but not prose — worth checking
+the other hand-written numbers if the stack moves again.
+
 #### Ground truth: which surrogate is actually right? (87 configurations)
 
 Everything else measures fidelity or agreement. For the three black boxes with exactly

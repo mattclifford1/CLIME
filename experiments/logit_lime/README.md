@@ -70,6 +70,7 @@ wrong.
 | `sweep_extended.py` | `results_extended.json` | 29 datasets × 16 black boxes, exploratory; carries the registered rows over rather than recomputing them |
 | `sweep_kernel.py` | `results_kernel.json` | the locality kernel width swept over a twentyfold range |
 | `sweep_explanations.py` | `results_explanations.json` | do the two surrogates give the same feature ranking? |
+| `sweep_explanations_extended.py` | `results_explanations_extended.json` | the same question on the extended grid, exploratory and kept separate for the same reason as `sweep_extended.py` |
 | `sweep_ground_truth.py` | `results_ground_truth.json` | for exactly-linear black boxes, score each surrogate against the model's own coefficients |
 | `sweep_gradient_truth.py` | `results_gradient_truth.json` | the same question for every *differentiable* black box, against the analytic gradient of its log-odds — and the surrogate's fidelity at the same query point, so the two can be correlated |
 | `validate_gradients.py` | — | checks every closed-form gradient against finite differences; run it before trusting the sweep above |
