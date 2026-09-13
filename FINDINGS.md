@@ -13,7 +13,7 @@ Three threads, in order of maturity:
 |---|---|---|---|
 | **CIKM'23 — location-agnostic surrogates** | Published, DOI `10.1145/3583780.3615284` | `~/Repos/Overleaf/CIKM-2023-camera-ready` | complete, figures reproducible |
 | **Logit-LIME** | Sketch (~1 page) + first real results, see §4 | `~/Repos/Overleaf/Logit-LIME` | implemented, working, operating regime now characterised |
-| **aLIMEgn / aLIMEgnment** | Framing note (~1 page, 3 open questions) | `~/Repos/Overleaf/aLIMEgn` | not started |
+| **aLIMEgn / aLIMEgnment** | Framing corrected, 8 predictions run, see §5 | `~/Repos/Overleaf/aLIMEgn` | `experiments/alimegn/`, 4 sweeps, 332 configurations |
 
 `~/Repos/Overleaf/CLIME/` is **empty** — that clone has no content. The paper you're
 thinking of is `CIKM-2023-camera-ready`. `pre-cut-CIKM-2023-camera-ready` is *not* a
