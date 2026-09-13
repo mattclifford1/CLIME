@@ -246,7 +246,7 @@ seven scales spanning LIME's default, and five seeds for error bars.
 | **C** smooth | 28 | +0.066 | 1.16× | 25/28 |
 | **D** piecewise constant | 42 | +0.000 | 0.76× | 6/42 |
 | **E** calibrated forest | 28 | +0.025 | 1.01× | 14/28 |
-| gradient boosting | 14 | +0.082 | 1.07× | 11/14 |
+| gradient boosting | 14 | +0.082 | 1.07× | 10/14 |
 
 **Three of the four statements confirmed, one refuted.**
 
@@ -286,7 +286,7 @@ descending order of how much weight they carry:
    blocked logit-space fitting, these should have benefited.
 3. **Δ is not a saturation proxy**: sat vs Δ is ρ = −0.116, p = 0.14 — essentially
    independent. Δ's association with benefit barely moves when saturation is partialled
-   out (0.698 → 0.682).
+   out (0.735 → 0.75, i.e. not diminished at all).
 4. **The aggregate correlation** is the wrong sign for the saturation account
    (ρ = −0.364, p = 1.2e-06).
 
@@ -314,8 +314,8 @@ families happen to be the non-benefiting ones), not by saturation acting on the 
 The defensible claim is the *negative* one — saturation does not explain which black boxes
 benefit — and it rests on 1 and 2, not on the correlation.
 
-**Three degenerate configurations** — Ionosphere|QDA, Direct Marketing|QDA, Direct
-Marketing|Gaussian NB — are 100% saturated: the black box returns exactly 0 or 1 across
+**Three degenerate configurations** — Ionosphere|QDA, Ionosphere|Gaussian NB, Direct
+Marketing|Gaussian NB — are saturated at 99.5–100%: the black box returns exactly 0 or 1 across
 the entire neighbourhood, so the probability target has zero variance and Δ is undefined.
 They are excluded from the gap correlation and reported separately, never imputed. A
 related artefact affects near-degenerate cases: R²_logit is then set by where probabilities
@@ -341,8 +341,11 @@ whole effect is an artefact of LIME's default scale of 0.75. It is not.
 | 2.0 | 320 | 35 | 3.6 | 0.81 | 1.24 |
 | 3.0 | 265 | 27 | 3.5 | 0.81 | 1.25 |
 
-**No pair of black boxes changes order at any width**, over a twentyfold range. The
-conclusions do not depend on `k`.
+**The ranking is stable from scale 0.3 upwards**, over a twentyfold range, so the
+conclusions do not depend on `k`. The single exception is the narrowest width: at 0.15 the
+linear models collapse to 8.4x (Logistic) and 3.3x (LDA), which puts LDA below the MLP's
+4.6x. That is the only order change anywhere in the sweep — an earlier version of this note
+claimed there were none.
 
 The magnitude does. Half of the registered expectation held: at very small widths the
 advantage collapses (5e4 → 8x for logistic), because a smooth function is approximately
@@ -363,13 +366,13 @@ alone and would otherwise return the previous seed's result):
 
 | model | median | min seed | max seed | benefit sign unstable |
 |---|---|---|---|---|
-| Logistic | 2959.70 | 328.19 | 22198.11 | 0/5 |
-| LDA | 1190.22 | 70.70 | 8087.77 | 0/5 |
-| Gaussian NB | 4.79 | 1.30 | 6.40 | 2/5 |
+| Logistic | 2945.26 | 451.50 | 12565.14 | 0/5 |
+| LDA | 1190.22 | 70.70 | 5343.53 | 0/5 |
+| Gaussian NB | 4.79 | 1.57 | 6.40 | 2/5 |
 | MLP | 3.67 | 2.91 | 5.03 | 1/5 |
-| QDA | 0.94 | 0.89 | 1.10 | 1/5 |
+| QDA | 0.99 | 0.98 | 1.10 | 1/5 |
 | Random Forest | 0.89 | 0.78 | 1.05 | 2/5 |
-| Decision Tree | 0.87 | 0.75 | 0.92 | 1/5 |
+| Decision Tree | 0.87 | 0.79 | 0.88 | 1/5 |
 | kNN | 0.78 | 0.56 | 0.83 | 1/5 |
 
 **The group A / everything-else split is seed-stable.** Logistic and LDA never once drop
@@ -431,7 +434,7 @@ reimplemented natively in ~15 lines instead. Its other models duplicate ones alr
 | **E** calibrated forest | 58 | +0.014 | 0.99× | 26/58 |
 | gradient boosting | 58 | +0.109 | 1.27× | 47/58 |
 
-Δ vs benefit: ρ = **+0.642**, p = 1.5e-53, n = 450. Saturation vs benefit: ρ = −0.364.
+Δ vs benefit: ρ = **+0.664**, p = 7.9e-58, n = 444. Saturation vs benefit: ρ = −0.312.
 
 **1. The exactly-linear claim is now very strong.** Three black boxes have exactly linear
 log-odds — logistic, LDA and Nearest Class Mean. Across 29 datasets spanning 2–279 features
@@ -440,13 +443,13 @@ whole: **87/87, no exceptions.**
 
 **2. Quadratic log-odds give nothing, even with saturation controlled.** This settles why
 registered statement 3's "intermediate" reading was too generous. QDA could be dismissed as
-confounded — it saturates at 75.6%. Polynomial Logistic has log-odds *exactly quadratic by
+confounded — it saturates at 58.7%. Polynomial Logistic has log-odds *exactly quadratic by
 construction* and saturates at only **8.6%**, and it still shows **0.97×, better on 13/29**:
 
 | | log-odds | saturation | benefit | better |
 |---|---|---|---|---|
 | Polynomial Logistic (deg 2) | exactly quadratic | 8.6% | 0.97× | 13/29 |
-| QDA | quadratic | 75.6% | 0.84× | 5/29 |
+| QDA | quadratic | 58.7% | 0.95× | 8/27 |
 
 So the taxonomy really does collapse to **binary**: exactly linear, or nothing. Quadratic is
 already too far. The graded ordering was wrong not just in the B/C order but in premise.
@@ -472,8 +475,9 @@ bagging averages probabilities, so the ensemble's log-odds are not linear. Resul
 this (+0.192, between group A's +0.282 and group C's +0.027), which is evidence Δ measures
 a genuine continuum rather than a family label.
 
-**5. Degenerate configurations are systematic, not incidental.** 14 of 464, every one of
-them QDA or Gaussian naive Bayes at exactly 100% saturation. On real tabular data those two
+**5. Degenerate configurations are systematic, not incidental.** 18 of 464 (plus 2 that
+cannot be fitted at all): QDA or Gaussian naive Bayes at ~100% saturation, plus six of the
+seven Arrhythmia configurations, the widest dataset in the grid. On real tabular data those two
 models routinely return hard 0/1 over an entire neighbourhood, which makes Δ undefined.
 Worth stating as a limitation of the diagnostic rather than a curiosity.
 
@@ -646,7 +650,10 @@ indirect and measurably lossy way to estimate it.
 
 ## 5. Thread 3 — aLIMEgn
 
-The most recent thinking (July 2024) and the most promising direction, but no code.
+Framing note from June 2024. **Coded and run on 2026-09-12** — see
+`experiments/alimegn/` (six registered predictions in `PREREGISTRATION.md`, three sweeps,
+332 configurations) and the write-up in `~/Repos/Overleaf/aLIMEgn/`. The outcome is
+summarised at the end of this section.
 
 **The reframing.** The CIKM paper's contribution generalises. Sampling `X_g` should not
 target `P(X, y)` — the distribution that trained the black box — it should target
@@ -660,20 +667,64 @@ distribution.
 
 That's a cleaner and more general story than the CIKM framing, and it subsumes it.
 
-**Matt's own open questions**, verbatim from the tex, all still open:
+**Matt's own open questions**, verbatim from the tex (1 and 2 are now answered below;
+3 is still open):
 
 1. Is `X_g` aligned to `P(X, y)` or just `P(X)`?
 2. Should `g` be evaluated on test data drawn from `P(X, ŷ)` rather than `P(X, y)`?
 3. `y` is a label in `{±1}` but `ŷ` is a probability in `[0, 1]` — does that asymmetry
    matter to the reasoning?
 
-Question 2 is **already answerable with the existing code** and is the strongest
-experimental hook in the repo. `evaluation data` toggles precisely that: `'test data'`
-scores against `P(X, y)`, `'sample locally'` scores against a proxy for `P(X, ŷ)`. Nobody
-has run the comparison systematically. The prediction the framing makes is sharp: for a
-*well-fit* black box the two evaluations should agree; as the black box degrades they
-should diverge, and the class-balanced explainer should track the `P(X, ŷ)` evaluation
-while standard LIME tracks neither.
+**Questions 1 and 2 were answered by reading the pipeline, not by experiment, and the
+answers changed what there was to measure.** What follows corrects what this section used
+to say.
+
+1. `X_g` is aligned to `P(X)`. A surrogate's training labels always come from `f`, so
+   "train on `P(X, ŷ)`" is automatic for the label half in *every* LIME variant. The only
+   free choices are the `X`-marginal and the sample weights. (Kleinlein et al. match
+   `P(X)` too — natural image statistics — not `P(X, y)`.)
+2. **Every fidelity metric here already scores against `ŷ`.** `fidelity`, `Brier` and `KL`
+   all compare `g` to `f`; none looks at `y`. So `evaluation data` (`'test data'` vs
+   `'sample locally'`) is *not* the `P(X,y)` vs `P(X,ŷ)` contrast this section previously
+   claimed — it contrasts two `X`-marginals, both labelled by `f`. That is worth measuring
+   (it is E2, now done) but it is a different claim.
+
+`y` vs `ŷ` can therefore only enter through class-conditional quantities — class weights
+taken from labels or from predictions — and through a black box degraded far enough that
+the two differ.
+
+**What the experiments found** (full numbers in the Overleaf write-up):
+
+- **The CIKM'23 collapse belongs to the evaluation marginal.** Standard LIME's local
+  fidelity varies by 0.26 along the line when scored on the test set and by 0.10 when
+  scored on the distribution it was trained on (58/67 configurations; registered as ≥5×,
+  measured 2.6×, so confirmed in direction, not in magnitude).
+- **Class weighting is a correction to that mismatch**: +0.034 fidelity on test data
+  against +0.004 on the surrogate's own marginal, worst query point 0.72 → 0.92. Every
+  scheme that repairs the test-set score makes the own-marginal score worse — the trade is
+  the signature of a marginal correction.
+- **An explicit density ratio beats it**, using no labels: better local KL than the CIKM
+  class trick in 69/84 configurations, worst query point 0.94. The effect is covariate
+  shift, and the class trick is a crude proxy for the correction (rank agreement between
+  the two weightings is only ρ ≈ 0.22–0.30, below the registered 0.3 away from the
+  boundary).
+- **The `y` vs `ŷ` axis is small**: ~3% in KL at 40% label noise, nothing under
+  underfitting or imbalance, sign seed-unstable in 11/36 repeated configurations. It is
+  concentrated in the piecewise-constant black box (random forest +0.037 at 40% noise,
+  logistic +0.001).
+- **Degrading the black box destroys the effect rather than exposing it** — the opposite
+  of the framing's expectation. The marginal effect falls monotonically with label noise
+  (variation 0.35 → 0.12, ρ = −0.44, p = 2e-06) and the gain from class weighting falls
+  with it (+0.111 → +0.003). What is being corrected is the black box's *own* confident,
+  one-sided predictions away from the boundary, and a badly fitted black box does not make
+  them.
+- **No reversal on the truth objective** (registered as P4): `ŷ`-derived weights are better
+  than `y`-derived ones at agreeing with the true labels too (129/210 vs 58/210), so the
+  two objectives are not in tension.
+- **Methodological note.** With LIME's default kernel width, a locality-weighted score over
+  the test set is barely local: the effective sample size is 69% of the test set (median
+  over 14 datasets, up to 91%). "Local fidelity on test data" — CIKM'23's own instrument —
+  is closer to a global score than the name suggests.
 
 Question 3 also connects the two open threads: it is the same probability-vs-label
 distinction that motivates Logit-LIME. **Logit-LIME and aLIMEgn are arguably one paper**
@@ -1181,6 +1232,15 @@ measured — this is the obvious reviewer question;
 (c) test whether the effect survives an interpretable-domain transform, where the
 surrogate operates on binary indicators rather than raw features;
 (d) more seeds and splits — everything so far is a single split per configuration.
+
+**E2, E3 — ***done 2026-09-12***, see §5 and `experiments/alimegn/`.** Both were run, with
+six predictions registered first. E2's framing was wrong as written below (the toggle
+contrasts two `X`-marginals, not `P(X,y)` against `P(X,ŷ)`) and is corrected in §5; E3's
+prediction was refuted in an informative direction — degrading the black box *shrinks* the
+effect. E4 is partly addressed: `cost sensitive sampled` (ŷ, local) beats `cost sensitive
+class` (y, global) decisively — the global scheme is the only one of six that never helps
+(19/210 on degraded black boxes) — but the balanced-vs-imbalanced *black box* comparison
+E4 asks for has still not been run. The original text follows.
 
 **E2 — the aLIMEgn evaluation-target sweep.** Fix the black box and the query points,
 toggle `evaluation data` between `'test data'` and `'sample locally'`, and sweep across
