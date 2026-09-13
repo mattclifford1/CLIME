@@ -1,0 +1,21 @@
+\begin{table}[tbp]
+  \centering
+  \footnotesize
+  \setlength{\tabcolsep}{5pt}
+  \caption{The six schemes over the $84$ marginal configurations and the $210$ degraded ones. \emph{Worst point} is the median lowest local fidelity along the line and \emph{variation} the median max${}-{}$min along it; KL columns are median $\log_{10}$ ratios against standard LIME, positive favouring the scheme. Note that every scheme repairing the test-set score makes the own-marginal score worse.}
+  \label{tab:schemes}
+  \begin{tabular}{lrrrrr}
+    \toprule
+    & \multicolumn{2}{c}{fidelity on test data} & \multicolumn{2}{c}{$\log_{10}$ KL gain} & degraded \\
+    \cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-6}
+    weighting scheme & worst point & variation & test data & own marginal & test data \\
+    \midrule
+    standard LIME & $0.718$ & $0.175$ & --- & --- & --- \\
+    class weights, $\hat{y}$ on the sample & $0.917$ & $0.078$ & $+0.006$ (46/84) & $-0.177$ (2/84) & $+0.065$ (147/210) \\
+    class weights, $y$ globally & $0.700$ & $0.185$ & $-0.001$ (17/84) & $-0.002$ (15/84) & $-0.003$ (19/210) \\
+    class weights, $y$ locally & $0.729$ & $0.154$ & $+0.005$ (49/84) & $-0.052$ (10/84) & $+0.011$ (113/210) \\
+    class weights, $\hat{y}$ locally & $0.729$ & $0.162$ & $+0.002$ (44/84) & $-0.063$ (8/84) & $+0.006$ (119/210) \\
+    density ratio & $0.941$ & $0.051$ & $+0.159$ (77/84) & $-0.073$ (31/84) & $+0.128$ (177/210) \\
+    \bottomrule
+  \end{tabular}
+\end{table}

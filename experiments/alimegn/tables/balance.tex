@@ -1,0 +1,16 @@
+\begin{table}[tbp]
+  \centering
+  \footnotesize
+  \caption{E4: local or global class imbalance? Median gain in local fidelity over standard LIME on test data, over $14$ datasets $\times$ $3$ model families, with the number of configurations improved. Local imbalance helps in every cell; global imbalance in none.}
+  \label{tab:balance}
+  \begin{tabular}{llrrr}
+    \toprule
+    training data & black box & $n$ & local ($\hat{y}$, sample) & global ($y$, training set) \\
+    \midrule
+    natural & normal & 42 & $+0.0326$ (34/42) & $-0.0002$ (7/42) \\
+    natural & balanced & 42 & $+0.0355$ (31/42) & $-0.0012$ (7/42) \\
+    class 0 at 20\% & normal & 42 & $+0.0268$ (30/42) & $-0.0001$ (9/42) \\
+    class 0 at 20\% & balanced & 42 & $+0.0297$ (30/42) & $-0.0005$ (9/42) \\
+    \bottomrule
+  \end{tabular}
+\end{table}

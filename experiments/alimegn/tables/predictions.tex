@@ -1,0 +1,22 @@
+\begin{table}[tbp]
+  \centering
+  \footnotesize
+  \setlength{\tabcolsep}{4pt}
+  \caption{Each prediction as registered in \texttt{PREREGISTRATION.md} before its sweep ran, against what was measured. Verdicts are computed from the registered thresholds rather than assigned by hand. P1--P6 were registered together, P7--P8 (E4) after the first six were analysed.}
+  \label{tab:predictions}
+  \setlength{\tabcolsep}{3pt}
+  \begin{tabular}{l p{0.24\textwidth} p{0.34\textwidth} l}
+    \toprule
+    & prediction & measured & verdict \\
+    \midrule
+    \textbf{P1} & the collapse belongs to the evaluation marginal & 1.88$\times$ larger on test data (61/84, $p = 6e-08$) & direction confirmed, threshold not met \\
+    \textbf{P2} & class weighting corrects that mismatch & $+0.0344$ on test data vs $+0.0035$ on its own marginal & confirmed \\
+    \textbf{P3} & as $f$ degrades, $\hat{y}$ weights beat $y$ weights & ladder -0.0036 $\to$ +0.0126 in $\log_{10}$ KL; $\rho = +0.085$, $p = 0.19$ & trend only, not significant \\
+    \textbf{P4} & the ordering reverses when the target is the truth & $y$ weights better on truth in 58/210, median -0.0006 & refuted \\
+    \textbf{P5} & the covariate-shift reading & density ratio best on KL in 69/84 vs CIKM; weight agreement in the tails $\rho = +0.218$ & first half confirmed, second refuted \\
+    \textbf{P6} & degradation and the marginal mismatch are independent & noise rate vs marginal effect $\rho = -0.439$, $p = 2e-06$, $n = 108$ & refuted \\
+    \textbf{P7} & local imbalance is the signal, not global & local $+0.0268$ to $+0.0355$ in all four cells; global never above $0$ & confirmed \\
+    \textbf{P8} & balanced training shrinks the gain (P6's mechanism again) & gain $+0.0286$ normally trained vs $+0.0323$ balance-trained, smaller in 31/84, $p = 0.3$ & refuted \\
+    \bottomrule
+  \end{tabular}
+\end{table}
