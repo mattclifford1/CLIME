@@ -1,0 +1,53 @@
+{
+ "Digits 3 vs 8|Logistic": {
+  "rho_standard": 0.9891176470588234,
+  "top1_standard": 1.0,
+  "cos_standard": 0.9972272750759045,
+  "brier_standard": 0.005238377737290039,
+  "kl_standard": 0.04228867436632397,
+  "rho_logit": 1.0,
+  "top1_logit": 1.0,
+  "cos_logit": 0.9999999997212038,
+  "brier_logit": 2.5143782995171562e-08,
+  "kl_logit": 6.665007154911477e-08,
+  "n_points": 20,
+  "n_patches": 16,
+  "logit_better_cos": 20,
+  "linearity_residual": 2.1155299734232358e-12,
+  "saturated_fraction": 0.0
+ },
+ "Digits 3 vs 8|LDA": {
+  "rho_standard": 0.9744117647058823,
+  "top1_standard": 0.85,
+  "cos_standard": 0.9897400063616718,
+  "brier_standard": 0.030681348133674985,
+  "kl_standard": 0.1137522648387321,
+  "rho_logit": 0.996764705882353,
+  "top1_logit": 1.0,
+  "cos_logit": 0.9998279043614501,
+  "brier_logit": 0.001805323402237206,
+  "kl_logit": 0.005245068539141705,
+  "n_points": 20,
+  "n_patches": 16,
+  "logit_better_cos": 20,
+  "linearity_residual": 5.817396225471505e-05,
+  "saturated_fraction": 0.009365000000000002
+ },
+ "Digits 3 vs 8|Nearest Class Mean": {
+  "rho_standard": 0.9741176470588236,
+  "top1_standard": 0.7,
+  "cos_standard": 0.9601011342982426,
+  "brier_standard": 0.013980176192420873,
+  "kl_standard": 0.05641574860132644,
+  "rho_logit": 0.995735294117647,
+  "top1_logit": 0.95,
+  "cos_logit": 0.9997543165318344,
+  "brier_logit": 0.002102060771104725,
+  "kl_logit": 0.009863743980099749,
+  "n_points": 20,
+  "n_patches": 16,
+  "logit_better_cos": 20,
+  "linearity_residual": 7.864624791331654e-05,
+  "saturated_fraction": 0.04391
+ }
+}

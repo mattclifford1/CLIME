@@ -41,6 +41,7 @@ run sweeps/sweep_ground_truth.py results_ground_truth.json
 run sweeps/validate_gradients.py
 run sweeps/sweep_gradient_truth.py results_gradient_truth.json
 run sweeps/sweep_taylor.py results_taylor.json
+run sweeps/sweep_patches.py results_patches.json
 run sweeps/sweep_fidelity.py results_fidelity.json
 run sweeps/sweep_seeds.py results
 
