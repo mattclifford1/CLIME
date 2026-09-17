@@ -75,6 +75,7 @@ wrong.
 | `sweep_gradient_truth.py` | `results_gradient_truth.json` | the same question for every *differentiable* black box, against the analytic gradient of its log-odds — and the surrogate's fidelity at the same query point, so the two can be correlated |
 | `validate_gradients.py` | — | checks every closed-form gradient against finite differences; run it before trusting the sweep above |
 | `sweep_taylor.py` | `results_taylor.json` | the explanation-targeted surrogate (`common/taylor.py`): what an exact explanation costs in fidelity, and how well the same gradient can be estimated from black-box queries alone |
+| `sweep_patches.py` | `results_patches.json` | the interpretable-domain transform (`common/patches.py`): surrogates fitted on binary 2×2 patch indicators rather than pixels, scored against the exact patch-space truth |
 | `sweep_fidelity.py` | `results_fidelity.json` | the 2×2 of (Brier vs fidelity) × (local sample vs test set) — whether the result survives the CIKM'23 evaluation protocol |
 | `sweep_seeds.py` | `results_seed*.json` | a subset repeated under five random seeds |
 
