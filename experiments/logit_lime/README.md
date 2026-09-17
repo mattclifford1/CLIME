@@ -78,6 +78,15 @@ wrong.
 | `sweep_fidelity.py` | `results_fidelity.json` | the 2×2 of (Brier vs fidelity) × (local sample vs test set) — whether the result survives the CIKM'23 evaluation protocol |
 | `sweep_seeds.py` | `results_seed*.json` | a subset repeated under five random seeds |
 
+Two figure scripts do not read a `results/*.json` either, re-running a single configuration
+instead: `figures/fig_justification.py` and `figures/fig_digits.py`. The latter is the only
+figure here on data whose features have a spatial layout — `Digits 3 vs 8`, an 8×8 pixel
+grid registered in `clime/data/loaders/sklearn_toy.py` — which lets an explanation be shown
+as an image rather than a bar chart. It explains a logistic black box, so `coef_` is the
+ground truth exactly as in `sweep_ground_truth.py`, and it draws each surrogate's signed
+error against that truth: at a cosine of ~0.9 the two explanations look alike side by side,
+and the error maps are what actually separate them.
+
 One analysis script does not read a `results/*.json`:
 `analysis/table_example_explanation.py` re-runs a single configuration to print one
 explanation feature by feature, against the black box's own coefficients, and writes
