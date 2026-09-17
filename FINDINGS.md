@@ -548,6 +548,26 @@ Paired against standard LIME: cosine better on **85/87** (Wilcoxon p = 3e-15), r
 the true most important feature (top-1 ≈ 0.0 for both, n = 3). Local feature-ranking
 recovery in high dimensions is hard regardless of the space fitted in.
 
+**The same result as an image (added 2026-09-17).** `Digits 3 vs 8` — 8×8 raw pixels, 64
+features, registered in `clime/data/loaders/sklearn_toy.py` — is the only dataset here whose
+features have a spatial layout, so an explanation can be drawn as an image instead of a bar
+chart (`experiments/logit_lime/figures/fig_digits.py`, paper Figure 9). With a logistic
+black box the coefficients are the ground truth exactly as above: mean cosine over 20 query
+points is **0.905 standard against 0.997 Logit-LIME**, with Logit-LIME closer at **20/20**.
+
+Worth knowing before drawing any saliency figure: at a cosine of 0.91 the two explanations
+look *alike* side by side, and comparing them by eye does not resolve the difference. The
+signed error maps do — mean absolute error against the truth differs by a factor of nine
+(0.115 against 0.013, as a fraction of the largest true weight; largest single-pixel error
+0.336 against 0.151). An argument for scoring explanations against a ground truth wherever
+one exists rather than presenting a picture of them.
+
+Note also that at 64 features vector recovery is still good (cosine 0.905/0.997) at a
+feature count where top-1 recovery is already unreliable elsewhere in the grid. The
+collapse recorded just above is a top-1 phenomenon on the three very high-dimensional
+configurations (Arrhythmia, 279 features), not a general failure of vector recovery above
+60 features.
+
 **What this means for the paper.** Not "our surrogate is better" — that dies on random
 forests. It is *"the right surrogate depends on the black box's local log-odds geometry,
 and here is a cheap diagnostic that tells you which to use"*. That framing explains the
