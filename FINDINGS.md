@@ -568,6 +568,46 @@ collapse recorded just above is a top-1 phenomenon on the three very high-dimens
 configurations (Arrhythmia, 279 features), not a general failure of vector recovery above
 60 features.
 
+**Does the effect survive the interpretable-domain transform? (added 2026-09-17)** The
+paper fits every surrogate in the raw feature space and lists this as future work.
+`sweeps/sweep_patches.py` answers it with LIME's actual image pipeline: 2×2 patches over the
+8×8 digit, so the surrogate sees **16 binary indicators** rather than 64 pixels.
+
+The question is answerable because the ground truth survives the transform in closed form.
+With `x(z) = b + Σⱼ zⱼ(qⱼ − bⱼ)`, a black box with linear log-odds satisfies
+`logit f(x(z)) = const + Σⱼ zⱼ γⱼ` where `γⱼ = Σ_{i∈patch j} βᵢ(qᵢ − bᵢ)` — *exactly* linear
+in z, so γ is the true patch importance rather than an estimate of one.
+
+| black box | cos standard | cos Logit-LIME | top-1 std/logit | KL std/logit | saturated |
+|---|---|---|---|---|---|
+| Logistic | 0.997 | **1.000** | 1.00 / 1.00 | 4.2e-2 / 6.7e-8 | 0.0% |
+| LDA | 0.990 | **1.000** | 0.85 / 1.00 | 1.1e-1 / 5.3e-3 | 0.9% |
+| Nearest Class Mean | 0.960 | **1.000** | 0.70 / 0.95 | 5.6e-2 / 9.9e-3 | 4.4% |
+
+Logit-LIME is closer at **20/20** query images in all three. The effect survives the
+transform.
+
+**The caveat has to stay attached to that table.** Logit-LIME's hypothesis class contains
+the patch truth *exactly*, so cosine 1.000 is close to a tautology — it is the group A
+argument carried into a new space, not an independent result. What is informative is
+standard LIME's error in the same space (top-1 0.70 on Nearest Class Mean) and the fidelity
+gap (KL 6×10⁵ on logistic regression). Scope: one dataset, because Digits 3 vs 8 is the only
+registered dataset with a spatial layout to cut up; three black boxes, because they are the
+ones with a truth; 20 real test images rather than the class-means line, since a patch
+explanation is a statement about an actual image.
+
+**Two numerical traps, recorded because both nearly produced wrong numbers.**
+
+- The first validator reported residuals of **~11 log-odds units** for LDA and NCM and read
+  like a refutation of the whole identity. It was float64 saturation: turning patches off
+  swings the log-odds by ~40, and `predict_proba` pins to exactly 0 or 1 long before that,
+  capping any measurable logit at ±27.6. On unsaturated z the identity holds. Validate on
+  the points where the quantity is representable, and record the fraction where it is not.
+- The residual that remains (5.8e-5 LDA, 7.9e-5 NCM, against 2.1e-12 for logistic) is
+  **rounding in `predict_proba`, not deviation**: recomputed from LDA's exact
+  `decision_function` it is **8.05e-15**. At p = 1 − 1.15e-12 float64 has ~4 significant
+  digits left in (1−p), and `logit` reads all of them.
+
 **What this means for the paper.** Not "our surrogate is better" — that dies on random
 forests. It is *"the right surrogate depends on the black box's local log-odds geometry,
 and here is a cheap diagnostic that tells you which to use"*. That framing explains the
