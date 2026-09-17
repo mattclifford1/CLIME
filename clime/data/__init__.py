@@ -8,7 +8,7 @@ from .loaders.banknote import get_banknote
 from .loaders.abalone_gender import get_abalone
 from .loaders.ionosphere import get_ionosphere
 from .loaders.wheat_seeds import get_wheat_seeds
-from .loaders.sklearn_toy import get_breast_cancer, get_wine, get_iris
+from .loaders.sklearn_toy import get_breast_cancer, get_wine, get_iris, get_digits_3v8
 from .loaders.exported_npz import available_exported
 from .processing.balance import get_proportions_and_sample_num, unbalance_undersample, balance_oversample
 from .processing.downsample_data import shuffle_dataset, proportional_downsample, proportional_split
@@ -25,6 +25,7 @@ AVAILABLE_DATASETS = {
     'Pima Indian Diabetes': get_diabetes_indian,
     'Iris': get_iris,
     'Wine': get_wine,
+    'Digits 3 vs 8': get_digits_3v8,
     'Sonar Rocks vs Mines': get_sonar,
     'Abalone Gender': get_abalone,
     'Ionosphere': get_ionosphere,
