@@ -23,7 +23,9 @@ rm -f results/results_taxonomy.json results/results_extended.json \
       results/results_kernel.json results/results_explanations.json \
       results/results_explanations_extended.json results/results_ground_truth.json \
       results/results_gradient_truth.json results/results_taylor.json \
-      results/results_fidelity.json results/results_seed*.json
+      results/results_fidelity.json results/results_seed*.json \
+      results/results_fidelity_extended.json results/results_instruments.json \
+      results/results_null.json
 
 run () {
     echo "=== $1 ==="
@@ -43,6 +45,12 @@ run sweeps/sweep_gradient_truth.py results_gradient_truth.json
 run sweeps/sweep_taylor.py results_taylor.json
 run sweeps/sweep_patches.py results_patches.json
 run sweeps/sweep_fidelity.py results_fidelity.json
+# the same 2x2 for the five extended-grid black boxes that have a gradient ground truth,
+# into its own file so the registered 168 above stays exactly that
+run sweeps/sweep_fidelity.py results_fidelity_extended.json \
+    --models 'Bagged Logistic,Bayes Optimal,Nearest Class Mean,Polynomial Logistic (deg 2),RBF Logistic (Nystroem)'
+run sweeps/sweep_instruments.py results_instruments.json
+run sweeps/sweep_null.py results_null.json
 run sweeps/sweep_seeds.py results
 
 echo "=== ALL SWEEPS COMPLETE ==="

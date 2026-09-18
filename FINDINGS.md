@@ -674,6 +674,82 @@ exactly-linear black boxes, where the standard surrogate's explanation was alrea
 right, so the largest fidelity gains come with the *smallest* explanation gains. KL beats
 Brier on every part of this test — another reason to prefer it.
 
+#### What a 0.5 threshold cannot see (registered 2026-09-18, third registration)
+
+The draft dismissed thresholded fidelity in two sentences. Making that argument properly
+changed it. **The obvious version of the claim is false and the data already on disk
+refuted it**: pooled over query points, test-data fidelity tracks cosine-to-truth *at least
+as closely* as KL does (ρ = +0.41 vs −0.28 over 154 configurations), and when it separates
+two surrogates it names the better explanation more often than KL (75% vs 65%). We
+registered that the two would agree within 0.1 and they did not — in fidelity's favour.
+Anyone repeating this should not start from "fidelity is uninformative".
+
+What is true is sharper and narrower. Three separate things, and keeping them separate is
+the point:
+
+1. **Blindness is exact, and it is blindness to the right quantity.** `sweep_instruments.py`
+   builds surrogates whose error is prescribed rather than fitted (`common/surrogates.py`)
+   and moves one property at a time. Multiplying a surrogate's whole log-odds by *c* leaves
+   `{g = ½}` fixed, so fidelity's range over a 100× change in confidence is **exactly zero**,
+   at every query point, in 2 and in 30 dimensions. Confidence at a fixed boundary is
+   precisely the axis Logit-LIME moves on. The cheap repairs fail too, and differently:
+   thresholding at *f(q)* is exactly blind to the *slope* instead (range 0 there, 0.51
+   under sharpening), and Spearman of the probabilities is blind to both up to
+   floating-point ties.
+
+   *A plan-level prediction was wrong here and the correction is the better result.* The
+   plan said fidelity would be flat in the slope. It is not: scaling the slope while
+   holding *g(q) = f(q)* slides the surrogate's boundary, which a threshold can see. The
+   invariance needs the intercept scaled too.
+
+2. **On the grid it ties rather than misleads.** Fidelity returns an identical number for
+   the two surrogates at 41% of the query points where their explanations differ (KL: 0%).
+   At 19% of points all three surrogates score exactly 1.000 on the local sample, and at
+   19% of those their cosines still span more than 0.2. Compression is not monotone: a
+   Brier ratio of 100–1,000 buys +0.035 of agreement, above 1,000 buys +0.018.
+
+3. **Where it does answer it is systematically wrong about which surrogate to use.** This is
+   the load-bearing empirical result, because it is not rare. Test-data fidelity crowns the
+   hard-label surrogate in 80/154 configurations; KL crowns Logit-LIME in 106. The
+   hard-label surrogate has the *lowest* mean cosine (0.843 vs 0.891) and top-1 (0.66 vs
+   0.77) of the three. An instrument that discards confidence rewards the surrogate that is
+   overconfident (§ hard-label), and that surrogate explains worst.
+
+**Blind test (70 configurations, 5 extended-grid black boxes, run after registering):**
+P5 ties ≥ 30% — held (41.4%, KL 0.0%). P6 hard-label crowned in ≥ 40% with the lowest mean
+cosine — held (51.4%, cosine 0.837). P7 fidelity's level ρ within 0.1 of KL's — **failed**
+(+0.440 vs −0.211), in the direction of fidelity being the better tracker.
+
+**The base rate.** The null explainer (`sweep_null.py`): g ≡ the locality-weighted mean of
+f over the neighbourhood — the constant minimising the local Brier score, so not a straw
+man — with the zero vector as its explanation. P8 (mean local fidelity ≥ 0.90) **failed**:
+it is 0.837, and ≥ 0.90 in only 18% of configurations. The mean is the wrong summary
+though — it scores a *perfect* 1.000 at 12% of query points, a perfect mean over all 20
+points in 8 of 168 configurations, and beats or ties standard LIME at 46% of points (P9
+held). P10 (KL ranks it worst at > 95%) **failed** at 37%, and the reason is worth more
+than the prediction was: **the hard-label surrogate is worse than saying nothing, under KL,
+at 45% of query points** (standard LIME 12%, Logit-LIME 18%). KL contains log g and prices
+a confident error without limit. Fidelity crowns that surrogate; KL puts it below a
+constant.
+
+**Two things that surprised us, both kept in the write-up.**
+
+- *Every* dramatic candidate for the worked example is an RBF SVM whose decision function
+  turns round inside the neighbourhood. A surrogate pointing "the wrong way" there may be
+  fitting a second, genuine boundary of the black box, while the gradient at q — the ground
+  truth by definition — is the unrepresentative thing. `analysis/select_example.py` plots
+  the transect and rejects all of them. Do not use such a point as an illustration.
+- At saturated query points, *no* probability-space instrument separates the surrogates.
+  Breast Cancer|MLP point 1 (f(q) = 0.0000), across all 5 seeds: test-data fidelity
+  identical to 4 dp every time, Brier ratio 0.91–5.5× (favouring the *worse* surrogate in
+  3 of 5), and yet Δcosine +0.40 to +0.52 consistently in Logit-LIME's favour. Proper
+  scoring rules are better instruments than a threshold, not oracles. On group B they are
+  near a coin flip (Brier 47%, KL 51%, against fidelity's 62%).
+  `analysis/check_example.py` reports the case-1 and case-3 shapes separately for exactly
+  this reason: a saturated candidate "fails" case 3 because Brier is blind there too, and
+  reporting only that would read as "does not replicate" when it replicates 5/5 and shows
+  something else.
+
 #### The explanation-targeted surrogate (registered 2026-08-14, before running)
 
 The open question above — whether targeting `g(q)` directly beats fitting `f` over a

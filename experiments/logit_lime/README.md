@@ -77,7 +77,28 @@ wrong.
 | `sweep_taylor.py` | `results_taylor.json` | the explanation-targeted surrogate (`common/taylor.py`): what an exact explanation costs in fidelity, and how well the same gradient can be estimated from black-box queries alone |
 | `sweep_patches.py` | `results_patches.json` | the interpretable-domain transform (`common/patches.py`): surrogates fitted on binary 2×2 patch indicators rather than pixels, scored against the exact patch-space truth |
 | `sweep_fidelity.py` | `results_fidelity.json` | the 2×2 of (Brier vs fidelity) × (local sample vs test set) — whether the result survives the CIKM'23 evaluation protocol |
+| `sweep_fidelity.py --models …` | `results_fidelity_extended.json` | the same 2×2 for the five extended-grid black boxes that have a gradient truth but were never swept here, run blind against the third pre-registration. **Kept in its own file**: `results_fidelity.json` is the registered 168 and stays that way |
+| `sweep_instruments.py` | `results_instruments.json` | what each instrument responds to, on a family of surrogates whose error is prescribed rather than fitted (`common/surrogates.py`) — the arithmetic behind the claim that a 0.5 threshold cannot see confidence |
+| `sweep_null.py` | `results_null.json` | the base rate: what an explainer that explains nothing scores under each instrument |
 | `sweep_seeds.py` | `results_seed*.json` | a subset repeated under five random seeds |
+
+The instrument and null sweeps exist because every fidelity number elsewhere is reported
+without a floor or a control. `sweep_instruments.py` supplies the control — it moves one
+property of a surrogate at a time and records what each instrument does, so "fidelity is
+blind to confidence" is a measured zero rather than an argument — and `sweep_null.py`
+supplies the floor. Their analysis is `analysis/analyse_fidelity_explanation.py`, which
+joins `results_fidelity.json` to `results_gradient_truth.json` per query point (the two
+sweeps walk the same 20 points with the same seeds; the join asserts their local Brier
+scores agree before trusting it), and `analysis/assess_blind.py`, which scores the third
+pre-registration with the blind 70 configurations kept separate from the 84 that had
+already been seen.
+
+Choosing the worked example is itself scripted, in `analysis/select_example.py` and
+`analysis/check_example.py`, and both log what they rejected. The filter that does the most
+work is monotonicity: the most dramatic candidates are all RBF SVMs whose decision function
+turns round inside the neighbourhood, where a surrogate pointing "the wrong way" may be
+fitting a second, real boundary of the black box rather than being wrong. Every one of them
+is rejected. See the docstrings for why case 3 was added after the fact and what that costs.
 
 Three figure scripts do not read a `results/*.json` either, re-running a single
 configuration instead: `figures/fig_justification.py`, `figures/fig_digits.py` and

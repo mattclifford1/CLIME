@@ -1,0 +1,41 @@
+{
+ "config": "Breast Cancer|MLP",
+ "index": 12,
+ "readings": {
+  "standard LIME": {
+   "fidelity\ntest data": 0.989086354868823,
+   "fidelity\nlocal sample": 0.9876304680455777,
+   "Brier": 0.042579418563511245,
+   "KL": 0.15935464467877206,
+   "cosine to\nthe truth": 0.5196479783666667
+  },
+  "Logit-LIME": {
+   "fidelity\ntest data": 0.989086354868823,
+   "fidelity\nlocal sample": 0.9876304680455777,
+   "Brier": 0.002186991135623256,
+   "KL": 0.0099737662597102,
+   "cosine to\nthe truth": 0.9751176392049559
+  },
+  "hard-label LIME": {
+   "fidelity\ntest data": 0.989086354868823,
+   "fidelity\nlocal sample": 1.0,
+   "Brier": 0.004499885680597214,
+   "KL": 0.034136106855831926,
+   "cosine to\nthe truth": 0.9733585041388476
+  },
+  "null explainer": {
+   "fidelity\ntest data": 0.7004101070256986,
+   "fidelity\nlocal sample": 0.5507374460191315,
+   "Brier": 0.2113023032052004,
+   "KL": 0.5719832926400993,
+   "cosine to\nthe truth": NaN
+  }
+ },
+ "crossings": {
+  "black box": -0.37099109225961513,
+  "standard LIME": -0.47698854719093475,
+  "Logit-LIME": -0.40632357723672285,
+  "hard-label LIME": -0.47698854719093475,
+  "null explainer": NaN
+ }
+}

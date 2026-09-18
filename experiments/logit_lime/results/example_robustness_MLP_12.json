@@ -1,0 +1,244 @@
+{
+ "_meta": {
+  "dataset": "Breast Cancer",
+  "model": "MLP",
+  "index": 12,
+  "seeds": [
+   1,
+   2,
+   3,
+   4,
+   42
+  ],
+  "kernel_scales": [
+   0.5,
+   0.75,
+   1.25
+  ],
+  "fid_tie_tol": 0.01,
+  "cos_margin": 0.4,
+  "seeds_strict": 1,
+  "seeds_shape": 3,
+  "seeds_by_criterion": {
+   "fidelity tied": 3,
+   "Brier separates": 5,
+   "explanations differ": 5,
+   "by a wide margin": 1
+  },
+  "seeds_by_shape": {
+   "case 3, strict": 1,
+   "case 3": 3,
+   "case 1": 1
+  },
+  "d_cos_range": [
+   0.14632376216441612,
+   0.4554696608382892
+  ],
+  "kernels_strict": 2,
+  "kernels_shape": 2
+ },
+ "seeds": {
+  "1": {
+   "f_q": 0.12090697716958704,
+   "truth_norm": 4.897927611537544,
+   "standard": {
+    "cos": 0.7103478753399955,
+    "fidelity | local sample": 0.9554260778898589,
+    "fidelity | test data": 0.9862669235398578,
+    "Brier": 0.042997742231853854,
+    "KL": 0.15760822654180048
+   },
+   "logit": {
+    "cos": 0.9811157065444598,
+    "fidelity | local sample": 0.9554260778898589,
+    "fidelity | test data": 0.9862669235398578,
+    "Brier": 0.0038564573719036695,
+    "KL": 0.011601294660495835
+   },
+   "logreg": {
+    "cos": 0.9468311854852902,
+    "fidelity | local sample": 0.9554260778898589,
+    "fidelity | test data": 0.9862669235398578,
+    "Brier": 0.00905347075972391,
+    "KL": 0.05643703603742771
+   }
+  },
+  "2": {
+   "f_q": 0.011681176095912479,
+   "truth_norm": 4.894401873570547,
+   "standard": {
+    "cos": 0.5755312619263634,
+    "fidelity | local sample": 0.9626691470576065,
+    "fidelity | test data": 0.9705157211606925,
+    "Brier": 0.05175660143343718,
+    "KL": 0.1885343140201177
+   },
+   "logit": {
+    "cos": 0.9521846764246533,
+    "fidelity | local sample": 0.9804016592242905,
+    "fidelity | test data": 0.9832704710368696,
+    "Brier": 0.005138143681735103,
+    "KL": 0.01582129428291691
+   },
+   "logreg": {
+    "cos": 0.9317471735904012,
+    "fidelity | local sample": 0.9626691470576065,
+    "fidelity | test data": 0.9832704710368696,
+    "Brier": 0.00732307992427611,
+    "KL": 0.026088855179388432
+   }
+  },
+  "3": {
+   "f_q": 0.02932686982886547,
+   "truth_norm": 4.093819794618525,
+   "standard": {
+    "cos": 0.690694969202679,
+    "fidelity | local sample": 0.9897706687998075,
+    "fidelity | test data": 1.0,
+    "Brier": 0.04850050313032009,
+    "KL": 0.177101774645067
+   },
+   "logit": {
+    "cos": 0.9686362692761936,
+    "fidelity | local sample": 1.0,
+    "fidelity | test data": 1.0,
+    "Brier": 0.004207144798511356,
+    "KL": 0.012719146018844841
+   },
+   "logreg": {
+    "cos": 0.9557748851654924,
+    "fidelity | local sample": 0.9897706687998075,
+    "fidelity | test data": 1.0,
+    "Brier": 0.006090174330138643,
+    "KL": 0.03652543849490652
+   }
+  },
+  "4": {
+   "f_q": 0.03764816965472799,
+   "truth_norm": 4.535018189379308,
+   "standard": {
+    "cos": 0.828357017212267,
+    "fidelity | local sample": 1.0,
+    "fidelity | test data": 0.984541267210823,
+    "Brier": 0.048932660098692786,
+    "KL": 0.1725247459833242
+   },
+   "logit": {
+    "cos": 0.9746807793766831,
+    "fidelity | local sample": 1.0,
+    "fidelity | test data": 0.984541267210823,
+    "Brier": 0.0024460821294579943,
+    "KL": 0.010003572160880688
+   },
+   "logreg": {
+    "cos": 0.9622368165505847,
+    "fidelity | local sample": 1.0,
+    "fidelity | test data": 0.984541267210823,
+    "Brier": 0.005181783078325622,
+    "KL": 0.04032034468629257
+   }
+  },
+  "42": {
+   "f_q": 0.8687683311411837,
+   "truth_norm": 6.744029886571352,
+   "standard": {
+    "cos": 0.5196479783666667,
+    "fidelity | local sample": 0.9876304680455777,
+    "fidelity | test data": 0.989086354868823,
+    "Brier": 0.042579418563511245,
+    "KL": 0.15935464467877206
+   },
+   "logit": {
+    "cos": 0.9751176392049559,
+    "fidelity | local sample": 0.9876304680455777,
+    "fidelity | test data": 0.989086354868823,
+    "Brier": 0.002186991135623256,
+    "KL": 0.0099737662597102
+   },
+   "logreg": {
+    "cos": 0.9733585041388476,
+    "fidelity | local sample": 1.0,
+    "fidelity | test data": 0.989086354868823,
+    "Brier": 0.004499885680597214,
+    "KL": 0.034136106855831926
+   }
+  }
+ },
+ "kernel": {
+  "0.5": {
+   "f_q": 0.8687683311411837,
+   "truth_norm": 6.744029886571352,
+   "standard": {
+    "cos": 0.6576400680377665,
+    "fidelity | local sample": 0.9862646204074726,
+    "fidelity | test data": 0.9879258903009949,
+    "Brier": 0.037813739179133554,
+    "KL": 0.14103718691689296
+   },
+   "logit": {
+    "cos": 0.9796935004583537,
+    "fidelity | local sample": 1.0,
+    "fidelity | test data": 0.9879258903009949,
+    "Brier": 0.0019621457317255697,
+    "KL": 0.008216031589843714
+   },
+   "logreg": {
+    "cos": 0.9727813842578255,
+    "fidelity | local sample": 1.0,
+    "fidelity | test data": 0.9879258903009949,
+    "Brier": 0.0039379219599869775,
+    "KL": 0.025986369306008738
+   }
+  },
+  "0.75": {
+   "f_q": 0.8687683311411837,
+   "truth_norm": 6.744029886571352,
+   "standard": {
+    "cos": 0.5196479783666667,
+    "fidelity | local sample": 0.9876304680455777,
+    "fidelity | test data": 0.989086354868823,
+    "Brier": 0.042579418563511245,
+    "KL": 0.15935464467877206
+   },
+   "logit": {
+    "cos": 0.9751176392049559,
+    "fidelity | local sample": 0.9876304680455777,
+    "fidelity | test data": 0.989086354868823,
+    "Brier": 0.002186991135623256,
+    "KL": 0.0099737662597102
+   },
+   "logreg": {
+    "cos": 0.9733585041388476,
+    "fidelity | local sample": 1.0,
+    "fidelity | test data": 0.989086354868823,
+    "Brier": 0.004499885680597214,
+    "KL": 0.034136106855831926
+   }
+  },
+  "1.25": {
+   "f_q": 0.8687683311411837,
+   "truth_norm": 6.744029886571352,
+   "standard": {
+    "cos": 0.4619714182446103,
+    "fidelity | local sample": 0.9889819109278108,
+    "fidelity | test data": 0.9902894107005984,
+    "Brier": 0.04622704425265701,
+    "KL": 0.1730510578611901
+   },
+   "logit": {
+    "cos": 0.9709424055429481,
+    "fidelity | local sample": 0.9889819109278108,
+    "fidelity | test data": 0.9902894107005984,
+    "Brier": 0.0023660655143711465,
+    "KL": 0.011103992391716557
+   },
+   "logreg": {
+    "cos": 0.973357700144144,
+    "fidelity | local sample": 1.0,
+    "fidelity | test data": 0.9902894107005984,
+    "Brier": 0.004724637318502979,
+    "KL": 0.03746441618348448
+   }
+  }
+ }
+}

@@ -27,13 +27,15 @@ Two versions, and the difference between them matters:
                           measurement, and it costs 2d queries against LIME's 10,000.
 
 Both expose the explainer contract - predict, predict_proba, get_explanation - so the
-existing metrics score them unchanged.
+existing metrics score them unchanged.  Both are the special case b = grad logit f(q) of
+common/surrogates.py's LinearLogitSurrogate, which is where that contract is implemented.
 '''
 # author: Matt Clifford <matt.clifford@bristol.ac.uk>
 
 import numpy as np
 
 from common import gradients
+from common.surrogates import LinearLogitSurrogate
 
 EPS = 1e-12
 # escalating step sizes: a difference quotient of logit f underflows to zero wherever the
@@ -47,34 +49,21 @@ def _logit(p):
     return np.log(p/(1 - p))
 
 
-class _TaylorBase:
-    '''logit g(x) = a + b.(x - q), with b fixed rather than fitted'''
+class _TaylorBase(LinearLogitSurrogate):
+    '''the expansion at q: the intercept is read off f, the slope from _gradient'''
 
     def __init__(self, black_box_model, query_point, **kwargs):
         self.clf = black_box_model
-        self.q = np.asarray(query_point, dtype=np.float64).ravel()
-        self.intercept = float(_logit(
-            np.asarray(self.clf.predict_proba(self.q[None, :]))[0, 1]))
-        self.coef = self._gradient()
-        self.degenerate = bool(np.linalg.norm(self.coef) == 0
-                               or not np.all(np.isfinite(self.coef)))
+        q = np.asarray(query_point, dtype=np.float64).ravel()
+        self.q = q
+        intercept = float(_logit(
+            np.asarray(self.clf.predict_proba(q[None, :]))[0, 1]))
+        super().__init__(q, intercept=intercept, coef=self._gradient())
         if self.degenerate:
             self.coef = np.zeros_like(self.q)
 
     def _gradient(self):
         raise NotImplementedError
-
-    def get_explanation(self):
-        return self.coef
-
-    def predict_proba(self, X):
-        X = np.atleast_2d(np.asarray(X, dtype=np.float64))
-        z = self.intercept + (X - self.q) @ self.coef
-        p = 1.0/(1.0 + np.exp(-np.clip(z, -700, 700)))
-        return np.stack([1 - p, p], axis=1)
-
-    def predict(self, X):
-        return (self.predict_proba(X)[:, 1] >= 0.5).astype(np.int64)
 
 
 class AnalyticTaylor(_TaylorBase):

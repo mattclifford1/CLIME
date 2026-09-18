@@ -1,0 +1,495 @@
+{
+ "_meta": {
+  "cos_margin": 0.4,
+  "fid_margin": 0.02,
+  "flat_fraction": 0.5,
+  "kernel_mass": 0.1,
+  "monotone_tol": 0.02,
+  "extended": false,
+  "n_points": 1680,
+  "brier_margin": 10.0,
+  "fid_tie_tol": 0.01,
+  "n_candidates": {
+   "case 1": 17,
+   "case 2": 20,
+   "case 3": 1
+  }
+ },
+ "checked": [
+  {
+   "case": "case 1",
+   "config": "Gaussian|SVM",
+   "dataset": "Gaussian",
+   "model": "SVM",
+   "index": 15,
+   "margin": 1.9008226024449466,
+   "flat": false,
+   "truth_norm": 1.4967807996622235,
+   "median_norm": 1.6751847112215357,
+   "n_features": null,
+   "monotone": false,
+   "retrace": 0.19121444989708747,
+   "transect_lim": 2.2761406940777196,
+   "f_range": [
+    0.031099095537464063,
+    0.990631779417454
+   ]
+  },
+  {
+   "case": "case 1",
+   "config": "Wheat Seeds|SVM",
+   "dataset": "Wheat Seeds",
+   "model": "SVM",
+   "index": 17,
+   "margin": 0.706088835572507,
+   "flat": false,
+   "truth_norm": 1.1322609314853103,
+   "median_norm": 1.465818075970065,
+   "n_features": null,
+   "monotone": false,
+   "retrace": 0.30341197746533677,
+   "transect_lim": 4.258269320666333,
+   "f_range": [
+    0.017513300627429652,
+    0.995442202455335
+   ]
+  },
+  {
+   "case": "case 1",
+   "config": "Wheat Seeds|SVM",
+   "dataset": "Wheat Seeds",
+   "model": "SVM",
+   "index": 16,
+   "margin": 0.6816820047639466,
+   "flat": false,
+   "truth_norm": 0.8619287788943716,
+   "median_norm": 1.465818075970065,
+   "n_features": null,
+   "monotone": false,
+   "retrace": 0.2653941946737677,
+   "transect_lim": 4.258269320666333,
+   "f_range": [
+    0.007626230242053841,
+    0.995441996509731
+   ]
+  },
+  {
+   "case": "case 1",
+   "config": "Breast Cancer|SVM",
+   "dataset": "Breast Cancer",
+   "model": "SVM",
+   "index": 1,
+   "margin": 0.5260175683750715,
+   "flat": false,
+   "truth_norm": 1.414929393271853,
+   "median_norm": 2.779740003897545,
+   "n_features": null,
+   "monotone": false,
+   "retrace": 0.09814002022524068,
+   "transect_lim": 8.815455001787997,
+   "f_range": [
+    1.1996848039886342e-05,
+    0.9999999880275764
+   ]
+  },
+  {
+   "case": "case 1",
+   "config": "Breast Cancer|SVM",
+   "dataset": "Breast Cancer",
+   "model": "SVM",
+   "index": 0,
+   "margin": 0.524422579229802,
+   "flat": false,
+   "truth_norm": 1.561111460650065,
+   "median_norm": 2.779740003897545,
+   "n_features": null,
+   "monotone": false,
+   "retrace": 0.1103063804839139,
+   "transect_lim": 8.815455001787997,
+   "f_range": [
+    1.1996815688210456e-05,
+    0.999999963369255
+   ]
+  },
+  {
+   "case": "case 1",
+   "config": "Breast Cancer|MLP",
+   "dataset": "Breast Cancer",
+   "model": "MLP",
+   "index": 0,
+   "margin": 0.4720260278640769,
+   "flat": false,
+   "truth_norm": 4.986416488778131,
+   "median_norm": 5.179120073303078,
+   "n_features": null,
+   "monotone": true,
+   "retrace": 0.0,
+   "transect_lim": 8.815455001787997,
+   "f_range": [
+    1.0070215915455935e-27,
+    0.9999791575822001
+   ]
+  },
+  {
+   "case": "case 1",
+   "config": "Credit Scoring 1|QDA",
+   "dataset": "Credit Scoring 1",
+   "model": "QDA",
+   "index": 8,
+   "margin": 0.46125394355426197,
+   "flat": false,
+   "truth_norm": 62.458333877089544,
+   "median_norm": 53.814561761397584,
+   "n_features": null,
+   "monotone": false,
+   "retrace": 0.14276666790848114,
+   "transect_lim": 5.0896053183113334,
+   "f_range": [
+    0.0,
+    0.14276666790848114
+   ]
+  },
+  {
+   "case": "case 1",
+   "config": "Breast Cancer|MLP",
+   "dataset": "Breast Cancer",
+   "model": "MLP",
+   "index": 12,
+   "margin": 0.4554696608382889,
+   "flat": false,
+   "truth_norm": 6.744029886571351,
+   "median_norm": 5.179120073303078,
+   "n_features": null,
+   "monotone": true,
+   "retrace": 0.0,
+   "transect_lim": 8.815455001787997,
+   "f_range": [
+    4.4912868618014775e-16,
+    0.9999999999999998
+   ]
+  },
+  {
+   "case": "case 3",
+   "config": "Breast Cancer|MLP",
+   "dataset": "Breast Cancer",
+   "model": "MLP",
+   "index": 12,
+   "margin": 0.4554696608382889,
+   "flat": false,
+   "truth_norm": 6.744029886571351,
+   "median_norm": 5.179120073303078,
+   "n_features": null,
+   "monotone": true,
+   "retrace": 0.0,
+   "transect_lim": 8.815455001787997,
+   "f_range": [
+    4.4912868618014775e-16,
+    0.9999999999999998
+   ]
+  },
+  {
+   "case": "case 1",
+   "config": "Breast Cancer|MLP",
+   "dataset": "Breast Cancer",
+   "model": "MLP",
+   "index": 1,
+   "margin": 0.4515422167979316,
+   "flat": false,
+   "truth_norm": 4.986416488778131,
+   "median_norm": 5.179120073303078,
+   "n_features": null,
+   "monotone": true,
+   "retrace": 0.0,
+   "transect_lim": 8.815455001787997,
+   "f_range": [
+    9.413798704307244e-27,
+    0.9999975176615509
+   ]
+  },
+  {
+   "case": "case 1",
+   "config": "Breast Cancer|QDA",
+   "dataset": "Breast Cancer",
+   "model": "QDA",
+   "index": 0,
+   "margin": 0.4292930558927342,
+   "flat": false,
+   "truth_norm": 74.50445268442606,
+   "median_norm": 30.143361928914622,
+   "n_features": null,
+   "monotone": true,
+   "retrace": 0.0,
+   "transect_lim": 8.815455001787997,
+   "f_range": [
+    3.095207936980184e-92,
+    0.9999999837684315
+   ]
+  },
+  {
+   "case": "case 2",
+   "config": "Breast Cancer|SVM",
+   "dataset": "Breast Cancer",
+   "model": "SVM",
+   "index": 0,
+   "margin": 0.2810761351991846,
+   "flat": false,
+   "truth_norm": 1.561111460650065,
+   "median_norm": 2.779740003897545,
+   "n_features": null,
+   "monotone": false,
+   "retrace": 0.1103063804839139,
+   "transect_lim": 8.815455001787997,
+   "f_range": [
+    1.1996815688210456e-05,
+    0.999999963369255
+   ]
+  },
+  {
+   "case": "case 2",
+   "config": "Banknote Authentication|SVM",
+   "dataset": "Banknote Authentication",
+   "model": "SVM",
+   "index": 18,
+   "margin": 0.17033050965138918,
+   "flat": false,
+   "truth_norm": 4.757909751176393,
+   "median_norm": 9.420919076029374,
+   "n_features": null,
+   "monotone": false,
+   "retrace": 0.4888032723548522,
+   "transect_lim": 3.2189490394340208,
+   "f_range": [
+    3.108679507472562e-05,
+    0.999999985319341
+   ]
+  },
+  {
+   "case": "case 2",
+   "config": "Pima Indian Diabetes|SVM",
+   "dataset": "Pima Indian Diabetes",
+   "model": "SVM",
+   "index": 18,
+   "margin": 0.16061153113987403,
+   "flat": false,
+   "truth_norm": 0.9743958879940534,
+   "median_norm": 1.3701649684854127,
+   "n_features": null,
+   "monotone": false,
+   "retrace": 0.4524470600768534,
+   "transect_lim": 4.552281388155439,
+   "f_range": [
+    0.09670378443082453,
+    0.9266216900273181
+   ]
+  },
+  {
+   "case": "case 2",
+   "config": "Banknote Authentication|SVM",
+   "dataset": "Banknote Authentication",
+   "model": "SVM",
+   "index": 2,
+   "margin": 0.09167023165103916,
+   "flat": false,
+   "truth_norm": 6.1635741200740375,
+   "median_norm": 9.420919076029374,
+   "n_features": null,
+   "monotone": false,
+   "retrace": 0.3751430036051468,
+   "transect_lim": 3.2189490394340208,
+   "f_range": [
+    2.1016859217461367e-06,
+    0.9963218419551773
+   ]
+  },
+  {
+   "case": "case 2",
+   "config": "Wheat Seeds|SVM",
+   "dataset": "Wheat Seeds",
+   "model": "SVM",
+   "index": 17,
+   "margin": 0.0881903246111676,
+   "flat": false,
+   "truth_norm": 1.1322609314853103,
+   "median_norm": 1.465818075970065,
+   "n_features": null,
+   "monotone": false,
+   "retrace": 0.30341197746533677,
+   "transect_lim": 4.258269320666333,
+   "f_range": [
+    0.017513300627429652,
+    0.995442202455335
+   ]
+  },
+  {
+   "case": "case 2",
+   "config": "Wheat Seeds|SVM",
+   "dataset": "Wheat Seeds",
+   "model": "SVM",
+   "index": 2,
+   "margin": 0.0846759863371106,
+   "flat": false,
+   "truth_norm": 1.0877174153877875,
+   "median_norm": 1.465818075970065,
+   "n_features": null,
+   "monotone": false,
+   "retrace": 0.42572908117723207,
+   "transect_lim": 4.258269320666333,
+   "f_range": [
+    0.004051454437766616,
+    0.9890724954137525
+   ]
+  },
+  {
+   "case": "case 2",
+   "config": "Wheat Seeds|SVM",
+   "dataset": "Wheat Seeds",
+   "model": "SVM",
+   "index": 18,
+   "margin": 0.0669238410977544,
+   "flat": false,
+   "truth_norm": 1.3105609132275677,
+   "median_norm": 1.465818075970065,
+   "n_features": null,
+   "monotone": false,
+   "retrace": 0.33475886390102494,
+   "transect_lim": 4.258269320666333,
+   "f_range": [
+    0.05508485804175764,
+    0.9954417950470742
+   ]
+  },
+  {
+   "case": "case 2",
+   "config": "Pima Indian Diabetes|SVM",
+   "dataset": "Pima Indian Diabetes",
+   "model": "SVM",
+   "index": 2,
+   "margin": 0.06436915836906087,
+   "flat": false,
+   "truth_norm": 0.7316864395003427,
+   "median_norm": 1.3701649684854127,
+   "n_features": null,
+   "monotone": false,
+   "retrace": 0.27001848168468756,
+   "transect_lim": 4.552281388155439,
+   "f_range": [
+    0.08681791578984421,
+    0.926539187567269
+   ]
+  },
+  {
+   "case": "case 2",
+   "config": "Pima Indian Diabetes|SVM",
+   "dataset": "Pima Indian Diabetes",
+   "model": "SVM",
+   "index": 1,
+   "margin": 0.056901017656424746,
+   "flat": false,
+   "truth_norm": 0.7105413753299549,
+   "median_norm": 1.3701649684854127,
+   "n_features": null,
+   "monotone": false,
+   "retrace": 0.29063575083092275,
+   "transect_lim": 4.552281388155439,
+   "f_range": [
+    0.0868176006230657,
+    0.9212703344162296
+   ]
+  },
+  {
+   "case": "case 2",
+   "config": "Gaussian|SVM",
+   "dataset": "Gaussian",
+   "model": "SVM",
+   "index": 5,
+   "margin": 0.05532057356697806,
+   "flat": false,
+   "truth_norm": 3.1470300643913025,
+   "median_norm": 1.6751847112215357,
+   "n_features": null,
+   "monotone": false,
+   "retrace": 0.4176581009760767,
+   "transect_lim": 2.2761406940777196,
+   "f_range": [
+    0.0031257895829999924,
+    0.9811767785567324
+   ]
+  },
+  {
+   "case": "case 2",
+   "config": "Wheat Seeds|SVM",
+   "dataset": "Wheat Seeds",
+   "model": "SVM",
+   "index": 1,
+   "margin": 0.05155577414605439,
+   "flat": false,
+   "truth_norm": 1.2733943618390704,
+   "median_norm": 1.465818075970065,
+   "n_features": null,
+   "monotone": false,
+   "retrace": 0.475645501813619,
+   "transect_lim": 4.258269320666333,
+   "f_range": [
+    0.004051577838451276,
+    0.9717718356390443
+   ]
+  },
+  {
+   "case": "case 2",
+   "config": "Wheat Seeds|SVM",
+   "dataset": "Wheat Seeds",
+   "model": "SVM",
+   "index": 19,
+   "margin": 0.05020993890842407,
+   "flat": false,
+   "truth_norm": 1.3652311409845628,
+   "median_norm": 1.465818075970065,
+   "n_features": null,
+   "monotone": false,
+   "retrace": 0.3558881369719158,
+   "transect_lim": 4.258269320666333,
+   "f_range": [
+    0.18609939280991866,
+    0.9954421808883178
+   ]
+  },
+  {
+   "case": "case 2",
+   "config": "Pima Indian Diabetes|SVM",
+   "dataset": "Pima Indian Diabetes",
+   "model": "SVM",
+   "index": 19,
+   "margin": 0.04867730761713518,
+   "flat": false,
+   "truth_norm": 1.0069475830660475,
+   "median_norm": 1.3701649684854127,
+   "n_features": null,
+   "monotone": false,
+   "retrace": 0.458273927493306,
+   "transect_lim": 4.552281388155439,
+   "f_range": [
+    0.11454788614909059,
+    0.9266213728526124
+   ]
+  },
+  {
+   "case": "case 2",
+   "config": "Pima Indian Diabetes|SVM",
+   "dataset": "Pima Indian Diabetes",
+   "model": "SVM",
+   "index": 0,
+   "margin": 0.04773515425775665,
+   "flat": false,
+   "truth_norm": 0.7150935473048717,
+   "median_norm": 1.3701649684854127,
+   "n_features": null,
+   "monotone": false,
+   "retrace": 0.3087359500822161,
+   "transect_lim": 4.552281388155439,
+   "f_range": [
+    0.08681730268194446,
+    0.9058465870931373
+   ]
+  }
+ ]
+}

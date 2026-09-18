@@ -9,13 +9,19 @@ cd "$(dirname "$0")"
 
 PAPER=${1:-$HOME/Repos/Overleaf/Logit-LIME}
 
+# tables that take arguments, run before the plain loop below
+echo "=== analysis/table_fidelity_proxy.py --extended"
+uv run python analysis/table_fidelity_proxy.py --extended > /dev/null
+
 for f in figures/fig_mechanism.py figures/fig_diagnostic.py figures/fig_spatial.py \
          figures/fig_groups.py figures/fig_kernel.py figures/fig_setup.py \
          figures/fig_justification.py figures/fig_group_gallery.py figures/fig_digits.py \
          figures/fig_patches.py \
          figures/fig_fidelity_explanation.py figures/fig_taylor_tradeoff.py \
+         figures/fig_instruments.py figures/fig_blind.py \
          analysis/table_brier_kl.py analysis/table_groups.py analysis/table_fidelity.py \
-         analysis/table_example_explanation.py analysis/table_gradient_truth.py; do
+         analysis/table_example_explanation.py analysis/table_gradient_truth.py \
+         analysis/table_instruments.py; do
     echo "=== $f"
     uv run python "$f" > /dev/null
 done

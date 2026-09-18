@@ -21,7 +21,13 @@ see this effect, because thresholding at 0.5 throws away exactly the calibration
 Logit-LIME changes. If that is right, the fidelity cells should show the two surrogates
 as near enough identical while the Brier cells show orders of magnitude.
 
-usage:  python sweep_fidelity.py <output.json> [seed]
+The extension of the same 2x2 to the five extended-grid black boxes that have gradient
+ground truth but were never swept here (--models, writing a separate file) is what lets
+the join in analysis/analyse_fidelity_explanation.py be tested on configurations that were
+not looked at while the claim was being formed.  It writes its own output file rather than
+adding to this one: results_fidelity.json is the registered 168 and stays that way.
+
+usage:  python sweep_fidelity.py <output.json> [--seed N] [--models A,B]
 '''
 # author: Matt Clifford <matt.clifford@bristol.ac.uk>
 
@@ -37,8 +43,13 @@ import warnings
 import numpy as np
 import clime
 from sweeps.sweep import DATASETS, MODELS, GROUP_OF, MODEL_GROUPS, EXPLAINERS, DATA_PARAMS
+from sweeps.sweep_extended import NEW_GROUPS
 
 warnings.filterwarnings('ignore')
+
+# the extended-grid black boxes carry their own group labels; 'Bayes Optimal' is
+# quadratic by construction, as in sweep_gradient_truth.py
+GROUPS = {**GROUP_OF, **NEW_GROUPS, 'Bayes Optimal': 'B quadratic'}
 
 # (metric, evaluation data) - the four cells, named for the table
 CELLS = {
@@ -56,15 +67,17 @@ def opts(dataset, model, explainer, metric, eval_data):
             'evaluation points': 'between_class_means', 'evaluation data': eval_data}
 
 
-def run(out_path, seed=None):
+def run(out_path, seed=None, models=None):
     out_path = paths.results(out_path)   # a bare name lands in results/
+    models = models or MODELS
 
     if seed is not None:
         clime.RANDOM_SEED = int(seed)
         np.random.seed(int(seed))
 
     out = {'_meta': {'seed': seed if seed is not None else clime.RANDOM_SEED,
-                     'groups': MODEL_GROUPS, 'cells': {k: list(v) for k, v in CELLS.items()}}}
+                     'groups': MODEL_GROUPS, 'models': models,
+                     'cells': {k: list(v) for k, v in CELLS.items()}}}
     if os.path.exists(out_path):
         done = json.load(open(out_path))
         out.update({k: v for k, v in done.items()
@@ -72,11 +85,11 @@ def run(out_path, seed=None):
         print(f'resuming: {len(out)-1} configurations already done', flush=True)
 
     for dataset in DATASETS:
-        for model in MODELS:
+        for model in models:
             key = f'{dataset}|{model}'
             if key in out:
                 continue
-            entry = {'group': GROUP_OF[model], 'cells': {}}
+            entry = {'group': GROUPS.get(model, 'unassigned'), 'cells': {}}
             try:
                 for cell, (metric, eval_data) in CELLS.items():
                     entry['cells'][cell] = {}
@@ -112,4 +125,11 @@ def run(out_path, seed=None):
 
 
 if __name__ == '__main__':
-    run(sys.argv[1], seed=int(sys.argv[2]) if len(sys.argv) > 2 else None)
+    import argparse
+    p = argparse.ArgumentParser()
+    p.add_argument('out')
+    p.add_argument('--seed', type=int, default=None)
+    p.add_argument('--models', type=str, default=None,
+                   help='comma separated subset of black boxes (default: the registered 12)')
+    a = p.parse_args()
+    run(a.out, seed=a.seed, models=a.models.split(',') if a.models else None)
