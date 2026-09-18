@@ -79,14 +79,34 @@ wrong.
 | `sweep_fidelity.py` | `results_fidelity.json` | the 2×2 of (Brier vs fidelity) × (local sample vs test set) — whether the result survives the CIKM'23 evaluation protocol |
 | `sweep_seeds.py` | `results_seed*.json` | a subset repeated under five random seeds |
 
-Two figure scripts do not read a `results/*.json` either, re-running a single configuration
-instead: `figures/fig_justification.py` and `figures/fig_digits.py`. The latter is the only
-figure here on data whose features have a spatial layout — `Digits 3 vs 8`, an 8×8 pixel
-grid registered in `clime/data/loaders/sklearn_toy.py` — which lets an explanation be shown
-as an image rather than a bar chart. It explains a logistic black box, so `coef_` is the
-ground truth exactly as in `sweep_ground_truth.py`, and it draws each surrogate's signed
-error against that truth: at a cosine of ~0.9 the two explanations look alike side by side,
-and the error maps are what actually separate them.
+Three figure scripts do not read a `results/*.json` either, re-running a single
+configuration instead: `figures/fig_justification.py`, `figures/fig_digits.py` and
+`figures/fig_patches.py`. The last two are the image-domain pair behind the paper's
+"Images: pixels and the interpretable domain" subsection, both on `Digits 3 vs 8` — an 8×8
+pixel grid registered in `clime/data/loaders/sklearn_toy.py`, the only registered dataset
+whose features have a spatial layout. Both explain a logistic black box, so a ground truth
+is available exactly as in `sweep_ground_truth.py`.
+
+`fig_digits.py` explains in raw pixels and draws each surrogate's signed error against the
+truth, because at a cosine of ~0.9 the two explanations look alike side by side and the
+error maps are what actually separate them. It also shows real examples of both classes
+first: a coefficient map means nothing until the reader can see what a 3 and an 8 look like.
+
+**Draw the image panels in raw pixel values, not standardised ones**, and note that this is
+not a colour-scale problem — two versions of the figure failed before this was understood.
+Standardising divides each pixel by its own standard deviation. The nearly-always-blank
+border pixels have a tiny one, so a stray mark there reaches +12 while the strokes that draw
+the digit sit between -1 and +3; on a min/max scale those outliers own the colourmap and
+every digit renders as flat grey. Switching to a percentile scale restores the contrast but
+*not* the shapes, because dividing each pixel separately has already removed the shared
+stroke structure that makes a 3 look like a 3 — the information is gone from the values, not
+from the colour range. So the script reconstructs the pipeline's standardisation from the
+training split and inverts it (which reproduces the pipeline's own arrays exactly, max
+difference 0) and draws the images in pixel units. The coefficient panels stay in the
+standardised units the surrogate was fitted in.
+
+`fig_patches.py` is the interpretable-domain version, and re-runs the configuration that
+`sweep_patches.py` sweeps.
 
 One analysis script does not read a `results/*.json`:
 `analysis/table_example_explanation.py` re-runs a single configuration to print one
