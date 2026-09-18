@@ -551,7 +551,7 @@ recovery in high dimensions is hard regardless of the space fitted in.
 **The same result as an image (added 2026-09-17).** `Digits 3 vs 8` — 8×8 raw pixels, 64
 features, registered in `clime/data/loaders/sklearn_toy.py` — is the only dataset here whose
 features have a spatial layout, so an explanation can be drawn as an image instead of a bar
-chart (`experiments/logit_lime/figures/fig_digits.py`, paper Figure 9). With a logistic
+chart (`experiments/logit_lime/figures/fig_digits.py`, paper Figure 8). With a logistic
 black box the coefficients are the ground truth exactly as above: mean cosine over 20 query
 points is **0.905 standard against 0.997 Logit-LIME**, with Logit-LIME closer at **20/20**.
 
@@ -571,7 +571,9 @@ configurations (Arrhythmia, 279 features), not a general failure of vector recov
 **Does the effect survive the interpretable-domain transform? (added 2026-09-17)** The
 paper fits every surrogate in the raw feature space and lists this as future work.
 `sweeps/sweep_patches.py` answers it with LIME's actual image pipeline: 2×2 patches over the
-8×8 digit, so the surrogate sees **16 binary indicators** rather than 64 pixels.
+8×8 digit, so the surrogate sees **16 binary indicators** rather than 64 pixels
+(`figures/fig_patches.py`, paper Figure 9). Both image results now sit in one paper
+subsection, "Images: pixels and the interpretable domain".
 
 The question is answerable because the ground truth survives the transform in closed form.
 With `x(z) = b + Σⱼ zⱼ(qⱼ − bⱼ)`, a black box with linear log-odds satisfies
