@@ -80,6 +80,7 @@ wrong.
 | `sweep_fidelity.py --models …` | `results_fidelity_extended.json` | the same 2×2 for the five extended-grid black boxes that have a gradient truth but were never swept here, run blind against the third pre-registration. **Kept in its own file**: `results_fidelity.json` is the registered 168 and stays that way |
 | `sweep_instruments.py` | `results_instruments.json` | what each instrument responds to, on a family of surrogates whose error is prescribed rather than fitted (`common/surrogates.py`) — the arithmetic behind the claim that a 0.5 threshold cannot see confidence |
 | `sweep_null.py` | `results_null.json` | the base rate: what an explainer that explains nothing scores under each instrument |
+| `sweep_range.py` | `results_range.json` | how far the *reported coefficient* can be carried before a standard LIME surrogate stops being a probability, against the width of the kernel that defined the neighbourhood — plus the flip distance each surrogate implies, against the black box's own |
 | `sweep_seeds.py` | `results_seed*.json` | a subset repeated under five random seeds |
 
 The instrument and null sweeps exist because every fidelity number elsewhere is reported
@@ -92,6 +93,17 @@ sweeps walk the same 20 points with the same seeds; the join asserts their local
 scores agree before trusting it), and `analysis/assess_blind.py`, which scores the third
 pre-registration with the blind 70 configurations kept separate from the 84 that had
 already been seen.
+
+`sweep_range.py` is about a different question from every other sweep here: not how well a
+surrogate reproduces the black box, but what the number it hands the user actually claims.
+A standard LIME surrogate is a linear model of a probability, so it *is* a probability only
+inside a slab of width `1/||beta||` about its own boundary; whether that slab is narrower
+than the neighbourhood it was fitted on is an empirical question, and this answers it over
+the registered grid. Its analysis is `analysis/analyse_range.py` (fourth pre-registration),
+and `figures/fig_reading.py` and `analysis/table_reading.py` are the single-configuration
+illustration. The flip-distance rows are restricted to group A and to query points where
+the black box crosses its own boundary exactly once along the feature — the same
+non-monotonicity trap the worked-example selection hit, counted rather than assumed away.
 
 Choosing the worked example is itself scripted, in `analysis/select_example.py` and
 `analysis/check_example.py`, and both log what they rejected. The filter that does the most

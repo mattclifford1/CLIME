@@ -18,10 +18,11 @@ for f in figures/fig_mechanism.py figures/fig_diagnostic.py figures/fig_spatial.
          figures/fig_justification.py figures/fig_group_gallery.py figures/fig_digits.py \
          figures/fig_patches.py \
          figures/fig_fidelity_explanation.py figures/fig_taylor_tradeoff.py \
-         figures/fig_instruments.py figures/fig_blind.py \
+         figures/fig_instruments.py figures/fig_blind.py figures/fig_reading.py \
          analysis/table_brier_kl.py analysis/table_groups.py analysis/table_fidelity.py \
          analysis/table_example_explanation.py analysis/table_gradient_truth.py \
-         analysis/table_instruments.py; do
+         analysis/table_instruments.py analysis/table_reading.py \
+         analysis/analyse_range.py; do
     echo "=== $f"
     uv run python "$f" > /dev/null
 done

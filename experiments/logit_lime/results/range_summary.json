@@ -1,0 +1,386 @@
+{
+ "n_configs": 168,
+ "n_points": 3360,
+ "mass_median": 0.13553869010532216,
+ "mass_q1": 0.023905219283076585,
+ "mass_q3": 0.23295245797718958,
+ "mass_below_002": 0.23660714285714285,
+ "reach_inside_k": 0.8083333333333333,
+ "by_confidence": [
+  {
+   "lo": 0,
+   "hi": 1,
+   "n": 582,
+   "mass_median": 0.00695167561616793,
+   "reach_inside_k": 0.5051546391752577
+  },
+  {
+   "lo": 1,
+   "hi": 2,
+   "n": 493,
+   "mass_median": 0.0509292384073097,
+   "reach_inside_k": 0.7018255578093306
+  },
+  {
+   "lo": 2,
+   "hi": 4,
+   "n": 638,
+   "mass_median": 0.09001059053088473,
+   "reach_inside_k": 0.841692789968652
+  },
+  {
+   "lo": 4,
+   "hi": null,
+   "n": 1647,
+   "mass_median": 0.2352260683182885,
+   "reach_inside_k": 0.9344262295081968
+  }
+ ],
+ "rho_confidence_mass": 0.5722238534744148,
+ "base_error_std": 0.08587975534121003,
+ "base_error_log": 0.00510559360559225,
+ "group": {
+  "A linear": {
+   "n": 28,
+   "mass": [
+    0.08052103430358687,
+    0.18816621542657117,
+    0.27813143954228314
+   ],
+   "inside": 0.9089285714285714,
+   "span_std": 2.715653692166353,
+   "span_log": 1.006167898176955
+  },
+  "B quadratic": {
+   "n": 28,
+   "mass": [
+    0.07380609515331019,
+    0.17702799484935128,
+    0.2809869066265024
+   ],
+   "inside": 0.8375,
+   "span_std": 11.729679715482138,
+   "span_log": 1.7366575068800572
+  },
+  "C smooth": {
+   "n": 28,
+   "mass": [
+    0.023976606500256622,
+    0.1274257538089316,
+    0.2167291772119274
+   ],
+   "inside": 0.8125,
+   "span_std": 6.61645047889619,
+   "span_log": 1.8746363617877828
+  },
+  "D piecewise constant": {
+   "n": 42,
+   "mass": [
+    0.017520200277827594,
+    0.09629978063800579,
+    0.21099592088825142
+   ],
+   "inside": 0.8130952380952381,
+   "span_std": 2.200879007184401,
+   "span_log": 2.524919205333651
+  },
+  "E calibrated forest": {
+   "n": 28,
+   "mass": [
+    0.0019196692766007316,
+    0.05320327545895309,
+    0.1774036669689723
+   ],
+   "inside": 0.6589285714285714,
+   "span_std": 6.570172077617775,
+   "span_log": 6.393700715802226
+  },
+  "unassigned": {
+   "n": 14,
+   "mass": [
+    0.07990112515235581,
+    0.15571798690261843,
+    0.23077903740513114
+   ],
+   "inside": 0.825,
+   "span_std": 10.164377934921639,
+   "span_log": 6.3642047965197515
+  }
+ },
+ "P3_std_span_ge5": 0.34615384615384615,
+ "P3_log_span_le15": 1.0,
+ "P3_span_std_median_all": 10.2956249917207,
+ "P3_span_log_median_all": 1.0116983100501467,
+ "P3_std_span_ge5_all_points": 0.5714285714285714,
+ "P3_flat_configs": [
+  "Abalone Gender|LDA",
+  "Abalone Gender|Logistic",
+  "Circles|LDA",
+  "Circles|Logistic",
+  "Credit Scoring 1|LDA",
+  "Credit Scoring 1|Logistic",
+  "Direct Marketing|LDA",
+  "Direct Marketing|Logistic"
+ ],
+ "P3_per_config": [
+  {
+   "config": "Abalone Gender|LDA",
+   "f_range": 0.41218880264284397,
+   "n_sat": 0,
+   "span_std_all": 1.317643451297842,
+   "span_std_uns": 1.317643451297842,
+   "span_log_all": 1.0006607597205879,
+   "span_log_uns": 1.0006607597205879
+  },
+  {
+   "config": "Abalone Gender|Logistic",
+   "f_range": 0.4192559921814455,
+   "n_sat": 0,
+   "span_std_all": 1.330309167830793,
+   "span_std_uns": 1.330309167830793,
+   "span_log_all": 1.0005404301448637,
+   "span_log_uns": 1.0005404301448637
+  },
+  {
+   "config": "Banknote Authentication|LDA",
+   "f_range": 1.0,
+   "n_sat": 20,
+   "span_std_all": 659.1725783831853,
+   "span_std_uns": NaN,
+   "span_log_all": 44.90632270323723,
+   "span_log_uns": NaN
+  },
+  {
+   "config": "Banknote Authentication|Logistic",
+   "f_range": 0.9999994147988001,
+   "n_sat": 5,
+   "span_std_all": 231.74642033883623,
+   "span_std_uns": 27.761323660375933,
+   "span_log_all": 1.2834781651160114,
+   "span_log_uns": 1.0809897483966322
+  },
+  {
+   "config": "Breast Cancer|LDA",
+   "f_range": 0.9999991973077779,
+   "n_sat": 11,
+   "span_std_all": 11.461395929096046,
+   "span_std_uns": 1.5443800351881203,
+   "span_log_all": 1.3605681672051335,
+   "span_log_uns": 1.037077086719267
+  },
+  {
+   "config": "Breast Cancer|Logistic",
+   "f_range": 0.9999973149031747,
+   "n_sat": 12,
+   "span_std_all": 11.530811647507612,
+   "span_std_uns": 1.4617846882132117,
+   "span_log_all": 1.4376045264502608,
+   "span_log_uns": 1.0372007858893892
+  },
+  {
+   "config": "Circles|LDA",
+   "f_range": 0.009806769178040797,
+   "n_sat": 0,
+   "span_std_all": 1.000098893690231,
+   "span_std_uns": 1.000098893690231,
+   "span_log_all": 1.0000122121013746,
+   "span_log_uns": 1.0000122121013746
+  },
+  {
+   "config": "Circles|Logistic",
+   "f_range": 0.009748488001649347,
+   "n_sat": 0,
+   "span_std_all": 1.0000977591656248,
+   "span_std_uns": 1.0000977591656248,
+   "span_log_all": 1.0000122127016229,
+   "span_log_uns": 1.0000122127016229
+  },
+  {
+   "config": "Credit Scoring 1|LDA",
+   "f_range": 0.03873072766491407,
+   "n_sat": 0,
+   "span_std_all": 1.966101829536306,
+   "span_std_uns": 1.966101829536306,
+   "span_log_all": 1.0167130036995817,
+   "span_log_uns": 1.0167130036995817
+  },
+  {
+   "config": "Credit Scoring 1|Logistic",
+   "f_range": 0.03928819390365939,
+   "n_sat": 0,
+   "span_std_all": 1.971511829396292,
+   "span_std_uns": 1.971511829396292,
+   "span_log_all": 1.0066836164007116,
+   "span_log_uns": 1.0066836164007116
+  },
+  {
+   "config": "Direct Marketing|LDA",
+   "f_range": 0.026072967973316374,
+   "n_sat": 0,
+   "span_std_all": 1.0346261103515795,
+   "span_std_uns": 1.0346261103515795,
+   "span_log_all": 1.000024179682949,
+   "span_log_uns": 1.000024179682949
+  },
+  {
+   "config": "Direct Marketing|Logistic",
+   "f_range": 0.012377636545464588,
+   "n_sat": 0,
+   "span_std_all": 1.0304853105615361,
+   "span_std_uns": 1.0304853105615361,
+   "span_log_all": 1.000027375920714,
+   "span_log_uns": 1.000027375920714
+  },
+  {
+   "config": "Gaussian|LDA",
+   "f_range": 0.9999993465867224,
+   "n_sat": 3,
+   "span_std_all": 1181.105133359182,
+   "span_std_uns": 158.66315331892375,
+   "span_log_all": 1.2120164182656756,
+   "span_log_uns": 1.0983988245851561
+  },
+  {
+   "config": "Gaussian|Logistic",
+   "f_range": 0.9999962361696035,
+   "n_sat": 0,
+   "span_std_all": 788.6067844695947,
+   "span_std_uns": 788.6067844695947,
+   "span_log_all": 1.069660854760261,
+   "span_log_uns": 1.069660854760261
+  },
+  {
+   "config": "Ionosphere|LDA",
+   "f_range": 0.9849200716959446,
+   "n_sat": 2,
+   "span_std_all": 94.79285850600293,
+   "span_std_uns": 28.56314737371628,
+   "span_log_all": 1.0540209909853933,
+   "span_log_uns": 1.022532134261241
+  },
+  {
+   "config": "Ionosphere|Logistic",
+   "f_range": 0.9460887400989004,
+   "n_sat": 2,
+   "span_std_all": 203.48541726844658,
+   "span_std_uns": 50.99968923667392,
+   "span_log_all": 1.0726249870059332,
+   "span_log_uns": 1.0266243703589761
+  },
+  {
+   "config": "Iris|LDA",
+   "f_range": 0.9162713159309648,
+   "n_sat": 0,
+   "span_std_all": 2.8557737593805537,
+   "span_std_uns": 2.8557737593805537,
+   "span_log_all": 1.0005698490103307,
+   "span_log_uns": 1.0005698490103307
+  },
+  {
+   "config": "Iris|Logistic",
+   "f_range": 0.8479871923527086,
+   "n_sat": 0,
+   "span_std_all": 2.5755336249521528,
+   "span_std_uns": 2.5755336249521528,
+   "span_log_all": 1.0001783175528123,
+   "span_log_uns": 1.0001783175528123
+  },
+  {
+   "config": "Moons|LDA",
+   "f_range": 0.9997822025102682,
+   "n_sat": 0,
+   "span_std_all": 96.0069077565231,
+   "span_std_uns": 96.0069077565231,
+   "span_log_all": 1.0056521799531986,
+   "span_log_uns": 1.0056521799531986
+  },
+  {
+   "config": "Moons|Logistic",
+   "f_range": 0.9973745171262475,
+   "n_sat": 0,
+   "span_std_all": 35.79382975292953,
+   "span_std_uns": 35.79382975292953,
+   "span_log_all": 1.000095898083633,
+   "span_log_uns": 1.000095898083633
+  },
+  {
+   "config": "Pima Indian Diabetes|LDA",
+   "f_range": 0.9385861548455053,
+   "n_sat": 0,
+   "span_std_all": 4.931214241364813,
+   "span_std_uns": 4.931214241364813,
+   "span_log_all": 1.0000189343552697,
+   "span_log_uns": 1.0000189343552697
+  },
+  {
+   "config": "Pima Indian Diabetes|Logistic",
+   "f_range": 0.9321816212201468,
+   "n_sat": 0,
+   "span_std_all": 4.586439572576997,
+   "span_std_uns": 4.586439572576997,
+   "span_log_all": 1.0000186437550902,
+   "span_log_uns": 1.0000186437550902
+  },
+  {
+   "config": "Sonar Rocks vs Mines|LDA",
+   "f_range": 0.9978452970460213,
+   "n_sat": 5,
+   "span_std_all": 7.111115268467741,
+   "span_std_uns": 2.0288366698714104,
+   "span_log_all": 1.2676574538784087,
+   "span_log_uns": 1.0513796860260767
+  },
+  {
+   "config": "Sonar Rocks vs Mines|Logistic",
+   "f_range": 0.998399052794533,
+   "n_sat": 4,
+   "span_std_all": 19.25781770431575,
+   "span_std_uns": 4.789397723964486,
+   "span_log_all": 1.2248373887497843,
+   "span_log_uns": 1.062178220350101
+  },
+  {
+   "config": "Wheat Seeds|LDA",
+   "f_range": 0.9999999835728902,
+   "n_sat": 17,
+   "span_std_all": 43.60738305488878,
+   "span_std_uns": 1.065217065717525,
+   "span_log_all": 3.668769598799121,
+   "span_log_uns": 1.0089356819790896
+  },
+  {
+   "config": "Wheat Seeds|Logistic",
+   "f_range": 0.9993329627624657,
+   "n_sat": 0,
+   "span_std_all": 17.69105486274135,
+   "span_std_uns": 17.69105486274135,
+   "span_log_all": 1.0042894192507457,
+   "span_log_uns": 1.0042894192507457
+  },
+  {
+   "config": "Wine|LDA",
+   "f_range": 0.999999999999773,
+   "n_sat": 20,
+   "span_std_all": 13.324081365555676,
+   "span_std_uns": NaN,
+   "span_log_all": 4.608212515639544,
+   "span_log_uns": NaN
+  },
+  {
+   "config": "Wine|Logistic",
+   "f_range": 0.9998391802473334,
+   "n_sat": 0,
+   "span_std_all": 9.129854054345355,
+   "span_std_uns": 9.129854054345355,
+   "span_log_all": 1.0262694537248154,
+   "span_log_uns": 1.0262694537248154
+  }
+ ],
+ "P4_n": 459,
+ "P4_dropped": 0,
+ "P4_rho": 0.88242640388856,
+ "P4_log_within10": 0.8540305010893247,
+ "P4_std_within10": 0.33986928104575165,
+ "P4_std_median_ratio": 1.2599271070220877,
+ "P4_std_p90_ratio": 4.500061002484154
+}

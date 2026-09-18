@@ -25,7 +25,7 @@ rm -f results/results_taxonomy.json results/results_extended.json \
       results/results_gradient_truth.json results/results_taylor.json \
       results/results_fidelity.json results/results_seed*.json \
       results/results_fidelity_extended.json results/results_instruments.json \
-      results/results_null.json
+      results/results_null.json results/results_range.json
 
 run () {
     echo "=== $1 ==="
@@ -51,6 +51,7 @@ run sweeps/sweep_fidelity.py results_fidelity_extended.json \
     --models 'Bagged Logistic,Bayes Optimal,Nearest Class Mean,Polynomial Logistic (deg 2),RBF Logistic (Nystroem)'
 run sweeps/sweep_instruments.py results_instruments.json
 run sweeps/sweep_null.py results_null.json
+run sweeps/sweep_range.py results_range.json
 run sweeps/sweep_seeds.py results
 
 echo "=== ALL SWEEPS COMPLETE ==="

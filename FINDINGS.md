@@ -784,6 +784,60 @@ for groups D/E. What it establishes is the shape of the problem: if what the use
 a local slope, then 10,000 samples through a kernel and a regularised regression is an
 indirect and measurably lossy way to estimate it.
 
+#### What a probability coefficient claims (registered 2026-09-18, fourth registration)
+
+A separate question from fidelity, and deliberately kept separate in the write-up
+(`sections/03-motivation.tex`, `sec:reading`): not how well the surrogate reproduces the
+black box, but what the *number the user is handed* asserts. Standard LIME reports a
+probability per unit feature. Its surrogate is a linear model of a probability, so it **is**
+a probability only inside a slab of half-width `(1-g(q))/||beta||` about its own boundary.
+Whether that matters is an empirical question about how the slab compares with the
+neighbourhood the surrogate was fitted on, and `sweeps/sweep_range.py` answers it over the
+registered 168.
+
+**The illustration** (`figures/fig_reading.py`, `analysis/table_reading.py`) is Gaussian |
+Logistic at query point 11 — the same neighbourhood as Figure 1, f(q) = 0.85. There the
+standard surrogate's output leaves [0,1] at 0.82 sd from q, which is 0.78 of the kernel
+width; 15% of the kernel-weighted mass of its **own training sample** is where its unclipped
+output exceeds 1. It starts from g(q) = 0.68 where f(q) = 0.85, and it is a chord, not a
+tangent (0.43 against 0.96 at the boundary point). Along the query line the black box's
+log-odds are exactly linear — the true importance vector never moves — yet the standard
+||beta|| falls 789x while Logit-LIME's moves by 7%.
+
+**On the grid** (3,360 query points): median 13.6% of the training mass outside [0,1],
+reach < k at 80.8% of points. Two registered clauses failed, and the reason is the better
+result: **the defect is a function of the black box's confidence, not a constant.** Median
+mass by |logit f(q)|: 0.007 (< 1), 0.051 (1–2), 0.090 (2–4), **0.235 (> 4)**; Spearman
++0.57. Where a model never commits, ||beta|| is small, the slab is wide and the reading
+survives. The reading breaks exactly where a confident prediction is the reason someone
+asked for an explanation.
+
+**The counterfactual.** For group A, where the truth is analytic and constant, the flip
+distance a coefficient implies is right at the boundary and degrades with confidence:
+Spearman +0.88 against |logit f(q)| over 459 points, within 10% of the truth at 34% of them
+against Logit-LIME's 85%, overstating by 1.26x at the median and 4.50x at the 90th
+percentile. On the illustration configuration it is exact at f(q) = 0.58 (-0.10 vs -0.11)
+and says 10.6 sd when 2.5 suffice at f(q) = 0.999.
+
+**What failed.** P1b (mass < 0.02 at fewer than 15% of points; it is 24%) and P3a (standard
+span >= 5x in >= 90% of group A; it is 35%). P3a turns on two choices the registration made
+itself: eight of the 28 group A configurations are a linear model on data it cannot separate
+(Abalone Gender, Circles, Credit Scoring 1, Direct Marketing), where f spans less than 0.5
+over the whole query line; and excluding saturated points — done to protect Logit-LIME from
+`logit_ridge`'s squash bound — removes the confident points where the standard coefficient
+collapses. Over all points the group A medians are 10.3x against 1.01x. P4b missed narrowly
+(85% against 90%). All of this is in `PREREGISTRATION.md` under the fourth registration.
+
+**Do not conflate this with the fidelity argument.** Leaving [0,1] is *not* why Logit-LIME
+wins on Brier: the SVM column of Figure 1 leaves [0,1] just as badly and gains 1.4x. The
+reading is well posed everywhere; the fit is only as good as the log-odds are linear.
+
+**Kernel-width dependence is real and was registered in advance.** Mass stays in 0.083–0.282
+over a twentyfold range of k. The one cell where it vanishes is the 2-D Gaussian at the
+narrowest kernel (reach < k at 0% of points), because a narrow kernel makes the chord
+approach the tangent, whose slab is wider in units of k. That is the mechanism, not an
+exception.
+
 ---
 
 ## 5. Thread 3 — aLIMEgn

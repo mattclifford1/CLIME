@@ -247,3 +247,111 @@ and the claim must be scoped to confident query points rather than stated genera
    rate of the shape in the caption.
 6. The shape must survive ≥ 4 of 5 seeds and be present at 3 kernel widths. Log every
    candidate tried, including the rejected ones.
+
+---
+
+# Fourth pre-registration: what a probability coefficient claims
+
+Written **2026-09-18**, from the plan in `PLAN_probability_space_motivation.md`. Results
+go in `results/results_range.json`.
+
+**Status when written.** The ad-hoc probe in §2 of that plan has already seen
+`Gaussian|Logistic`, `Gaussian|MLP`, `Breast Cancer|Logistic` and `Moons|SVM` — four of
+the 168 configurations, on the quantities below. Those four are a recomputation. The other
+164 are blind. The figure and table are illustrations of one configuration and are not
+tests of anything.
+
+## The claim
+
+The paper argues for logit space on fidelity grounds, and separately asserts in
+`sec:logitlime` that a log-odds coefficient is the better-posed *reading*. That assertion
+is currently argued from definitions alone. It should be measurable, because the defect it
+names is arithmetic:
+
+> Standard LIME reports a probability per unit feature. Its surrogate is a linear model of
+> a probability, so the surrogate is a probability only inside a slab of width
+> $1/\lVert\beta\rVert$ about its own decision boundary. If that slab is narrower than the
+> neighbourhood the surrogate was fitted on, then the reading the user is given expires
+> inside the region it purports to describe — and no amount of fit quality repairs it.
+
+What this does **not** say: that leaving $[0,1]$ is why Logit-LIME wins on fidelity. It is
+not (the SVM column of Figure~\ref{fig:mechanism} leaves $[0,1]$ just as badly and gains
+$1.4\times$). The two arguments are independent and the section must keep them apart.
+
+## Predictions, over the 168 registered configurations $\times$ 20 query points
+
+1. **The slab is narrow.** The median kernel-weighted fraction of the surrogate's own
+   training sample on which its unclipped output is not a probability is $\ge 0.10$; the
+   fraction of query points where that mass is below $0.02$ is $< 15\%$.
+2. **It expires inside its own neighbourhood.** The reach — the distance from $q$ toward
+   the confident side at which the standard surrogate's output leaves $[0,1]$ — is shorter
+   than the locality kernel width $k$ at $\ge 2/3$ of query points.
+3. **The reported size tracks saturation, not importance.** For group A (Logistic, LDA;
+   exactly linear log-odds, so the true importance vector is constant along the query
+   line), at non-saturated points: standard LIME's $\lVert\beta\rVert$ spans $\ge 5\times$
+   between its largest and smallest value in $\ge 90\%$ of configurations, and
+   Logit-LIME's spans $\le 1.5\times$ in $\ge 90\%$.
+4. **The implied counterfactual degrades with confidence.** For group A at non-saturated
+   points with exactly one boundary crossing along the feature: standard LIME's flip-distance
+   error ratio grows with $\lvert\logit f(q)\rvert$ (pooled Spearman $\ge 0.5$), while
+   Logit-LIME's flip distance is within $10\%$ of the truth at $\ge 90\%$ of points.
+
+Whatever comes out is reported. If 3 or 4 fail on LDA but not on logistic regression — LDA
+fits a larger slope and saturates sooner — the two are reported separately rather than the
+claim being dropped.
+
+Predictions 1 and 2 are about the standard surrogate alone and do not involve Logit-LIME,
+so they cannot be satisfied by choosing a favourable comparison. Prediction 3 is one-sided
+by construction (a constant truth), which is why it is restricted to group A: nowhere else
+is the truth known to be constant.
+
+## Robustness fixed in advance
+
+The reach and the mass both depend on the kernel width $k$ by construction — a narrower
+kernel makes the fitted chord more like a tangent and pushes the exit further out in units
+of $k$. The statistics are therefore recomputed for `Gaussian|Logistic` and
+`Breast Cancer|Logistic` at the extremes of `sweep_kernel.py`'s twentyfold range, and the
+range is reported in the caption rather than the single default.
+
+## Outcome (run 2026-09-18, `results/results_range.json`, 168 configurations)
+
+| | registered | measured | |
+|---|---|---|---|
+| P1a | median mass ≥ 0.10 | **0.136** (quartiles 0.024–0.233) | held |
+| P1b | mass < 0.02 at fewer than 15% of points | **23.7%** | **failed** |
+| P2 | reach < k at ≥ 2/3 of points | **80.8%** | held |
+| P3a | standard span ≥ 5× in ≥ 90% of group A | **35%** | **failed** |
+| P3b | Logit-LIME span ≤ 1.5× in ≥ 90% | **100%** | held |
+| P4a | standard flip error grows with confidence, ρ ≥ 0.5 | **+0.88** (n = 459) | held |
+| P4b | Logit-LIME flip within 10% of truth at ≥ 90% | **85%** | **failed, narrowly** |
+
+**P1b and P3a failed for the same reason, and it is worth more than the predictions were.**
+The slab's half-width is 1/‖β‖, so it is *wide* wherever the black box never commits. Split
+by the black box's own confidence at q, the median mass is 0.007 for |logit f(q)| < 1,
+0.051 for 1–2, 0.090 for 2–4 and 0.235 above 4 (Spearman +0.57 over all 3,360 points). The
+defect is not uniform over the grid; it concentrates exactly where a confident prediction is
+the reason an explanation was wanted. The registration should have predicted the gradient,
+not the average.
+
+P3a additionally turns on two choices made in the registration itself. Eight of the 28
+group A configurations are a linear model on data it cannot separate (Abalone Gender,
+Circles, Credit Scoring 1, Direct Marketing), where f spans less than 0.5 over the whole
+query line and no coefficient has a confidence range to track. And excluding saturated
+points — done to protect Logit-LIME from `logit_ridge`'s squash bound — removes the
+confident points where the standard coefficient collapses: over *all* points the group A
+median spans are 10.3× (standard) against 1.01× (Logit-LIME), and the ≥ 5× fraction is 57%
+rather than 35%. Both figures are reported; neither is offered as a restatement of P3a.
+
+P4b missed by 5 points of the registered 90%, on the same saturation boundary: the flip
+row is computed on the 459 unsaturated group A points with exactly one boundary crossing
+along the feature (101 of 560 dropped as saturated, 0 for the crossing count). The
+contrast it was testing is intact — standard LIME is within 10% of the truth at 34% of
+those points against Logit-LIME's 85%, and overstates the flip distance by 1.26× at the
+median and 4.50× at the ninetieth percentile.
+
+**Kernel-width robustness** (`results/results_range_kernel.json`, scales 0.15 / 0.75 / 3.0,
+Gaussian and Breast Cancer with a logistic black box): the mass stays between 0.083 and
+0.282. The single cell where the effect vanishes is the two-dimensional Gaussian at the
+narrowest kernel — mass 0.083, reach < k at 0% of points — which is the mechanism stated in
+the registration behaving as described, not a counterexample: a narrow kernel makes the
+fitted chord approach the tangent at q, whose slab is wider in units of k.
