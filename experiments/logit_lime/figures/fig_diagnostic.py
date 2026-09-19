@@ -1,6 +1,10 @@
 '''
 Figure 2 - the diagnostic, and the negative control.
-(a) log-odds linearity gap vs Logit-LIME's advantage: strong relationship.
+(a) how much of the black box's local log-odds variance a linear fit leaves unexplained,
+    1 - R²_logit, against Logit-LIME's advantage: strong relationship. Until 2026-09-19
+    this panel plotted the registered gap Δ = R²_logit - R²_p; the fifth registration
+    replaced it (PREREGISTRATION.md, analysis/analyse_diagnostic.py). On a log axis because
+    the informative range is the last few decimal places below R²_logit = 1.
 (b) probability saturation vs the same advantage: none. Calibrating a random forest
     removes saturation entirely without moving the gap or the advantage.
 
@@ -40,8 +44,13 @@ rows, _ = load(sys.argv[1] if len(sys.argv) > 1 else paths.results('results_taxo
 groups = [g for g in GROUP_ORDER if any(r['group'] == g for r in rows)]
 
 fig, axs = plt.subplots(1, 2, figsize=(6.9, 3.1))
+# exact fits (R²_logit = 1 to machine precision, group A) have no place on a log axis, so
+# the unexplained fraction is floored and those points drawn at the left edge
+UNEXPL_FLOOR = 1e-5
+for r in rows:
+    r['unexpl'] = max(1 - r['r2_logit'], UNEXPL_FLOOR) if np.isfinite(r['r2_logit']) else np.nan
 for ax, tag, xkey, xlabel in [
-        (axs[0], '(a)', 'gap', 'log-odds linearity gap   $R^2_{\\mathrm{logit}} - R^2_{p}$'),
+        (axs[0], '(a)', 'unexpl', 'unexplained log-odds variance  $1 - R^2_{\\mathrm{logit}}$'),
         (axs[1], '(b)', 'sat', 'fraction of saturated probabilities')]:
     ax.axhline(1, color=MUTED, lw=0.8, ls='--', zorder=1)
     # Degenerate configurations have no meaningful gap, so panel (a) drops them - from the
@@ -50,6 +59,8 @@ for ax, tag, xkey, xlabel in [
     # them: saturation is well defined for them, and they are exactly the heavily
     # saturated points that panel is about.
     ok = rows if xkey == 'sat' else [r for r in rows if r not in degenerate(rows)]
+    if xkey == 'unexpl':
+        ax.set_xscale('log')
     for g in groups:
         sub = [r for r in ok if r['group'] == g]
         ax.scatter([r[xkey] for r in sub], [r['adv'] for r in sub], s=17,
@@ -59,8 +70,11 @@ for ax, tag, xkey, xlabel in [
     ax.set_xlabel(xlabel)
     rho, pv = spearmanr([r[xkey] for r in ok], [r['adv'] for r in ok])
     # panel letter folded into the title: as a separate text it collides with it
-    ax.set_title(f"{tag}   Spearman $\\rho$ = {rho:.2f}   "
-                 f"($p$ = {pv:.1g},  $n$ = {len(ok)})", color=INK, pad=6, fontsize=8.5)
+    # no p-value: the configurations share datasets and are not independent draws, so a
+    # p computed from n configurations overstates the evidence. The dataset-level
+    # bootstrap interval is in tables/diagnostic.tex
+    ax.set_title(f"{tag}   Spearman $\\rho$ = {rho:.2f}   ($n$ = {len(ok)})",
+                 color=INK, pad=6, fontsize=8.5)
 
 axs[0].set_ylabel('Logit-LIME advantage\n(Brier ratio, $>1$ is better)')
 axs[1].tick_params(labelleft=False)
@@ -72,7 +86,7 @@ ADV_LIM = (10**-1.2, 10**7)
 n_clamped = int(sum(not (ADV_LIM[0] <= r['adv'] <= ADV_LIM[1]) for r in rows))
 for ax in axs:
     ax.set_ylim(*ADV_LIM)
-for ax, xkey in [(axs[0], 'gap'), (axs[1], 'sat')]:
+for ax, xkey in [(axs[0], 'unexpl'), (axs[1], 'sat')]:
     shown = rows if xkey == 'sat' else [r for r in rows if r not in degenerate(rows)]
     outside = [r for r in shown if not (ADV_LIM[0] <= r['adv'] <= ADV_LIM[1])]
     ax.scatter([r[xkey] for r in outside],
@@ -80,8 +94,14 @@ for ax, xkey in [(axs[0], 'gap'), (axs[1], 'sat')]:
                s=17, facecolor=[GROUP_COLOUR[r['group']] for r in outside],
                edgecolor='white', linewidth=0.4, alpha=0.85, zorder=3)
 print(f'clamped to axis edge: {n_clamped}')
-axs[0].annotate('break-even', xy=(0.99, 1.6), xycoords=('axes fraction', 'data'),
-                fontsize=7, color=MUTED, ha='right')
+axs[0].annotate('break-even', xy=(0.13, 0.62), xycoords=('axes fraction', 'data'),
+                fontsize=7, color=MUTED, ha='left')
+# the screening rule of the fifth registration, R²_logit > 0.95
+axs[0].axvline(0.05, color=MUTED, lw=0.8, ls=':', zorder=1)
+axs[0].annotate('$R^2_{\\mathrm{logit}} = 0.95$', xy=(0.05, 10**6.3), fontsize=6.5,
+                color=MUTED, ha='right', xytext=(-3, 0), textcoords='offset points')
+n_floor = sum(1 for r in rows if r not in degenerate(rows) and r['unexpl'] == UNEXPL_FLOOR)
+print(f'drawn at the floor 1 - R2_logit = {UNEXPL_FLOOR:g}: {n_floor}')
 
 # the calibration triple is the negative control - call it out on panel (b). One dataset
 # only: the whole point is the horizontal move at fixed advantage, which a cloud hides.

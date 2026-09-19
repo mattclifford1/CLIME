@@ -40,6 +40,7 @@ def load(path):
         rows.append(dict(
             dataset=dataset, model=model, group=v['group'],
             gap=v['diagnostic']['gap'], sat=v['diagnostic']['saturation'],
+            r2_logit=v['diagnostic']['r2_logit'], r2_prob=v['diagnostic']['r2_prob'],
             brier_std=b[E[0]]['mean'], brier_logit=b[E[1]]['mean'], brier_lr=b[E[2]]['mean'],
             kl_std=k[E[0]]['mean'], kl_logit=k[E[1]]['mean'], kl_lr=k[E[2]]['mean'],
             adv=b[E[0]]['mean']/max(b[E[1]]['mean'], 1e-30),

@@ -355,3 +355,195 @@ Gaussian and Breast Cancer with a logistic black box): the mass stays between 0.
 narrowest kernel — mass 0.083, reach < k at 0% of points — which is the mechanism stated in
 the registration behaving as described, not a counterexample: a narrow kernel makes the
 fitted chord approach the tangent at q, whose slab is wider in units of k.
+
+---
+
+# Fifth pre-registration: replacing Δ, and a grid wide enough to test it
+
+Written **2026-09-19**, from the plan in `PLAN_diagnostic_and_datasets.md`, before any of
+the 42 new datasets below was run through a sweep. Results go in `results/*_full.json`,
+`results/results_diagnostic_checks.json` and `results/results_ridge_alpha.json`.
+
+## Status when written
+
+| part | status |
+|---|---|
+| replacing Δ with $\Rlogit$ | **not blind.** Chosen after reading `results_taxonomy.json` and `results_extended.json` (numbers below) |
+| the $\Rlogit > 0.95$ rule | **not blind.** Read off the same two files |
+| everything on the 42 new datasets | blind |
+| the diagnostic checks C1–C5 | blind; nothing in them has been computed |
+| seeds, kernel, query points, ridge α on the full grid | blind beyond the subsets already reported |
+
+## Why Δ is being replaced
+
+Δ = R²_logit − R²_p was registered in the first registration and is what the paper reports.
+Recomputed from the two stored grids, with the paper's own degenerate filter:
+
+| | registered (n = 165) | extended (n = 444) |
+|---|---|---|
+| ρ(Δ, advantage) | 0.74 | 0.66 |
+| ρ(R²_logit, advantage) | 0.76 | 0.80 |
+| ρ(R²_p, advantage) | 0.36 | 0.47 |
+| partial ρ(R²_p, advantage \| R²_logit) | −0.45 | −0.31 |
+| AUC for advantage > 2: Δ / R²_logit | 0.94 / 0.98 | 0.90 / 0.98 |
+
+Subtracting R²_p removes information: once R²_logit is known, a *better* probability-space
+fit predicts a *smaller* advantage, so the difference is a worse predictor than its first
+term. This is not a new idea bolted on: the paper's own §3.2 already says that what caps the
+benefit is how close R²_logit comes to 1, and Figure 1 quotes R²_logit, not Δ.
+
+**The registered test is not rewritten.** Statements 1 and 2 of the first registration are
+phrased as Δ thresholds and are reported as written. R²_logit is a change of diagnostic,
+dated here, and it is tested blind below on data it has not seen.
+
+## A second definitional fact, found while planning
+
+The paper says Logit-LIME rescales probabilities into $[\epsilon, 1-\epsilon]$ with
+$\epsilon = 10^{-9}$. `clime/models/logit_regression.py` rescales into
+$[10^{-9},\,1 - 10^{-8}]$, so the target runs from −20.7 to +18.4, not symmetrically. The
+diagnostic, separately, *clips* at $10^{-9}$ on both sides. Neither is changed (either would
+move every published number); both are measured in C1 and the text is corrected to match
+the code.
+
+## The new datasets (42)
+
+| family | datasets | why |
+|---|---|---|
+| real, new from `toy_datasets` | Breast Cancer Prognostic, Cervical Cancer, Framingham CHD, German Credit, HCC Survival, Hepatitis | every tabular set there not already in the grid, less exact duplicates |
+| real, registered in CLIME but never swept | Credit Scoring 2, Blobs, Digits 3 vs 8 | |
+| **Gaussian family** (24) | $d \in \{2,5,10,30\}$ × covariance ratio $r \in \{1,3\}$ × separation $s \in \{2,4,6\}$ | geometry set by construction: the Bayes log-odds are exactly linear when $r=1$ and exactly quadratic when $r=3$; $s$ is the Euclidean distance between the means, so it does not grow with $d$ |
+| **make_classification family** (9) | $d \in \{10,30,60,100,200\}$ × informative $\in \{5, d/2\}$ | where the paper's "above ~60 features both surrogates fail" begins, and whether it is $d$ or the number of informative features |
+
+The Gaussian family is generated with numpy directly, not with `toy_datasets`'
+`GaussianGenerator`: that generator re-seeds before each class, so class 1 is an exact
+translate of class 0, point for point.
+
+## Predictions
+
+"New" means the 42 datasets above × 16 black boxes = 672 configurations. The 464 already
+seen are reported alongside and never pooled into a test.
+
+**N1. R²_logit beats Δ out of sample.** On the new configurations, ρ(R²_logit, advantage)
+> ρ(Δ, advantage), and R²_logit's AUC for advantage > 2 is ≥ 0.95 and higher than Δ's.
+
+**N2. The rule transfers.** "R²_logit > 0.95" flags an advantage > 2× with precision
+≥ 0.85 on the new configurations.
+
+**N3. Group A is better everywhere.** Logistic, LDA and Nearest Class Mean beat standard
+LIME on ≥ 124 of the 126 new (dataset, model) pairs.
+
+**N4. Group D stays at or below break-even**: median advantage < 1 on the new
+configurations.
+
+**N5. Linearity, not smoothness, within the Gaussian family.** For the black boxes whose
+log-odds follow the data geometry (QDA, Gaussian naive Bayes, Bayes Optimal), the median
+advantage at $r = 1$ exceeds that at $r = 3$ in ≥ 10 of the 12 $(d, s)$ cells.
+
+**N6. The diagnostic, not saturation, within the Gaussian family.** Pooled over its 384
+configurations, ρ(R²_logit, advantage) ≥ 0.6 and |ρ(saturation, advantage)| < 0.3.
+
+**N7. Separation: no direction registered.** Larger $s$ puts fewer query points near the
+boundary but sharpens the sigmoid at the ones that are. The two pull the group A advantage
+opposite ways and I cannot say which wins. Reported, not tested.
+
+**N8. Dimension is not what breaks explanations.** On the make_classification family,
+where the sampling covariance is full rank at every $d$, Logit-LIME's top-1 agreement with
+the gradient truth for group A is ≥ 0.9 at every $d$ up to 200, and standard LIME's is
+≥ 0.5. If this holds, the paper's high-dimensional failure is a property of wide, small
+datasets (Arrhythmia: 279 features, 136 test rows), not of dimension.
+
+### Diagnostic checks (C1–C5), on the full grid
+
+**C1. Clip sensitivity.** Recomputing R²_logit with $\epsilon \in \{10^{-3}, 10^{-6},
+10^{-9}, 10^{-12}\}$: the rank correlation across non-degenerate configurations between
+the $10^{-3}$ and $10^{-12}$ versions is ≥ 0.9, and ρ(R²_logit, advantage) moves by < 0.05
+across the four.
+
+**C2. Same-space curvature.** The gain in weighted R² from adding diagonal quadratic terms
+to the log-odds fit has group A median < 0.01 and ρ(gain, advantage) ≤ −0.3 outside group A.
+
+**C3. A surrogate-free measure.** For the 11 black boxes with analytic gradients, the
+locality-weighted relative dispersion of $\nabla \logit f$ over the neighbourhood is 0 for
+group A (arithmetic; a violation is a bug) and has ρ ≤ −0.6 with R²_logit.
+
+**C4. In-sample advantage is the ceiling.** The ratio of the two unregularised fits'
+in-sample Brier scores has ρ ≥ 0.9 with the measured advantage, higher than R²_logit's.
+
+**C5. Its own random stream.** R²_logit from a sample with its own salt has rank
+correlation ≥ 0.98 with R²_logit from the evaluation-salt sample the paper used.
+
+### Robustness of the diagnostic on the full grid
+
+**S. Seeds.** Over 5 seeds, ρ(R²_logit, advantage) is ≥ 0.7 at every seed and within 0.05
+of the seed-42 value.
+
+**K. Kernel width.** ρ(R²_logit, advantage) ≥ 0.6 at every kernel scale ≥ 0.3.
+
+**Q. Query points.** With 20 random test points as query points instead of the
+between-means line, group A is better on ≥ 95% of its configurations and
+ρ(R²_logit, advantage) ≥ 0.6.
+
+**R. Ridge α.** The sign of log(advantage) is unchanged between α = 0.1, 1 and 10 in ≥ 95%
+of the configurations swept.
+
+No prediction is made for datasets where the sampling covariance is rank deficient
+($d \ge$ the number of test rows). They are reported as their own column.
+
+## Outcome (run 2026-09-19, `results/*_full.json`, scored by `analysis/assess_fifth.py`)
+
+One of the 42 new datasets (`Gauss d2 r3 s4`) went through a smoke test of every sweep
+before the main run, which printed its last two configurations. Nothing else was seen.
+
+| | registered | measured | |
+|---|---|---|---|
+| N1 | ρ(R²_logit) > ρ(Δ); AUC(R²_logit) ≥ 0.95 and > Δ's | ρ 0.83 vs 0.76 (difference 0.07, dataset-bootstrap 95% [0.01, 0.12]); AUC 0.956 vs 0.948 | held |
+| N2 | R²_logit > 0.95 ⇒ advantage > 2×, precision ≥ 0.85 | precision 0.99 (129 flagged); recall 0.55 | held |
+| N3 | group A better on ≥ 124 of 126 | 126 of 126 | held |
+| N4 | group D median advantage < 1 | 0.83 | held |
+| N5 | r = 1 beats r = 3 in ≥ 10 of 12 (d, s) cells | 12 of 12 | held |
+| N6 | Gaussian family ρ(R²_logit) ≥ 0.6, \|ρ(saturation)\| < 0.3 | 0.83, −0.17 | held |
+| N7 | (reported) group A advantage by separation | s = 2: 6.7e5×, s = 4: 57×, s = 6: 9.0× | — |
+| N8 | make_classification group A: top-1 ≥ 0.9 (Logit-LIME), ≥ 0.5 (standard) at every d | minimum 0.20 / 0.05 at d = 200 | **failed** |
+| C1 | clip ε: rank corr ≥ 0.9, ρ moves < 0.05 | 0.80; ρ 0.55 / 0.75 / 0.80 / 0.82 at ε = 1e-3 / 1e-6 / 1e-9 / 1e-12 | **failed** |
+| C2 | curvature gain: group A median < 0.01; ρ ≤ −0.3 outside A | 0.0003; −0.15 | **failed** (second half) |
+| C3 | gradient dispersion 0 for A; ρ with R²_logit ≤ −0.6 | 2.5e-30; −0.77 | held |
+| C4 | in-sample ratio ρ ≥ 0.9 and > R²_logit's | 0.99 vs 0.80 | held |
+| C5 | own-salt vs evaluation-salt rank corr ≥ 0.98 | 0.9996 | held |
+| S | ρ ≥ 0.7 at every seed, within 0.05 of seed 42 | 0.80, 0.80, 0.81, 0.81, 0.80 | held |
+| K | ρ ≥ 0.6 at every kernel scale ≥ 0.3 | 0.77–0.80 (0.35 at 0.15, not registered) | held |
+| Q | random query points: group A better ≥ 95%, ρ ≥ 0.6 | 99.5% of 213, ρ 0.88 | held |
+| R | sign stable across α = 0.1, 1, 10 in ≥ 95% | 168 of 168 | held |
+
+**N1 held narrowly on AUC, clearly on ρ.** The registered grid alone could not separate the
+two (difference +0.02, [−0.06, +0.10]); the extended grid and the blind new grid both can.
+
+**N2 held on precision and exposes a recall problem the registration did not ask about.**
+The rule finds 55% of the new configurations with an advantage above 2×, against 83% on
+the seen ones. The misses are mostly exactly-linear black boxes on the synthetic Gaussian
+data, saturated over three quarters of the neighbourhood. That is C1's failure seen from the
+other side.
+
+**C1 failed, and the failure is the finding.** R²_logit is a statement about the *clipped*
+target, and at a coarse clip an exactly-linear black box has median R²_logit 0.69. But
+Logit-LIME fits the same clipped target, and in those saturated cases its advantage is also
+modest (1.4–10× rather than 10⁵×). So R²_logit at the surrogate's own clip measures what
+Logit-LIME can fit; it is not a clean measure of the black box's geometry where it
+saturates. The registration assumed the second reading.
+
+**N8 failed, and what it shows is saturation, not dimension.** With 5 informative features,
+Logit-LIME's top-1 is 1.00 at every d up to 200 (cosine ≥ 0.99). With d/2 informative it
+falls to 0.20 at d = 200, and the two worst cases have 55% and 75% of query points
+saturated: more informative features make the classes more separable. The claim that
+"dimension is not what breaks explanations" survives; the registered form, "at every d",
+did not, because the family was built with separability growing alongside d.
+
+**C2 failed in the half that mattered.** Squared terms add nothing for group A, as they
+must, but the gain barely tracks the advantage elsewhere (−0.15; pooled with group A it is
+−0.47). How far the log-odds are from linear matters, not whether the departure is
+quadratic, which is the registered statement 3 result again.
+
+**Not registered, found on the way:** the paper's R² formula returns a ratio of rounding
+errors when the target is constant, which caused every |Δ| > 1 exclusion (fixed by
+`sweep.guarded_r2`); α = 1 costs group A an order of magnitude (median 1.1e4× at α = 0.1
+against 1.4e3× at α = 1); and the lbfgs-fitted hard-label surrogate and polynomial logistic
+black box are BLAS-thread-sensitive on wide data (README).

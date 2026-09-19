@@ -1,0 +1,641 @@
+{
+ "Gaussian": {
+  "family": "registered",
+  "d": 2,
+  "n_train": 400,
+  "n_test": 400,
+  "minority": 0.5,
+  "cov_rank": 2,
+  "full_rank": true
+ },
+ "Moons": {
+  "family": "registered",
+  "d": 2,
+  "n_train": 400,
+  "n_test": 400,
+  "minority": 0.5,
+  "cov_rank": 2,
+  "full_rank": true
+ },
+ "Circles": {
+  "family": "registered",
+  "d": 2,
+  "n_train": 400,
+  "n_test": 400,
+  "minority": 0.5,
+  "cov_rank": 2,
+  "full_rank": true
+ },
+ "Breast Cancer": {
+  "family": "registered",
+  "d": 30,
+  "n_train": 454,
+  "n_test": 115,
+  "minority": 0.37258347978910367,
+  "cov_rank": 30,
+  "full_rank": true
+ },
+ "Banknote Authentication": {
+  "family": "registered",
+  "d": 4,
+  "n_train": 960,
+  "n_test": 412,
+  "minority": 0.4446064139941691,
+  "cov_rank": 4,
+  "full_rank": true
+ },
+ "Pima Indian Diabetes": {
+  "family": "registered",
+  "d": 8,
+  "n_train": 537,
+  "n_test": 231,
+  "minority": 0.3489583333333333,
+  "cov_rank": 8,
+  "full_rank": true
+ },
+ "Iris": {
+  "family": "registered",
+  "d": 4,
+  "n_train": 120,
+  "n_test": 30,
+  "minority": 0.3333333333333333,
+  "cov_rank": 4,
+  "full_rank": true
+ },
+ "Wine": {
+  "family": "registered",
+  "d": 13,
+  "n_train": 142,
+  "n_test": 36,
+  "minority": 0.33146067415730335,
+  "cov_rank": 13,
+  "full_rank": true
+ },
+ "Sonar Rocks vs Mines": {
+  "family": "registered",
+  "d": 60,
+  "n_train": 144,
+  "n_test": 64,
+  "minority": 0.46634615384615385,
+  "cov_rank": 60,
+  "full_rank": true
+ },
+ "Ionosphere": {
+  "family": "registered",
+  "d": 34,
+  "n_train": 245,
+  "n_test": 106,
+  "minority": 0.358974358974359,
+  "cov_rank": 33,
+  "full_rank": false
+ },
+ "Wheat Seeds": {
+  "family": "registered",
+  "d": 7,
+  "n_train": 98,
+  "n_test": 42,
+  "minority": 0.5,
+  "cov_rank": 7,
+  "full_rank": true
+ },
+ "Abalone Gender": {
+  "family": "registered",
+  "d": 8,
+  "n_train": 1983,
+  "n_test": 852,
+  "minority": 0.46102292768959435,
+  "cov_rank": 8,
+  "full_rank": true
+ },
+ "Credit Scoring 1": {
+  "family": "registered",
+  "d": 10,
+  "n_train": 901,
+  "n_test": 227,
+  "minority": 0.0673758865248227,
+  "cov_rank": 10,
+  "full_rank": true
+ },
+ "Direct Marketing": {
+  "family": "registered",
+  "d": 32,
+  "n_train": 301,
+  "n_test": 77,
+  "minority": 0.12433862433862433,
+  "cov_rank": 23,
+  "full_rank": false
+ },
+ "Arrhythmia": {
+  "family": "extended",
+  "d": 279,
+  "n_train": 315,
+  "n_test": 137,
+  "minority": 0.4579646017699115,
+  "cov_rank": 136,
+  "full_rank": false
+ },
+ "Breast Cancer Coimbra": {
+  "family": "extended",
+  "d": 9,
+  "n_train": 80,
+  "n_test": 36,
+  "minority": 0.4482758620689655,
+  "cov_rank": 9,
+  "full_rank": true
+ },
+ "Chronic Kidney Disease": {
+  "family": "extended",
+  "d": 15,
+  "n_train": 186,
+  "n_test": 82,
+  "minority": 0.45149253731343286,
+  "cov_rank": 15,
+  "full_rank": true
+ },
+ "Habermans Breast Cancer": {
+  "family": "extended",
+  "d": 3,
+  "n_train": 213,
+  "n_test": 93,
+  "minority": 0.2647058823529412,
+  "cov_rank": 3,
+  "full_rank": true
+ },
+ "Heart Disease": {
+  "family": "extended",
+  "d": 11,
+  "n_train": 147,
+  "n_test": 65,
+  "minority": 0.22641509433962265,
+  "cov_rank": 11,
+  "full_rank": true
+ },
+ "Heart Failure": {
+  "family": "extended",
+  "d": 12,
+  "n_train": 209,
+  "n_test": 90,
+  "minority": 0.3210702341137124,
+  "cov_rank": 12,
+  "full_rank": true
+ },
+ "Indian Liver Patient": {
+  "family": "extended",
+  "d": 10,
+  "n_train": 407,
+  "n_test": 176,
+  "minority": 0.2864493996569468,
+  "cov_rank": 10,
+  "full_rank": true
+ },
+ "Mammographic Mass": {
+  "family": "extended",
+  "d": 5,
+  "n_train": 672,
+  "n_test": 289,
+  "minority": 0.4630593132154006,
+  "cov_rank": 5,
+  "full_rank": true
+ },
+ "Parkinsons": {
+  "family": "extended",
+  "d": 22,
+  "n_train": 135,
+  "n_test": 60,
+  "minority": 0.24615384615384617,
+  "cov_rank": 18,
+  "full_rank": false
+ },
+ "SPECTF Heart": {
+  "family": "extended",
+  "d": 44,
+  "n_train": 186,
+  "n_test": 81,
+  "minority": 0.20599250936329588,
+  "cov_rank": 44,
+  "full_rank": true
+ },
+ "Stroke Prediction": {
+  "family": "extended",
+  "d": 10,
+  "n_train": 3576,
+  "n_test": 1534,
+  "minority": 0.0487279843444227,
+  "cov_rank": 10,
+  "full_rank": true
+ },
+ "Thoracic Surgery": {
+  "family": "extended",
+  "d": 16,
+  "n_train": 329,
+  "n_test": 141,
+  "minority": 0.14893617021276595,
+  "cov_rank": 15,
+  "full_rank": false
+ },
+ "Thyroid Sick": {
+  "family": "extended",
+  "d": 28,
+  "n_train": 1959,
+  "n_test": 841,
+  "minority": 0.06107142857142857,
+  "cov_rank": 26,
+  "full_rank": false
+ },
+ "XOR": {
+  "family": "extended",
+  "d": 2,
+  "n_train": 140,
+  "n_test": 60,
+  "minority": 0.5,
+  "cov_rank": 2,
+  "full_rank": true
+ },
+ "Z-Alizadeh Sani CAD": {
+  "family": "extended",
+  "d": 55,
+  "n_train": 211,
+  "n_test": 92,
+  "minority": 0.2871287128712871,
+  "cov_rank": 53,
+  "full_rank": false
+ },
+ "Breast Cancer Prognostic": {
+  "family": "new real",
+  "d": 33,
+  "n_train": 137,
+  "n_test": 61,
+  "minority": 0.23737373737373738,
+  "cov_rank": 33,
+  "full_rank": true
+ },
+ "Cervical Cancer": {
+  "family": "new real",
+  "d": 32,
+  "n_train": 600,
+  "n_test": 258,
+  "minority": 0.0641025641025641,
+  "cov_rank": 24,
+  "full_rank": false
+ },
+ "Framingham CHD": {
+  "family": "new real",
+  "d": 15,
+  "n_train": 2967,
+  "n_test": 1273,
+  "minority": 0.15188679245283018,
+  "cov_rank": 15,
+  "full_rank": true
+ },
+ "German Credit": {
+  "family": "new real",
+  "d": 20,
+  "n_train": 699,
+  "n_test": 301,
+  "minority": 0.3,
+  "cov_rank": 20,
+  "full_rank": true
+ },
+ "HCC Survival": {
+  "family": "new real",
+  "d": 49,
+  "n_train": 115,
+  "n_test": 50,
+  "minority": 0.38181818181818183,
+  "cov_rank": 46,
+  "full_rank": false
+ },
+ "Hepatitis": {
+  "family": "new real",
+  "d": 16,
+  "n_train": 95,
+  "n_test": 42,
+  "minority": 0.1897810218978102,
+  "cov_rank": 16,
+  "full_rank": true
+ },
+ "Credit Scoring 2": {
+  "family": "new real",
+  "d": 34,
+  "n_train": 309,
+  "n_test": 79,
+  "minority": 0.19845360824742267,
+  "cov_rank": 22,
+  "full_rank": false
+ },
+ "Blobs": {
+  "family": "new real",
+  "d": 2,
+  "n_train": 400,
+  "n_test": 400,
+  "minority": 0.5,
+  "cov_rank": 2,
+  "full_rank": true
+ },
+ "Digits 3 vs 8": {
+  "family": "new real",
+  "d": 64,
+  "n_train": 285,
+  "n_test": 72,
+  "minority": 0.48739495798319327,
+  "cov_rank": 51,
+  "full_rank": false
+ },
+ "Gauss d2 r1 s2": {
+  "family": "gaussian",
+  "d": 2,
+  "n_train": 700,
+  "n_test": 300,
+  "minority": 0.5,
+  "cov_rank": 2,
+  "full_rank": true
+ },
+ "Gauss d2 r1 s4": {
+  "family": "gaussian",
+  "d": 2,
+  "n_train": 700,
+  "n_test": 300,
+  "minority": 0.5,
+  "cov_rank": 2,
+  "full_rank": true
+ },
+ "Gauss d2 r1 s6": {
+  "family": "gaussian",
+  "d": 2,
+  "n_train": 700,
+  "n_test": 300,
+  "minority": 0.5,
+  "cov_rank": 2,
+  "full_rank": true
+ },
+ "Gauss d2 r3 s2": {
+  "family": "gaussian",
+  "d": 2,
+  "n_train": 700,
+  "n_test": 300,
+  "minority": 0.5,
+  "cov_rank": 2,
+  "full_rank": true
+ },
+ "Gauss d2 r3 s4": {
+  "family": "gaussian",
+  "d": 2,
+  "n_train": 700,
+  "n_test": 300,
+  "minority": 0.5,
+  "cov_rank": 2,
+  "full_rank": true
+ },
+ "Gauss d2 r3 s6": {
+  "family": "gaussian",
+  "d": 2,
+  "n_train": 700,
+  "n_test": 300,
+  "minority": 0.5,
+  "cov_rank": 2,
+  "full_rank": true
+ },
+ "Gauss d5 r1 s2": {
+  "family": "gaussian",
+  "d": 5,
+  "n_train": 700,
+  "n_test": 300,
+  "minority": 0.5,
+  "cov_rank": 5,
+  "full_rank": true
+ },
+ "Gauss d5 r1 s4": {
+  "family": "gaussian",
+  "d": 5,
+  "n_train": 700,
+  "n_test": 300,
+  "minority": 0.5,
+  "cov_rank": 5,
+  "full_rank": true
+ },
+ "Gauss d5 r1 s6": {
+  "family": "gaussian",
+  "d": 5,
+  "n_train": 700,
+  "n_test": 300,
+  "minority": 0.5,
+  "cov_rank": 5,
+  "full_rank": true
+ },
+ "Gauss d5 r3 s2": {
+  "family": "gaussian",
+  "d": 5,
+  "n_train": 700,
+  "n_test": 300,
+  "minority": 0.5,
+  "cov_rank": 5,
+  "full_rank": true
+ },
+ "Gauss d5 r3 s4": {
+  "family": "gaussian",
+  "d": 5,
+  "n_train": 700,
+  "n_test": 300,
+  "minority": 0.5,
+  "cov_rank": 5,
+  "full_rank": true
+ },
+ "Gauss d5 r3 s6": {
+  "family": "gaussian",
+  "d": 5,
+  "n_train": 700,
+  "n_test": 300,
+  "minority": 0.5,
+  "cov_rank": 5,
+  "full_rank": true
+ },
+ "Gauss d10 r1 s2": {
+  "family": "gaussian",
+  "d": 10,
+  "n_train": 700,
+  "n_test": 300,
+  "minority": 0.5,
+  "cov_rank": 10,
+  "full_rank": true
+ },
+ "Gauss d10 r1 s4": {
+  "family": "gaussian",
+  "d": 10,
+  "n_train": 700,
+  "n_test": 300,
+  "minority": 0.5,
+  "cov_rank": 10,
+  "full_rank": true
+ },
+ "Gauss d10 r1 s6": {
+  "family": "gaussian",
+  "d": 10,
+  "n_train": 700,
+  "n_test": 300,
+  "minority": 0.5,
+  "cov_rank": 10,
+  "full_rank": true
+ },
+ "Gauss d10 r3 s2": {
+  "family": "gaussian",
+  "d": 10,
+  "n_train": 700,
+  "n_test": 300,
+  "minority": 0.5,
+  "cov_rank": 10,
+  "full_rank": true
+ },
+ "Gauss d10 r3 s4": {
+  "family": "gaussian",
+  "d": 10,
+  "n_train": 700,
+  "n_test": 300,
+  "minority": 0.5,
+  "cov_rank": 10,
+  "full_rank": true
+ },
+ "Gauss d10 r3 s6": {
+  "family": "gaussian",
+  "d": 10,
+  "n_train": 700,
+  "n_test": 300,
+  "minority": 0.5,
+  "cov_rank": 10,
+  "full_rank": true
+ },
+ "Gauss d30 r1 s2": {
+  "family": "gaussian",
+  "d": 30,
+  "n_train": 700,
+  "n_test": 300,
+  "minority": 0.5,
+  "cov_rank": 30,
+  "full_rank": true
+ },
+ "Gauss d30 r1 s4": {
+  "family": "gaussian",
+  "d": 30,
+  "n_train": 700,
+  "n_test": 300,
+  "minority": 0.5,
+  "cov_rank": 30,
+  "full_rank": true
+ },
+ "Gauss d30 r1 s6": {
+  "family": "gaussian",
+  "d": 30,
+  "n_train": 700,
+  "n_test": 300,
+  "minority": 0.5,
+  "cov_rank": 30,
+  "full_rank": true
+ },
+ "Gauss d30 r3 s2": {
+  "family": "gaussian",
+  "d": 30,
+  "n_train": 700,
+  "n_test": 300,
+  "minority": 0.5,
+  "cov_rank": 30,
+  "full_rank": true
+ },
+ "Gauss d30 r3 s4": {
+  "family": "gaussian",
+  "d": 30,
+  "n_train": 700,
+  "n_test": 300,
+  "minority": 0.5,
+  "cov_rank": 30,
+  "full_rank": true
+ },
+ "Gauss d30 r3 s6": {
+  "family": "gaussian",
+  "d": 30,
+  "n_train": 700,
+  "n_test": 300,
+  "minority": 0.5,
+  "cov_rank": 30,
+  "full_rank": true
+ },
+ "MakeClf d10 i5": {
+  "family": "makeclf",
+  "d": 10,
+  "n_train": 1399,
+  "n_test": 601,
+  "minority": 0.4995,
+  "cov_rank": 10,
+  "full_rank": true
+ },
+ "MakeClf d30 i5": {
+  "family": "makeclf",
+  "d": 30,
+  "n_train": 1399,
+  "n_test": 601,
+  "minority": 0.4985,
+  "cov_rank": 30,
+  "full_rank": true
+ },
+ "MakeClf d30 i15": {
+  "family": "makeclf",
+  "d": 30,
+  "n_train": 1399,
+  "n_test": 601,
+  "minority": 0.498,
+  "cov_rank": 30,
+  "full_rank": true
+ },
+ "MakeClf d60 i5": {
+  "family": "makeclf",
+  "d": 60,
+  "n_train": 1400,
+  "n_test": 600,
+  "minority": 0.5,
+  "cov_rank": 60,
+  "full_rank": true
+ },
+ "MakeClf d60 i30": {
+  "family": "makeclf",
+  "d": 60,
+  "n_train": 1399,
+  "n_test": 601,
+  "minority": 0.499,
+  "cov_rank": 60,
+  "full_rank": true
+ },
+ "MakeClf d100 i5": {
+  "family": "makeclf",
+  "d": 100,
+  "n_train": 1399,
+  "n_test": 601,
+  "minority": 0.4985,
+  "cov_rank": 100,
+  "full_rank": true
+ },
+ "MakeClf d100 i50": {
+  "family": "makeclf",
+  "d": 100,
+  "n_train": 1400,
+  "n_test": 600,
+  "minority": 0.5,
+  "cov_rank": 100,
+  "full_rank": true
+ },
+ "MakeClf d200 i5": {
+  "family": "makeclf",
+  "d": 200,
+  "n_train": 1399,
+  "n_test": 601,
+  "minority": 0.4985,
+  "cov_rank": 200,
+  "full_rank": true
+ },
+ "MakeClf d200 i100": {
+  "family": "makeclf",
+  "d": 200,
+  "n_train": 1399,
+  "n_test": 601,
+  "minority": 0.4985,
+  "cov_rank": 200,
+  "full_rank": true
+ }
+}

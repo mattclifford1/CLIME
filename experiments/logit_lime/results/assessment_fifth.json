@@ -1,0 +1,115 @@
+{
+ "N1": {
+  "registered": "rho(R2logit) > rho(gap); AUC(R2logit) >= .95 and > gap",
+  "measured": "rho +0.826 vs +0.758; AUC 0.956 vs 0.948",
+  "held": true,
+  "note": "n = 663"
+ },
+ "N2": {
+  "registered": "R2logit > .95 => adv > 2x, precision >= .85",
+  "measured": "precision 0.992, recall 0.549, 129 flagged",
+  "held": true,
+  "note": ""
+ },
+ "N3": {
+  "registered": "group A better on >= 124 of 126",
+  "measured": "126 of 126",
+  "held": true,
+  "note": "worst: "
+ },
+ "N4": {
+  "registered": "group D median advantage < 1",
+  "measured": "0.831 (n = 126)",
+  "held": true,
+  "note": ""
+ },
+ "N5": {
+  "registered": "median adv r=1 > r=3 in >= 10 of 12 (d, s) cells",
+  "measured": "12 of 12",
+  "held": true,
+  "note": "d2s2: 49.4/1.11, d2s4: 30.3/1.7, d2s6: 2.93/1.29, d5s2: 19.5/0.882, d5s4: 14.1/1.13, d5s6: 3.13/1.26, d10s2: 3.3/0.863, d10s4: 8.26/0.909, d10s6: 2.66/1.04, d30s2: 0.973/0.703, d30s4: 2.24/0.708, d30s6: 1.52/0.839"
+ },
+ "N6": {
+  "registered": "Gaussian family rho(R2logit) >= .6, |rho(sat)| < .3",
+  "measured": "rho(R2logit) +0.831, rho(sat) -0.169",
+  "held": true,
+  "note": "n = 384, 0 excluded"
+ },
+ "N7": {
+  "report": [
+   "s=2: median 6.74e+05x",
+   "s=4: median 56.7x",
+   "s=6: median 8.96x"
+  ]
+ },
+ "N8": {
+  "registered": "MakeClf group A: top-1 logit >= .9, standard >= .5, every d",
+  "measured": "d10: 1.00/1.00, d30: 0.75/0.30, d60: 0.65/0.10, d100: 0.50/0.20, d200: 0.20/0.05",
+  "held": false,
+  "note": "minimum over datasets and group A models, logit/standard"
+ },
+ "C1": {
+  "registered": "rank corr eps 1e-3 vs 1e-12 >= .9; rho(adv) moves < .05",
+  "measured": "+0.801; rho by eps 1e-03: +0.561, 1e-06: +0.743, 1e-09: +0.790, 1e-12: +0.811",
+  "held": false,
+  "note": "n = 1169, spread 0.249"
+ },
+ "C2": {
+  "registered": "group A median curvature gain < .01; rho(gain, adv) <= -.3 outside A",
+  "measured": "0.0003; rho -0.145",
+  "held": false,
+  "note": ""
+ },
+ "C3": {
+  "registered": "group A dispersion 0; rho(dispersion, R2logit) <= -.6",
+  "measured": "max group A 2.5e-30; rho -0.765",
+  "held": true,
+  "note": "n = 743"
+ },
+ "C4": {
+  "registered": "rho(in-sample ratio, adv) >= .9 and > rho(R2logit)",
+  "measured": "+0.972 vs +0.790",
+  "held": true,
+  "note": ""
+ },
+ "C5": {
+  "registered": "rank corr own-salt vs evaluation-salt R2logit >= .98",
+  "measured": "+0.9996",
+  "held": true,
+  "note": ""
+ },
+ "_checks_n": 1169,
+ "S": {
+  "registered": "rho >= .7 every seed, within .05 of seed 42",
+  "measured": "42: +0.797, 1: +0.801, 2: +0.809, 3: +0.813, 4: +0.799",
+  "held": true,
+  "note": ""
+ },
+ "K": {
+  "registered": "rho >= .6 at every scale >= .3",
+  "measured": "0.15: +0.347, 0.3: +0.773, 0.5: +0.793, 0.75: +0.797, 1.25: +0.802, 2.0: +0.803, 3.0: +0.802",
+  "held": true,
+  "note": "",
+  "per_scale": {
+   "0.15": 0.3472904126556296,
+   "0.3": 0.773189776178511,
+   "0.5": 0.7925009673382789,
+   "0.75": 0.7966179447447869,
+   "1.25": 0.802324493723818,
+   "2.0": 0.8026259674747769,
+   "3.0": 0.8019586137829098
+  }
+ },
+ "Q": {
+  "registered": "group A better >= 95%; rho >= .6",
+  "measured": "99.5% of 213; rho +0.876",
+  "held": true,
+  "note": ""
+ },
+ "R": {
+  "registered": "sign of log(adv) same at alpha .1, 1, 10 in >= 95%",
+  "measured": "168 of 168 (100.0%)",
+  "held": true,
+  "note": ""
+ }
+}

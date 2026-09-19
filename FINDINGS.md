@@ -838,6 +838,59 @@ narrowest kernel (reach < k at 0% of points), because a narrow kernel makes the 
 approach the tangent, whose slab is wider in units of k. That is the mechanism, not an
 exception.
 
+### The diagnostic replaced, and a 71-dataset grid (fifth registration, 2026-09-19)
+
+Plan: `experiments/logit_lime/PLAN_diagnostic_and_datasets.md`. Predictions and outcome:
+`PREREGISTRATION.md`, fifth registration. Scored by `analysis/assess_fifth.py`.
+
+**Δ is replaced by R²_logit.** Subtracting R²_p removed information: given R²_logit, a
+better probability-space fit predicts a *smaller* advantage (partial ρ −0.45 registered,
+−0.31 extended). Tested blind on 42 new datasets: ρ 0.83 against Δ's 0.76 (difference
+0.07, dataset bootstrap [0.01, 0.12]); the rule R²_logit > 0.95 has precision 0.99 but
+recall 0.55. The registered Δ test is still reported in Δ, as written.
+
+**The diagnostic is not "from the black box alone".** R²_logit is the in-sample fit of an
+unregularised Logit-LIME. The genuinely black-box-only version is the dispersion of
+grad logit f over the neighbourhood (no fit): ρ −0.82 against R²_logit's 0.83 on the 688
+differentiable configurations. The in-sample Brier ratio of the two OLS fits ranks the
+advantage at ρ 0.99, so there is little left to predict once both fits are made.
+
+**R²_logit measures the clipped target.** ρ with the advantage is 0.55 / 0.75 / 0.80 / 0.82
+at clip 1e-3 / 1e-6 / 1e-9 / 1e-12 (registered < 0.05 movement; failed). In saturated
+neighbourhoods an exactly-linear black box scores R²_logit 0.3–0.5, and Logit-LIME's gain
+there is also modest (1.4–10×), because it fits the same clipped target. Compute it at the
+surrogate's own clip.
+
+**Every "degenerate" |Δ| > 1 configuration was rounding noise.** `sweep.weighted_r2` tests
+`ss_tot > 0`, which a constant target passes because its weighted mean carries rounding
+error; R² is then a ratio of two rounding errors (−303 at one Arrhythmia point; Ionosphere
+naive Bayes moves between −108 and −115 across identical runs). `sweep.guarded_r2` returns
+nan there. Exclusions on the extended grid fall from 18 to 11, and most of Arrhythmia comes
+back. The registered keys in `sweep.diagnostic_detail` are unchanged; the guarded values are
+extra keys.
+
+**The full grid** (`sweeps/full_grid.py`: 71 datasets × 16 black boxes; 24-member Gaussian
+family, 9-member make_classification family, 9 new real datasets). Held: group A better in
+213/213; linear-by-construction beats quadratic-by-construction in 12/12 Gaussian cells;
+ρ(R²_logit, advantage) 0.76–0.88 on every family, dimension band, covariance rank, seed
+and query-point placement; ridge α changes no sign below 100. Weak: kernel scale 0.15
+(ρ 0.35, group A wins 60%), minority < 15% (ρ 0.61). Failed as registered: "dimension does
+not break explanations" (N8) — with 5 informative features Logit-LIME's top-1 is 1.00 up to
+d = 200, but with d/2 informative it falls to 0.20, tracking saturation (55–75% of points).
+
+**α = 1 understates the effect.** Group A median advantage is 1.1e4× at α = 0.1 and
+1.4e3× at α = 1: the logit target is ~20× the scale of the probability target, so the same
+penalty shrinks Logit-LIME far more.
+
+**Reproducibility.** `sweeps/parallel.py` (one dataset per process, one BLAS thread each)
+reproduces serial runs to 1e-15 for standard LIME and Logit-LIME. The lbfgs-fitted
+hard-label surrogate and polynomial-logistic black box differ by up to 7e-3 on wide data
+depending on BLAS thread count; they stop at their iteration cap.
+
+**toy_datasets bug, not fixed here.** Its `GaussianGenerator` re-seeds before each class, so
+class 1 is an exact translate of class 0. The Gaussian family is generated in
+`export_toy_datasets.py` instead.
+
 ---
 
 ## 5. Thread 3 — aLIMEgn

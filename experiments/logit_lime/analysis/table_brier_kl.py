@@ -39,18 +39,19 @@ lines = [
  r'\begin{table}[t]', r'\centering', r'\footnotesize',
  r'\setlength{\tabcolsep}{4pt}',
  r'\caption{Local Brier score and local KL divergence between each surrogate and the black'
- r' box, averaged over the 20 query points. $\Delta$ is the log-odds linearity gap'
- r' (Eq.~\ref{eq:gap}), computed from the black box alone; \emph{sat.} is the fraction of'
- r' locally sampled points with a saturated probability. Best surrogate per row per metric'
- r' in bold. The large Logit-LIME gains occur exactly where $\Delta$ is large; calibrating'
- r' the random forest removes saturation without changing $\Delta$ or the outcome. Note that'
+ r' box, averaged over the 20 query points. $\Rlogit$ is the diagnostic of'
+ r' Eq.~\ref{eq:r2}, the in-sample fit of an unregularised Logit-LIME; \emph{sat.} is the'
+ r' fraction of locally sampled points with a saturated probability. Best surrogate per row'
+ r' per metric in bold. The large Logit-LIME gains occur exactly where $\Rlogit$ is close to'
+ r' $1$; calibrating the random forest removes saturation without moving $\Rlogit$ much or'
+ r' changing the outcome. Note that'
  r' the log.reg.\ variant often wins on Brier score while losing badly on KL'
  r' (Section~\ref{sec:hardlabel}).}',
  r'\label{tab:main}',
  r'\begin{tabular}{llrr rrr rrr}', r'\toprule',
  r'& & & & \multicolumn{3}{c}{local Brier score} & \multicolumn{3}{c}{local KL divergence} \\',
  r'\cmidrule(lr){5-7}\cmidrule(lr){8-10}',
- r'Dataset & Black box & $\Delta$ & sat. & standard & logit & log.reg. & standard & logit & log.reg. \\',
+ r'Dataset & Black box & $\Rlogit$ & sat. & standard & logit & log.reg. & standard & logit & log.reg. \\',
  r'\midrule']
 
 for di, ds in enumerate(DATASETS):
@@ -62,7 +63,7 @@ for di, ds in enumerate(DATASETS):
         first = DS_SHORT[ds] if mi == 0 else ''
         cells = ' & '.join([fmt(v, i == bb) for i, v in enumerate(b)] +
                            [fmt(v, i == kb) for i, v in enumerate(k)])
-        lines.append(f"{first} & {NICE[model]} & ${e['diagnostic']['gap']:+.2f}$ & "
+        lines.append(f"{first} & {NICE[model]} & ${e['diagnostic']['r2_logit']:.3f}$ & "
                      f"${e['diagnostic']['saturation']*100:.0f}\\%$ & {cells} \\\\")
     if di < len(DATASETS)-1:
         lines.append(r'\addlinespace')

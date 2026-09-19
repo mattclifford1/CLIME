@@ -82,6 +82,9 @@ wrong.
 | `sweep_null.py` | `results_null.json` | the base rate: what an explainer that explains nothing scores under each instrument |
 | `sweep_range.py` | `results_range.json` | how far the *reported coefficient* can be carried before a standard LIME surrogate stops being a probability, against the width of the kernel that defined the neighbourhood — plus the flip distance each surrogate implies, against the black box's own |
 | `sweep_seeds.py` | `results_seed*.json` | a subset repeated under five random seeds |
+| `sweep_diagnostic_checks.py` | `results_diagnostic_checks.json` | what R²_logit is measuring (fifth registration, C1–C5): clip sensitivity, same-space curvature, gradient dispersion (no fit), in-sample advantage, its own salt |
+| `sweep_ridge_alpha.py` | `results_ridge_alpha.json` | both surrogates refitted at five ridge penalties on the same neighbourhood; α = 1 reproduces `results_taxonomy.json` exactly |
+| `run_full.py` | `results_*_full.json` | every experiment above again on the full grid (`full_grid.py`, 71 datasets × 16 black boxes), plus `results_querypoints_full.json` (20 random test points as query points) and `results_full_seed{1..4}.json` |
 
 The instrument and null sweeps exist because every fidelity number elsewhere is reported
 without a floor or a control. `sweep_instruments.py` supplies the control — it moves one
@@ -179,10 +182,33 @@ where a difference quotient of `logit f` collapses to zero and the truth would b
 Two of the 154 configurations are saturated at *every* query point. There is deliberately
 no gradient for the piecewise-constant families: they have none, and that is a result.
 
-**The diagnostic is the point.** `sweep.py::diagnostic` fits a locality-weighted linear
-model to the black box's log-odds and to its probabilities on the same locally sampled
-points, and returns the gap in weighted R². That gap predicts whether Logit-LIME will help
-(Spearman ρ = 0.74, n = 165) and needs only the black box, not any surrogate.
+**The diagnostic is the point, and it is R²_logit, not the gap.** `sweep.py::diagnostic`
+fits an unregularised locality-weighted linear model to the black box's log-odds and to its
+probabilities on the same 2,000 locally sampled points. The registered diagnostic was the
+gap Δ = R²_logit − R²_p; the fifth registration replaced it with R²_logit alone, which ranks
+the advantage better (ρ 0.80 against 0.66 on the extended grid) because R²_p carries
+negative information once R²_logit is known. It is the in-sample fit of an unregularised
+Logit-LIME, so it does *not* avoid building a surrogate; what it avoids is a held-out
+sample and a metric. `diagnostic_detail` also returns `_guarded` values, which skip query
+points whose target is constant to rounding: there `weighted_r2` returns a ratio of two
+rounding errors, which is where every |Δ| > 1 "degenerate" configuration came from.
+
+**`sweeps/parallel.py` runs any sweep one dataset per process** and merges the shards
+(`results/shards/<name>/`, kept as the resume state). It pins BLAS to one thread per
+process. Checked against the serial `results_taxonomy.json` on 36 configurations: every
+score agrees to 1e-11, except the unguarded R²_logit of degenerate configurations, which is
+rounding noise and moves by up to 28 between runs. Against all 464 of
+`results_extended.json`, standard LIME and Logit-LIME agree to 1e-15 everywhere except two
+configurations of the degree-2 polynomial logistic black box on wide data (Arrhythmia,
+Thyroid Sick), and the hard-label logistic-regression surrogate differs by up to 7e-3 in
+KL on 20 wide or rank-deficient configurations. Both are lbfgs fits that stop at their
+iteration cap on near-separable data, and where they stop depends on the BLAS thread
+count. Nothing else in the pipeline is thread-sensitive: the local samples themselves are
+bit-identical at 1 and 32 threads, rank-deficient covariance included.
+
+**The synthetic families are generated in `export_toy_datasets.py`, not by toy_datasets.**
+Its `GaussianGenerator` re-seeds before each class, so class 1 is an exact translate of
+class 0, point for point.
 
 **Figure style is not ad hoc.** `common/style.py` holds the shared matplotlib style. The
 three series colours are slots 1–3 of a validated categorical palette, used unmodified —
