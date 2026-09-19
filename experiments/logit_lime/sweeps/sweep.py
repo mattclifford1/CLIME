@@ -25,7 +25,8 @@ import warnings
 import numpy as np
 import clime
 from clime.data.utils import costs
-from clime.evaluation.key_points import get_points_between_class_means, get_local_points
+from clime.evaluation.key_points import (get_points_between_class_means, get_local_points,
+                                        get_random_test_points)
 
 warnings.filterwarnings('ignore')
 
@@ -55,11 +56,26 @@ DATA_PARAMS = {'class_samples': [200, 200], 'percent_of_data': 1, 'moons_noise':
                'gaussian_covs': [[[1, 0], [0, 1]], [[1, 0], [0, 1]]]}
 
 
+# where the query points go. Every registered result uses the line between the class
+# means; sweep_querypoints.py switches this to test the diagnostic somewhere else. The
+# diagnostic in run() follows the same setting, so it is always computed at the points
+# the surrogates are scored at
+QUERY_POINTS = 'between_class_means'
+
+
+def query_points(test_data):
+    if QUERY_POINTS == 'between_class_means':
+        return get_points_between_class_means(test_data)[0]
+    if QUERY_POINTS == 'random_test_points':
+        return get_random_test_points(test_data)
+    raise ValueError(f'no query points for {QUERY_POINTS!r}')
+
+
 def opts(dataset, model, explainer, metric):
     return {'dataset': dataset, 'data params': DATA_PARAMS, 'standardise data': True,
             'dataset rebalancing': 'none', 'model': model, 'model balancer': 'none',
             'explainer': explainer, 'evaluation metric': metric,
-            'evaluation points': 'between_class_means', 'evaluation data': 'sample locally'}
+            'evaluation points': QUERY_POINTS, 'evaluation data': 'sample locally'}
 
 
 def weighted_r2(A, target, w):
@@ -73,20 +89,61 @@ def weighted_r2(A, target, w):
     return 1 - ss_res/ss_tot if ss_tot > 0 else np.nan
 
 
-def diagnostic(clf, test_data, query_points):
-    '''how linear are the black box's log-odds vs its probabilities, locally?'''
-    r2_logit, r2_prob, saturation = [], [], []
+# R² is undefined when the target is constant to within rounding. weighted_r2 above tests
+# ss_tot > 0, which a constant target passes: its weighted mean carries rounding error, so
+# ss_tot comes out near 1e-28 rather than 0 and R² becomes a ratio of two rounding errors
+# (-303 at one Arrhythmia point where every sampled probability clips to the same bound).
+# That is the mechanism behind every |gap| > 1 configuration analyse.degenerate excludes.
+# weighted_r2 is kept as it was so the registered numbers reproduce; guarded_r2 is what the
+# fifth registration reports. The tolerance is relative to the target's own magnitude, so a
+# real but small variation - a logistic model's log-odds far from its boundary - is kept.
+REL_TOL = 1e-9
+
+
+def guarded_r2(A, target, w):
+    sw = np.sqrt(w)
+    coef, *_ = np.linalg.lstsq(A*sw[:, None], target*sw, rcond=None)
+    mean = np.sum(w*target)/np.sum(w)
+    ss_tot = np.sum(w*(target-mean)**2)
+    if not ss_tot/np.sum(w) > (REL_TOL*max(1.0, abs(mean)))**2:
+        return np.nan
+    return 1 - np.sum(w*(target - A @ coef)**2)/ss_tot
+
+
+def diagnostic_detail(clf, test_data, query_points):
+    '''
+    how linear are the black box's log-odds vs its probabilities, locally?
+
+    'r2_logit', 'r2_prob', 'gap' and 'saturation' are exactly what the registered sweep
+    recorded. The '_guarded' values drop query points whose target is numerically constant
+    and average over the rest; 'n_defined_*' says how many were left.
+    '''
+    cols = {k: [] for k in ('r2_logit', 'r2_prob', 'r2_logit_guarded', 'r2_prob_guarded',
+                            'saturation')}
     for q in query_points:
         X = get_local_points(test_data, q, samples=2000)['X']
         p = clf.predict_proba(X)[:, 1].astype(np.float64)
         w = costs.weights_based_on_distance(q, X)
-        saturation.append(float(((p <= 1e-6) | (p >= 1-1e-6)).mean()))
+        cols['saturation'].append(float(((p <= 1e-6) | (p >= 1-1e-6)).mean()))
         pc = np.clip(p, 1e-9, 1-1e-9)
         A = np.c_[X, np.ones(len(X))]
-        r2_logit.append(weighted_r2(A, np.log(pc/(1-pc)), w))
-        r2_prob.append(weighted_r2(A, p, w))
-    return (float(np.nanmean(r2_logit)), float(np.nanmean(r2_prob)),
-            float(np.mean(saturation)))
+        lo = np.log(pc/(1-pc))
+        cols['r2_logit'].append(weighted_r2(A, lo, w))
+        cols['r2_prob'].append(weighted_r2(A, p, w))
+        cols['r2_logit_guarded'].append(guarded_r2(A, lo, w))
+        cols['r2_prob_guarded'].append(guarded_r2(A, p, w))
+    out = {k: float(np.nanmean(v)) if np.isfinite(v).any() else float('nan')
+           for k, v in ((k, np.asarray(v, dtype=float)) for k, v in cols.items())}
+    out['gap'] = out['r2_logit'] - out['r2_prob']
+    out['n_defined_logit'] = int(np.isfinite(cols['r2_logit_guarded']).sum())
+    out['n_defined_prob'] = int(np.isfinite(cols['r2_prob_guarded']).sum())
+    return out
+
+
+def diagnostic(clf, test_data, query_points):
+    '''(r2_logit, r2_prob, saturation) as registered - see diagnostic_detail'''
+    d = diagnostic_detail(clf, test_data, query_points)
+    return d['r2_logit'], d['r2_prob'], d['saturation']
 
 
 def run(out_path, seed=None):
@@ -98,7 +155,7 @@ def run(out_path, seed=None):
         np.random.seed(int(seed))
 
     out = {'_meta': {'seed': seed if seed is not None else clime.RANDOM_SEED,
-                     'groups': MODEL_GROUPS}}
+                     'groups': MODEL_GROUPS, 'query points': QUERY_POINTS}}
     # resume: results are deterministic per (dataset, model) since B10 was fixed, so a
     # run interrupted part way can pick up where it stopped rather than recompute
     if os.path.exists(out_path):
@@ -112,7 +169,7 @@ def run(out_path, seed=None):
             key = f'{dataset}|{model}'
             if key in out:
                 continue
-            entry = {'group': GROUP_OF[model], 'metrics': {}}
+            entry = {'group': GROUP_OF.get(model, 'unassigned'), 'metrics': {}}
             try:
                 for metric in METRICS:
                     entry['metrics'][metric] = {}
@@ -127,10 +184,10 @@ def run(out_path, seed=None):
                         entry['model_stats'] = {k: float(v) for k, v in r['model_stats'].items()}
                 base = clime.pipeline.run_pipeline(opts(dataset, model, EXPLAINERS[0], METRICS[0]),
                                                    parallel_eval=False)
-                qs, _ = get_points_between_class_means(base['test_data'])
-                rl, rp, sat = diagnostic(base['clf'], base['test_data'], qs)
-                entry['diagnostic'] = {'r2_logit': rl, 'r2_prob': rp, 'gap': rl-rp,
-                                       'saturation': sat}
+                qs = query_points(base['test_data'])
+                entry['diagnostic'] = diagnostic_detail(base['clf'], base['test_data'], qs)
+                rl, rp, sat = (entry['diagnostic'][k] for k in ('r2_logit', 'r2_prob',
+                                                                'saturation'))
             except Exception as e:
                 entry['error'] = f'{type(e).__name__}: {e}'
                 print(f'{key:60s} FAILED {entry["error"][:60]}', flush=True)

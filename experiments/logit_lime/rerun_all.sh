@@ -54,4 +54,11 @@ run sweeps/sweep_null.py results_null.json
 run sweeps/sweep_range.py results_range.json
 run sweeps/sweep_seeds.py results
 
+# the fifth registration: every experiment again on the full 71-dataset grid, one dataset
+# per process, into results/*_full.json (plus the diagnostic checks and the ridge alpha
+# check). Resumes from results/shards/; delete that directory to start from scratch.
+# dataset_meta.json first - the robustness analysis slices by it
+run analysis/dataset_meta.py
+run sweeps/run_full.py
+
 echo "=== ALL SWEEPS COMPLETE ==="

@@ -27,7 +27,7 @@ import warnings
 import numpy as np
 import clime
 from clime.data.utils import costs
-from sweeps.sweep import opts, diagnostic, EXPLAINERS
+from sweeps.sweep import opts, diagnostic_detail, EXPLAINERS
 from clime.evaluation.key_points import get_points_between_class_means
 
 warnings.filterwarnings('ignore')
@@ -67,9 +67,7 @@ def run(out_path):
                     base = clime.pipeline.run_pipeline(opts(dataset, model, EXPLAINERS[0], METRIC),
                                                        parallel_eval=False)
                     qs, _ = get_points_between_class_means(base['test_data'])
-                    rl, rp, sat = diagnostic(base['clf'], base['test_data'], qs)
-                    entry['diagnostic'] = {'r2_logit': rl, 'r2_prob': rp, 'gap': rl-rp,
-                                           'saturation': sat}
+                    entry['diagnostic'] = diagnostic_detail(base['clf'], base['test_data'], qs)
                 except Exception as e:
                     entry['error'] = f'{type(e).__name__}: {e}'
                 out[f'{scale}|{dataset}|{model}'] = entry
