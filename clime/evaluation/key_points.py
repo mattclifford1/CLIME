@@ -63,6 +63,19 @@ def get_data_grid(train_data, test_data, num_samples=20):
     return query_points
 
 
+def get_random_test_points(data, num_samples=20):
+    '''
+    num_samples test points drawn without replacement, as a control for the between-means
+    line: every other placement is a structured path chosen by the experimenter, this one
+    follows the data's own density. Seeded from clime.RANDOM_SEED alone, so the same split
+    always gives the same points, independent of which explainer or metric asks.
+    '''
+    X = np.asarray(data['X'])
+    rng = np.random.default_rng([clime.RANDOM_SEED, 20260919])
+    idx = rng.choice(len(X), size=min(num_samples, len(X)), replace=False)
+    return X[np.sort(idx)]
+
+
 def get_points_between_class_means(data, num_samples=20):
     '''
     estimate mean of the data and get points between 
@@ -124,13 +137,14 @@ def get_all_points(data):
         points.append(data['X'][i, :])
     return points
 
-def get_local_points(data, query_point, samples=100):
+def get_local_points(data, query_point, samples=100, salt='local evaluation sample'):
     # sample locally around the query point with a variance of the dataset
     data_cov = np.cov(data['X'].T)
     local_sample_cov = data_cov #/ 5    # maybe justify this?
     # different salt to the surrogate's own sample, otherwise the surrogate would be
-    # evaluated on exactly the points it was trained on
-    rng = clime.utils.rng_from_point(query_point, salt='local evaluation sample')
+    # evaluated on exactly the points it was trained on. A caller drawing for any other
+    # purpose passes its own salt (see CLAUDE.md, "the salts must differ")
+    rng = clime.utils.rng_from_point(query_point, salt=salt)
     samples = rng.multivariate_normal(query_point, local_sample_cov, samples)
     return {'X': samples}
 
@@ -156,6 +170,8 @@ class get_key_points_score():
             return get_points_between_class_means(test_data)
         elif self.key_points == 'all_points':
             return get_all_points(test_data), None
+        elif self.key_points == 'random_points':
+            return get_random_test_points(test_data), None
         elif self.key_points == 'data_edges':
             return get_data_edges(test_data), None
         elif self.key_points == 'grid':

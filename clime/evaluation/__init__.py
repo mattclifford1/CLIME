@@ -60,6 +60,7 @@ AVAILABLE_EVALUATION_POINTS ={   # give the value to 'key_points' arg in get_key
     'data_limits': 'data_edges',
     'class_means': 'means',
     'all_test_points': 'all_points',
+    'random_test_points': 'random_points',
 }
 
 AVAILABLE_EVALUATION_DATA = {   # give the value to 'test_points' arg in get_key_points_score func
