@@ -62,7 +62,8 @@ def test_explanations_all_describe_the_same_class(logistic_setup):
     On a black box whose class 1 log-odds increase with x, every surrogate must agree.
     '''
     clf, train_data, test_data = logistic_setup
-    variants = ['bLIMEy (normal)', 'bLIMEy (logit)', 'bLIMEy (logistic regression)']
+    variants = ['bLIMEy (normal)', 'bLIMEy (logit)', 'bLIMEy (logistic regression)',
+                'bLIMEy (soft-label logistic regression)']
     explanations = {}
     for name in variants:
         expl = AVAILABLE_EXPLAINERS[name](clf,
@@ -127,3 +128,51 @@ def test_explainer_builds_far_from_the_boundary(name, setup):
     probs = np.asarray(expl.predict_proba(test_data['X'][:5, :]))
     assert probs.shape == (5, 2)
     assert np.isfinite(probs).all()
+
+
+def test_soft_label_surrogate_recovers_a_logistic_black_box(logistic_setup):
+    '''
+    The soft-label logistic surrogate is the KL projection of the black box onto the
+    sigmoid-linear model class, which contains a logistic black box exactly - so, like the
+    logit surrogate, it should return the black box's own coefficients up to its L2
+    penalty and the finite sample.
+    '''
+    clf, train_data, test_data = logistic_setup
+    expl = AVAILABLE_EXPLAINERS['bLIMEy (soft-label logistic regression)'](
+        clf, query_point=test_data['X'][0, :], train_data=train_data,
+        test_data=test_data, samples=5000)
+    truth = np.atleast_2d(clf.coef_)[-1, :]
+    np.testing.assert_allclose(expl.get_explanation(), truth, rtol=0.15, atol=0.05)
+
+
+def test_soft_label_fit_minimises_the_soft_cross_entropy():
+    '''
+    sklearn's LogisticRegression takes classes, so the surrogate enters each point twice,
+    weighted w*p and w*(1-p). Check that this really minimises the weighted cross-entropy
+    against the probabilities, by solving the same problem directly.
+    '''
+    from scipy.optimize import minimize
+    rng = np.random.default_rng(0)
+    X = rng.normal(size=(400, 3))
+    p = 1/(1 + np.exp(-(X @ np.array([1.5, -0.7, 0.2]) + 0.3)))
+    p = np.clip(p + rng.normal(scale=0.05, size=p.size), 0, 1)     # soft, not exactly logistic
+    w = rng.uniform(0.2, 1.0, size=p.size)
+    C = 0.5
+    model = clime.models.soft_logistic_regression(C=C).fit(X, p, sample_weight=w)
+
+    def objective(theta):
+        z = X @ theta[:3] + theta[3]
+        # -w [p log g + (1-p) log(1-g)] with log g = -log(1 + e^-z), log(1-g) = -log(1 + e^z)
+        nll = np.sum(w*(p*np.logaddexp(0, -z) + (1 - p)*np.logaddexp(0, z)))
+        return C*nll + 0.5*theta[:3] @ theta[:3]
+    direct = minimize(objective, np.zeros(4), method='BFGS', options={'gtol': 1e-9}).x
+    np.testing.assert_allclose(model.coef_[0], direct[:3], rtol=1e-4, atol=1e-5)
+    np.testing.assert_allclose(model.intercept_[0], direct[3], rtol=1e-4, atol=1e-5)
+
+
+def test_soft_label_surrogate_falls_back_on_a_one_class_neighbourhood():
+    '''every sampled probability exactly 1: no finite optimum, so predict 1 with no importances'''
+    X = np.random.default_rng(1).normal(size=(50, 2))
+    model = clime.models.soft_logistic_regression().fit(X, np.ones(50))
+    np.testing.assert_array_equal(model.predict_proba(X)[:, 1], 1.0)
+    np.testing.assert_array_equal(model.coef_, 0.0)

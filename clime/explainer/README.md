@@ -62,10 +62,13 @@ local vs global imbalance as the signal. See `FINDINGS.md` §3 and E4.
 | *(default)* | `sklearn.linear_model.Ridge` | regresses probabilities directly; unbounded, can predict outside `[0,1]` (clipped at predict time) |
 | `train_logits` | `clime.models.logit_ridge` | ridge in **logit space**, sigmoid on the way out |
 | `logistic_regression` | `clime.models.logistic_regression` | sklearn logistic regression on **rounded** probabilities, i.e. on hard labels |
+| `soft_logistic_regression` | `clime.models.soft_logistic_regression` | logistic regression on the probabilities themselves: cross-entropy against soft labels, the locality-weighted KL projection onto the sigmoid-linear class. Same model class and log-odds reading as `train_logits`, no clipping |
 
-The latter two are the Logit-LIME thread. Their coefficients are on different scales from
-each other and from the default, so don't compare `get_explanation()` outputs across
-them without normalising.
+The last three are the Logit-LIME thread. All three report log-odds per unit feature,
+while the default reports probability per unit feature, so don't compare `get_explanation()`
+between the default and the others without normalising. Even among the three, the
+hard-label surrogate's log-odds are on its own scale: fitted to rounded labels, it is as
+confident as its regularisation allows, not as confident as the black box.
 
 ## Other explainers
 

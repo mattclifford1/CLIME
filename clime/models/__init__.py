@@ -7,6 +7,7 @@ from .MLP import MLP_simple
 from .balance import adjust_boundary, adjust_proba, base_balance
 from .logit_regression import logit_ridge
 from .logistic_regression import logistic_regression
+from .soft_logistic_regression import soft_logistic_regression
 from .calibrated import random_forest_platt, random_forest_isotonic, gradient_boosting
 from .log_odds_families import LDA, gaussian_naive_bayes, decision_tree, knn
 from .QDA import QDA

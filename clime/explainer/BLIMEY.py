@@ -45,6 +45,7 @@ class bLIMEy:
                        rebalance_sampled_data=False,
                        train_logits=False,
                        logistic_regression=False,
+                       soft_logistic_regression=False,
                        train_data=None,   # the black box's training data (class_weight_data)
                        **kwargs
                        ):
@@ -60,6 +61,7 @@ class bLIMEy:
         self.rebalance_sampled_data = rebalance_sampled_data
         self.train_logits = train_logits
         self.logistic_regression = logistic_regression
+        self.soft_logistic_regression = soft_logistic_regression
 
         sampled_data = self._sample_locally(black_box_model)
         self._train_surrogate(sampled_data)
@@ -133,6 +135,11 @@ class bLIMEy:
                                                          random_state=clime.RANDOM_SEED)
         elif self.logistic_regression == True:
             self.surrogate_model = clime.models.logistic_regression(
+                                                         random_state=clime.RANDOM_SEED)
+        elif self.soft_logistic_regression == True:
+            # the same sigmoid-linear model as the two above, fitted by cross-entropy
+            # against the probabilities themselves (clime/models/soft_logistic_regression.py)
+            self.surrogate_model = clime.models.soft_logistic_regression(
                                                          random_state=clime.RANDOM_SEED)
         else:
             # self.surrogate_model = sklearn.linear_model.Lasso(alpha=1, 

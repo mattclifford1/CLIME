@@ -22,6 +22,12 @@ def bLIMEy_logistic_regression(*args, **kwargs):
     # occurance of minority class in the SAMPLED data
     return bLIMEy(*args, logistic_regression=True, **kwargs)
 
+def bLIMEy_soft_logistic_regression(*args, **kwargs):
+    # logistic regression fitted to the black box's PROBABILITIES (cross-entropy against
+    # soft labels), where 'bLIMEy (logistic regression)' fits its rounded classes. Same
+    # model class and same log-odds reading as 'bLIMEy (logit)'; a different loss
+    return bLIMEy(*args, soft_logistic_regression=True, **kwargs)
+
 def sample_weighted_bLIMEy_logistic_regression(*args, **kwargs):
     # add weights to the samples based on inverse 
     # occurance of minority class in the SAMPLED data
@@ -65,5 +71,6 @@ AVAILABLE_EXPLAINERS = {
     'bLIMEy (logit and sample weights)': sample_weighted_bLIMEy_logit,
     'bLIMEy (logistic regression)': bLIMEy_logistic_regression,
     'bLIMEy (logistic regression and sample weights)': sample_weighted_bLIMEy_logistic_regression,
+    'bLIMEy (soft-label logistic regression)': bLIMEy_soft_logistic_regression,
     # 'bLIMEy (rebalance data training)': data_rebalanced_bLIMEy,
 }
