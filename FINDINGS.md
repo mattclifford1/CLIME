@@ -667,9 +667,18 @@ Three parts, two favourable:
 
 | | KL | Brier |
 |---|---|---|
-| **level** — ρ(log score, cosine), pooled over surrogates and 3,080 points | **−0.42** | −0.38 |
+| **level** — ρ(log score, cosine), pooled over surrogates and 3,080 points | **−0.45** | −0.40 |
 | **direction** — fidelity names the same winner as the truth | 115/153 (75%) | 108/153 (71%) |
 | **magnitude** — ρ(fidelity gain, explanation gain), paired | −0.29 | −0.18 |
+
+*Corrected 2026-10-02.* The level row used to read −0.42 and −0.38, and the full grid's −0.11
+in the write-up came from the same code. `analyse_gradient_truth.pooled` filtered the
+scores and the cosines for NaN separately and then truncated both to a common length. From
+the first NaN cosine onward (23 points for standard LIME, 27 for Logit-LIME, almost all of
+them zero coefficient vectors),
+each score was paired with a neighbouring point's cosine. Paired per point, as
+`fig_fidelity_explanation.py` always did, the values are −0.45 and −0.40 on the registered
+grid and −0.23 and −0.17 on the full one. The conclusions are unchanged.
 
 A proper scoring rule is a sound instrument for **ranking** two surrogates and a poor one
 for **sizing** the difference: the four-to-seven-order-of-magnitude fidelity wins are the
@@ -708,7 +717,7 @@ the point:
 2. **On the grid it ties rather than misleads.** Fidelity returns an identical number for
    the two surrogates at 41% of the query points where their explanations differ (KL: 0%).
    At 19% of points all three surrogates score exactly 1.000 on the local sample, and at
-   19% of those their cosines still span more than 0.2. Compression is not monotone: a
+   20% of those (19% before B20) their cosines still span more than 0.2. Compression is not monotone: a
    Brier ratio of 100–1,000 buys +0.035 of agreement, above 1,000 buys +0.018.
 
 3. **Where it does answer it is systematically wrong about which surrogate to use.** This is
@@ -726,10 +735,11 @@ cosine — held (51.4%, cosine 0.837). P7 fidelity's level ρ within 0.1 of KL's
 **The base rate.** The null explainer (`sweep_null.py`): g ≡ the locality-weighted mean of
 f over the neighbourhood — the constant minimising the local Brier score, so not a straw
 man — with the zero vector as its explanation. P8 (mean local fidelity ≥ 0.90) **failed**:
-it is 0.837, and ≥ 0.90 in only 18% of configurations. The mean is the wrong summary
-though — it scores a *perfect* 1.000 at 12% of query points, a perfect mean over all 20
-points in 8 of 168 configurations, and beats or ties standard LIME at 46% of points (P9
-held). P10 (KL ranks it worst at > 95%) **failed** at 37%, and the reason is worth more
+it is 0.838 (0.837 before B20), and ≥ 0.90 in only 18% of configurations. The mean is the
+wrong summary though — it scores a *perfect* 1.000 at 12% of query points, a perfect mean
+over all 20 points in 10 of 168 configurations (7 of 168 in the test-data cell, 8 before
+B20), and beats or ties standard LIME at 46% of the 1,680 points with a gradient truth (44%
+over all 168 configurations) (P9 held). P10 (KL ranks it worst at > 95%) **failed** at 37%, and the reason is worth more
 than the prediction was: **the hard-label surrogate is worse than saying nothing, under KL,
 at 45% of query points** (standard LIME 12%, Logit-LIME 18%). KL contains log g and prices
 a confident error without limit. Fidelity crowns that surrogate; KL puts it below a
@@ -893,6 +903,79 @@ depending on BLAS thread count; they stop at their iteration cap.
 **toy_datasets bug, not fixed here.** Its `GaussianGenerator` re-seeds before each class, so
 class 1 is an exact translate of class 0. The Gaussian family is generated in
 `export_toy_datasets.py` instead.
+
+
+### The same model class, fitted by cross-entropy (sixth registration, 2026-10-02)
+
+Predictions and outcome: `PREREGISTRATION.md`, sixth registration. Sweep:
+`sweeps/sweep_soft_logistic.py` (`run_full.py soft_logistic`), the new surrogate alone over
+the full grid. Analysis: `analysis/analyse_soft_logistic.py`, which joins it to the stored
+standard, Logit-LIME and hard-label results; the join is checked to 0.0. Write-up:
+`sec:softlabel`.
+
+**What it is.** `bLIMEy (soft-label logistic regression)` (`clime/models/soft_logistic_regression.py`)
+is a logistic regression fitted to the black box's probabilities: each sampled point enters
+twice, weighted w·p as class 1 and w·(1−p) as class 0, so the fit minimises the weighted
+cross-entropy against p, the KL projection onto the sigmoid-linear class. C = 0.5 is the
+nominal match to ridge α = 1. It is not a LIME baseline. It is Logit-LIME's own model class
+and log-odds reading, with a different loss and no clip. It differs from the existing
+`bLIMEy (logistic regression)`, which is fitted to `round(p)`, the black box's classes.
+
+**Outcome.** 31 registered configurations had been seen (28 in the review probe, 3 Moons
+configurations in a smoke test that printed the surrogate's own scores); the test is the
+other 137.
+
+| | registered | blind registered (137) | rest of the full grid (960) |
+|---|---|---|---|
+| S1 better Brier than standard LIME | ≥ 90%, group D > 1× | 84%, group D 1.06× — **refuted** | 94%, 1.09× |
+| S2 better KL than Logit-LIME | ≥ 70% | 78% | 82% |
+| S3 Logit-LIME's wins are group A | ≥ 60% | 68% | 68% |
+| S4 better KL than hard-label | ≥ 90% | 89% — **missed** | 93% |
+| S5 explanation: ≥ Logit-LIME − 0.02, beats standard in ≥ 85% (differentiable black boxes: 135 blind registered, 614 on the 57 other datasets) | | 0.872 vs 0.885 / 0.852; 59% — **refuted** | 0.853 vs 0.890 / 0.845; 66% |
+| S6 ρ(R²_logit, its advantage) | ≥ 0.5 | 0.64 | 0.73 |
+| S7 ρ(saturation, its KL edge over Logit-LIME) | ≥ +0.3 | +0.68 | +0.68 |
+
+**What it says.**
+
+- *The group D harm is Logit-LIME's loss, not logit space.* Blind group D: Logit-LIME
+  0.75× (better in 4/29), the soft-label fit 1.06× (24/29), and lower KL than Logit-LIME in
+  29/29 by a median 2.9× (170/171 on the full grid). With the 13 seen configurations, 1.10×
+  and 37/42. Least squares chases a step function's log-odds of ±20 at the clip, while
+  cross-entropy treats a saturated probability as a confident label.
+- *What "saturation decides how much" measured is largely the clip* (S7).
+- *Where Logit-LIME wins, the log-odds are linear and the penalty decides* (S3). On group A
+  both fits contain the black box. At C = 0.5 against α = 1 the soft-label fit is the more
+  shrunk; at C = 50 it is a median 4,000× better on group A, and it beats Logit-LIME at
+  α = 0.01 on KL in 91% of the registered grid. The group A ratios are about constants.
+- *S1's failure is near break-even.* Of the 22 blind configurations where it is not better
+  than standard LIME, 3 are numerically exact for both it and standard LIME (Circles with
+  logistic and LDA, standard LIME at 3.3×10⁻¹² against 1.9×10⁻¹⁰ for the soft-label fit;
+  Direct Marketing with naive Bayes, 0 for both). The hard-label surrogate is not exact on
+  the two Circles configurations (0.22); on Direct Marketing it is 0 too. The other 19
+  are within 0.885–1.0×, on Credit Scoring 1, Abalone Gender, Direct Marketing, Circles and
+  Iris.
+- *The explanation result is the informative failure* (S5). Mean cosine is within 0.02 of
+  Logit-LIME's, but it beats standard LIME's explanation in only 59%. In 38% the two
+  cosines are within 1e-3, and it beats Logit-LIME's in 19% (Logit-LIME beats standard
+  LIME's in 90%). Without Bayes Optimal, whose `predict_proba` rows fail to sum to 1 in high
+  dimensions (an open bug, below), the shares are 61% and 69% and the verdict stands. The
+  estimating equations explain it. Cross-entropy is stationary at
+  Σ w (p − σ(g)) x = 0, a residual in probability units like standard LIME's
+  Σ w (p − g) x = 0, whereas Logit-LIME's Σ w (logit p̃ − g) x = 0 weighs the tails. The best
+  model of the neighbourhood is not the best slope at q, the same trade as the Taylor
+  surrogate.
+- *Fidelity, unregistered:* test-data fidelity rates it above standard LIME in 80% of
+  registered configurations but crowns it in only 24/168. It crowns the hard-label surrogate
+  in 94. KL crowns it in 111.
+
+**Correction to the review.** `LOGIT-LIME-REVIEW.md` §2.1 reported 32/32 wins over standard
+LIME and 26/32 over Logit-LIME from a probe on four datasets. The registered run reproduces
+both on those 32 configurations at tol = 1e-8. What did not hold is the generalisation: on
+the 137 blind registered configurations it beats standard LIME in 84%.
+
+**Practical consequence.** To model the neighbourhood, fit the sigmoid surrogate by
+cross-entropy. For the coefficients a user reads, Logit-LIME's least squares in logit space
+recovered the gradient best here. Both report log-odds.
 
 ---
 
@@ -1522,6 +1605,131 @@ after B20 changed the SVM rows, 14/42 and 16/42, median −0.0012 and −0.0018)
 is unchanged, but it is now a test: before, the global column applied the natural test-split
 balance in every cell, so undersampling never reached it.
 On degraded black boxes the global scheme improves 29/210 rather than 19/210.
+
+
+### B20 — fidelity compared the surrogate with `SVC.predict`, not with the probabilities it was fitted to. `clime/evaluation/faithfulness.py` — **FIXED**
+
+Found on 2026-10-02 in the Logit-LIME review (`LOGIT-LIME-REVIEW.md`, R7).
+
+`_get_preds` took the black box's class from `black_box_model.predict(X)`. For an `SVC` with
+`probability=True`, `predict` is the sign of the decision function, while `predict_proba`
+comes from a Platt model that sklearn fits by internal cross-validation. The two disagree,
+by an amount that depends on the dataset. On 2,000-point local samples it is 0.5% of points
+on Pima, 1.2% on Breast Cancer, 1.7% on Banknote, 2.4% on Gaussian, 6% on Ionosphere and 18%
+on Abalone Gender, and 57% at one Abalone query point (means over the 20 query points of
+`predict != argmax(predict_proba)` on `get_local_points(test, q, 2000)`). Every surrogate is fitted to
+`predict_proba`, and the paper defines fidelity through f(x) − ½. A surrogate that
+reproduced the SVM's probabilities exactly therefore scored below 1.
+
+Fixed: `black_box_class(model, X)` is the argmax of `predict_proba`, and `_get_preds` uses
+it. The argmax, rather than p ≥ ½, keeps sklearn's tie rule. Checked on 6 datasets × all 20
+registered black boxes, 61,664 points each: `predict` equals the argmax exactly for 18 of
+the 20, so every fidelity number for those is bit-identical. `p ≥ ½` would also have moved
+the two random forests, which have exact 0.5 vote fractions (230 and 210 points), and Bayes
+Optimal, whose unnormalised rows (B21) can put p1 below ½ for the argmax class. Only
+`'SVM'` and `'SVM balanced training'` move, with model balancer `'none'` or
+`'boundary adjust'`. Under `'probability adjust'` every black box moves, because that
+wrapper's `predict` is the unadjusted class and its `predict_proba` the reweighted one. No
+stored result uses it. Tests:
+`test_fidelity_reads_the_black_box_probabilities_not_predict`,
+`test_black_box_class_keeps_sklearns_tie_rule` and
+`test_black_box_class_matches_predict_where_sklearn_agrees`.
+
+**Effect.** The CIKM paper uses a random forest and is unchanged. aLIMEgn's SVM rows (the
+marginal and balance sweeps) were recomputed by that thread; no registered verdict moved
+(see B19 and §5). In Logit-LIME only the SVM rows of four files change, recomputed
+by `experiments/logit_lime/sweeps/patch_b20_svm_fidelity.py`. Pre-fix copies are in
+`results/archive/pre-B20/`, and Brier and KL reproduce exactly in every recomputed row.
+
+| SVM rows | configurations | mean change in config-mean fidelity, test / local | points moved, test / local | Logit-LIME vs standard sign flips, test / local |
+|---|---|---|---|---|
+| registered | 14 | +0.007 / +0.012 (largest 0.08 / 0.15) | 50% / 56% | 1 / 2 |
+| full grid | 71 | +0.002 / +0.007 | 58% / 48% | 3 / 6 |
+
+Numbers in the write-up that moved: the CIKM-protocol count, 102 → 103 of 168 (p 7e-8 →
+5e-8), and 858 → 859 of 1,201 on the full grid; configurations where Brier and fidelity
+disagree on sign, 52 → 51; local-sample fidelity p 0.55 → 0.47; and the null explainer,
+mean local fidelity 0.837 → 0.838, perfect mean *test-data* fidelity in 8 → 7 configurations
+(Credit Scoring 1 | SVM drops out; the local-sample count stays at 10), ≥ standard LIME at 46.0% → 45.8% of the 1,680 points with a gradient truth. In the prose, the share of all-perfect points whose cosines span more than 0.2 goes 19% → 20%. In the tables: the
+fidelity-proxy table's local-sample row, tracks +0.28 → +0.27, blind 19.0% → 19.2%, crowns
+24/50/80 → 23/51/80; its test-data blind share 13.8% → 13.1%; and the 2×2 table's group C
+fidelity difference, local / test, +0.0020 / +0.0060 → +0.0028 / +0.0072. The third registration's
+blind 70 configurations contain no SVM, so P5–P7 are unchanged; P8–P10 keep their verdicts.
+
+Not changed, and worth knowing: `bLIMEy._sample_locally` still sets
+`sampled_data['y'] = black_box_model.predict(X)`, which the CIKM class weights count, while
+the instance weights use `np.round(p)`. For the SVM the two disagree. That belongs to the
+aLIMEgn thread, which has flagged it.
+
+
+### B21 — Bayes Optimal returns unnormalised probabilities in high dimensions. `clime/models/bayes_optimal.py` — **OPEN**
+
+Found on 2026-10-02 by the review of the soft-label sweep. `Guassian_class_conditional.predict_proba`
+normalises the two class densities with `sklearn.preprocessing.normalize(norm='l1')`. When
+both densities underflow, which happens far from both means in high dimensions, `normalize`
+leaves any row whose l1 norm is below 10·eps unscaled, so the rows no longer sum to 1, or
+they are [0, 0]. A surrogate that models column 1 alone then predicts p0 = 1 − p1 ≈ 1
+against a "black box" of ≈ 0, which gives a Brier score near 1 and a negative KL.
+
+Scope, measured on the soft-label sweep: 24 Bayes Optimal configurations of the full grid
+have Brier > 0.3 or negative KL, 3 of them on registered datasets (Sonar, Ionosphere, Direct
+Marketing) and the rest on wide data (Arrhythmia, Digits, SPECTF, MakeClf d ≥ 30, Gauss
+d30, …). The stored standard LIME and Logit-LIME rows for those configurations are equally
+meaningless: in `results_gradient_truth_full.json`, Logit-LIME's mean local Brier is 0.94–1 there (1 − 2e-9
+where every point is affected).
+Every Bayes Optimal number is affected where this happens: the gradient-truth table's
+Bayes optimal row, group B's counts that include it, the third registration's blind
+extension (P5–P7), the fifth registration's N5, and the Taylor and fidelity sweeps. The
+sixth registration's S5 verdict does not depend on it (61% without Bayes Optimal, against a
+registered 85%).
+
+Fix, not applied here: compute in log space,
+`softmax(column_stack([multivariate_normal.logpdf(X, m, c) for m, c in ...]), axis=1)`.
+This matches the old output to 2e-16 on rows that were already normalised. Then rerun the
+Bayes Optimal rows of every file that holds them and recheck the numbers listed above.
+
+### B22 — top-1 scores an all-zero explanation as naming feature 0. `experiments/logit_lime/sweeps/sweep_gradient_truth.py` — **OPEN**
+
+`top1 = argmax(|c|) == argmax(|truth|)` with c all zeros (the one-class fallback of the
+hard-label surrogate, B12) returns feature 0, so the point counts as a hit whenever feature
+0 is the true top feature. Cosine and rank ρ are also NaN at these points. The counts below
+are points with a NaN cosine, which for standard LIME include 1 registered and 22 full-grid
+points whose coefficients are not zero but whose cosine underflowed. The soft-label
+sweep records NaN there; `sweep_taylor.py` records 0.0, a miss. Effect on the stored
+gradient-truth results, mean over configurations as stored → with those points excluded:
+
+| | NaN-cosine points | standard | Logit-LIME | hard-label |
+|---|---|---|---|---|
+| registered (154) | 23 / 27 / 212 | 0.689 → 0.693 | 0.768 → 0.765 | 0.658 → 0.675 |
+| full grid | 205 / 233 / 2,052 | 0.637 → 0.643 | 0.759 → 0.760 | 0.574 → 0.635 |
+
+On the registered grid the hard-label surrogate stays the lowest of the three, so its
+ranking holds, but the write-up's pooled "top-1 0.66 against 0.77" changes either way: 0.64
+against 0.76 counting those points as misses, 0.69 against 0.77 excluding them (standard
+LIME 0.69 too). Pick one convention, NaN or a
+miss, apply it in `sweep_gradient_truth.py` and `sweep_taylor.py`, and regenerate.
+
+
+### B23 — two synthetic test sets are not independent of the training set. `clime/data/loaders/sklearn_synthetic.py`, `clime/data/loaders/gaussian.py` — **OPEN**
+
+Found on 2026-10-02 by the audit of the Logit-LIME write-up's setup section.
+
+- **Blobs.** `_generic_loader` bumps the seed for the test draw except when the loader is
+  `make_blobs`, so Blobs' test set is its training set, row for row.
+- **Gaussian.** `get_gaussian` seeds class c with `RANDOM_SEED + c` and adds 1 for the test
+  draw. Class 0's test seed is therefore class 1's training seed, and with identity
+  covariance both classes draw the same standard normals. Class 0's test points are class
+  1's training points translated by mean₀ − mean₁ = −[2, 2]. Class 1's test draw is fresh.
+
+Moons and Circles are drawn independently. Each Gaussian test class is still a valid sample
+from its class distribution, so the test set has the right distribution. What is lost is
+independence from the training draw. That matters most for the black box's own test
+accuracy, which is optimistic for these two datasets. It matters less for the explainer
+metrics. The `'test data'` fidelity and Brier cells compare a surrogate with the black box
+on these points, and the query points sit on the test set's class-mean line. The
+local-sample metrics behind every main Logit-LIME result are drawn around q. Not fixed:
+giving each class its own test seed (e.g. `RANDOM_SEED + label + n_classes`) and bumping the
+Blobs seed would change every Gaussian and Blobs number, so it needs a deliberate rerun.
 
 ---
 
