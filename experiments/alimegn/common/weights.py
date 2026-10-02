@@ -115,7 +115,8 @@ class _weighting_bLIMEy(bLIMEy):
         # stored before super().__init__, which fits the surrogate before it returns
         self._reference = train_data if train_data is not None else test_data
         self._black_box = black_box_model
-        super().__init__(black_box_model, query_point, test_data=test_data, **kwargs)
+        super().__init__(black_box_model, query_point, test_data=test_data,
+                         train_data=train_data, **kwargs)
 
     def _get_sampled_weights(self, sampled_data):
         weights = kernel_weights(self.query_point, sampled_data['X'])

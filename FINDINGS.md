@@ -1461,6 +1461,41 @@ paper's Table 3 lists *worst texture*, *radius error* and so on rather than *fea
 *feature 10*. Tests: `test_both_splits_describe_the_same_features` (over every registered
 dataset), `test_named_datasets_keep_their_names`.
 
+### B19 — `'bLIMEy (cost sensitive class)'` weighted by the test split's class balance. `clime/explainer/BLIMEY.py` — **FIXED**
+
+Found on 2026-10-02 while reviewing the aLIMEgn sweeps (`ALIMEGN-REVIEW.md`, A1).
+
+`class_weight_data` is documented, in the registry comment and in
+`clime/explainer/README.md`, as weighting each sampled point by the inverse class frequency
+of the black box's **training** data. `bLIMEy` never stored the training split: the pipeline
+passes `train_data`, `bLIMEy.__init__` swallowed it in `**kwargs`, and the weights were
+computed from `self.test_data`, the only data dict it kept.
+
+`proportional_split` gives both splits the same class proportions, so on unmodified data
+the two balances agree to within rounding and nothing visible happened. They part company as
+soon as the training split is rebalanced, which is exactly the case the scheme exists for:
+on Gaussian data with class 0 undersampled to 20% the training set is 40:200 and the weights
+should be [5, 1]; the test set is still 200:200, and the weights applied were [1, 1].
+
+Fixed: `bLIMEy` takes `train_data` and `class_weight_data` reads it, raising rather than
+substituting the test split when it is absent. Tests:
+`test_data_class_weights_come_from_the_training_split` (which also checks that the test
+split's balance plays no part) and `test_data_class_weights_refuse_to_guess_the_training_split`.
+Both fail on the old code.
+
+**Effect.** The CIKM paper does not use this scheme, and Logit-LIME does not either. In
+aLIMEgn every sweep was rerun from an empty cache; the other five weighting schemes came
+out bit-identical, and the global scheme moved by at most 0.05 in local fidelity on natural data, where the two
+splits share a balance. The grid sweep, on balanced synthetic data, was bit-identical.
+Where it mattered is the undersampled cells, which decide P7. There the global scheme had
+been a near no-op (better than standard LIME in 9/42 in both cells, median −0.0001 and
+−0.0005); with the training balance it applies weights of median 5:1 and moves the
+surrogate both ways (better in 15/42 and 18/42, median −0.0018 and −0.0010, local KL worse;
+after B20 changed the SVM rows, 14/42 and 16/42, median −0.0012 and −0.0018). P7's verdict
+is unchanged, but it is now a test: before, the global column applied the natural test-split
+balance in every cell, so undersampling never reached it.
+On degraded black boxes the global scheme improves 29/210 rather than 19/210.
+
 ---
 
 ## 7. Suggested next experiments

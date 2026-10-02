@@ -48,7 +48,7 @@ All variants are one-line wrappers in `__init__.py` that flip a boolean:
 |---|---|
 | `weight_locally=True` *(default)* | exponential distance kernel `w_x`, width `0.75·√|D|` |
 | `class_weight_sampled` | multiply by `w_c ∝ 1/n_c` over the **sampled** labels `f(X_s)` — this is the CIKM paper's `w_xc` |
-| `class_weight_data` | multiply by `w_c` over the **black box's training data** class counts |
+| `class_weight_data` | multiply by `w_c` over the **black box's training data** class counts (`train_data`, required) |
 | `class_weight_sampled_probs` | as `class_weight_sampled`, but "class" means *above/below the query point's predicted probability* rather than above/below 0.5 |
 | `rebalance_sampled_data` | oversample the minority class in `X_s` instead of weighting (registered but commented out) |
 

@@ -12,7 +12,8 @@ from clime.data.utils import costs
 
 class bLIMEy:
     '''
-    create our own version of LIME that has no access to the training data
+    create our own version of LIME that has no access to the training data beyond its
+    class counts (read only by class_weight_data)
     current steps:
         - sample around the query point in the feature domain (Guassian)
         - get model probabilities from sampled data
@@ -23,6 +24,8 @@ class bLIMEy:
     Input:
         - clf: classifier with .predict_proba() attribute
         - query_point: data point to locally explain
+        - test_data: data dict whose covariance sets the sampling distribution
+        - train_data: the black box's training data, read only by class_weight_data
         - data_lim: *not yet implimented*
 
     Attributes:
@@ -42,10 +45,12 @@ class bLIMEy:
                        rebalance_sampled_data=False,
                        train_logits=False,
                        logistic_regression=False,
+                       train_data=None,   # the black box's training data (class_weight_data)
                        **kwargs
                        ):
         self.query_point = query_point
         self.test_data = test_data   # test set to get statistics from
+        self.train_data = train_data
         self.sampling_cov = sampling_cov
         self.samples = samples
         self.class_weight_data = class_weight_data
@@ -151,7 +156,13 @@ class bLIMEy:
 
         # black box training data class imbalance weights/costs
         if self.class_weight_data is True:
-            class_weights = costs.weight_based_on_class_imbalance(self.test_data)
+            # the class balance the black box was TRAINED on. The test split is not a
+            # stand-in for it: the two differ whenever the training data are rebalanced
+            # (FINDINGS.md B19)
+            if self.train_data is None:
+                raise ValueError('class_weight_data needs the black box\'s training data: '
+                                 'pass train_data')
+            class_weights = costs.weight_based_on_class_imbalance(self.train_data)
             class_preds_matrix = np.round(sampled_data['p(y|x)'])
             # apply to all instances
             instance_class_imbalance_weights = np.dot(class_preds_matrix, class_weights.T)
