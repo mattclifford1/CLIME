@@ -79,8 +79,10 @@ def write_table(results):
         lo, hi = s['ci'][k]
         return f'${s[k]:+.2f}$ {{\\scriptsize $[{lo:+.2f}, {hi:+.2f}]$}}'
     lines = [r'\begin{table}[tbp]', r'  \centering', r'  \footnotesize',
-             r'  \caption{Which quantity predicts Logit-LIME''s advantage (standard LIME''s '
-             r'local Brier score over Logit-LIME''s). $\rho$ is Spearman''s rank correlation '
+             # double-quoted raw strings: in r'...''s...' the doubled quote ends the raw
+             # string, so the rest is a plain string in which "\rho" is a carriage return
+             r"  \caption{Which quantity predicts Logit-LIME's advantage (standard LIME's "
+             r"local Brier score over Logit-LIME's). $\rho$ is Spearman's rank correlation "
              r'with the advantage, bracketed by a $95\%$ interval from resampling '
              r'\emph{datasets}, since the black boxes fitted to one dataset are not '
              r'independent. The registered and extended grids were seen before $\Rlogit$ was '

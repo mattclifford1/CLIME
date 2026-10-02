@@ -48,6 +48,21 @@ def pooled(rows, field, label):
     return np.array([x for x in v if np.isfinite(x)])
 
 
+def pooled_pairs(rows, field_x, field_y, label):
+    '''
+    (x, y) over every query point where BOTH are finite, so each pair is one point.
+
+    Filtering the two fields separately with pooled() and truncating to a common length -
+    as this script did until 2026-10-02 - pairs each score with a neighbouring point's
+    cosine from the first point whose cosine is NaN onward (a zero coefficient vector,
+    23 points for standard LIME and 27 for Logit-LIME on the registered grid).
+    '''
+    x = np.array([p[label][field_x] for r in rows for p in r['points']], dtype=float)
+    y = np.array([p[label][field_y] for r in rows for p in r['points']], dtype=float)
+    ok = np.isfinite(x) & np.isfinite(y)
+    return x[ok], y[ok]
+
+
 def summarise(rows, title):
     print(f'\n{title}   ({len(rows)} configurations, '
           f'{sum(len(r["points"]) for r in rows)} query points)')
@@ -123,12 +138,10 @@ def fidelity_tracks_explanation(rows, metric):
 
     pool_f, pool_c = [], []
     for label in ('standard', 'logit'):
-        f = pooled(rows, metric, label)
-        c = pooled(rows, 'cos', label)
-        n = min(len(f), len(c))
-        keep = f[:n] > 0
-        pool_f.append(np.log10(f[:n][keep]))
-        pool_c.append(c[:n][keep])
+        f, c = pooled_pairs(rows, metric, 'cos', label)
+        keep = f > 0
+        pool_f.append(np.log10(f[keep]))
+        pool_c.append(c[keep])
     rho_pooled = spearmanr(np.concatenate(pool_f), np.concatenate(pool_c))
 
     print(f'\n--- does {metric} predict explanation correctness? ---')

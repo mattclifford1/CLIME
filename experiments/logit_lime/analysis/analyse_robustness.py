@@ -111,11 +111,13 @@ def main():
 def write_table(slices):
     lines = [r'\begin{table}[tbp]', r'  \centering', r'  \scriptsize',
              r'  \setlength{\tabcolsep}{4pt}',
+             # double-quoted raw strings: a doubled quote inside r'...' ends the raw string,
+             # and '''' opened a triple-quoted string that swallowed the next source lines
              r'  \caption{The diagnostic across the full grid ($71$ datasets $\times$ $16$ '
-             r'black boxes). $\rho$ is Spearman''s correlation with Logit-LIME''s advantage, '
-             r'with a $95\%$ interval from resampling datasets. ``A better'''' is the fraction '
+             r"black boxes). $\rho$ is Spearman's correlation with Logit-LIME's advantage, "
+             r"with a $95\%$ interval from resampling datasets. ``A better'' is the fraction "
              r'of group A configurations where Logit-LIME wins. Configurations whose black box '
-             r'is constant to rounding over most neighbourhoods are excluded (``excl.'''').}',
+             r"is constant to rounding over most neighbourhoods are excluded (``excl.'').}",
              r'  \label{tab:robustness}',
              r'  \begin{tabular}{@{}llrrccr@{}}', r'    \toprule',
              r'    & slice & configs & excl. & $\rho$, $\Rlogit$ & $\rho$, $\Delta$ & A better \\',

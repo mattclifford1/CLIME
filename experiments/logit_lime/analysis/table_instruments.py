@@ -54,19 +54,21 @@ def main(path=None):
         r'\begin{table}[tbp]',
         r'  \centering',
         r'  \footnotesize',
+        # apostrophes go in double-quoted raw strings: inside r'...' a \' reaches LaTeX
+        # as an acute accent, rendering "surrogate's" as "surrogateś"
         r'  \caption{What each instrument can see. Entries are the dynamic range of the '
         r'instrument - its best reading minus its worst - as one property of the surrogate '
         r'is moved away from the truth and everything else is held exactly right '
         r'(Figure~\ref{fig:instruments}). \emph{direction} rotates the explanation through '
         r'a full turn, at the query point nearest the decision boundary and at the most '
         r'confident one; \emph{slope} multiplies the slope by $0.1$ to $10$, keeping '
-        r'$g(q)=f(q)$, which slides the surrogate\'s class boundary; \emph{confidence} '
+        r"$g(q)=f(q)$, which slides the surrogate's class boundary; \emph{confidence} "
         r'multiplies the whole log-odds by the same factors, which leaves the boundary '
         r'where it is. The last two columns take the largest range over the three query '
         r'points, so each instrument is shown at its most responsive. A bold zero is exact '
         r'in floating point, not rounded: every member of the family gets an identical '
-        r'reading. Spearman\'s small non-zero entries in the last two columns are a tie '
-        r'artefact rather than a response - it reads exactly $1$ until the surrogate\'s '
+        r"reading. Spearman's small non-zero entries in the last two columns are a tie "
+        r"artefact rather than a response - it reads exactly $1$ until the surrogate's "
         r'probabilities saturate to $0$ or $1$ in floating point, which only happens at the '
         r'top of the range.}',
         r'  \label{tab:instruments}',
