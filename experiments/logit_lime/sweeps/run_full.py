@@ -55,6 +55,11 @@ JOBS = {
     'kernel': ('results_kernel_full.json', full_grid.DATASETS,
                FULL + "from sweeps import sweep_kernel as m\nm.MODELS = full_grid.MODELS",
                "m.DATASETS = {datasets!r}\nm.run({out!r})"),
+    # sixth registration: the soft-label logistic surrogate, joined in the analysis to the
+    # stored standard / Logit-LIME / hard-label results above
+    'soft_logistic': ('results_soft_logistic_full.json', full_grid.DATASETS,
+                      FULL + "from sweeps import sweep_soft_logistic as m",
+                      "m.run({out!r}, {datasets!r}, full_grid.FIDELITY_MODELS)"),
     'ridge_alpha': ('results_ridge_alpha.json', full_grid.REGISTERED,
                     "from sweeps import sweep_ridge_alpha as m, sweep",
                     "m.run({out!r}, {datasets!r}, sweep.MODELS)"),

@@ -18,6 +18,11 @@ SVM is every bit as smooth as the logistic regression, and the standard surrogat
 [0,1] there just as badly, yet fitting in logit space buys almost nothing. Smoothness is
 not the property that matters; linearity of the log-odds is.
 
+The soft-label logistic surrogate (sixth registration) is drawn dashed: it is Logit-LIME's
+own model class fitted by cross-entropy rather than least squares on a clipped logit, so on
+the logistic black box it lies on top of Logit-LIME, and the columns where the two part
+company are the ones where the loss, not the model class, is doing the work.
+
 The top row is a locator strip. Its horizontal axis is the same transect coordinate as
 the two rows below, so the reader can see what 'distance from q along the transect'
 means in the feature space, and what each black box's surface looks like along it.
@@ -32,6 +37,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from common import paths
 
 from common.style import *
+import json
 import numpy as np, warnings, clime
 from matplotlib.colors import LinearSegmentedColormap
 from clime.evaluation.key_points import get_points_between_class_means
@@ -77,10 +83,25 @@ MODELS = [('Logistic regression', 'Logistic'),
           ('SVM (RBF)', 'SVM'),
           ('Random forest', 'Random Forest')]
 
-# what the standard surrogate's Brier score is divided by, on this dataset, from the
-# registered sweep (results_taxonomy.json, Gaussian).
-BENEFIT = {'Logistic': '$12{,}600\\times$', 'MLP': '$9.7\\times$',
-           'SVM': '$1.4\\times$', 'Random Forest': '$1.6\\times$'}
+# what the standard surrogate's Brier score is divided by, on this dataset, over the 20
+# query points: Logit-LIME's from the registered sweep (results_taxonomy.json), the
+# soft-label surrogate's from results_soft_logistic_full.json (same evaluation points)
+_TAX = json.load(open(paths.results('results_taxonomy.json')))
+_SOFT = json.load(open(paths.results('results_soft_logistic_full.json')))
+
+
+def _ratio(x):
+    '''three significant figures, with a thousands separator mathtext can typeset'''
+    v = float(f'{x:.3g}')
+    body = f'{v:,.0f}'.replace(',', '{,}') if v >= 100 else f'{v:.3g}'
+    return f'${body}\\times$'
+
+
+def benefit(model):
+    m = _TAX[f'Gaussian|{model}']['metrics']['Brier score (local)']
+    std = m['bLIMEy (normal)']['mean']
+    return (_ratio(std/m['bLIMEy (logit)']['mean']),
+            _ratio(std/_SOFT[f'Gaussian|{model}']['mean Brier | local sample']))
 
 NOTE = {'Logistic': 'log-odds linear in $x$:\nLogit-LIME recovers $f$',
         'MLP': 'learned, but log-odds\nnearly linear',
@@ -98,9 +119,12 @@ for col, (nice, model) in enumerate(MODELS):
         clf, query_point=q, train_data=train, test_data=test)
     e_log = clime.explainer.AVAILABLE_EXPLAINERS['bLIMEy (logit)'](
         clf, query_point=q, train_data=train, test_data=test)
+    e_soft = clime.explainer.AVAILABLE_EXPLAINERS['bLIMEy (soft-label logistic regression)'](
+        clf, query_point=q, train_data=train, test_data=test)
     raw_std = e_std.surrogate_model.predict(line)[:, 1]   # unclipped: shows it leave [0,1]
     p_std = np.clip(raw_std, 0, 1)
     p_log = e_log.predict_proba(line)[:, 1]
+    p_soft = e_soft.predict_proba(line)[:, 1]
 
     # ---- locator strip: the feature space, rotated so the transect is horizontal ------
     ax = axs[0, col]
@@ -125,8 +149,9 @@ for col, (nice, model) in enumerate(MODELS):
     # the benefit sits as a column subtitle rather than inside a panel: all three panels
     # of a column are already carrying annotation, and it describes the column, not a panel
     ax.set_title(nice, color=INK, fontsize=8.5, pad=14)
-    ax.annotate(f'Brier {BENEFIT[model]} better', xy=(0.5, 1.03),
-                xycoords='axes fraction', ha='center', va='bottom', fontsize=6.5,
+    b_log, b_soft = benefit(model)
+    ax.annotate(f'Brier: logit {b_log}, soft {b_soft}', xy=(0.5, 1.03),
+                xycoords='axes fraction', ha='center', va='bottom', fontsize=6.0,
                 color=INK_2, annotation_clip=False)
     if col == 0:
         ax.set_ylabel('feature\nspace', fontsize=7.5, color=INK_2)
@@ -146,6 +171,8 @@ for col, (nice, model) in enumerate(MODELS):
     ax.plot(t, raw_std, color=BLUE, ls=':', lw=1.3, zorder=2)
     ax.plot(t, p_std, color=BLUE, lw=1.6, label='standard LIME', zorder=4)
     ax.plot(t, p_log, color=ORANGE, lw=1.6, label='Logit-LIME', zorder=4)
+    ax.plot(t, p_soft, color=AQUA, lw=1.4, ls=(0, (3.2, 1.6)), label='soft-label logistic',
+            zorder=5)
     ax.axvline(0, color=MUTED, lw=0.6, ls='--', zorder=1)
     ax.set_ylim(-0.35, 1.35)
     if col == 0:
@@ -158,6 +185,7 @@ for col, (nice, model) in enumerate(MODELS):
     ax.plot(t, logit(p_bb), color=INK, lw=3.4, zorder=3)
     ax.plot(t, logit(p_std), color=BLUE, lw=1.6, zorder=4)
     ax.plot(t, logit(p_log), color=ORANGE, lw=1.6, zorder=4)
+    ax.plot(t, logit(p_soft), color=AQUA, lw=1.4, ls=(0, (3.2, 1.6)), zorder=5)
     ax.axvline(0, color=MUTED, lw=0.6, ls='--', zorder=1)
     ax.set_ylim(-9.6, 13.6)          # headroom above the clipping level for the note
     ax.annotate(NOTE[model], xy=(0.03, 0.97), xycoords='axes fraction', fontsize=6.5,
@@ -173,8 +201,8 @@ fig.align_ylabels()
 fig.tight_layout(w_pad=1.1, h_pad=0.55, rect=(0, 0.075, 1, 1))
 fig.supxlabel('distance from $q$ along the transect', y=0.062, fontsize=9, color=INK)
 handles, labels = axs[1, 0].get_legend_handles_labels()
-fig.legend(handles, labels, loc='lower center', ncol=3, frameon=False,
-           bbox_to_anchor=(0.5, -0.005), handlelength=1.6, columnspacing=1.8)
+fig.legend(handles, labels, loc='lower center', ncol=4, frameon=False,
+           bbox_to_anchor=(0.5, -0.005), handlelength=1.8, columnspacing=1.5)
 
 # Make the locator strips true to scale: the transect coordinate and the perpendicular
 # offset are the same units, so an unequal aspect would draw the decision boundary at the

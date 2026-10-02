@@ -1,0 +1,471 @@
+{
+ "results": {
+  "registered, blind": {
+   "n": 137,
+   "n_diff": 135,
+   "n_logit_wins": 28,
+   "n_s6": 135,
+   "S1": {
+    "text": "better Brier than standard in 83.9% (>= 90%); group D median advantage 1.06 (> 1)",
+    "held": false
+   },
+   "S2": {
+    "text": "better KL than Logit-LIME in 78.1% (>= 70%)",
+    "held": true
+   },
+   "S3": {
+    "text": "67.9% of the 28 Logit-LIME wins are group A (>= 60%)",
+    "held": true
+   },
+   "S4": {
+    "text": "better KL than hard-label in 89.1% (>= 90%)",
+    "held": false
+   },
+   "S5": {
+    "text": "mean cosine soft 0.872 vs Logit-LIME 0.885 (>= -0.02) and standard 0.852; better than standard in 58.5% (>= 85%)",
+    "held": false
+   },
+   "S6": {
+    "text": "rho(R2_logit, advantage over standard) +0.637 (>= 0.5)",
+    "held": true
+   },
+   "S7": {
+    "text": "rho(saturation, Logit-LIME KL / soft KL) +0.677 (>= +0.3)",
+    "held": true
+   },
+   "values": {
+    "s1a": 0.8394160583941606,
+    "s1b": 1.0625485011595674,
+    "s2": 0.781021897810219,
+    "s3": 0.6785714285714286,
+    "s4": 0.8905109489051095,
+    "cos": {
+     "std": 0.852068393763629,
+     "logit": 0.8846610723328294,
+     "soft": 0.872317832908511
+    },
+    "s5b": 0.5851851851851851,
+    "s6": 0.6372258907729935,
+    "s7": 0.6770101248530764,
+    "near_tie": 0.37777777777777777,
+    "beats_logit": 0.18518518518518517,
+    "group_d": {
+     "n": 29,
+     "soft_adv": 1.0625485011595674,
+     "soft_wins": 24,
+     "logit_adv": 0.7529503905494825,
+     "logit_wins": 4,
+     "kl_wins": 29,
+     "kl_ratio": 2.9239509721976145
+    },
+    "s5_without_bayes_optimal": {
+     "n": 121,
+     "cos": {
+      "std": 0.8754768842030014,
+      "logit": 0.9106059092455671,
+      "soft": 0.9002998709667657
+     },
+     "better_than_std": 0.6115702479338843
+    },
+    "logit_beats_std": 0.9037037037037037,
+    "s1_losses": 22,
+    "s1_numerically_null": 3,
+    "s1_loss_band": [
+     0.8851982079133505,
+     0.9997688631045285
+    ],
+    "s1_loss_datasets": [
+     "Abalone Gender",
+     "Circles",
+     "Credit Scoring 1",
+     "Direct Marketing",
+     "Iris"
+    ]
+   }
+  },
+  "registered, seen (probe and smoke test)": {
+   "n": 31,
+   "n_diff": 18,
+   "n_logit_wins": 4,
+   "n_s6": 31,
+   "S1": {
+    "text": "better Brier than standard in 100.0% (>= 90%); group D median advantage 1.23 (> 1)",
+    "held": true
+   },
+   "S2": {
+    "text": "better KL than Logit-LIME in 87.1% (>= 70%)",
+    "held": true
+   },
+   "S3": {
+    "text": "100.0% of the 4 Logit-LIME wins are group A (>= 60%)",
+    "held": true
+   },
+   "S4": {
+    "text": "better KL than hard-label in 93.5% (>= 90%)",
+    "held": true
+   },
+   "S5": {
+    "text": "mean cosine soft 0.927 vs Logit-LIME 0.923 (>= -0.02) and standard 0.845; better than standard in 55.6% (>= 85%)",
+    "held": false
+   },
+   "S6": {
+    "text": "rho(R2_logit, advantage over standard) +0.711 (>= 0.5)",
+    "held": true
+   },
+   "S7": {
+    "text": "rho(saturation, Logit-LIME KL / soft KL) +0.648 (>= +0.3)",
+    "held": true
+   },
+   "values": {
+    "s1a": 1.0,
+    "s1b": 1.2315768673174412,
+    "s2": 0.8709677419354839,
+    "s3": 1.0,
+    "s4": 0.9354838709677419,
+    "cos": {
+     "std": 0.8451455791783731,
+     "logit": 0.9226664176093569,
+     "soft": 0.9266600802367222
+    },
+    "s5b": 0.5555555555555556,
+    "s6": 0.7105555031573647,
+    "s7": 0.648106188724471,
+    "near_tie": 0.6111111111111112,
+    "beats_logit": 0.2222222222222222,
+    "group_d": {
+     "n": 13,
+     "soft_adv": 1.2315768673174412,
+     "soft_wins": 13,
+     "logit_adv": 0.80747790350603,
+     "logit_wins": 2,
+     "kl_wins": 13,
+     "kl_ratio": 3.5805614352743858
+    },
+    "s5_without_bayes_optimal": {
+     "n": 18,
+     "cos": {
+      "std": 0.8451455791783731,
+      "logit": 0.9226664176093569,
+      "soft": 0.9266600802367222
+     },
+     "better_than_std": 0.5555555555555556
+    },
+    "logit_beats_std": 1.0,
+    "s1_losses": 0,
+    "s1_numerically_null": 0,
+    "s1_loss_band": null,
+    "s1_loss_datasets": []
+   }
+  },
+  "full grid beyond the registered datasets": {
+   "n": 960,
+   "n_diff": 614,
+   "n_logit_wins": 162,
+   "n_s6": 944,
+   "S1": {
+    "text": "better Brier than standard in 93.8% (>= 90%); group D median advantage 1.09 (> 1)",
+    "held": true
+   },
+   "S2": {
+    "text": "better KL than Logit-LIME in 82.3% (>= 70%)",
+    "held": true
+   },
+   "S3": {
+    "text": "67.9% of the 162 Logit-LIME wins are group A (>= 60%)",
+    "held": true
+   },
+   "S4": {
+    "text": "better KL than hard-label in 93.1% (>= 90%)",
+    "held": true
+   },
+   "S5": {
+    "text": "mean cosine soft 0.853 vs Logit-LIME 0.890 (>= -0.02) and standard 0.845; better than standard in 66.3% (>= 85%)",
+    "held": false
+   },
+   "S6": {
+    "text": "rho(R2_logit, advantage over standard) +0.731 (>= 0.5)",
+    "held": true
+   },
+   "S7": {
+    "text": "rho(saturation, Logit-LIME KL / soft KL) +0.681 (>= +0.3)",
+    "held": true
+   },
+   "values": {
+    "s1a": 0.9375,
+    "s1b": 1.086645045930987,
+    "s2": 0.8229166666666666,
+    "s3": 0.6790123456790124,
+    "s4": 0.93125,
+    "cos": {
+     "std": 0.8446340445057022,
+     "logit": 0.8901235078193154,
+     "soft": 0.8534564774072199
+    },
+    "s5b": 0.6628664495114006,
+    "s6": 0.7310684061720336,
+    "s7": 0.6811064517161989,
+    "near_tie": 0.4234527687296417,
+    "beats_logit": 0.1482084690553746,
+    "group_d": {
+     "n": 171,
+     "soft_adv": 1.086645045930987,
+     "soft_wins": 158,
+     "logit_adv": 0.8112259265125131,
+     "logit_wins": 36,
+     "kl_wins": 170,
+     "kl_ratio": 3.3557185287487736
+    },
+    "s5_without_bayes_optimal": {
+     "n": 559,
+     "cos": {
+      "std": 0.8779343579562499,
+      "logit": 0.9273379082454821,
+      "soft": 0.8890258001331126
+     },
+     "better_than_std": 0.6851520572450805
+    },
+    "logit_beats_std": 0.9185667752442996,
+    "s1_losses": 60,
+    "s1_numerically_null": 16,
+    "s1_loss_band": [
+     0.9174971571975591,
+     0.9999921477626886
+    ],
+    "s1_loss_datasets": [
+     "Abalone Gender",
+     "Breast Cancer Prognostic",
+     "Cervical Cancer",
+     "Chronic Kidney Disease",
+     "Circles",
+     "Credit Scoring 1",
+     "Credit Scoring 2",
+     "Direct Marketing",
+     "Gauss d30 r1 s4",
+     "Gauss d30 r3 s2",
+     "Gauss d30 r3 s4",
+     "Gauss d30 r3 s6",
+     "German Credit",
+     "Indian Liver Patient",
+     "MakeClf d10 i5",
+     "MakeClf d100 i5",
+     "MakeClf d200 i100",
+     "MakeClf d200 i5",
+     "SPECTF Heart",
+     "Stroke Prediction",
+     "Thoracic Surgery",
+     "Thyroid Sick",
+     "XOR"
+    ]
+   }
+  }
+ },
+ "groups_registered": {
+  "A linear": {
+   "n": 28,
+   "adv_logit": 1384.3536468936131,
+   "adv_soft": 139.74714844264554,
+   "wins_logit": 28,
+   "wins_soft": 26,
+   "kl_soft_vs_logit": 0.01641882944825126,
+   "kl_wins_vs_logit": 5,
+   "kl_wins_vs_hard": 25,
+   "n_diff": 42,
+   "cos": {
+    "std": 0.9382346919939241,
+    "logit": 0.9735603383533706,
+    "soft": 0.9568997304526033
+   },
+   "sat": 0.035812500000000004
+  },
+  "B quadratic": {
+   "n": 28,
+   "adv_logit": 0.9687430388246085,
+   "adv_soft": 1.1320539543356958,
+   "wins_logit": 11,
+   "wins_soft": 21,
+   "kl_soft_vs_logit": 2.470014120024068,
+   "kl_wins_vs_logit": 23,
+   "kl_wins_vs_hard": 21,
+   "n_diff": 55,
+   "cos": {
+    "std": 0.7689095920827307,
+    "logit": 0.8035686296324627,
+    "soft": 0.7978033052451942
+   },
+   "sat": 0.576525
+  },
+  "C smooth": {
+   "n": 28,
+   "adv_logit": 1.1606145114292965,
+   "adv_soft": 1.3024896192682989,
+   "wins_logit": 25,
+   "wins_soft": 25,
+   "kl_soft_vs_logit": 1.1875068787690473,
+   "kl_wins_vs_logit": 26,
+   "kl_wins_vs_hard": 27,
+   "n_diff": 42,
+   "cos": {
+    "std": 0.8391146856244114,
+    "logit": 0.8813782059737901,
+    "soft": 0.8713387176802676
+   },
+   "sat": 1.25e-05
+  },
+  "D piecewise constant": {
+   "n": 42,
+   "adv_logit": 0.7572124796832658,
+   "adv_soft": 1.1013827241239027,
+   "wins_logit": 6,
+   "wins_soft": 37,
+   "kl_soft_vs_logit": 3.095790379301472,
+   "kl_wins_vs_logit": 42,
+   "kl_wins_vs_hard": 37,
+   "n_diff": 0,
+   "cos": {
+    "std": NaN,
+    "logit": NaN,
+    "soft": NaN
+   },
+   "sat": 0.620825
+  },
+  "E calibrated forest": {
+   "n": 28,
+   "adv_logit": 1.005491242489076,
+   "adv_soft": 1.191461270190929,
+   "wins_logit": 14,
+   "wins_soft": 24,
+   "kl_soft_vs_logit": 1.1343974492519115,
+   "kl_wins_vs_logit": 25,
+   "kl_wins_vs_hard": 28,
+   "n_diff": 0,
+   "cos": {
+    "std": NaN,
+    "logit": NaN,
+    "soft": NaN
+   },
+   "sat": 0.0
+  },
+  "unassigned": {
+   "n": 14,
+   "adv_logit": 1.0716366325939979,
+   "adv_soft": 1.1732529094599022,
+   "wins_logit": 10,
+   "wins_soft": 13,
+   "kl_soft_vs_logit": 1.2398679611385075,
+   "kl_wins_vs_logit": 13,
+   "kl_wins_vs_hard": 13,
+   "n_diff": 14,
+   "cos": {
+    "std": 0.950225154198596,
+    "logit": 0.9952533421695848,
+    "soft": 0.984113734060266
+   },
+   "sat": 0.0
+  }
+ },
+ "groups_full": {
+  "A linear": {
+   "n": 181,
+   "adv_logit": 694.7769517618659,
+   "adv_soft": 201.88904499895148,
+   "wins_logit": 181,
+   "wins_soft": 180,
+   "kl_soft_vs_logit": 0.09114634439906447,
+   "kl_wins_vs_logit": 68,
+   "kl_wins_vs_hard": 169,
+   "n_diff": 171,
+   "cos": {
+    "std": 0.9204152675881944,
+    "logit": 0.961354553580561,
+    "soft": 0.9346942596255153
+   },
+   "sat": 0.198675
+  },
+  "B quadratic": {
+   "n": 181,
+   "adv_logit": 1.0014913736137014,
+   "adv_soft": 1.2261361006906057,
+   "wins_logit": 91,
+   "wins_soft": 160,
+   "kl_soft_vs_logit": 1.5926760756634366,
+   "kl_wins_vs_logit": 172,
+   "kl_wins_vs_hard": 159,
+   "n_diff": 215,
+   "cos": {
+    "std": 0.7822498707684047,
+    "logit": 0.8224383971718329,
+    "soft": 0.7928140882015224
+   },
+   "sat": 0.29307500000000003
+  },
+  "C smooth": {
+   "n": 185,
+   "adv_logit": 1.0840692786407857,
+   "adv_soft": 1.285524629249151,
+   "wins_logit": 141,
+   "wins_soft": 166,
+   "kl_soft_vs_logit": 1.0996916636071672,
+   "kl_wins_vs_logit": 169,
+   "kl_wins_vs_hard": 185,
+   "n_diff": 171,
+   "cos": {
+    "std": 0.813510347298773,
+    "logit": 0.8718782353930459,
+    "soft": 0.8134781019507329
+   },
+   "sat": 0.0
+  },
+  "D piecewise constant": {
+   "n": 171,
+   "adv_logit": 0.8112259265125131,
+   "adv_soft": 1.086645045930987,
+   "wins_logit": 36,
+   "wins_soft": 158,
+   "kl_soft_vs_logit": 3.3557185287487736,
+   "kl_wins_vs_logit": 170,
+   "kl_wins_vs_hard": 145,
+   "n_diff": 0,
+   "cos": {
+    "std": NaN,
+    "logit": NaN,
+    "soft": NaN
+   },
+   "sat": 0.62305
+  },
+  "E calibrated forest": {
+   "n": 114,
+   "adv_logit": 1.0656785690909245,
+   "adv_soft": 1.2981331200481008,
+   "wins_logit": 78,
+   "wins_soft": 111,
+   "kl_soft_vs_logit": 1.3487036332059328,
+   "kl_wins_vs_logit": 111,
+   "kl_wins_vs_hard": 112,
+   "n_diff": 0,
+   "cos": {
+    "std": NaN,
+    "logit": NaN,
+    "soft": NaN
+   },
+   "sat": 0.0
+  },
+  "unassigned": {
+   "n": 128,
+   "adv_logit": 4.21736863773067,
+   "adv_soft": 6.813382722119131,
+   "wins_logit": 113,
+   "wins_soft": 125,
+   "kl_soft_vs_logit": 1.1506517595650996,
+   "kl_wins_vs_logit": 100,
+   "kl_wins_vs_hard": 124,
+   "n_diff": 57,
+   "cos": {
+    "std": 0.9459701923793448,
+    "logit": 0.9864696753443664,
+    "soft": 0.9584170935994263
+   },
+   "sat": 0.0
+  }
+ },
+ "join_error": 0.0
+}

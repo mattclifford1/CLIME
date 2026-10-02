@@ -19,6 +19,10 @@ be drawn:
   (c) the coefficients that come out: the logit surrogate recovers the black box's own
       ranking, the standard one does not
 
+The soft-label logistic surrogate (sixth registration) is drawn alongside, dashed: the
+same model class as Logit-LIME fitted by cross-entropy against the probabilities, so the
+two should coincide on this black box, whose log-odds are exactly linear.
+
 The same three panels also show why the failure is invisible to a threshold based
 instrument: both surrogates put the boundary in nearly the same place. It is the
 probabilities, and the weights that produce them, that differ.
@@ -70,8 +74,12 @@ e_std = clime.explainer.AVAILABLE_EXPLAINERS['bLIMEy (normal)'](
     clf, query_point=q, train_data=train, test_data=test)
 e_log = clime.explainer.AVAILABLE_EXPLAINERS['bLIMEy (logit)'](
     clf, query_point=q, train_data=train, test_data=test)
+e_soft = clime.explainer.AVAILABLE_EXPLAINERS['bLIMEy (soft-label logistic regression)'](
+    clf, query_point=q, train_data=train, test_data=test)
 c_std = np.asarray(e_std.get_explanation(), dtype=float)
 c_log = np.asarray(e_log.get_explanation(), dtype=float)
+c_soft = np.asarray(e_soft.get_explanation(), dtype=float)
+SOFT_DASH = (0, (3.2, 1.6))
 
 # the transect runs along the query-point line, re-parameterised as distance from q
 direction = np.asarray(qs[-1]) - np.asarray(qs[0])
@@ -82,6 +90,7 @@ line = q[None, :] + t[:, None]*direction[None, :]
 p_bb = clf.predict_proba(line)[:, 1]
 raw_std = e_std.surrogate_model.predict(line)[:, 1]      # unclipped
 p_log = e_log.predict_proba(line)[:, 1]
+p_soft = e_soft.predict_proba(line)[:, 1]
 
 # the fidelity numbers quoted in the caption, from the same surrogate objects
 eval_data = get_local_points(test, q)
@@ -89,7 +98,7 @@ brier = clime.evaluation.AVAILABLE_EVALUATION_METRICS['Brier score (local)']
 kl = clime.evaluation.AVAILABLE_EVALUATION_METRICS['KL divergence (local)']
 scores = {label: (brier(e, black_box_model=clf, data=eval_data, query_point=q),
                   kl(e, black_box_model=clf, data=eval_data, query_point=q))
-          for label, e in (('standard', e_std), ('logit', e_log))}
+          for label, e in (('standard', e_std), ('logit', e_log), ('soft', e_soft))}
 
 
 def cosine(a, b):
@@ -113,6 +122,7 @@ ax.plot(t, p_bb, color=INK, lw=3.2, label='black box $f$', zorder=3)
 ax.plot(t, raw_std, color=BLUE, ls=':', lw=1.2, zorder=2)
 ax.plot(t, np.clip(raw_std, 0, 1), color=BLUE, lw=1.6, label='standard LIME', zorder=4)
 ax.plot(t, p_log, color=ORANGE, lw=1.6, label='Logit-LIME', zorder=4)
+ax.plot(t, p_soft, color=AQUA, lw=1.4, ls=SOFT_DASH, label='soft-label logistic', zorder=5)
 ax.axvline(0, color=MUTED, lw=0.6, ls='--', zorder=1)
 ax.set_ylim(-0.4, 1.4)
 ax.set_xlim(-T_LIM, T_LIM)
@@ -127,13 +137,20 @@ ax = axs[1]
 ax.plot(t, logit(p_bb), color=INK, lw=3.2, zorder=3)
 ax.plot(t, logit(np.clip(raw_std, 1e-12, 1 - 1e-12)), color=BLUE, lw=1.6, zorder=4)
 ax.plot(t, logit(p_log), color=ORANGE, lw=1.6, zorder=4)
+ax.plot(t, logit(p_soft), color=AQUA, lw=1.4, ls=SOFT_DASH, zorder=5)
 ax.axvline(0, color=MUTED, lw=0.6, ls='--', zorder=1)
 ax.set_xlim(-T_LIM, T_LIM)
 ax.set_ylabel('log-odds  $\\mathrm{logit}\\,p$')
 ax.set_xlabel('distance from $q$')
 ax.set_title('(b) where the black box is straight', fontsize=8.5, color=INK)
-ax.annotate(f"Brier  {scores['standard'][0]/scores['logit'][0]:,.0f}$\\times$ better\n"
-            f"KL     {scores['standard'][1]/scores['logit'][1]:,.0f}$\\times$ better",
+# logit() clips at -12, so extending the axis below that leaves an empty strip for the
+# ratios, clear of every curve and of the tick labels
+ax.set_ylim(-23, None)
+ax.annotate("better than standard\nin Brier, KL:\n"
+            f"logit  {scores['standard'][0]/scores['logit'][0]:,.0f}$\\times$, "
+            f"{scores['standard'][1]/scores['logit'][1]:,.0f}$\\times$\n"
+            f"soft    {scores['standard'][0]/scores['soft'][0]:,.0f}$\\times$, "
+            f"{scores['standard'][1]/scores['soft'][1]:,.0f}$\\times$",
             xy=(0.97, 0.03), xycoords='axes fraction', fontsize=6.2, color=INK_2,
             ha='right', va='bottom',
             bbox=dict(facecolor='white', edgecolor='none', alpha=0.85, pad=1.6))
@@ -144,13 +161,15 @@ ax.annotate(f"Brier  {scores['standard'][0]/scores['logit'][0]:,.0f}$\\times$ be
 # the black box ranks ninth being promoted to the top
 ax = axs[2]
 order = list(np.argsort(-np.abs(truth))[:N_FEATURES])
-extra = [int(np.argmax(np.abs(c))) for c in (c_std, c_log)]
+extra = [int(np.argmax(np.abs(c))) for c in (c_std, c_log, c_soft)]
 order += [i for i in dict.fromkeys(extra) if i not in order]
 ypos = np.arange(len(order))[::-1]
-h = 0.26
-ax.barh(ypos + h, unit_max(truth)[order], height=h, color=INK, label='black box (truth)')
-ax.barh(ypos, unit_max(c_std)[order], height=h, color=BLUE, label='standard LIME')
-ax.barh(ypos - h, unit_max(c_log)[order], height=h, color=ORANGE, label='Logit-LIME')
+h = 0.2
+ax.barh(ypos + 1.5*h, unit_max(truth)[order], height=h, color=INK, label='black box (truth)')
+ax.barh(ypos + 0.5*h, unit_max(c_std)[order], height=h, color=BLUE, label='standard LIME')
+ax.barh(ypos - 0.5*h, unit_max(c_log)[order], height=h, color=ORANGE, label='Logit-LIME')
+ax.barh(ypos - 1.5*h, unit_max(c_soft)[order], height=h, color=AQUA,
+        label='soft-label logistic')
 ax.set_yticks(ypos)
 ax.set_yticklabels([names[i] for i in order], fontsize=6.2)
 for tick, i in zip(ax.get_yticklabels(), order):
@@ -161,15 +180,17 @@ ax.set_xlim(-1.18, 0.62)
 ax.set_xlabel('weight, scaled to unit maximum')
 ax.set_title('(c) the explanation that comes out', fontsize=8.5, color=INK)
 ax.grid(axis='y', visible=False)
-ax.annotate(f'cosine to truth\nstandard  {cosine(c_std, truth):.2f}\n'
-            f'Logit-LIME  {cosine(c_log, truth):.2f}',
+# narrow, so it sits in the empty positive half of the axis rather than over the bars
+ax.annotate(f'cosine\nstd  {cosine(c_std, truth):.2f}\n'
+            f'logit  {cosine(c_log, truth):.2f}\n'
+            f'soft  {cosine(c_soft, truth):.2f}',
             xy=(0.985, 0.05), xycoords='axes fraction', fontsize=6.5, color=INK_2,
             ha='right', va='bottom',
             bbox=dict(facecolor='white', edgecolor='none', alpha=0.9, pad=1.6))
 
 fig.tight_layout(w_pad=1.4, rect=(0, 0.09, 1, 1))
 handles, labels = axs[0].get_legend_handles_labels()
-fig.legend(handles, labels, loc='lower center', ncol=3, frameon=False,
+fig.legend(handles, labels, loc='lower center', ncol=4, frameon=False,
            bbox_to_anchor=(0.5, -0.02), handlelength=1.6, columnspacing=1.8)
 
 fig.savefig(paths.fig('fig_justification.pdf'))
@@ -180,3 +201,5 @@ print(f"  Brier standard {scores['standard'][0]:.3e}  logit {scores['logit'][0]:
       f"   ratio {scores['standard'][0]/scores['logit'][0]:.1f}x")
 print(f"  KL    standard {scores['standard'][1]:.3e}  logit {scores['logit'][1]:.3e}"
       f"   ratio {scores['standard'][1]/scores['logit'][1]:.1f}x")
+print(f"  soft  Brier {scores['soft'][0]:.3e}  KL {scores['soft'][1]:.3e}   "
+      f"cos {cosine(c_soft, truth):.4f}")

@@ -24,7 +24,8 @@ for f in figures/fig_mechanism.py figures/fig_diagnostic.py figures/fig_spatial.
          analysis/table_instruments.py analysis/table_reading.py \
          analysis/analyse_range.py \
          analysis/analyse_diagnostic.py analysis/analyse_robustness.py \
-         figures/fig_robustness.py figures/fig_diagnostic_blind.py; do
+         figures/fig_robustness.py figures/fig_diagnostic_blind.py \
+         analysis/analyse_soft_logistic.py figures/fig_softlabel.py; do
     echo "=== $f"
     uv run python "$f" > /dev/null
 done

@@ -547,3 +547,127 @@ errors when the target is constant, which caused every |Δ| > 1 exclusion (fixed
 `sweep.guarded_r2`); α = 1 costs group A an order of magnitude (median 1.1e4× at α = 0.1
 against 1.4e3× at α = 1); and the lbfgs-fitted hard-label surrogate and polynomial logistic
 black box are BLAS-thread-sensitive on wide data (README).
+
+---
+
+# Sixth pre-registration: the same surrogate, fitted by cross-entropy
+
+Written **2026-10-02**, before `sweeps/sweep_soft_logistic.py` was run. Results go in
+`results/results_soft_logistic_full.json`; the outcome is scored by
+`analysis/analyse_soft_logistic.py`.
+
+## Status when written
+
+| part | status |
+|---|---|
+| 28 registered configurations: {Gaussian, Breast Cancer, Banknote, Pima} × {Logistic, MLP, SVM, RF, RF + Platt, decision tree, k-NN} | **seen** in an ad-hoc probe (`LOGIT-LIME-REVIEW.md` §2.1), with sklearn's default solver tolerance rather than the registered `tol = 1e-8`. Reported, never part of a test |
+| Nearest Class Mean on the same four datasets | seen, as above |
+| the other 140 registered configurations | blind |
+| the full grid apart from the 32 above | blind |
+
+## What is being tested
+
+Not a baseline in the sense of "what LIME does" — LIME does not do this. It is a second way
+of fitting Logit-LIME's own model class. Both surrogates are a sigmoid of a linear
+function and both report log-odds per unit feature. They differ only in the loss:
+
+| surrogate | target | loss |
+|---|---|---|
+| Logit-LIME (`bLIMEy (logit)`) | logit p, after rescaling p into [1e-9, 1 − 1e-8] | weighted least squares, ridge α = 1 |
+| hard-label (`bLIMEy (logistic regression)`) | round(p) | weighted cross-entropy, C = 1 |
+| soft-label (`bLIMEy (soft-label logistic regression)`) | p | weighted cross-entropy, C = 0.5 (the same nominal penalty as α = 1) |
+
+The question is whether what the study has attributed to fitting in logit space belongs to
+the model class or to least squares on a clipped logit. Two results are at stake: that
+logit space harms piecewise-constant black boxes, and that saturation decides how much it
+helps. The soft-label fit needs no clip, so a saturated probability is a confident label
+rather than a log-odds of ±20.
+
+## Predictions
+
+On the registered grid (14 datasets × the 12 registered black boxes, or × the 11
+differentiable ones for S5), scored on the 140 blind configurations, with the 28 seen ones
+reported alongside:
+
+**S1. It beats standard LIME almost everywhere, including where Logit-LIME loses.** Better
+local Brier than standard LIME in ≥ 90% of configurations, and a group D median advantage
+over standard LIME above 1 (Logit-LIME's is 0.76).
+
+**S2. It beats Logit-LIME as a fit.** Better local KL than Logit-LIME in ≥ 70% of
+configurations.
+
+**S3. Where Logit-LIME wins, the black box is linear in log-odds.** At least 60% of the
+configurations in which Logit-LIME has the better local Brier are group A. Group A is 17%
+of the grid.
+
+**S4. Rounding is what costs the hard-label surrogate.** Better local KL than the
+hard-label surrogate in ≥ 90% of configurations.
+
+**S5. No worse an explanation.** Over the differentiable configurations, mean cosine to
+∇logit f(q) at least Logit-LIME's minus 0.02, and better than standard LIME's in ≥ 85% of
+configurations.
+
+**S6. The diagnostic still sizes the gain.** ρ(R²_logit, soft-label advantage over standard
+LIME) ≥ 0.5, where the advantage is the ratio of local Brier scores.
+
+**S7. Its edge over Logit-LIME grows with saturation.** ρ(saturation, Logit-LIME's local
+KL / the soft-label surrogate's) ≥ +0.3.
+
+On the full grid, the same seven statements with the same thresholds, scored on the
+configurations not seen in the probe. They are reported separately and never pooled with
+the registered grid.
+
+Recorded without a prediction: the fidelity cells of the CIKM'23 protocol (for the 2×2
+table), and a second fit at C = 50, the nominal equivalent of α = 0.01.
+
+## Outcome (run 2026-10-02, `results/results_soft_logistic_full.json`, scored by `analysis/analyse_soft_logistic.py`)
+
+**Seen before scoring, beyond what the status table says.** A smoke test of the sweep, run
+before the full grid, printed the new surrogate's own scores for Moons × {Logistic, Random
+Forest, SVM}. It printed no comparison with the other surrogates. Those three are moved to
+the seen set, so the blind registered set is 137 configurations, not 140.
+
+| | registered | blind registered (137) | seen (31) | rest of the full grid (960) | |
+|---|---|---|---|---|---|
+| S1 | better Brier than standard ≥ 90%; group D median > 1 | 83.9%; 1.06 | 100%; 1.23 | 93.8%; 1.09 | **failed** (registered grid) |
+| S2 | better KL than Logit-LIME ≥ 70% | 78.1% | 87.1% | 82.3% | held |
+| S3 | ≥ 60% of Logit-LIME's Brier wins are group A | 67.9% of 28 | 4 of 4 | 67.9% of 162 | held |
+| S4 | better KL than hard-label ≥ 90% | 89.1% | 93.5% | 93.1% | **failed, narrowly** (registered grid) |
+| S5 | mean cosine ≥ Logit-LIME's − 0.02; better than standard ≥ 85% | 0.872 vs 0.885 (std 0.852); 58.5% | 0.927 vs 0.923; 55.6% | 0.853 vs 0.890 (std 0.845); 66.3% | **failed** (second half; both halves on the full grid) |
+| S6 | ρ(R²_logit, advantage over standard) ≥ 0.5 | +0.64 | +0.71 | +0.73 | held |
+| S7 | ρ(saturation, Logit-LIME KL / soft KL) ≥ +0.3 | +0.68 | +0.65 | +0.68 | held |
+
+Two choices the registration left open, fixed before the verdicts were read: the full-grid
+set is every configuration of the 71 × 16 grid outside the registered 14 × 12 (so it includes
+the registered datasets × the 4 black boxes added later), less the seen ones: 960
+configurations. S5 is the exception, because it needs a gradient. Its registered population
+is the 14 registered datasets × all 11 differentiable black boxes (135 blind), and its
+full-grid population is the 57 other datasets × the same 11 (614). S6 uses the fifth
+registration's guarded R²_logit on both grids.
+
+**S1 failed near break-even, not by a mechanism.** Of the 22 blind configurations where the
+soft-label surrogate is not better than standard LIME, 3 are numerically exact for both it
+and standard LIME (Circles × Logistic and LDA, where both Brier scores are below 1e-9; Direct
+Marketing × naive Bayes, 0 for both). The other 19 are at 0.885–1.0× on five datasets (Credit
+Scoring 1, Abalone Gender, Direct Marketing, Circles, Iris), the band the first registration's
+seed study found to be noise. The full grid clears the threshold. The group D clause held
+everywhere: Logit-LIME's harm on piecewise-constant black boxes is its loss.
+
+**S5 failed, and the failure is the finding.** The first half held on the registered grid, so
+there the soft-label explanation is no worse than Logit-LIME's on average. It failed on the
+full grid (0.853 against 0.890). It is barely better than standard
+LIME's: the two cosines are within 1e-3 in 38% of blind configurations, and it beats
+Logit-LIME's explanation in 19%. Cross-entropy's estimating equations,
+Σ w (p − σ(g)) x = 0, take residuals in probability units, as standard LIME's do.
+Logit-LIME's least squares on logit p̃ weighs the tails. The registration assumed the
+explanation would follow the model class. It follows the loss. The verdict does not depend on
+Bayes Optimal, whose probabilities fail to normalise in high dimensions (an unfixed bug in
+`clime/models/bayes_optimal.py`). Without it the share is 61% registered and 69% on the full
+grid.
+
+**Not registered, recorded:** at C = 50 (nominal α = 0.01) the soft-label fit is a median
+4,000× better on group A than at C = 0.5, and beats Logit-LIME at α = 0.01 on KL in 91% of
+the registered grid. Group A's ratios are set by the penalties. Test-data fidelity rates it
+above standard LIME in 80% of registered configurations yet crowns it in 24 of 168 (the
+hard-label surrogate: 94); KL crowns it in 111. lbfgs converged at every point; the one-class
+fallback was used at 22 of 3,360 registered query points.

@@ -40,8 +40,11 @@ from clime.evaluation.key_points import get_points_between_class_means
 warnings.filterwarnings('ignore')
 
 SHOW = 6            # features listed, by true importance
-COLUMNS = ['standard', 'logit']
-HEADING = {'standard': 'standard LIME', 'logit': 'Logit-LIME'}
+# the soft-label logistic surrogate (sixth registration) shares Logit-LIME's model class
+# and its log-odds reading, fitted by cross-entropy instead of least squares
+SURROGATES = {**SURROGATES, 'soft': 'bLIMEy (soft-label logistic regression)'}
+COLUMNS = ['standard', 'logit', 'soft']
+HEADING = {'standard': 'standard LIME', 'logit': 'Logit-LIME', 'soft': 'soft-label'}
 
 
 def unit_max(v):
@@ -111,23 +114,26 @@ def main(dataset='Breast Cancer', model='Logistic', point=None):
         f' with the {escape(model)} black box, at query point {point} of '
         f'{len(qs)} ' + "along the line between the class means. The black box's own "
         r'coefficients are the true local importances, since its log-odds are exactly '
-        r'linear. Each vector is scaled to unit maximum magnitude, because the two '
-        r'surrogates regress different quantities and their raw coefficients are not '
-        r'comparable in units; ranks and signs are unaffected. Rows are the '
+        r'linear. Each vector is scaled to unit maximum magnitude, because standard LIME '
+        r'regresses probabilities and the other two surrogates log-odds, so raw '
+        r'coefficients are not comparable in units; ranks and signs are unaffected. '
+        r'\emph{Soft-label} is the logistic regression fitted to the black box\textquoteright s '
+        r'probabilities. Rows are the '
         f'{SHOW} truly most important features, plus any feature a surrogate puts first. '
         r'Ranks are over all ' + f'{truth.size} features. ' +
-        f'At this point Logit-LIME attains cosine similarity {here["logit"][0]:.4f} '
-        f'against standard LIME\'s {here["standard"][0]:.4f}; over all {len(qs)} query '
-        f'points Logit-LIME names the true most important feature at '
-        f'{pct(over_all["logit"])} of them and standard LIME at '
-        f'{pct(over_all["standard"])}.' + r'}',
+        f'At this point the cosine similarity to the truth is {here["logit"][0]:.4f} for '
+        f'Logit-LIME, {here["soft"][0]:.4f} for the soft-label surrogate and '
+        f'{here["standard"][0]:.4f} for standard LIME; over all {len(qs)} query points '
+        f'they name the true most important feature at {pct(over_all["logit"])}, '
+        f'{pct(over_all["soft"])} and {pct(over_all["standard"])} of them.' + r'}',
         r'  \label{tab:example}',
-        r'  \begin{tabular}{lrrrrrr}',
+        r'  \begin{tabular}{lrrrrrrrr}',
         r'    \toprule',
         r'    & \multicolumn{2}{c}{black box (truth)} & '
-        r'\multicolumn{2}{c}{standard LIME} & \multicolumn{2}{c}{Logit-LIME} \\',
-        r'    \cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-7}',
-        r'    feature & weight & rank & weight & rank & weight & rank \\',
+        r'\multicolumn{2}{c}{standard LIME} & \multicolumn{2}{c}{Logit-LIME} & '
+        r'\multicolumn{2}{c}{soft-label} \\',
+        r'    \cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-7}\cmidrule(lr){8-9}',
+        r'    feature & weight & rank & weight & rank & weight & rank & weight & rank \\',
         r'    \midrule',
     ]
     for j, i in enumerate(shown):
@@ -150,7 +156,7 @@ def main(dataset='Breast Cancer', model='Logistic', point=None):
     print(f'\n{dataset} | {model} | query point {point} of {len(qs)}   '
           f'({truth.size} features)\n')
     print(f"{'feature':<26s} {'truth':>8s} {'rank':>5s} "
-          f"{'std':>8s} {'rank':>5s} {'logit':>8s} {'rank':>5s}")
+          f"{'std':>8s} {'rank':>5s} {'logit':>8s} {'rank':>5s} {'soft':>8s} {'rank':>5s}")
     for i in shown:
         print(f'{str(names[i]):<26s} '
               + ' '.join(f'{scaled[k][i]:>+8.2f} {rank[k][i]:>5d}'

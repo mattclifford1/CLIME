@@ -84,6 +84,8 @@ wrong.
 | `sweep_seeds.py` | `results_seed*.json` | a subset repeated under five random seeds |
 | `sweep_diagnostic_checks.py` | `results_diagnostic_checks.json` | what R²_logit is measuring (fifth registration, C1–C5): clip sensitivity, same-space curvature, gradient dispersion (no fit), in-sample advantage, its own salt |
 | `sweep_ridge_alpha.py` | `results_ridge_alpha.json` | both surrogates refitted at five ridge penalties on the same neighbourhood; α = 1 reproduces `results_taxonomy.json` exactly |
+| `sweep_soft_logistic.py` | `results_soft_logistic_full.json` | the sixth registration: Logit-LIME's model class fitted by cross-entropy against the probabilities (`bLIMEy (soft-label logistic regression)`) over the full grid, joined in `analysis/analyse_soft_logistic.py` to the stored standard, Logit-LIME and hard-label results; run by `run_full.py soft_logistic` |
+| `patch_b20_svm_fidelity.py` | the SVM rows of four files | provenance for `FINDINGS.md` B20: recomputes the SVM rows of the two fidelity and two null-explainer files after the fidelity metric stopped reading `SVC.predict`, archiving the old files in `results/archive/pre-B20/`. `rerun_all.sh` does not need it |
 | `run_full.py` | `results_*_full.json` | every experiment above again on the full grid (`full_grid.py`, 71 datasets × 16 black boxes), plus `results_querypoints_full.json` (20 random test points as query points) and `results_full_seed{1..4}.json` |
 
 The instrument and null sweeps exist because every fidelity number elsewhere is reported
