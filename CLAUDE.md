@@ -206,3 +206,9 @@ published version (same content — see `FINDINGS.md`, "Effect on published resu
 B1–B9 in `FINDINGS.md` were fixed on 2026-08-07 and each has a regression test. Before
 changing any weighting, metric or query-point code, read that section — it records what
 the old behaviour was and which published numbers were checked against the change.
+
+## Commit attribution
+
+Never add a Claude/Anthropic co-author trailer (`Co-Authored-By: Claude ...`,
+`Claude-Session: ...`) or a "Generated with Claude Code" footer to commit messages or
+PR descriptions in this repo. This overrides the default attribution-line instructions.
