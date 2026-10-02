@@ -13,7 +13,7 @@ Three threads, in order of maturity:
 |---|---|---|---|
 | **CIKM'23 — location-agnostic surrogates** | Published, DOI `10.1145/3583780.3615284` | `~/Repos/Overleaf/CIKM-2023-camera-ready` | complete, figures reproducible |
 | **Logit-LIME** | Sketch (~1 page) + first real results, see §4 | `~/Repos/Overleaf/Logit-LIME` | implemented, working, operating regime now characterised |
-| **aLIMEgn / aLIMEgnment** | Framing corrected, 8 predictions run, see §5 | `~/Repos/Overleaf/aLIMEgn` | `experiments/alimegn/`, 4 sweeps, 332 configurations |
+| **aLIMEgn / aLIMEgnment** | Framing corrected, 8 predictions run, see §5 | `~/Repos/Overleaf/aLIMEgn` | `experiments/alimegn/`, 4 sweeps, 500 configurations |
 
 `~/Repos/Overleaf/CLIME/` is **empty** — that clone has no content. The paper you're
 thinking of is `CIKM-2023-camera-ready`. `pre-cut-CIKM-2023-camera-ready` is *not* a
@@ -105,7 +105,10 @@ Not-yet-written observations sitting in the repo:
   sensitive class)'` and it is a genuinely interesting negative result: it says the
   useful signal is *local* class imbalance, not *global* class imbalance. `notes.txt`
   flags this as a research idea ("show other cost sensitive trained models where you
-  need to do other things for LIME") and it was never followed up.
+  need to do other things for LIME"). It was not followed up until E4 (§5, P7), which
+  confirms it across 14 datasets: local `ŷ` class weights help in all four cells of
+  {natural, undersampled training data} × {normal, balanced training}, global `y` class
+  weights never help by median.
 
 ---
 
@@ -895,10 +898,10 @@ class 1 is an exact translate of class 0. The Gaussian family is generated in
 
 ## 5. Thread 3 — aLIMEgn
 
-Framing note from June 2024. **Coded and run on 2026-09-12** — see
-`experiments/alimegn/` (six registered predictions in `PREREGISTRATION.md`, three sweeps,
-332 configurations) and the write-up in `~/Repos/Overleaf/aLIMEgn/`. The outcome is
-summarised at the end of this section.
+Framing note from June 2024. **Coded and run on 2026-09-12/13, rerun from an empty cache
+on 2026-10-02 after B19** — see `experiments/alimegn/` (eight registered predictions in
+`PREREGISTRATION.md`, four sweeps, 500 configurations) and the write-up in
+`~/Repos/Overleaf/aLIMEgn/`. The outcome is summarised at the end of this section.
 
 **The reframing.** The CIKM paper's contribution generalises. Sampling `X_g` should not
 target `P(X, y)` — the distribution that trained the black box — it should target
@@ -938,16 +941,20 @@ to say.
 taken from labels or from predictions — and through a black box degraded far enough that
 the two differ.
 
-**What the experiments found** (full numbers in the Overleaf write-up):
+**What the experiments found** (full numbers in the Overleaf write-up; fidelity figures are
+after B20, which changed how fidelity reads the SVM black boxes' class):
 
 - **The CIKM'23 collapse belongs to the evaluation marginal.** Standard LIME's local
-  fidelity varies by 0.26 along the line when scored on the test set and by 0.10 when
-  scored on the distribution it was trained on (58/67 configurations; registered as ≥5×,
-  measured 2.6×, so confirmed in direction, not in magnitude).
-- **Class weighting is a correction to that mismatch**: +0.034 fidelity on test data
-  against +0.004 on the surrogate's own marginal, worst query point 0.72 → 0.92. Every
-  scheme that repairs the test-set score makes the own-marginal score worse — the trade is
-  the signature of a marginal correction.
+  fidelity varies 1.9× more along the line when scored on the test set than when scored on
+  the distribution it was trained on (median 0.170 against 0.089, larger on test data in
+  61/84; registered as ≥5×, so confirmed in direction, not in magnitude). Among the 66
+  configurations that collapse at all (test-set variation above 0.1) it is 0.27 against
+  0.10, 2.8×, smaller locally in 58/66.
+- **Class weighting is a correction to that mismatch**: +0.041 fidelity on test data
+  against +0.004 on the surrogate's own marginal, worst query point 0.72 → 0.92. In local
+  KL every scheme that repairs the test-set score makes the own-marginal score worse (the
+  CIKM scheme is better on its own marginal in only 2/84) — the trade is the signature of a
+  marginal correction.
 - **An explicit density ratio beats it**, using no labels: better local KL than the CIKM
   class trick in 69/84 configurations, worst query point 0.94. The effect is covariate
   shift, and the class trick is a crude proxy for the correction (rank agreement between
@@ -960,12 +967,32 @@ the two differ.
 - **Degrading the black box destroys the effect rather than exposing it** — the opposite
   of the framing's expectation. The marginal effect falls monotonically with label noise
   (variation 0.35 → 0.12, ρ = −0.44, p = 2e-06) and the gain from class weighting falls
-  with it (+0.111 → +0.003). What is being corrected is the black box's *own* confident,
-  one-sided predictions away from the boundary, and a badly fitted black box does not make
-  them.
+  with it (+0.111 → +0.002). What is being corrected is the black box's *own* confident,
+  one-sided predictions away from the boundary, and a badly fitted black box makes far fewer
+  of them (neighbourhoods over 95% one class at 11% of query points at 40% noise, against
+  32% clean).
 - **No reversal on the truth objective** (registered as P4): `ŷ`-derived weights are better
   than `y`-derived ones at agreeing with the true labels too (129/210 vs 58/210), so the
   two objectives are not in tension.
+- **Local class imbalance is the signal, global imbalance is not** (E4, registered as P7).
+  Over 14 datasets × 3 model families × {natural, undersampled training data} × {normal,
+  balanced training}, class weights from `ŷ` on the surrogate's own sample gain +0.027 to
+  +0.041 local fidelity on test data in every cell. Class weights from `y` over the training
+  set never gain by median (−0.0018 to −0.00004), and where they do anything they mostly
+  hurt: on natural data they cost a median 0.018 on the five datasets whose classes are
+  1.7–2:1 (worse in 27/30) and nothing on the 14:1 and 7:1 costcla sets, where the local
+  scheme does nothing either. Undersampling class
+  0 raises the ratio on 12 of 14 datasets, to a median of 5; the global weights then move
+  the surrogate both ways — better in 14 and 16 of 42, worse in 24 and 24 — with worse
+  local KL and a lower worst point. A global weight is the same at every query point, so it
+  cannot follow which class a neighbourhood is short of. Measured on nearby training points
+  instead of the surrogate's sample, local class weights are worth only +0.004 (from `y`)
+  to +0.007 (from `ŷ`): what matters is measuring on the sample, not the label source.
+- **Balanced training does not shrink the gain** (P8, refuted): it makes the sampled
+  neighbourhoods less one-sided (0.313 → 0.283 on natural data, 0.304 → 0.265 undersampled)
+  but the gain from `ŷ` class weights is +0.030 against a normally trained black box and
+  +0.036 against a balance-trained one
+  (smaller in 31/84, p = 0.25). One-sidedness alone does not set the size of the gain.
 - **Methodological note.** With LIME's default kernel width, a locality-weighted score over
   the test set is barely local: the effective sample size is 69% of the test set (median
   over 14 datasets, up to 91%). "Local fidelity on test data" — CIKM'23's own instrument —
@@ -1517,10 +1544,11 @@ surrogate operates on binary indicators rather than raw features;
 six predictions registered first. E2's framing was wrong as written below (the toggle
 contrasts two `X`-marginals, not `P(X,y)` against `P(X,ŷ)`) and is corrected in §5; E3's
 prediction was refuted in an informative direction — degrading the black box *shrinks* the
-effect. E4 is partly addressed: `cost sensitive sampled` (ŷ, local) beats `cost sensitive
-class` (y, global) decisively — the global scheme is the only one of six that never helps
-(19/210 on degraded black boxes) — but the balanced-vs-imbalanced *black box* comparison
-E4 asks for has still not been run. The original text follows.
+effect. E4 is done too, by `sweep_balance.py` (P7, P8), including the balanced-vs-imbalanced
+black box comparison it asks for: `cost sensitive sampled` (ŷ, local) beats `cost sensitive
+class` (y, global) in all four cells, and the global scheme is the only one of six whose
+median effect on degraded black boxes is negative (better in 29/210). See §5. The original
+text follows.
 
 **E2 — the aLIMEgn evaluation-target sweep.** Fix the black box and the query points,
 toggle `evaluation data` between `'test data'` and `'sample locally'`, and sweep across
