@@ -173,9 +173,33 @@ def query_probs_local_fidelity(expl, black_box_model, data, query_point, **kwarg
     fidelity_acc = sum(same_preds*weights) / sum(weights)
     return fidelity_acc
 
+def black_box_class(black_box_model, X):
+    '''
+    the black box's class: argmax of its predicted probabilities (class 0 on an exact tie)
+
+    Not black_box_model.predict(X). Every surrogate is fitted to predict_proba, and fidelity
+    asks whether the two agree on which side of p = 1/2 each point falls. For most
+    estimators predict IS the argmax of predict_proba, so this changes nothing - checked
+    on all 20 registered black boxes, 18 of which agree exactly with model balancer 'none'
+    or 'boundary adjust'. An SVC with probability=True is the exception: its predict is the
+    sign of the decision function while predict_proba comes from a Platt model fitted by
+    internal cross validation, and the share of locally sampled points on which the two
+    disagree depends on the dataset - about 0.5% on Pima, 2-3% on Gaussian, 6% on
+    Ionosphere, 18% on Abalone Gender, 57% at one Abalone query point (FINDINGS.md B20).
+    The 'probability adjust' balancer is the other exception: its predict is the
+    unadjusted class and its predict_proba the reweighted one, so under it fidelity now
+    follows the reweighted probabilities for every black box. No stored result uses it.
+    The argmax,
+    rather than p >= 1/2, keeps sklearn's tie rule, so the random forests' exact 0.5 vote
+    fractions are classified as before.
+    '''
+    probs = np.asarray(black_box_model.predict_proba(X))
+    return np.argmax(probs, axis=1).astype(np.int64)
+
+
 def _get_preds(expl, black_box_model, data):
     # get prediction from both models
-    bb_preds = black_box_model.predict(data['X'])
+    bb_preds = black_box_class(black_box_model, data['X'])
     expl_preds = expl.predict(data['X'])
     same_preds = (bb_preds==expl_preds).astype(np.int64)
     return same_preds

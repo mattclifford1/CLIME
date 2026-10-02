@@ -71,3 +71,65 @@ def test_between_class_means_identical_means_raises():
     y = np.array([0, 0, 1, 1])
     with pytest.raises(Exception, match='class means are identical'):
         get_points_between_class_means({'X': X, 'y': y})
+
+
+class _DisagreeingBlackBox:
+    '''predict and predict_proba deliberately disagree, as an SVC's can under Platt scaling'''
+    def predict_proba(self, X):
+        p = np.full(len(X), 0.8)
+        return np.stack([1 - p, p], axis=1)
+
+    def predict(self, X):
+        return np.zeros(len(X), dtype=np.int64)
+
+
+class _ConstantSurrogate:
+    def __init__(self, p):
+        self.p = p
+
+    def predict(self, X):
+        return np.full(len(X), int(self.p >= 0.5), dtype=np.int64)
+
+    def predict_proba(self, X):
+        p = np.full(len(X), self.p)
+        return np.stack([1 - p, p], axis=1)
+
+
+def test_fidelity_reads_the_black_box_probabilities_not_predict():
+    '''
+    B20. Fidelity compared the surrogate with black_box_model.predict, which for an SVC is
+    the sign of its decision function rather than the argmax of the probabilities every
+    surrogate is fitted to. A surrogate that reproduces predict_proba exactly then scored
+    below 1. The black box's class is now argmax(predict_proba).
+    '''
+    X = np.zeros((10, 2))
+    data = {'X': X}
+    fid = AVAILABLE_EVALUATION_METRICS['fidelity (local)']
+    q = np.zeros(2)
+    assert fid(_ConstantSurrogate(0.8), black_box_model=_DisagreeingBlackBox(),
+               data=data, query_point=q) == 1.0
+    assert fid(_ConstantSurrogate(0.2), black_box_model=_DisagreeingBlackBox(),
+               data=data, query_point=q) == 0.0
+
+
+def test_black_box_class_keeps_sklearns_tie_rule():
+    '''a vote fraction of exactly 0.5 is class 0, as RandomForestClassifier.predict has it'''
+    from clime.evaluation.faithfulness import black_box_class
+
+    class Tied:
+        def predict_proba(self, X):
+            return np.full((len(X), 2), 0.5)
+    assert np.all(black_box_class(Tied(), np.zeros((3, 2))) == 0)
+
+
+@pytest.mark.parametrize('model', ['Logistic', 'Random Forest', 'MLP', 'Gradient Boosting',
+                                   'Decision Tree', 'k Nearest Neighbours'])
+def test_black_box_class_matches_predict_where_sklearn_agrees(model):
+    '''the B20 change is a no-op for every estimator whose predict is the argmax'''
+    from clime.evaluation.faithfulness import black_box_class
+    rng = np.random.default_rng(0)
+    y = np.array([0]*60 + [1]*60)
+    X = rng.normal(size=(120, 2)) + np.where(y[:, None] == 1, 1.0, -1.0)
+    clf = clime.models.AVAILABLE_MODELS[model](data={'X': X, 'y': y})
+    Z = rng.normal(scale=2.0, size=(2000, 2))
+    np.testing.assert_array_equal(black_box_class(clf, Z), np.asarray(clf.predict(Z)))
