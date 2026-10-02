@@ -88,11 +88,11 @@ def variation(entry, scheme, metric, eval_data):
     '''
     how much the score moves along the line: worst query point against best
 
-    The boundary-to-tail drop turns out to be the wrong instrument for P1 (it reads ~0 on
-    most configurations): the far ends of the line sit outside the data, where the black
-    box and any surrogate agree trivially because both predict one class over the whole
-    neighbourhood, so fidelity returns to ~1 there. What CIKM'23 reports is a collapse
-    somewhere along the line, not specifically at its ends, and this measures that.
+    The boundary-to-tail drop turns out to be the wrong instrument for P1 (it takes both
+    signs, median ~0 over configurations): fidelity recovers towards the ends of the line,
+    so the drop depends on where the boundary falls, and a one-sided collapse is diluted by
+    averaging the two ends. What CIKM'23 reports is a collapse somewhere along the line, not
+    specifically at its ends, and this measures that.
     '''
     values = series(entry, scheme, metric, eval_data)
     if np.all(np.isnan(values)):

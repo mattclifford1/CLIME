@@ -58,16 +58,18 @@ def main():
              r'$210$ degraded ones. \emph{Worst point} is the median lowest local fidelity '
              r'along the line and \emph{variation} the median max${}-{}$min along it; KL '
              r'columns are median $\log_{10}$ ratios against standard LIME, positive '
-             r'favouring the scheme. Note that every scheme repairing the test-set score '
-             r'makes the own-marginal score worse.}',
+             r'favouring the scheme, and the last column is the same KL gain over the degraded '
+             r'configurations; parentheses count the configurations where the scheme beats '
+             r'standard LIME. Note that in KL every scheme repairing the test-set score makes '
+             r'the own-marginal score worse.}',
              r'  \label{tab:schemes}',
              r'  \begin{tabular}{lrrrrr}',
              r'    \toprule',
              r'    & \multicolumn{2}{c}{fidelity on test data} '
-             r'& \multicolumn{2}{c}{$\log_{10}$ KL gain} & degraded \\',
-             r'    \cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-6}',
+             r'& \multicolumn{3}{c}{$\log_{10}$ KL gain} \\',
+             r'    \cmidrule(lr){2-3}\cmidrule(lr){4-6}',
              r'    weighting scheme & worst point & variation & test data '
-             r'& own marginal & test data \\',
+             r'& own marginal & degraded, test data \\',
              r'    \midrule']
     print(f"{'scheme':38s} {'worst':>7s} {'variation':>10s} {'KL test':>20s} "
           f"{'KL local':>20s} {'degraded':>20s}")

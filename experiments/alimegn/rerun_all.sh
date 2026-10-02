@@ -3,7 +3,8 @@
 #
 # Each sweep caches one file per configuration, so this is safe to interrupt and re-run:
 # it picks up whatever is missing. To force a recompute, delete results/cache/<sweep>/.
-set -eu
+# A code change to clime or common/ is NOT seen by the cache - delete it after one.
+set -euo pipefail   # a crashed sweep must stop the script, not be masked by tee
 cd "$(dirname "$0")"
 
 PROCESSES=${1:-16}
@@ -19,6 +20,9 @@ uv run python sweeps/sweep_marginal.py "$PROCESSES" 2>&1 | tee logs/marginal.log
 echo "=== degrade: force P(yhat|x) away from P(y|x) (P3, P4, P6)"
 uv run python sweeps/sweep_degrade.py "$PROCESSES" --seeds 1,2 2>&1 | tee logs/degrade.log
 
+echo "=== balance: local versus global class imbalance, FINDINGS.md E4 (P7, P8)"
+uv run python sweeps/sweep_balance.py "$PROCESSES" 2>&1 | tee logs/balance.log
+
 echo "=== grid: where in the space the mismatch lives"
 uv run python sweeps/sweep_grid.py "$((PROCESSES/2))" 2>&1 | tee logs/grid.log
 
@@ -26,3 +30,5 @@ echo
 echo "=== findings"
 uv run python analysis/analyse_marginal.py 2>&1 | tee logs/analyse_marginal.log
 uv run python analysis/analyse_degrade.py 2>&1 | tee logs/analyse_degrade.log
+uv run python analysis/analyse_balance.py 2>&1 | tee logs/analyse_balance.log
+uv run python analysis/analyse_locality.py 2>&1 | tee logs/analyse_locality.log

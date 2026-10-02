@@ -6,12 +6,12 @@ P2  class weighting is a correction to that mismatch
 P5  an explicit density ratio does it better, and the class trick approximates it
 
 A note on how P1 is measured. The obvious statistic - fidelity at the boundary minus
-fidelity in the tails - reads ~0.0000 on most configurations and is the wrong instrument.
-Two reasons, both visible in the curves: the far ends of the line lie outside the data,
-where the black box is locally constant and any surrogate agrees with it trivially, so
-fidelity returns towards 1 there; and the collapse is usually asymmetric - one side of the
-boundary only - so averaging the two ends cancels it. What the prediction is actually about
-is how far the score moves ALONG the line, which is max - min.
+fidelity in the tails - is the wrong instrument: it takes both signs (-0.29 to +0.22 over
+the 84 configurations, median 0.0000). Two reasons, both visible in the curves: fidelity
+recovers towards the ends of the line (median 0.90 and 0.92), so the drop depends on where
+the boundary falls; and the collapse is usually asymmetric - one side of the boundary only -
+so averaging the two ends dilutes it. What the prediction is actually about is how far the
+score moves ALONG the line, which is max - min.
 
 usage:  uv run python analysis/analyse_marginal.py
 '''

@@ -5,7 +5,8 @@ to the black box's own predictions, `P(X, ŷ)`, rather than to the data distribu
 `P(X, y)`. Until now it was a one-page framing note in `~/Repos/Overleaf/aLIMEgn/` with no
 code. This directory is the code, and the write-up it feeds.
 
-`PREREGISTRATION.md` holds the six predictions, fixed before any sweep ran.
+`PREREGISTRATION.md` holds the eight predictions, each fixed before the sweep that tests it
+ran: P1–P6 together, P7–P8 once the first six had been analysed.
 
 ## The framing correction this study starts from
 
@@ -53,9 +54,7 @@ unaffected.
 
 ```bash
 cd experiments/alimegn
-./rerun_all.sh                  # every sweep, ~1 h on 16 processes
-uv run python analysis/analyse_marginal.py
-uv run python analysis/analyse_degrade.py
+./rerun_all.sh 24               # every sweep and analysis, ~15 min on 24 processes
 ./make_writeup.sh               # figures and tables, then copy into the Overleaf clone
 ```
 
@@ -65,12 +64,15 @@ threads and the worker processes otherwise oversubscribe the machine.
 Every configuration is cached as its own file under `results/cache/<sweep>/`, so an
 interrupted sweep resumes, and adding one dataset or one black box costs only the new
 cells. Delete a cache file to recompute just that configuration; pass `force=True` to
-`run_jobs` to recompute everything.
+`run_jobs` to recompute everything. The cache cannot see code changes: after editing
+`clime/` or `common/`, delete `results/cache/` before rerunning.
 
 ## The weighting schemes
 
-All six are methods a deployer could actually run — none needs the test set or a label the
-deployer would not have.
+All six are methods a deployer could actually run: beyond the sampling covariance Σ, which is
+taken from the test set and shared by every scheme, none reads the test set, and none needs a
+label the deployer would not have. The exception is the label-noise sweep, where the schemes
+that read `y` see the clean training labels rather than the noisy ones the black box learnt.
 
 | explainer key | class frequencies from | needs |
 |---|---|---|

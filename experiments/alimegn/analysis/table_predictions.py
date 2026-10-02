@@ -26,6 +26,16 @@ FIDELITY = 'fidelity (local)'
 KL = 'KL divergence (local)'
 
 
+def tex_p(p, digits=1):
+    '''a p-value as LaTeX: 0.19 stays decimal, 2.2e-08 becomes 2\\times10^{-8}'''
+    if p >= 0.01:
+        return f'{p:.2g}'
+    if p >= 0.001:
+        return f'{p:.1g}'
+    mantissa, exponent = f'{p:.{digits - 1}e}'.split('e')
+    return f'{mantissa}\\times10^{{{int(exponent)}}}'
+
+
 def p1(marginal):
     test = np.array([ca.variation(e, NORMAL, FIDELITY, 'test data')
                      for e in marginal.values()])
@@ -38,7 +48,7 @@ def p1(marginal):
                'direction confirmed, threshold not met' if p < 0.05 and ratio > 1 else
                'refuted')
     measured = (f'{ratio:.2f}$\\times$ larger on test data '
-                f'({(test[ok] > local[ok]).sum()}/{ok.sum()}, $p = {p:.1g}$)')
+                f'({(test[ok] > local[ok]).sum()}/{ok.sum()}, $p = {tex_p(p)}$)')
     return ('P1', 'the collapse belongs to the evaluation marginal',
             '$\\geq 5\\times$ smaller on the local sample', measured, verdict)
 
@@ -76,8 +86,8 @@ def p3(degrade):
     rises = medians[-1] > medians[0]
     verdict = ('confirmed' if rises and rho.pvalue < 0.05 else
                'trend only, not significant' if rises else 'refuted')
-    measured = (f'ladder {medians[0]:+.4f} $\\to$ {medians[-1]:+.4f} in $\\log_{{10}}$ KL; '
-                f'$\\rho = {rho.statistic:+.3f}$, $p = {rho.pvalue:.2g}$')
+    measured = (f'ladder ${medians[0]:+.4f} \\to {medians[-1]:+.4f}$ in $\\log_{{10}}$ KL; '
+                f'$\\rho = {rho.statistic:+.3f}$, $p = {tex_p(rho.pvalue)}$')
     return ('P3', r'as $f$ degrades, $\hat{y}$ weights beat $y$ weights',
             'gap grows with the divergence', measured, verdict)
 
@@ -90,7 +100,7 @@ def p4(degrade):
     better = int((truth[ok] > 0).sum())
     verdict = 'confirmed' if better > ok.sum()/2 else 'refuted'
     measured = (f'$y$ weights better on truth in {better}/{ok.sum()}, '
-                f'median {np.median(truth[ok]):+.4f}')
+                f'median ${np.median(truth[ok]):+.4f}$')
     return ('P4', 'the ordering reverses when the target is the truth',
             r'$y$ weights win on agreement with $y$', measured, verdict)
 
@@ -131,8 +141,8 @@ def p6(degrade):
             y.append(v)
     rho = spearmanr(x, y)
     verdict = 'confirmed' if rho.pvalue > 0.05 else 'refuted'
-    measured = (f'noise rate vs marginal effect $\\rho = {rho.statistic:+.3f}$, '
-                f'$p = {rho.pvalue:.2g}$, $n = {len(x)}$')
+    measured = (f'noise rate vs test-set variation $\\rho = {rho.statistic:+.3f}$, '
+                f'$p = {tex_p(rho.pvalue)}$, $n = {len(x)}$')
     return ('P6', 'degradation and the marginal mismatch are independent',
             'no trend in the marginal effect with noise', measured, verdict)
 
@@ -155,7 +165,7 @@ def p7(balance):
     verdict = 'confirmed' if local_wins and global_never else 'refuted'
     measured = (f'local $+{min(r[0][0] for r in rows.values()):.4f}$ to '
                 f'$+{max(r[0][0] for r in rows.values()):.4f}$ in all four cells; '
-                f'global never above $0$')
+                f'global median $\\leq 0$ in every cell')
     return ('P7', 'local imbalance is the signal, not global',
             'local wins in all four cells; global never helps', measured, verdict)
 
@@ -181,7 +191,7 @@ def p8(balance):
     verdict = 'confirmed' if shrinks > ok.sum()/2 and p < 0.05 else 'refuted'
     measured = (f'gain $+{np.median(normal[ok]):.4f}$ normally trained vs '
                 f'$+{np.median(balanced[ok]):.4f}$ balance-trained, smaller in '
-                f'{shrinks}/{ok.sum()}, $p = {p:.2g}$')
+                f'{shrinks}/{ok.sum()}, $p = {tex_p(p)}$')
     return ('P8', 'balanced training shrinks the gain (P6\'s mechanism again)',
             'gain smaller against a balance-trained black box', measured, verdict)
 

@@ -158,7 +158,7 @@ def table(results):
                          for e in entries]
                 median, better, n = ca.median_and_count(gains)
                 cells.append(f'${median:+.4f}$ ({better}/{n})')
-            label = 'class 0 at 20\\%' if data == 'undersampled' else 'natural'
+            label = 'class 0 undersampled to 20\\%' if data == 'undersampled' else 'natural'
             lines.append(f'    {label} & {model} & {len(entries)} & '
                          f'{cells[0]} & {cells[1]} \\\\')
     lines += [r'    \bottomrule', r'  \end{tabular}', r'\end{table}', '']

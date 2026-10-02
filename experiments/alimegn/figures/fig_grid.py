@@ -32,7 +32,7 @@ CIKM = 'bLIMEy (cost sensitive sampled)'
 DEFAULT_DATASET = 'Gaussian'
 # Two rows by default rather than every black box in the sweep: a well fitted black box
 # shows where the gain lives, and the same model trained on corrupted labels shows the same
-# bands an order of magnitude weaker, which is P6 seen spatially. The write-up needs those
+# bands at about a quarter of the size, which is P6 seen spatially. The write-up needs those
 # two; pass a comma separated list to see the others.
 DEFAULT_MODELS = ['Logistic', 'Logistic (label noise 0.3)']
 
@@ -91,7 +91,7 @@ def main(dataset, models=None):
     for ax in axes[-1]:
         ax.set_xlabel('feature 1')
     fig.suptitle(f'{dataset}: local fidelity over the grid, 400 query points per panel.\n'
-                 'Colour scales are per panel: the gains differ by an order of magnitude '
+                 'Colour scales are per panel: the gains differ several-fold '
                  'between black boxes', fontsize=9, y=1.0)
     fig.tight_layout()
     out = paths.fig(f'fig_grid_{dataset.replace(" ", "_")}.pdf')
