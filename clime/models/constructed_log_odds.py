@@ -84,7 +84,7 @@ class _NearestClassMean(BaseEstimator, ClassifierMixin):
     '''
     assign to the nearer class centroid. The decision function is linear in x, so the
     log-odds are linear once passed through a softmax over negative squared distances.
-    Reimplemented rather than taken from ~/Repos/projection_models, which needs
+    Reimplemented rather than taken from ~/Repos/lib/projection_models, which needs
     scikit-learn >= 1.6 for validate_data and cannot be imported alongside the 1.1.3
     this repo is pinned to.
     '''

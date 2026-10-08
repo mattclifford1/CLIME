@@ -26,11 +26,11 @@ Weighting the surrogate's training samples by the class imbalance in the *black 
 predictions* re-aligns the two and recovers most of the lost fidelity, without needing
 access to the test distribution.
 
-Source: `~/Repos/Overleaf/CIKM-2023-camera-ready`. Figures reproduced by
+Source: `~/Repos/clime/papers/CIKM-2023-camera-ready`. Figures reproduced by
 `experiments/lime_vs_clime-sampling.py` and `experiments/gaussian_lime_vs_clime.py`.
 
 A follow-up study — *Logit-LIME: The Right Surrogate Depends on the Black Box* — is
-drafted in `~/Repos/Overleaf/Logit-LIME/`. It finds that fitting the surrogate in logit
+drafted in `~/Repos/clime/papers/Logit-LIME/`. It finds that fitting the surrogate in logit
 space helps by up to four orders of magnitude for some black boxes and not at all for
 others, and gives a cheap diagnostic that predicts which. See [FINDINGS.md](FINDINGS.md)
 §4.
@@ -59,7 +59,7 @@ and `uv run <cmd>` uses it without anything to activate. There is no conda step 
 `pip install -e .`. Name every extra you want on each sync: `uv sync` makes the
 environment match exactly what you ask for, so omitting one removes it.
 
-The `datasets` extra points at `~/Repos/toy_datasets` by local path. Drop it if you do not
+The `datasets` extra points at `~/Repos/lib/toy_datasets` by local path. Drop it if you do not
 have that repo — nothing in the core pipeline needs it.
 
 The Colab badge below is commented out: it installs from GitHub, and the packaging fix

@@ -8,7 +8,7 @@ PREREGISTRATION.md before anything was run. Datasets and models chosen *after* s
 those results cannot be folded back into it without destroying what the registration was
 for. This file is the exploratory extension, and must be reported as such.
 
-The extra datasets come from ~/Repos/toy_datasets (exported to .npz - see
+The extra datasets come from ~/Repos/lib/toy_datasets (exported to .npz - see
 export_toy_datasets.py) and widen the grid from 2-60 features to 2-279, and from roughly
 balanced to a 4.9% minority class.
 

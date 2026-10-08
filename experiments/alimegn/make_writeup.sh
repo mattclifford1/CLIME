@@ -5,7 +5,7 @@
 set -eu
 cd "$(dirname "$0")"
 
-WRITEUP=${1:-$HOME/Repos/Overleaf/aLIMEgn}
+WRITEUP=${1:-$HOME/Repos/clime/papers/aLIMEgn}
 
 for f in figures/fig_schematic.py figures/fig_marginal.py figures/fig_degrade.py \
          figures/fig_weights.py "figures/fig_grid.py Gaussian" "figures/fig_grid.py Moons" \

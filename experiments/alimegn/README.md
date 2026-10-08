@@ -2,7 +2,7 @@
 
 The third CLIME thread (`FINDINGS.md` §5): a surrogate's training sample should be aligned
 to the black box's own predictions, `P(X, ŷ)`, rather than to the data distribution
-`P(X, y)`. Until now it was a one-page framing note in `~/Repos/Overleaf/aLIMEgn/` with no
+`P(X, y)`. Until now it was a one-page framing note in `~/Repos/clime/papers/aLIMEgn/` with no
 code. This directory is the code, and the write-up it feeds.
 
 `PREREGISTRATION.md` holds the eight predictions, each fixed before the sweep that tests it

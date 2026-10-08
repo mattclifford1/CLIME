@@ -11,11 +11,11 @@ Three threads, in order of maturity:
 
 | Thread | Status | Overleaf | Code |
 |---|---|---|---|
-| **CIKM'23 — location-agnostic surrogates** | Published, DOI `10.1145/3583780.3615284` | `~/Repos/Overleaf/CIKM-2023-camera-ready` | complete, figures reproducible |
-| **Logit-LIME** | Sketch (~1 page) + first real results, see §4 | `~/Repos/Overleaf/Logit-LIME` | implemented, working, operating regime now characterised |
-| **aLIMEgn / aLIMEgnment** | Framing corrected, 8 predictions run, see §5 | `~/Repos/Overleaf/aLIMEgn` | `experiments/alimegn/`, 4 sweeps, 500 configurations |
+| **CIKM'23 — location-agnostic surrogates** | Published, DOI `10.1145/3583780.3615284` | `~/Repos/clime/papers/CIKM-2023-camera-ready` | complete, figures reproducible |
+| **Logit-LIME** | Sketch (~1 page) + first real results, see §4 | `~/Repos/clime/papers/Logit-LIME` | implemented, working, operating regime now characterised |
+| **aLIMEgn / aLIMEgnment** | Framing corrected, 8 predictions run, see §5 | `~/Repos/clime/papers/aLIMEgn` | `experiments/alimegn/`, 4 sweeps, 500 configurations |
 
-`~/Repos/Overleaf/CLIME/` is **empty** — that clone has no content. The paper you're
+`~/Repos/clime/papers/` is **empty** — that clone has no content. The paper you're
 thinking of is `CIKM-2023-camera-ready`. `pre-cut-CIKM-2023-camera-ready` is *not* a
 longer version: diffing the two shows only formatting, ORCIDs, copyright block and
 light copy-editing. Two substantive things did change:
@@ -160,7 +160,7 @@ feature importances — the actual explanation — could not be extracted. Fixed
 ### When is Logit-LIME actually better? (answered 2026-08-07)
 
 Full study: 4 datasets x 7 black boxes x 3 surrogates x 2 metrics, 20 query points each,
-run serially. **Written up as a paper in `~/Repos/Overleaf/Logit-LIME/` (10 pages,
+run serially. **Written up as a paper in `~/Repos/clime/papers/Logit-LIME/` (10 pages,
 compiles clean).** Headline: the June 2024 comparison used a random forest, which is close
 to the worst possible choice.
 
@@ -402,7 +402,7 @@ Kept in `results_extended.json`, deliberately **not** merged into
 cannot be folded back into the registered claim without destroying what registering was
 for. Report the two separately.
 
-**15 further datasets**, exported from `~/Repos/toy_datasets`. That package pins
+**15 further datasets**, exported from `~/Repos/lib/toy_datasets`. That package pins
 numpy ≥2.3.5 / sklearn ≥1.7.2 and cannot share a process with this env, so
 `experiments/logit_lime/sweeps/export_toy_datasets.py` runs under its venv and writes `.npz`
 that `clime/data/loaders/exported_npz.py` registers automatically. The grid widens from
@@ -984,7 +984,7 @@ recovered the gradient best here. Both report log-odds.
 Framing note from June 2024. **Coded and run on 2026-09-12/13, rerun from an empty cache
 on 2026-10-02 after B19** — see `experiments/alimegn/` (eight registered predictions in
 `PREREGISTRATION.md`, four sweeps, 500 configurations) and the write-up in
-`~/Repos/Overleaf/aLIMEgn/`. The outcome is summarised at the end of this section.
+`~/Repos/clime/papers/aLIMEgn/`. The outcome is summarised at the end of this section.
 
 **The reframing.** The CIKM paper's contribution generalises. Sampling `X_g` should not
 target `P(X, y)` — the distribution that trained the black box — it should target
@@ -1738,7 +1738,7 @@ Blobs seed would change every Gaussian and Blobs number, so it needs a deliberat
 Roughly in cost order. The first two are hours, not days.
 
 **E1 — Logit-LIME's operating regime.** ***Done — see §4, and the paper in
-`~/Repos/Overleaf/Logit-LIME/`.*** Remaining follow-ups, in order of value:
+`~/Repos/clime/papers/Logit-LIME/`.*** Remaining follow-ups, in order of value:
 (a) test the Δ diagnostic on black boxes outside the seven used here, and establish a
 threshold rather than the eyeballed 0.35;
 (b) sweep the locality kernel width `k`, which defines "local" for both the surrogate's

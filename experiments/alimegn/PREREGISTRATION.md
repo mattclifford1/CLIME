@@ -6,7 +6,7 @@ that a taxonomy or an account cannot be quietly fitted to whatever came out.
 
 ## The claim being tested
 
-From `~/Repos/Overleaf/aLIMEgn/main.tex` (June 2024): a surrogate's training sample should
+From `~/Repos/clime/papers/aLIMEgn/main.tex` (June 2024): a surrogate's training sample should
 target `P(X, ŷ)` — the distribution of the black box's *own* predictions — rather than
 `P(X, y)`, the distribution that trained the black box. The two coincide when `f` has
 learned the data well and diverge when it has not (weak labels, underfitting, shift).

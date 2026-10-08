@@ -1,6 +1,6 @@
 # Logit-LIME experiments
 
-Everything behind the paper draft in `~/Repos/Overleaf/Logit-LIME/`
+Everything behind the paper draft in `~/Repos/clime/papers/Logit-LIME/`
 (*Logit-LIME: Is there too much faith in the agnosticity of LIME?*). See `FINDINGS.md` §4
 in the repo root for the research state, and `PREREGISTRATION.md` here for the prediction
 that was fixed before the main sweep ran.
@@ -25,7 +25,7 @@ results/     sweep output, plus archive/ (superseded runs kept for provenance)
 tables/      generated LaTeX, named to match the paper's \input paths
 figs/        generated figures, named to match the paper's \includegraphics paths
 logs/        stdout from long sweeps
-extra_datasets/  .npz files exported from ~/Repos/toy_datasets (see below)
+extra_datasets/  .npz files exported from ~/Repos/lib/toy_datasets (see below)
 ```
 
 Scripts resolve every path through `common/paths.py`, not through the working directory,
@@ -58,7 +58,7 @@ sweep of 4 datasets × 7 black boxes, which predates the per-query-point seeding
 removed in the 2026-08-13 tidy-up; recover it from git history if it is ever needed.
 
 `make_paper.sh` takes the Overleaf path as an optional argument and defaults to
-`~/Repos/Overleaf/Logit-LIME`. Generated names match the paper's `\input` and
+`~/Repos/clime/papers/Logit-LIME`. Generated names match the paper's `\input` and
 `\includegraphics` paths exactly, so the copy is a mirror with no renaming step to get
 wrong.
 
@@ -155,7 +155,7 @@ the same subsection come from `--model LDA`. The model has to be one of the exac
 family that `sweep_ground_truth.py` uses, since it is their coefficients that supply the
 ground truth.
 
-`sweeps/export_toy_datasets.py` freezes 15 further datasets from `~/Repos/toy_datasets`
+`sweeps/export_toy_datasets.py` freezes 15 further datasets from `~/Repos/lib/toy_datasets`
 into `extra_datasets/`, where `clime/data/loaders/exported_npz.py` registers them
 automatically. It used to need that repo's own interpreter; since `toy_datasets` became a
 declared dependency here (the `datasets` extra) it runs under `uv run` like everything

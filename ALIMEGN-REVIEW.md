@@ -296,7 +296,7 @@ ratio between the test distribution and the local sample, built from `ŷ`.
 ## 2. The experiments the review asked for — **DONE**, and they answered it
 
 Run 2026-09-12/13: `experiments/alimegn/`, six registered predictions, three sweeps, 332
-configurations. Write-up in `~/Repos/Overleaf/aLIMEgn/` (9 pages, pushed).
+configurations. Write-up in `~/Repos/clime/papers/aLIMEgn/` (9 pages, pushed).
 
 The review's ranked suggestion #4 was "combine E3 and E4, degrade `f`, compare ŷ-derived
 against y-derived class weights, and add a learned density ratio as the principled

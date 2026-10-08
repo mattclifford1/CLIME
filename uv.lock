@@ -252,7 +252,7 @@ requires-dist = [
     { name = "scipy", specifier = "==1.18.0" },
     { name = "shap", specifier = "==0.52.0" },
     { name = "statsmodels", specifier = "==0.14.6" },
-    { name = "toy-datasets", marker = "extra == 'datasets'", editable = "../../Repos/toy_datasets" },
+    { name = "toy-datasets", marker = "extra == 'datasets'", editable = "../../lib/toy_datasets" },
     { name = "tqdm", specifier = "==4.70.0" },
 ]
 provides-extras = ["notebook", "datasets"]
@@ -1718,7 +1718,7 @@ wheels = [
 [[package]]
 name = "toy-datasets"
 version = "0.1.0"
-source = { editable = "../../Repos/toy_datasets" }
+source = { editable = "../../lib/toy_datasets" }
 dependencies = [
     { name = "imbalanced-learn", marker = "sys_platform == 'linux'" },
     { name = "matplotlib", marker = "sys_platform == 'linux'" },

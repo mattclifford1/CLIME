@@ -406,7 +406,7 @@ About one working day. W1 and W2 need no sweep and can be done in one session.
 
 ```python
 import sys, os, warnings
-sys.path.insert(0, '/home/matt/projects/CLIME/experiments/logit_lime')
+sys.path.insert(0, '/home/matt/Repos/clime/CLIME/experiments/logit_lime')
 warnings.filterwarnings('ignore')
 import numpy as np, clime
 from sweeps.sweep import opts, METRICS

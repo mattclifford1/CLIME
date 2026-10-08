@@ -7,7 +7,7 @@
 set -eu
 cd "$(dirname "$0")"
 
-PAPER=${1:-$HOME/Repos/Overleaf/Logit-LIME}
+PAPER=${1:-$HOME/Repos/clime/papers/Logit-LIME}
 
 # tables that take arguments, run before the plain loop below
 echo "=== analysis/table_fidelity_proxy.py --extended"

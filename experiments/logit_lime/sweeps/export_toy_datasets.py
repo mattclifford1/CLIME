@@ -1,5 +1,5 @@
 '''
-Freeze datasets from ~/Repos/toy_datasets into .npz files, which
+Freeze datasets from ~/Repos/lib/toy_datasets into .npz files, which
 clime/data/loaders/exported_npz.py registers automatically.
 
     uv run python sweeps/export_toy_datasets.py [output_dir]

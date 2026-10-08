@@ -1,6 +1,6 @@
 # Review of the Logit-LIME thread: code, results and the Overleaf draft
 
-*Written 2026-10-02 against CLIME `e6c53d7` and Overleaf `91421a8` (`~/Repos/Overleaf/Logit-LIME`).*
+*Written 2026-10-02 against CLIME `e6c53d7` and Overleaf `91421a8` (`~/Repos/clime/papers/Logit-LIME`).*
 
 What was done: every section of the draft and every script under `experiments/logit_lime/`
 was read; the analysis scripts were re-run against the stored `results/*.json` (the prose

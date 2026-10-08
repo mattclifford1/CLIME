@@ -38,7 +38,7 @@ AVAILABLE_DATASETS = {
     'Blobs': sample_dataset_to_proportions(get_blobs),
 }
 
-# datasets exported from ~/Repos/toy_datasets, if any have been exported. Added last so a
+# datasets exported from ~/Repos/lib/toy_datasets, if any have been exported. Added last so a
 # name clash cannot silently shadow one of the loaders above
 AVAILABLE_DATASETS.update({name: loader
                            for name, loader in available_exported().items()

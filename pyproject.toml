@@ -41,7 +41,7 @@ notebook = [
     "ipywidgets",
     "ipython",
 ]
-# ~/Repos/toy_datasets, as an editable path source (see [tool.uv.sources]). Optional
+# ~/Repos/lib/toy_datasets, as an editable path source (see [tool.uv.sources]). Optional
 # because the path is local to this machine: without this extra the repo still resolves
 # and syncs anywhere. It adds four light packages (imbalanced-learn, sklearn-compat,
 # ucimlrepo, toy-datasets) and moves no existing pin. It stays lean only because
@@ -64,7 +64,7 @@ environments = ["sys_platform == 'linux'"]
 
 [tool.uv.sources]
 py-rbig = { git = "https://github.com/ipl-uv/rbig", rev = "master" }
-toy-datasets = { path = "../../Repos/toy_datasets", editable = true }
+toy-datasets = { path = "../../lib/toy_datasets", editable = true }
 
 [build-system]
 requires = ["setuptools>=61"]

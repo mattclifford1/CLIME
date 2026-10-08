@@ -32,7 +32,7 @@ editable, so edits take effect immediately with no build step.
 **Name every extra you want on each `uv sync`.** It makes the environment match exactly
 what is asked for, so `uv sync --extra datasets` alone *uninstalls* the notebook packages.
 
-The `datasets` extra is `~/Repos/toy_datasets`, as an editable path source. It is optional
+The `datasets` extra is `~/Repos/lib/toy_datasets`, as an editable path source. It is optional
 because that path only exists on this machine; without it the repo still resolves and syncs
 anywhere. It is also what `clime/data/loaders/exported_npz.py` exists to avoid needing —
 see the note on crossing that boundary below.
@@ -156,11 +156,11 @@ constants that are not part of `opts` — the locality kernel width
 (`costs.KERNEL_WIDTH_SCALE`), `clime.RANDOM_SEED` — call `run_pipeline.cache_clear()`;
 `freezeargs` passes it through explicitly, since `@wraps` does not carry it across.
 
-**`~/Repos/toy_datasets` is a real dependency now (the `datasets` extra), not a forbidden
+**`~/Repos/lib/toy_datasets` is a real dependency now (the `datasets` extra), not a forbidden
 import.** The old "this env is pinned to sklearn 1.1.3, cross the boundary with data not
 code" rule died with the 2026-08-10 upgrade; `toy_datasets` wants numpy ≥2.3.5 / sklearn
 ≥1.7.2 / scipy ≥1.16.3 / pandas ≥2.3.3 / python ≥3.11 and this env clears all of them.
-`~/Repos/projection_models` (sklearn ≥1.6 for `validate_data`) also imports fine but is
+`~/Repos/lib/projection_models` (sklearn ≥1.6 for `validate_data`) also imports fine but is
 not yet declared — `PYTHONPATH` for now.
 
 Adding it cost four light packages and moved no pin, but that is a property of how
