@@ -43,7 +43,7 @@ resolution problem. `uv` resolves for linux only (`tool.uv.environments`), becau
 macOS numba requirement caps numpy below the version pinned here.
 
 `requirements.txt` is superseded and kept only for reference; `setup.py` is gone. The old
-`~/anaconda3/envs/clime` still exists and is unused.
+conda env has been deleted.
 
 **On upgrading scikit-learn.** The repo sat on 1.1.3 for years behind an undiagnosed
 "incompatibility with 1.2.2" note. It was upgraded to 1.9 on 2026-08-10; the blocker was
