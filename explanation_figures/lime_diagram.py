@@ -3,11 +3,11 @@
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.legend_handler import HandlerTuple
-from matplotlib.lines import Line2D
 from matplotlib.patches import Patch
 from sklearn.datasets import make_moons
 from sklearn.linear_model import Ridge
 from sklearn.svm import SVC
+from thesis_figures import plot
 
 import draw
 import style
@@ -17,7 +17,6 @@ WIDTH = 1.0
 SEED = 0
 Q = np.array([0.5, 0.25])
 N_SAMPLES, SPREAD, KERNEL = 40, 0.45, 0.5
-MARKER = {0: 's', 1: 'o'}
 
 
 def make():
@@ -36,28 +35,23 @@ def make():
     draw.surface(ax, f.predict_proba, proj, lims, boundary=False)
     for c in (0, 1):
         m = fx == c
-        ax.scatter(X_s[m, 0], X_s[m, 1], s=8 + 70 * w[m], marker=MARKER[c],
-                   color=style.CLASS[c], edgecolors=style.INK, linewidths=0.6, zorder=2)
+        plot.points(ax, X_s[m], c, size=8 + 70 * w[m], alpha=1.0, linewidths=0.6)
     # g's 0.5 level set: coef . x + intercept = 0.5
     xs = np.array(lims[0])
-    ax.plot(xs, (0.5 - g.intercept_ - g.coef_[0] * xs) / g.coef_[1], color=style.INK,
-            ls='--', lw=1.6, zorder=3)
-    ax.scatter(*Q, s=110, color=style.QUERY, edgecolors=style.INK, linewidths=1.0, zorder=4)
+    plot.line(ax, xs, (0.5 - g.intercept_ - g.coef_[0] * xs) / g.coef_[1], 'surrogate',
+              zorder=3)
+    plot.query(ax, Q, size=110, linewidths=1.0)
     ax.set(xlim=lims[0], ylim=lims[1], xticks=[], yticks=[])
     for s in ax.spines.values():
         s.set_visible(True)
     ax.text(0.97, 0.04, r'$g \approx f$ near $q$', transform=ax.transAxes, ha='right',
             va='bottom', fontsize=9, bbox=dict(fc='white', ec='none', alpha=0.8, pad=1.5))
 
-    def cls(c):
-        return Line2D([], [], ls='', marker=MARKER[c], ms=6, color=style.CLASS[c],
-                      markeredgecolor=style.INK)
     handles = [(Patch(color=style.CLASS[0], alpha=style.SURFACE_ALPHA),
                 Patch(color=style.CLASS[1], alpha=style.SURFACE_ALPHA)),
-               Line2D([], [], color=style.INK, ls='--', lw=1.6),
-               Line2D([], [], ls='', marker='o', ms=9, color=style.QUERY,
-                      markeredgecolor=style.INK),
-               (cls(0), cls(1))]
+               plot.line_handle('surrogate'),
+               plot.query_handle(ms=9),
+               (plot.class_handle(0), plot.class_handle(1))]
     labels = [r'$f$  (black box)', r'$g$  (surrogate model)', r'$q$  (query point)',
               r'$X_s$  (sampled data)']
     key.axis('off')

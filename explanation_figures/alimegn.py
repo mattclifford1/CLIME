@@ -9,6 +9,7 @@ import warnings
 
 import matplotlib.pyplot as plt
 import numpy as np
+from thesis_figures import plot
 
 import draw
 import style
@@ -52,8 +53,7 @@ def schematic(dataset='Gaussian', model='Logistic', index=6, show=2500):
     ax.scatter(X_s[sub, 0], X_s[sub, 1], s=3, color=style.SAMPLE, alpha=0.2, edgecolors='none',
                zorder=1)
     draw.classes(ax, test['X'], test['y'], size=6)
-    ax.scatter(*q, s=160, marker='*', color=style.QUERY, edgecolors=style.INK, linewidths=0.6,
-               zorder=5)
+    plot.query(ax, q, size=70, zorder=5)
     ax.set_title('(a) training sample and test set')
 
     for ax, (title, w) in zip(axes[1:], panels):
@@ -100,7 +100,7 @@ def marginal(dataset='Breast Cancer', model='Random Forest'):
             ax.plot(x, y, color=colour, lw=1.2, label=style.SCHEME_LABELS[scheme])
     ax.set(xlabel='Query point', title='(b) every scheme, on test data')
     for a in axes[:2]:
-        a.axvline(boundary, color=style.MUTED, ls=':', lw=1)
+        a.axvline(boundary, **style.LINES['reference'])
         a.set_xticks(np.arange(0, len(x), 4))
 
     ax = axes[2]
@@ -110,7 +110,7 @@ def marginal(dataset='Breast Cancer', model='Random Forest'):
     ax.scatter(own[ok], test[ok], s=8, color=style.SCHEME_COLOURS[NORMAL], alpha=0.8,
                edgecolors='none')
     lim = [0, max(own[ok].max(), test[ok].max()) * 1.05]
-    ax.plot(lim, lim, color=style.MUTED, ls='--', lw=1)
+    plot.line(ax, lim, lim, 'reference')
     ax.set(xlim=lim, ylim=lim, aspect='equal', xlabel='Variation on own sample',
            ylabel='Variation on test data', title=f'(c) all {int(ok.sum())} configurations')
     handles, labels = axes[1].get_legend_handles_labels()
@@ -142,7 +142,7 @@ def grid(dataset='Gaussian', models=('Logistic', 'Logistic (label noise 0.3)')):
             kw = {'cmap': 'viridis'}
             if diverging:
                 span = np.nanmax(np.abs(image)) or 1e-6
-                kw = {'cmap': 'RdBu_r', 'vmin': -span, 'vmax': span}
+                kw = {'cmap': style.DIVERGING_CMAP, 'vmin': -span, 'vmax': span}
             mesh = ax.imshow(image, origin='lower', extent=extent, aspect='equal', **kw)
             bar = fig.colorbar(mesh, ax=ax, fraction=0.046, pad=0.03)
             bar.ax.tick_params(labelsize=7)

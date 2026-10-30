@@ -2,6 +2,7 @@
 # author: Matt Clifford <matt.clifford@bristol.ac.uk>
 import numpy as np
 from sklearn.decomposition import PCA
+from thesis_figures import plot
 
 import style
 
@@ -48,20 +49,18 @@ def surface(ax, predict_proba, proj, lims, res=200, boundary=True):
     ax.contourf(xx, yy, p, levels=np.linspace(0, 1, 11), cmap=style.PROBA_CMAP,
                 alpha=style.SURFACE_ALPHA, zorder=0)
     if boundary:
-        ax.contour(xx, yy, p, levels=[0.5], colors=style.INK, linewidths=0.9, zorder=1)
+        b = style.LINES['boundary']
+        ax.contour(xx, yy, p, levels=[0.5], colors=b['color'], linewidths=b['lw'],
+                   linestyles=b['ls'], zorder=1)
     ax.set(xlim=(x0, x1), ylim=(y0, y1))
 
 
 def classes(ax, Z, y, size=10, alpha=0.8):
-    for label in (0, 1):
-        z = Z[np.asarray(y) == label]
-        ax.scatter(z[:, 0], z[:, 1], s=size, color=style.CLASS[label], alpha=alpha,
-                   edgecolors=style.INK, linewidths=0.3, zorder=2)
+    plot.classes(ax, Z, y, size, alpha)
 
 
 def query_points(ax, Z, label_every=4, size=18):
-    ax.scatter(Z[:, 0], Z[:, 1], s=size, color=style.QUERY, edgecolors=style.INK,
-               linewidths=0.6, zorder=4)
+    plot.query(ax, Z, size)
     for i in range(0, len(Z), label_every):
         ax.annotate(str(i), Z[i], xytext=(0, 4), textcoords='offset points', ha='center',
                     va='bottom', fontsize=7, zorder=5)
