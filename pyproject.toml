@@ -54,6 +54,14 @@ datasets = [
 figures = [
     "thesis-figures",
 ]
+# the thesis's shared models and threshold placement: projection_models (with the torch MLP)
+# and deltas. Brings the CUDA build of torch with it.
+thesis = [
+    "toy-datasets",
+    "projection-models[torch]",
+    "deltas",
+    "pyarrow>=26.0.1",
+]
 
 [dependency-groups]
 dev = [
@@ -70,6 +78,8 @@ environments = ["sys_platform == 'linux'"]
 py-rbig = { git = "https://github.com/ipl-uv/rbig", rev = "master" }
 toy-datasets = { path = "../../lib/toy_datasets", editable = true }
 thesis-figures = { path = "../../lib/thesis_figures", editable = true }
+projection-models = { path = "../../lib/projection_models", editable = true }
+deltas = { path = "../../deltas/linear_confidence", editable = true }
 
 [build-system]
 requires = ["setuptools>=61"]

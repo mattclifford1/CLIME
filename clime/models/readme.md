@@ -21,3 +21,9 @@ Adjust decision boundary away from minority class to protect it
 
 ## adjust_proba
 Increase probability of minority class predictions to protect it
+
+## moved_threshold
+Move the decision threshold on P(class 1), placed by balanced accuracy on labelled data or by a deltas method (`threshold.py`)
+
+# Projection models
+`projection.py` wraps the `projection_models` families, which also give `get_projection` and `get_threshold`

@@ -13,6 +13,9 @@ from .log_odds_families import LDA, gaussian_naive_bayes, decision_tree, knn
 from .QDA import QDA
 from .constructed_log_odds import (polynomial_logistic, rbf_logistic,
                                   bagged_logistic, nearest_class_mean)
+from . import projection, threshold
+from .projection import projection_model
+from .threshold import moved_threshold
 
 AVAILABLE_MODELS = {
     'Random Forest': random_forest,
@@ -38,8 +41,12 @@ AVAILABLE_MODELS = {
     'Bagged Logistic': bagged_logistic,
 }
 
+# the thesis's shared model families, when projection_models is installed (the `thesis` extra)
+AVAILABLE_MODELS.update(projection.available())
+
 AVAILABLE_MODEL_BALANCING = {
     'none': base_balance,
     'boundary adjust': adjust_boundary,
     'probability adjust': adjust_proba,
 }
+AVAILABLE_MODEL_BALANCING.update(threshold.available())

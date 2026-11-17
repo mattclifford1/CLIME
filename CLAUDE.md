@@ -22,6 +22,7 @@ aLIMEgn). See `FINDINGS.md` for the research state, results and open questions.
 
 ```bash
 uv sync --extra notebook --extra datasets   # create/refresh .venv (python 3.13, sklearn 1.9, numpy 2.4)
+uv sync --extra notebook --extra datasets --extra figures --extra thesis --group dev   # everything
 uv run python -m clime.pipeline.make_pipeline
 uv run --group dev pytest
 ```
@@ -160,8 +161,12 @@ constants that are not part of `opts` — the locality kernel width
 import.** The old "this env is pinned to sklearn 1.1.3, cross the boundary with data not
 code" rule died with the 2026-08-10 upgrade; `toy_datasets` wants numpy ≥2.3.5 / sklearn
 ≥1.7.2 / scipy ≥1.16.3 / pandas ≥2.3.3 / python ≥3.11 and this env clears all of them.
-`~/Repos/lib/projection_models` (sklearn ≥1.6 for `validate_data`) also imports fine but is
-not yet declared — `PYTHONPATH` for now.
+`~/Repos/lib/projection_models` and `~/Repos/deltas/linear_confidence` are declared by the
+`thesis` extra, which also brings torch (CUDA build) for the torch MLP. With it installed,
+`clime/models/projection.py` registers the thesis's model families as `'<family> (projection)'`
+and `clime/models/threshold.py` registers the re-thresholding and deltas model balancers.
+The torch MLP is built with `projection_model(data, family='MLP')` and is not registered:
+autograd fails in a forked worker once the parent has used it, and the pipeline's pools fork.
 
 Adding it cost four light packages and moved no pin, but that is a property of how
 `toy_datasets` is packaged and it is easy to lose. Its heavy loaders live behind its own

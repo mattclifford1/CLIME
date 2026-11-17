@@ -141,3 +141,7 @@ experiments/logit_lime/tables/
 
 # per-dataset resume state of sweeps/parallel.py; the merged results/*.json are the record
 experiments/logit_lime/results/shards/
+
+# per-job cache and logs of the extended CIKM experiments; results/*.csv are the record
+experiments/cikm_extended/results/raw/
+experiments/cikm_extended/logs/

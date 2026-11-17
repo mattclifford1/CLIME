@@ -14,6 +14,7 @@ Three threads, in order of maturity:
 | **CIKM'23 — location-agnostic surrogates** | Published, DOI `10.1145/3583780.3615284` | `~/Repos/clime/papers/CIKM-2023-camera-ready` | complete, figures reproducible |
 | **Logit-LIME** | Sketch (~1 page) + first real results, see §4 | `~/Repos/clime/papers/Logit-LIME` | implemented, working, operating regime now characterised |
 | **aLIMEgn / aLIMEgnment** | Framing corrected, 8 predictions run, see §5 | `~/Repos/clime/papers/aLIMEgn` | `experiments/alimegn/`, 4 sweeps, 500 configurations |
+| **CIKM'23 extended** | CIKM protocol on 22 datasets, 6 model families, 3 class ratios, with threshold placement on the black box and on the surrogate; see the write-up | `~/Repos/clime/papers/CIKM-2023-extra-datasets` | `experiments/cikm_extended/` |
 
 `~/Repos/clime/papers/` is **empty** — that clone has no content. The paper you're
 thinking of is `CIKM-2023-camera-ready`. `pre-cut-CIKM-2023-camera-ready` is *not* a
@@ -1730,6 +1731,19 @@ on these points, and the query points sit on the test set's class-mean line. The
 local-sample metrics behind every main Logit-LIME result are drawn around q. Not fixed:
 giving each class its own test seed (e.g. `RANDOM_SEED + label + n_classes`) and bumping the
 Blobs seed would change every Gaussian and Blobs number, so it needs a deliberate rerun.
+
+### B24 — class-balanced weights give zero weight to a sample scored exactly 0.5. `clime/explainer/BLIMEY.py` — **OPEN**
+
+Found on 2026-11-17 by the extended CIKM experiments. `_get_sampled_weights` takes each
+sample's class as `np.round(p(y|x))`, and numpy rounds 0.5 to 0 in both columns, so the
+sample's class-weight is zero and it drops out of the `cost sensitive sampled` and `cost
+sensitive class` fits. Everywhere else the class is the argmax (`black_box_class`, B20).
+With a 100-tree forest 0.2% to 0.7% of a neighbourhood sample sits at exactly 0.5 on Breast
+Cancer, Banknote and Pima (at most 1.3% at one query point). If every sample ties, as when
+a black box's moved threshold lands on a vote level, `Ridge.fit` raises "Sample weights must
+contain at least one non-zero number"; `clime/models/threshold.py` places a moved threshold
+a hair past its value so that it cannot create ties. Not fixed: using the argmax would move
+every published `cost sensitive` number for vote-based black boxes in the third decimal.
 
 ---
 

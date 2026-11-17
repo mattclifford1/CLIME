@@ -35,6 +35,10 @@ space helps by up to four orders of magnitude for some black boxes and not at al
 others, and gives a cheap diagnostic that predicts which. See [FINDINGS.md](FINDINGS.md)
 §4.
 
+The published protocol is extended to 22 datasets, six model families, balanced and
+imbalanced training data and threshold placement in `experiments/cikm_extended/`, written
+up in `~/Repos/clime/papers/CIKM-2023-extra-datasets/`.
+
 ## Documentation
 
 | file | contents |
