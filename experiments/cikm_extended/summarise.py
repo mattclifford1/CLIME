@@ -278,4 +278,8 @@ if __name__ == '__main__':
     RUNS = {'main': main_run, 'sweep': sweep, 'kernel': kernel,
             'surrogate_deltas': surrogate_deltas, 'matched': matched}
     for run in sys.argv[1:] or list(RUNS):
+        if not any(paths.raw('main' if run == 'sweep' else run).glob('*.scores.parquet')) \
+                or not any(paths.raw(run).glob('*.scores.parquet')):
+            print(f'skipped {run}: no finished jobs')
+            continue
         RUNS[run]()

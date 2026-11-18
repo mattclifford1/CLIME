@@ -24,7 +24,8 @@ uv run python run_sweep.py              # imbalance ratios 4, 20 and 40
 uv run python run_kernel.py             # locality kernel width
 uv run python run_surrogate_deltas.py   # every deltas method on the surrogate's threshold
 uv run python run_grid.py               # fidelity maps on the first two principal components
-uv run python summarise.py              # results/raw/ -> results/*.csv
-uv run python make_diagrams.py && uv run python make_figures.py && uv run python make_tables.py
-uv run python sync_paper_assets.py      # copy figures/ and tables/ into the paper
+uv run python run_matched.py            # CLIME's gain split into a change of cut and a change of fit
+./make_paper.sh                         # summarise, draw figures and tables, copy them into the paper
 ```
+
+`./rerun_all.sh` runs the four large runs in stages, three seeds of the main run first.

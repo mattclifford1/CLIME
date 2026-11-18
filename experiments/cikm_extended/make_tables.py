@@ -262,6 +262,61 @@ def surrogate_thresholds():
         [(label, 2 + 2*i, 3 + 2*i) for i, label in enumerate(SETTINGS.values())]))
 
 
+WIDTHS = {0.25: 'quarter', 0.5: 'half', 0.75: 'default', 1.5: 'wide', 3.0: 'widest'}
+RATIOS = {4: 'four', 10: 'ten', 20: 'twenty', 40: 'forty'}
+
+
+def kernel():
+    frame = read('kernel')
+    pooled = frame.groupby(['setting', 'kernel_width', 'kind', 'explainer'])[
+        ['test_fidelity', 'test_balanced', 'test_effective_share', 'sample_minority']].mean()
+    for (setting, width, kind, explainer), r in pooled.iterrows():
+        base = ['ker', setting, kind, WIDTHS[width], MAIN[explainer].split(',')[-1]]
+        macro([*base, 'fid'], r.test_fidelity)
+        macro([*base, 'bal'], r.test_balanced)
+        macro([*base, 'ess'], pct(r.test_effective_share), '{:.0f}')
+
+
+def sweep():
+    frame = read('sweep_arms')
+    frame = frame[frame.family == 'all']
+    for _, r in frame.iterrows():
+        base = ['swp', RATIOS[int(r.setting)], r.arm, r.kind]
+        macro([*base, 'balacc'], r.balanced_accuracy)
+        macro([*base, 'onesided'], pct(r.one_sided), '{:.0f}')
+        for column in ('fidelity', 'balanced'):
+            for explainer, tag in (('LIME', 'lime'), ('CLIME', 'clime'),
+                                   ('LIME + re-threshold', 'reth')):
+                macro([*base, column, tag], r.get(f'{column}: {explainer}', np.nan))
+
+
+def surrogate_deltas():
+    frame = read('surrogate_deltas')
+    frame = frame[(frame.family == 'all') & (frame.kind == 'line')]
+    wide = frame.pivot_table(index='explainer', columns='setting',
+                             values=['test_fidelity', 'test_balanced', 'moved'])
+    first = [n for n in MAIN if n in wide.index]
+    rest = wide.drop(index=first).sort_values(('test_balanced', 'imbalanced'), ascending=False)
+    rows = []
+    for explainer in [*first, None, *rest.index]:
+        if explainer is None:
+            rows.append([])
+            continue
+        r = wide.loc[explainer]
+        name = MAIN.get(explainer, explainer.replace('LIME + ', ''))
+        rows.append([ARM_NAMES.get(name, name)] + [
+            cell for setting in ('native', 'imbalanced')
+            for cell in (f'{100*r[("moved", setting)]:.0f}', f'{r[("test_fidelity", setting)]:.3f}',
+                         f'{r[("test_balanced", setting)]:.3f}')])
+        macro(['sur', name, 'native', 'bal'], r[('test_balanced', 'native')])
+        macro(['sur', name, 'imbalanced', 'bal'], r[('test_balanced', 'imbalanced')])
+        macro(['sur', name, 'native', 'fid'], r[('test_fidelity', 'native')])
+        macro(['sur', name, 'imbalanced', 'fid'], r[('test_fidelity', 'imbalanced')])
+    write('surrogate_deltas', table(
+        ['Cut of LIME\'s surrogate', 'Moved \\%', 'Fid.', 'Bal.', 'Moved \\%', 'Fid.', 'Bal.'],
+        rows, 'lrrrrrr', [('own ratio', 2, 4), ('imbalanced 200:20', 5, 7)]))
+
+
 def reproduce():
     frame = read('reproduce')
     for (name, explainer), part in frame.groupby(['configuration', 'explainer']):
@@ -281,7 +336,7 @@ def numbers():
 
 if __name__ == '__main__':
     for make in (datasets, replication, triad, arms, neighbourhoods, by_class, matched,
-                 surrogate_thresholds, reproduce):
+                 surrogate_thresholds, kernel, sweep, surrogate_deltas, reproduce):
         try:
             make()
         except (AttributeError, TypeError, FileNotFoundError) as e:   # a results file is not there yet
