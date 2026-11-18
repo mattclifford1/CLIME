@@ -29,3 +29,4 @@ uv run python run_matched.py            # CLIME's gain split into a change of cu
 ```
 
 `./rerun_all.sh` runs the four large runs in stages, three seeds of the main run first.
+`check_outliers.py` repeats the headline comparison without the splits whose test set holds an extreme value.

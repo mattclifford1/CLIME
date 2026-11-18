@@ -1,0 +1,601 @@
+setting,dataset,seed,largest,extreme
+balanced,Banknote Authentication,0,4.13062,False
+balanced,Banknote Authentication,1,3.85932,False
+balanced,Banknote Authentication,2,3.71212,False
+balanced,Banknote Authentication,3,3.87249,False
+balanced,Banknote Authentication,4,3.70028,False
+balanced,Banknote Authentication,5,3.84819,False
+balanced,Banknote Authentication,6,3.64951,False
+balanced,Banknote Authentication,7,3.46696,False
+balanced,Banknote Authentication,8,3.58819,False
+balanced,Banknote Authentication,9,3.68125,False
+balanced,Costcla Credit Scoring Kaggle 2011,0,14.74412,False
+balanced,Costcla Credit Scoring Kaggle 2011,1,10.42330,False
+balanced,Costcla Credit Scoring Kaggle 2011,2,20.70866,False
+balanced,Costcla Credit Scoring Kaggle 2011,3,447.54091,True
+balanced,Costcla Credit Scoring Kaggle 2011,4,28.04381,False
+balanced,Costcla Credit Scoring Kaggle 2011,5,14.72500,False
+balanced,Costcla Credit Scoring Kaggle 2011,6,172.18115,True
+balanced,Costcla Credit Scoring Kaggle 2011,7,1898.54929,True
+balanced,Costcla Credit Scoring Kaggle 2011,8,3915.33798,True
+balanced,Costcla Credit Scoring Kaggle 2011,9,163.83329,True
+balanced,Costcla Credit Scoring PAKDD 2009,0,25.42165,False
+balanced,Costcla Credit Scoring PAKDD 2009,1,14.79865,False
+balanced,Costcla Credit Scoring PAKDD 2009,2,14.79865,False
+balanced,Costcla Credit Scoring PAKDD 2009,3,20.90268,False
+balanced,Costcla Credit Scoring PAKDD 2009,4,14.79865,False
+balanced,Costcla Credit Scoring PAKDD 2009,5,8000.00000,True
+balanced,Costcla Credit Scoring PAKDD 2009,6,23.27982,False
+balanced,Costcla Credit Scoring PAKDD 2009,7,22.23176,False
+balanced,Costcla Credit Scoring PAKDD 2009,8,23.42756,False
+balanced,Costcla Credit Scoring PAKDD 2009,9,17.98607,False
+balanced,Costcla Direct Marketing,0,10.20061,False
+balanced,Costcla Direct Marketing,1,14.79865,False
+balanced,Costcla Direct Marketing,2,14.79865,False
+balanced,Costcla Direct Marketing,3,24.73618,False
+balanced,Costcla Direct Marketing,4,10.44031,False
+balanced,Costcla Direct Marketing,5,11.95846,False
+balanced,Costcla Direct Marketing,6,6.74360,False
+balanced,Costcla Direct Marketing,7,14.79865,False
+balanced,Costcla Direct Marketing,8,11.27489,False
+balanced,Costcla Direct Marketing,9,14.79865,False
+balanced,Default of Credit Card Clients,0,32.50741,False
+balanced,Default of Credit Card Clients,1,62.89160,True
+balanced,Default of Credit Card Clients,2,54.30606,True
+balanced,Default of Credit Card Clients,3,35.46005,False
+balanced,Default of Credit Card Clients,4,54.57938,True
+balanced,Default of Credit Card Clients,5,62.24171,True
+balanced,Default of Credit Card Clients,6,115.32779,True
+balanced,Default of Credit Card Clients,7,43.79924,False
+balanced,Default of Credit Card Clients,8,24.05954,False
+balanced,Default of Credit Card Clients,9,42.02509,False
+balanced,Diabetes Pima Indian,0,5.88690,False
+balanced,Diabetes Pima Indian,1,6.83795,False
+balanced,Diabetes Pima Indian,2,5.22434,False
+balanced,Diabetes Pima Indian,3,4.81566,False
+balanced,Diabetes Pima Indian,4,6.31911,False
+balanced,Diabetes Pima Indian,5,5.93777,False
+balanced,Diabetes Pima Indian,6,5.48738,False
+balanced,Diabetes Pima Indian,7,5.21271,False
+balanced,Diabetes Pima Indian,8,6.48313,False
+balanced,Diabetes Pima Indian,9,4.23347,False
+balanced,EEG Eye State,0,8.82750,False
+balanced,EEG Eye State,1,3.18184,False
+balanced,EEG Eye State,2,7.96078,False
+balanced,EEG Eye State,3,6.03569,False
+balanced,EEG Eye State,4,139.90390,True
+balanced,EEG Eye State,5,6.31957,False
+balanced,EEG Eye State,6,19555.90529,True
+balanced,EEG Eye State,7,6.73395,False
+balanced,EEG Eye State,8,8.31338,False
+balanced,EEG Eye State,9,7.13399,False
+balanced,Framingham CHD,0,10.66670,False
+balanced,Framingham CHD,1,12.31749,False
+balanced,Framingham CHD,2,21.17362,False
+balanced,Framingham CHD,3,10.44031,False
+balanced,Framingham CHD,4,8.50490,False
+balanced,Framingham CHD,5,10.62714,False
+balanced,Framingham CHD,6,14.45038,False
+balanced,Framingham CHD,7,13.54345,False
+balanced,Framingham CHD,8,9.19530,False
+balanced,Framingham CHD,9,10.44031,False
+balanced,German Credit,0,5.97216,False
+balanced,German Credit,1,5.97216,False
+balanced,German Credit,2,8.50490,False
+balanced,German Credit,3,5.14782,False
+balanced,German Credit,4,6.55744,False
+balanced,German Credit,5,6.55744,False
+balanced,German Credit,6,5.51621,False
+balanced,German Credit,7,6.55744,False
+balanced,German Credit,8,5.97216,False
+balanced,German Credit,9,5.97216,False
+balanced,KC1 Software Defects,0,15.45086,False
+balanced,KC1 Software Defects,1,17.24516,False
+balanced,KC1 Software Defects,2,11.60605,False
+balanced,KC1 Software Defects,3,16.16655,False
+balanced,KC1 Software Defects,4,12.48644,False
+balanced,KC1 Software Defects,5,19.73953,False
+balanced,KC1 Software Defects,6,9.40409,False
+balanced,KC1 Software Defects,7,12.66779,False
+balanced,KC1 Software Defects,8,16.53176,False
+balanced,KC1 Software Defects,9,20.59966,False
+balanced,MAGIC Gamma Telescope,0,7.34709,False
+balanced,MAGIC Gamma Telescope,1,5.95336,False
+balanced,MAGIC Gamma Telescope,2,9.35760,False
+balanced,MAGIC Gamma Telescope,3,7.76614,False
+balanced,MAGIC Gamma Telescope,4,7.28574,False
+balanced,MAGIC Gamma Telescope,5,7.21863,False
+balanced,MAGIC Gamma Telescope,6,7.63435,False
+balanced,MAGIC Gamma Telescope,7,9.30624,False
+balanced,MAGIC Gamma Telescope,8,9.95276,False
+balanced,MAGIC Gamma Telescope,9,7.40217,False
+balanced,Mammographic Mass,0,68.13489,True
+balanced,Mammographic Mass,1,4.99748,False
+balanced,Mammographic Mass,2,74.76678,True
+balanced,Mammographic Mass,3,5.62187,False
+balanced,Mammographic Mass,4,67.58873,True
+balanced,Mammographic Mass,5,72.49403,True
+balanced,Mammographic Mass,6,78.77170,True
+balanced,Mammographic Mass,7,6.57249,False
+balanced,Mammographic Mass,8,4.91785,False
+balanced,Mammographic Mass,9,5.07404,False
+balanced,Phoneme,0,3.73114,False
+balanced,Phoneme,1,3.78333,False
+balanced,Phoneme,2,4.43184,False
+balanced,Phoneme,3,3.93772,False
+balanced,Phoneme,4,4.86690,False
+balanced,Phoneme,5,4.24607,False
+balanced,Phoneme,6,4.12182,False
+balanced,Phoneme,7,4.06049,False
+balanced,Phoneme,8,4.01755,False
+balanced,Phoneme,9,4.97180,False
+balanced,QSAR Biodegradation,0,120.33129,True
+balanced,QSAR Biodegradation,1,82.00235,True
+balanced,QSAR Biodegradation,2,22.63634,False
+balanced,QSAR Biodegradation,3,44.53109,False
+balanced,QSAR Biodegradation,4,82.46053,True
+balanced,QSAR Biodegradation,5,18.22176,False
+balanced,QSAR Biodegradation,6,18.16624,False
+balanced,QSAR Biodegradation,7,20.97640,False
+balanced,QSAR Biodegradation,8,44.53109,False
+balanced,QSAR Biodegradation,9,79.80163,True
+balanced,Spambase,0,1058.65523,True
+balanced,Spambase,1,109.72322,True
+balanced,Spambase,2,469.96813,True
+balanced,Spambase,3,148.42308,True
+balanced,Spambase,4,162.57571,True
+balanced,Spambase,5,89.35565,True
+balanced,Spambase,6,107.23687,True
+balanced,Spambase,7,1420.36457,True
+balanced,Spambase,8,477.38058,True
+balanced,Spambase,9,115.55414,True
+balanced,Steel Plates Fault,0,18.18918,False
+balanced,Steel Plates Fault,1,11.57410,False
+balanced,Steel Plates Fault,2,12.83539,False
+balanced,Steel Plates Fault,3,11.78027,False
+balanced,Steel Plates Fault,4,16.12710,False
+balanced,Steel Plates Fault,5,17.87145,False
+balanced,Steel Plates Fault,6,13.94862,False
+balanced,Steel Plates Fault,7,25.60008,False
+balanced,Steel Plates Fault,8,172.82598,True
+balanced,Steel Plates Fault,9,175.83379,True
+balanced,Stroke Prediction,0,2.92664,False
+balanced,Stroke Prediction,1,4.18878,False
+balanced,Stroke Prediction,2,3.91984,False
+balanced,Stroke Prediction,3,5.94591,False
+balanced,Stroke Prediction,4,3.93201,False
+balanced,Stroke Prediction,5,2.55587,False
+balanced,Stroke Prediction,6,2.85774,False
+balanced,Stroke Prediction,7,4.48210,False
+balanced,Stroke Prediction,8,5.39743,False
+balanced,Stroke Prediction,9,3.00000,False
+imbalanced,Banknote Authentication,0,3.82833,False
+imbalanced,Banknote Authentication,1,3.44005,False
+imbalanced,Banknote Authentication,2,4.63500,False
+imbalanced,Banknote Authentication,3,3.40608,False
+imbalanced,Banknote Authentication,4,3.65373,False
+imbalanced,Banknote Authentication,5,3.98735,False
+imbalanced,Banknote Authentication,6,4.84191,False
+imbalanced,Banknote Authentication,7,3.43809,False
+imbalanced,Banknote Authentication,8,3.83523,False
+imbalanced,Banknote Authentication,9,4.49141,False
+imbalanced,Blood Transfusion,0,8.71321,False
+imbalanced,Blood Transfusion,1,7.74782,False
+imbalanced,Blood Transfusion,2,8.71123,False
+imbalanced,Blood Transfusion,3,7.07671,False
+imbalanced,Blood Transfusion,4,8.74435,False
+imbalanced,Blood Transfusion,5,8.14186,False
+imbalanced,Blood Transfusion,6,8.51537,False
+imbalanced,Blood Transfusion,7,8.46490,False
+imbalanced,Blood Transfusion,8,8.62950,False
+imbalanced,Blood Transfusion,9,7.45601,False
+imbalanced,Cervical Cancer,0,19.03831,False
+imbalanced,Cervical Cancer,1,16.17131,False
+imbalanced,Cervical Cancer,2,15.63859,False
+imbalanced,Cervical Cancer,3,14.79865,False
+imbalanced,Cervical Cancer,4,14.79865,False
+imbalanced,Cervical Cancer,5,20.28331,False
+imbalanced,Cervical Cancer,6,14.79865,False
+imbalanced,Cervical Cancer,7,19.62784,False
+imbalanced,Cervical Cancer,8,16.15974,False
+imbalanced,Cervical Cancer,9,18.27123,False
+imbalanced,Costcla Credit Scoring Kaggle 2011,0,88820.87836,True
+imbalanced,Costcla Credit Scoring Kaggle 2011,1,38021.08755,True
+imbalanced,Costcla Credit Scoring Kaggle 2011,2,37098.76032,True
+imbalanced,Costcla Credit Scoring Kaggle 2011,3,3817.75024,True
+imbalanced,Costcla Credit Scoring Kaggle 2011,4,21416.96178,True
+imbalanced,Costcla Credit Scoring Kaggle 2011,5,249.76736,True
+imbalanced,Costcla Credit Scoring Kaggle 2011,6,24889.66529,True
+imbalanced,Costcla Credit Scoring Kaggle 2011,7,10224.90162,True
+imbalanced,Costcla Credit Scoring Kaggle 2011,8,408.81155,True
+imbalanced,Costcla Credit Scoring Kaggle 2011,9,24137.99114,True
+imbalanced,Costcla Credit Scoring PAKDD 2009,0,34.81088,False
+imbalanced,Costcla Credit Scoring PAKDD 2009,1,10.55149,False
+imbalanced,Costcla Credit Scoring PAKDD 2009,2,13.91421,False
+imbalanced,Costcla Credit Scoring PAKDD 2009,3,36.79257,False
+imbalanced,Costcla Credit Scoring PAKDD 2009,4,367.45843,True
+imbalanced,Costcla Credit Scoring PAKDD 2009,5,14.79865,False
+imbalanced,Costcla Credit Scoring PAKDD 2009,6,19.92092,False
+imbalanced,Costcla Credit Scoring PAKDD 2009,7,22.23176,False
+imbalanced,Costcla Credit Scoring PAKDD 2009,8,22.23176,False
+imbalanced,Costcla Credit Scoring PAKDD 2009,9,23.57695,False
+imbalanced,Costcla Direct Marketing,0,14.79865,False
+imbalanced,Costcla Direct Marketing,1,18.92527,False
+imbalanced,Costcla Direct Marketing,2,10.44031,False
+imbalanced,Costcla Direct Marketing,3,21.28891,False
+imbalanced,Costcla Direct Marketing,4,22.57925,False
+imbalanced,Costcla Direct Marketing,5,26.55604,False
+imbalanced,Costcla Direct Marketing,6,23.58513,False
+imbalanced,Costcla Direct Marketing,7,24.94258,False
+imbalanced,Costcla Direct Marketing,8,22.50824,False
+imbalanced,Costcla Direct Marketing,9,138.79577,True
+imbalanced,Default of Credit Card Clients,0,73.87012,True
+imbalanced,Default of Credit Card Clients,1,39.48047,False
+imbalanced,Default of Credit Card Clients,2,20.34805,False
+imbalanced,Default of Credit Card Clients,3,17.14930,False
+imbalanced,Default of Credit Card Clients,4,74.82022,True
+imbalanced,Default of Credit Card Clients,5,34.90621,False
+imbalanced,Default of Credit Card Clients,6,105.16514,True
+imbalanced,Default of Credit Card Clients,7,65.94595,True
+imbalanced,Default of Credit Card Clients,8,59.48513,True
+imbalanced,Default of Credit Card Clients,9,80.24709,True
+imbalanced,Diabetes Pima Indian,0,4.51297,False
+imbalanced,Diabetes Pima Indian,1,7.69523,False
+imbalanced,Diabetes Pima Indian,2,7.32021,False
+imbalanced,Diabetes Pima Indian,3,6.16130,False
+imbalanced,Diabetes Pima Indian,4,6.04788,False
+imbalanced,Diabetes Pima Indian,5,7.37736,False
+imbalanced,Diabetes Pima Indian,6,5.10072,False
+imbalanced,Diabetes Pima Indian,7,6.11761,False
+imbalanced,Diabetes Pima Indian,8,7.55174,False
+imbalanced,Diabetes Pima Indian,9,4.14432,False
+imbalanced,EEG Eye State,0,9.84220,False
+imbalanced,EEG Eye State,1,75.88273,True
+imbalanced,EEG Eye State,2,9.78994,False
+imbalanced,EEG Eye State,3,7.00671,False
+imbalanced,EEG Eye State,4,19688.46807,True
+imbalanced,EEG Eye State,5,16325.42970,True
+imbalanced,EEG Eye State,6,7.63704,False
+imbalanced,EEG Eye State,7,6.62334,False
+imbalanced,EEG Eye State,8,7.12108,False
+imbalanced,EEG Eye State,9,6.91459,False
+imbalanced,Framingham CHD,0,16.72430,False
+imbalanced,Framingham CHD,1,19.08242,False
+imbalanced,Framingham CHD,2,24.19721,False
+imbalanced,Framingham CHD,3,14.79865,False
+imbalanced,Framingham CHD,4,14.79865,False
+imbalanced,Framingham CHD,5,21.27648,False
+imbalanced,Framingham CHD,6,24.49787,False
+imbalanced,Framingham CHD,7,19.50006,False
+imbalanced,Framingham CHD,8,12.06443,False
+imbalanced,Framingham CHD,9,15.62868,False
+imbalanced,German Credit,0,6.45933,False
+imbalanced,German Credit,1,4.74632,False
+imbalanced,German Credit,2,6.75878,False
+imbalanced,German Credit,3,5.83557,False
+imbalanced,German Credit,4,5.97216,False
+imbalanced,German Credit,5,6.33630,False
+imbalanced,German Credit,6,5.07136,False
+imbalanced,German Credit,7,5.51621,False
+imbalanced,German Credit,8,5.51621,False
+imbalanced,German Credit,9,4.91839,False
+imbalanced,KC1 Software Defects,0,33.81873,False
+imbalanced,KC1 Software Defects,1,33.70427,False
+imbalanced,KC1 Software Defects,2,19.20515,False
+imbalanced,KC1 Software Defects,3,28.91063,False
+imbalanced,KC1 Software Defects,4,14.77541,False
+imbalanced,KC1 Software Defects,5,38.34964,False
+imbalanced,KC1 Software Defects,6,18.31968,False
+imbalanced,KC1 Software Defects,7,27.99055,False
+imbalanced,KC1 Software Defects,8,26.57469,False
+imbalanced,KC1 Software Defects,9,26.84585,False
+imbalanced,MAGIC Gamma Telescope,0,9.85174,False
+imbalanced,MAGIC Gamma Telescope,1,10.39515,False
+imbalanced,MAGIC Gamma Telescope,2,14.07773,False
+imbalanced,MAGIC Gamma Telescope,3,9.89700,False
+imbalanced,MAGIC Gamma Telescope,4,10.94088,False
+imbalanced,MAGIC Gamma Telescope,5,8.59303,False
+imbalanced,MAGIC Gamma Telescope,6,8.73411,False
+imbalanced,MAGIC Gamma Telescope,7,9.32240,False
+imbalanced,MAGIC Gamma Telescope,8,12.83771,False
+imbalanced,MAGIC Gamma Telescope,9,9.84070,False
+imbalanced,Mammographic Mass,0,74.89326,True
+imbalanced,Mammographic Mass,1,7.94153,False
+imbalanced,Mammographic Mass,2,6.84677,False
+imbalanced,Mammographic Mass,3,4.70753,False
+imbalanced,Mammographic Mass,4,7.14196,False
+imbalanced,Mammographic Mass,5,8.02877,False
+imbalanced,Mammographic Mass,6,6.43949,False
+imbalanced,Mammographic Mass,7,6.89149,False
+imbalanced,Mammographic Mass,8,7.23482,False
+imbalanced,Mammographic Mass,9,4.91785,False
+imbalanced,Ozone Level 8hr,0,7.70020,False
+imbalanced,Ozone Level 8hr,1,23.97658,False
+imbalanced,Ozone Level 8hr,2,14.57285,False
+imbalanced,Ozone Level 8hr,3,34.04631,False
+imbalanced,Ozone Level 8hr,4,34.16963,False
+imbalanced,Ozone Level 8hr,5,15.23665,False
+imbalanced,Ozone Level 8hr,6,15.30704,False
+imbalanced,Ozone Level 8hr,7,12.08894,False
+imbalanced,Ozone Level 8hr,8,16.11970,False
+imbalanced,Ozone Level 8hr,9,9.78994,False
+imbalanced,Phoneme,0,5.01950,False
+imbalanced,Phoneme,1,5.16663,False
+imbalanced,Phoneme,2,4.60519,False
+imbalanced,Phoneme,3,5.64995,False
+imbalanced,Phoneme,4,5.68401,False
+imbalanced,Phoneme,5,4.79930,False
+imbalanced,Phoneme,6,6.04967,False
+imbalanced,Phoneme,7,4.49357,False
+imbalanced,Phoneme,8,5.75399,False
+imbalanced,Phoneme,9,5.76748,False
+imbalanced,QSAR Biodegradation,0,87.31099,True
+imbalanced,QSAR Biodegradation,1,29.66487,False
+imbalanced,QSAR Biodegradation,2,14.79865,False
+imbalanced,QSAR Biodegradation,3,84.10044,True
+imbalanced,QSAR Biodegradation,4,73.20259,True
+imbalanced,QSAR Biodegradation,5,15.79179,False
+imbalanced,QSAR Biodegradation,6,89.68345,True
+imbalanced,QSAR Biodegradation,7,82.21165,True
+imbalanced,QSAR Biodegradation,8,44.53109,False
+imbalanced,QSAR Biodegradation,9,70.24819,True
+imbalanced,Spambase,0,467.57231,True
+imbalanced,Spambase,1,1575.75199,True
+imbalanced,Spambase,2,867.09185,True
+imbalanced,Spambase,3,778.30975,True
+imbalanced,Spambase,4,395.59230,True
+imbalanced,Spambase,5,1350.77649,True
+imbalanced,Spambase,6,117.19797,True
+imbalanced,Spambase,7,203.31727,True
+imbalanced,Spambase,8,297.53810,True
+imbalanced,Spambase,9,281.83338,True
+imbalanced,Steel Plates Fault,0,135.91009,True
+imbalanced,Steel Plates Fault,1,165.84563,True
+imbalanced,Steel Plates Fault,2,158.21859,True
+imbalanced,Steel Plates Fault,3,10.61382,False
+imbalanced,Steel Plates Fault,4,14.96415,False
+imbalanced,Steel Plates Fault,5,126.01708,True
+imbalanced,Steel Plates Fault,6,136.04242,True
+imbalanced,Steel Plates Fault,7,168.21731,True
+imbalanced,Steel Plates Fault,8,147.58913,True
+imbalanced,Steel Plates Fault,9,10.15700,False
+imbalanced,Stroke Prediction,0,9.50547,False
+imbalanced,Stroke Prediction,1,6.63749,False
+imbalanced,Stroke Prediction,2,4.84195,False
+imbalanced,Stroke Prediction,3,10.38610,False
+imbalanced,Stroke Prediction,4,4.44441,False
+imbalanced,Stroke Prediction,5,8.13865,False
+imbalanced,Stroke Prediction,6,5.14782,False
+imbalanced,Stroke Prediction,7,9.87750,False
+imbalanced,Stroke Prediction,8,5.12914,False
+imbalanced,Stroke Prediction,9,9.35675,False
+imbalanced,Thyroid Sick,0,24.80014,False
+imbalanced,Thyroid Sick,1,33.86590,False
+imbalanced,Thyroid Sick,2,35.78444,False
+imbalanced,Thyroid Sick,3,40.85362,False
+imbalanced,Thyroid Sick,4,68.19248,True
+imbalanced,Thyroid Sick,5,35.85428,False
+imbalanced,Thyroid Sick,6,34.81459,False
+imbalanced,Thyroid Sick,7,136.48825,True
+imbalanced,Thyroid Sick,8,14.79865,False
+imbalanced,Thyroid Sick,9,20.53640,False
+native,Banknote Authentication,0,3.59782,False
+native,Banknote Authentication,1,3.91397,False
+native,Banknote Authentication,2,3.53027,False
+native,Banknote Authentication,3,3.80212,False
+native,Banknote Authentication,4,3.51037,False
+native,Banknote Authentication,5,3.71220,False
+native,Banknote Authentication,6,3.70209,False
+native,Banknote Authentication,7,3.65828,False
+native,Banknote Authentication,8,3.92975,False
+native,Banknote Authentication,9,3.69648,False
+native,Blood Transfusion,0,8.07395,False
+native,Blood Transfusion,1,6.21709,False
+native,Blood Transfusion,2,8.91649,False
+native,Blood Transfusion,3,7.92440,False
+native,Blood Transfusion,4,6.74166,False
+native,Blood Transfusion,5,8.62244,False
+native,Blood Transfusion,6,5.44959,False
+native,Blood Transfusion,7,8.21236,False
+native,Blood Transfusion,8,2.89214,False
+native,Blood Transfusion,9,8.12367,False
+native,Breast Cancer Wisconsin,0,14.05766,False
+native,Breast Cancer Wisconsin,1,11.66562,False
+native,Breast Cancer Wisconsin,2,16.45650,False
+native,Breast Cancer Wisconsin,3,13.11677,False
+native,Breast Cancer Wisconsin,4,11.96523,False
+native,Breast Cancer Wisconsin,5,15.19961,False
+native,Breast Cancer Wisconsin,6,6.03216,False
+native,Breast Cancer Wisconsin,7,7.16574,False
+native,Breast Cancer Wisconsin,8,6.92041,False
+native,Breast Cancer Wisconsin,9,4.77608,False
+native,Cervical Cancer,0,10.16661,False
+native,Cervical Cancer,1,9.95337,False
+native,Cervical Cancer,2,14.10674,False
+native,Cervical Cancer,3,17.29162,False
+native,Cervical Cancer,4,19.28725,False
+native,Cervical Cancer,5,17.29162,False
+native,Cervical Cancer,6,24.47448,False
+native,Cervical Cancer,7,10.90871,False
+native,Cervical Cancer,8,18.06402,False
+native,Cervical Cancer,9,17.29162,False
+native,Costcla Credit Scoring Kaggle 2011,0,180.12368,True
+native,Costcla Credit Scoring Kaggle 2011,1,6.98740,False
+native,Costcla Credit Scoring Kaggle 2011,2,11.59273,False
+native,Costcla Credit Scoring Kaggle 2011,3,6.03714,False
+native,Costcla Credit Scoring Kaggle 2011,4,5.94072,False
+native,Costcla Credit Scoring Kaggle 2011,5,32.19150,False
+native,Costcla Credit Scoring Kaggle 2011,6,18.48725,False
+native,Costcla Credit Scoring Kaggle 2011,7,45.23706,False
+native,Costcla Credit Scoring Kaggle 2011,8,59.26782,True
+native,Costcla Credit Scoring Kaggle 2011,9,32.22357,False
+native,Costcla Credit Scoring PAKDD 2009,0,18.42553,False
+native,Costcla Credit Scoring PAKDD 2009,1,18.42553,False
+native,Costcla Credit Scoring PAKDD 2009,2,18.42553,False
+native,Costcla Credit Scoring PAKDD 2009,3,22.61343,False
+native,Costcla Credit Scoring PAKDD 2009,4,13.00961,False
+native,Costcla Credit Scoring PAKDD 2009,5,36.89173,False
+native,Costcla Credit Scoring PAKDD 2009,6,16.66131,False
+native,Costcla Credit Scoring PAKDD 2009,7,15.03330,False
+native,Costcla Credit Scoring PAKDD 2009,8,18.42553,False
+native,Costcla Credit Scoring PAKDD 2009,9,18.42553,False
+native,Costcla Direct Marketing,0,23.33486,False
+native,Costcla Direct Marketing,1,18.18653,False
+native,Costcla Direct Marketing,2,13.73213,False
+native,Costcla Direct Marketing,3,22.80331,False
+native,Costcla Direct Marketing,4,13.73213,False
+native,Costcla Direct Marketing,5,18.91469,False
+native,Costcla Direct Marketing,6,33.74698,False
+native,Costcla Direct Marketing,7,13.73213,False
+native,Costcla Direct Marketing,8,21.10441,False
+native,Costcla Direct Marketing,9,14.83801,False
+native,Default of Credit Card Clients,0,25.95639,False
+native,Default of Credit Card Clients,1,20.96420,False
+native,Default of Credit Card Clients,2,99.55956,True
+native,Default of Credit Card Clients,3,26.67152,False
+native,Default of Credit Card Clients,4,10.61150,False
+native,Default of Credit Card Clients,5,23.86529,False
+native,Default of Credit Card Clients,6,22.62963,False
+native,Default of Credit Card Clients,7,21.27161,False
+native,Default of Credit Card Clients,8,61.13875,True
+native,Default of Credit Card Clients,9,30.62914,False
+native,Diabetes Pima Indian,0,4.06132,False
+native,Diabetes Pima Indian,1,5.69093,False
+native,Diabetes Pima Indian,2,6.64991,False
+native,Diabetes Pima Indian,3,5.69450,False
+native,Diabetes Pima Indian,4,4.65495,False
+native,Diabetes Pima Indian,5,4.02702,False
+native,Diabetes Pima Indian,6,5.78021,False
+native,Diabetes Pima Indian,7,4.31832,False
+native,Diabetes Pima Indian,8,6.84174,False
+native,Diabetes Pima Indian,9,5.89081,False
+native,EEG Eye State,0,3.03562,False
+native,EEG Eye State,1,30323.94019,True
+native,EEG Eye State,2,7.29940,False
+native,EEG Eye State,3,5.36564,False
+native,EEG Eye State,4,6.90760,False
+native,EEG Eye State,5,5.47272,False
+native,EEG Eye State,6,6.36621,False
+native,EEG Eye State,7,6.92733,False
+native,EEG Eye State,8,7.52379,False
+native,EEG Eye State,9,6.88120,False
+native,Framingham CHD,0,14.45683,False
+native,Framingham CHD,1,13.24286,False
+native,Framingham CHD,2,18.68154,False
+native,Framingham CHD,3,12.67038,False
+native,Framingham CHD,4,15.24248,False
+native,Framingham CHD,5,12.20656,False
+native,Framingham CHD,6,16.17096,False
+native,Framingham CHD,7,14.50461,False
+native,Framingham CHD,8,13.78075,False
+native,Framingham CHD,9,14.67491,False
+native,German Credit,0,5.39074,False
+native,German Credit,1,5.09147,False
+native,German Credit,2,4.81019,False
+native,German Credit,3,4.89898,False
+native,German Credit,4,5.55141,False
+native,German Credit,5,5.55141,False
+native,German Credit,6,5.09147,False
+native,German Credit,7,4.81019,False
+native,German Credit,8,4.64550,False
+native,German Credit,9,4.49579,False
+native,KC1 Software Defects,0,12.29747,False
+native,KC1 Software Defects,1,14.85049,False
+native,KC1 Software Defects,2,14.72490,False
+native,KC1 Software Defects,3,21.20258,False
+native,KC1 Software Defects,4,15.79038,False
+native,KC1 Software Defects,5,16.62890,False
+native,KC1 Software Defects,6,11.96502,False
+native,KC1 Software Defects,7,20.62049,False
+native,KC1 Software Defects,8,15.01381,False
+native,KC1 Software Defects,9,19.73088,False
+native,MAGIC Gamma Telescope,0,8.24310,False
+native,MAGIC Gamma Telescope,1,5.84826,False
+native,MAGIC Gamma Telescope,2,9.62787,False
+native,MAGIC Gamma Telescope,3,10.50248,False
+native,MAGIC Gamma Telescope,4,9.47404,False
+native,MAGIC Gamma Telescope,5,7.56531,False
+native,MAGIC Gamma Telescope,6,12.39456,False
+native,MAGIC Gamma Telescope,7,10.24845,False
+native,MAGIC Gamma Telescope,8,5.38015,False
+native,MAGIC Gamma Telescope,9,10.72039,False
+native,Mammographic Mass,0,5.31275,False
+native,Mammographic Mass,1,5.22694,False
+native,Mammographic Mass,2,5.28744,False
+native,Mammographic Mass,3,5.25357,False
+native,Mammographic Mass,4,6.42218,False
+native,Mammographic Mass,5,5.34643,False
+native,Mammographic Mass,6,4.96263,False
+native,Mammographic Mass,7,5.63791,False
+native,Mammographic Mass,8,5.40490,False
+native,Mammographic Mass,9,5.25684,False
+native,Ozone Level 8hr,0,10.77369,False
+native,Ozone Level 8hr,1,15.54241,False
+native,Ozone Level 8hr,2,5.81053,False
+native,Ozone Level 8hr,3,15.50310,False
+native,Ozone Level 8hr,4,9.64591,False
+native,Ozone Level 8hr,5,16.46776,False
+native,Ozone Level 8hr,6,15.68525,False
+native,Ozone Level 8hr,7,8.62041,False
+native,Ozone Level 8hr,8,12.44502,False
+native,Ozone Level 8hr,9,9.73279,False
+native,Phoneme,0,4.21758,False
+native,Phoneme,1,3.61258,False
+native,Phoneme,2,3.89831,False
+native,Phoneme,3,4.15521,False
+native,Phoneme,4,4.27852,False
+native,Phoneme,5,3.84415,False
+native,Phoneme,6,3.68922,False
+native,Phoneme,7,3.62499,False
+native,Phoneme,8,3.90045,False
+native,Phoneme,9,4.19180,False
+native,QSAR Biodegradation,0,88.31653,True
+native,QSAR Biodegradation,1,86.31284,True
+native,QSAR Biodegradation,2,85.16617,True
+native,QSAR Biodegradation,3,16.02778,False
+native,QSAR Biodegradation,4,13.28368,False
+native,QSAR Biodegradation,5,13.58389,False
+native,QSAR Biodegradation,6,86.79579,True
+native,QSAR Biodegradation,7,13.77443,False
+native,QSAR Biodegradation,8,27.16626,False
+native,QSAR Biodegradation,9,13.86367,False
+native,Spambase,0,48.64909,False
+native,Spambase,1,55.62507,True
+native,Spambase,2,79.17023,True
+native,Spambase,3,45.51382,False
+native,Spambase,4,72.12579,True
+native,Spambase,5,124.32467,True
+native,Spambase,6,68.83743,True
+native,Spambase,7,43.65795,False
+native,Spambase,8,41.31272,False
+native,Spambase,9,53.91169,True
+native,Steel Plates Fault,0,14.10682,False
+native,Steel Plates Fault,1,16.33337,False
+native,Steel Plates Fault,2,14.80097,False
+native,Steel Plates Fault,3,6.23817,False
+native,Steel Plates Fault,4,8.60703,False
+native,Steel Plates Fault,5,15.90596,False
+native,Steel Plates Fault,6,10.09963,False
+native,Steel Plates Fault,7,6.57734,False
+native,Steel Plates Fault,8,7.17059,False
+native,Steel Plates Fault,9,160.34030,True
+native,Stroke Prediction,0,6.13332,False
+native,Stroke Prediction,1,4.42208,False
+native,Stroke Prediction,2,8.79403,False
+native,Stroke Prediction,3,8.90263,False
+native,Stroke Prediction,4,8.93121,False
+native,Stroke Prediction,5,8.98874,False
+native,Stroke Prediction,6,4.82068,False
+native,Stroke Prediction,7,6.34031,False
+native,Stroke Prediction,8,4.02655,False
+native,Stroke Prediction,9,8.07859,False
+native,Thyroid Sick,0,27.21788,False
+native,Thyroid Sick,1,26.93446,False
+native,Thyroid Sick,2,26.49218,False
+native,Thyroid Sick,3,18.04162,False
+native,Thyroid Sick,4,14.71960,False
+native,Thyroid Sick,5,26.38093,False
+native,Thyroid Sick,6,23.31266,False
+native,Thyroid Sick,7,24.60998,False
+native,Thyroid Sick,8,25.77778,False
+native,Thyroid Sick,9,23.72842,False

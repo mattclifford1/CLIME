@@ -1,61 +1,61 @@
 setting,dataset,seeds,ratio,n_features,n_train,n_test
-balanced,Banknote Authentication,3,1.00000,4,220.00000,666.00000
-balanced,Costcla Credit Scoring Kaggle 2011,3,1.00000,10,220.00000,360.00000
-balanced,Costcla Credit Scoring PAKDD 2009,3,1.00000,34,220.00000,370.00000
-balanced,Costcla Direct Marketing,3,1.00000,32,220.00000,172.00000
-balanced,Default of Credit Card Clients,3,1.00000,23,220.00000,2000.00000
-balanced,Diabetes Pima Indian,3,1.00000,8,220.00000,210.00000
-balanced,EEG Eye State,3,1.00000,14,220.00000,2000.00000
-balanced,Framingham CHD,3,1.00000,15,220.00000,712.00000
-balanced,German Credit,3,1.00000,20,220.00000,254.00000
-balanced,KC1 Software Defects,3,1.00000,21,220.00000,288.00000
-balanced,MAGIC Gamma Telescope,3,1.00000,10,220.00000,2000.00000
-balanced,Mammographic Mass,3,1.00000,5,220.00000,446.00000
-balanced,Phoneme,3,1.00000,5,220.00000,1968.00000
-balanced,QSAR Biodegradation,3,1.00000,41,220.00000,328.00000
-balanced,Spambase,3,1.00000,57,220.00000,2000.00000
-balanced,Steel Plates Fault,3,1.00000,27,220.00000,750.00000
-balanced,Stroke Prediction,3,1.00000,10,220.00000,186.00000
-imbalanced,Banknote Authentication,4,10.00000,4,220.00000,412.00000
-imbalanced,Blood Transfusion,4,10.00000,4,220.00000,272.00000
-imbalanced,Cervical Cancer,4,10.00000,32,220.00000,256.00000
-imbalanced,Costcla Credit Scoring Kaggle 2011,4,10.00000,10,220.00000,2000.00000
-imbalanced,Costcla Credit Scoring PAKDD 2009,4,10.00000,34,220.00000,997.00000
-imbalanced,Costcla Direct Marketing,4,10.00000,32,220.00000,1068.00000
-imbalanced,Default of Credit Card Clients,4,10.00000,23,220.00000,2000.00000
-imbalanced,Diabetes Pima Indian,4,10.00000,8,220.00000,220.00000
-imbalanced,EEG Eye State,4,10.00000,14,220.00000,2000.00000
-imbalanced,Framingham CHD,4,10.00000,15,220.00000,2000.00000
-imbalanced,German Credit,4,10.00000,20,220.00000,366.00000
-imbalanced,KC1 Software Defects,4,10.00000,21,220.00000,1160.00000
-imbalanced,MAGIC Gamma Telescope,4,10.00000,10,220.00000,2000.00000
-imbalanced,Mammographic Mass,4,10.00000,5,220.00000,232.00000
-imbalanced,Ozone Level 8hr,4,10.00000,72,220.00000,1026.00000
-imbalanced,Phoneme,4,10.00000,5,220.00000,2000.00000
-imbalanced,QSAR Biodegradation,4,10.00000,41,220.00000,366.00000
-imbalanced,Spambase,3,10.00000,57,220.00000,1898.00000
-imbalanced,Steel Plates Fault,3,10.00000,27,220.00000,783.00000
-imbalanced,Stroke Prediction,3,10.00000,10,220.00000,1680.00000
-imbalanced,Thyroid Sick,3,10.00000,28,220.00000,1108.00000
-native,Banknote Authentication,3,1.24824,4,960.00000,274.00000
-native,Blood Transfusion,3,3.21774,4,523.00000,150.00000
-native,Breast Cancer Wisconsin,3,1.68919,30,398.00000,114.00000
-native,Cervical Cancer,3,14.78947,32,600.00000,172.00000
-native,Costcla Credit Scoring Kaggle 2011,3,13.89362,10,2100.00000,600.00000
-native,Costcla Credit Scoring PAKDD 2009,3,4.02583,34,1362.00000,389.00000
-native,Costcla Direct Marketing,3,6.94611,32,1327.00000,379.00000
-native,Default of Credit Card Clients,3,3.51613,23,2100.00000,600.00000
-native,Diabetes Pima Indian,3,1.87166,8,537.00000,154.00000
-native,EEG Eye State,3,1.22930,14,2100.00000,600.00000
-native,Framingham CHD,3,5.58307,15,2100.00000,600.00000
-native,German Credit,3,2.33333,20,700.00000,200.00000
-native,KC1 Software Defects,3,5.47368,21,1476.00000,422.00000
-native,MAGIC Gamma Telescope,3,1.84296,10,2100.00000,600.00000
-native,Mammographic Mass,3,1.16077,5,672.00000,192.00000
-native,Ozone Level 8hr,3,14.83036,72,1773.00000,507.00000
-native,Phoneme,3,2.40909,5,2100.00000,600.00000
-native,QSAR Biodegradation,3,1.96386,41,738.00000,211.00000
-native,Spambase,3,1.53930,57,2100.00000,600.00000
-native,Steel Plates Fault,3,1.88323,27,1358.00000,388.00000
-native,Stroke Prediction,3,19.58824,10,2100.00000,600.00000
-native,Thyroid Sick,3,15.32500,28,1959.00000,560.00000
+balanced,Banknote Authentication,10,1.00000,4,220.00000,666.00000
+balanced,Costcla Credit Scoring Kaggle 2011,10,1.00000,10,220.00000,360.00000
+balanced,Costcla Credit Scoring PAKDD 2009,10,1.00000,34,220.00000,370.00000
+balanced,Costcla Direct Marketing,10,1.00000,32,220.00000,172.00000
+balanced,Default of Credit Card Clients,10,1.00000,23,220.00000,2000.00000
+balanced,Diabetes Pima Indian,10,1.00000,8,220.00000,210.00000
+balanced,EEG Eye State,10,1.00000,14,220.00000,2000.00000
+balanced,Framingham CHD,10,1.00000,15,220.00000,712.00000
+balanced,German Credit,10,1.00000,20,220.00000,254.00000
+balanced,KC1 Software Defects,10,1.00000,21,220.00000,288.00000
+balanced,MAGIC Gamma Telescope,10,1.00000,10,220.00000,2000.00000
+balanced,Mammographic Mass,10,1.00000,5,220.00000,446.00000
+balanced,Phoneme,10,1.00000,5,220.00000,1968.00000
+balanced,QSAR Biodegradation,10,1.00000,41,220.00000,328.00000
+balanced,Spambase,10,1.00000,57,220.00000,2000.00000
+balanced,Steel Plates Fault,10,1.00000,27,220.00000,750.00000
+balanced,Stroke Prediction,10,1.00000,10,220.00000,186.00000
+imbalanced,Banknote Authentication,10,10.00000,4,220.00000,412.00000
+imbalanced,Blood Transfusion,10,10.00000,4,220.00000,272.00000
+imbalanced,Cervical Cancer,10,10.00000,32,220.00000,256.00000
+imbalanced,Costcla Credit Scoring Kaggle 2011,10,10.00000,10,220.00000,2000.00000
+imbalanced,Costcla Credit Scoring PAKDD 2009,10,10.00000,34,220.00000,997.00000
+imbalanced,Costcla Direct Marketing,10,10.00000,32,220.00000,1068.00000
+imbalanced,Default of Credit Card Clients,10,10.00000,23,220.00000,2000.00000
+imbalanced,Diabetes Pima Indian,10,10.00000,8,220.00000,220.00000
+imbalanced,EEG Eye State,10,10.00000,14,220.00000,2000.00000
+imbalanced,Framingham CHD,10,10.00000,15,220.00000,2000.00000
+imbalanced,German Credit,10,10.00000,20,220.00000,366.00000
+imbalanced,KC1 Software Defects,10,10.00000,21,220.00000,1160.00000
+imbalanced,MAGIC Gamma Telescope,10,10.00000,10,220.00000,2000.00000
+imbalanced,Mammographic Mass,10,10.00000,5,220.00000,232.00000
+imbalanced,Ozone Level 8hr,10,10.00000,72,220.00000,1026.00000
+imbalanced,Phoneme,10,10.00000,5,220.00000,2000.00000
+imbalanced,QSAR Biodegradation,10,10.00000,41,220.00000,366.00000
+imbalanced,Spambase,10,10.00000,57,220.00000,1898.00000
+imbalanced,Steel Plates Fault,10,10.00000,27,220.00000,783.00000
+imbalanced,Stroke Prediction,10,10.00000,10,220.00000,1680.00000
+imbalanced,Thyroid Sick,10,10.00000,28,220.00000,1108.00000
+native,Banknote Authentication,10,1.24824,4,960.00000,274.00000
+native,Blood Transfusion,10,3.21774,4,523.00000,150.00000
+native,Breast Cancer Wisconsin,10,1.68919,30,398.00000,114.00000
+native,Cervical Cancer,10,14.78947,32,600.00000,172.00000
+native,Costcla Credit Scoring Kaggle 2011,10,13.89362,10,2100.00000,600.00000
+native,Costcla Credit Scoring PAKDD 2009,10,4.02583,34,1362.00000,389.00000
+native,Costcla Direct Marketing,10,6.94611,32,1327.00000,379.00000
+native,Default of Credit Card Clients,10,3.51613,23,2100.00000,600.00000
+native,Diabetes Pima Indian,10,1.87166,8,537.00000,154.00000
+native,EEG Eye State,10,1.22930,14,2100.00000,600.00000
+native,Framingham CHD,10,5.58307,15,2100.00000,600.00000
+native,German Credit,10,2.33333,20,700.00000,200.00000
+native,KC1 Software Defects,10,5.47368,21,1476.00000,422.00000
+native,MAGIC Gamma Telescope,10,1.84322,10,2100.00000,600.00000
+native,Mammographic Mass,10,1.16077,5,672.00000,192.00000
+native,Ozone Level 8hr,10,14.83036,72,1773.00000,507.00000
+native,Phoneme,10,2.40909,5,2100.00000,600.00000
+native,QSAR Biodegradation,10,1.96386,41,738.00000,211.00000
+native,Spambase,10,1.53930,57,2100.00000,600.00000
+native,Steel Plates Fault,10,1.88323,27,1358.00000,388.00000
+native,Stroke Prediction,10,19.58824,10,2100.00000,600.00000
+native,Thyroid Sick,10,15.32500,28,1959.00000,560.00000

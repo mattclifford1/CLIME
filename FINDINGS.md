@@ -14,7 +14,7 @@ Three threads, in order of maturity:
 | **CIKM'23 — location-agnostic surrogates** | Published, DOI `10.1145/3583780.3615284` | `~/Repos/clime/papers/CIKM-2023-camera-ready` | complete, figures reproducible |
 | **Logit-LIME** | Sketch (~1 page) + first real results, see §4 | `~/Repos/clime/papers/Logit-LIME` | implemented, working, operating regime now characterised |
 | **aLIMEgn / aLIMEgnment** | Framing corrected, 8 predictions run, see §5 | `~/Repos/clime/papers/aLIMEgn` | `experiments/alimegn/`, 4 sweeps, 500 configurations |
-| **CIKM'23 extended** | CIKM protocol on 22 datasets, 6 model families, 3 class ratios, with threshold placement on the black box and on the surrogate; see the write-up | `~/Repos/clime/papers/CIKM-2023-extra-datasets` | `experiments/cikm_extended/` |
+| **CIKM'23 extended** | Complete (10 seeds, 0 failed jobs), written up, see §5a | `~/Repos/clime/papers/CIKM-2023-extra-datasets` | `experiments/cikm_extended/` |
 
 `~/Repos/clime/papers/` is **empty** — that clone has no content. The paper you're
 thinking of is `CIKM-2023-camera-ready`. `pre-cut-CIKM-2023-camera-ready` is *not* a
@@ -1086,6 +1086,54 @@ Question 3 also connects the two open threads: it is the same probability-vs-lab
 distinction that motivates Logit-LIME. **Logit-LIME and aLIMEgn are arguably one paper**
 — "what should the surrogate be trained on, and against what should it be scored" —
 rather than two.
+
+---
+
+## 5a. Thread 4 — CIKM'23 extended (finished 2026-11-18)
+
+The CIKM'23 protocol on 22 datasets, six model families (thesis `projection_models`) and
+three class ratios, 10 seeds, with threshold placement on the black box and on the
+surrogate. Every number below is in `experiments/cikm_extended/results/numbers.txt`;
+the write-up is `../papers/CIKM-2023-extra-datasets`.
+
+- **The published gain replicates on balanced data.** 110:110: fidelity 0.81 → 0.85
+  (+0.043 ± 0.007), higher on 15 of 17 datasets, none lower, all six families.
+- **It fades with imbalance on the published score.** Own ratio: +0.029 on the line
+  (12 higher, 5 level, 5 lower), +0.004 ± 0.005 at test points. 200:20: −0.003 on the
+  line and −0.019 at test points (lower on 18 of 21).
+- **The failure moves into the rare class.** LIME's balanced fidelity at 200:20 is 0.56;
+  CLIME raises balanced fidelity in every setting (+0.076, +0.146, +0.158 at 110:110,
+  own ratio, 200:20) on every dataset at own ratio and 200:20.
+- **Where:** the gain is confined to query points whose sample is a trace to a fifth the
+  other class. Samples under 1% the other class are 5%, 18% and 44% of line points at
+  110:110, own ratio and 200:20. The "local" test score has an effective size of
+  74–80% of the test set at the default kernel.
+- **CLIME is mostly a threshold move.** Cutting LIME's surrogate at CLIME's positive
+  rate gives +0.040 of CLIME's +0.045 fidelity at 110:110, and +0.148 of +0.160 balanced
+  fidelity at 200:20, with LIME's coefficients. AUC moves by about 0.01.
+- **Correcting the black box lowers LIME's fidelity.** 200:20, test-point queries:
+  re-thresholding on validation data takes balanced accuracy 0.58 → 0.69, one-sided
+  samples 46% → 7% and LIME's fidelity 0.97 → 0.76. A high fidelity for an imbalanced
+  model is a sign of a one-class model.
+- **Deltas on the black box:** the count-based minimax placements match validation
+  re-thresholding with no held-out data (balanced accuracy 0.68–0.69 against 0.69);
+  the published method moves the threshold in 57% of fits (0.62).
+- **Ratio sweep (4:1 to 40:1, 13 datasets):** one-sided samples 17% → 81% and LIME's
+  fidelity 0.89 → 0.99 for the plain model; 9–12% one-sided once re-thresholded.
+- **Kernel width:** the published gap grows with the kernel (0.93 against 0.94 at a
+  third of the default, 0.87 against 0.92 at four times it); a narrow kernel hides the
+  failure from the score, not from the surrogate.
+- **Deltas on the surrogate's cut (19 methods, RF and logistic, 2 seeds):** count-based
+  and shape-aware methods move the cut at about 80% of line points and reach CLIME's
+  balanced fidelity; none matches the kernel-weighted balanced-accuracy cut.
+
+Robustness: 97 of the 600 main-run splits have a standardised test value beyond 50
+training SDs, which stretches the sampling covariance; dropping them moves no headline
+difference by more than 0.013 (`check_outliers.py`). 19 of 2.4 million explanations
+failed, all in one such split, through B24.
+
+Not done: images (planned in the write-up's section 6); a logit surrogate under the same
+three readings.
 
 ---
 

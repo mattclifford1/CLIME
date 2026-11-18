@@ -1,0 +1,2 @@
+setting,dataset,family,seed,arm,kind,error,failed,explained
+native,EEG Eye State,SVM,1,SMOTE,line,ValueError: Sample weights must contain at least one non-zero number.,19,2397181

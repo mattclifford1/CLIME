@@ -1,265 +1,265 @@
 setting,family,kind,explainer,test_fidelity,test_balanced,local_fidelity,local_balanced,cut,moved,datasets
-imbalanced,Logistic,line,CLIME,0.97969,0.86771,0.99264,0.91322,0.50000,0.00000,21
-imbalanced,Logistic,line,LIME,0.96743,0.63173,0.97803,0.66798,0.50000,0.00000,21
-imbalanced,Logistic,line,LIME + Avg Deltas,0.90010,0.81517,0.88448,0.83892,0.35581,0.76905,21
-imbalanced,Logistic,line,LIME + CP Minimax,0.94140,0.86432,0.95639,0.90402,0.38061,0.76905,21
-imbalanced,Logistic,line,LIME + CP Sum,0.98212,0.87575,0.99652,0.91348,0.41338,0.76905,21
-imbalanced,Logistic,line,LIME + DKW Minimax,0.94176,0.86352,0.95275,0.90162,0.37812,0.76905,21
-imbalanced,Logistic,line,LIME + DKW Sum,0.98214,0.87521,0.99676,0.91361,0.41359,0.76905,21
-imbalanced,Logistic,line,LIME + ECAI Tolerance Limit (modular),0.96746,0.63176,0.97803,0.66798,0.50001,0.00238,21
-imbalanced,Logistic,line,LIME + ECAI Tolerance Limit (one-sided radius),0.96726,0.63266,0.97803,0.66839,0.49939,0.00476,21
-imbalanced,Logistic,line,LIME + F Deltas,0.95236,0.86261,0.94975,0.89329,0.38086,0.76905,21
-imbalanced,Logistic,line,LIME + Gaussian Band,0.93951,0.86170,0.95016,0.89775,0.38030,0.76905,21
-imbalanced,Logistic,line,LIME + Gaussian Band (MC),0.94739,0.86612,0.95804,0.90234,0.38370,0.76905,21
-imbalanced,Logistic,line,LIME + Gaussian Neyman-Pearson,0.90615,0.84134,0.91004,0.87211,0.36752,0.76905,21
-imbalanced,Logistic,line,LIME + Gaussian Predictive,0.96810,0.87960,0.97843,0.91371,0.39553,0.76905,21
-imbalanced,Logistic,line,LIME + Logistic Band,0.93755,0.86063,0.94773,0.89632,0.37894,0.76905,21
-imbalanced,Logistic,line,LIME + Max Deltas,0.82824,0.78595,0.81725,0.80554,0.32664,0.76905,21
-imbalanced,Logistic,line,LIME + Min Deltas,0.94656,0.85907,0.94615,0.89100,0.37732,0.76905,21
-imbalanced,Logistic,line,LIME + Saw-Yang-Mo Minimax,0.97139,0.88178,0.98131,0.91715,0.39784,0.76905,21
-imbalanced,Logistic,line,LIME + Slacks Deltas,0.95396,0.85164,0.95765,0.88257,0.39118,0.73810,21
-imbalanced,Logistic,line,LIME + Slacks Deltas (continuous),0.95060,0.84834,0.95462,0.88087,0.38959,0.73810,21
-imbalanced,Logistic,line,"LIME + k-th Point Tolerance Limit (min, expected loss)",0.87252,0.81691,0.87238,0.84515,0.34596,0.76905,21
-imbalanced,Logistic,line,LIME + re-threshold,0.98255,0.95261,0.99398,0.99055,0.41157,0.92619,21
-imbalanced,Logistic,test,CLIME,0.98603,0.87479,0.98314,0.92294,0.50000,0.00000,21
-imbalanced,Logistic,test,LIME,0.97908,0.65435,0.96968,0.69329,0.50000,0.00000,21
-imbalanced,Logistic,test,LIME + Avg Deltas,0.91367,0.78199,0.89275,0.84239,0.38204,0.76190,21
-imbalanced,Logistic,test,LIME + CP Minimax,0.95953,0.86371,0.95768,0.89809,0.39336,0.76190,21
-imbalanced,Logistic,test,LIME + CP Sum,0.98928,0.85511,0.99156,0.90415,0.42123,0.76190,21
-imbalanced,Logistic,test,LIME + DKW Minimax,0.95803,0.86281,0.95429,0.89609,0.39035,0.76190,21
-imbalanced,Logistic,test,LIME + DKW Sum,0.98927,0.85436,0.99167,0.90407,0.42142,0.76190,21
-imbalanced,Logistic,test,LIME + ECAI Tolerance Limit (modular),0.97908,0.65435,0.96968,0.69329,0.50000,0.00000,21
-imbalanced,Logistic,test,LIME + ECAI Tolerance Limit (one-sided radius),0.97921,0.65568,0.96968,0.69329,0.49794,0.01905,21
-imbalanced,Logistic,test,LIME + F Deltas,0.95852,0.84701,0.94471,0.88931,0.38967,0.76190,21
-imbalanced,Logistic,test,LIME + Gaussian Band,0.95065,0.85431,0.95199,0.89346,0.39317,0.76190,21
-imbalanced,Logistic,test,LIME + Gaussian Band (MC),0.95633,0.85723,0.95818,0.89761,0.39607,0.76190,21
-imbalanced,Logistic,test,LIME + Gaussian Neyman-Pearson,0.92959,0.83607,0.92994,0.87482,0.38682,0.76190,21
-imbalanced,Logistic,test,LIME + Gaussian Predictive,0.97208,0.86709,0.97632,0.90937,0.40621,0.76190,21
-imbalanced,Logistic,test,LIME + Logistic Band,0.94943,0.85365,0.95013,0.89231,0.39193,0.76190,21
-imbalanced,Logistic,test,LIME + Max Deltas,0.84922,0.75964,0.82793,0.80505,0.35192,0.76190,21
-imbalanced,Logistic,test,LIME + Min Deltas,0.95439,0.84341,0.94253,0.88806,0.38856,0.76190,21
-imbalanced,Logistic,test,LIME + Saw-Yang-Mo Minimax,0.97509,0.86853,0.97888,0.91109,0.40831,0.76190,21
-imbalanced,Logistic,test,LIME + Slacks Deltas,0.96676,0.84175,0.96342,0.87948,0.40361,0.70952,21
-imbalanced,Logistic,test,LIME + Slacks Deltas (continuous),0.96488,0.84034,0.96131,0.87820,0.40279,0.70952,21
-imbalanced,Logistic,test,"LIME + k-th Point Tolerance Limit (min, expected loss)",0.89362,0.81187,0.87377,0.84030,0.35637,0.75238,21
-imbalanced,Logistic,test,LIME + re-threshold,0.99444,0.95407,0.99656,0.98804,0.36232,0.97143,21
-imbalanced,Random Forest,line,CLIME,0.94560,0.62988,0.94801,0.69702,0.50000,0.00000,21
-imbalanced,Random Forest,line,LIME,0.94172,0.53751,0.95595,0.55959,0.50000,0.00000,21
-imbalanced,Random Forest,line,LIME + Avg Deltas,0.90710,0.66558,0.87060,0.70364,0.38417,0.59524,21
-imbalanced,Random Forest,line,LIME + CP Minimax,0.86586,0.69762,0.81171,0.72905,0.35381,0.70238,21
-imbalanced,Random Forest,line,LIME + CP Sum,0.93327,0.66039,0.89965,0.71227,0.38279,0.70238,21
-imbalanced,Random Forest,line,LIME + DKW Minimax,0.87872,0.70206,0.82107,0.73157,0.35536,0.70238,21
-imbalanced,Random Forest,line,LIME + DKW Sum,0.92552,0.66414,0.89170,0.72408,0.37818,0.70238,21
-imbalanced,Random Forest,line,LIME + ECAI Tolerance Limit (modular),0.94172,0.53751,0.95595,0.55959,0.50000,0.00000,21
-imbalanced,Random Forest,line,LIME + ECAI Tolerance Limit (one-sided radius),0.94172,0.53751,0.95358,0.55841,0.49886,0.01190,21
-imbalanced,Random Forest,line,LIME + F Deltas,0.90663,0.67980,0.86615,0.70991,0.38098,0.59524,21
-imbalanced,Random Forest,line,LIME + Gaussian Band,0.85094,0.68607,0.79959,0.72323,0.35280,0.70238,21
-imbalanced,Random Forest,line,LIME + Gaussian Band (MC),0.85807,0.68531,0.81081,0.72747,0.35493,0.70238,21
-imbalanced,Random Forest,line,LIME + Gaussian Neyman-Pearson,0.60370,0.60430,0.56660,0.61643,0.26089,0.70238,21
-imbalanced,Random Forest,line,LIME + Gaussian Predictive,0.91045,0.68710,0.87350,0.73789,0.36840,0.70238,21
-imbalanced,Random Forest,line,LIME + Logistic Band,0.85065,0.68678,0.79871,0.72347,0.35240,0.70238,21
-imbalanced,Random Forest,line,LIME + Max Deltas,0.89339,0.66351,0.85687,0.69995,0.38189,0.59524,21
-imbalanced,Random Forest,line,LIME + Min Deltas,0.90923,0.68174,0.87279,0.71167,0.38270,0.59524,21
-imbalanced,Random Forest,line,LIME + Saw-Yang-Mo Minimax,0.88146,0.68374,0.82596,0.72387,0.35896,0.70238,21
-imbalanced,Random Forest,line,LIME + Slacks Deltas,0.93412,0.60948,0.93457,0.65019,0.44180,0.31905,21
-imbalanced,Random Forest,line,LIME + Slacks Deltas (continuous),0.93397,0.60880,0.93416,0.65026,0.44174,0.31905,21
-imbalanced,Random Forest,line,"LIME + k-th Point Tolerance Limit (min, expected loss)",0.89485,0.67604,0.85818,0.70750,0.37932,0.58810,21
-imbalanced,Random Forest,line,LIME + re-threshold,0.86892,0.78468,0.82004,0.82081,0.27506,0.97143,21
-imbalanced,Random Forest,test,CLIME,0.96418,0.61094,0.93550,0.70155,0.50000,0.00000,21
-imbalanced,Random Forest,test,LIME,0.96810,0.54250,0.94438,0.57019,0.50000,0.00000,21
-imbalanced,Random Forest,test,LIME + Avg Deltas,0.94862,0.63636,0.86798,0.71069,0.39968,0.58571,21
-imbalanced,Random Forest,test,LIME + CP Minimax,0.92542,0.66176,0.80196,0.73841,0.36284,0.69524,21
-imbalanced,Random Forest,test,LIME + CP Sum,0.95167,0.64266,0.88239,0.72806,0.38979,0.69524,21
-imbalanced,Random Forest,test,LIME + DKW Minimax,0.92939,0.66197,0.80876,0.74150,0.36402,0.69524,21
-imbalanced,Random Forest,test,LIME + DKW Sum,0.95464,0.64205,0.88451,0.73998,0.38696,0.69524,21
-imbalanced,Random Forest,test,LIME + ECAI Tolerance Limit (modular),0.96810,0.54250,0.94438,0.57019,0.50000,0.00000,21
-imbalanced,Random Forest,test,LIME + ECAI Tolerance Limit (one-sided radius),0.96810,0.54250,0.94438,0.57019,0.50000,0.00000,21
-imbalanced,Random Forest,test,LIME + F Deltas,0.94815,0.64987,0.85419,0.71838,0.39201,0.58571,21
-imbalanced,Random Forest,test,LIME + Gaussian Band,0.92237,0.65848,0.79796,0.73073,0.36259,0.69524,21
-imbalanced,Random Forest,test,LIME + Gaussian Band (MC),0.92543,0.65504,0.80497,0.73279,0.36454,0.69524,21
-imbalanced,Random Forest,test,LIME + Gaussian Neyman-Pearson,0.62893,0.60318,0.56108,0.61486,0.25272,0.69524,21
-imbalanced,Random Forest,test,LIME + Gaussian Predictive,0.94674,0.63946,0.85255,0.73878,0.37749,0.69524,21
-imbalanced,Random Forest,test,LIME + Logistic Band,0.92152,0.65848,0.79658,0.73047,0.36211,0.69524,21
-imbalanced,Random Forest,test,LIME + Max Deltas,0.94468,0.63529,0.86330,0.70929,0.39798,0.58571,21
-imbalanced,Random Forest,test,LIME + Min Deltas,0.94846,0.64657,0.86338,0.71948,0.39457,0.58571,21
-imbalanced,Random Forest,test,LIME + Saw-Yang-Mo Minimax,0.90247,0.65298,0.79338,0.72531,0.36220,0.69524,21
-imbalanced,Random Forest,test,LIME + Slacks Deltas,0.96451,0.58227,0.92895,0.64665,0.45747,0.26190,21
-imbalanced,Random Forest,test,LIME + Slacks Deltas (continuous),0.96437,0.58232,0.92872,0.64658,0.45723,0.26190,21
-imbalanced,Random Forest,test,"LIME + k-th Point Tolerance Limit (min, expected loss)",0.94569,0.65458,0.85161,0.71599,0.39075,0.58095,21
-imbalanced,Random Forest,test,LIME + re-threshold,0.92548,0.69828,0.81175,0.81893,0.29538,0.97619,21
-imbalanced,all,line,CLIME,0.96264,0.74314,0.97032,0.80821,0.50000,0.00000,21
-imbalanced,all,line,LIME,0.95457,0.58153,0.96699,0.61410,0.50000,0.00000,21
-imbalanced,all,line,LIME + Avg Deltas,0.90360,0.73605,0.87754,0.77517,0.36999,0.68214,21
-imbalanced,all,line,LIME + CP Minimax,0.90363,0.77689,0.88405,0.82136,0.36721,0.73571,21
-imbalanced,all,line,LIME + CP Sum,0.95770,0.76267,0.94808,0.81861,0.39809,0.73571,21
-imbalanced,all,line,LIME + DKW Minimax,0.91024,0.77887,0.88691,0.82131,0.36674,0.73571,21
-imbalanced,all,line,LIME + DKW Sum,0.95383,0.76471,0.94423,0.82468,0.39588,0.73571,21
-imbalanced,all,line,LIME + ECAI Tolerance Limit (modular),0.95459,0.58155,0.96699,0.61410,0.50000,0.00119,21
-imbalanced,all,line,LIME + ECAI Tolerance Limit (one-sided radius),0.95449,0.58198,0.96580,0.61368,0.49912,0.00833,21
-imbalanced,all,line,LIME + F Deltas,0.92949,0.76601,0.90795,0.80604,0.38092,0.68214,21
-imbalanced,all,line,LIME + Gaussian Band,0.89522,0.76993,0.87488,0.81565,0.36655,0.73571,21
-imbalanced,all,line,LIME + Gaussian Band (MC),0.90273,0.77150,0.88442,0.82021,0.36931,0.73571,21
-imbalanced,all,line,LIME + Gaussian Neyman-Pearson,0.75492,0.71658,0.73832,0.74946,0.31420,0.73571,21
-imbalanced,all,line,LIME + Gaussian Predictive,0.93928,0.77870,0.92597,0.83118,0.38196,0.73571,21
-imbalanced,all,line,LIME + Logistic Band,0.89410,0.76978,0.87322,0.81503,0.36567,0.73571,21
-imbalanced,all,line,LIME + Max Deltas,0.86081,0.72083,0.83706,0.75567,0.35427,0.68214,21
-imbalanced,all,line,LIME + Min Deltas,0.92790,0.76532,0.90947,0.80589,0.38001,0.68214,21
-imbalanced,all,line,LIME + Saw-Yang-Mo Minimax,0.92642,0.77770,0.90363,0.82555,0.37840,0.73571,21
-imbalanced,all,line,LIME + Slacks Deltas,0.94404,0.72494,0.94611,0.77304,0.41649,0.52857,21
-imbalanced,all,line,LIME + Slacks Deltas (continuous),0.94228,0.72303,0.94439,0.77214,0.41566,0.52857,21
-imbalanced,all,line,"LIME + k-th Point Tolerance Limit (min, expected loss)",0.88369,0.74250,0.86528,0.78021,0.36264,0.67857,21
-imbalanced,all,line,LIME + re-threshold,0.92574,0.86252,0.90701,0.90534,0.34331,0.94881,21
-imbalanced,all,test,CLIME,0.97510,0.73909,0.95932,0.81622,0.50000,0.00000,21
-imbalanced,all,test,LIME,0.97359,0.59594,0.95703,0.63385,0.50000,0.00000,21
-imbalanced,all,test,LIME + Avg Deltas,0.93115,0.70711,0.88036,0.77687,0.39086,0.67381,21
-imbalanced,all,test,LIME + CP Minimax,0.94247,0.76001,0.87982,0.82094,0.37810,0.72857,21
-imbalanced,all,test,LIME + CP Sum,0.97047,0.74621,0.93698,0.82000,0.40551,0.72857,21
-imbalanced,all,test,LIME + DKW Minimax,0.94371,0.75971,0.88152,0.82132,0.37719,0.72857,21
-imbalanced,all,test,LIME + DKW Sum,0.97195,0.74546,0.93809,0.82572,0.40419,0.72857,21
-imbalanced,all,test,LIME + ECAI Tolerance Limit (modular),0.97359,0.59594,0.95703,0.63385,0.50000,0.00000,21
-imbalanced,all,test,LIME + ECAI Tolerance Limit (one-sided radius),0.97366,0.59657,0.95703,0.63385,0.49897,0.00952,21
-imbalanced,all,test,LIME + F Deltas,0.95333,0.74508,0.89945,0.80506,0.39084,0.67381,21
-imbalanced,all,test,LIME + Gaussian Band,0.93651,0.75403,0.87498,0.81544,0.37788,0.72857,21
-imbalanced,all,test,LIME + Gaussian Band (MC),0.94088,0.75368,0.88157,0.81836,0.38030,0.72857,21
-imbalanced,all,test,LIME + Gaussian Neyman-Pearson,0.77926,0.71588,0.74551,0.74826,0.31977,0.72857,21
-imbalanced,all,test,LIME + Gaussian Predictive,0.95941,0.75077,0.91443,0.82724,0.39185,0.72857,21
-imbalanced,all,test,LIME + Logistic Band,0.93547,0.75371,0.87335,0.81470,0.37702,0.72857,21
-imbalanced,all,test,LIME + Max Deltas,0.89695,0.69595,0.84561,0.75769,0.37495,0.67381,21
-imbalanced,all,test,LIME + Min Deltas,0.95143,0.74175,0.90295,0.80505,0.39156,0.67381,21
-imbalanced,all,test,LIME + Saw-Yang-Mo Minimax,0.93878,0.75779,0.88613,0.82070,0.38526,0.72857,21
-imbalanced,all,test,LIME + Slacks Deltas,0.96563,0.70812,0.94619,0.76799,0.43054,0.48571,21
-imbalanced,all,test,LIME + Slacks Deltas (continuous),0.96462,0.70746,0.94502,0.76732,0.43001,0.48571,21
-imbalanced,all,test,"LIME + k-th Point Tolerance Limit (min, expected loss)",0.91966,0.73073,0.86269,0.78047,0.37356,0.66667,21
-imbalanced,all,test,LIME + re-threshold,0.95996,0.82244,0.90415,0.90349,0.32885,0.97381,21
-native,Logistic,line,CLIME,0.98221,0.93184,0.99257,0.92776,0.50000,0.00000,22
-native,Logistic,line,LIME,0.94351,0.73901,0.98227,0.72113,0.50000,0.00000,22
-native,Logistic,line,LIME + Avg Deltas,0.86402,0.81626,0.87475,0.82798,0.42449,0.80909,22
-native,Logistic,line,LIME + CP Minimax,0.93118,0.88839,0.95798,0.90442,0.43741,0.80909,22
-native,Logistic,line,LIME + CP Sum,0.98044,0.91565,0.99631,0.91467,0.46416,0.80909,22
-native,Logistic,line,LIME + DKW Minimax,0.92918,0.88620,0.95542,0.90253,0.43607,0.80909,22
-native,Logistic,line,LIME + DKW Sum,0.98055,0.91574,0.99635,0.91470,0.46419,0.80909,22
-native,Logistic,line,LIME + ECAI Tolerance Limit (modular),0.94351,0.73901,0.98227,0.72113,0.50000,0.00000,22
-native,Logistic,line,LIME + ECAI Tolerance Limit (one-sided radius),0.94351,0.74150,0.98230,0.72295,0.49940,0.00455,22
-native,Logistic,line,LIME + F Deltas,0.92574,0.87640,0.94269,0.88838,0.43613,0.80909,22
-native,Logistic,line,LIME + Gaussian Band,0.92282,0.88200,0.94658,0.89691,0.43660,0.80909,22
-native,Logistic,line,LIME + Gaussian Band (MC),0.93130,0.88756,0.95443,0.90125,0.43933,0.80909,22
-native,Logistic,line,LIME + Gaussian Neyman-Pearson,0.88254,0.85662,0.89344,0.86411,0.41910,0.80909,22
-native,Logistic,line,LIME + Gaussian Predictive,0.95718,0.90510,0.97799,0.91408,0.44938,0.80909,22
-native,Logistic,line,LIME + Logistic Band,0.92098,0.88065,0.94458,0.89568,0.43564,0.80909,22
-native,Logistic,line,LIME + Max Deltas,0.81128,0.78429,0.82132,0.80179,0.40522,0.80909,22
-native,Logistic,line,LIME + Min Deltas,0.92400,0.86824,0.94278,0.88941,0.43851,0.80909,22
-native,Logistic,line,LIME + Saw-Yang-Mo Minimax,0.96310,0.90901,0.98125,0.91570,0.45179,0.80909,22
-native,Logistic,line,LIME + Slacks Deltas,0.94126,0.87365,0.96027,0.88031,0.44952,0.77045,22
-native,Logistic,line,LIME + Slacks Deltas (continuous),0.93768,0.87104,0.95725,0.87865,0.44809,0.77045,22
-native,Logistic,line,"LIME + k-th Point Tolerance Limit (min, expected loss)",0.86126,0.83213,0.87475,0.84583,0.40756,0.80909,22
-native,Logistic,line,LIME + re-threshold,0.99052,0.96655,0.99683,0.99521,0.43893,0.96136,22
-native,Logistic,test,CLIME,0.98570,0.94615,0.98998,0.95820,0.50000,0.00000,22
-native,Logistic,test,LIME,0.96529,0.80137,0.97857,0.78318,0.50000,0.00000,22
-native,Logistic,test,LIME + Avg Deltas,0.84275,0.81123,0.83818,0.83854,0.42319,0.88182,22
-native,Logistic,test,LIME + CP Minimax,0.95625,0.92720,0.96657,0.94457,0.43713,0.88182,22
-native,Logistic,test,LIME + CP Sum,0.99349,0.94376,0.99547,0.95448,0.45865,0.88182,22
-native,Logistic,test,LIME + DKW Minimax,0.95333,0.92394,0.96108,0.94106,0.43481,0.88182,22
-native,Logistic,test,LIME + DKW Sum,0.99364,0.94396,0.99563,0.95452,0.45861,0.88182,22
-native,Logistic,test,LIME + ECAI Tolerance Limit (modular),0.96529,0.80137,0.97857,0.78318,0.50000,0.00000,22
-native,Logistic,test,LIME + ECAI Tolerance Limit (one-sided radius),0.96529,0.80137,0.97857,0.78318,0.50000,0.00000,22
-native,Logistic,test,LIME + F Deltas,0.94129,0.90521,0.93519,0.91931,0.43700,0.88182,22
-native,Logistic,test,LIME + Gaussian Band,0.95240,0.92334,0.96028,0.93882,0.43615,0.88182,22
-native,Logistic,test,LIME + Gaussian Band (MC),0.95870,0.92707,0.96520,0.94167,0.43841,0.88182,22
-native,Logistic,test,LIME + Gaussian Neyman-Pearson,0.93677,0.90786,0.94068,0.92422,0.43285,0.88182,22
-native,Logistic,test,LIME + Gaussian Predictive,0.97635,0.93843,0.97950,0.95020,0.44604,0.88182,22
-native,Logistic,test,LIME + Logistic Band,0.95056,0.92190,0.95812,0.93753,0.43521,0.88182,22
-native,Logistic,test,LIME + Max Deltas,0.78907,0.77889,0.78530,0.81328,0.40432,0.88182,22
-native,Logistic,test,LIME + Min Deltas,0.93868,0.90675,0.93721,0.92070,0.43378,0.88182,22
-native,Logistic,test,LIME + Saw-Yang-Mo Minimax,0.97866,0.93966,0.98086,0.95165,0.44759,0.88182,22
-native,Logistic,test,LIME + Slacks Deltas,0.95775,0.91740,0.95616,0.92599,0.44006,0.85909,22
-native,Logistic,test,LIME + Slacks Deltas (continuous),0.95522,0.91561,0.95393,0.92477,0.43914,0.85909,22
-native,Logistic,test,"LIME + k-th Point Tolerance Limit (min, expected loss)",0.85154,0.84022,0.84848,0.86551,0.40787,0.88182,22
-native,Logistic,test,LIME + re-threshold,0.99333,0.97407,0.99600,0.99653,0.43506,0.96364,22
-native,Random Forest,line,CLIME,0.88645,0.70450,0.89787,0.72925,0.50000,0.00000,22
-native,Random Forest,line,LIME,0.85951,0.59563,0.90276,0.60629,0.50000,0.00000,22
-native,Random Forest,line,LIME + Avg Deltas,0.82088,0.69404,0.82465,0.71861,0.43213,0.71591,22
-native,Random Forest,line,LIME + CP Minimax,0.78611,0.71569,0.77511,0.75460,0.40752,0.85000,22
-native,Random Forest,line,LIME + CP Sum,0.85259,0.71500,0.85162,0.73630,0.42384,0.85000,22
-native,Random Forest,line,LIME + DKW Minimax,0.79009,0.71645,0.77984,0.75545,0.40813,0.85000,22
-native,Random Forest,line,LIME + DKW Sum,0.84460,0.71763,0.84638,0.74994,0.42150,0.85000,22
-native,Random Forest,line,LIME + ECAI Tolerance Limit (modular),0.85951,0.59563,0.90276,0.60629,0.50000,0.00000,22
-native,Random Forest,line,LIME + ECAI Tolerance Limit (one-sided radius),0.85951,0.59563,0.90276,0.60629,0.50000,0.00000,22
-native,Random Forest,line,LIME + F Deltas,0.82049,0.70167,0.82130,0.73464,0.42887,0.71591,22
-native,Random Forest,line,LIME + Gaussian Band,0.79182,0.71596,0.77971,0.75093,0.40908,0.85000,22
-native,Random Forest,line,LIME + Gaussian Band (MC),0.79644,0.71691,0.78634,0.75296,0.41031,0.85000,22
-native,Random Forest,line,LIME + Gaussian Neyman-Pearson,0.57557,0.63748,0.51124,0.63181,0.32792,0.85000,22
-native,Random Forest,line,LIME + Gaussian Predictive,0.82239,0.71680,0.82105,0.75801,0.41696,0.85000,22
-native,Random Forest,line,LIME + Logistic Band,0.79121,0.71605,0.77947,0.75098,0.40894,0.85000,22
-native,Random Forest,line,LIME + Max Deltas,0.81881,0.68016,0.82380,0.71667,0.43746,0.71591,22
-native,Random Forest,line,LIME + Min Deltas,0.82882,0.70282,0.83120,0.73591,0.43114,0.71591,22
-native,Random Forest,line,LIME + Saw-Yang-Mo Minimax,0.78564,0.70853,0.76425,0.74015,0.40792,0.85000,22
-native,Random Forest,line,LIME + Slacks Deltas,0.85991,0.64441,0.88793,0.66583,0.48074,0.26591,22
-native,Random Forest,line,LIME + Slacks Deltas (continuous),0.85968,0.64443,0.88768,0.66606,0.48060,0.26591,22
-native,Random Forest,line,"LIME + k-th Point Tolerance Limit (min, expected loss)",0.81558,0.70338,0.81711,0.73106,0.42668,0.71364,22
-native,Random Forest,line,LIME + re-threshold,0.81019,0.75557,0.79200,0.79278,0.37406,0.98864,22
-native,Random Forest,test,CLIME,0.87381,0.69269,0.88368,0.76435,0.50000,0.00000,22
-native,Random Forest,test,LIME,0.86133,0.60477,0.88732,0.63975,0.50000,0.00000,22
-native,Random Forest,test,LIME + Avg Deltas,0.81122,0.67998,0.79355,0.74556,0.42788,0.78182,22
-native,Random Forest,test,LIME + CP Minimax,0.83335,0.71928,0.78958,0.78806,0.41381,0.89545,22
-native,Random Forest,test,LIME + CP Sum,0.84907,0.70951,0.82638,0.77885,0.42223,0.89545,22
-native,Random Forest,test,LIME + DKW Minimax,0.83541,0.72006,0.79233,0.78942,0.41434,0.89545,22
-native,Random Forest,test,LIME + DKW Sum,0.85377,0.71058,0.82742,0.79626,0.42285,0.89545,22
-native,Random Forest,test,LIME + ECAI Tolerance Limit (modular),0.86133,0.60477,0.88732,0.63975,0.50000,0.00000,22
-native,Random Forest,test,LIME + ECAI Tolerance Limit (one-sided radius),0.86133,0.60477,0.88732,0.63975,0.50000,0.00000,22
-native,Random Forest,test,LIME + F Deltas,0.83608,0.70659,0.80721,0.76841,0.42950,0.78182,22
-native,Random Forest,test,LIME + Gaussian Band,0.83506,0.71726,0.79206,0.78551,0.41530,0.89545,22
-native,Random Forest,test,LIME + Gaussian Band (MC),0.83716,0.71739,0.79603,0.78673,0.41636,0.89545,22
-native,Random Forest,test,LIME + Gaussian Neyman-Pearson,0.58678,0.64516,0.52831,0.64852,0.32803,0.89545,22
-native,Random Forest,test,LIME + Gaussian Predictive,0.85021,0.70497,0.82431,0.79427,0.42310,0.89545,22
-native,Random Forest,test,LIME + Logistic Band,0.83456,0.71759,0.79109,0.78537,0.41496,0.89545,22
-native,Random Forest,test,LIME + Max Deltas,0.81158,0.68154,0.79052,0.74392,0.42842,0.78182,22
-native,Random Forest,test,LIME + Min Deltas,0.83817,0.69997,0.81442,0.76947,0.43181,0.78182,22
-native,Random Forest,test,LIME + Saw-Yang-Mo Minimax,0.80606,0.70614,0.75986,0.77158,0.41012,0.89545,22
-native,Random Forest,test,LIME + Slacks Deltas,0.86648,0.65255,0.87946,0.69486,0.47930,0.33182,22
-native,Random Forest,test,LIME + Slacks Deltas (continuous),0.86642,0.65249,0.87937,0.69481,0.47939,0.33182,22
-native,Random Forest,test,"LIME + k-th Point Tolerance Limit (min, expected loss)",0.83118,0.70422,0.79895,0.76230,0.42662,0.78182,22
-native,Random Forest,test,LIME + re-threshold,0.84281,0.73237,0.79713,0.81459,0.38642,0.99091,22
-native,all,line,CLIME,0.93433,0.80222,0.94522,0.82659,0.50000,0.00000,22
-native,all,line,LIME,0.90151,0.65645,0.94252,0.66231,0.50000,0.00000,22
-native,all,line,LIME + Avg Deltas,0.84245,0.74228,0.84970,0.77271,0.42831,0.76250,22
-native,all,line,LIME + CP Minimax,0.85864,0.78789,0.86655,0.82894,0.42246,0.82955,22
-native,all,line,LIME + CP Sum,0.91652,0.79641,0.92396,0.82514,0.44400,0.82955,22
-native,all,line,LIME + DKW Minimax,0.85964,0.78734,0.86763,0.82844,0.42210,0.82955,22
-native,all,line,LIME + DKW Sum,0.91257,0.79878,0.92137,0.83182,0.44284,0.82955,22
-native,all,line,LIME + ECAI Tolerance Limit (modular),0.90151,0.65645,0.94252,0.66231,0.50000,0.00000,22
-native,all,line,LIME + ECAI Tolerance Limit (one-sided radius),0.90151,0.65759,0.94253,0.66322,0.49970,0.00227,22
-native,all,line,LIME + F Deltas,0.87311,0.77286,0.88199,0.81069,0.43250,0.76250,22
-native,all,line,LIME + Gaussian Band,0.85732,0.78501,0.86315,0.82334,0.42284,0.82955,22
-native,all,line,LIME + Gaussian Band (MC),0.86387,0.78802,0.87038,0.82654,0.42482,0.82955,22
-native,all,line,LIME + Gaussian Neyman-Pearson,0.72906,0.73159,0.70234,0.74584,0.37351,0.82955,22
-native,all,line,LIME + Gaussian Predictive,0.88978,0.79458,0.89952,0.83521,0.43317,0.82955,22
-native,all,line,LIME + Logistic Band,0.85610,0.78444,0.86203,0.82280,0.42229,0.82955,22
-native,all,line,LIME + Max Deltas,0.81505,0.72078,0.82256,0.75866,0.42134,0.76250,22
-native,all,line,LIME + Min Deltas,0.87641,0.76973,0.88699,0.81179,0.43482,0.76250,22
-native,all,line,LIME + Saw-Yang-Mo Minimax,0.87437,0.79306,0.87275,0.82697,0.42986,0.82955,22
-native,all,line,LIME + Slacks Deltas,0.90059,0.74204,0.92410,0.77194,0.46513,0.51818,22
-native,all,line,LIME + Slacks Deltas (continuous),0.89868,0.74087,0.92246,0.77124,0.46434,0.51818,22
-native,all,line,"LIME + k-th Point Tolerance Limit (min, expected loss)",0.83842,0.75360,0.84593,0.78765,0.41712,0.76136,22
-native,all,line,LIME + re-threshold,0.90035,0.84572,0.89441,0.89091,0.40650,0.97500,22
-native,all,test,CLIME,0.92976,0.80139,0.93683,0.86400,0.50000,0.00000,22
-native,all,test,LIME,0.91331,0.68937,0.93295,0.71300,0.50000,0.00000,22
-native,all,test,LIME + Avg Deltas,0.82699,0.73195,0.81586,0.79298,0.42553,0.83182,22
-native,all,test,LIME + CP Minimax,0.89480,0.80535,0.87807,0.86745,0.42547,0.88864,22
-native,all,test,LIME + CP Sum,0.92128,0.80641,0.91093,0.86899,0.44044,0.88864,22
-native,all,test,LIME + DKW Minimax,0.89437,0.80429,0.87671,0.86612,0.42458,0.88864,22
-native,all,test,LIME + DKW Sum,0.92370,0.80764,0.91153,0.87566,0.44073,0.88864,22
-native,all,test,LIME + ECAI Tolerance Limit (modular),0.91331,0.68937,0.93295,0.71300,0.50000,0.00000,22
-native,all,test,LIME + ECAI Tolerance Limit (one-sided radius),0.91331,0.68937,0.93295,0.71300,0.50000,0.00000,22
-native,all,test,LIME + F Deltas,0.88869,0.78798,0.87120,0.84484,0.43325,0.83182,22
-native,all,test,LIME + Gaussian Band,0.89373,0.80254,0.87617,0.86371,0.42573,0.88864,22
-native,all,test,LIME + Gaussian Band (MC),0.89793,0.80430,0.88061,0.86580,0.42739,0.88864,22
-native,all,test,LIME + Gaussian Neyman-Pearson,0.76177,0.75971,0.73449,0.79044,0.38044,0.88864,22
-native,all,test,LIME + Gaussian Predictive,0.91328,0.80229,0.90191,0.87305,0.43457,0.88864,22
-native,all,test,LIME + Logistic Band,0.89256,0.80205,0.87461,0.86298,0.42509,0.88864,22
-native,all,test,LIME + Max Deltas,0.80032,0.71800,0.78791,0.77896,0.41637,0.83182,22
-native,all,test,LIME + Min Deltas,0.88842,0.78537,0.87582,0.84601,0.43280,0.83182,22
-native,all,test,LIME + Saw-Yang-Mo Minimax,0.89236,0.80440,0.87036,0.86341,0.42886,0.88864,22
-native,all,test,LIME + Slacks Deltas,0.91211,0.76600,0.91781,0.81457,0.45968,0.59545,22
-native,all,test,LIME + Slacks Deltas (continuous),0.91082,0.76516,0.91665,0.81392,0.45927,0.59545,22
-native,all,test,"LIME + k-th Point Tolerance Limit (min, expected loss)",0.84136,0.75725,0.82371,0.81417,0.41724,0.83182,22
-native,all,test,LIME + re-threshold,0.91807,0.83550,0.89656,0.90791,0.41074,0.97727,22
+imbalanced,Logistic,line,CLIME,0.98369,0.88017,0.99079,0.91557,0.50000,0.00000,21
+imbalanced,Logistic,line,LIME,0.96834,0.64258,0.97593,0.66000,0.50000,0.00000,21
+imbalanced,Logistic,line,LIME + Avg Deltas,0.90933,0.81661,0.88653,0.84689,0.35438,0.79405,21
+imbalanced,Logistic,line,LIME + CP Minimax,0.94156,0.85773,0.95190,0.90808,0.37450,0.79405,21
+imbalanced,Logistic,line,LIME + CP Sum,0.98635,0.87432,0.99440,0.91848,0.40841,0.79405,21
+imbalanced,Logistic,line,LIME + DKW Minimax,0.94300,0.85683,0.94864,0.90592,0.37213,0.79405,21
+imbalanced,Logistic,line,LIME + DKW Sum,0.98647,0.87428,0.99441,0.91821,0.40854,0.79405,21
+imbalanced,Logistic,line,LIME + ECAI Tolerance Limit (modular),0.96836,0.64259,0.97593,0.66000,0.50000,0.00119,21
+imbalanced,Logistic,line,LIME + ECAI Tolerance Limit (one-sided radius),0.96901,0.64363,0.97593,0.66109,0.50019,0.00357,21
+imbalanced,Logistic,line,LIME + F Deltas,0.95879,0.85768,0.94798,0.89967,0.37572,0.79405,21
+imbalanced,Logistic,line,LIME + Gaussian Band,0.94129,0.85541,0.94742,0.90359,0.37525,0.79405,21
+imbalanced,Logistic,line,LIME + Gaussian Band (MC),0.94918,0.85923,0.95505,0.90806,0.37858,0.79405,21
+imbalanced,Logistic,line,LIME + Gaussian Neyman-Pearson,0.91717,0.84034,0.91319,0.88097,0.36463,0.79405,21
+imbalanced,Logistic,line,LIME + Gaussian Predictive,0.97060,0.87318,0.97565,0.91965,0.39029,0.79405,21
+imbalanced,Logistic,line,LIME + Logistic Band,0.93938,0.85437,0.94531,0.90263,0.37385,0.79405,21
+imbalanced,Logistic,line,LIME + Max Deltas,0.83961,0.78748,0.81406,0.81060,0.32309,0.79405,21
+imbalanced,Logistic,line,LIME + Min Deltas,0.95220,0.85414,0.94368,0.89764,0.37126,0.79405,21
+imbalanced,Logistic,line,LIME + Saw-Yang-Mo Minimax,0.97563,0.87609,0.97866,0.92185,0.39258,0.79405,21
+imbalanced,Logistic,line,LIME + Slacks Deltas,0.96089,0.84735,0.95414,0.88787,0.38693,0.76071,21
+imbalanced,Logistic,line,LIME + Slacks Deltas (continuous),0.95794,0.84434,0.95090,0.88600,0.38526,0.76071,21
+imbalanced,Logistic,line,"LIME + k-th Point Tolerance Limit (min, expected loss)",0.88349,0.81516,0.86986,0.85113,0.34133,0.79286,21
+imbalanced,Logistic,line,LIME + re-threshold,0.98573,0.94868,0.99333,0.99062,0.39467,0.95000,21
+imbalanced,Logistic,test,CLIME,0.98936,0.88897,0.98630,0.93324,0.50000,0.00000,21
+imbalanced,Logistic,test,LIME,0.98370,0.67540,0.97273,0.71075,0.50000,0.00000,21
+imbalanced,Logistic,test,LIME + Avg Deltas,0.90785,0.80139,0.86967,0.84152,0.36474,0.80000,21
+imbalanced,Logistic,test,LIME + CP Minimax,0.96323,0.87176,0.95743,0.91596,0.39084,0.80000,21
+imbalanced,Logistic,test,LIME + CP Sum,0.99070,0.86897,0.99230,0.92531,0.41998,0.80000,21
+imbalanced,Logistic,test,LIME + DKW Minimax,0.96192,0.87052,0.95376,0.91356,0.38788,0.80000,21
+imbalanced,Logistic,test,LIME + DKW Sum,0.99072,0.86862,0.99238,0.92529,0.42011,0.80000,21
+imbalanced,Logistic,test,LIME + ECAI Tolerance Limit (modular),0.98370,0.67540,0.97273,0.71075,0.50000,0.00000,21
+imbalanced,Logistic,test,LIME + ECAI Tolerance Limit (one-sided radius),0.98377,0.67604,0.97273,0.71075,0.49897,0.00952,21
+imbalanced,Logistic,test,LIME + F Deltas,0.96140,0.85809,0.94257,0.90361,0.38797,0.80000,21
+imbalanced,Logistic,test,LIME + Gaussian Band,0.95243,0.86258,0.94693,0.90901,0.38961,0.80000,21
+imbalanced,Logistic,test,LIME + Gaussian Band (MC),0.95828,0.86582,0.95332,0.91283,0.39258,0.80000,21
+imbalanced,Logistic,test,LIME + Gaussian Neyman-Pearson,0.92311,0.83903,0.91063,0.88384,0.38011,0.80000,21
+imbalanced,Logistic,test,LIME + Gaussian Predictive,0.97581,0.87617,0.97377,0.92486,0.40335,0.80000,21
+imbalanced,Logistic,test,LIME + Logistic Band,0.95126,0.86189,0.94442,0.90755,0.38836,0.80000,21
+imbalanced,Logistic,test,LIME + Max Deltas,0.84913,0.77767,0.81236,0.80876,0.34240,0.80000,21
+imbalanced,Logistic,test,LIME + Min Deltas,0.95836,0.85684,0.94214,0.90373,0.38549,0.80000,21
+imbalanced,Logistic,test,LIME + Saw-Yang-Mo Minimax,0.97923,0.87720,0.97674,0.92660,0.40584,0.80000,21
+imbalanced,Logistic,test,LIME + Slacks Deltas,0.97016,0.84366,0.95779,0.89190,0.40401,0.75000,21
+imbalanced,Logistic,test,LIME + Slacks Deltas (continuous),0.96825,0.84274,0.95486,0.89021,0.40297,0.75000,21
+imbalanced,Logistic,test,"LIME + k-th Point Tolerance Limit (min, expected loss)",0.90580,0.82582,0.87156,0.85510,0.35616,0.79286,21
+imbalanced,Logistic,test,LIME + re-threshold,0.99362,0.96503,0.99373,0.99025,0.36024,0.98571,21
+imbalanced,Random Forest,line,CLIME,0.95674,0.64810,0.95046,0.71373,0.50000,0.00000,21
+imbalanced,Random Forest,line,LIME,0.95193,0.54327,0.95337,0.56954,0.50000,0.00000,21
+imbalanced,Random Forest,line,LIME + Avg Deltas,0.90838,0.67802,0.87576,0.71957,0.38766,0.59881,21
+imbalanced,Random Forest,line,LIME + CP Minimax,0.87280,0.70690,0.82882,0.74424,0.35987,0.68333,21
+imbalanced,Random Forest,line,LIME + CP Sum,0.93308,0.67519,0.90626,0.72946,0.38384,0.68333,21
+imbalanced,Random Forest,line,LIME + DKW Minimax,0.88131,0.71077,0.83567,0.74691,0.36087,0.68333,21
+imbalanced,Random Forest,line,LIME + DKW Sum,0.92722,0.68107,0.90051,0.74038,0.38089,0.68333,21
+imbalanced,Random Forest,line,LIME + ECAI Tolerance Limit (modular),0.95193,0.54327,0.95337,0.56954,0.50000,0.00000,21
+imbalanced,Random Forest,line,LIME + ECAI Tolerance Limit (one-sided radius),0.95193,0.54327,0.95218,0.56894,0.49943,0.00595,21
+imbalanced,Random Forest,line,LIME + F Deltas,0.91028,0.69532,0.86894,0.72881,0.38290,0.59881,21
+imbalanced,Random Forest,line,LIME + Gaussian Band,0.86339,0.69684,0.81903,0.73719,0.35956,0.68333,21
+imbalanced,Random Forest,line,LIME + Gaussian Band (MC),0.86915,0.69610,0.82803,0.74089,0.36146,0.68333,21
+imbalanced,Random Forest,line,LIME + Gaussian Neyman-Pearson,0.64881,0.61953,0.61159,0.63509,0.27599,0.68333,21
+imbalanced,Random Forest,line,LIME + Gaussian Predictive,0.91367,0.70119,0.88237,0.75428,0.37350,0.68333,21
+imbalanced,Random Forest,line,LIME + Logistic Band,0.86314,0.69755,0.81811,0.73714,0.35918,0.68333,21
+imbalanced,Random Forest,line,LIME + Max Deltas,0.89832,0.67392,0.86276,0.71509,0.38590,0.59881,21
+imbalanced,Random Forest,line,LIME + Min Deltas,0.91297,0.69426,0.87807,0.73189,0.38515,0.59881,21
+imbalanced,Random Forest,line,LIME + Saw-Yang-Mo Minimax,0.88053,0.69619,0.83428,0.73804,0.36269,0.68333,21
+imbalanced,Random Forest,line,LIME + Slacks Deltas,0.93857,0.62206,0.93461,0.66831,0.44269,0.34286,21
+imbalanced,Random Forest,line,LIME + Slacks Deltas (continuous),0.93818,0.62194,0.93473,0.66922,0.44244,0.34286,21
+imbalanced,Random Forest,line,"LIME + k-th Point Tolerance Limit (min, expected loss)",0.89924,0.69079,0.86069,0.72514,0.38127,0.59405,21
+imbalanced,Random Forest,line,LIME + re-threshold,0.88149,0.79090,0.83731,0.83392,0.27966,0.95952,21
+imbalanced,Random Forest,test,CLIME,0.96854,0.62759,0.94330,0.71512,0.50000,0.00000,21
+imbalanced,Random Forest,test,LIME,0.97165,0.54627,0.94900,0.57940,0.50000,0.00000,21
+imbalanced,Random Forest,test,LIME + Avg Deltas,0.93509,0.64797,0.86622,0.72086,0.40021,0.60000,21
+imbalanced,Random Forest,test,LIME + CP Minimax,0.92797,0.67365,0.82741,0.75328,0.37160,0.68810,21
+imbalanced,Random Forest,test,LIME + CP Sum,0.95602,0.65441,0.89694,0.73951,0.39374,0.68810,21
+imbalanced,Random Forest,test,LIME + DKW Minimax,0.93178,0.67463,0.83356,0.75751,0.37268,0.68810,21
+imbalanced,Random Forest,test,LIME + DKW Sum,0.95828,0.65402,0.89723,0.75020,0.39207,0.68810,21
+imbalanced,Random Forest,test,LIME + ECAI Tolerance Limit (modular),0.97165,0.54627,0.94900,0.57940,0.50000,0.00000,21
+imbalanced,Random Forest,test,LIME + ECAI Tolerance Limit (one-sided radius),0.97165,0.54627,0.94900,0.57940,0.50000,0.00000,21
+imbalanced,Random Forest,test,LIME + F Deltas,0.94201,0.66437,0.86557,0.73229,0.39429,0.60000,21
+imbalanced,Random Forest,test,LIME + Gaussian Band,0.92147,0.66860,0.82161,0.74335,0.37099,0.68810,21
+imbalanced,Random Forest,test,LIME + Gaussian Band (MC),0.92556,0.66735,0.82847,0.74644,0.37292,0.68810,21
+imbalanced,Random Forest,test,LIME + Gaussian Neyman-Pearson,0.66896,0.62144,0.60300,0.63385,0.27378,0.68810,21
+imbalanced,Random Forest,test,LIME + Gaussian Predictive,0.94935,0.65300,0.87457,0.75585,0.38522,0.68810,21
+imbalanced,Random Forest,test,LIME + Logistic Band,0.92191,0.66977,0.82133,0.74397,0.37067,0.68810,21
+imbalanced,Random Forest,test,LIME + Max Deltas,0.92310,0.64206,0.85824,0.71817,0.39776,0.60000,21
+imbalanced,Random Forest,test,LIME + Min Deltas,0.94565,0.66033,0.87612,0.73297,0.39738,0.60000,21
+imbalanced,Random Forest,test,LIME + Saw-Yang-Mo Minimax,0.90920,0.66225,0.81888,0.73470,0.37084,0.68810,21
+imbalanced,Random Forest,test,LIME + Slacks Deltas,0.96386,0.59819,0.93413,0.66645,0.45108,0.32381,21
+imbalanced,Random Forest,test,LIME + Slacks Deltas (continuous),0.96341,0.59812,0.93378,0.66631,0.45079,0.32381,21
+imbalanced,Random Forest,test,"LIME + k-th Point Tolerance Limit (min, expected loss)",0.93635,0.66488,0.85837,0.72804,0.39347,0.59524,21
+imbalanced,Random Forest,test,LIME + re-threshold,0.92286,0.71695,0.82162,0.82683,0.29825,0.96905,21
+imbalanced,all,line,CLIME,0.97021,0.77073,0.97062,0.82657,0.50000,0.00000,21
+imbalanced,all,line,LIME,0.96014,0.59226,0.96465,0.61719,0.50000,0.00000,21
+imbalanced,all,line,LIME + Avg Deltas,0.90886,0.75364,0.88114,0.79415,0.37102,0.69643,21
+imbalanced,all,line,LIME + CP Minimax,0.90718,0.78799,0.89036,0.83826,0.36718,0.73869,21
+imbalanced,all,line,LIME + CP Sum,0.95972,0.78108,0.95033,0.83727,0.39612,0.73869,21
+imbalanced,all,line,LIME + DKW Minimax,0.91215,0.78946,0.89215,0.83828,0.36650,0.73869,21
+imbalanced,all,line,LIME + DKW Sum,0.95684,0.78356,0.94746,0.84225,0.39472,0.73869,21
+imbalanced,all,line,LIME + ECAI Tolerance Limit (modular),0.96014,0.59226,0.96465,0.61719,0.50000,0.00060,21
+imbalanced,all,line,LIME + ECAI Tolerance Limit (one-sided radius),0.96047,0.59278,0.96406,0.61737,0.49981,0.00476,21
+imbalanced,all,line,LIME + F Deltas,0.93454,0.78314,0.90846,0.82657,0.37931,0.69643,21
+imbalanced,all,line,LIME + Gaussian Band,0.90234,0.78251,0.88323,0.83284,0.36741,0.73869,21
+imbalanced,all,line,LIME + Gaussian Band (MC),0.90916,0.78403,0.89154,0.83700,0.37002,0.73869,21
+imbalanced,all,line,LIME + Gaussian Neyman-Pearson,0.78299,0.73697,0.76239,0.77279,0.32031,0.73869,21
+imbalanced,all,line,LIME + Gaussian Predictive,0.94214,0.79267,0.92901,0.84954,0.38190,0.73869,21
+imbalanced,all,line,LIME + Logistic Band,0.90126,0.78231,0.88171,0.83225,0.36651,0.73869,21
+imbalanced,all,line,LIME + Max Deltas,0.86896,0.73543,0.83841,0.77155,0.35450,0.69643,21
+imbalanced,all,line,LIME + Min Deltas,0.93258,0.78081,0.91087,0.82686,0.37821,0.69643,21
+imbalanced,all,line,LIME + Saw-Yang-Mo Minimax,0.92808,0.79256,0.90647,0.84291,0.37763,0.73869,21
+imbalanced,all,line,LIME + Slacks Deltas,0.94973,0.74171,0.94437,0.79252,0.41481,0.55179,21
+imbalanced,all,line,LIME + Slacks Deltas (continuous),0.94806,0.74036,0.94282,0.79189,0.41385,0.55179,21
+imbalanced,all,line,"LIME + k-th Point Tolerance Limit (min, expected loss)",0.89136,0.75867,0.86527,0.79814,0.36130,0.69345,21
+imbalanced,all,line,LIME + re-threshold,0.93361,0.86974,0.91532,0.91661,0.33717,0.95476,21
+imbalanced,all,test,CLIME,0.97895,0.76375,0.96480,0.83130,0.50000,0.00000,21
+imbalanced,all,test,LIME,0.97768,0.61257,0.96086,0.64867,0.50000,0.00000,21
+imbalanced,all,test,LIME + Avg Deltas,0.92147,0.73011,0.86795,0.78651,0.38247,0.70000,21
+imbalanced,all,test,LIME + CP Minimax,0.94560,0.77831,0.89242,0.84133,0.38122,0.74405,21
+imbalanced,all,test,LIME + CP Sum,0.97336,0.76776,0.94462,0.84008,0.40686,0.74405,21
+imbalanced,all,test,LIME + DKW Minimax,0.94685,0.77806,0.89366,0.84204,0.38028,0.74405,21
+imbalanced,all,test,LIME + DKW Sum,0.97450,0.76719,0.94480,0.84458,0.40609,0.74405,21
+imbalanced,all,test,LIME + ECAI Tolerance Limit (modular),0.97768,0.61257,0.96086,0.64867,0.50000,0.00000,21
+imbalanced,all,test,LIME + ECAI Tolerance Limit (one-sided radius),0.97771,0.61288,0.96086,0.64867,0.49948,0.00476,21
+imbalanced,all,test,LIME + F Deltas,0.95171,0.76723,0.90407,0.82450,0.39113,0.70000,21
+imbalanced,all,test,LIME + Gaussian Band,0.93695,0.77113,0.88427,0.83341,0.38030,0.74405,21
+imbalanced,all,test,LIME + Gaussian Band (MC),0.94192,0.77209,0.89090,0.83674,0.38275,0.74405,21
+imbalanced,all,test,LIME + Gaussian Neyman-Pearson,0.79604,0.73634,0.75681,0.76764,0.32694,0.74405,21
+imbalanced,all,test,LIME + Gaussian Predictive,0.96258,0.77059,0.92417,0.84710,0.39429,0.74405,21
+imbalanced,all,test,LIME + Logistic Band,0.93658,0.77136,0.88287,0.83285,0.37952,0.74405,21
+imbalanced,all,test,LIME + Max Deltas,0.88612,0.71433,0.83530,0.76788,0.37008,0.70000,21
+imbalanced,all,test,LIME + Min Deltas,0.95201,0.76454,0.90913,0.82489,0.39144,0.70000,21
+imbalanced,all,test,LIME + Saw-Yang-Mo Minimax,0.94422,0.77608,0.89781,0.83791,0.38834,0.74405,21
+imbalanced,all,test,LIME + Slacks Deltas,0.96701,0.72773,0.94596,0.78770,0.42755,0.53690,21
+imbalanced,all,test,LIME + Slacks Deltas (continuous),0.96583,0.72730,0.94432,0.78677,0.42688,0.53690,21
+imbalanced,all,test,"LIME + k-th Point Tolerance Limit (min, expected loss)",0.92108,0.75034,0.86496,0.79708,0.37481,0.69405,21
+imbalanced,all,test,LIME + re-threshold,0.95824,0.84426,0.90768,0.91169,0.32924,0.97738,21
+native,Logistic,line,CLIME,0.97691,0.91847,0.99243,0.92708,0.50000,0.00000,22
+native,Logistic,line,LIME,0.93778,0.70315,0.98165,0.72109,0.50000,0.00000,22
+native,Logistic,line,LIME + Avg Deltas,0.85303,0.79706,0.87867,0.82690,0.42529,0.77727,22
+native,Logistic,line,LIME + CP Minimax,0.92742,0.86320,0.96141,0.90375,0.43766,0.77727,22
+native,Logistic,line,LIME + CP Sum,0.97426,0.88687,0.99636,0.91406,0.46170,0.77727,22
+native,Logistic,line,LIME + DKW Minimax,0.92495,0.86103,0.95843,0.90167,0.43598,0.77727,22
+native,Logistic,line,LIME + DKW Sum,0.97446,0.88690,0.99643,0.91410,0.46179,0.77727,22
+native,Logistic,line,LIME + ECAI Tolerance Limit (modular),0.93778,0.70428,0.98165,0.72109,0.49971,0.00114,22
+native,Logistic,line,LIME + ECAI Tolerance Limit (one-sided radius),0.93803,0.70593,0.98166,0.72290,0.49975,0.00568,22
+native,Logistic,line,LIME + F Deltas,0.91842,0.85035,0.94444,0.88761,0.43549,0.77727,22
+native,Logistic,line,LIME + Gaussian Band,0.91902,0.85705,0.95016,0.89610,0.43539,0.77727,22
+native,Logistic,line,LIME + Gaussian Band (MC),0.92656,0.86177,0.95704,0.90013,0.43795,0.77727,22
+native,Logistic,line,LIME + Gaussian Neyman-Pearson,0.88305,0.83189,0.90625,0.86765,0.42106,0.77727,22
+native,Logistic,line,LIME + Gaussian Predictive,0.95134,0.87751,0.97837,0.91252,0.44730,0.77727,22
+native,Logistic,line,LIME + Logistic Band,0.91698,0.85571,0.94821,0.89488,0.43447,0.77727,22
+native,Logistic,line,LIME + Max Deltas,0.79807,0.76506,0.82232,0.79906,0.40215,0.77727,22
+native,Logistic,line,LIME + Min Deltas,0.91568,0.84481,0.94404,0.88802,0.43647,0.77727,22
+native,Logistic,line,LIME + Saw-Yang-Mo Minimax,0.95663,0.88077,0.98143,0.91405,0.44963,0.77727,22
+native,Logistic,line,LIME + Slacks Deltas,0.93275,0.84965,0.96014,0.87924,0.44531,0.74091,22
+native,Logistic,line,LIME + Slacks Deltas (continuous),0.92962,0.84752,0.95751,0.87769,0.44409,0.74091,22
+native,Logistic,line,"LIME + k-th Point Tolerance Limit (min, expected loss)",0.85084,0.80963,0.87936,0.84556,0.41064,0.77727,22
+native,Logistic,line,LIME + re-threshold,0.98503,0.96286,0.99676,0.99489,0.43301,0.94432,22
+native,Logistic,test,CLIME,0.98143,0.91403,0.98453,0.94550,0.50000,0.00000,22
+native,Logistic,test,LIME,0.95673,0.76601,0.97352,0.77592,0.50000,0.00000,22
+native,Logistic,test,LIME + Avg Deltas,0.83139,0.78197,0.83771,0.82795,0.42662,0.84091,22
+native,Logistic,test,LIME + CP Minimax,0.95419,0.89143,0.96615,0.93343,0.44459,0.84091,22
+native,Logistic,test,LIME + CP Sum,0.98773,0.90510,0.98838,0.93643,0.46320,0.84091,22
+native,Logistic,test,LIME + DKW Minimax,0.95065,0.88826,0.96090,0.93002,0.44244,0.84091,22
+native,Logistic,test,LIME + DKW Sum,0.98780,0.90519,0.98846,0.93644,0.46318,0.84091,22
+native,Logistic,test,LIME + ECAI Tolerance Limit (modular),0.95673,0.76601,0.97352,0.77592,0.50000,0.00000,22
+native,Logistic,test,LIME + ECAI Tolerance Limit (one-sided radius),0.95673,0.76601,0.97352,0.77592,0.50000,0.00000,22
+native,Logistic,test,LIME + F Deltas,0.93473,0.86913,0.93198,0.90658,0.44218,0.84091,22
+native,Logistic,test,LIME + Gaussian Band,0.94436,0.88096,0.95110,0.92408,0.44257,0.84091,22
+native,Logistic,test,LIME + Gaussian Band (MC),0.95017,0.88444,0.95617,0.92693,0.44449,0.84091,22
+native,Logistic,test,LIME + Gaussian Neyman-Pearson,0.91892,0.85938,0.91861,0.90221,0.43538,0.84091,22
+native,Logistic,test,LIME + Gaussian Predictive,0.96935,0.89709,0.97295,0.93673,0.45159,0.84091,22
+native,Logistic,test,LIME + Logistic Band,0.94254,0.87974,0.94925,0.92294,0.44173,0.84091,22
+native,Logistic,test,LIME + Max Deltas,0.77656,0.75432,0.78698,0.80287,0.40976,0.84091,22
+native,Logistic,test,LIME + Min Deltas,0.93459,0.87051,0.93633,0.90965,0.43999,0.84091,22
+native,Logistic,test,LIME + Saw-Yang-Mo Minimax,0.97258,0.89906,0.97487,0.93819,0.45320,0.84091,22
+native,Logistic,test,LIME + Slacks Deltas,0.95255,0.87241,0.95399,0.91148,0.44979,0.80909,22
+native,Logistic,test,LIME + Slacks Deltas (continuous),0.94966,0.87074,0.94994,0.90931,0.44865,0.80909,22
+native,Logistic,test,"LIME + k-th Point Tolerance Limit (min, expected loss)",0.84949,0.81510,0.85464,0.85792,0.41605,0.84091,22
+native,Logistic,test,LIME + re-threshold,0.98849,0.96397,0.99029,0.98947,0.43058,0.95455,22
+native,Random Forest,line,CLIME,0.88544,0.70583,0.90097,0.73709,0.50000,0.00000,22
+native,Random Forest,line,LIME,0.85731,0.59270,0.90545,0.60759,0.50000,0.00000,22
+native,Random Forest,line,LIME + Avg Deltas,0.81391,0.69411,0.81732,0.72694,0.42729,0.72955,22
+native,Random Forest,line,LIME + CP Minimax,0.78534,0.71640,0.77974,0.76173,0.40507,0.85114,22
+native,Random Forest,line,LIME + CP Sum,0.84381,0.71551,0.84431,0.75085,0.41987,0.85114,22
+native,Random Forest,line,LIME + DKW Minimax,0.78931,0.71659,0.78481,0.76274,0.40588,0.85114,22
+native,Random Forest,line,LIME + DKW Sum,0.84262,0.71794,0.84415,0.75928,0.41839,0.85114,22
+native,Random Forest,line,LIME + ECAI Tolerance Limit (modular),0.85731,0.59270,0.90545,0.60759,0.50000,0.00000,22
+native,Random Forest,line,LIME + ECAI Tolerance Limit (one-sided radius),0.85731,0.59270,0.90545,0.60759,0.50000,0.00000,22
+native,Random Forest,line,LIME + F Deltas,0.81313,0.70552,0.81737,0.74274,0.42165,0.72955,22
+native,Random Forest,line,LIME + Gaussian Band,0.79002,0.71722,0.78377,0.75923,0.40621,0.85114,22
+native,Random Forest,line,LIME + Gaussian Band (MC),0.79492,0.71841,0.79089,0.76139,0.40762,0.85114,22
+native,Random Forest,line,LIME + Gaussian Neyman-Pearson,0.56795,0.63982,0.51991,0.63976,0.31912,0.85114,22
+native,Random Forest,line,LIME + Gaussian Predictive,0.82319,0.71736,0.82628,0.76652,0.41535,0.85114,22
+native,Random Forest,line,LIME + Logistic Band,0.78914,0.71714,0.78205,0.75861,0.40598,0.85114,22
+native,Random Forest,line,LIME + Max Deltas,0.80798,0.68398,0.81428,0.72370,0.42941,0.72955,22
+native,Random Forest,line,LIME + Min Deltas,0.82049,0.70627,0.82575,0.74376,0.42452,0.72955,22
+native,Random Forest,line,LIME + Saw-Yang-Mo Minimax,0.78768,0.71427,0.76992,0.74986,0.40469,0.85114,22
+native,Random Forest,line,LIME + Slacks Deltas,0.85787,0.65094,0.88779,0.67943,0.47219,0.30909,22
+native,Random Forest,line,LIME + Slacks Deltas (continuous),0.85744,0.65103,0.88746,0.67943,0.47201,0.30909,22
+native,Random Forest,line,"LIME + k-th Point Tolerance Limit (min, expected loss)",0.80741,0.70377,0.81014,0.73770,0.42142,0.72727,22
+native,Random Forest,line,LIME + re-threshold,0.81379,0.74920,0.79768,0.79890,0.37604,0.98636,22
+native,Random Forest,test,CLIME,0.87709,0.69151,0.88852,0.75821,0.50000,0.00000,22
+native,Random Forest,test,LIME,0.86029,0.59882,0.89113,0.63208,0.50000,0.00000,22
+native,Random Forest,test,LIME + Avg Deltas,0.81883,0.67939,0.79292,0.74372,0.42759,0.79318,22
+native,Random Forest,test,LIME + CP Minimax,0.84340,0.71161,0.79354,0.78195,0.41683,0.87727,22
+native,Random Forest,test,LIME + CP Sum,0.85099,0.70190,0.82319,0.77332,0.42332,0.87727,22
+native,Random Forest,test,LIME + DKW Minimax,0.84532,0.71227,0.79650,0.78300,0.41725,0.87727,22
+native,Random Forest,test,LIME + DKW Sum,0.85693,0.70114,0.82612,0.78544,0.42452,0.87727,22
+native,Random Forest,test,LIME + ECAI Tolerance Limit (modular),0.86029,0.59882,0.89113,0.63208,0.50000,0.00000,22
+native,Random Forest,test,LIME + ECAI Tolerance Limit (one-sided radius),0.86029,0.59882,0.89113,0.63208,0.50000,0.00000,22
+native,Random Forest,test,LIME + F Deltas,0.83946,0.70135,0.79902,0.76192,0.42604,0.79318,22
+native,Random Forest,test,LIME + Gaussian Band,0.84373,0.71015,0.79124,0.77659,0.41840,0.87727,22
+native,Random Forest,test,LIME + Gaussian Band (MC),0.84527,0.70941,0.79528,0.77758,0.41938,0.87727,22
+native,Random Forest,test,LIME + Gaussian Neyman-Pearson,0.58945,0.63664,0.53815,0.64592,0.33491,0.87727,22
+native,Random Forest,test,LIME + Gaussian Predictive,0.85672,0.69737,0.82414,0.78275,0.42580,0.87727,22
+native,Random Forest,test,LIME + Logistic Band,0.84271,0.71030,0.78986,0.77635,0.41793,0.87727,22
+native,Random Forest,test,LIME + Max Deltas,0.82022,0.67964,0.79749,0.74499,0.42786,0.79318,22
+native,Random Forest,test,LIME + Min Deltas,0.84217,0.69728,0.80866,0.76377,0.42855,0.79318,22
+native,Random Forest,test,LIME + Saw-Yang-Mo Minimax,0.80482,0.69930,0.75859,0.76195,0.41198,0.87727,22
+native,Random Forest,test,LIME + Slacks Deltas,0.86665,0.64641,0.88091,0.69151,0.47512,0.31818,22
+native,Random Forest,test,LIME + Slacks Deltas (continuous),0.86671,0.64661,0.87846,0.69065,0.47516,0.31818,22
+native,Random Forest,test,"LIME + k-th Point Tolerance Limit (min, expected loss)",0.83422,0.69877,0.79239,0.75797,0.42506,0.79091,22
+native,Random Forest,test,LIME + re-threshold,0.84607,0.72523,0.80103,0.81239,0.39134,0.97727,22
+native,all,line,CLIME,0.93118,0.80380,0.94670,0.82871,0.50000,0.00000,22
+native,all,line,LIME,0.89754,0.64878,0.94355,0.66230,0.50000,0.00000,22
+native,all,line,LIME + Avg Deltas,0.83347,0.74073,0.84800,0.77479,0.42629,0.75341,22
+native,all,line,LIME + CP Minimax,0.85638,0.78554,0.87058,0.83008,0.42136,0.81420,22
+native,all,line,LIME + CP Sum,0.90904,0.79562,0.92033,0.82935,0.44078,0.81420,22
+native,all,line,LIME + DKW Minimax,0.85713,0.78439,0.87162,0.82960,0.42093,0.81420,22
+native,all,line,LIME + DKW Sum,0.90854,0.79709,0.92029,0.83376,0.44009,0.81420,22
+native,all,line,LIME + ECAI Tolerance Limit (modular),0.89754,0.64916,0.94355,0.66230,0.49985,0.00057,22
+native,all,line,LIME + ECAI Tolerance Limit (one-sided radius),0.89767,0.64998,0.94356,0.66313,0.49988,0.00284,22
+native,all,line,LIME + F Deltas,0.86578,0.77288,0.88090,0.81245,0.42857,0.75341,22
+native,all,line,LIME + Gaussian Band,0.85452,0.78268,0.86697,0.82511,0.42080,0.81420,22
+native,all,line,LIME + Gaussian Band (MC),0.86074,0.78551,0.87397,0.82820,0.42278,0.81420,22
+native,all,line,LIME + Gaussian Neyman-Pearson,0.72550,0.72938,0.71308,0.74883,0.37009,0.81420,22
+native,all,line,LIME + Gaussian Predictive,0.88727,0.79178,0.90232,0.83663,0.43133,0.81420,22
+native,all,line,LIME + Logistic Band,0.85306,0.78199,0.86513,0.82409,0.42022,0.81420,22
+native,all,line,LIME + Max Deltas,0.80302,0.72055,0.81830,0.75945,0.41578,0.75341,22
+native,all,line,LIME + Min Deltas,0.86808,0.77041,0.88489,0.81316,0.43050,0.75341,22
+native,all,line,LIME + Saw-Yang-Mo Minimax,0.87216,0.79240,0.87567,0.82888,0.42716,0.81420,22
+native,all,line,LIME + Slacks Deltas,0.89531,0.74317,0.92397,0.77584,0.45875,0.52500,22
+native,all,line,LIME + Slacks Deltas (continuous),0.89353,0.74221,0.92248,0.77511,0.45805,0.52500,22
+native,all,line,"LIME + k-th Point Tolerance Limit (min, expected loss)",0.82912,0.75280,0.84475,0.78927,0.41603,0.75227,22
+native,all,line,LIME + re-threshold,0.89941,0.84784,0.89722,0.89306,0.40452,0.96534,22
+native,all,test,CLIME,0.92926,0.79656,0.93653,0.85248,0.50000,0.00000,22
+native,all,test,LIME,0.90851,0.67930,0.93233,0.70433,0.50000,0.00000,22
+native,all,test,LIME + Avg Deltas,0.82511,0.72498,0.81531,0.78566,0.42711,0.81705,22
+native,all,test,LIME + CP Minimax,0.89879,0.79598,0.87984,0.85735,0.43071,0.85909,22
+native,all,test,LIME + CP Sum,0.91936,0.79761,0.90578,0.85511,0.44326,0.85909,22
+native,all,test,LIME + DKW Minimax,0.89798,0.79470,0.87870,0.85608,0.42984,0.85909,22
+native,all,test,LIME + DKW Sum,0.92236,0.79714,0.90729,0.86029,0.44385,0.85909,22
+native,all,test,LIME + ECAI Tolerance Limit (modular),0.90851,0.67930,0.93233,0.70433,0.50000,0.00000,22
+native,all,test,LIME + ECAI Tolerance Limit (one-sided radius),0.90851,0.67930,0.93233,0.70433,0.50000,0.00000,22
+native,all,test,LIME + F Deltas,0.88710,0.77898,0.86550,0.83371,0.43411,0.81705,22
+native,all,test,LIME + Gaussian Band,0.89404,0.79039,0.87117,0.85003,0.43048,0.85909,22
+native,all,test,LIME + Gaussian Band (MC),0.89772,0.79170,0.87573,0.85198,0.43193,0.85909,22
+native,all,test,LIME + Gaussian Neyman-Pearson,0.75418,0.74192,0.72838,0.77394,0.38514,0.85909,22
+native,all,test,LIME + Gaussian Predictive,0.91304,0.79077,0.89854,0.85922,0.43869,0.85909,22
+native,all,test,LIME + Logistic Band,0.89263,0.78987,0.86955,0.84934,0.42983,0.85909,22
+native,all,test,LIME + Max Deltas,0.79839,0.71114,0.79224,0.77362,0.41881,0.81705,22
+native,all,test,LIME + Min Deltas,0.88838,0.77775,0.87250,0.83615,0.43427,0.81705,22
+native,all,test,LIME + Saw-Yang-Mo Minimax,0.88870,0.79374,0.86673,0.85014,0.43259,0.85909,22
+native,all,test,LIME + Slacks Deltas,0.90960,0.75281,0.91745,0.80156,0.46245,0.56364,22
+native,all,test,LIME + Slacks Deltas (continuous),0.90818,0.75209,0.91420,0.80003,0.46190,0.56364,22
+native,all,test,"LIME + k-th Point Tolerance Limit (min, expected loss)",0.84185,0.75124,0.82351,0.80712,0.42055,0.81591,22
+native,all,test,LIME + re-threshold,0.91728,0.83629,0.89566,0.90076,0.41096,0.96591,22

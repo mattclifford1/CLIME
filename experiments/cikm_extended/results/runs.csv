@@ -1,6 +1,6 @@
 run,jobs,seeds
-main,1189,4
-sweep,234,1
-kernel,430,1
-surrogate_deltas,86,1
+main,3600,10
+sweep,1170,5
+kernel,2150,5
+surrogate_deltas,172,2
 matched,1800,5

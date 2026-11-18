@@ -262,7 +262,7 @@ def surrogate_thresholds():
         [(label, 2 + 2*i, 3 + 2*i) for i, label in enumerate(SETTINGS.values())]))
 
 
-WIDTHS = {0.25: 'quarter', 0.5: 'half', 0.75: 'default', 1.5: 'wide', 3.0: 'widest'}
+WIDTHS = {0.25: 'narrowest', 0.5: 'narrow', 0.75: 'default', 1.5: 'wide', 3.0: 'widest'}
 RATIOS = {4: 'four', 10: 'ten', 20: 'twenty', 40: 'forty'}
 
 
@@ -325,6 +325,23 @@ def runs():
         macro(['run', r.run, 'jobs'], r.jobs, '{:.0f}')
 
 
+def failures():
+    frame = read('failures')
+    macro(['failed', 'query', 'points'], frame.failed.sum(), '{:.0f}')
+    macro(['explained', 'query', 'points'], frame.explained.iloc[0]/1e6, '{:.1f}')
+
+
+def outliers():
+    frame = read('outlier_sensitivity')
+    splits = frame.drop_duplicates('setting')
+    macro(['out', 'splits'], splits.extreme.sum(), '{:.0f}')
+    macro(['out', 'splits', 'total'], splits.splits.sum(), '{:.0f}')
+    for _, r in frame.iterrows():
+        base = ['out', r.setting, r.kind, 'fid' if r.metric == 'test_fidelity' else 'bal']
+        macro([*base, 'all'], r['diff'], '{:+.3f}')
+        macro([*base, 'without'], r.diff_without, '{:+.3f}')
+
+
 def reproduce():
     frame = read('reproduce')
     for (name, explainer), part in frame.groupby(['configuration', 'explainer']):
@@ -345,7 +362,7 @@ def numbers():
 if __name__ == '__main__':
     for make in (datasets, replication, triad, arms, neighbourhoods, by_class, matched,
                  surrogate_thresholds, kernel, sweep, surrogate_deltas, runs,
-                 reproduce):
+                 failures, outliers, reproduce):
         try:
             make()
         except (AttributeError, TypeError, FileNotFoundError) as e:   # a results file is not there yet

@@ -211,7 +211,9 @@ def main_run(run='main'):
         n_train=('n_train', 'mean'), n_test=('n_test', 'mean')).reset_index()
     save(counts, f'data{suffix}')
     failures = runner.load(run, 'failures')
-    print(f'{len(failures)} failed query points')
+    by = ['setting', 'dataset', 'family', 'seed', 'arm', 'kind', 'error']
+    failed = failures.groupby(by, observed=True).size().rename('failed').reset_index()
+    save(failed.assign(explained=len(queries)), f'failures{suffix}')
     return block
 
 
