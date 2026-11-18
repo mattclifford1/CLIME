@@ -9,6 +9,7 @@ from clime.models import threshold
 
 LIME, CLIME = 'LIME', 'CLIME'
 RETHRESHOLDED = 'LIME + re-threshold'
+MATCHED = 'LIME + matched cut'
 PREFIX = 'LIME + '
 # deltas methods fast enough to fit at every query point
 FAST_DELTAS = ('DKW Minimax', 'DKW Sum', 'Gaussian Predictive', 'Gaussian Band',
@@ -46,7 +47,17 @@ def balanced_threshold(score, label, weight):
     return float(edges[best[np.argmin(np.abs(edges[best] - 0.5))]])
 
 
-def build(box, query_point, test_data, deltas=FAST_DELTAS):
+def matched_cut(score, weight, positive_share):
+    '''the cut on `score` that calls the same weighted share of the sample class 1'''
+    if positive_share <= 0:
+        return float(score.max() + 1e-9)
+    order = np.argsort(-score)
+    above = np.cumsum(weight[order])/weight.sum()
+    k = min(np.searchsorted(above, positive_share - 1e-12), len(score) - 1)
+    return float(score[order][k])
+
+
+def build(box, query_point, test_data, deltas=FAST_DELTAS, matched=False):
     '''
     {explainer: (surrogate, threshold on its score)} plus the two fitted bLIMEy objects
 
@@ -63,6 +74,11 @@ def build(box, query_point, test_data, deltas=FAST_DELTAS):
 
     out = {LIME: (lime, 0.5), CLIME: (balanced, 0.5),
            RETHRESHOLDED: (lime, balanced_threshold(score, label, weight))}
+    if matched:
+        # LIME's surrogate cut to predict class 1 as often as CLIME does: CLIME's change of
+        # operating point without its change of fit
+        share = (weight*(balanced.score(sample['X']) >= 0.5)).sum()/weight.sum()
+        out[MATCHED] = (lime, matched_cut(score, weight, share))
     rng = clime.utils.rng_from_point(query_point, salt='surrogate threshold sample')
     idx = rng.choice(len(score), size=DELTAS_SAMPLE, p=weight/weight.sum())
     for method in deltas:

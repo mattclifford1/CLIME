@@ -39,9 +39,9 @@ def _evaluation_sets(box, task, query_point):
     return out
 
 
-def explain(box, task, query_point, deltas=surrogates.FAST_DELTAS):
+def explain(box, task, query_point, deltas=surrogates.FAST_DELTAS, matched=False):
     '''a row of neighbourhood diagnostics and one row of scores per explainer'''
-    built, lime, balanced = surrogates.build(box, query_point, task.test, deltas)
+    built, lime, balanced = surrogates.build(box, query_point, task.test, deltas, matched)
     sample = lime.sampled
     label = np.asarray(sample['y']).astype(np.int64)
     weight = costs.weights_based_on_distance(query_point, sample['X'])
@@ -76,7 +76,7 @@ def explain(box, task, query_point, deltas=surrogates.FAST_DELTAS):
 
 def run(dataset, setting, seed, family, arms=boxes.TRAINING_ARMS, deltas=None,
         surrogate_deltas=surrogates.FAST_DELTAS, line=LINE_POINTS,
-        per_class=TEST_POINTS_PER_CLASS, kernel_width=None):
+        per_class=TEST_POINTS_PER_CLASS, kernel_width=None, matched=False):
     '''
     {'models', 'queries', 'scores', 'failures'}: lists of rows for one (dataset, setting,
     seed, family); a query point that raises goes to 'failures' and is skipped
@@ -84,7 +84,7 @@ def run(dataset, setting, seed, family, arms=boxes.TRAINING_ARMS, deltas=None,
     deltas: methods placed on the black box (all by default, () for none).
     surrogate_deltas: methods placed on LIME's surrogate, for the training arms and the
     re-thresholded black box; a deltas-placed black box gets LIME, CLIME and the
-    re-thresholded surrogate only.
+    re-thresholded surrogate only. matched: add LIME cut at CLIME's operating point.
     '''
     clime.RANDOM_SEED = int(seed)
     costs.KERNEL_WIDTH_SCALE = 0.75 if kernel_width is None else kernel_width
@@ -120,7 +120,7 @@ def run(dataset, setting, seed, family, arms=boxes.TRAINING_ARMS, deltas=None,
                         or r['explainer'] == surrogates.RETHRESHOLDED]
             else:
                 try:
-                    query, rows = explain(box, task, q, on_surrogate)
+                    query, rows = explain(box, task, q, on_surrogate, matched)
                 except Exception as e:   # noqa: BLE001 - one bad query point, not the job
                     failures.append({**where, 'error': f'{type(e).__name__}: {e}'})
                     continue

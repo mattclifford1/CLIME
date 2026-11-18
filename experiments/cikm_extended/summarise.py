@@ -237,6 +237,25 @@ def surrogate_deltas():
     save(out, 'surrogate_deltas')
 
 
+def matched():
+    '''CLIME's gain split into its change of operating point and its change of fit'''
+    scores = runner.load('matched', 'scores')
+    block = blocks(scores)
+    out = stats.over_datasets(with_all(block), ['setting', 'family', 'kind', 'explainer'],
+                              [*VALUES, 'worst'])
+    save(out, 'matched')
+    rows = []
+    for (setting, kind), part in block.groupby(['setting', 'kind']):
+        for metric in ('test_fidelity', 'worst', 'test_balanced'):
+            wide = part.pivot_table(index=['dataset', 'seed'], columns='explainer', values=metric)
+            for a, b, name in (('CLIME', 'LIME', 'total'), ('LIME + matched cut', 'LIME', 'cut'),
+                               ('CLIME', 'LIME + matched cut', 'fit')):
+                rows.append({'setting': setting, 'kind': kind, 'metric': metric, 'part': name,
+                             **stats.paired(wide, a, b)})
+    save(pd.DataFrame(rows), 'matched_parts')
+    save(pd.DataFrame({'seed': sorted(scores.seed.unique())}), 'matched_seeds')
+
+
 def sweep():
     '''the imbalance ratio: the sweep runs plus the 200:20 setting of the main run'''
     frames = {t: [runner.load('sweep', t)] for t in ('scores', 'queries', 'models')}
@@ -257,6 +276,6 @@ def sweep():
 
 if __name__ == '__main__':
     RUNS = {'main': main_run, 'sweep': sweep, 'kernel': kernel,
-            'surrogate_deltas': surrogate_deltas}
+            'surrogate_deltas': surrogate_deltas, 'matched': matched}
     for run in sys.argv[1:] or list(RUNS):
         RUNS[run]()

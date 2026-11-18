@@ -1,0 +1,17 @@
+\begin{tabular}{@{}lrrrrrr@{}}
+  \toprule
+   & \multicolumn{2}{c}{own ratio} & \multicolumn{2}{c}{balanced 110:110} & \multicolumn{2}{c}{imbalanced 200:20} \\
+  \cmidrule(lr){2-3} \cmidrule(lr){4-5} \cmidrule(lr){6-7}
+  Surrogate & Fid. & Bal. & Fid. & Bal. & Fid. & Bal. \\
+  \midrule
+  LIME & 0.883 & 0.624 & 0.810 & 0.753 & 0.963 & 0.562 \\
+  CLIME & 0.909 & 0.772 & 0.858 & 0.838 & 0.961 & 0.725 \\
+  LIME, re-thresholded & 0.862 & 0.808 & 0.833 & 0.834 & 0.911 & 0.801 \\
+  LIME, deltas: DKW Minimax & 0.836 & 0.760 & 0.802 & 0.799 & 0.906 & 0.737 \\
+  LIME, deltas: DKW Sum & 0.880 & 0.766 & 0.834 & 0.820 & 0.944 & 0.730 \\
+  LIME, deltas: F Deltas & 0.852 & 0.744 & 0.785 & 0.779 & 0.926 & 0.727 \\
+  LIME, deltas: Gaussian Band & 0.834 & 0.757 & 0.803 & 0.800 & 0.898 & 0.730 \\
+  LIME, deltas: Gaussian Predictive & 0.865 & 0.763 & 0.823 & 0.813 & 0.934 & 0.735 \\
+  LIME, deltas: Saw-Yang-Mo Minimax & 0.835 & 0.757 & 0.803 & 0.798 & 0.908 & 0.734 \\
+  \bottomrule
+\end{tabular}

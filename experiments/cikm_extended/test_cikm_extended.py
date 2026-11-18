@@ -83,3 +83,12 @@ def test_an_unmoved_threshold_reuses_the_plain_rows(task):
     arms = {r['arm'] for r in out['scores']}
     assert arms == {'plain', 're-thresholded', 'Gaussian Neyman-Pearson', 'Gaussian Predictive'}
     assert len(out['queries']) == 4*6
+
+
+def test_matched_cut_reproduces_a_positive_share():
+    rng = np.random.default_rng(1)
+    score, weight = rng.normal(size=500), rng.uniform(0.1, 1, size=500)
+    for share in (0.0, 0.1, 0.5, 0.93):
+        cut = surrogates.matched_cut(score, weight, share)
+        got = (weight*(score >= cut)).sum()/weight.sum()
+        assert share <= got <= share + weight.max()/weight.sum() + 1e-12

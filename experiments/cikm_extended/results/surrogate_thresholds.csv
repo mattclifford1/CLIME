@@ -1,0 +1,1099 @@
+setting,family,arm,kind,explainer,test_fidelity,test_balanced,local_fidelity,local_balanced,worst,datasets
+balanced,Gradient Boosting,plain,line,CLIME,0.77882,0.77213,0.84370,0.79353,0.72307,17
+balanced,Gradient Boosting,plain,line,LIME,0.75266,0.70091,0.84778,0.68935,0.65269,17
+balanced,Gradient Boosting,plain,line,LIME + DKW Minimax,0.72276,0.73614,0.79578,0.79806,0.55652,17
+balanced,Gradient Boosting,plain,line,LIME + DKW Sum,0.74708,0.74768,0.81601,0.79713,0.61470,17
+balanced,Gradient Boosting,plain,line,LIME + F Deltas,0.70767,0.72196,0.78425,0.78969,0.52501,17
+balanced,Gradient Boosting,plain,line,LIME + Gaussian Band,0.72678,0.73880,0.79891,0.79776,0.55465,17
+balanced,Gradient Boosting,plain,line,LIME + Gaussian Predictive,0.74594,0.75106,0.81406,0.80011,0.60775,17
+balanced,Gradient Boosting,plain,line,LIME + Saw-Yang-Mo Minimax,0.70798,0.72069,0.76051,0.78028,0.49897,17
+balanced,Gradient Boosting,plain,line,LIME + re-threshold,0.74392,0.75921,0.81085,0.81509,0.62365,17
+balanced,Gradient Boosting,plain,test,CLIME,0.75667,0.75032,0.83894,0.79884,0.60549,17
+balanced,Gradient Boosting,plain,test,LIME,0.72640,0.68674,0.84279,0.71020,0.55285,17
+balanced,Gradient Boosting,plain,test,LIME + DKW Minimax,0.73057,0.73746,0.79983,0.81212,0.55335,17
+balanced,Gradient Boosting,plain,test,LIME + DKW Sum,0.73942,0.74324,0.81295,0.81052,0.57417,17
+balanced,Gradient Boosting,plain,test,LIME + F Deltas,0.70871,0.71918,0.77862,0.80076,0.51353,17
+balanced,Gradient Boosting,plain,test,LIME + Gaussian Band,0.73047,0.73736,0.80185,0.81155,0.55022,17
+balanced,Gradient Boosting,plain,test,LIME + Gaussian Predictive,0.74071,0.74363,0.81416,0.81328,0.57694,17
+balanced,Gradient Boosting,plain,test,LIME + Saw-Yang-Mo Minimax,0.69755,0.71288,0.76221,0.79423,0.43371,17
+balanced,Gradient Boosting,plain,test,LIME + re-threshold,0.73591,0.74350,0.80664,0.81597,0.52770,17
+balanced,Logistic,plain,line,CLIME,0.97644,0.95292,0.99099,0.97007,0.92936,17
+balanced,Logistic,plain,line,LIME,0.91589,0.85684,0.98034,0.85058,0.75777,17
+balanced,Logistic,plain,line,LIME + DKW Minimax,0.90927,0.90146,0.97139,0.96004,0.68912,17
+balanced,Logistic,plain,line,LIME + DKW Sum,0.97854,0.95242,0.99549,0.96841,0.90209,17
+balanced,Logistic,plain,line,LIME + F Deltas,0.86794,0.85785,0.92675,0.92452,0.73271,17
+balanced,Logistic,plain,line,LIME + Gaussian Band,0.90841,0.89881,0.96316,0.95343,0.67838,17
+balanced,Logistic,plain,line,LIME + Gaussian Predictive,0.93925,0.92270,0.97892,0.96337,0.80007,17
+balanced,Logistic,plain,line,LIME + Saw-Yang-Mo Minimax,0.94394,0.92609,0.98021,0.96414,0.81860,17
+balanced,Logistic,plain,line,LIME + re-threshold,0.98937,0.97843,0.99574,0.99554,0.95802,17
+balanced,Logistic,plain,test,CLIME,0.98249,0.97575,0.98864,0.98435,0.93648,17
+balanced,Logistic,plain,test,LIME,0.92824,0.88935,0.97551,0.86344,0.67644,17
+balanced,Logistic,plain,test,LIME + DKW Minimax,0.93937,0.94238,0.96655,0.97837,0.71451,17
+balanced,Logistic,plain,test,LIME + DKW Sum,0.98946,0.98207,0.99504,0.99071,0.93908,17
+balanced,Logistic,plain,test,LIME + F Deltas,0.87023,0.88146,0.91120,0.93692,0.72226,17
+balanced,Logistic,plain,test,LIME + Gaussian Band,0.93207,0.93556,0.95772,0.97193,0.74855,17
+balanced,Logistic,plain,test,LIME + Gaussian Predictive,0.95620,0.95535,0.97430,0.98157,0.83680,17
+balanced,Logistic,plain,test,LIME + Saw-Yang-Mo Minimax,0.95888,0.95751,0.97545,0.98220,0.86065,17
+balanced,Logistic,plain,test,LIME + re-threshold,0.99095,0.98697,0.99510,0.99569,0.95368,17
+balanced,MLP,plain,line,CLIME,0.91822,0.89973,0.94916,0.90260,0.87316,17
+balanced,MLP,plain,line,LIME,0.86311,0.80253,0.94212,0.78756,0.72314,17
+balanced,MLP,plain,line,LIME + DKW Minimax,0.85317,0.84626,0.91895,0.90263,0.64884,17
+balanced,MLP,plain,line,LIME + DKW Sum,0.89550,0.87470,0.94051,0.90308,0.77664,17
+balanced,MLP,plain,line,LIME + F Deltas,0.83931,0.83017,0.89820,0.88984,0.65203,17
+balanced,MLP,plain,line,LIME + Gaussian Band,0.85999,0.85126,0.92048,0.90260,0.64044,17
+balanced,MLP,plain,line,LIME + Gaussian Predictive,0.88424,0.86875,0.93724,0.90849,0.74155,17
+balanced,MLP,plain,line,LIME + Saw-Yang-Mo Minimax,0.88454,0.86847,0.93380,0.90537,0.73603,17
+balanced,MLP,plain,line,LIME + re-threshold,0.89064,0.89986,0.93651,0.93808,0.78816,17
+balanced,MLP,plain,test,CLIME,0.90868,0.90136,0.95423,0.93349,0.82977,17
+balanced,MLP,plain,test,LIME,0.87033,0.83013,0.94346,0.81631,0.65443,17
+balanced,MLP,plain,test,LIME + DKW Minimax,0.86338,0.87262,0.92103,0.93724,0.66403,17
+balanced,MLP,plain,test,LIME + DKW Sum,0.89861,0.89776,0.94697,0.94025,0.78183,17
+balanced,MLP,plain,test,LIME + F Deltas,0.83453,0.84777,0.89012,0.91848,0.64585,17
+balanced,MLP,plain,test,LIME + Gaussian Band,0.86840,0.87675,0.92333,0.93763,0.67280,17
+balanced,MLP,plain,test,LIME + Gaussian Predictive,0.88858,0.89152,0.94093,0.94399,0.75920,17
+balanced,MLP,plain,test,LIME + Saw-Yang-Mo Minimax,0.88787,0.89126,0.93937,0.94366,0.74417,17
+balanced,MLP,plain,test,LIME + re-threshold,0.89432,0.89843,0.94510,0.94920,0.77514,17
+balanced,Random Forest,plain,line,CLIME,0.80380,0.77684,0.87120,0.79658,0.74214,17
+balanced,Random Forest,plain,line,LIME,0.76103,0.70235,0.87042,0.71102,0.65798,17
+balanced,Random Forest,plain,line,LIME + DKW Minimax,0.75412,0.75510,0.81376,0.81220,0.56607,17
+balanced,Random Forest,plain,line,LIME + DKW Sum,0.77570,0.76744,0.83364,0.81068,0.60330,17
+balanced,Random Forest,plain,line,LIME + F Deltas,0.73925,0.73815,0.80201,0.79999,0.54104,17
+balanced,Random Forest,plain,line,LIME + Gaussian Band,0.75845,0.75869,0.81553,0.81285,0.57439,17
+balanced,Random Forest,plain,line,LIME + Gaussian Predictive,0.77514,0.76939,0.83278,0.81333,0.60827,17
+balanced,Random Forest,plain,line,LIME + Saw-Yang-Mo Minimax,0.74271,0.74590,0.78731,0.79633,0.51325,17
+balanced,Random Forest,plain,line,LIME + re-threshold,0.76396,0.77271,0.82647,0.83032,0.60685,17
+balanced,Random Forest,plain,test,CLIME,0.77797,0.76100,0.85901,0.80379,0.65028,17
+balanced,Random Forest,plain,test,LIME,0.73163,0.68779,0.85522,0.71347,0.58087,17
+balanced,Random Forest,plain,test,LIME + DKW Minimax,0.75699,0.75737,0.80131,0.82114,0.60736,17
+balanced,Random Forest,plain,test,LIME + DKW Sum,0.76281,0.75694,0.82037,0.82017,0.58466,17
+balanced,Random Forest,plain,test,LIME + F Deltas,0.73681,0.74163,0.78389,0.80521,0.50003,17
+balanced,Random Forest,plain,test,LIME + Gaussian Band,0.75516,0.75539,0.80331,0.82062,0.59577,17
+balanced,Random Forest,plain,test,LIME + Gaussian Predictive,0.76241,0.75809,0.81846,0.82028,0.61725,17
+balanced,Random Forest,plain,test,LIME + Saw-Yang-Mo Minimax,0.72594,0.73459,0.76412,0.80229,0.47919,17
+balanced,Random Forest,plain,test,LIME + re-threshold,0.76608,0.76067,0.81853,0.82331,0.62264,17
+balanced,SVM,plain,line,CLIME,0.88255,0.84655,0.91083,0.84652,0.81218,17
+balanced,SVM,plain,line,LIME,0.80380,0.74403,0.90467,0.74172,0.66133,17
+balanced,SVM,plain,line,LIME + DKW Minimax,0.83658,0.81467,0.85385,0.84705,0.63207,17
+balanced,SVM,plain,line,LIME + DKW Sum,0.85522,0.82741,0.86878,0.85097,0.65068,17
+balanced,SVM,plain,line,LIME + F Deltas,0.82481,0.79745,0.84811,0.82823,0.61199,17
+balanced,SVM,plain,line,LIME + Gaussian Band,0.82922,0.80929,0.84901,0.84315,0.61742,17
+balanced,SVM,plain,line,LIME + Gaussian Predictive,0.83876,0.81494,0.86074,0.84415,0.65062,17
+balanced,SVM,plain,line,LIME + Saw-Yang-Mo Minimax,0.82491,0.80582,0.83891,0.83454,0.54068,17
+balanced,SVM,plain,line,LIME + re-threshold,0.86049,0.83611,0.86575,0.86131,0.69391,17
+balanced,SVM,plain,test,CLIME,0.82351,0.78354,0.90119,0.84062,0.62254,17
+balanced,SVM,plain,test,LIME,0.74959,0.69230,0.89442,0.72484,0.53909,17
+balanced,SVM,plain,test,LIME + DKW Minimax,0.80992,0.78166,0.84200,0.84979,0.56259,17
+balanced,SVM,plain,test,LIME + DKW Sum,0.82058,0.78122,0.87560,0.85480,0.58739,17
+balanced,SVM,plain,test,LIME + F Deltas,0.79755,0.76609,0.82297,0.82685,0.56229,17
+balanced,SVM,plain,test,LIME + Gaussian Band,0.80050,0.77566,0.83801,0.84442,0.53952,17
+balanced,SVM,plain,test,LIME + Gaussian Predictive,0.80365,0.77618,0.85636,0.84731,0.55022,17
+balanced,SVM,plain,test,LIME + Saw-Yang-Mo Minimax,0.79536,0.77022,0.82961,0.83824,0.51754,17
+balanced,SVM,plain,test,LIME + re-threshold,0.82134,0.78909,0.86440,0.86569,0.52161,17
+balanced,all,plain,line,CLIME,0.85778,0.83774,0.89934,0.84598,0.80126,17
+balanced,all,plain,line,LIME,0.81036,0.75299,0.89614,0.74432,0.68795,17
+balanced,all,plain,line,LIME + DKW Minimax,0.80172,0.79893,0.85580,0.85006,0.61079,17
+balanced,all,plain,line,LIME + DKW Sum,0.83421,0.81991,0.87531,0.85192,0.69190,17
+balanced,all,plain,line,LIME + F Deltas,0.78472,0.77934,0.83851,0.83349,0.60311,17
+balanced,all,plain,line,LIME + Gaussian Band,0.80341,0.79999,0.85465,0.84811,0.60639,17
+balanced,all,plain,line,LIME + Gaussian Predictive,0.82287,0.81326,0.86990,0.85188,0.67369,17
+balanced,all,plain,line,LIME + Saw-Yang-Mo Minimax,0.80321,0.79837,0.84097,0.84020,0.60205,17
+balanced,all,plain,line,LIME + re-threshold,0.83337,0.83377,0.87186,0.87293,0.71250,17
+balanced,all,plain,test,CLIME,0.83362,0.81903,0.89807,0.85916,0.70740,17
+balanced,all,plain,test,LIME,0.79174,0.74589,0.89380,0.75360,0.60006,17
+balanced,all,plain,test,LIME + DKW Minimax,0.80319,0.80256,0.85362,0.86762,0.60552,17
+balanced,all,plain,test,LIME + DKW Sum,0.82404,0.81546,0.87702,0.87044,0.67111,17
+balanced,all,plain,test,LIME + F Deltas,0.77507,0.77778,0.82684,0.84735,0.57128,17
+balanced,all,plain,test,LIME + Gaussian Band,0.80128,0.80101,0.85310,0.86558,0.60734,17
+balanced,all,plain,test,LIME + Gaussian Predictive,0.81362,0.80915,0.86894,0.86918,0.64954,17
+balanced,all,plain,test,LIME + Saw-Yang-Mo Minimax,0.79228,0.79453,0.83711,0.85811,0.57145,17
+balanced,all,plain,test,LIME + re-threshold,0.82318,0.81858,0.87300,0.87702,0.65859,17
+balanced,k Nearest Neighbours,plain,line,CLIME,0.78686,0.77826,0.83013,0.76655,0.72768,17
+balanced,k Nearest Neighbours,plain,line,LIME,0.76570,0.71126,0.83147,0.68570,0.67477,17
+balanced,k Nearest Neighbours,plain,line,LIME + DKW Minimax,0.73442,0.73994,0.78109,0.78036,0.57211,17
+balanced,k Nearest Neighbours,plain,line,LIME + DKW Sum,0.75323,0.74980,0.79745,0.78125,0.60399,17
+balanced,k Nearest Neighbours,plain,line,LIME + F Deltas,0.72935,0.73046,0.77172,0.76866,0.55587,17
+balanced,k Nearest Neighbours,plain,line,LIME + Gaussian Band,0.73759,0.74309,0.78082,0.77886,0.57308,17
+balanced,k Nearest Neighbours,plain,line,LIME + Gaussian Predictive,0.75389,0.75273,0.79567,0.78180,0.63391,17
+balanced,k Nearest Neighbours,plain,line,LIME + Saw-Yang-Mo Minimax,0.71521,0.72327,0.74506,0.76057,0.50478,17
+balanced,k Nearest Neighbours,plain,line,LIME + re-threshold,0.75187,0.75626,0.79586,0.79724,0.60441,17
+balanced,k Nearest Neighbours,plain,test,CLIME,0.75238,0.74221,0.84640,0.79384,0.59983,17
+balanced,k Nearest Neighbours,plain,test,LIME,0.74424,0.68902,0.85137,0.69332,0.59671,17
+balanced,k Nearest Neighbours,plain,test,LIME + DKW Minimax,0.71889,0.72385,0.79099,0.80706,0.53124,17
+balanced,k Nearest Neighbours,plain,test,LIME + DKW Sum,0.73337,0.73152,0.81122,0.80617,0.55956,17
+balanced,k Nearest Neighbours,plain,test,LIME + F Deltas,0.70256,0.71054,0.77422,0.79592,0.48374,17
+balanced,k Nearest Neighbours,plain,test,LIME + Gaussian Band,0.72109,0.72532,0.79442,0.80735,0.53720,17
+balanced,k Nearest Neighbours,plain,test,LIME + Gaussian Predictive,0.73019,0.73012,0.80945,0.80866,0.55686,17
+balanced,k Nearest Neighbours,plain,test,LIME + Saw-Yang-Mo Minimax,0.68807,0.70071,0.75188,0.78804,0.39346,17
+balanced,k Nearest Neighbours,plain,test,LIME + re-threshold,0.73049,0.73283,0.80824,0.81224,0.55077,17
+imbalanced,Gradient Boosting,SMOTE,line,CLIME,0.64257,0.70274,0.83387,0.78657,0.51251,21
+imbalanced,Gradient Boosting,SMOTE,line,LIME,0.62451,0.61214,0.84971,0.64036,0.44398,21
+imbalanced,Gradient Boosting,SMOTE,line,LIME + DKW Minimax,0.66975,0.70458,0.77643,0.78556,0.41411,21
+imbalanced,Gradient Boosting,SMOTE,line,LIME + DKW Sum,0.65596,0.70098,0.80831,0.78748,0.43053,21
+imbalanced,Gradient Boosting,SMOTE,line,LIME + F Deltas,0.66254,0.69721,0.76710,0.77313,0.34497,21
+imbalanced,Gradient Boosting,SMOTE,line,LIME + Gaussian Band,0.67516,0.70450,0.78023,0.78553,0.40443,21
+imbalanced,Gradient Boosting,SMOTE,line,LIME + Gaussian Predictive,0.67794,0.70382,0.80026,0.78878,0.46284,21
+imbalanced,Gradient Boosting,SMOTE,line,LIME + Saw-Yang-Mo Minimax,0.68053,0.69599,0.73997,0.76870,0.35410,21
+imbalanced,Gradient Boosting,SMOTE,line,LIME + re-threshold,0.65616,0.71414,0.80701,0.80526,0.46580,21
+imbalanced,Gradient Boosting,SMOTE,test,CLIME,0.56529,0.68248,0.82791,0.79196,0.31299,21
+imbalanced,Gradient Boosting,SMOTE,test,LIME,0.63078,0.61213,0.84464,0.66028,0.36073,21
+imbalanced,Gradient Boosting,SMOTE,test,LIME + DKW Minimax,0.54305,0.67688,0.78201,0.80062,0.24202,21
+imbalanced,Gradient Boosting,SMOTE,test,LIME + DKW Sum,0.55293,0.68199,0.80020,0.79775,0.29153,21
+imbalanced,Gradient Boosting,SMOTE,test,LIME + F Deltas,0.53509,0.67050,0.77034,0.78950,0.24669,21
+imbalanced,Gradient Boosting,SMOTE,test,LIME + Gaussian Band,0.54871,0.67662,0.78437,0.79942,0.22242,21
+imbalanced,Gradient Boosting,SMOTE,test,LIME + Gaussian Predictive,0.56565,0.68150,0.80293,0.80158,0.29163,21
+imbalanced,Gradient Boosting,SMOTE,test,LIME + Saw-Yang-Mo Minimax,0.52730,0.66939,0.74370,0.78353,0.20203,21
+imbalanced,Gradient Boosting,SMOTE,test,LIME + re-threshold,0.54807,0.68927,0.79965,0.80978,0.29556,21
+imbalanced,Gradient Boosting,plain,line,CLIME,0.90929,0.67719,0.89667,0.74033,0.79165,21
+imbalanced,Gradient Boosting,plain,line,LIME,0.93364,0.52388,0.92946,0.53969,0.80928,21
+imbalanced,Gradient Boosting,plain,line,LIME + DKW Minimax,0.79279,0.70867,0.75250,0.78005,0.45793,21
+imbalanced,Gradient Boosting,plain,line,LIME + DKW Sum,0.86865,0.70496,0.82571,0.77206,0.65663,21
+imbalanced,Gradient Boosting,plain,line,LIME + F Deltas,0.83330,0.68527,0.79492,0.74194,0.53588,21
+imbalanced,Gradient Boosting,plain,line,LIME + Gaussian Band,0.78351,0.70144,0.74684,0.77226,0.40633,21
+imbalanced,Gradient Boosting,plain,line,LIME + Gaussian Predictive,0.84934,0.70178,0.80974,0.78141,0.61587,21
+imbalanced,Gradient Boosting,plain,line,LIME + Saw-Yang-Mo Minimax,0.76775,0.70091,0.71431,0.75326,0.41894,21
+imbalanced,Gradient Boosting,plain,line,LIME + re-threshold,0.84192,0.73946,0.80321,0.81495,0.61714,21
+imbalanced,Gradient Boosting,plain,test,CLIME,0.89175,0.67841,0.90815,0.75352,0.63565,21
+imbalanced,Gradient Boosting,plain,test,LIME,0.95132,0.52875,0.93304,0.55066,0.82395,21
+imbalanced,Gradient Boosting,plain,test,LIME + DKW Minimax,0.79680,0.69944,0.77455,0.78710,0.40667,21
+imbalanced,Gradient Boosting,plain,test,LIME + DKW Sum,0.86248,0.69744,0.83664,0.77885,0.55168,21
+imbalanced,Gradient Boosting,plain,test,LIME + F Deltas,0.82634,0.68567,0.80697,0.75328,0.45711,21
+imbalanced,Gradient Boosting,plain,test,LIME + Gaussian Band,0.78570,0.69274,0.76838,0.77966,0.28997,21
+imbalanced,Gradient Boosting,plain,test,LIME + Gaussian Predictive,0.85472,0.69462,0.83412,0.78929,0.53010,21
+imbalanced,Gradient Boosting,plain,test,LIME + Saw-Yang-Mo Minimax,0.76676,0.69420,0.74597,0.76464,0.28789,21
+imbalanced,Gradient Boosting,plain,test,LIME + re-threshold,0.82243,0.72724,0.81247,0.82061,0.50840,21
+imbalanced,Gradient Boosting,re-thresholded,line,CLIME,0.77924,0.71928,0.82331,0.75425,0.66129,21
+imbalanced,Gradient Boosting,re-thresholded,line,LIME,0.76499,0.63936,0.83296,0.65038,0.60976,21
+imbalanced,Gradient Boosting,re-thresholded,line,LIME + DKW Minimax,0.72980,0.70056,0.77946,0.76905,0.50508,21
+imbalanced,Gradient Boosting,re-thresholded,line,LIME + DKW Sum,0.74828,0.70817,0.79492,0.76816,0.55234,21
+imbalanced,Gradient Boosting,re-thresholded,line,LIME + F Deltas,0.72030,0.69202,0.77089,0.76120,0.49298,21
+imbalanced,Gradient Boosting,re-thresholded,line,LIME + Gaussian Band,0.73167,0.70036,0.78006,0.76753,0.50296,21
+imbalanced,Gradient Boosting,re-thresholded,line,LIME + Gaussian Predictive,0.74863,0.70760,0.79710,0.76932,0.56529,21
+imbalanced,Gradient Boosting,re-thresholded,line,LIME + Saw-Yang-Mo Minimax,0.71135,0.68937,0.74823,0.75363,0.44380,21
+imbalanced,Gradient Boosting,re-thresholded,line,LIME + re-threshold,0.73636,0.71624,0.78695,0.78822,0.56456,21
+imbalanced,Gradient Boosting,re-thresholded,test,CLIME,0.75119,0.71496,0.82861,0.77335,0.57777,21
+imbalanced,Gradient Boosting,re-thresholded,test,LIME,0.74301,0.64013,0.83723,0.66823,0.54164,21
+imbalanced,Gradient Boosting,re-thresholded,test,LIME + DKW Minimax,0.71392,0.70343,0.78189,0.79039,0.45941,21
+imbalanced,Gradient Boosting,re-thresholded,test,LIME + DKW Sum,0.73116,0.71038,0.80177,0.79080,0.52797,21
+imbalanced,Gradient Boosting,re-thresholded,test,LIME + F Deltas,0.70045,0.69102,0.77013,0.77930,0.44724,21
+imbalanced,Gradient Boosting,re-thresholded,test,LIME + Gaussian Band,0.71571,0.70260,0.78313,0.78925,0.44994,21
+imbalanced,Gradient Boosting,re-thresholded,test,LIME + Gaussian Predictive,0.73077,0.70833,0.79859,0.79001,0.52694,21
+imbalanced,Gradient Boosting,re-thresholded,test,LIME + Saw-Yang-Mo Minimax,0.68603,0.68467,0.74504,0.77279,0.39239,21
+imbalanced,Gradient Boosting,re-thresholded,test,LIME + re-threshold,0.72385,0.71518,0.79572,0.80044,0.50281,21
+imbalanced,Gradient Boosting,weighted,line,CLIME,0.87049,0.69409,0.86046,0.75587,0.75502,21
+imbalanced,Gradient Boosting,weighted,line,LIME,0.89224,0.55186,0.88998,0.57292,0.75277,21
+imbalanced,Gradient Boosting,weighted,line,LIME + DKW Minimax,0.78036,0.71330,0.75876,0.77445,0.50060,21
+imbalanced,Gradient Boosting,weighted,line,LIME + DKW Sum,0.82292,0.71238,0.79715,0.77410,0.59213,21
+imbalanced,Gradient Boosting,weighted,line,LIME + F Deltas,0.79385,0.70125,0.76952,0.75191,0.51432,21
+imbalanced,Gradient Boosting,weighted,line,LIME + Gaussian Band,0.78348,0.71087,0.76321,0.77364,0.47023,21
+imbalanced,Gradient Boosting,weighted,line,LIME + Gaussian Predictive,0.82223,0.71344,0.79976,0.77828,0.61638,21
+imbalanced,Gradient Boosting,weighted,line,LIME + Saw-Yang-Mo Minimax,0.74687,0.71328,0.71405,0.75684,0.39923,21
+imbalanced,Gradient Boosting,weighted,line,LIME + re-threshold,0.81066,0.73128,0.79201,0.80223,0.60300,21
+imbalanced,Gradient Boosting,weighted,test,CLIME,0.83962,0.69350,0.86725,0.77235,0.59033,21
+imbalanced,Gradient Boosting,weighted,test,LIME,0.90400,0.55512,0.89210,0.58644,0.73742,21
+imbalanced,Gradient Boosting,weighted,test,LIME + DKW Minimax,0.75786,0.70834,0.77391,0.79761,0.37812,21
+imbalanced,Gradient Boosting,weighted,test,LIME + DKW Sum,0.80808,0.71176,0.81663,0.79589,0.48075,21
+imbalanced,Gradient Boosting,weighted,test,LIME + F Deltas,0.76566,0.69726,0.77958,0.77557,0.39636,21
+imbalanced,Gradient Boosting,weighted,test,LIME + Gaussian Band,0.75941,0.70477,0.77603,0.79515,0.32674,21
+imbalanced,Gradient Boosting,weighted,test,LIME + Gaussian Predictive,0.80356,0.70766,0.81483,0.79647,0.47708,21
+imbalanced,Gradient Boosting,weighted,test,LIME + Saw-Yang-Mo Minimax,0.71703,0.70384,0.73339,0.77529,0.28443,21
+imbalanced,Gradient Boosting,weighted,test,LIME + re-threshold,0.78997,0.72600,0.80615,0.81998,0.47771,21
+imbalanced,Logistic,SMOTE,line,CLIME,0.96066,0.91192,0.98330,0.94003,0.87000,21
+imbalanced,Logistic,SMOTE,line,LIME,0.91813,0.81394,0.97711,0.82540,0.72689,21
+imbalanced,Logistic,SMOTE,line,LIME + DKW Minimax,0.92465,0.87964,0.96968,0.93713,0.72961,21
+imbalanced,Logistic,SMOTE,line,LIME + DKW Sum,0.97357,0.91672,0.99207,0.94437,0.89240,21
+imbalanced,Logistic,SMOTE,line,LIME + F Deltas,0.86836,0.82893,0.92645,0.90258,0.70090,21
+imbalanced,Logistic,SMOTE,line,LIME + Gaussian Band,0.91398,0.87133,0.96193,0.93097,0.68700,21
+imbalanced,Logistic,SMOTE,line,LIME + Gaussian Predictive,0.94100,0.89266,0.97688,0.94020,0.78283,21
+imbalanced,Logistic,SMOTE,line,LIME + Saw-Yang-Mo Minimax,0.94463,0.89553,0.97809,0.94092,0.80500,21
+imbalanced,Logistic,SMOTE,line,LIME + re-threshold,0.98002,0.95537,0.99219,0.98773,0.91102,21
+imbalanced,Logistic,SMOTE,test,CLIME,0.96138,0.94279,0.98061,0.97371,0.86833,21
+imbalanced,Logistic,SMOTE,test,LIME,0.91825,0.84856,0.97226,0.85498,0.61306,21
+imbalanced,Logistic,SMOTE,test,LIME + DKW Minimax,0.93603,0.92857,0.96665,0.97090,0.71656,21
+imbalanced,Logistic,SMOTE,test,LIME + DKW Sum,0.97444,0.95639,0.99088,0.98017,0.88944,21
+imbalanced,Logistic,SMOTE,test,LIME + F Deltas,0.87469,0.86372,0.91961,0.93401,0.71681,21
+imbalanced,Logistic,SMOTE,test,LIME + Gaussian Band,0.92785,0.91894,0.95921,0.96522,0.71820,21
+imbalanced,Logistic,SMOTE,test,LIME + Gaussian Predictive,0.94877,0.93625,0.97443,0.97364,0.81338,21
+imbalanced,Logistic,SMOTE,test,LIME + Saw-Yang-Mo Minimax,0.95092,0.93794,0.97547,0.97420,0.82758,21
+imbalanced,Logistic,SMOTE,test,LIME + re-threshold,0.97646,0.96738,0.99000,0.98975,0.91350,21
+imbalanced,Logistic,plain,line,CLIME,0.98369,0.88003,0.99079,0.91702,0.91753,21
+imbalanced,Logistic,plain,line,LIME,0.96834,0.64245,0.97593,0.66180,0.85842,21
+imbalanced,Logistic,plain,line,LIME + DKW Minimax,0.94300,0.85666,0.94864,0.90539,0.75492,21
+imbalanced,Logistic,plain,line,LIME + DKW Sum,0.98647,0.87412,0.99441,0.91738,0.91493,21
+imbalanced,Logistic,plain,line,LIME + F Deltas,0.95879,0.85751,0.94798,0.89844,0.82112,21
+imbalanced,Logistic,plain,line,LIME + Gaussian Band,0.94129,0.85520,0.94742,0.90272,0.63046,21
+imbalanced,Logistic,plain,line,LIME + Gaussian Predictive,0.97060,0.87297,0.97565,0.91861,0.80212,21
+imbalanced,Logistic,plain,line,LIME + Saw-Yang-Mo Minimax,0.97563,0.87587,0.97866,0.92109,0.85942,21
+imbalanced,Logistic,plain,line,LIME + re-threshold,0.98573,0.94870,0.99333,0.99041,0.92719,21
+imbalanced,Logistic,plain,test,CLIME,0.99098,0.89433,0.98057,0.93271,0.94823,21
+imbalanced,Logistic,plain,test,LIME,0.98369,0.68150,0.96624,0.71050,0.90252,21
+imbalanced,Logistic,plain,test,LIME + DKW Minimax,0.96378,0.87974,0.94784,0.91520,0.79611,21
+imbalanced,Logistic,plain,test,LIME + DKW Sum,0.99320,0.88165,0.98615,0.92728,0.95521,21
+imbalanced,Logistic,plain,test,LIME + F Deltas,0.96722,0.86875,0.93549,0.90221,0.88055,21
+imbalanced,Logistic,plain,test,LIME + Gaussian Band,0.95858,0.87595,0.94203,0.91134,0.66245,21
+imbalanced,Logistic,plain,test,LIME + Gaussian Predictive,0.98075,0.88767,0.96825,0.92632,0.86477,21
+imbalanced,Logistic,plain,test,LIME + Saw-Yang-Mo Minimax,0.98511,0.88860,0.97174,0.92806,0.91999,21
+imbalanced,Logistic,plain,test,LIME + re-threshold,0.99351,0.96445,0.98790,0.98855,0.96482,21
+imbalanced,Logistic,re-thresholded,line,CLIME,0.97145,0.92172,0.98911,0.94577,0.87604,21
+imbalanced,Logistic,re-thresholded,line,LIME,0.91385,0.81304,0.97941,0.82163,0.72190,21
+imbalanced,Logistic,re-thresholded,line,LIME + DKW Minimax,0.91562,0.87631,0.96831,0.93808,0.67658,21
+imbalanced,Logistic,re-thresholded,line,LIME + DKW Sum,0.97008,0.91711,0.99360,0.94795,0.84549,21
+imbalanced,Logistic,re-thresholded,line,LIME + F Deltas,0.87141,0.83129,0.92935,0.90601,0.67021,21
+imbalanced,Logistic,re-thresholded,line,LIME + Gaussian Band,0.91220,0.87266,0.96341,0.93394,0.65510,21
+imbalanced,Logistic,re-thresholded,line,LIME + Gaussian Predictive,0.93838,0.89348,0.97847,0.94259,0.74261,21
+imbalanced,Logistic,re-thresholded,line,LIME + Saw-Yang-Mo Minimax,0.94241,0.89655,0.97982,0.94336,0.76489,21
+imbalanced,Logistic,re-thresholded,line,LIME + re-threshold,0.98203,0.96080,0.99368,0.98892,0.91244,21
+imbalanced,Logistic,re-thresholded,test,CLIME,0.96986,0.95317,0.98717,0.97201,0.89788,21
+imbalanced,Logistic,re-thresholded,test,LIME,0.92190,0.86169,0.97779,0.86657,0.64272,21
+imbalanced,Logistic,re-thresholded,test,LIME + DKW Minimax,0.92926,0.92135,0.96583,0.96745,0.64893,21
+imbalanced,Logistic,re-thresholded,test,LIME + DKW Sum,0.97637,0.95753,0.99263,0.97795,0.87919,21
+imbalanced,Logistic,re-thresholded,test,LIME + F Deltas,0.86947,0.86325,0.91849,0.93002,0.69940,21
+imbalanced,Logistic,re-thresholded,test,LIME + Gaussian Band,0.91876,0.91142,0.95681,0.96080,0.62939,21
+imbalanced,Logistic,re-thresholded,test,LIME + Gaussian Predictive,0.94397,0.93205,0.97421,0.97052,0.74861,21
+imbalanced,Logistic,re-thresholded,test,LIME + Saw-Yang-Mo Minimax,0.94743,0.93454,0.97526,0.97111,0.78652,21
+imbalanced,Logistic,re-thresholded,test,LIME + re-threshold,0.97905,0.97184,0.99113,0.99149,0.93764,21
+imbalanced,Logistic,weighted,line,CLIME,0.96729,0.91858,0.98564,0.94170,0.88045,21
+imbalanced,Logistic,weighted,line,LIME,0.91939,0.82106,0.97803,0.82992,0.72899,21
+imbalanced,Logistic,weighted,line,LIME + DKW Minimax,0.92455,0.87976,0.96969,0.93854,0.71216,21
+imbalanced,Logistic,weighted,line,LIME + DKW Sum,0.97462,0.92032,0.99243,0.94548,0.87573,21
+imbalanced,Logistic,weighted,line,LIME + F Deltas,0.86812,0.82791,0.92392,0.90227,0.69905,21
+imbalanced,Logistic,weighted,line,LIME + Gaussian Band,0.91521,0.87212,0.96121,0.93215,0.67539,21
+imbalanced,Logistic,weighted,line,LIME + Gaussian Predictive,0.94156,0.89348,0.97675,0.94119,0.77296,21
+imbalanced,Logistic,weighted,line,LIME + Saw-Yang-Mo Minimax,0.94565,0.89679,0.97818,0.94204,0.80024,21
+imbalanced,Logistic,weighted,line,LIME + re-threshold,0.98070,0.96095,0.99345,0.98980,0.91348,21
+imbalanced,Logistic,weighted,test,CLIME,0.96715,0.94989,0.98477,0.97639,0.88698,21
+imbalanced,Logistic,weighted,test,LIME,0.92350,0.85680,0.97404,0.85884,0.63869,21
+imbalanced,Logistic,weighted,test,LIME + DKW Minimax,0.93546,0.92733,0.96601,0.96949,0.69360,21
+imbalanced,Logistic,weighted,test,LIME + DKW Sum,0.97761,0.95929,0.99213,0.98045,0.89060,21
+imbalanced,Logistic,weighted,test,LIME + F Deltas,0.87528,0.86307,0.91948,0.93279,0.71582,21
+imbalanced,Logistic,weighted,test,LIME + Gaussian Band,0.92710,0.91751,0.95771,0.96326,0.69453,21
+imbalanced,Logistic,weighted,test,LIME + Gaussian Predictive,0.94869,0.93524,0.97509,0.97334,0.78864,21
+imbalanced,Logistic,weighted,test,LIME + Saw-Yang-Mo Minimax,0.95168,0.93761,0.97658,0.97413,0.81165,21
+imbalanced,Logistic,weighted,test,LIME + re-threshold,0.98010,0.97062,0.99066,0.98957,0.92616,21
+imbalanced,MLP,SMOTE,line,CLIME,0.89268,0.78458,0.92750,0.86346,0.78971,21
+imbalanced,MLP,SMOTE,line,LIME,0.86109,0.65889,0.92066,0.71165,0.72423,21
+imbalanced,MLP,SMOTE,line,LIME + DKW Minimax,0.84519,0.78282,0.89052,0.87894,0.64339,21
+imbalanced,MLP,SMOTE,line,LIME + DKW Sum,0.88013,0.79280,0.91300,0.87756,0.74632,21
+imbalanced,MLP,SMOTE,line,LIME + F Deltas,0.83357,0.78295,0.87316,0.87091,0.65542,21
+imbalanced,MLP,SMOTE,line,LIME + Gaussian Band,0.84651,0.77842,0.89465,0.87858,0.59303,21
+imbalanced,MLP,SMOTE,line,LIME + Gaussian Predictive,0.87050,0.78392,0.91495,0.88416,0.71181,21
+imbalanced,MLP,SMOTE,line,LIME + Saw-Yang-Mo Minimax,0.86884,0.78376,0.91126,0.88210,0.70174,21
+imbalanced,MLP,SMOTE,line,LIME + re-threshold,0.87452,0.82639,0.91042,0.91377,0.74055,21
+imbalanced,MLP,SMOTE,test,CLIME,0.88091,0.82034,0.93919,0.90120,0.76775,21
+imbalanced,MLP,SMOTE,test,LIME,0.86364,0.68154,0.92907,0.73134,0.67907,21
+imbalanced,MLP,SMOTE,test,LIME + DKW Minimax,0.82717,0.81310,0.89879,0.91040,0.55880,21
+imbalanced,MLP,SMOTE,test,LIME + DKW Sum,0.87220,0.82631,0.93055,0.91145,0.73147,21
+imbalanced,MLP,SMOTE,test,LIME + F Deltas,0.81684,0.80693,0.88458,0.90203,0.59507,21
+imbalanced,MLP,SMOTE,test,LIME + Gaussian Band,0.83006,0.81193,0.90274,0.91212,0.50220,21
+imbalanced,MLP,SMOTE,test,LIME + Gaussian Predictive,0.86035,0.82201,0.92568,0.91845,0.66270,21
+imbalanced,MLP,SMOTE,test,LIME + Saw-Yang-Mo Minimax,0.86329,0.82325,0.92454,0.91628,0.68763,21
+imbalanced,MLP,SMOTE,test,LIME + re-threshold,0.86760,0.84642,0.92837,0.93197,0.73591,21
+imbalanced,MLP,plain,line,CLIME,0.98722,0.73189,0.98287,0.74294,0.94213,21
+imbalanced,MLP,plain,line,LIME,0.98383,0.64503,0.98163,0.62288,0.93322,21
+imbalanced,MLP,plain,line,LIME + DKW Minimax,0.97833,0.73725,0.95465,0.76736,0.89684,21
+imbalanced,MLP,plain,line,LIME + DKW Sum,0.98849,0.73080,0.97513,0.76817,0.94107,21
+imbalanced,MLP,plain,line,LIME + F Deltas,0.98272,0.74289,0.95690,0.76965,0.92009,21
+imbalanced,MLP,plain,line,LIME + Gaussian Band,0.97428,0.72860,0.94799,0.75976,0.85954,21
+imbalanced,MLP,plain,line,LIME + Gaussian Predictive,0.98513,0.73034,0.96955,0.77661,0.91817,21
+imbalanced,MLP,plain,line,LIME + Saw-Yang-Mo Minimax,0.98711,0.72914,0.97120,0.77684,0.93587,21
+imbalanced,MLP,plain,line,LIME + re-threshold,0.98119,0.82044,0.96945,0.91412,0.94131,21
+imbalanced,MLP,plain,test,CLIME,0.98794,0.71807,0.98445,0.73911,0.92942,21
+imbalanced,MLP,plain,test,LIME,0.98864,0.61028,0.98466,0.60653,0.93796,21
+imbalanced,MLP,plain,test,LIME + DKW Minimax,0.97473,0.72010,0.96210,0.78718,0.89628,21
+imbalanced,MLP,plain,test,LIME + DKW Sum,0.98830,0.70763,0.97996,0.77916,0.95200,21
+imbalanced,MLP,plain,test,LIME + F Deltas,0.97815,0.71613,0.96555,0.78921,0.90281,21
+imbalanced,MLP,plain,test,LIME + Gaussian Band,0.96410,0.70773,0.95544,0.77599,0.75621,21
+imbalanced,MLP,plain,test,LIME + Gaussian Predictive,0.98113,0.71159,0.97473,0.79604,0.89181,21
+imbalanced,MLP,plain,test,LIME + Saw-Yang-Mo Minimax,0.98345,0.71268,0.97680,0.79667,0.91267,21
+imbalanced,MLP,plain,test,LIME + re-threshold,0.98487,0.81649,0.97761,0.93289,0.94490,21
+imbalanced,MLP,re-thresholded,line,CLIME,0.79146,0.72123,0.90218,0.80642,0.67237,21
+imbalanced,MLP,re-thresholded,line,LIME,0.77099,0.65861,0.90255,0.71134,0.63342,21
+imbalanced,MLP,re-thresholded,line,LIME + DKW Minimax,0.75263,0.70936,0.86013,0.83710,0.53770,21
+imbalanced,MLP,re-thresholded,line,LIME + DKW Sum,0.78395,0.72825,0.88722,0.83877,0.61447,21
+imbalanced,MLP,re-thresholded,line,LIME + F Deltas,0.74500,0.70716,0.84051,0.82675,0.53804,21
+imbalanced,MLP,re-thresholded,line,LIME + Gaussian Band,0.75110,0.70600,0.85979,0.83445,0.50779,21
+imbalanced,MLP,re-thresholded,line,LIME + Gaussian Predictive,0.76965,0.71369,0.88088,0.83892,0.58685,21
+imbalanced,MLP,re-thresholded,line,LIME + Saw-Yang-Mo Minimax,0.75854,0.71087,0.85725,0.82811,0.53338,21
+imbalanced,MLP,re-thresholded,line,LIME + re-threshold,0.79541,0.74786,0.88139,0.88017,0.64258,21
+imbalanced,MLP,re-thresholded,test,CLIME,0.80475,0.74285,0.91885,0.85528,0.64099,21
+imbalanced,MLP,re-thresholded,test,LIME,0.79391,0.67209,0.91047,0.74318,0.62612,21
+imbalanced,MLP,re-thresholded,test,LIME + DKW Minimax,0.78061,0.74998,0.87967,0.88735,0.56075,21
+imbalanced,MLP,re-thresholded,test,LIME + DKW Sum,0.80795,0.75848,0.90571,0.88914,0.65033,21
+imbalanced,MLP,re-thresholded,test,LIME + F Deltas,0.76084,0.73966,0.85832,0.87856,0.53859,21
+imbalanced,MLP,re-thresholded,test,LIME + Gaussian Band,0.78275,0.74791,0.88500,0.88793,0.53657,21
+imbalanced,MLP,re-thresholded,test,LIME + Gaussian Predictive,0.80185,0.75394,0.90308,0.89146,0.62052,21
+imbalanced,MLP,re-thresholded,test,LIME + Saw-Yang-Mo Minimax,0.79812,0.75435,0.89476,0.88839,0.59951,21
+imbalanced,MLP,re-thresholded,test,LIME + re-threshold,0.80601,0.77459,0.90102,0.91082,0.64067,21
+imbalanced,MLP,weighted,line,CLIME,0.90707,0.79013,0.93454,0.85416,0.81379,21
+imbalanced,MLP,weighted,line,LIME,0.87462,0.67908,0.92881,0.72427,0.74646,21
+imbalanced,MLP,weighted,line,LIME + DKW Minimax,0.85605,0.78774,0.89594,0.87653,0.63694,21
+imbalanced,MLP,weighted,line,LIME + DKW Sum,0.88923,0.80038,0.91944,0.87706,0.75434,21
+imbalanced,MLP,weighted,line,LIME + F Deltas,0.84613,0.79078,0.87770,0.86825,0.65887,21
+imbalanced,MLP,weighted,line,LIME + Gaussian Band,0.85898,0.78613,0.89770,0.87487,0.58441,21
+imbalanced,MLP,weighted,line,LIME + Gaussian Predictive,0.88348,0.79399,0.91913,0.88049,0.71102,21
+imbalanced,MLP,weighted,line,LIME + Saw-Yang-Mo Minimax,0.87799,0.79208,0.91439,0.87733,0.70577,21
+imbalanced,MLP,weighted,line,LIME + re-threshold,0.87437,0.83322,0.91420,0.91587,0.74213,21
+imbalanced,MLP,weighted,test,CLIME,0.89807,0.82452,0.94728,0.89738,0.79713,21
+imbalanced,MLP,weighted,test,LIME,0.87363,0.70689,0.93745,0.74997,0.67978,21
+imbalanced,MLP,weighted,test,LIME + DKW Minimax,0.84593,0.82642,0.90695,0.91499,0.57781,21
+imbalanced,MLP,weighted,test,LIME + DKW Sum,0.88686,0.83862,0.93563,0.91507,0.75039,21
+imbalanced,MLP,weighted,test,LIME + F Deltas,0.83131,0.81735,0.88692,0.90273,0.60916,21
+imbalanced,MLP,weighted,test,LIME + Gaussian Band,0.85114,0.82742,0.91079,0.91603,0.54404,21
+imbalanced,MLP,weighted,test,LIME + Gaussian Predictive,0.87729,0.83634,0.93240,0.92166,0.68533,21
+imbalanced,MLP,weighted,test,LIME + Saw-Yang-Mo Minimax,0.87838,0.83609,0.92956,0.91966,0.70268,21
+imbalanced,MLP,weighted,test,LIME + re-threshold,0.87991,0.85716,0.93228,0.93685,0.73857,21
+imbalanced,Random Forest,SMOTE,line,CLIME,0.66097,0.67534,0.85364,0.74666,0.51614,21
+imbalanced,Random Forest,SMOTE,line,LIME,0.66730,0.58756,0.86781,0.62408,0.48286,21
+imbalanced,Random Forest,SMOTE,line,LIME + DKW Minimax,0.68062,0.68821,0.76866,0.76763,0.39683,21
+imbalanced,Random Forest,SMOTE,line,LIME + DKW Sum,0.67576,0.68906,0.80019,0.76812,0.43387,21
+imbalanced,Random Forest,SMOTE,line,LIME + F Deltas,0.67885,0.68120,0.78709,0.74613,0.35111,21
+imbalanced,Random Forest,SMOTE,line,LIME + Gaussian Band,0.68470,0.68661,0.77277,0.76527,0.38003,21
+imbalanced,Random Forest,SMOTE,line,LIME + Gaussian Predictive,0.69237,0.68621,0.79609,0.76702,0.45123,21
+imbalanced,Random Forest,SMOTE,line,LIME + Saw-Yang-Mo Minimax,0.68765,0.68975,0.72981,0.74829,0.34438,21
+imbalanced,Random Forest,SMOTE,line,LIME + re-threshold,0.65871,0.69890,0.78226,0.78506,0.43494,21
+imbalanced,Random Forest,SMOTE,test,CLIME,0.60054,0.66719,0.85260,0.76148,0.32833,21
+imbalanced,Random Forest,SMOTE,test,LIME,0.67798,0.59030,0.86711,0.63343,0.42913,21
+imbalanced,Random Forest,SMOTE,test,LIME + DKW Minimax,0.56530,0.67512,0.77016,0.79517,0.27816,21
+imbalanced,Random Forest,SMOTE,test,LIME + DKW Sum,0.58444,0.67339,0.79769,0.79180,0.31646,21
+imbalanced,Random Forest,SMOTE,test,LIME + F Deltas,0.56073,0.66271,0.76678,0.77317,0.30381,21
+imbalanced,Random Forest,SMOTE,test,LIME + Gaussian Band,0.56688,0.67089,0.77062,0.79243,0.21871,21
+imbalanced,Random Forest,SMOTE,test,LIME + Gaussian Predictive,0.59677,0.67214,0.80280,0.79276,0.31579,21
+imbalanced,Random Forest,SMOTE,test,LIME + Saw-Yang-Mo Minimax,0.53728,0.66112,0.72604,0.77400,0.19875,21
+imbalanced,Random Forest,SMOTE,test,LIME + re-threshold,0.56812,0.68153,0.78326,0.80627,0.29375,21
+imbalanced,Random Forest,plain,line,CLIME,0.95674,0.64764,0.95046,0.71434,0.88281,21
+imbalanced,Random Forest,plain,line,LIME,0.95193,0.54288,0.95337,0.56858,0.85123,21
+imbalanced,Random Forest,plain,line,LIME + DKW Minimax,0.88131,0.71062,0.83567,0.74160,0.57279,21
+imbalanced,Random Forest,plain,line,LIME + DKW Sum,0.92722,0.68098,0.90051,0.73513,0.72150,21
+imbalanced,Random Forest,plain,line,LIME + F Deltas,0.91028,0.69505,0.86894,0.72394,0.68353,21
+imbalanced,Random Forest,plain,line,LIME + Gaussian Band,0.86339,0.69655,0.81903,0.73166,0.46055,21
+imbalanced,Random Forest,plain,line,LIME + Gaussian Predictive,0.91367,0.70090,0.88237,0.74890,0.68364,21
+imbalanced,Random Forest,plain,line,LIME + Saw-Yang-Mo Minimax,0.88053,0.69594,0.83428,0.73239,0.54025,21
+imbalanced,Random Forest,plain,line,LIME + re-threshold,0.88149,0.79080,0.83731,0.83937,0.66325,21
+imbalanced,Random Forest,plain,test,CLIME,0.96670,0.62386,0.93393,0.72176,0.81489,21
+imbalanced,Random Forest,plain,test,LIME,0.96833,0.54277,0.93984,0.57629,0.81657,21
+imbalanced,Random Forest,plain,test,LIME + DKW Minimax,0.93270,0.68873,0.82083,0.75924,0.68480,21
+imbalanced,Random Forest,plain,test,LIME + DKW Sum,0.95069,0.65784,0.87834,0.75277,0.70525,21
+imbalanced,Random Forest,plain,test,LIME + F Deltas,0.94131,0.67084,0.84789,0.73680,0.71979,21
+imbalanced,Random Forest,plain,test,LIME + Gaussian Band,0.92441,0.68322,0.81062,0.74883,0.58597,21
+imbalanced,Random Forest,plain,test,LIME + Gaussian Predictive,0.95113,0.65825,0.86453,0.76035,0.75532,21
+imbalanced,Random Forest,plain,test,LIME + Saw-Yang-Mo Minimax,0.91317,0.67503,0.80788,0.73893,0.58034,21
+imbalanced,Random Forest,plain,test,LIME + re-threshold,0.92469,0.71328,0.81842,0.82530,0.60765,21
+imbalanced,Random Forest,re-thresholded,line,CLIME,0.74346,0.68139,0.83522,0.73647,0.61367,21
+imbalanced,Random Forest,re-thresholded,line,LIME,0.68931,0.62117,0.85219,0.64033,0.53076,21
+imbalanced,Random Forest,re-thresholded,line,LIME + DKW Minimax,0.69630,0.67592,0.77453,0.75241,0.44339,21
+imbalanced,Random Forest,re-thresholded,line,LIME + DKW Sum,0.71122,0.68104,0.79910,0.75089,0.47082,21
+imbalanced,Random Forest,re-thresholded,line,LIME + F Deltas,0.69960,0.66681,0.78247,0.73663,0.43366,21
+imbalanced,Random Forest,re-thresholded,line,LIME + Gaussian Band,0.69148,0.67356,0.77643,0.75194,0.43037,21
+imbalanced,Random Forest,re-thresholded,line,LIME + Gaussian Predictive,0.69663,0.67806,0.79866,0.75226,0.47144,21
+imbalanced,Random Forest,re-thresholded,line,LIME + Saw-Yang-Mo Minimax,0.67868,0.66543,0.75373,0.73982,0.36924,21
+imbalanced,Random Forest,re-thresholded,line,LIME + re-threshold,0.71304,0.69775,0.77762,0.77765,0.50724,21
+imbalanced,Random Forest,re-thresholded,test,CLIME,0.72695,0.67424,0.84817,0.77387,0.53724,21
+imbalanced,Random Forest,re-thresholded,test,LIME,0.63719,0.61271,0.86919,0.65506,0.39571,21
+imbalanced,Random Forest,re-thresholded,test,LIME + DKW Minimax,0.70637,0.66507,0.78972,0.78544,0.46997,21
+imbalanced,Random Forest,re-thresholded,test,LIME + DKW Sum,0.71392,0.66814,0.81025,0.78474,0.49292,21
+imbalanced,Random Forest,re-thresholded,test,LIME + F Deltas,0.69228,0.65545,0.78343,0.77375,0.43803,21
+imbalanced,Random Forest,re-thresholded,test,LIME + Gaussian Band,0.70393,0.66569,0.79370,0.78411,0.46915,21
+imbalanced,Random Forest,re-thresholded,test,LIME + Gaussian Predictive,0.70701,0.67075,0.81732,0.78493,0.49063,21
+imbalanced,Random Forest,re-thresholded,test,LIME + Saw-Yang-Mo Minimax,0.69522,0.65505,0.76145,0.77047,0.42346,21
+imbalanced,Random Forest,re-thresholded,test,LIME + re-threshold,0.71148,0.67530,0.79370,0.80636,0.49297,21
+imbalanced,Random Forest,weighted,line,CLIME,0.90080,0.66478,0.90846,0.72452,0.76115,21
+imbalanced,Random Forest,weighted,line,LIME,0.90293,0.54163,0.92710,0.57190,0.77626,21
+imbalanced,Random Forest,weighted,line,LIME + DKW Minimax,0.81586,0.71090,0.77912,0.76688,0.50406,21
+imbalanced,Random Forest,weighted,line,LIME + DKW Sum,0.86557,0.70199,0.84008,0.76616,0.65343,21
+imbalanced,Random Forest,weighted,line,LIME + F Deltas,0.83618,0.68894,0.81777,0.74138,0.55249,21
+imbalanced,Random Forest,weighted,line,LIME + Gaussian Band,0.80810,0.70571,0.77611,0.76353,0.40256,21
+imbalanced,Random Forest,weighted,line,LIME + Gaussian Predictive,0.85676,0.70427,0.82959,0.77134,0.59990,21
+imbalanced,Random Forest,weighted,line,LIME + Saw-Yang-Mo Minimax,0.78696,0.70119,0.74642,0.74719,0.40932,21
+imbalanced,Random Forest,weighted,line,LIME + re-threshold,0.82318,0.73360,0.78963,0.79844,0.57450,21
+imbalanced,Random Forest,weighted,test,CLIME,0.89325,0.66240,0.90763,0.72403,0.66245,21
+imbalanced,Random Forest,weighted,test,LIME,0.92199,0.53972,0.92319,0.57504,0.74177,21
+imbalanced,Random Forest,weighted,test,LIME + DKW Minimax,0.84045,0.69685,0.78540,0.77184,0.49492,21
+imbalanced,Random Forest,weighted,test,LIME + DKW Sum,0.88172,0.68341,0.84219,0.76209,0.58314,21
+imbalanced,Random Forest,weighted,test,LIME + F Deltas,0.85902,0.68363,0.82048,0.74419,0.55115,21
+imbalanced,Random Forest,weighted,test,LIME + Gaussian Band,0.83038,0.68725,0.77909,0.76629,0.38146,21
+imbalanced,Random Forest,weighted,test,LIME + Gaussian Predictive,0.87399,0.67963,0.83168,0.76938,0.58253,21
+imbalanced,Random Forest,weighted,test,LIME + Saw-Yang-Mo Minimax,0.81475,0.68899,0.75957,0.75185,0.41217,21
+imbalanced,Random Forest,weighted,test,LIME + re-threshold,0.84747,0.72320,0.79244,0.81039,0.57604,21
+imbalanced,SVM,SMOTE,line,CLIME,0.83171,0.71205,0.87940,0.78474,0.63528,21
+imbalanced,SVM,SMOTE,line,LIME,0.84227,0.56880,0.90987,0.59200,0.67225,21
+imbalanced,SVM,SMOTE,line,LIME + DKW Minimax,0.79696,0.71671,0.82517,0.79595,0.54978,21
+imbalanced,SVM,SMOTE,line,LIME + DKW Sum,0.82341,0.71046,0.85435,0.79175,0.61622,21
+imbalanced,SVM,SMOTE,line,LIME + F Deltas,0.79414,0.71785,0.81584,0.78596,0.55620,21
+imbalanced,SVM,SMOTE,line,LIME + Gaussian Band,0.79110,0.70692,0.82016,0.78805,0.47225,21
+imbalanced,SVM,SMOTE,line,LIME + Gaussian Predictive,0.82308,0.69990,0.85743,0.79413,0.59136,21
+imbalanced,SVM,SMOTE,line,LIME + Saw-Yang-Mo Minimax,0.79092,0.71381,0.80534,0.78295,0.51653,21
+imbalanced,SVM,SMOTE,line,LIME + re-threshold,0.80888,0.74038,0.83686,0.82748,0.57733,21
+imbalanced,SVM,SMOTE,test,CLIME,0.70821,0.69353,0.91895,0.80695,0.36021,21
+imbalanced,SVM,SMOTE,test,LIME,0.85103,0.55916,0.93938,0.57623,0.63132,21
+imbalanced,SVM,SMOTE,test,LIME + DKW Minimax,0.70687,0.66211,0.87049,0.80751,0.33587,21
+imbalanced,SVM,SMOTE,test,LIME + DKW Sum,0.75504,0.67619,0.90679,0.78413,0.38015,21
+imbalanced,SVM,SMOTE,test,LIME + F Deltas,0.70187,0.65599,0.86548,0.78923,0.32955,21
+imbalanced,SVM,SMOTE,test,LIME + Gaussian Band,0.70108,0.65491,0.86298,0.79801,0.27940,21
+imbalanced,SVM,SMOTE,test,LIME + Gaussian Predictive,0.74024,0.66775,0.90373,0.79406,0.35422,21
+imbalanced,SVM,SMOTE,test,LIME + Saw-Yang-Mo Minimax,0.72618,0.66469,0.87969,0.79028,0.30644,21
+imbalanced,SVM,SMOTE,test,LIME + re-threshold,0.69659,0.70898,0.89438,0.86085,0.34785,21
+imbalanced,SVM,plain,line,CLIME,0.97477,0.69974,0.97817,0.74339,0.88726,21
+imbalanced,SVM,plain,line,LIME,0.97460,0.53946,0.97963,0.54578,0.91852,21
+imbalanced,SVM,plain,line,LIME + DKW Minimax,0.96591,0.65176,0.94868,0.72954,0.84291,21
+imbalanced,SVM,plain,line,LIME + DKW Sum,0.97259,0.64205,0.96735,0.71063,0.85778,21
+imbalanced,SVM,plain,line,LIME + F Deltas,0.96949,0.65103,0.95354,0.69666,0.87173,21
+imbalanced,SVM,plain,line,LIME + Gaussian Band,0.96323,0.64994,0.94560,0.71672,0.79679,21
+imbalanced,SVM,plain,line,LIME + Gaussian Predictive,0.97206,0.64807,0.96311,0.71991,0.86243,21
+imbalanced,SVM,plain,line,LIME + Saw-Yang-Mo Minimax,0.97098,0.64790,0.95913,0.71569,0.85534,21
+imbalanced,SVM,plain,line,LIME + re-threshold,0.92229,0.69948,0.91361,0.85064,0.67936,21
+imbalanced,SVM,plain,test,CLIME,0.97034,0.67708,0.97874,0.80197,0.78863,21
+imbalanced,SVM,plain,test,LIME,0.97688,0.53672,0.97927,0.54830,0.85960,21
+imbalanced,SVM,plain,test,LIME + DKW Minimax,0.96692,0.63080,0.94277,0.78211,0.78589,21
+imbalanced,SVM,plain,test,LIME + DKW Sum,0.97377,0.61820,0.96630,0.76544,0.79098,21
+imbalanced,SVM,plain,test,LIME + F Deltas,0.96746,0.62512,0.95058,0.77273,0.79899,21
+imbalanced,SVM,plain,test,LIME + Gaussian Band,0.96544,0.62581,0.93983,0.77041,0.78090,21
+imbalanced,SVM,plain,test,LIME + Gaussian Predictive,0.97479,0.62072,0.96027,0.78971,0.81984,21
+imbalanced,SVM,plain,test,LIME + Saw-Yang-Mo Minimax,0.97196,0.62245,0.95385,0.78252,0.79650,21
+imbalanced,SVM,plain,test,LIME + re-threshold,0.92716,0.65935,0.90670,0.87138,0.63960,21
+imbalanced,SVM,re-thresholded,line,CLIME,0.79036,0.70026,0.84716,0.75930,0.65632,21
+imbalanced,SVM,re-thresholded,line,LIME,0.73275,0.63729,0.85183,0.67111,0.55264,21
+imbalanced,SVM,re-thresholded,line,LIME + DKW Minimax,0.75806,0.68392,0.79963,0.77570,0.51803,21
+imbalanced,SVM,re-thresholded,line,LIME + DKW Sum,0.79031,0.68646,0.81949,0.77772,0.55932,21
+imbalanced,SVM,re-thresholded,line,LIME + F Deltas,0.75874,0.67841,0.78976,0.76292,0.49798,21
+imbalanced,SVM,re-thresholded,line,LIME + Gaussian Band,0.75089,0.68198,0.79847,0.77224,0.49512,21
+imbalanced,SVM,re-thresholded,line,LIME + Gaussian Predictive,0.75787,0.68385,0.81315,0.77298,0.53299,21
+imbalanced,SVM,re-thresholded,line,LIME + Saw-Yang-Mo Minimax,0.74412,0.67360,0.76301,0.75639,0.44428,21
+imbalanced,SVM,re-thresholded,line,LIME + re-threshold,0.78406,0.69093,0.79534,0.79055,0.54601,21
+imbalanced,SVM,re-thresholded,test,CLIME,0.75933,0.66693,0.86372,0.77446,0.50082,21
+imbalanced,SVM,re-thresholded,test,LIME,0.68220,0.61553,0.86812,0.67498,0.37135,21
+imbalanced,SVM,re-thresholded,test,LIME + DKW Minimax,0.75532,0.65656,0.80152,0.80285,0.44544,21
+imbalanced,SVM,re-thresholded,test,LIME + DKW Sum,0.76299,0.65338,0.82181,0.79374,0.45022,21
+imbalanced,SVM,re-thresholded,test,LIME + F Deltas,0.74952,0.64847,0.78800,0.78626,0.43140,21
+imbalanced,SVM,re-thresholded,test,LIME + Gaussian Band,0.75009,0.65511,0.80295,0.80093,0.43701,21
+imbalanced,SVM,re-thresholded,test,LIME + Gaussian Predictive,0.74856,0.65518,0.82331,0.79943,0.43760,21
+imbalanced,SVM,re-thresholded,test,LIME + Saw-Yang-Mo Minimax,0.74948,0.64643,0.76657,0.78074,0.38757,21
+imbalanced,SVM,re-thresholded,test,LIME + re-threshold,0.76531,0.65923,0.80890,0.80995,0.46066,21
+imbalanced,SVM,weighted,line,CLIME,0.96928,0.65418,0.98597,0.68349,0.87335,21
+imbalanced,SVM,weighted,line,LIME,0.97860,0.51265,0.99251,0.51472,0.94746,21
+imbalanced,SVM,weighted,line,LIME + DKW Minimax,0.96357,0.64552,0.95954,0.68178,0.83208,21
+imbalanced,SVM,weighted,line,LIME + DKW Sum,0.97293,0.62542,0.97797,0.67806,0.90049,21
+imbalanced,SVM,weighted,line,LIME + F Deltas,0.96857,0.64771,0.96511,0.67889,0.87587,21
+imbalanced,SVM,weighted,line,LIME + Gaussian Band,0.95708,0.63444,0.95344,0.67168,0.78316,21
+imbalanced,SVM,weighted,line,LIME + Gaussian Predictive,0.96931,0.62752,0.97356,0.67898,0.85914,21
+imbalanced,SVM,weighted,line,LIME + Saw-Yang-Mo Minimax,0.96710,0.63725,0.96534,0.67245,0.84663,21
+imbalanced,SVM,weighted,line,LIME + re-threshold,0.94403,0.75743,0.95529,0.81890,0.76458,21
+imbalanced,SVM,weighted,test,CLIME,0.96800,0.67690,0.98668,0.70278,0.83235,21
+imbalanced,SVM,weighted,test,LIME,0.98369,0.52182,0.99214,0.51972,0.95405,21
+imbalanced,SVM,weighted,test,LIME + DKW Minimax,0.96230,0.63014,0.96504,0.72311,0.83544,21
+imbalanced,SVM,weighted,test,LIME + DKW Sum,0.97246,0.62173,0.97811,0.69237,0.87436,21
+imbalanced,SVM,weighted,test,LIME + F Deltas,0.96469,0.62791,0.96652,0.70291,0.84139,21
+imbalanced,SVM,weighted,test,LIME + Gaussian Band,0.95771,0.62225,0.96159,0.71158,0.80182,21
+imbalanced,SVM,weighted,test,LIME + Gaussian Predictive,0.97130,0.62417,0.97715,0.71987,0.87255,21
+imbalanced,SVM,weighted,test,LIME + Saw-Yang-Mo Minimax,0.96580,0.62277,0.96937,0.71362,0.82264,21
+imbalanced,SVM,weighted,test,LIME + re-threshold,0.95640,0.72447,0.96697,0.80804,0.82052,21
+imbalanced,all,SMOTE,line,CLIME,0.79026,0.74735,0.87877,0.80990,0.65747,21
+imbalanced,all,SMOTE,line,LIME,0.77917,0.64802,0.88804,0.67550,0.60806,21
+imbalanced,all,SMOTE,line,LIME + DKW Minimax,0.77231,0.74190,0.83174,0.81899,0.54035,21
+imbalanced,all,SMOTE,line,LIME + DKW Sum,0.78838,0.74929,0.85646,0.81959,0.60804,21
+imbalanced,all,SMOTE,line,LIME + F Deltas,0.75870,0.73007,0.82118,0.80301,0.51525,21
+imbalanced,all,SMOTE,line,LIME + Gaussian Band,0.77166,0.73781,0.83173,0.81593,0.50761,21
+imbalanced,all,SMOTE,line,LIME + Gaussian Predictive,0.78935,0.74202,0.85299,0.82054,0.59296,21
+imbalanced,all,SMOTE,line,LIME + Saw-Yang-Mo Minimax,0.77847,0.74119,0.81659,0.80968,0.52454,21
+imbalanced,all,SMOTE,line,LIME + re-threshold,0.78182,0.77227,0.84962,0.84742,0.61231,21
+imbalanced,all,SMOTE,test,CLIME,0.73379,0.74707,0.89254,0.83691,0.51226,21
+imbalanced,all,SMOTE,test,LIME,0.77714,0.65220,0.89927,0.68751,0.52257,21
+imbalanced,all,SMOTE,test,LIME + DKW Minimax,0.70351,0.73708,0.84624,0.84747,0.41565,21
+imbalanced,all,SMOTE,test,LIME + DKW Sum,0.73296,0.74817,0.87258,0.84472,0.50024,21
+imbalanced,all,SMOTE,test,LIME + F Deltas,0.68602,0.71950,0.82993,0.83007,0.42369,21
+imbalanced,all,SMOTE,test,LIME + Gaussian Band,0.70343,0.73347,0.84533,0.84457,0.38439,21
+imbalanced,all,SMOTE,test,LIME + Gaussian Predictive,0.72840,0.74206,0.86965,0.84788,0.47281,21
+imbalanced,all,SMOTE,test,LIME + Saw-Yang-Mo Minimax,0.70427,0.73466,0.83426,0.83746,0.42401,21
+imbalanced,all,SMOTE,test,LIME + re-threshold,0.71868,0.76207,0.86698,0.86812,0.49408,21
+imbalanced,all,plain,line,CLIME,0.96071,0.72458,0.95720,0.76437,0.87905,21
+imbalanced,all,plain,line,LIME,0.96322,0.56228,0.96372,0.57783,0.87600,21
+imbalanced,all,plain,line,LIME + DKW Minimax,0.90592,0.73695,0.87649,0.78167,0.68574,21
+imbalanced,all,plain,line,LIME + DKW Sum,0.94415,0.73026,0.92480,0.77941,0.79829,21
+imbalanced,all,plain,line,LIME + F Deltas,0.92577,0.72724,0.89690,0.76203,0.75107,21
+imbalanced,all,plain,line,LIME + Gaussian Band,0.89777,0.73002,0.86882,0.77469,0.60702,21
+imbalanced,all,plain,line,LIME + Gaussian Predictive,0.93389,0.73536,0.91184,0.78788,0.76115,21
+imbalanced,all,plain,line,LIME + Saw-Yang-Mo Minimax,0.90782,0.73389,0.87702,0.77477,0.69096,21
+imbalanced,all,plain,line,LIME + re-threshold,0.91088,0.80104,0.88720,0.86571,0.73080,21
+imbalanced,all,plain,test,CLIME,0.95803,0.71689,0.95543,0.78497,0.80069,21
+imbalanced,all,plain,test,LIME,0.97471,0.56931,0.96129,0.59377,0.87142,21
+imbalanced,all,plain,test,LIME + DKW Minimax,0.92202,0.71965,0.88327,0.79417,0.68092,21
+imbalanced,all,plain,test,LIME + DKW Sum,0.95143,0.70981,0.92599,0.78862,0.77052,21
+imbalanced,all,plain,test,LIME + F Deltas,0.93349,0.70823,0.89750,0.77626,0.73301,21
+imbalanced,all,plain,test,LIME + Gaussian Band,0.91468,0.71392,0.87647,0.78621,0.58312,21
+imbalanced,all,plain,test,LIME + Gaussian Predictive,0.94463,0.71172,0.91542,0.79864,0.73786,21
+imbalanced,all,plain,test,LIME + Saw-Yang-Mo Minimax,0.91866,0.71665,0.88334,0.78631,0.66233,21
+imbalanced,all,plain,test,LIME + re-threshold,0.91664,0.77178,0.88821,0.87189,0.68086,21
+imbalanced,all,re-thresholded,line,CLIME,0.81131,0.73175,0.86379,0.78196,0.68950,21
+imbalanced,all,re-thresholded,line,LIME,0.77781,0.65707,0.86972,0.68267,0.62089,21
+imbalanced,all,re-thresholded,line,LIME + DKW Minimax,0.76285,0.72113,0.82183,0.80295,0.53270,21
+imbalanced,all,re-thresholded,line,LIME + DKW Sum,0.79242,0.73468,0.84450,0.80434,0.60088,21
+imbalanced,all,re-thresholded,line,LIME + F Deltas,0.75547,0.70569,0.81208,0.78589,0.52422,21
+imbalanced,all,re-thresholded,line,LIME + Gaussian Band,0.76084,0.71938,0.82189,0.80109,0.51701,21
+imbalanced,all,re-thresholded,line,LIME + Gaussian Predictive,0.77635,0.72745,0.83989,0.80378,0.57825,21
+imbalanced,all,re-thresholded,line,LIME + Saw-Yang-Mo Minimax,0.75507,0.71762,0.80272,0.79216,0.49459,21
+imbalanced,all,re-thresholded,line,LIME + re-threshold,0.79231,0.75229,0.83396,0.83120,0.62308,21
+imbalanced,all,re-thresholded,test,CLIME,0.79452,0.73176,0.87383,0.81486,0.61238,21
+imbalanced,all,re-thresholded,test,LIME,0.76025,0.66441,0.87989,0.70720,0.52006,21
+imbalanced,all,re-thresholded,test,LIME + DKW Minimax,0.76423,0.72736,0.83247,0.83756,0.49692,21
+imbalanced,all,re-thresholded,test,LIME + DKW Sum,0.78669,0.73673,0.85749,0.83871,0.57676,21
+imbalanced,all,re-thresholded,test,LIME + F Deltas,0.74578,0.70818,0.81502,0.82064,0.49298,21
+imbalanced,all,re-thresholded,test,LIME + Gaussian Band,0.76217,0.72504,0.83311,0.83563,0.48685,21
+imbalanced,all,re-thresholded,test,LIME + Gaussian Predictive,0.77467,0.73197,0.85242,0.83825,0.54472,21
+imbalanced,all,re-thresholded,test,LIME + Saw-Yang-Mo Minimax,0.75815,0.72129,0.81390,0.82630,0.48817,21
+imbalanced,all,re-thresholded,test,LIME + re-threshold,0.78300,0.74566,0.84863,0.85534,0.57357,21
+imbalanced,all,weighted,line,CLIME,0.92299,0.75469,0.93501,0.80320,0.81675,21
+imbalanced,all,weighted,line,LIME,0.91355,0.63757,0.94329,0.66012,0.79039,21
+imbalanced,all,weighted,line,LIME + DKW Minimax,0.86808,0.76211,0.87261,0.82265,0.63717,21
+imbalanced,all,weighted,line,LIME + DKW Sum,0.90505,0.76946,0.90542,0.82384,0.75522,21
+imbalanced,all,weighted,line,LIME + F Deltas,0.86257,0.74156,0.87080,0.80056,0.66012,21
+imbalanced,all,weighted,line,LIME + Gaussian Band,0.86457,0.75735,0.87033,0.81889,0.58315,21
+imbalanced,all,weighted,line,LIME + Gaussian Predictive,0.89467,0.76320,0.89976,0.82560,0.71188,21
+imbalanced,all,weighted,line,LIME + Saw-Yang-Mo Minimax,0.86491,0.76338,0.86367,0.81401,0.63224,21
+imbalanced,all,weighted,line,LIME + re-threshold,0.88659,0.80729,0.88892,0.86933,0.71954,21
+imbalanced,all,weighted,test,CLIME,0.91322,0.77047,0.93872,0.82978,0.75385,21
+imbalanced,all,weighted,test,LIME,0.92136,0.65136,0.94378,0.67827,0.75034,21
+imbalanced,all,weighted,test,LIME + DKW Minimax,0.86840,0.77399,0.87946,0.85134,0.59598,21
+imbalanced,all,weighted,test,LIME + DKW Sum,0.90535,0.78054,0.91294,0.84804,0.71584,21
+imbalanced,all,weighted,test,LIME + F Deltas,0.85919,0.75051,0.87460,0.82636,0.62278,21
+imbalanced,all,weighted,test,LIME + Gaussian Band,0.86515,0.76828,0.87704,0.84734,0.54972,21
+imbalanced,all,weighted,test,LIME + Gaussian Predictive,0.89497,0.77308,0.90623,0.85252,0.68123,21
+imbalanced,all,weighted,test,LIME + Saw-Yang-Mo Minimax,0.86553,0.77497,0.87369,0.84275,0.60671,21
+imbalanced,all,weighted,test,LIME + re-threshold,0.89077,0.80857,0.89770,0.88218,0.70780,21
+imbalanced,k Nearest Neighbours,SMOTE,line,CLIME,0.75299,0.69746,0.79491,0.73797,0.62117,21
+imbalanced,k Nearest Neighbours,SMOTE,line,LIME,0.76171,0.64681,0.80306,0.65951,0.59812,21
+imbalanced,k Nearest Neighbours,SMOTE,line,LIME + DKW Minimax,0.71669,0.67943,0.76000,0.74875,0.50840,21
+imbalanced,k Nearest Neighbours,SMOTE,line,LIME + DKW Sum,0.72145,0.68571,0.77081,0.74827,0.52890,21
+imbalanced,k Nearest Neighbours,SMOTE,line,LIME + F Deltas,0.71473,0.67227,0.75745,0.73933,0.48291,21
+imbalanced,k Nearest Neighbours,SMOTE,line,LIME + Gaussian Band,0.71850,0.67906,0.76064,0.74716,0.50892,21
+imbalanced,k Nearest Neighbours,SMOTE,line,LIME + Gaussian Predictive,0.73122,0.68562,0.77231,0.74898,0.55771,21
+imbalanced,k Nearest Neighbours,SMOTE,line,LIME + Saw-Yang-Mo Minimax,0.69824,0.66832,0.73507,0.73512,0.42545,21
+imbalanced,k Nearest Neighbours,SMOTE,line,LIME + re-threshold,0.71263,0.69844,0.76899,0.76521,0.54420,21
+imbalanced,k Nearest Neighbours,SMOTE,test,CLIME,0.68639,0.67610,0.83600,0.77868,0.43598,21
+imbalanced,k Nearest Neighbours,SMOTE,test,LIME,0.72117,0.62153,0.84315,0.66472,0.42208,21
+imbalanced,k Nearest Neighbours,SMOTE,test,LIME + DKW Minimax,0.64267,0.66668,0.78932,0.79797,0.36249,21
+imbalanced,k Nearest Neighbours,SMOTE,test,LIME + DKW Sum,0.65870,0.67478,0.80936,0.79505,0.39239,21
+imbalanced,k Nearest Neighbours,SMOTE,test,LIME + F Deltas,0.62688,0.65713,0.77281,0.78514,0.35022,21
+imbalanced,k Nearest Neighbours,SMOTE,test,LIME + Gaussian Band,0.64600,0.66753,0.79203,0.79728,0.36537,21
+imbalanced,k Nearest Neighbours,SMOTE,test,LIME + Gaussian Predictive,0.65864,0.67272,0.80832,0.79931,0.39914,21
+imbalanced,k Nearest Neighbours,SMOTE,test,LIME + Saw-Yang-Mo Minimax,0.62065,0.65159,0.75613,0.78145,0.32164,21
+imbalanced,k Nearest Neighbours,SMOTE,test,LIME + re-threshold,0.65522,0.67883,0.80622,0.80759,0.37791,21
+imbalanced,k Nearest Neighbours,plain,line,CLIME,0.95257,0.69044,0.94427,0.71665,0.85294,21
+imbalanced,k Nearest Neighbours,plain,line,LIME,0.96695,0.52806,0.96232,0.54497,0.88529,21
+imbalanced,k Nearest Neighbours,plain,line,LIME + DKW Minimax,0.87417,0.69980,0.81880,0.73726,0.58907,21
+imbalanced,k Nearest Neighbours,plain,line,LIME + DKW Sum,0.92150,0.69143,0.88573,0.73521,0.69785,21
+imbalanced,k Nearest Neighbours,plain,line,LIME + F Deltas,0.90007,0.68461,0.85915,0.71199,0.67404,21
+imbalanced,k Nearest Neighbours,plain,line,LIME + Gaussian Band,0.86090,0.69302,0.80605,0.73224,0.48848,21
+imbalanced,k Nearest Neighbours,plain,line,LIME + Gaussian Predictive,0.91256,0.69631,0.87064,0.74460,0.68465,21
+imbalanced,k Nearest Neighbours,plain,line,LIME + Saw-Yang-Mo Minimax,0.86494,0.69404,0.80456,0.72269,0.53594,21
+imbalanced,k Nearest Neighbours,plain,line,LIME + re-threshold,0.85267,0.76691,0.80631,0.81155,0.55653,21
+imbalanced,k Nearest Neighbours,plain,test,CLIME,0.94043,0.68757,0.94671,0.74643,0.68729,21
+imbalanced,k Nearest Neighbours,plain,test,LIME,0.97938,0.53434,0.96465,0.55655,0.88790,21
+imbalanced,k Nearest Neighbours,plain,test,LIME + DKW Minimax,0.89719,0.65875,0.85151,0.73161,0.51574,21
+imbalanced,k Nearest Neighbours,plain,test,LIME + DKW Sum,0.94013,0.65058,0.90855,0.72192,0.66797,21
+imbalanced,k Nearest Neighbours,plain,test,LIME + F Deltas,0.92044,0.64600,0.87853,0.71488,0.63879,21
+imbalanced,k Nearest Neighbours,plain,test,LIME + Gaussian Band,0.88986,0.65397,0.84254,0.72487,0.42319,21
+imbalanced,k Nearest Neighbours,plain,test,LIME + Gaussian Predictive,0.92527,0.65353,0.89064,0.73205,0.56535,21
+imbalanced,k Nearest Neighbours,plain,test,LIME + Saw-Yang-Mo Minimax,0.89149,0.65898,0.84383,0.71784,0.47656,21
+imbalanced,k Nearest Neighbours,plain,test,LIME + re-threshold,0.84715,0.72623,0.82619,0.82833,0.41979,21
+imbalanced,k Nearest Neighbours,re-thresholded,line,CLIME,0.79188,0.64662,0.78572,0.68967,0.65731,21
+imbalanced,k Nearest Neighbours,re-thresholded,line,LIME,0.79497,0.57298,0.79935,0.60018,0.67687,21
+imbalanced,k Nearest Neighbours,re-thresholded,line,LIME + DKW Minimax,0.72472,0.68069,0.74891,0.74485,0.51545,21
+imbalanced,k Nearest Neighbours,re-thresholded,line,LIME + DKW Sum,0.75067,0.68704,0.77266,0.74182,0.56286,21
+imbalanced,k Nearest Neighbours,re-thresholded,line,LIME + F Deltas,0.73779,0.65846,0.75952,0.72107,0.51242,21
+imbalanced,k Nearest Neighbours,re-thresholded,line,LIME + Gaussian Band,0.72770,0.68174,0.75321,0.74558,0.51073,21
+imbalanced,k Nearest Neighbours,re-thresholded,line,LIME + Gaussian Predictive,0.74695,0.68802,0.77109,0.74562,0.57034,21
+imbalanced,k Nearest Neighbours,re-thresholded,line,LIME + Saw-Yang-Mo Minimax,0.69530,0.66990,0.71425,0.72995,0.41196,21
+imbalanced,k Nearest Neighbours,re-thresholded,line,LIME + re-threshold,0.74294,0.70017,0.76880,0.75809,0.56565,21
+imbalanced,k Nearest Neighbours,re-thresholded,test,CLIME,0.75508,0.63843,0.79645,0.73307,0.51957,21
+imbalanced,k Nearest Neighbours,re-thresholded,test,LIME,0.78327,0.58432,0.81655,0.63101,0.54282,21
+imbalanced,k Nearest Neighbours,re-thresholded,test,LIME + DKW Minimax,0.69991,0.66776,0.77618,0.78758,0.39701,21
+imbalanced,k Nearest Neighbours,re-thresholded,test,LIME + DKW Sum,0.72774,0.67244,0.81278,0.78797,0.45996,21
+imbalanced,k Nearest Neighbours,re-thresholded,test,LIME + F Deltas,0.70211,0.65126,0.77177,0.76977,0.40322,21
+imbalanced,k Nearest Neighbours,re-thresholded,test,LIME + Gaussian Band,0.70177,0.66753,0.77706,0.78642,0.39903,21
+imbalanced,k Nearest Neighbours,re-thresholded,test,LIME + Gaussian Predictive,0.71587,0.67155,0.79798,0.78881,0.44402,21
+imbalanced,k Nearest Neighbours,re-thresholded,test,LIME + Saw-Yang-Mo Minimax,0.67261,0.65269,0.74029,0.76867,0.33957,21
+imbalanced,k Nearest Neighbours,re-thresholded,test,LIME + re-threshold,0.71233,0.67783,0.80131,0.80628,0.40668,21
+native,Gradient Boosting,SMOTE,line,CLIME,0.58652,0.67869,0.87009,0.77888,0.49124,22
+native,Gradient Boosting,SMOTE,line,LIME,0.49597,0.59815,0.88354,0.62247,0.40919,22
+native,Gradient Boosting,SMOTE,line,LIME + DKW Minimax,0.62891,0.67783,0.79295,0.78816,0.39848,22
+native,Gradient Boosting,SMOTE,line,LIME + DKW Sum,0.59447,0.67537,0.83817,0.78506,0.41950,22
+native,Gradient Boosting,SMOTE,line,LIME + F Deltas,0.62352,0.68132,0.78533,0.76385,0.37869,22
+native,Gradient Boosting,SMOTE,line,LIME + Gaussian Band,0.63123,0.67722,0.79129,0.78397,0.38640,22
+native,Gradient Boosting,SMOTE,line,LIME + Gaussian Predictive,0.62058,0.67616,0.82307,0.79227,0.43577,22
+native,Gradient Boosting,SMOTE,line,LIME + Saw-Yang-Mo Minimax,0.65248,0.68294,0.75720,0.76519,0.37988,22
+native,Gradient Boosting,SMOTE,line,LIME + re-threshold,0.60246,0.68893,0.82944,0.81625,0.44217,22
+native,Gradient Boosting,SMOTE,test,CLIME,0.52831,0.66235,0.84946,0.79394,0.33426,22
+native,Gradient Boosting,SMOTE,test,LIME,0.51565,0.60815,0.86056,0.66603,0.32516,22
+native,Gradient Boosting,SMOTE,test,LIME + DKW Minimax,0.52589,0.66019,0.79271,0.80460,0.32024,22
+native,Gradient Boosting,SMOTE,test,LIME + DKW Sum,0.52254,0.65981,0.81908,0.80389,0.31519,22
+native,Gradient Boosting,SMOTE,test,LIME + F Deltas,0.52055,0.65706,0.78149,0.79192,0.29334,22
+native,Gradient Boosting,SMOTE,test,LIME + Gaussian Band,0.52832,0.65930,0.79356,0.80339,0.30574,22
+native,Gradient Boosting,SMOTE,test,LIME + Gaussian Predictive,0.53329,0.66233,0.81551,0.80502,0.34216,22
+native,Gradient Boosting,SMOTE,test,LIME + Saw-Yang-Mo Minimax,0.53291,0.66030,0.75291,0.78350,0.28252,22
+native,Gradient Boosting,SMOTE,test,LIME + re-threshold,0.52683,0.66571,0.81318,0.82130,0.31855,22
+native,Gradient Boosting,plain,line,CLIME,0.85955,0.71313,0.87587,0.75628,0.80427,22
+native,Gradient Boosting,plain,line,LIME,0.83499,0.56925,0.89827,0.59010,0.75853,22
+native,Gradient Boosting,plain,line,LIME + DKW Minimax,0.75951,0.73367,0.75420,0.78559,0.52010,22
+native,Gradient Boosting,plain,line,LIME + DKW Sum,0.81474,0.74237,0.81428,0.77872,0.65097,22
+native,Gradient Boosting,plain,line,LIME + F Deltas,0.78662,0.70102,0.79365,0.74766,0.56809,22
+native,Gradient Boosting,plain,line,LIME + Gaussian Band,0.76244,0.73021,0.75779,0.78307,0.48147,22
+native,Gradient Boosting,plain,line,LIME + Gaussian Predictive,0.79927,0.73592,0.80132,0.78834,0.61762,22
+native,Gradient Boosting,plain,line,LIME + Saw-Yang-Mo Minimax,0.73026,0.71954,0.70863,0.76429,0.46395,22
+native,Gradient Boosting,plain,line,LIME + re-threshold,0.79925,0.76099,0.79676,0.80603,0.65284,22
+native,Gradient Boosting,plain,test,CLIME,0.82513,0.71536,0.86761,0.75971,0.62128,22
+native,Gradient Boosting,plain,test,LIME,0.83410,0.58808,0.88442,0.60900,0.66970,22
+native,Gradient Boosting,plain,test,LIME + DKW Minimax,0.75565,0.71597,0.77532,0.78319,0.41902,22
+native,Gradient Boosting,plain,test,LIME + DKW Sum,0.79423,0.72091,0.81314,0.78064,0.45818,22
+native,Gradient Boosting,plain,test,LIME + F Deltas,0.77259,0.70071,0.78853,0.75878,0.46069,22
+native,Gradient Boosting,plain,test,LIME + Gaussian Band,0.75714,0.71348,0.77828,0.78179,0.41791,22
+native,Gradient Boosting,plain,test,LIME + Gaussian Predictive,0.78869,0.71639,0.81213,0.78748,0.50723,22
+native,Gradient Boosting,plain,test,LIME + Saw-Yang-Mo Minimax,0.71812,0.70111,0.73272,0.76109,0.32554,22
+native,Gradient Boosting,plain,test,LIME + re-threshold,0.76950,0.74353,0.80016,0.80961,0.46274,22
+native,Gradient Boosting,re-thresholded,line,CLIME,0.76786,0.72360,0.81790,0.77323,0.70789,22
+native,Gradient Boosting,re-thresholded,line,LIME,0.74016,0.64486,0.82654,0.66740,0.65907,22
+native,Gradient Boosting,re-thresholded,line,LIME + DKW Minimax,0.72675,0.70331,0.77395,0.77602,0.56272,22
+native,Gradient Boosting,re-thresholded,line,LIME + DKW Sum,0.74903,0.71920,0.79234,0.77300,0.60351,22
+native,Gradient Boosting,re-thresholded,line,LIME + F Deltas,0.72691,0.69979,0.77424,0.76195,0.54166,22
+native,Gradient Boosting,re-thresholded,line,LIME + Gaussian Band,0.72660,0.70214,0.77336,0.77395,0.54029,22
+native,Gradient Boosting,re-thresholded,line,LIME + Gaussian Predictive,0.74065,0.70897,0.79117,0.77783,0.59226,22
+native,Gradient Boosting,re-thresholded,line,LIME + Saw-Yang-Mo Minimax,0.71647,0.69182,0.74947,0.76192,0.52214,22
+native,Gradient Boosting,re-thresholded,line,LIME + re-threshold,0.74235,0.72486,0.78814,0.79141,0.61176,22
+native,Gradient Boosting,re-thresholded,test,CLIME,0.74673,0.72036,0.83124,0.78061,0.55992,22
+native,Gradient Boosting,re-thresholded,test,LIME,0.72937,0.64581,0.83881,0.66659,0.49575,22
+native,Gradient Boosting,re-thresholded,test,LIME + DKW Minimax,0.71711,0.70696,0.77861,0.79335,0.48502,22
+native,Gradient Boosting,re-thresholded,test,LIME + DKW Sum,0.73111,0.71204,0.80231,0.79351,0.50196,22
+native,Gradient Boosting,re-thresholded,test,LIME + F Deltas,0.70253,0.69417,0.77338,0.77630,0.45477,22
+native,Gradient Boosting,re-thresholded,test,LIME + Gaussian Band,0.71913,0.70624,0.78254,0.79342,0.48098,22
+native,Gradient Boosting,re-thresholded,test,LIME + Gaussian Predictive,0.72969,0.70992,0.79842,0.79356,0.51106,22
+native,Gradient Boosting,re-thresholded,test,LIME + Saw-Yang-Mo Minimax,0.69310,0.69023,0.73998,0.77347,0.42562,22
+native,Gradient Boosting,re-thresholded,test,LIME + re-threshold,0.72776,0.71866,0.79800,0.80292,0.50934,22
+native,Gradient Boosting,weighted,line,CLIME,0.83394,0.71955,0.85373,0.76192,0.77775,22
+native,Gradient Boosting,weighted,line,LIME,0.81141,0.59560,0.87243,0.60936,0.73797,22
+native,Gradient Boosting,weighted,line,LIME + DKW Minimax,0.75426,0.71986,0.76129,0.78099,0.54755,22
+native,Gradient Boosting,weighted,line,LIME + DKW Sum,0.78887,0.72976,0.79865,0.77541,0.62408,22
+native,Gradient Boosting,weighted,line,LIME + F Deltas,0.77329,0.70815,0.77942,0.75338,0.57907,22
+native,Gradient Boosting,weighted,line,LIME + Gaussian Band,0.75724,0.72061,0.76494,0.77866,0.51761,22
+native,Gradient Boosting,weighted,line,LIME + Gaussian Predictive,0.77909,0.72477,0.79246,0.78276,0.60475,22
+native,Gradient Boosting,weighted,line,LIME + Saw-Yang-Mo Minimax,0.72258,0.70694,0.71850,0.76140,0.47084,22
+native,Gradient Boosting,weighted,line,LIME + re-threshold,0.78291,0.74003,0.79358,0.79598,0.62818,22
+native,Gradient Boosting,weighted,test,CLIME,0.79271,0.71557,0.85103,0.77049,0.58461,22
+native,Gradient Boosting,weighted,test,LIME,0.80283,0.60781,0.86663,0.62949,0.57876,22
+native,Gradient Boosting,weighted,test,LIME + DKW Minimax,0.72436,0.70944,0.76925,0.79530,0.42195,22
+native,Gradient Boosting,weighted,test,LIME + DKW Sum,0.76171,0.72217,0.80629,0.79389,0.50007,22
+native,Gradient Boosting,weighted,test,LIME + F Deltas,0.74095,0.70220,0.77535,0.77331,0.44310,22
+native,Gradient Boosting,weighted,test,LIME + Gaussian Band,0.72762,0.70907,0.77053,0.79287,0.40539,22
+native,Gradient Boosting,weighted,test,LIME + Gaussian Predictive,0.75317,0.71483,0.80022,0.79636,0.48356,22
+native,Gradient Boosting,weighted,test,LIME + Saw-Yang-Mo Minimax,0.68781,0.69857,0.72435,0.77341,0.33862,22
+native,Gradient Boosting,weighted,test,LIME + re-threshold,0.74853,0.72824,0.79697,0.80622,0.49940,22
+native,Logistic,SMOTE,line,CLIME,0.97345,0.95185,0.98952,0.97403,0.92890,22
+native,Logistic,SMOTE,line,LIME,0.93162,0.87782,0.98418,0.87508,0.81243,22
+native,Logistic,SMOTE,line,LIME + DKW Minimax,0.92949,0.91399,0.97323,0.96015,0.76650,22
+native,Logistic,SMOTE,line,LIME + DKW Sum,0.97474,0.94870,0.99497,0.97026,0.90330,22
+native,Logistic,SMOTE,line,LIME + F Deltas,0.87382,0.86003,0.92410,0.92122,0.72934,22
+native,Logistic,SMOTE,line,LIME + Gaussian Band,0.91807,0.90281,0.96238,0.95230,0.70648,22
+native,Logistic,SMOTE,line,LIME + Gaussian Predictive,0.94362,0.92305,0.97805,0.96214,0.82006,22
+native,Logistic,SMOTE,line,LIME + Saw-Yang-Mo Minimax,0.94755,0.92601,0.97919,0.96279,0.84871,22
+native,Logistic,SMOTE,line,LIME + re-threshold,0.98546,0.97634,0.99530,0.99352,0.95954,22
+native,Logistic,SMOTE,test,CLIME,0.97805,0.97258,0.98788,0.98190,0.89317,22
+native,Logistic,SMOTE,test,LIME,0.93249,0.88406,0.97709,0.86433,0.66858,22
+native,Logistic,SMOTE,test,LIME + DKW Minimax,0.93564,0.93514,0.96785,0.96906,0.68107,22
+native,Logistic,SMOTE,test,LIME + DKW Sum,0.98575,0.97441,0.99511,0.98095,0.87906,22
+native,Logistic,SMOTE,test,LIME + F Deltas,0.87932,0.87931,0.91524,0.93004,0.72014,22
+native,Logistic,SMOTE,test,LIME + Gaussian Band,0.92820,0.92728,0.95961,0.96306,0.67902,22
+native,Logistic,SMOTE,test,LIME + Gaussian Predictive,0.95322,0.94750,0.97556,0.97241,0.78451,22
+native,Logistic,SMOTE,test,LIME + Saw-Yang-Mo Minimax,0.95550,0.94924,0.97650,0.97294,0.80003,22
+native,Logistic,SMOTE,test,LIME + re-threshold,0.99038,0.98877,0.99537,0.99550,0.94995,22
+native,Logistic,plain,line,CLIME,0.98217,0.93034,0.99272,0.92658,0.92946,22
+native,Logistic,plain,line,LIME,0.94380,0.72409,0.98204,0.72205,0.82922,22
+native,Logistic,plain,line,LIME + DKW Minimax,0.92894,0.87010,0.95578,0.90544,0.73671,22
+native,Logistic,plain,line,LIME + DKW Sum,0.98042,0.89829,0.99639,0.91776,0.88230,22
+native,Logistic,plain,line,LIME + F Deltas,0.92343,0.85802,0.94242,0.89080,0.78259,22
+native,Logistic,plain,line,LIME + Gaussian Band,0.92177,0.86537,0.94701,0.89980,0.62113,22
+native,Logistic,plain,line,LIME + Gaussian Predictive,0.95610,0.88721,0.97785,0.91672,0.81628,22
+native,Logistic,plain,line,LIME + Saw-Yang-Mo Minimax,0.96174,0.89072,0.98109,0.91833,0.84928,22
+native,Logistic,plain,line,LIME + re-threshold,0.99058,0.96825,0.99684,0.99504,0.95783,22
+native,Logistic,plain,test,CLIME,0.98872,0.93018,0.99028,0.94605,0.96111,22
+native,Logistic,plain,test,LIME,0.96680,0.78482,0.97951,0.77623,0.82931,22
+native,Logistic,plain,test,LIME + DKW Minimax,0.95682,0.89823,0.96172,0.93190,0.79824,22
+native,Logistic,plain,test,LIME + DKW Sum,0.99368,0.91587,0.99590,0.94242,0.96238,22
+native,Logistic,plain,test,LIME + F Deltas,0.93965,0.87634,0.93479,0.91008,0.84686,22
+native,Logistic,plain,test,LIME + Gaussian Band,0.95214,0.89453,0.95603,0.92787,0.72593,22
+native,Logistic,plain,test,LIME + Gaussian Predictive,0.97581,0.90975,0.97793,0.94082,0.90054,22
+native,Logistic,plain,test,LIME + Saw-Yang-Mo Minimax,0.97857,0.91082,0.98007,0.94222,0.92179,22
+native,Logistic,plain,test,LIME + re-threshold,0.99469,0.97679,0.99623,0.99367,0.97649,22
+native,Logistic,re-thresholded,line,CLIME,0.97479,0.95313,0.99150,0.96160,0.92919,22
+native,Logistic,re-thresholded,line,LIME,0.93050,0.86565,0.98345,0.84885,0.80250,22
+native,Logistic,re-thresholded,line,LIME + DKW Minimax,0.92727,0.91095,0.97040,0.94638,0.76766,22
+native,Logistic,re-thresholded,line,LIME + DKW Sum,0.97340,0.94556,0.99591,0.95768,0.88625,22
+native,Logistic,re-thresholded,line,LIME + F Deltas,0.88584,0.86406,0.92832,0.91187,0.74860,22
+native,Logistic,re-thresholded,line,LIME + Gaussian Band,0.91797,0.90116,0.96059,0.93934,0.71882,22
+native,Logistic,re-thresholded,line,LIME + Gaussian Predictive,0.94327,0.92176,0.97736,0.94968,0.81146,22
+native,Logistic,re-thresholded,line,LIME + Saw-Yang-Mo Minimax,0.94668,0.92444,0.97870,0.95048,0.81903,22
+native,Logistic,re-thresholded,line,LIME + re-threshold,0.98524,0.97670,0.99625,0.98861,0.95631,22
+native,Logistic,re-thresholded,test,CLIME,0.97979,0.96997,0.98988,0.97833,0.91304,22
+native,Logistic,re-thresholded,test,LIME,0.93636,0.86411,0.97923,0.84441,0.72008,22
+native,Logistic,re-thresholded,test,LIME + DKW Minimax,0.93342,0.93324,0.96567,0.96722,0.69262,22
+native,Logistic,re-thresholded,test,LIME + DKW Sum,0.98756,0.97337,0.99589,0.98054,0.91395,22
+native,Logistic,re-thresholded,test,LIME + F Deltas,0.89297,0.89000,0.92161,0.93292,0.75031,22
+native,Logistic,re-thresholded,test,LIME + Gaussian Band,0.92839,0.92753,0.95752,0.96150,0.65618,22
+native,Logistic,re-thresholded,test,LIME + Gaussian Predictive,0.95605,0.94914,0.97623,0.97233,0.79379,22
+native,Logistic,re-thresholded,test,LIME + Saw-Yang-Mo Minimax,0.95978,0.95166,0.97761,0.97305,0.83648,22
+native,Logistic,re-thresholded,test,LIME + re-threshold,0.99144,0.98945,0.99616,0.99649,0.96593,22
+native,Logistic,weighted,line,CLIME,0.97608,0.95398,0.99096,0.97301,0.93077,22
+native,Logistic,weighted,line,LIME,0.93207,0.87928,0.98442,0.87525,0.81143,22
+native,Logistic,weighted,line,LIME + DKW Minimax,0.93180,0.91338,0.97384,0.95952,0.77435,22
+native,Logistic,weighted,line,LIME + DKW Sum,0.97459,0.94673,0.99533,0.96724,0.90241,22
+native,Logistic,weighted,line,LIME + F Deltas,0.87874,0.86288,0.92312,0.91905,0.74527,22
+native,Logistic,weighted,line,LIME + Gaussian Band,0.92106,0.90219,0.96221,0.95108,0.71158,22
+native,Logistic,weighted,line,LIME + Gaussian Predictive,0.94605,0.92311,0.97849,0.96144,0.82279,22
+native,Logistic,weighted,line,LIME + Saw-Yang-Mo Minimax,0.95055,0.92654,0.97963,0.96209,0.85349,22
+native,Logistic,weighted,line,LIME + re-threshold,0.98603,0.97672,0.99612,0.99608,0.95713,22
+native,Logistic,weighted,test,CLIME,0.97951,0.97395,0.98928,0.98114,0.89501,22
+native,Logistic,weighted,test,LIME,0.93351,0.88606,0.97676,0.86178,0.66260,22
+native,Logistic,weighted,test,LIME + DKW Minimax,0.93898,0.93707,0.96780,0.96987,0.71340,22
+native,Logistic,weighted,test,LIME + DKW Sum,0.98742,0.97593,0.99566,0.98262,0.90623,22
+native,Logistic,weighted,test,LIME + F Deltas,0.88508,0.88538,0.91718,0.93236,0.72793,22
+native,Logistic,weighted,test,LIME + Gaussian Band,0.93197,0.92971,0.95985,0.96395,0.71970,22
+native,Logistic,weighted,test,LIME + Gaussian Predictive,0.95581,0.94937,0.97635,0.97365,0.81127,22
+native,Logistic,weighted,test,LIME + Saw-Yang-Mo Minimax,0.95801,0.95114,0.97733,0.97418,0.82867,22
+native,Logistic,weighted,test,LIME + re-threshold,0.99132,0.98939,0.99585,0.99554,0.95393,22
+native,MLP,SMOTE,line,CLIME,0.84799,0.77094,0.89106,0.85993,0.79162,22
+native,MLP,SMOTE,line,LIME,0.81520,0.67264,0.89290,0.73052,0.71721,22
+native,MLP,SMOTE,line,LIME + DKW Minimax,0.80837,0.74874,0.85830,0.85801,0.65924,22
+native,MLP,SMOTE,line,LIME + DKW Sum,0.83114,0.76257,0.87873,0.85923,0.72929,22
+native,MLP,SMOTE,line,LIME + F Deltas,0.78914,0.74632,0.83605,0.84887,0.62890,22
+native,MLP,SMOTE,line,LIME + Gaussian Band,0.81005,0.74895,0.86091,0.85744,0.63748,22
+native,MLP,SMOTE,line,LIME + Gaussian Predictive,0.82666,0.75656,0.87712,0.86265,0.71938,22
+native,MLP,SMOTE,line,LIME + Saw-Yang-Mo Minimax,0.79488,0.76082,0.83437,0.84506,0.62461,22
+native,MLP,SMOTE,line,LIME + re-threshold,0.82892,0.77874,0.87384,0.87743,0.74790,22
+native,MLP,SMOTE,test,CLIME,0.81144,0.78424,0.91800,0.89068,0.65473,22
+native,MLP,SMOTE,test,LIME,0.81869,0.69062,0.91526,0.74000,0.61689,22
+native,MLP,SMOTE,test,LIME + DKW Minimax,0.76479,0.76313,0.88418,0.89413,0.49507,22
+native,MLP,SMOTE,test,LIME + DKW Sum,0.80281,0.77931,0.90990,0.89609,0.63468,22
+native,MLP,SMOTE,test,LIME + F Deltas,0.74339,0.75610,0.85709,0.87794,0.50699,22
+native,MLP,SMOTE,test,LIME + Gaussian Band,0.76837,0.76307,0.88477,0.89231,0.49044,22
+native,MLP,SMOTE,test,LIME + Gaussian Predictive,0.79306,0.77315,0.90550,0.89751,0.58523,22
+native,MLP,SMOTE,test,LIME + Saw-Yang-Mo Minimax,0.78808,0.77242,0.89428,0.89214,0.58217,22
+native,MLP,SMOTE,test,LIME + re-threshold,0.79520,0.79054,0.90692,0.91215,0.62584,22
+native,MLP,plain,line,CLIME,0.92029,0.82123,0.94898,0.84040,0.87030,22
+native,MLP,plain,line,LIME,0.89234,0.64851,0.94464,0.66762,0.80019,22
+native,MLP,plain,line,LIME + DKW Minimax,0.87139,0.82028,0.88483,0.86060,0.70784,22
+native,MLP,plain,line,LIME + DKW Sum,0.90524,0.82498,0.92689,0.86120,0.80895,22
+native,MLP,plain,line,LIME + F Deltas,0.87410,0.82527,0.87651,0.85326,0.73701,22
+native,MLP,plain,line,LIME + Gaussian Band,0.86395,0.81577,0.87898,0.85712,0.58177,22
+native,MLP,plain,line,LIME + Gaussian Predictive,0.89673,0.82452,0.91973,0.86998,0.77161,22
+native,MLP,plain,line,LIME + Saw-Yang-Mo Minimax,0.89237,0.82049,0.91129,0.86568,0.76804,22
+native,MLP,plain,line,LIME + re-threshold,0.89670,0.85876,0.91599,0.91567,0.81030,22
+native,MLP,plain,test,CLIME,0.91655,0.82532,0.95045,0.86666,0.81836,22
+native,MLP,plain,test,LIME,0.90044,0.68061,0.94447,0.70021,0.73144,22
+native,MLP,plain,test,LIME + DKW Minimax,0.87362,0.80241,0.91124,0.87778,0.65809,22
+native,MLP,plain,test,LIME + DKW Sum,0.91119,0.80863,0.94283,0.87531,0.79557,22
+native,MLP,plain,test,LIME + F Deltas,0.86972,0.80005,0.89631,0.86572,0.67584,22
+native,MLP,plain,test,LIME + Gaussian Band,0.86761,0.79895,0.90704,0.87400,0.55601,22
+native,MLP,plain,test,LIME + Gaussian Predictive,0.89804,0.80858,0.93424,0.88679,0.73084,22
+native,MLP,plain,test,LIME + Saw-Yang-Mo Minimax,0.89898,0.80654,0.93125,0.88434,0.75258,22
+native,MLP,plain,test,LIME + re-threshold,0.89947,0.86354,0.93737,0.93275,0.75291,22
+native,MLP,re-thresholded,line,CLIME,0.85624,0.80215,0.91554,0.87198,0.79139,22
+native,MLP,re-thresholded,line,LIME,0.82817,0.72722,0.91556,0.76932,0.71106,22
+native,MLP,re-thresholded,line,LIME + DKW Minimax,0.81575,0.77482,0.88353,0.87834,0.66391,22
+native,MLP,re-thresholded,line,LIME + DKW Sum,0.84215,0.79185,0.90478,0.87742,0.71668,22
+native,MLP,re-thresholded,line,LIME + F Deltas,0.81367,0.77391,0.86586,0.86430,0.66937,22
+native,MLP,re-thresholded,line,LIME + Gaussian Band,0.81627,0.77453,0.88471,0.87723,0.64369,22
+native,MLP,re-thresholded,line,LIME + Gaussian Predictive,0.83428,0.78464,0.90194,0.88274,0.71337,22
+native,MLP,re-thresholded,line,LIME + Saw-Yang-Mo Minimax,0.82534,0.78041,0.88733,0.87502,0.67976,22
+native,MLP,re-thresholded,line,LIME + re-threshold,0.84059,0.81329,0.90292,0.90013,0.74412,22
+native,MLP,re-thresholded,test,CLIME,0.84917,0.82124,0.93068,0.89951,0.70009,22
+native,MLP,re-thresholded,test,LIME,0.82652,0.73475,0.92422,0.77280,0.62970,22
+native,MLP,re-thresholded,test,LIME + DKW Minimax,0.79925,0.80498,0.89667,0.91187,0.55586,22
+native,MLP,re-thresholded,test,LIME + DKW Sum,0.83839,0.82453,0.92338,0.91306,0.66838,22
+native,MLP,re-thresholded,test,LIME + F Deltas,0.77928,0.79059,0.87021,0.89531,0.55625,22
+native,MLP,re-thresholded,test,LIME + Gaussian Band,0.79950,0.80425,0.89568,0.91038,0.55189,22
+native,MLP,re-thresholded,test,LIME + Gaussian Predictive,0.82451,0.81608,0.91597,0.91649,0.62795,22
+native,MLP,re-thresholded,test,LIME + Saw-Yang-Mo Minimax,0.82346,0.81465,0.90841,0.91182,0.63276,22
+native,MLP,re-thresholded,test,LIME + re-threshold,0.83141,0.83348,0.92110,0.92694,0.65501,22
+native,MLP,weighted,line,CLIME,0.87233,0.82464,0.91571,0.88125,0.82729,22
+native,MLP,weighted,line,LIME,0.83947,0.74109,0.91496,0.78099,0.73748,22
+native,MLP,weighted,line,LIME + DKW Minimax,0.83593,0.79921,0.88717,0.88195,0.68073,22
+native,MLP,weighted,line,LIME + DKW Sum,0.86259,0.81777,0.90423,0.88155,0.76776,22
+native,MLP,weighted,line,LIME + F Deltas,0.82844,0.80035,0.86836,0.87205,0.68151,22
+native,MLP,weighted,line,LIME + Gaussian Band,0.83505,0.79975,0.88619,0.88092,0.64288,22
+native,MLP,weighted,line,LIME + Gaussian Predictive,0.85320,0.80889,0.90358,0.88673,0.74734,22
+native,MLP,weighted,line,LIME + Saw-Yang-Mo Minimax,0.85153,0.80918,0.89166,0.88041,0.73761,22
+native,MLP,weighted,line,LIME + re-threshold,0.86071,0.83437,0.90464,0.90681,0.79599,22
+native,MLP,weighted,test,CLIME,0.86807,0.83814,0.93163,0.89846,0.75253,22
+native,MLP,weighted,test,LIME,0.84067,0.75425,0.92633,0.78091,0.64072,22
+native,MLP,weighted,test,LIME + DKW Minimax,0.82889,0.82238,0.89788,0.90644,0.58848,22
+native,MLP,weighted,test,LIME + DKW Sum,0.86217,0.83799,0.92469,0.90864,0.69529,22
+native,MLP,weighted,test,LIME + F Deltas,0.81216,0.80935,0.87354,0.89141,0.60472,22
+native,MLP,weighted,test,LIME + Gaussian Band,0.83377,0.82400,0.90099,0.90693,0.60043,22
+native,MLP,weighted,test,LIME + Gaussian Predictive,0.85236,0.83375,0.91888,0.91259,0.67997,22
+native,MLP,weighted,test,LIME + Saw-Yang-Mo Minimax,0.85044,0.83063,0.91260,0.90901,0.67913,22
+native,MLP,weighted,test,LIME + re-threshold,0.85560,0.84914,0.92234,0.92649,0.71905,22
+native,Random Forest,SMOTE,line,CLIME,0.62624,0.70444,0.85567,0.75676,0.53858,22
+native,Random Forest,SMOTE,line,LIME,0.57938,0.64091,0.85857,0.65625,0.46601,22
+native,Random Forest,SMOTE,line,LIME + DKW Minimax,0.68743,0.70038,0.77324,0.77135,0.47366,22
+native,Random Forest,SMOTE,line,LIME + DKW Sum,0.66778,0.70472,0.81386,0.77025,0.47871,22
+native,Random Forest,SMOTE,line,LIME + F Deltas,0.67224,0.69649,0.78540,0.75420,0.40418,22
+native,Random Forest,SMOTE,line,LIME + Gaussian Band,0.69013,0.70248,0.77261,0.76915,0.45040,22
+native,Random Forest,SMOTE,line,LIME + Gaussian Predictive,0.68086,0.70311,0.79963,0.77354,0.50022,22
+native,Random Forest,SMOTE,line,LIME + Saw-Yang-Mo Minimax,0.70420,0.69385,0.73521,0.75321,0.43609,22
+native,Random Forest,SMOTE,line,LIME + re-threshold,0.67356,0.72063,0.79310,0.78872,0.48240,22
+native,Random Forest,SMOTE,test,CLIME,0.56089,0.67629,0.83401,0.77318,0.33484,22
+native,Random Forest,SMOTE,test,LIME,0.56143,0.62932,0.83764,0.68823,0.32394,22
+native,Random Forest,SMOTE,test,LIME + DKW Minimax,0.54416,0.67654,0.77252,0.79114,0.32228,22
+native,Random Forest,SMOTE,test,LIME + DKW Sum,0.55270,0.67628,0.79108,0.79108,0.36091,22
+native,Random Forest,SMOTE,test,LIME + F Deltas,0.53438,0.66887,0.76874,0.78054,0.33694,22
+native,Random Forest,SMOTE,test,LIME + Gaussian Band,0.54453,0.67455,0.77393,0.79009,0.30278,22
+native,Random Forest,SMOTE,test,LIME + Gaussian Predictive,0.55262,0.67323,0.79247,0.79127,0.34563,22
+native,Random Forest,SMOTE,test,LIME + Saw-Yang-Mo Minimax,0.54488,0.66847,0.73909,0.77286,0.29991,22
+native,Random Forest,SMOTE,test,LIME + re-threshold,0.54533,0.68109,0.78634,0.79821,0.33559,22
+native,Random Forest,plain,line,CLIME,0.88698,0.70516,0.89794,0.72992,0.83185,22
+native,Random Forest,plain,line,LIME,0.86030,0.59621,0.90271,0.60657,0.78097,22
+native,Random Forest,plain,line,LIME + DKW Minimax,0.79098,0.71868,0.77941,0.75746,0.55853,22
+native,Random Forest,plain,line,LIME + DKW Sum,0.84623,0.71994,0.84670,0.75153,0.65016,22
+native,Random Forest,plain,line,LIME + F Deltas,0.82182,0.70399,0.82102,0.73656,0.61475,22
+native,Random Forest,plain,line,LIME + Gaussian Band,0.79326,0.71859,0.77962,0.75312,0.54856,22
+native,Random Forest,plain,line,LIME + Gaussian Predictive,0.82375,0.71927,0.82097,0.76006,0.63188,22
+native,Random Forest,plain,line,LIME + Saw-Yang-Mo Minimax,0.78661,0.71064,0.76380,0.74192,0.49619,22
+native,Random Forest,plain,line,LIME + re-threshold,0.81187,0.75779,0.79351,0.79437,0.60410,22
+native,Random Forest,plain,test,CLIME,0.87502,0.69641,0.88602,0.75311,0.72905,22
+native,Random Forest,plain,test,LIME,0.84971,0.59762,0.88992,0.63253,0.61754,22
+native,Random Forest,plain,test,LIME + DKW Minimax,0.84347,0.72216,0.79358,0.77869,0.57165,22
+native,Random Forest,plain,test,LIME + DKW Sum,0.86093,0.71254,0.83140,0.77675,0.62844,22
+native,Random Forest,plain,test,LIME + F Deltas,0.84289,0.71068,0.80786,0.76380,0.63064,22
+native,Random Forest,plain,test,LIME + Gaussian Band,0.84478,0.71696,0.79592,0.77647,0.58045,22
+native,Random Forest,plain,test,LIME + Gaussian Predictive,0.85954,0.71065,0.82805,0.78014,0.66659,22
+native,Random Forest,plain,test,LIME + Saw-Yang-Mo Minimax,0.81265,0.70316,0.77138,0.76512,0.50015,22
+native,Random Forest,plain,test,LIME + re-threshold,0.85348,0.73540,0.80616,0.80756,0.65405,22
+native,Random Forest,re-thresholded,line,CLIME,0.77634,0.73433,0.83705,0.77125,0.70495,22
+native,Random Forest,re-thresholded,line,LIME,0.73116,0.65676,0.84541,0.66820,0.63610,22
+native,Random Forest,re-thresholded,line,LIME + DKW Minimax,0.72907,0.72155,0.78019,0.78233,0.54370,22
+native,Random Forest,re-thresholded,line,LIME + DKW Sum,0.74692,0.72408,0.80638,0.78062,0.58197,22
+native,Random Forest,re-thresholded,line,LIME + F Deltas,0.73116,0.71594,0.77707,0.76945,0.54073,22
+native,Random Forest,re-thresholded,line,LIME + Gaussian Band,0.72786,0.72206,0.78071,0.78089,0.53074,22
+native,Random Forest,re-thresholded,line,LIME + Gaussian Predictive,0.73998,0.72644,0.80119,0.78166,0.58116,22
+native,Random Forest,re-thresholded,line,LIME + Saw-Yang-Mo Minimax,0.70991,0.70992,0.74875,0.76597,0.48221,22
+native,Random Forest,re-thresholded,line,LIME + re-threshold,0.73652,0.73340,0.78716,0.79754,0.58863,22
+native,Random Forest,re-thresholded,test,CLIME,0.75547,0.71564,0.84360,0.78083,0.55818,22
+native,Random Forest,re-thresholded,test,LIME,0.70375,0.63355,0.85273,0.66349,0.45158,22
+native,Random Forest,re-thresholded,test,LIME + DKW Minimax,0.73231,0.71067,0.78266,0.79150,0.53630,22
+native,Random Forest,re-thresholded,test,LIME + DKW Sum,0.73513,0.70970,0.80218,0.79147,0.52613,22
+native,Random Forest,re-thresholded,test,LIME + F Deltas,0.72238,0.69857,0.77861,0.77624,0.48186,22
+native,Random Forest,re-thresholded,test,LIME + Gaussian Band,0.73231,0.71027,0.78579,0.79086,0.53510,22
+native,Random Forest,re-thresholded,test,LIME + Gaussian Predictive,0.73989,0.71355,0.80348,0.79094,0.54896,22
+native,Random Forest,re-thresholded,test,LIME + Saw-Yang-Mo Minimax,0.71500,0.69723,0.75648,0.77804,0.46420,22
+native,Random Forest,re-thresholded,test,LIME + re-threshold,0.73785,0.71766,0.79521,0.80545,0.55366,22
+native,Random Forest,weighted,line,CLIME,0.85534,0.71314,0.87800,0.75798,0.79379,22
+native,Random Forest,weighted,line,LIME,0.82011,0.60372,0.88914,0.62455,0.74556,22
+native,Random Forest,weighted,line,LIME + DKW Minimax,0.78378,0.72965,0.77036,0.77963,0.57652,22
+native,Random Forest,weighted,line,LIME + DKW Sum,0.81207,0.73251,0.81595,0.77621,0.62128,22
+native,Random Forest,weighted,line,LIME + F Deltas,0.78711,0.71773,0.79241,0.75732,0.57918,22
+native,Random Forest,weighted,line,LIME + Gaussian Band,0.78183,0.72049,0.76979,0.77775,0.54487,22
+native,Random Forest,weighted,line,LIME + Gaussian Predictive,0.80843,0.72410,0.80690,0.78336,0.63603,22
+native,Random Forest,weighted,line,LIME + Saw-Yang-Mo Minimax,0.75977,0.72005,0.73069,0.76492,0.46888,22
+native,Random Forest,weighted,line,LIME + re-threshold,0.80478,0.75125,0.79260,0.80191,0.64287,22
+native,Random Forest,weighted,test,CLIME,0.81979,0.71322,0.87613,0.75231,0.56699,22
+native,Random Forest,weighted,test,LIME,0.80869,0.60715,0.88672,0.63540,0.59928,22
+native,Random Forest,weighted,test,LIME + DKW Minimax,0.78503,0.72298,0.77716,0.77975,0.47773,22
+native,Random Forest,weighted,test,LIME + DKW Sum,0.80791,0.71794,0.81985,0.77151,0.53311,22
+native,Random Forest,weighted,test,LIME + F Deltas,0.79184,0.70643,0.79731,0.75405,0.48233,22
+native,Random Forest,weighted,test,LIME + Gaussian Band,0.77894,0.71668,0.77427,0.77534,0.46196,22
+native,Random Forest,weighted,test,LIME + Gaussian Predictive,0.80252,0.71695,0.80954,0.77973,0.55085,22
+native,Random Forest,weighted,test,LIME + Saw-Yang-Mo Minimax,0.74684,0.70796,0.73974,0.76073,0.40560,22
+native,Random Forest,weighted,test,LIME + re-threshold,0.78746,0.74058,0.78725,0.80501,0.49938,22
+native,SVM,SMOTE,line,CLIME,0.85273,0.78705,0.87983,0.83384,0.76012,22
+native,SVM,SMOTE,line,LIME,0.80659,0.67799,0.88248,0.70742,0.67505,22
+native,SVM,SMOTE,line,LIME + DKW Minimax,0.81172,0.75541,0.83047,0.82975,0.60333,22
+native,SVM,SMOTE,line,LIME + DKW Sum,0.83328,0.77472,0.85117,0.82981,0.67023,22
+native,SVM,SMOTE,line,LIME + F Deltas,0.79602,0.75479,0.81207,0.81528,0.59811,22
+native,SVM,SMOTE,line,LIME + Gaussian Band,0.80874,0.75124,0.82789,0.82580,0.58240,22
+native,SVM,SMOTE,line,LIME + Gaussian Predictive,0.82212,0.75678,0.84521,0.82959,0.63689,22
+native,SVM,SMOTE,line,LIME + Saw-Yang-Mo Minimax,0.80196,0.75712,0.80742,0.81812,0.56892,22
+native,SVM,SMOTE,line,LIME + re-threshold,0.82972,0.78203,0.84408,0.84161,0.64758,22
+native,SVM,SMOTE,test,CLIME,0.74542,0.75340,0.90794,0.85675,0.44964,22
+native,SVM,SMOTE,test,LIME,0.78423,0.65715,0.91165,0.68904,0.50970,22
+native,SVM,SMOTE,test,LIME + DKW Minimax,0.72234,0.72282,0.84833,0.85233,0.43018,22
+native,SVM,SMOTE,test,LIME + DKW Sum,0.75890,0.73863,0.88683,0.85326,0.47350,22
+native,SVM,SMOTE,test,LIME + F Deltas,0.69892,0.70828,0.82964,0.83498,0.39545,22
+native,SVM,SMOTE,test,LIME + Gaussian Band,0.72072,0.72029,0.84536,0.84824,0.40747,22
+native,SVM,SMOTE,test,LIME + Gaussian Predictive,0.74497,0.73061,0.87294,0.85127,0.44664,22
+native,SVM,SMOTE,test,LIME + Saw-Yang-Mo Minimax,0.72840,0.72282,0.84418,0.84029,0.38685,22
+native,SVM,SMOTE,test,LIME + re-threshold,0.74386,0.75134,0.87626,0.87478,0.44431,22
+native,SVM,plain,line,CLIME,0.92583,0.75278,0.95370,0.86348,0.86308,22
+native,SVM,plain,line,LIME,0.89317,0.62854,0.95061,0.68504,0.79121,22
+native,SVM,plain,line,LIME + DKW Minimax,0.88839,0.71116,0.89837,0.83583,0.68942,22
+native,SVM,plain,line,LIME + DKW Sum,0.90924,0.72033,0.92632,0.83493,0.71960,22
+native,SVM,plain,line,LIME + F Deltas,0.88838,0.71593,0.90232,0.82373,0.71606,22
+native,SVM,plain,line,LIME + Gaussian Band,0.88705,0.70847,0.89892,0.83680,0.67002,22
+native,SVM,plain,line,LIME + Gaussian Predictive,0.89969,0.71227,0.91875,0.84147,0.71221,22
+native,SVM,plain,line,LIME + Saw-Yang-Mo Minimax,0.89020,0.70957,0.90295,0.83540,0.68692,22
+native,SVM,plain,line,LIME + re-threshold,0.88173,0.73753,0.89927,0.85939,0.59624,22
+native,SVM,plain,test,CLIME,0.90736,0.74850,0.94161,0.85288,0.71647,22
+native,SVM,plain,test,LIME,0.88626,0.62875,0.93833,0.66433,0.66356,22
+native,SVM,plain,test,LIME + DKW Minimax,0.89364,0.71548,0.89539,0.81134,0.70037,22
+native,SVM,plain,test,LIME + DKW Sum,0.89941,0.71300,0.91366,0.81010,0.67378,22
+native,SVM,plain,test,LIME + F Deltas,0.88297,0.70466,0.88497,0.79544,0.68441,22
+native,SVM,plain,test,LIME + Gaussian Band,0.88858,0.71111,0.89147,0.81270,0.65391,22
+native,SVM,plain,test,LIME + Gaussian Predictive,0.89609,0.70838,0.90756,0.81413,0.69466,22
+native,SVM,plain,test,LIME + Saw-Yang-Mo Minimax,0.88478,0.70394,0.89035,0.79546,0.66287,22
+native,SVM,plain,test,LIME + re-threshold,0.88366,0.72714,0.88828,0.86410,0.64734,22
+native,SVM,re-thresholded,line,CLIME,0.77462,0.75947,0.85189,0.79590,0.63473,22
+native,SVM,re-thresholded,line,LIME,0.72818,0.69201,0.86024,0.71026,0.57335,22
+native,SVM,re-thresholded,line,LIME + DKW Minimax,0.74716,0.72810,0.80116,0.80671,0.49675,22
+native,SVM,re-thresholded,line,LIME + DKW Sum,0.77416,0.73944,0.82188,0.80928,0.51398,22
+native,SVM,re-thresholded,line,LIME + F Deltas,0.73805,0.70195,0.80434,0.78229,0.46612,22
+native,SVM,re-thresholded,line,LIME + Gaussian Band,0.74176,0.72484,0.79744,0.80295,0.47992,22
+native,SVM,re-thresholded,line,LIME + Gaussian Predictive,0.75016,0.73116,0.81527,0.80596,0.50608,22
+native,SVM,re-thresholded,line,LIME + Saw-Yang-Mo Minimax,0.74545,0.72256,0.77109,0.79389,0.42308,22
+native,SVM,re-thresholded,line,LIME + re-threshold,0.76805,0.74321,0.81316,0.81766,0.53684,22
+native,SVM,re-thresholded,test,CLIME,0.76723,0.72638,0.87619,0.81734,0.52300,22
+native,SVM,re-thresholded,test,LIME,0.70817,0.66607,0.88131,0.71479,0.40930,22
+native,SVM,re-thresholded,test,LIME + DKW Minimax,0.77102,0.72240,0.82061,0.83459,0.50079,22
+native,SVM,re-thresholded,test,LIME + DKW Sum,0.78197,0.72683,0.84204,0.83560,0.49771,22
+native,SVM,re-thresholded,test,LIME + F Deltas,0.75748,0.70878,0.80202,0.81545,0.46506,22
+native,SVM,re-thresholded,test,LIME + Gaussian Band,0.76556,0.72042,0.82039,0.83179,0.48619,22
+native,SVM,re-thresholded,test,LIME + Gaussian Predictive,0.76654,0.72236,0.83985,0.83203,0.49309,22
+native,SVM,re-thresholded,test,LIME + Saw-Yang-Mo Minimax,0.76807,0.71783,0.79535,0.82021,0.45208,22
+native,SVM,re-thresholded,test,LIME + re-threshold,0.78824,0.73038,0.83639,0.84557,0.51476,22
+native,SVM,weighted,line,CLIME,0.91573,0.72884,0.94570,0.80597,0.83075,22
+native,SVM,weighted,line,LIME,0.88364,0.61370,0.94650,0.62542,0.77797,22
+native,SVM,weighted,line,LIME + DKW Minimax,0.88072,0.70922,0.88795,0.78363,0.69180,22
+native,SVM,weighted,line,LIME + DKW Sum,0.89907,0.71544,0.91911,0.78734,0.72424,22
+native,SVM,weighted,line,LIME + F Deltas,0.88046,0.71211,0.89234,0.76958,0.71032,22
+native,SVM,weighted,line,LIME + Gaussian Band,0.87844,0.70519,0.88327,0.78036,0.64334,22
+native,SVM,weighted,line,LIME + Gaussian Predictive,0.89382,0.70735,0.90833,0.78751,0.71620,22
+native,SVM,weighted,line,LIME + Saw-Yang-Mo Minimax,0.88380,0.72057,0.88174,0.77988,0.66340,22
+native,SVM,weighted,line,LIME + re-threshold,0.88774,0.78226,0.89086,0.85406,0.68792,22
+native,SVM,weighted,test,CLIME,0.89116,0.73463,0.93680,0.79399,0.63505,22
+native,SVM,weighted,test,LIME,0.88013,0.62080,0.93916,0.63437,0.66556,22
+native,SVM,weighted,test,LIME + DKW Minimax,0.87204,0.72470,0.88325,0.80463,0.61681,22
+native,SVM,weighted,test,LIME + DKW Sum,0.89169,0.72670,0.90787,0.80708,0.65289,22
+native,SVM,weighted,test,LIME + F Deltas,0.86261,0.71474,0.87481,0.78312,0.60329,22
+native,SVM,weighted,test,LIME + Gaussian Band,0.87011,0.72057,0.88133,0.80168,0.59060,22
+native,SVM,weighted,test,LIME + Gaussian Predictive,0.88499,0.71697,0.90294,0.80871,0.65382,22
+native,SVM,weighted,test,LIME + Saw-Yang-Mo Minimax,0.86948,0.71877,0.87563,0.79261,0.58098,22
+native,SVM,weighted,test,LIME + re-threshold,0.88679,0.76223,0.89968,0.85244,0.62939,22
+native,all,SMOTE,line,CLIME,0.77698,0.77178,0.87735,0.82338,0.70318,22
+native,all,SMOTE,line,LIME,0.73370,0.69051,0.88216,0.70759,0.62861,22
+native,all,SMOTE,line,LIME + DKW Minimax,0.76578,0.75141,0.82776,0.82412,0.58158,22
+native,all,SMOTE,line,LIME + DKW Sum,0.77398,0.76521,0.85426,0.82497,0.63814,22
+native,all,SMOTE,line,LIME + F Deltas,0.74702,0.73896,0.81520,0.80333,0.55125,22
+native,all,SMOTE,line,LIME + Gaussian Band,0.76481,0.74921,0.82598,0.82093,0.55904,22
+native,all,SMOTE,line,LIME + Gaussian Predictive,0.77285,0.75579,0.84581,0.82640,0.62103,22
+native,all,SMOTE,line,LIME + Saw-Yang-Mo Minimax,0.76841,0.75218,0.80478,0.81177,0.56225,22
+native,all,SMOTE,line,LIME + re-threshold,0.77575,0.77979,0.84689,0.84486,0.64963,22
+native,all,SMOTE,test,CLIME,0.72029,0.75777,0.88610,0.84441,0.52508,22
+native,all,SMOTE,test,LIME,0.72555,0.68607,0.88869,0.71628,0.49567,22
+native,all,SMOTE,test,LIME + DKW Minimax,0.69135,0.73909,0.83835,0.84817,0.44290,22
+native,all,SMOTE,test,LIME + DKW Sum,0.71534,0.75258,0.86454,0.85054,0.52003,22
+native,all,SMOTE,test,LIME + F Deltas,0.67167,0.72220,0.81820,0.82920,0.44356,22
+native,all,SMOTE,test,LIME + Gaussian Band,0.69107,0.73689,0.83718,0.84563,0.43170,22
+native,all,SMOTE,test,LIME + Gaussian Predictive,0.70774,0.74507,0.85758,0.84960,0.49237,22
+native,all,SMOTE,test,LIME + Saw-Yang-Mo Minimax,0.69637,0.73872,0.82273,0.83713,0.45478,22
+native,all,SMOTE,test,LIME + re-threshold,0.71236,0.76137,0.86040,0.86523,0.52148,22
+native,all,plain,line,CLIME,0.90853,0.77158,0.92393,0.79931,0.85282,22
+native,all,plain,line,LIME,0.88340,0.62373,0.92865,0.63588,0.79096,22
+native,all,plain,line,LIME + DKW Minimax,0.83602,0.76011,0.83935,0.80730,0.62714,22
+native,all,plain,line,LIME + DKW Sum,0.87982,0.76616,0.88715,0.80640,0.72310,22
+native,all,plain,line,LIME + F Deltas,0.85197,0.74355,0.85810,0.78422,0.67016,22
+native,all,plain,line,LIME + Gaussian Band,0.83434,0.75726,0.83758,0.80385,0.57368,22
+native,all,plain,line,LIME + Gaussian Predictive,0.86459,0.76336,0.87299,0.81328,0.69627,22
+native,all,plain,line,LIME + Saw-Yang-Mo Minimax,0.83503,0.75720,0.83127,0.80074,0.62064,22
+native,all,plain,line,LIME + re-threshold,0.86185,0.80808,0.86335,0.85913,0.70760,22
+native,all,plain,test,CLIME,0.88712,0.76595,0.91932,0.82162,0.72228,22
+native,all,plain,test,LIME,0.88388,0.64151,0.92158,0.66003,0.70036,22
+native,all,plain,test,LIME + DKW Minimax,0.84824,0.74830,0.85473,0.81925,0.59069,22
+native,all,plain,test,LIME + DKW Sum,0.87789,0.75274,0.88860,0.81952,0.67525,22
+native,all,plain,test,LIME + F Deltas,0.84726,0.73739,0.85280,0.80131,0.62851,22
+native,all,plain,test,LIME + Gaussian Band,0.84632,0.74518,0.85313,0.81689,0.55534,22
+native,all,plain,test,LIME + Gaussian Predictive,0.86917,0.74931,0.88073,0.82429,0.66214,22
+native,all,plain,test,LIME + Saw-Yang-Mo Minimax,0.83868,0.74217,0.84350,0.81014,0.58694,22
+native,all,plain,test,LIME + re-threshold,0.85790,0.78871,0.87060,0.86644,0.64647,22
+native,all,re-thresholded,line,CLIME,0.82527,0.77956,0.86964,0.81454,0.74982,22
+native,all,re-thresholded,line,LIME,0.79389,0.70298,0.87599,0.71442,0.68495,22
+native,all,re-thresholded,line,LIME + DKW Minimax,0.78121,0.75581,0.82663,0.82027,0.60206,22
+native,all,re-thresholded,line,LIME + DKW Sum,0.80795,0.77155,0.84929,0.82171,0.65064,22
+native,all,re-thresholded,line,LIME + F Deltas,0.77655,0.73878,0.82152,0.79851,0.59157,22
+native,all,re-thresholded,line,LIME + Gaussian Band,0.77916,0.75422,0.82480,0.81752,0.58241,22
+native,all,re-thresholded,line,LIME + Gaussian Predictive,0.79499,0.76345,0.84275,0.82183,0.63626,22
+native,all,re-thresholded,line,LIME + Saw-Yang-Mo Minimax,0.77760,0.75362,0.80955,0.81117,0.57352,22
+native,all,re-thresholded,line,LIME + re-threshold,0.80374,0.78722,0.84138,0.84175,0.67409,22
+native,all,re-thresholded,test,CLIME,0.80668,0.77352,0.88262,0.83624,0.62884,22
+native,all,re-thresholded,test,LIME,0.78163,0.69431,0.88743,0.71582,0.55591,22
+native,all,re-thresholded,test,LIME + DKW Minimax,0.77556,0.75787,0.83654,0.84488,0.53477,22
+native,all,re-thresholded,test,LIME + DKW Sum,0.80077,0.77092,0.86294,0.84734,0.60325,22
+native,all,re-thresholded,test,LIME + F Deltas,0.76120,0.74061,0.82192,0.82475,0.52893,22
+native,all,re-thresholded,test,LIME + Gaussian Band,0.77452,0.75649,0.83627,0.84296,0.52326,22
+native,all,re-thresholded,test,LIME + Gaussian Predictive,0.78930,0.76461,0.85542,0.84637,0.57458,22
+native,all,re-thresholded,test,LIME + Saw-Yang-Mo Minimax,0.77358,0.75520,0.82097,0.83541,0.53674,22
+native,all,re-thresholded,test,LIME + re-threshold,0.79796,0.77930,0.85679,0.86122,0.60908,22
+native,all,weighted,line,CLIME,0.89151,0.79114,0.91754,0.83762,0.83317,22
+native,all,weighted,line,LIME,0.85847,0.69188,0.92204,0.70902,0.76298,22
+native,all,weighted,line,LIME + DKW Minimax,0.83820,0.77969,0.85736,0.84088,0.65494,22
+native,all,weighted,line,LIME + DKW Sum,0.86842,0.79381,0.88761,0.84121,0.72959,22
+native,all,weighted,line,LIME + F Deltas,0.82935,0.76441,0.85112,0.81694,0.65656,22
+native,all,weighted,line,LIME + Gaussian Band,0.83579,0.77512,0.85454,0.83743,0.61351,22
+native,all,weighted,line,LIME + Gaussian Predictive,0.85704,0.78288,0.87909,0.84388,0.70519,22
+native,all,weighted,line,LIME + Saw-Yang-Mo Minimax,0.83487,0.78191,0.84199,0.83319,0.63911,22
+native,all,weighted,line,LIME + re-threshold,0.86462,0.81987,0.87649,0.87199,0.73954,22
+native,all,weighted,test,CLIME,0.87147,0.79850,0.91758,0.84168,0.68881,22
+native,all,weighted,test,LIME,0.85397,0.69801,0.91950,0.71101,0.62984,22
+native,all,weighted,test,LIME + DKW Minimax,0.83086,0.78608,0.85997,0.85367,0.56596,22
+native,all,weighted,test,LIME + DKW Sum,0.86341,0.79972,0.89163,0.85514,0.66040,22
+native,all,weighted,test,LIME + F Deltas,0.81876,0.76557,0.84778,0.82911,0.57488,22
+native,all,weighted,test,LIME + Gaussian Band,0.82938,0.78271,0.85831,0.85062,0.55618,22
+native,all,weighted,test,LIME + Gaussian Predictive,0.85089,0.78971,0.88247,0.85660,0.63782,22
+native,all,weighted,test,LIME + Saw-Yang-Mo Minimax,0.82363,0.78468,0.84706,0.84460,0.56763,22
+native,all,weighted,test,LIME + re-threshold,0.85548,0.81749,0.88148,0.87928,0.66283,22
+native,k Nearest Neighbours,SMOTE,line,CLIME,0.75867,0.72020,0.76998,0.72859,0.69035,22
+native,k Nearest Neighbours,SMOTE,line,LIME,0.75494,0.65935,0.78362,0.64127,0.67376,22
+native,k Nearest Neighbours,SMOTE,line,LIME + DKW Minimax,0.71876,0.69444,0.73047,0.72831,0.58136,22
+native,k Nearest Neighbours,SMOTE,line,LIME + DKW Sum,0.72889,0.70729,0.74027,0.72634,0.60941,22
+native,k Nearest Neighbours,SMOTE,line,LIME + F Deltas,0.72309,0.68101,0.74228,0.70931,0.56901,22
+native,k Nearest Neighbours,SMOTE,line,LIME + Gaussian Band,0.72124,0.69517,0.73313,0.72819,0.58157,22
+native,k Nearest Neighbours,SMOTE,line,LIME + Gaussian Predictive,0.73286,0.70127,0.74375,0.72942,0.61361,22
+native,k Nearest Neighbours,SMOTE,line,LIME + Saw-Yang-Mo Minimax,0.70003,0.67557,0.70480,0.71678,0.50793,22
+native,k Nearest Neighbours,SMOTE,line,LIME + re-threshold,0.72497,0.71755,0.73902,0.74482,0.62322,22
+native,k Nearest Neighbours,SMOTE,test,CLIME,0.67702,0.68253,0.81293,0.76257,0.45932,22
+native,k Nearest Neighbours,SMOTE,test,LIME,0.72322,0.63569,0.82379,0.64179,0.51508,22
+native,k Nearest Neighbours,SMOTE,test,LIME + DKW Minimax,0.63675,0.66319,0.75831,0.77111,0.39919,22
+native,k Nearest Neighbours,SMOTE,test,LIME + DKW Sum,0.64753,0.67164,0.77910,0.77161,0.43157,22
+native,k Nearest Neighbours,SMOTE,test,LIME + F Deltas,0.63714,0.65244,0.75251,0.75333,0.39357,22
+native,k Nearest Neighbours,SMOTE,test,LIME + Gaussian Band,0.63837,0.66378,0.75997,0.77028,0.39648,22
+native,k Nearest Neighbours,SMOTE,test,LIME + Gaussian Predictive,0.65013,0.66965,0.77723,0.77347,0.43108,22
+native,k Nearest Neighbours,SMOTE,test,LIME + Saw-Yang-Mo Minimax,0.61007,0.64531,0.72235,0.75411,0.36380,22
+native,k Nearest Neighbours,SMOTE,test,LIME + re-threshold,0.65080,0.67500,0.77817,0.78306,0.42908,22
+native,k Nearest Neighbours,plain,line,CLIME,0.87492,0.73943,0.87328,0.73357,0.81481,22
+native,k Nearest Neighbours,plain,line,LIME,0.87289,0.60304,0.89290,0.59649,0.78169,22
+native,k Nearest Neighbours,plain,line,LIME + DKW Minimax,0.77418,0.72481,0.76006,0.74131,0.54414,22
+native,k Nearest Neighbours,plain,line,LIME + DKW Sum,0.82049,0.72453,0.81036,0.73753,0.62346,22
+native,k Nearest Neighbours,plain,line,LIME + F Deltas,0.81756,0.69208,0.81163,0.70044,0.60747,22
+native,k Nearest Neighbours,plain,line,LIME + Gaussian Band,0.77365,0.72355,0.75941,0.73749,0.53082,22
+native,k Nearest Neighbours,plain,line,LIME + Gaussian Predictive,0.80929,0.72723,0.79625,0.74489,0.63248,22
+native,k Nearest Neighbours,plain,line,LIME + Saw-Yang-Mo Minimax,0.74377,0.71669,0.71411,0.72247,0.45720,22
+native,k Nearest Neighbours,plain,line,LIME + re-threshold,0.79135,0.77809,0.77445,0.78800,0.63292,22
+native,k Nearest Neighbours,plain,test,CLIME,0.80856,0.71605,0.87896,0.76650,0.48444,22
+native,k Nearest Neighbours,plain,test,LIME,0.86457,0.60227,0.89178,0.59930,0.68836,22
+native,k Nearest Neighbours,plain,test,LIME + DKW Minimax,0.76445,0.67967,0.78889,0.75551,0.38543,22
+native,k Nearest Neighbours,plain,test,LIME + DKW Sum,0.80630,0.69002,0.83265,0.75541,0.51924,22
+native,k Nearest Neighbours,plain,test,LIME + F Deltas,0.77598,0.67489,0.80415,0.73657,0.46536,22
+native,k Nearest Neighbours,plain,test,LIME + Gaussian Band,0.76606,0.68029,0.78774,0.75219,0.39062,22
+native,k Nearest Neighbours,plain,test,LIME + Gaussian Predictive,0.79507,0.68649,0.82209,0.75894,0.46694,22
+native,k Nearest Neighbours,plain,test,LIME + Saw-Yang-Mo Minimax,0.73432,0.67185,0.75079,0.73417,0.35089,22
+native,k Nearest Neighbours,plain,test,LIME + re-threshold,0.74352,0.71491,0.79202,0.79272,0.37806,22
+native,k Nearest Neighbours,re-thresholded,line,CLIME,0.79159,0.70457,0.79630,0.71269,0.72169,22
+native,k Nearest Neighbours,re-thresholded,line,LIME,0.79262,0.62995,0.81793,0.62132,0.71565,22
+native,k Nearest Neighbours,re-thresholded,line,LIME + DKW Minimax,0.73233,0.69552,0.74235,0.73136,0.56563,22
+native,k Nearest Neighbours,re-thresholded,line,LIME + DKW Sum,0.75351,0.70824,0.76534,0.73095,0.58947,22
+native,k Nearest Neighbours,re-thresholded,line,LIME + F Deltas,0.75707,0.67794,0.77319,0.69974,0.58174,22
+native,k Nearest Neighbours,re-thresholded,line,LIME + Gaussian Band,0.73468,0.69941,0.74346,0.73001,0.56594,22
+native,k Nearest Neighbours,re-thresholded,line,LIME + Gaussian Predictive,0.75276,0.70724,0.76073,0.73235,0.61188,22
+native,k Nearest Neighbours,re-thresholded,line,LIME + Saw-Yang-Mo Minimax,0.71229,0.69215,0.71189,0.71907,0.50569,22
+native,k Nearest Neighbours,re-thresholded,line,LIME + re-threshold,0.74463,0.73422,0.75284,0.75251,0.61019,22
+native,k Nearest Neighbours,re-thresholded,test,CLIME,0.73105,0.68744,0.81805,0.75407,0.49886,22
+native,k Nearest Neighbours,re-thresholded,test,LIME,0.77254,0.61985,0.84280,0.63120,0.59831,22
+native,k Nearest Neighbours,re-thresholded,test,LIME + DKW Minimax,0.68913,0.66832,0.76857,0.76499,0.42226,22
+native,k Nearest Neighbours,re-thresholded,test,LIME + DKW Sum,0.71646,0.67784,0.80321,0.76398,0.48493,22
+native,k Nearest Neighbours,re-thresholded,test,LIME + F Deltas,0.70105,0.65971,0.78062,0.74496,0.44377,22
+native,k Nearest Neighbours,re-thresholded,test,LIME + Gaussian Band,0.69158,0.66961,0.76960,0.76410,0.42720,22
+native,k Nearest Neighbours,re-thresholded,test,LIME + Gaussian Predictive,0.70721,0.67580,0.79143,0.76633,0.45442,22
+native,k Nearest Neighbours,re-thresholded,test,LIME + Saw-Yang-Mo Minimax,0.66958,0.65885,0.73908,0.74900,0.38949,22
+native,k Nearest Neighbours,re-thresholded,test,LIME + re-threshold,0.69731,0.68522,0.78457,0.78248,0.43563,22

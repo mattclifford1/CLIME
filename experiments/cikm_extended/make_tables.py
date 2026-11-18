@@ -19,6 +19,8 @@ TRAINING = ['plain', 'weighted', 'SMOTE', 're-thresholded']
 ARM_NAMES = {'plain': 'plain (0.5)', 'weighted': 'class weighted', 'SMOTE': 'SMOTE',
              're-thresholded': 're-thresholded (validation)',
              'k-th Point Tolerance Limit (min, expected loss)': 'k-th Point Tolerance Limit'}
+# letter-only names for the groups of query points by the rarer class's share of the sample
+BINS = {'none': 'none', 'under 1%': 'trace', '1-5%': 'few', '5-20%': 'some', '20-50%': 'mixed'}
 NUMBERS = {}
 
 
@@ -113,7 +115,7 @@ def replication():
     pooled = frame[(frame.family == 'all') & frame.metric.isin(['test_fidelity', 'test_balanced'])]
     rows = []
     for metric, label in (('test_fidelity', 'Local fidelity'), ('test_balanced', 'Balanced local fidelity')):
-        rows.append([f'\\emph{{{label}}}'] + ['']*8)
+        rows.append([f'\\emph{{{label}}}'] + ['']*7)
         for setting, setting_label in SETTINGS.items():
             for kind, kind_label in KINDS.items():
                 part = pooled[(pooled.metric == metric) & (pooled.setting == setting)
@@ -125,11 +127,11 @@ def replication():
                              f'{signed(c["diff"])} $\\pm$ {c.ci:.3f}',
                              f'{c.wins:.0f}/{c.ties:.0f}/{c.losses:.0f}', f'{t.mean_a:.3f}',
                              f'{signed(t["diff"])} $\\pm$ {t.ci:.3f}',
-                             f'{t.wins:.0f}/{t.ties:.0f}/{t.losses:.0f}', f'{c.n:.0f}'])
+                             f'{t.wins:.0f}/{t.ties:.0f}/{t.losses:.0f}'])
         rows.append([])
     write('replication', table(['', 'LIME', 'CLIME', 'CLIME $-$ LIME', '+/=/$-$',
-                                'Re-thr.', 'Re-thr.\\ $-$ LIME', '+/=/$-$', 'Blocks'],
-                               rows, 'lrrrcrrcr'))
+                                'Re-thr.', 'Re-thr.\\ $-$ LIME', '+/=/$-$'],
+                               rows, 'lrrrcrrc'))
 
 
 def triad():
@@ -169,6 +171,7 @@ def arms():
         macro([*base, 'balacc'], r.balanced_accuracy)
         macro([*base, 'recall'], r.recall_minority)
         macro([*base, 'threshold'], r.threshold)
+        macro([*base, 'moved'], pct(r.moved), '{:.0f}')
         macro([*base, 'onesided'], pct(r.one_sided), '{:.0f}')
         macro([*base, 'cosine'], r.cosine)
         macro([*base, 'sametop'], pct(r.same_top), '{:.0f}')
@@ -207,11 +210,38 @@ def neighbourhoods():
         macro(['nbr', setting, kind, 'onesided'],
               pct(share.get('none', 0.0) + share.get('under 1%', 0.0)), '{:.0f}')
     for _, r in frame[frame.arm == 'plain'].iterrows():
-        base = ['bin', r.setting, r.kind, r.minority.replace('%', ' pct').replace('-', ' to '),
-                MAIN[r.explainer].split(',')[-1]]
+        base = ['bin', r.setting, r.kind, BINS[r.minority], MAIN[r.explainer].split(',')[-1]]
         macro([*base, 'fid'], r.test_fidelity)
         macro([*base, 'bal'], r.test_balanced)
         macro([*base, 'cosine'], r.cosine)
+        macro([*base, 'share'], pct(r.share), '{:.0f}')
+    configurations = read('configurations')
+    for setting, part in configurations.groupby('setting'):
+        macro(['ess', setting], pct(part.test_effective_share.mean()), '{:.0f}')
+    for _, r in read('predictors').iterrows():
+        macro(['rho', r.setting, r['with']], r.rho, '{:+.2f}')
+
+
+def by_class():
+    frame = read('by_class')
+    for _, r in frame.iterrows():
+        base = ['cls', r.setting, r.arm, 'minority' if r.label == 1 else 'majority',
+                MAIN[r.explainer].split(',')[-1]]
+        macro([*base, 'fid'], r.test_fidelity)
+        macro([*base, 'bal'], r.test_balanced)
+        macro([*base, 'onesided'], pct(r.one_sided), '{:.0f}')
+
+
+def matched():
+    frame = read('matched_parts')
+    for _, r in frame.iterrows():
+        base = ['part', r.setting, r.kind, METRICS[r.metric], r.part]
+        macro(base, r['diff'], '{:+.3f}')
+        macro([*base, 'wins'], r.wins, '{:.0f}')
+        macro([*base, 'losses'], r.losses, '{:.0f}')
+        macro([*base, 'datasets'], r.datasets, '{:.0f}')
+    macro(['matched', 'seeds'], read('matched').datasets.max()*0 + len(
+        set(pd.read_csv(paths.RESULTS/'matched_seeds.csv').seed)), '{:.0f}')
 
 
 def surrogate_thresholds():
@@ -250,10 +280,10 @@ def numbers():
 
 
 if __name__ == '__main__':
-    for make in (datasets, replication, triad, arms, neighbourhoods, surrogate_thresholds,
-                 reproduce):
+    for make in (datasets, replication, triad, arms, neighbourhoods, by_class, matched,
+                 surrogate_thresholds, reproduce):
         try:
             make()
-        except (AttributeError, TypeError) as e:   # a results file is not there yet
+        except (AttributeError, TypeError, FileNotFoundError) as e:   # a results file is not there yet
             print(f'skipped {make.__name__}: {e}')
     numbers()

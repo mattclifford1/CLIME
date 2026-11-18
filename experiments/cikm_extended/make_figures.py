@@ -21,6 +21,7 @@ FAMILIES = list(FAMILY_SHORT)
 ARMS = ['plain', 'weighted', 'SMOTE', 're-thresholded', 'CP Minimax', 'Slacks Deltas',
         'Gaussian Predictive']
 MINORITY = ['none', 'under 1%', '1-5%', '5-20%', '20-50%']
+SETTING_SHORT = {'native': 'own\nratio', 'balanced': '110:110', 'imbalanced': '200:20'}
 FAMILY_COLOURS = dict(zip(FAMILIES, [roles.C[c] for c in
                                      ('aqua', 'blue', 'plum', 'orange', 'brown', 'red')]))
 
@@ -79,15 +80,15 @@ def replication():
             ax.plot([0.4, 1], [0.4, 1], color=MUTED, lw=0.8, ls=':')
             ax.set(xlim=(0.4, 1.01), ylim=(0.4, 1.01), aspect='equal')
             above = (wide.CLIME > wide.LIME + 0.005).mean()
-            ax.text(0.04, 0.93, f'CLIME higher in {above:.0%}', transform=ax.transAxes, fontsize=7,
-                    color=INK2)
+            ax.text(0.97, 0.05, f'CLIME higher in {above:.0%}', transform=ax.transAxes, fontsize=7,
+                    color=INK, ha='right', bbox=dict(fc='white', ec='none', pad=1.5, alpha=0.8))
             if row == 0:
                 ax.set_title(SETTING_LABELS[setting], fontsize=8)
             if row == 1:
                 ax.set_xlabel('LIME')
         axes[row][0].set_ylabel(f'CLIME\n{label}')
     handles, labels = axes[0][0].get_legend_handles_labels()
-    fig.legend(handles, labels, ncol=6, loc='lower center', bbox_to_anchor=(0.5, -0.04),
+    fig.legend(handles, labels, ncol=6, loc='lower center', bbox_to_anchor=(0.5, -0.07),
                markerscale=1.6, handletextpad=0.2, columnspacing=1.2)
     style.save(fig, 'replication')
 
@@ -118,11 +119,13 @@ def profile():
                 label='rarer class in the sample')
         ax.plot(line['index'], line.test_effective_share, color=MUTED, ls=':',
                 label='effective share of test set')
-        ax.set(ylim=(0, 1), xlabel='query point (class 0 to class 1)', xticks=[0, 5, 10, 15])
+        ax.set(ylim=(0, 1), xlabel='query point', xticks=[0, 5, 10, 15])
         axes[0][col].set_title(SETTING_LABELS[setting], fontsize=8)
     axes[2][0].set_ylabel('share')
-    axes[2][-1].legend(fontsize=6.5, loc='upper left')
-    explainer_legend(fig, y=-0.06)
+    handles, labels = axes[2][0].get_legend_handles_labels()
+    fig.legend(handles, labels, ncol=3, loc='lower center', bbox_to_anchor=(0.5, -0.1),
+               fontsize=7)
+    explainer_legend(fig, y=-0.05)
     style.save(fig, 'profile')
 
 
@@ -144,7 +147,7 @@ def triad():
             ax.bar(np.arange(len(present)) + (i - 1)*width, values, width,
                    color=EXPLAINER_COLOURS[explainer], label=EXPLAINER_LABELS[explainer])
         ax.set_xticks(np.arange(len(present)))
-        ax.set_xticklabels([SETTING_LABELS[s].replace(' ', '\n', 1) for s in present], fontsize=6.5)
+        ax.set_xticklabels([SETTING_SHORT[s] for s in present], fontsize=6.5)
         ax.set_title(label, fontsize=7.5)
         if metric != 'test_brier':
             ax.set_ylim(0.4, 1.0)
@@ -183,8 +186,8 @@ def one_sided():
         ax = axes[3][col]
         ax.bar(x, [part['share'].get(('LIME', m), 0) for m in MINORITY], color=MUTED, width=0.6)
         ax.set(ylim=(0, 0.6), xticks=x)
-        ax.set_xticklabels(MINORITY, fontsize=6.5)
-        ax.set_xlabel('rarer black-box class in the sample')
+        ax.set_xticklabels(['none', '<1%', '1-5%', '5-20%', '20-50%'], fontsize=6.5)
+        ax.set_xlabel('rarer class in the sample', fontsize=8)
         ax.grid(axis='x', visible=False)
         axes[0][col].set_title(SETTING_LABELS[setting], fontsize=8)
     axes[2][0].set_ylabel('cosine of LIME\nand CLIME\ncoefficients')
@@ -241,7 +244,7 @@ def families():
             if np.isfinite(value):
                 ax.text(j, i, f'{value:+.2f}', ha='center', va='center', fontsize=7)
         ax.set_xticks(range(len(present)))
-        ax.set_xticklabels([SETTING_LABELS[s].replace(' ', '\n', 1) for s in present], fontsize=6.5)
+        ax.set_xticklabels([SETTING_SHORT[s] for s in present], fontsize=6.5)
         ax.set_yticks(range(len(FAMILIES)))
         ax.set_yticklabels([FAMILY_SHORT[f] for f in FAMILIES])
         ax.set_title(f'CLIME $-$ LIME:\n{label}', fontsize=7.5)
@@ -425,8 +428,38 @@ def kernel():
     style.save(fig, 'kernel')
 
 
+def matched():
+    '''CLIME's gain over LIME split into a change of cut and a change of fit'''
+    frame = read('matched_parts')
+    frame = frame[frame.kind == 'line']
+    present = settings_present(frame)
+    metrics = [('test_fidelity', 'local fidelity'), ('worst', 'worst query point'),
+               ('test_balanced', 'balanced local fidelity')]
+    fig, axes = plt.subplots(1, 3, figsize=(TEXTWIDTH, TEXTWIDTH*0.3))
+    x = np.arange(len(present))
+    for ax, (metric, label) in zip(axes, metrics):
+        part = frame[frame.metric == metric].pivot_table(index='setting', columns='part',
+                                                         values='diff').reindex(present)
+        ax.bar(x - 0.2, part['cut'], 0.38, color=EXPLAINER_COLOURS['LIME + re-threshold'],
+               label="cut: LIME moved to CLIME's operating point")
+        ax.bar(x + 0.2, part['fit'], 0.38, color=EXPLAINER_COLOURS['CLIME'],
+               label="fit: CLIME against that cut")
+        ax.plot(x, part['total'], ls='', marker='_', ms=22, color=INK, label='CLIME $-$ LIME')
+        ax.axhline(0, **style.ZERO_LINE)
+        ax.set_xticks(x)
+        ax.set_xticklabels([SETTING_SHORT[s] for s in present], fontsize=6.5)
+        ax.set_title(label, fontsize=7.5)
+        ax.grid(axis='x', visible=False)
+    handles, labels = axes[0].get_legend_handles_labels()
+    fig.legend(handles, labels, ncol=3, loc='lower center', bbox_to_anchor=(0.5, -0.24),
+               fontsize=7)
+    fig.subplots_adjust(wspace=0.35)
+    style.save(fig, 'matched')
+
+
 FIGURES = {f.__name__: f for f in (reproduce, replication, profile, triad, one_sided, arms,
-                                   families, grid, operating_point, by_class, sweep, kernel)}
+                                   families, grid, operating_point, by_class, sweep, kernel,
+                                   matched)}
 
 if __name__ == '__main__':
     style.use()
