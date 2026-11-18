@@ -32,3 +32,4 @@ uv run python run_explanations.py       # six surrogates scored as explanations,
 
 `./rerun_all.sh` runs the four large runs in stages, three seeds of the main run first.
 `check_outliers.py` repeats the headline comparison without the splits whose test set holds an extreme value.
+`check_logistic.py` refits LIME's ridge on logistic regression at other kernel widths, with no penalty and on ten times the samples.

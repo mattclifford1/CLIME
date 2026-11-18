@@ -459,6 +459,28 @@ def explanations_spread():
         macro([*base, 'datasets'], r.datasets, '{:.0f}')
 
 
+def logistic_check():
+    frame = read('logistic_check').set_index(['fit', 'width'])
+    for (fit, width), r in frame.iterrows():
+        base = ['lgc', fit, width]
+        macro([*base, 'mean'], r['mean'], '{:.3f}')
+        macro([*base, 'lowest'], r.lowest)
+        macro([*base, 'close'], r.close, '{:.0f}')
+        macro([*base, 'datasets'], r.datasets, '{:.0f}')
+    cell = lambda fit, width: [f'{frame.loc[(fit, width), "mean"]:.3f}',
+                               f'{frame.loc[(fit, width), "close"]:.0f}']
+    widths = {'third': '0.25', 'two thirds': '0.5', 'default': '0.75 (LIME)', 'double': '1.5',
+              'fourfold': '3', 'uniform': 'no kernel'}
+    rows = [[label, f'{100*frame.loc[("effective share", width), "mean"]:.0f}\\%',
+             *cell('probability', width), *cell('linear target', width)]
+            for width, label in widths.items()]
+    rows += [[], ['0.75, no penalty', '', *cell('no penalty', 'default'), '', ''],
+             ['0.75, 100,000 samples', '', *cell('more samples', 'default'), '', '']]
+    write('logistic', table(['Kernel width', 'Effective sample', 'Cosine', 'Above 0.99',
+                             'Cosine', 'Above 0.99'], rows,
+                            groups=[('black box\'s probability', 3, 4), ('linear target', 5, 6)]))
+
+
 def explanations_instruments():
     frame = read('explanations_instruments')
     frame = frame[(frame.family == 'smooth') & frame.explainer.isin(['all', 'LIME and CLIME'])]
@@ -504,7 +526,7 @@ if __name__ == '__main__':
                  surrogate_thresholds, kernel, sweep, surrogate_deltas, runs,
                  failures, outliers, reproduce, explanations, explanations_paired,
                  explanations_moves, explanations_spread, explanations_instruments,
-                 explanations_cuts,
+                 explanations_cuts, logistic_check,
                  explanations_run):
         try:
             make()

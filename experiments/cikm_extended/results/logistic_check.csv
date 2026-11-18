@@ -1,0 +1,21 @@
+fit,width,mean,median,lowest,close,datasets
+probability,third,0.94358,0.99381,0.58044,12,21
+linear target,third,0.95081,0.99705,0.59296,14,21
+effective share,third,0.11605,0.10444,0.00072,0,21
+probability,two thirds,0.96394,0.99865,0.70240,12,21
+linear target,two thirds,0.98511,1.00000,0.75147,17,21
+effective share,two thirds,0.55188,0.58668,0.00405,0,21
+probability,default,0.96423,0.99865,0.75750,12,21
+linear target,default,0.99218,1.00000,0.85686,19,21
+effective share,default,0.75901,0.82970,0.00754,0,21
+probability,double,0.95666,0.99836,0.69617,12,21
+linear target,double,0.99664,1.00000,0.94560,19,21
+effective share,double,0.89909,0.98057,0.01735,4,21
+probability,fourfold,0.94534,0.99786,0.54004,12,21
+linear target,fourfold,0.99790,1.00000,0.97148,19,21
+effective share,fourfold,0.93255,0.99848,0.03725,16,21
+probability,uniform,0.91606,0.99721,0.11628,12,21
+linear target,uniform,0.99926,1.00000,0.98472,20,21
+effective share,uniform,1.00000,1.00000,1.00000,21,21
+no penalty,default,0.62623,0.80037,0.00343,9,21
+more samples,default,0.98805,0.99988,0.91759,16,21

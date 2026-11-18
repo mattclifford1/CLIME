@@ -1157,10 +1157,12 @@ committed first (`experiments/cikm_extended/PREREGISTRATION.md`): 1, 3, 4 and 7 
   a constant is 0.16 (LIME 0.60), and Logit-LIME's class-balanced skill is −0.04.
 - **Which score follows the cosine with the gradient** (exploratory): fidelity least
   (Spearman +0.39 at 200:20), AUC and class-balanced Brier most (+0.70, +0.68).
-- **Failed prediction worth chasing:** on logistic regression LIME's mean cosine with the
-  gradient is 0.96 at 200:20, not above 0.99; 12 of 21 datasets are above 0.99 and the
-  lowest is 0.75. Refitting without the ridge penalty makes it worse (scratch check, seed
-  0), so the penalty is not the cause.
+- **Failed prediction, explained (`check_logistic.py`, 5 seeds, 2026-11-18):** on logistic
+  regression LIME's mean cosine with the gradient is 0.96 at 200:20, not above 0.99; 12 of
+  21 datasets are above 0.99 and the lowest is 0.75. The cause is too few samples, not the
+  kernel: ten times the samples gives 0.988 (16 datasets above 0.99), while a wider kernel
+  is worse (0.957 at twice the width, 0.916 with none). The ridge penalty costs 0.008 at
+  LIME's width (0.992 on an exactly linear target) and removing it is far worse (0.63).
 
 Not done: images (planned in the write-up's section 6); a ground truth for the tree models
 and k-NN.

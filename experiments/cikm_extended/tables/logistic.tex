@@ -1,0 +1,17 @@
+\begin{tabular}{@{}lrrrrr@{}}
+  \toprule
+   &  & \multicolumn{2}{c}{black box's probability} & \multicolumn{2}{c}{linear target} \\
+  \cmidrule(lr){3-4} \cmidrule(lr){5-6}
+  Kernel width & Effective sample & Cosine & Above 0.99 & Cosine & Above 0.99 \\
+  \midrule
+  0.25 & 12\% & 0.944 & 12 & 0.951 & 14 \\
+  0.5 & 55\% & 0.964 & 12 & 0.985 & 17 \\
+  0.75 (LIME) & 76\% & 0.964 & 12 & 0.992 & 19 \\
+  1.5 & 90\% & 0.957 & 12 & 0.997 & 19 \\
+  3 & 93\% & 0.945 & 12 & 0.998 & 19 \\
+  no kernel & 100\% & 0.916 & 12 & 0.999 & 20 \\
+  \midrule
+  0.75, no penalty &  & 0.626 & 9 &  &  \\
+  0.75, 100,000 samples &  & 0.988 & 16 &  &  \\
+  \bottomrule
+\end{tabular}
