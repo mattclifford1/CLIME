@@ -308,6 +308,8 @@ def surrogate_deltas():
             cell for setting in ('native', 'imbalanced')
             for cell in (f'{100*r[("moved", setting)]:.0f}', f'{r[("test_fidelity", setting)]:.3f}',
                          f'{r[("test_balanced", setting)]:.3f}')])
+        macro(['sur', name, 'native', 'moved'], pct(r[('moved', 'native')]), '{:.0f}')
+        macro(['sur', name, 'imbalanced', 'moved'], pct(r[('moved', 'imbalanced')]), '{:.0f}')
         macro(['sur', name, 'native', 'bal'], r[('test_balanced', 'native')])
         macro(['sur', name, 'imbalanced', 'bal'], r[('test_balanced', 'imbalanced')])
         macro(['sur', name, 'native', 'fid'], r[('test_fidelity', 'native')])
@@ -315,6 +317,12 @@ def surrogate_deltas():
     write('surrogate_deltas', table(
         ['Cut of LIME\'s surrogate', 'Moved \\%', 'Fid.', 'Bal.', 'Moved \\%', 'Fid.', 'Bal.'],
         rows, 'lrrrrrr', [('own ratio', 2, 4), ('imbalanced 200:20', 5, 7)]))
+
+
+def runs():
+    for _, r in read('runs').iterrows():
+        macro(['run', r.run, 'seeds'], r.seeds, '{:.0f}')
+        macro(['run', r.run, 'jobs'], r.jobs, '{:.0f}')
 
 
 def reproduce():
@@ -336,7 +344,8 @@ def numbers():
 
 if __name__ == '__main__':
     for make in (datasets, replication, triad, arms, neighbourhoods, by_class, matched,
-                 surrogate_thresholds, kernel, sweep, surrogate_deltas, reproduce):
+                 surrogate_thresholds, kernel, sweep, surrogate_deltas, runs,
+                 reproduce):
         try:
             make()
         except (AttributeError, TypeError, FileNotFoundError) as e:   # a results file is not there yet

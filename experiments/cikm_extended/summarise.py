@@ -277,6 +277,13 @@ def sweep():
 if __name__ == '__main__':
     RUNS = {'main': main_run, 'sweep': sweep, 'kernel': kernel,
             'surrogate_deltas': surrogate_deltas, 'matched': matched}
+    counts = []
+    for run in RUNS:
+        files = list(paths.raw(run).glob('*.models.parquet'))
+        if files:
+            seeds = pd.concat([pd.read_parquet(f, columns=['seed']) for f in files]).seed
+            counts.append({'run': run, 'jobs': len(files), 'seeds': seeds.nunique()})
+    save(pd.DataFrame(counts), 'runs')
     for run in sys.argv[1:] or list(RUNS):
         if not any(paths.raw('main' if run == 'sweep' else run).glob('*.scores.parquet')) \
                 or not any(paths.raw(run).glob('*.scores.parquet')):

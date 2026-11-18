@@ -385,10 +385,11 @@ def sweep():
         ax.set_xticklabels(['4', '10', '20', '40'])
         ax.minorticks_off()
         ax.set_title(label, fontsize=7.5)
-        ax.set_xlabel('majority : minority')
+        ax.tick_params(labelsize=7)
+    axes[2].set_xlabel('majority rows per minority row in the development set')
     handles, labels = axes[0].get_legend_handles_labels()
-    fig.legend(handles, labels, ncol=4, loc='lower center', bbox_to_anchor=(0.5, -0.14))
-    fig.subplots_adjust(wspace=0.42)
+    fig.legend(handles, labels, ncol=4, loc='lower center', bbox_to_anchor=(0.5, -0.22))
+    fig.subplots_adjust(wspace=0.5)
     style.save(fig, 'sweep')
 
 
