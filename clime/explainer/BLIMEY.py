@@ -47,6 +47,7 @@ class bLIMEy:
                        logistic_regression=False,
                        soft_logistic_regression=False,
                        train_data=None,   # the black box's training data (class_weight_data)
+                       sample_salt='surrogate training sample',   # another salt draws another neighbourhood
                        **kwargs
                        ):
         self.query_point = query_point
@@ -62,6 +63,7 @@ class bLIMEy:
         self.train_logits = train_logits
         self.logistic_regression = logistic_regression
         self.soft_logistic_regression = soft_logistic_regression
+        self.sample_salt = sample_salt
 
         sampled_data = self._sample_locally(black_box_model)
         self._train_surrogate(sampled_data)
@@ -99,7 +101,7 @@ class bLIMEy:
         sampled_data = {}
         # seeded from the query point so the neighbourhood does not depend on
         # evaluation order or parallelism (see clime.utils.seeding)
-        rng = clime.utils.rng_from_point(self.query_point, salt='surrogate training sample')
+        rng = clime.utils.rng_from_point(self.query_point, salt=self.sample_salt)
         sampled_data['X'] = rng.multivariate_normal(self.query_point, cov, self.samples)
         # get the class predictions from the sampled data (for use with class balanced learning and metrics)
         sampled_data['y'] = black_box_model.predict(sampled_data['X'])

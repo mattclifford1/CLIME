@@ -5,6 +5,8 @@ import numpy as np
 from scipy.stats import spearmanr
 from sklearn.metrics import roc_auc_score
 
+KL_FLOOR = 1e-7
+
 
 def _rate(mask, weight):
     total = weight.sum()
@@ -20,6 +22,23 @@ def ranking(score, f_class, weight):
 
 def brier(score, f_prob, weight):
     return _rate((np.clip(score, 0, 1) - f_prob)**2, weight)
+
+
+def calibration(score, f_prob, f_class, weight):
+    '''
+    brier, kl: weighted squared error and KL(black box || surrogate) of the clipped score
+    brier_balanced, kl_balanced: their mean over the two black-box classes
+    '''
+    f = np.clip(f_prob, KL_FLOOR, 1 - KL_FLOOR)
+    g = np.clip(score, KL_FLOOR, 1 - KL_FLOOR)
+    loss = {'brier': (np.clip(score, 0, 1) - f_prob)**2,
+            'kl': f*np.log(f/g) + (1 - f)*np.log((1 - f)/(1 - g))}
+    out = {}
+    for name, value in loss.items():
+        out[name] = _rate(value, weight)
+        out[f'{name}_balanced'] = float(np.mean([_rate(value[f_class == c], weight[f_class == c])
+                                                 for c in (0, 1)]))
+    return out
 
 
 def operating_point(score, cut, f_class, weight):

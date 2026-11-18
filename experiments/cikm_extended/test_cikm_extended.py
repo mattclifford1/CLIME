@@ -13,7 +13,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import clime   # noqa: E402
 from clime.evaluation import AVAILABLE_EVALUATION_METRICS   # noqa: E402
 from clime.explainer import AVAILABLE_EXPLAINERS   # noqa: E402
-from common import boxes, evaluate, scores, surrogates, tasks   # noqa: E402
+from common import boxes, evaluate, explanations, gradients, scores, surrogates, tasks   # noqa: E402
 
 
 @pytest.fixture(scope='module')
@@ -92,3 +92,52 @@ def test_matched_cut_reproduces_a_positive_share():
         cut = surrogates.matched_cut(score, weight, share)
         got = (weight*(score >= cut)).sum()/weight.sum()
         assert share <= got <= share + weight.max()/weight.sum() + 1e-12
+
+
+@pytest.mark.parametrize('family, step, tolerance', [('Logistic', 1e-5, 1e-6), ('SVM', 1e-5, 1e-5),
+                                                     ('MLP', 1e-2, 2e-2)])
+def test_gradient_matches_finite_differences(task, family, step, tolerance):
+    clime.RANDOM_SEED = 0
+    built, _ = boxes.build(task, family, arms=('plain',), deltas=())
+    X = task.test['X'][:4]
+
+    def log_odds(Z):
+        p = built['plain'].model.predict_proba(Z)[:, 1]
+        return np.log(p/(1 - p))
+
+    numeric = np.zeros_like(X)
+    for j in range(X.shape[1]):
+        h = np.zeros(X.shape[1])
+        h[j] = step
+        numeric[:, j] = (log_odds(X + h) - log_odds(X - h))/(2*step)
+    found = gradients.log_odds(built['plain'], X)
+    assert np.abs(found - numeric).max() <= tolerance*max(1, np.abs(numeric).max())
+    assert gradients.log_odds(boxes.build(task, 'k Nearest Neighbours', arms=('plain',),
+                                          deltas=())[0]['plain'], X) is None
+
+
+def test_balanced_calibration_is_the_mean_over_classes():
+    rng = np.random.default_rng(2)
+    f = rng.uniform(size=200)
+    g, w, c = rng.uniform(-0.2, 1.2, size=200), rng.uniform(0.1, 1, size=200), (f > 0.8).astype(int)
+    found = scores.calibration(g, f, c, w)
+    assert found['brier'] == pytest.approx(scores.brier(g, f, w))
+    per_class = [scores.brier(g[c == k], f[c == k], w[c == k]) for k in (0, 1)]
+    assert found['brier_balanced'] == pytest.approx(np.mean(per_class))
+    assert scores.calibration(f, f, c, w)['kl'] == pytest.approx(0)
+
+
+def test_a_threshold_move_leaves_the_plain_explanation_to_score(task):
+    '''the threshold-only row scores the plain black box's LIME at the moved threshold'''
+    clime.RANDOM_SEED = 0
+    built, _ = boxes.build(task, 'Logistic', arms=('plain',), deltas=())
+    moved = boxes.threshold.moved_threshold(built['plain'], 0.2)
+    q = evaluate.query_points(task, line=20, per_class=0)[10][3]
+    _, _, cuts, coefs, truths, lime = explanations.explain(built['plain'], task, q, sweep=True)
+    assert len(cuts) == len(explanations.SWEPT)*len(explanations.CUTS)
+    assert set(truths) == {'point', 'mean', 'mean_probability'}
+    _, rows, _, shifted, _, _ = explanations.explain(moved, task, q, plain_lime=lime)
+    last = rows[-1]
+    assert last['explainer'] == explanations.THRESHOLD_ONLY and last['cut'] == pytest.approx(0.2)
+    cosine = scores.explanation_agreement(coefs['Logit-LIME'], shifted['Logit-LIME'])['cosine']
+    assert cosine == pytest.approx(1, abs=1e-6)

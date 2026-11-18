@@ -18,7 +18,7 @@ FAST_DELTAS = ('DKW Minimax', 'DKW Sum', 'Gaussian Predictive', 'Gaussian Band',
 DELTAS_SAMPLE = 500
 
 
-class _kept(bLIMEy):
+class kept(bLIMEy):
     '''bLIMEy that keeps its neighbourhood sample and the weights it trained with'''
     def _train_surrogate(self, sampled_data):
         self.sampled = sampled_data
@@ -65,8 +65,8 @@ def build(box, query_point, test_data, deltas=FAST_DELTAS, matched=False):
     its threshold moved (by weighted balanced accuracy, or by each deltas method in
     `deltas`), so they share its coefficients.
     '''
-    lime = _kept(box, query_point, test_data=test_data)
-    balanced = _kept(box, query_point, test_data=test_data, class_weight_sampled=True)
+    lime = kept(box, query_point, test_data=test_data)
+    balanced = kept(box, query_point, test_data=test_data, class_weight_sampled=True)
     sample = lime.sampled
     score = lime.score(sample['X'])
     label = np.asarray(sample['y']).astype(np.int64)

@@ -74,6 +74,13 @@ def explain(box, task, query_point, deltas=surrogates.FAST_DELTAS, matched=False
     return query, rows
 
 
+def described(task, tags, model_rows):
+    '''the model rows of a job, tagged with the job and the size of its data'''
+    return [{**tags, 'ratio': task.ratio, 'n_features': task.train['X'].shape[1],
+             'n_train': len(task.train['y']), 'n_test': len(task.test['y']), **r}
+            for r in model_rows]
+
+
 def run(dataset, setting, seed, family, arms=boxes.TRAINING_ARMS, deltas=None,
         surrogate_deltas=surrogates.FAST_DELTAS, line=LINE_POINTS,
         per_class=TEST_POINTS_PER_CLASS, kernel_width=None, matched=False):
@@ -92,10 +99,7 @@ def run(dataset, setting, seed, family, arms=boxes.TRAINING_ARMS, deltas=None,
     built, model_rows = boxes.build(task, family, arms, deltas)
     tags = {'dataset': dataset, 'setting': setting, 'seed': seed, 'family': family,
             'kernel_width': costs.KERNEL_WIDTH_SCALE}
-    out = {'models': [{**tags, 'ratio': task.ratio, 'n_features': task.train['X'].shape[1],
-                       'n_train': len(task.train['y']), 'n_test': len(task.test['y']), **r}
-                      for r in model_rows],
-           'queries': [], 'scores': []}
+    out = {'models': described(task, tags, model_rows), 'queries': [], 'scores': []}
 
     points = query_points(task, line, per_class)
     placement = {r['arm']: r['placement'] for r in model_rows}
