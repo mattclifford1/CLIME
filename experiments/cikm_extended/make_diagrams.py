@@ -231,9 +231,48 @@ def scores():
     style.save(fig, 'diagram_scores')
 
 
+def threshold():
+    """a moved black-box threshold: LIME's line changes, the logit surrogate's only shifts"""
+    from clime.models import threshold as placement
+    test, box, _, _, _ = toy()
+    moved = placement.moved_threshold(box, 0.05)
+    direction = np.array([1.0, 1.0])/np.sqrt(2)
+    t = np.linspace(-2.2, 5.2, 400)
+    X = QUERY + t[:, None]*direction
+    fig, axes = plt.subplots(1, 2, figsize=(TEXTWIDTH, TEXTWIDTH*0.36))
+    panels = [({}, 'LIME: fitted to the probability', 'P(class 1)', lambda p: p),
+              ({'train_logits': True}, 'Logit-LIME: fitted to the log-odds', 'log-odds of class 1',
+               lambda p: np.log(p/(1 - p)))]
+    for ax, (flags, title, label, space) in zip(axes, panels):
+        notes = []
+        for model, name, style_ in ((box, 'threshold 0.5', '-'), (moved, 'threshold moved', '--')):
+            surrogate = surrogates.kept(model, QUERY, test_data=test, **flags)
+            colour = INK if style_ == '-' else MUTED
+            ax.plot(t, space(model.predict_proba(X)[:, 1]), color=colour, lw=1.4, ls=style_,
+                    label=f'black box, {name}')
+            ax.plot(t, space(np.clip(surrogate.score(X), 1e-6, 1 - 1e-6)) if flags
+                    else surrogate.score(X), color=COLOUR['Logit-LIME' if flags else 'LIME'],
+                    ls=style_, lw=1.1, label=f'surrogate, {name}')
+            notes.append(np.linalg.norm(surrogate.get_explanation()))
+        ax.axvline(0, color=MUTED, lw=0.6, ls=':')
+        ax.set(xlabel='distance from $q$ towards the other class', ylabel=label,
+               xlim=(t[0], t[-1]))
+        if not flags:
+            ax.set_ylim(-0.1, 1.08)
+        ax.set_title(title, fontsize=8, loc='left')
+        ax.text(0.97, 0.05, f'size of the weights\n{notes[0]:.2f} $\\to$ {notes[1]:.2f}',
+                transform=ax.transAxes, ha='right', va='bottom', fontsize=7, color=INK2,
+                bbox=dict(fc='white', ec='none', pad=1.5))
+        ax.legend(loc='upper left', fontsize=6.5)
+        ax.grid(False)
+    fig.subplots_adjust(wspace=0.28)
+    style.save(fig, 'diagram_threshold')
+
+
 if __name__ == '__main__':
     style.use()
     mismatch()
     slice_()
     design()
     scores()
+    threshold()
