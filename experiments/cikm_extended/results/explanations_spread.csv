@@ -1,0 +1,109 @@
+setting,family,kind,explainer,median,lowest,above,datasets
+balanced,Logistic,line,CLIME,0.99867,0.97156,14,17
+balanced,Logistic,line,LIME,0.99979,0.97010,14,17
+balanced,Logistic,line,Logit-CLIME,1.00000,0.99946,17,17
+balanced,Logistic,line,Logit-LIME,1.00000,0.99937,17,17
+balanced,Logistic,line,Soft logistic,0.99923,0.94367,14,17
+balanced,Logistic,line,Soft logistic CLIME,0.99963,0.94463,15,17
+balanced,Logistic,test,CLIME,0.99873,0.91948,13,17
+balanced,Logistic,test,LIME,0.99976,0.91886,14,17
+balanced,Logistic,test,Logit-CLIME,1.00000,0.98426,16,17
+balanced,Logistic,test,Logit-LIME,1.00000,0.98838,16,17
+balanced,Logistic,test,Soft logistic,0.99843,0.98124,13,17
+balanced,Logistic,test,Soft logistic CLIME,0.99924,0.98591,14,17
+balanced,MLP,line,CLIME,0.90691,0.82494,0,17
+balanced,MLP,line,LIME,0.94136,0.84214,0,17
+balanced,MLP,line,Logit-CLIME,0.93729,0.83986,0,17
+balanced,MLP,line,Logit-LIME,0.95596,0.86176,1,17
+balanced,MLP,line,Soft logistic,0.94563,0.86331,0,17
+balanced,MLP,line,Soft logistic CLIME,0.92181,0.85258,0,17
+balanced,MLP,test,CLIME,0.94257,0.86575,0,17
+balanced,MLP,test,LIME,0.95239,0.87974,0,17
+balanced,MLP,test,Logit-CLIME,0.95352,0.89843,0,17
+balanced,MLP,test,Logit-LIME,0.96759,0.91277,1,17
+balanced,MLP,test,Soft logistic,0.95340,0.90893,0,17
+balanced,MLP,test,Soft logistic CLIME,0.94440,0.90002,0,17
+balanced,SVM,line,CLIME,0.88020,0.61175,4,17
+balanced,SVM,line,LIME,0.93559,0.80740,4,17
+balanced,SVM,line,Logit-CLIME,0.89394,0.64312,4,17
+balanced,SVM,line,Logit-LIME,0.96632,0.83656,5,17
+balanced,SVM,line,Soft logistic,0.96846,0.88389,4,17
+balanced,SVM,line,Soft logistic CLIME,0.91973,0.63108,4,17
+balanced,SVM,test,CLIME,0.91109,0.73964,0,17
+balanced,SVM,test,LIME,0.97058,0.79780,3,17
+balanced,SVM,test,Logit-CLIME,0.92211,0.75861,0,17
+balanced,SVM,test,Logit-LIME,0.98110,0.81422,4,17
+balanced,SVM,test,Soft logistic,0.97136,0.88515,3,17
+balanced,SVM,test,Soft logistic CLIME,0.91796,0.76512,0,17
+imbalanced,Logistic,line,CLIME,0.98871,0.40344,10,21
+imbalanced,Logistic,line,LIME,0.99890,0.45511,13,21
+imbalanced,Logistic,line,Logit-CLIME,1.00000,0.81385,17,21
+imbalanced,Logistic,line,Logit-LIME,1.00000,0.81373,17,21
+imbalanced,Logistic,line,Soft logistic,0.99914,0.63236,14,21
+imbalanced,Logistic,line,Soft logistic CLIME,0.99929,0.63245,15,21
+imbalanced,Logistic,test,CLIME,0.97931,0.75281,6,21
+imbalanced,Logistic,test,LIME,0.99864,0.75284,12,21
+imbalanced,Logistic,test,Logit-CLIME,1.00000,0.85571,19,21
+imbalanced,Logistic,test,Logit-LIME,1.00000,0.85553,19,21
+imbalanced,Logistic,test,Soft logistic,0.99693,0.76433,14,21
+imbalanced,Logistic,test,Soft logistic CLIME,0.99763,0.76451,15,21
+imbalanced,MLP,line,CLIME,0.85780,0.19894,0,21
+imbalanced,MLP,line,LIME,0.85780,0.27268,0,21
+imbalanced,MLP,line,Logit-CLIME,0.84010,0.43693,0,21
+imbalanced,MLP,line,Logit-LIME,0.85236,0.61143,1,21
+imbalanced,MLP,line,Soft logistic,0.86349,0.70535,0,21
+imbalanced,MLP,line,Soft logistic CLIME,0.84877,0.62757,0,21
+imbalanced,MLP,test,CLIME,0.91144,0.38837,0,21
+imbalanced,MLP,test,LIME,0.92399,0.48090,0,21
+imbalanced,MLP,test,Logit-CLIME,0.91970,0.49869,0,21
+imbalanced,MLP,test,Logit-LIME,0.93035,0.70443,0,21
+imbalanced,MLP,test,Soft logistic,0.92459,0.79991,0,21
+imbalanced,MLP,test,Soft logistic CLIME,0.91723,0.62735,0,21
+imbalanced,SVM,line,CLIME,0.72409,0.38742,1,21
+imbalanced,SVM,line,LIME,0.89953,0.51155,2,21
+imbalanced,SVM,line,Logit-CLIME,0.76461,0.41185,1,21
+imbalanced,SVM,line,Logit-LIME,0.94530,0.51877,4,21
+imbalanced,SVM,line,Soft logistic,0.91895,0.51208,3,21
+imbalanced,SVM,line,Soft logistic CLIME,0.81239,0.36331,1,21
+imbalanced,SVM,test,CLIME,0.76250,0.35392,1,21
+imbalanced,SVM,test,LIME,0.92288,0.46223,2,21
+imbalanced,SVM,test,Logit-CLIME,0.79827,0.35779,1,21
+imbalanced,SVM,test,Logit-LIME,0.95638,0.46625,2,21
+imbalanced,SVM,test,Soft logistic,0.94887,0.46219,2,21
+imbalanced,SVM,test,Soft logistic CLIME,0.83349,0.41143,1,21
+native,Logistic,line,CLIME,0.99682,0.48027,13,22
+native,Logistic,line,LIME,0.99937,0.57654,15,22
+native,Logistic,line,Logit-CLIME,0.99992,0.82255,19,22
+native,Logistic,line,Logit-LIME,0.99992,0.82250,19,22
+native,Logistic,line,Soft logistic,0.99713,0.66539,14,22
+native,Logistic,line,Soft logistic CLIME,0.99779,0.67998,15,22
+native,Logistic,test,CLIME,0.98950,0.66402,10,22
+native,Logistic,test,LIME,0.99957,0.65263,15,22
+native,Logistic,test,Logit-CLIME,0.99992,0.90421,18,22
+native,Logistic,test,Logit-LIME,0.99992,0.90420,18,22
+native,Logistic,test,Soft logistic,0.99600,0.89743,13,22
+native,Logistic,test,Soft logistic CLIME,0.99736,0.89870,13,22
+native,MLP,line,CLIME,0.84951,0.20713,0,22
+native,MLP,line,LIME,0.87926,0.25362,0,22
+native,MLP,line,Logit-CLIME,0.89333,0.43830,1,22
+native,MLP,line,Logit-LIME,0.92270,0.58568,2,22
+native,MLP,line,Soft logistic,0.90028,0.67712,0,22
+native,MLP,line,Soft logistic CLIME,0.87554,0.56683,0,22
+native,MLP,test,CLIME,0.86401,0.36790,0,22
+native,MLP,test,LIME,0.91171,0.45154,1,22
+native,MLP,test,Logit-CLIME,0.93338,0.58287,1,22
+native,MLP,test,Logit-LIME,0.95669,0.78498,2,22
+native,MLP,test,Soft logistic,0.93523,0.81814,1,22
+native,MLP,test,Soft logistic CLIME,0.91618,0.71133,0,22
+native,SVM,line,CLIME,0.83898,0.35699,0,22
+native,SVM,line,LIME,0.91685,0.46744,2,22
+native,SVM,line,Logit-CLIME,0.86235,0.44563,1,22
+native,SVM,line,Logit-LIME,0.93936,0.57870,3,22
+native,SVM,line,Soft logistic,0.92569,0.55430,3,22
+native,SVM,line,Soft logistic CLIME,0.86036,0.44688,2,22
+native,SVM,test,CLIME,0.83304,0.39724,0,22
+native,SVM,test,LIME,0.92670,0.56089,1,22
+native,SVM,test,Logit-CLIME,0.85611,0.46297,0,22
+native,SVM,test,Logit-LIME,0.93822,0.67137,3,22
+native,SVM,test,Soft logistic,0.94531,0.63522,1,22
+native,SVM,test,Soft logistic CLIME,0.85930,0.50541,0,22

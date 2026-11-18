@@ -130,6 +130,17 @@ def neighbourhoods(full, arm='plain'):
     return pd.concat(out, ignore_index=True)
 
 
+def spread(block, arm='plain', level=0.99):
+    '''how the cosine with the gradient is spread over datasets: median and count above `level`'''
+    part = block[(block.arm == arm) & block.truth_point_cosine.notna()]
+    by = ['setting', 'family', 'kind', 'explainer']
+    per_dataset = part.groupby([*by, 'dataset'], observed=True).truth_point_cosine.mean()
+    grouped = per_dataset.groupby(by, observed=True)
+    return pd.DataFrame({'median': grouped.median(), 'lowest': grouped.min(),
+                         'above': grouped.agg(lambda c: (c > level).sum()),
+                         'datasets': grouped.size()}).reset_index()
+
+
 def cuts(frame):
     values = [f'{w}_{s}' for w in WHERE for s in ('fidelity', 'balanced')]
     return stats.over_datasets(with_all(frame), ['setting', 'family', 'kind', 'explainer', 'cut'],
@@ -166,6 +177,7 @@ if __name__ == '__main__':
     block = blocks(full)
     save(triad(block), 'explanations_triad')
     save(paired(block), 'explanations_paired')
+    save(spread(block), 'explanations_spread')
     models = runner.load(RUN, 'models')
     save(moves(runner.load(RUN, 'pairs'), queries, models), 'explanations_moves')
     save(cuts(runner.load(RUN, 'cuts')), 'explanations_cuts')

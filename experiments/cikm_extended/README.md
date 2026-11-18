@@ -9,6 +9,7 @@ Write-up: `../../../papers/CIKM-2023-extra-datasets`.
 - **Threshold of the black box** (`clime/models/threshold.py`): 0.5, re-thresholded on validation data, or placed by each named deltas method on the training projections.
 - **Surrogates** (`common/surrogates.py`): LIME, CLIME, and LIME's surrogate with its 0.5 cut moved by balanced accuracy or by a deltas method.
 - **Scores** (`common/scores.py`): fidelity and per-class fidelity (operating point), AUC (ranking) and Brier score (calibration) against the black box, on the test set and on a local sample.
+- **Explanations** (`common/explanations.py`): six surrogates on one neighbourhood sample, scored against the black box's gradient, across two draws of the neighbourhood and across each correction of the black box; predictions in `PREREGISTRATION.md`.
 
 ## Running
 
@@ -25,6 +26,7 @@ uv run python run_kernel.py             # locality kernel width
 uv run python run_surrogate_deltas.py   # every deltas method on the surrogate's threshold
 uv run python run_grid.py               # fidelity maps on the first two principal components
 uv run python run_matched.py            # CLIME's gain split into a change of cut and a change of fit
+uv run python run_explanations.py       # six surrogates scored as explanations, 5 seeds
 ./make_paper.sh                         # summarise, draw figures and tables, copy them into the paper
 ```
 

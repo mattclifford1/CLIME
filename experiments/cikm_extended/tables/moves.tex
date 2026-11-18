@@ -2,36 +2,36 @@
   \toprule
   Black box & Explanation & Cosine & Norm ratio & Same top feature & Unchanged \\
   \midrule
-  re-thresholded (validation) & LIME & 0.993 & 1.85 & 80\% & 31\% \\
-   & CLIME & 0.961 & 1.27 & 66\% & 25\% \\
-   & Logit-LIME & 1.000 & 1.00 & 98\% & 94\% \\
-   & Logit-CLIME & 0.997 & 1.00 & 83\% & 43\% \\
-   & Soft logistic & 0.993 & 1.10 & 84\% & 28\% \\
-   & Soft logistic, CLIME weights & 0.966 & 1.05 & 70\% & 24\% \\
-   & black box's gradient & 1.000 & 1.00 & 100\% & 99\% \\
+  re-thresholded (validation) & LIME & 0.990 & 2.17 & 80\% & 20\% \\
+   & CLIME & 0.909 & 1.23 & 57\% & 10\% \\
+   & Logit-LIME & 1.000 & 1.00 & 98\% & 87\% \\
+   & Logit-CLIME & 0.975 & 0.98 & 71\% & 25\% \\
+   & Soft logistic & 0.993 & 1.07 & 82\% & 23\% \\
+   & Soft logistic, CLIME weights & 0.935 & 1.01 & 62\% & 18\% \\
+   & black box's gradient & 1.000 & 1.00 & 100\% & 100\% \\
   \midrule
-  deltas (CP Minimax) & LIME & 0.995 & 1.89 & 84\% & 26\% \\
-   & CLIME & 0.978 & 1.26 & 72\% & 20\% \\
-   & Logit-LIME & 1.000 & 1.00 & 98\% & 94\% \\
-   & Logit-CLIME & 0.999 & 1.00 & 85\% & 48\% \\
-   & Soft logistic & 0.995 & 1.11 & 88\% & 24\% \\
-   & Soft logistic, CLIME weights & 0.979 & 1.07 & 75\% & 19\% \\
-   & black box's gradient & 1.000 & 1.00 & 100\% & 99\% \\
+  deltas (CP Minimax) & LIME & 0.993 & 2.11 & 84\% & 19\% \\
+   & CLIME & 0.932 & 1.18 & 61\% & 10\% \\
+   & Logit-LIME & 1.000 & 1.00 & 98\% & 88\% \\
+   & Logit-CLIME & 0.980 & 0.96 & 72\% & 25\% \\
+   & Soft logistic & 0.995 & 1.05 & 87\% & 23\% \\
+   & Soft logistic, CLIME weights & 0.953 & 1.00 & 66\% & 18\% \\
+   & black box's gradient & 1.000 & 1.00 & 100\% & 100\% \\
   \midrule
-  class weighted & LIME & 0.970 & 1.22 & 70\% & 7\% \\
-   & CLIME & 0.964 & 1.11 & 68\% & 9\% \\
-   & Logit-LIME & 0.973 & 1.00 & 73\% & 5\% \\
-   & Logit-CLIME & 0.970 & 1.00 & 70\% & 7\% \\
-   & Soft logistic & 0.975 & 1.13 & 72\% & 7\% \\
-   & Soft logistic, CLIME weights & 0.969 & 1.08 & 75\% & 7\% \\
-   & black box's gradient & 0.942 & 1.03 & 75\% & 0\% \\
+  class weighted & LIME & 0.907 & 1.44 & 58\% & 1\% \\
+   & CLIME & 0.857 & 1.16 & 52\% & 1\% \\
+   & Logit-LIME & 0.923 & 1.10 & 61\% & 1\% \\
+   & Logit-CLIME & 0.893 & 1.09 & 57\% & 1\% \\
+   & Soft logistic & 0.921 & 1.16 & 61\% & 1\% \\
+   & Soft logistic, CLIME weights & 0.875 & 1.17 & 55\% & 1\% \\
+   & black box's gradient & 0.892 & 1.24 & 56\% & 1\% \\
   \midrule
-  SMOTE & LIME & 0.950 & 1.68 & 62\% & 2\% \\
-   & CLIME & 0.938 & 1.27 & 63\% & 3\% \\
-   & Logit-LIME & 0.952 & 1.29 & 67\% & 4\% \\
-   & Logit-CLIME & 0.961 & 1.28 & 65\% & 2\% \\
-   & Soft logistic & 0.963 & 1.35 & 70\% & 2\% \\
-   & Soft logistic, CLIME weights & 0.956 & 1.33 & 71\% & 2\% \\
-   & black box's gradient & 0.951 & 1.40 & 74\% & 1\% \\
+  SMOTE & LIME & 0.840 & 2.13 & 49\% & 1\% \\
+   & CLIME & 0.756 & 1.38 & 43\% & 1\% \\
+   & Logit-LIME & 0.854 & 1.52 & 51\% & 1\% \\
+   & Logit-CLIME & 0.809 & 1.46 & 47\% & 1\% \\
+   & Soft logistic & 0.861 & 1.50 & 51\% & 1\% \\
+   & Soft logistic, CLIME weights & 0.786 & 1.43 & 46\% & 1\% \\
+   & black box's gradient & 0.880 & 1.81 & 54\% & 1\% \\
   \bottomrule
 \end{tabular}

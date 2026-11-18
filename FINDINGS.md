@@ -1132,8 +1132,38 @@ training SDs, which stretches the sampling covariance; dropping them moves no he
 difference by more than 0.013 (`check_outliers.py`). 19 of 2.4 million explanations
 failed, all in one such split, through B24.
 
-Not done: images (planned in the write-up's section 6); a logit surrogate under the same
-three readings.
+### The explanation scored itself (explanations run, 2026-11-18)
+
+Six surrogates on one neighbourhood sample (LIME, CLIME, Logit-LIME, Logit-CLIME, soft-label
+logistic with each weighting), 5 seeds, 270 thousand explanations. Eight predictions were
+committed first (`experiments/cikm_extended/PREREGISTRATION.md`): 1, 3, 4 and 7 hold, 2 and
+5 in part, 6 and 8 fail.
+
+- **Fidelity is not a property of the explanation.** With LIME's coefficients fixed, moving
+  the cut takes balanced fidelity from 0.50 to 0.72 and fidelity from 0.21 to 0.97 at
+  200:20 (line). So the cut-versus-fit split above is a demonstration, not a method.
+- **CLIME is further from the black box's gradient than LIME** (cosine with the log-odds
+  gradient at the query point; logistic regression, SVM, MLP): −0.068 at 200:20, −0.049 at
+  own ratio, −0.028 at 110:110, ahead on no dataset. Logit-LIME is +0.028, +0.035, +0.011
+  against LIME.
+- **CLIME is less stable** across two draws of the neighbourhood: 0.79 against 0.89 at
+  200:20.
+- **A threshold move on the black box** (a constant shift in log-odds, so no gradient
+  changes): LIME's coefficients grow ×2.2 and its top feature changes at 20% of query
+  points; CLIME's at 43%; Logit-LIME's at 2%. Class weighting and SMOTE change the gradient
+  itself (median cosine 0.89 and 0.88 with the plain model's).
+- **Losses:** on the surrogate's own samples each weighting wins its own loss in every
+  setting; on the test set CLIME wins both at 110:110. At 200:20 CLIME's Brier skill over
+  a constant is 0.16 (LIME 0.60), and Logit-LIME's class-balanced skill is −0.04.
+- **Which score follows the cosine with the gradient** (exploratory): fidelity least
+  (Spearman +0.39 at 200:20), AUC and class-balanced Brier most (+0.70, +0.68).
+- **Failed prediction worth chasing:** on logistic regression LIME's mean cosine with the
+  gradient is 0.96 at 200:20, not above 0.99; 12 of 21 datasets are above 0.99 and the
+  lowest is 0.75. Refitting without the ridge penalty makes it worse (scratch check, seed
+  0), so the penalty is not the cause.
+
+Not done: images (planned in the write-up's section 6); a ground truth for the tree models
+and k-NN.
 
 ---
 

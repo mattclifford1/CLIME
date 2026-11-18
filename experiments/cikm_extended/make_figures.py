@@ -547,28 +547,28 @@ def moves():
 
 
 def losses():
-    """CLIME minus LIME under each loss: each weighting wins the loss it is fitted with"""
+    """CLIME minus LIME in Brier score, kernel weighted and class balanced, on each evaluation set"""
     frame = read('explanations_paired')
-    frame = frame[(frame.family == 'all') & (frame.kind == 'line') & (frame.explainer == 'CLIME')]
+    frame = frame[(frame.family == 'all') & (frame.kind == 'test') & (frame.explainer == 'CLIME')]
     present = settings_present(frame)
-    panels = [('brier', 'Brier score'), ('kl', 'KL divergence')]
-    fig, axes = plt.subplots(1, 2, figsize=(TEXTWIDTH*0.8, TEXTWIDTH*0.3))
+    panels = [('local', "on fresh samples around $q$"), ('test', 'on the test set')]
+    fig, axes = plt.subplots(1, 2, figsize=(TEXTWIDTH*0.8, TEXTWIDTH*0.3), sharey=True)
     x = np.arange(len(present))
-    for ax, (loss, label) in zip(axes, panels):
+    for ax, (where, label) in zip(axes, panels):
         for i, (suffix, name, colour) in enumerate((('', 'kernel weighted', EXPLAINER_COLOURS['LIME']),
                                                     ('_balanced', 'kernel weighted, class balanced',
                                                      EXPLAINER_COLOURS['CLIME']))):
-            part = frame[frame.metric == f'test_{loss}{suffix}'].set_index('setting').reindex(present)
+            part = frame[frame.metric == f'{where}_brier{suffix}'].set_index('setting').reindex(present)
             ax.bar(x + (i - 0.5)*0.38, part['diff'], 0.36, yerr=part['ci'], color=colour, label=name,
                    error_kw=dict(lw=0.8, ecolor=INK))
         ax.axhline(0, **style.ZERO_LINE)
         ax.set_xticks(x)
         ax.set_xticklabels([SETTING_SHORT[s] for s in present], fontsize=6.5)
-        ax.set_title(f'{label}: CLIME $-$ LIME\n(below zero: CLIME better)', fontsize=7.5)
+        ax.set_title(label, fontsize=7.5)
         ax.grid(axis='x', visible=False)
+    axes[0].set_ylabel('Brier score, CLIME $-$ LIME\n(below zero: CLIME better)')
     handles, labels = axes[0].get_legend_handles_labels()
-    fig.legend(handles, labels, ncol=2, loc='lower center', bbox_to_anchor=(0.5, -0.16))
-    fig.subplots_adjust(wspace=0.35)
+    fig.legend(handles, labels, ncol=2, loc='lower center', bbox_to_anchor=(0.5, -0.28))
     style.save(fig, 'losses')
 
 

@@ -420,12 +420,16 @@ def explanations_paired():
 
 def explanations_moves():
     frame = read('explanations_moves')
-    frame = frame[frame.family.isin(['all', 'smooth']) & frame.arm.isin(MOVED_ARMS)]
-    for _, r in frame.iterrows():
-        base = ['mov', r.setting, r.kind, r.family, r.arm, r.neighbourhood, r.explainer]
+    frame = frame[frame.arm.isin(MOVED_ARMS)]
+    headline = (frame.setting == 'imbalanced') & (frame.kind == 'test') & (frame.neighbourhood == 'all')
+    for _, r in frame[frame.family.isin(['all', 'smooth']) | headline].iterrows():
+        base = ['mov', r.setting, r.kind, GROUPS.get(r.family, r.family), r.arm, r.neighbourhood,
+                r.explainer]
         macro([*base, 'cos'], r.median_cosine, '{:.3f}')
+        macro([*base, 'meancos'], r.mean_cosine, '{:.3f}')
         macro([*base, 'norm'], r.median_norm_ratio, '{:.2f}')
         macro([*base, 'top'], pct(r.same_top), '{:.0f}')
+        macro([*base, 'changed'], pct(1 - r.same_top), '{:.0f}')
         macro([*base, 'same'], pct(r.unchanged), '{:.0f}')
     shown = frame[(frame.setting == 'imbalanced') & (frame.kind == 'test')
                   & (frame.neighbourhood == 'all')]
@@ -443,6 +447,16 @@ def explanations_moves():
         rows.append([])
     write('moves', table(['Black box', 'Explanation', 'Cosine', 'Norm ratio', 'Same top feature',
                           'Unchanged'], rows, 'llrrrr'))
+
+
+def explanations_spread():
+    frame = read('explanations_spread')
+    for _, r in frame[frame.family.isin(list(GROUPS))].iterrows():
+        base = ['spr', r.setting, r.kind, GROUPS[r.family], r.explainer]
+        macro([*base, 'median'], r['median'], '{:.3f}')
+        macro([*base, 'lowest'], r.lowest)
+        macro([*base, 'above'], r.above, '{:.0f}')
+        macro([*base, 'datasets'], r.datasets, '{:.0f}')
 
 
 def explanations_instruments():
@@ -489,7 +503,8 @@ if __name__ == '__main__':
     for make in (datasets, replication, triad, arms, neighbourhoods, by_class, matched,
                  surrogate_thresholds, kernel, sweep, surrogate_deltas, runs,
                  failures, outliers, reproduce, explanations, explanations_paired,
-                 explanations_moves, explanations_instruments, explanations_cuts,
+                 explanations_moves, explanations_spread, explanations_instruments,
+                 explanations_cuts,
                  explanations_run):
         try:
             make()

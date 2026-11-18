@@ -1,79 +1,173 @@
 setting,family,arm,kind,one_sided,has_gradient,datasets
-imbalanced,Gradient Boosting,CP Minimax,line,0.10000,0.00000,3
-imbalanced,Gradient Boosting,CP Minimax,test,0.00000,0.00000,3
-imbalanced,Gradient Boosting,SMOTE,line,0.08333,0.00000,3
-imbalanced,Gradient Boosting,SMOTE,test,0.00000,0.00000,3
-imbalanced,Gradient Boosting,plain,line,0.08333,0.00000,3
-imbalanced,Gradient Boosting,plain,test,0.06667,0.00000,3
-imbalanced,Gradient Boosting,re-thresholded,line,0.10000,0.00000,3
-imbalanced,Gradient Boosting,re-thresholded,test,0.00000,0.00000,3
-imbalanced,Gradient Boosting,weighted,line,0.08333,0.00000,3
-imbalanced,Gradient Boosting,weighted,test,0.00000,0.00000,3
-imbalanced,Logistic,CP Minimax,line,0.16667,1.00000,3
-imbalanced,Logistic,CP Minimax,test,0.05000,1.00000,3
-imbalanced,Logistic,SMOTE,line,0.16667,1.00000,3
-imbalanced,Logistic,SMOTE,test,0.03333,1.00000,3
-imbalanced,Logistic,plain,line,0.25000,1.00000,3
-imbalanced,Logistic,plain,test,0.08333,1.00000,3
-imbalanced,Logistic,re-thresholded,line,0.18333,1.00000,3
-imbalanced,Logistic,re-thresholded,test,0.03333,1.00000,3
-imbalanced,Logistic,weighted,line,0.18333,1.00000,3
-imbalanced,Logistic,weighted,test,0.03333,1.00000,3
-imbalanced,MLP,CP Minimax,line,0.20000,1.00000,2
-imbalanced,MLP,CP Minimax,test,0.00000,1.00000,2
-imbalanced,MLP,SMOTE,line,0.22500,1.00000,2
-imbalanced,MLP,SMOTE,test,0.00000,1.00000,2
-imbalanced,MLP,plain,line,0.70000,1.00000,2
-imbalanced,MLP,plain,test,0.55000,1.00000,2
-imbalanced,MLP,re-thresholded,line,0.20000,1.00000,2
-imbalanced,MLP,re-thresholded,test,0.05000,1.00000,2
-imbalanced,MLP,weighted,line,0.22500,1.00000,2
-imbalanced,MLP,weighted,test,0.00000,1.00000,2
-imbalanced,Random Forest,CP Minimax,line,0.05000,0.00000,3
-imbalanced,Random Forest,CP Minimax,test,0.01667,0.00000,3
-imbalanced,Random Forest,SMOTE,line,0.08333,0.00000,3
-imbalanced,Random Forest,SMOTE,test,0.00000,0.00000,3
-imbalanced,Random Forest,plain,line,0.13333,0.00000,3
-imbalanced,Random Forest,plain,test,0.08333,0.00000,3
-imbalanced,Random Forest,re-thresholded,line,0.08333,0.00000,3
-imbalanced,Random Forest,re-thresholded,test,0.03333,0.00000,3
-imbalanced,Random Forest,weighted,line,0.08333,0.00000,3
-imbalanced,Random Forest,weighted,test,0.00000,0.00000,3
-imbalanced,SVM,CP Minimax,line,0.15000,1.00000,2
-imbalanced,SVM,CP Minimax,test,0.00000,1.00000,2
-imbalanced,SVM,SMOTE,line,0.15000,1.00000,2
-imbalanced,SVM,SMOTE,test,0.02500,1.00000,2
-imbalanced,SVM,plain,line,0.65000,1.00000,2
-imbalanced,SVM,plain,test,0.52500,1.00000,2
-imbalanced,SVM,re-thresholded,line,0.15000,1.00000,2
-imbalanced,SVM,re-thresholded,test,0.00000,1.00000,2
-imbalanced,SVM,weighted,line,0.65000,1.00000,2
-imbalanced,SVM,weighted,test,0.52500,1.00000,2
-imbalanced,all,CP Minimax,line,0.11667,0.41667,3
-imbalanced,all,CP Minimax,test,0.01667,0.41667,3
-imbalanced,all,SMOTE,line,0.11944,0.41667,3
-imbalanced,all,SMOTE,test,0.00833,0.41667,3
-imbalanced,all,plain,line,0.24444,0.41667,3
-imbalanced,all,plain,test,0.17222,0.41667,3
-imbalanced,all,re-thresholded,line,0.12500,0.41667,3
-imbalanced,all,re-thresholded,test,0.02222,0.41667,3
-imbalanced,all,weighted,line,0.18667,0.51111,3
-imbalanced,all,weighted,test,0.07667,0.51111,3
-imbalanced,k Nearest Neighbours,CP Minimax,line,0.15000,0.00000,3
-imbalanced,k Nearest Neighbours,CP Minimax,test,0.01667,0.00000,3
-imbalanced,k Nearest Neighbours,SMOTE,line,0.13333,0.00000,3
-imbalanced,k Nearest Neighbours,SMOTE,test,0.00000,0.00000,3
-imbalanced,k Nearest Neighbours,plain,line,0.10000,0.00000,3
-imbalanced,k Nearest Neighbours,plain,test,0.08333,0.00000,3
-imbalanced,k Nearest Neighbours,re-thresholded,line,0.15000,0.00000,3
-imbalanced,k Nearest Neighbours,re-thresholded,test,0.01667,0.00000,3
-imbalanced,smooth,CP Minimax,line,0.13333,1.00000,3
-imbalanced,smooth,CP Minimax,test,0.01667,1.00000,3
-imbalanced,smooth,SMOTE,line,0.13889,1.00000,3
-imbalanced,smooth,SMOTE,test,0.01667,1.00000,3
-imbalanced,smooth,plain,line,0.38333,1.00000,3
-imbalanced,smooth,plain,test,0.26667,1.00000,3
-imbalanced,smooth,re-thresholded,line,0.13889,1.00000,3
-imbalanced,smooth,re-thresholded,test,0.02222,1.00000,3
-imbalanced,smooth,weighted,line,0.25556,1.00000,3
-imbalanced,smooth,weighted,test,0.12778,1.00000,3
+balanced,Gradient Boosting,plain,line,0.02353,0.00000,17
+balanced,Gradient Boosting,plain,test,0.00647,0.00000,17
+balanced,Logistic,plain,line,0.08353,1.00000,17
+balanced,Logistic,plain,test,0.02059,1.00000,17
+balanced,MLP,plain,line,0.07176,1.00000,17
+balanced,MLP,plain,test,0.01588,1.00000,17
+balanced,Random Forest,plain,line,0.02941,0.00000,17
+balanced,Random Forest,plain,test,0.00941,0.00000,17
+balanced,SVM,plain,line,0.05000,1.00000,17
+balanced,SVM,plain,test,0.05294,1.00000,17
+balanced,all,plain,line,0.04608,0.50000,17
+balanced,all,plain,test,0.02039,0.50000,17
+balanced,k Nearest Neighbours,plain,line,0.01824,0.00000,17
+balanced,k Nearest Neighbours,plain,test,0.01706,0.00000,17
+balanced,smooth,plain,line,0.06843,1.00000,17
+balanced,smooth,plain,test,0.02980,1.00000,17
+imbalanced,Gradient Boosting,CP Minimax,line,0.05238,0.00000,21
+imbalanced,Gradient Boosting,CP Minimax,test,0.02667,0.00000,21
+imbalanced,Gradient Boosting,SMOTE,line,0.05286,0.00000,21
+imbalanced,Gradient Boosting,SMOTE,test,0.01905,0.00000,21
+imbalanced,Gradient Boosting,plain,line,0.13952,0.00000,21
+imbalanced,Gradient Boosting,plain,test,0.16714,0.00000,21
+imbalanced,Gradient Boosting,re-thresholded,line,0.04476,0.00000,21
+imbalanced,Gradient Boosting,re-thresholded,test,0.01381,0.00000,21
+imbalanced,Gradient Boosting,weighted,line,0.06905,0.00000,21
+imbalanced,Gradient Boosting,weighted,test,0.06190,0.00000,21
+imbalanced,Logistic,CP Minimax,line,0.10286,1.00000,21
+imbalanced,Logistic,CP Minimax,test,0.03238,1.00000,21
+imbalanced,Logistic,SMOTE,line,0.09286,1.00000,21
+imbalanced,Logistic,SMOTE,test,0.02524,1.00000,21
+imbalanced,Logistic,plain,line,0.18619,1.00000,21
+imbalanced,Logistic,plain,test,0.21238,1.00000,21
+imbalanced,Logistic,re-thresholded,line,0.09619,1.00000,21
+imbalanced,Logistic,re-thresholded,test,0.03095,1.00000,21
+imbalanced,Logistic,weighted,line,0.09476,1.00000,21
+imbalanced,Logistic,weighted,test,0.02619,1.00000,21
+imbalanced,MLP,CP Minimax,line,0.09667,1.00000,21
+imbalanced,MLP,CP Minimax,test,0.08095,1.00000,21
+imbalanced,MLP,SMOTE,line,0.07571,1.00000,21
+imbalanced,MLP,SMOTE,test,0.06905,1.00000,21
+imbalanced,MLP,plain,line,0.70857,1.00000,21
+imbalanced,MLP,plain,test,0.73762,1.00000,21
+imbalanced,MLP,re-thresholded,line,0.10429,1.00000,21
+imbalanced,MLP,re-thresholded,test,0.08571,1.00000,21
+imbalanced,MLP,weighted,line,0.07810,1.00000,21
+imbalanced,MLP,weighted,test,0.05952,1.00000,21
+imbalanced,Random Forest,CP Minimax,line,0.03810,0.00000,21
+imbalanced,Random Forest,CP Minimax,test,0.03095,0.00000,21
+imbalanced,Random Forest,SMOTE,line,0.08286,0.00000,21
+imbalanced,Random Forest,SMOTE,test,0.05667,0.00000,21
+imbalanced,Random Forest,plain,line,0.41762,0.00000,21
+imbalanced,Random Forest,plain,test,0.37238,0.00000,21
+imbalanced,Random Forest,re-thresholded,line,0.06667,0.00000,21
+imbalanced,Random Forest,re-thresholded,test,0.06952,0.00000,21
+imbalanced,Random Forest,weighted,line,0.19476,0.00000,21
+imbalanced,Random Forest,weighted,test,0.22381,0.00000,21
+imbalanced,SVM,CP Minimax,line,0.12762,1.00000,21
+imbalanced,SVM,CP Minimax,test,0.18238,1.00000,21
+imbalanced,SVM,SMOTE,line,0.25476,1.00000,21
+imbalanced,SVM,SMOTE,test,0.41524,1.00000,21
+imbalanced,SVM,plain,line,0.73810,1.00000,21
+imbalanced,SVM,plain,test,0.74952,1.00000,21
+imbalanced,SVM,re-thresholded,line,0.12619,1.00000,21
+imbalanced,SVM,re-thresholded,test,0.16524,1.00000,21
+imbalanced,SVM,weighted,line,0.86286,1.00000,21
+imbalanced,SVM,weighted,test,0.86048,1.00000,21
+imbalanced,all,CP Minimax,line,0.07548,0.50000,21
+imbalanced,all,CP Minimax,test,0.06341,0.50000,21
+imbalanced,all,SMOTE,line,0.10119,0.50000,21
+imbalanced,all,SMOTE,test,0.10444,0.50000,21
+imbalanced,all,plain,line,0.43500,0.50000,21
+imbalanced,all,plain,test,0.45246,0.50000,21
+imbalanced,all,re-thresholded,line,0.08095,0.50000,21
+imbalanced,all,re-thresholded,test,0.07008,0.50000,21
+imbalanced,all,weighted,line,0.25990,0.60000,21
+imbalanced,all,weighted,test,0.24638,0.60000,21
+imbalanced,k Nearest Neighbours,CP Minimax,line,0.03524,0.00000,21
+imbalanced,k Nearest Neighbours,CP Minimax,test,0.02714,0.00000,21
+imbalanced,k Nearest Neighbours,SMOTE,line,0.04810,0.00000,21
+imbalanced,k Nearest Neighbours,SMOTE,test,0.04143,0.00000,21
+imbalanced,k Nearest Neighbours,plain,line,0.42000,0.00000,21
+imbalanced,k Nearest Neighbours,plain,test,0.47571,0.00000,21
+imbalanced,k Nearest Neighbours,re-thresholded,line,0.04762,0.00000,21
+imbalanced,k Nearest Neighbours,re-thresholded,test,0.05524,0.00000,21
+imbalanced,smooth,CP Minimax,line,0.10905,1.00000,21
+imbalanced,smooth,CP Minimax,test,0.09857,1.00000,21
+imbalanced,smooth,SMOTE,line,0.14111,1.00000,21
+imbalanced,smooth,SMOTE,test,0.16984,1.00000,21
+imbalanced,smooth,plain,line,0.54429,1.00000,21
+imbalanced,smooth,plain,test,0.56651,1.00000,21
+imbalanced,smooth,re-thresholded,line,0.10889,1.00000,21
+imbalanced,smooth,re-thresholded,test,0.09397,1.00000,21
+imbalanced,smooth,weighted,line,0.34524,1.00000,21
+imbalanced,smooth,weighted,test,0.31540,1.00000,21
+native,Gradient Boosting,CP Minimax,line,0.04682,0.00000,22
+native,Gradient Boosting,CP Minimax,test,0.02909,0.00000,22
+native,Gradient Boosting,SMOTE,line,0.09909,0.00000,22
+native,Gradient Boosting,SMOTE,test,0.04455,0.00000,22
+native,Gradient Boosting,plain,line,0.07182,0.00000,22
+native,Gradient Boosting,plain,test,0.09000,0.00000,22
+native,Gradient Boosting,re-thresholded,line,0.05727,0.00000,22
+native,Gradient Boosting,re-thresholded,test,0.02273,0.00000,22
+native,Gradient Boosting,weighted,line,0.05227,0.00000,22
+native,Gradient Boosting,weighted,test,0.04045,0.00000,22
+native,Logistic,CP Minimax,line,0.10545,1.00000,22
+native,Logistic,CP Minimax,test,0.03545,1.00000,22
+native,Logistic,SMOTE,line,0.10364,1.00000,22
+native,Logistic,SMOTE,test,0.03636,1.00000,22
+native,Logistic,plain,line,0.19273,1.00000,22
+native,Logistic,plain,test,0.18500,1.00000,22
+native,Logistic,re-thresholded,line,0.11545,1.00000,22
+native,Logistic,re-thresholded,test,0.04727,1.00000,22
+native,Logistic,weighted,line,0.10273,1.00000,22
+native,Logistic,weighted,test,0.03318,1.00000,22
+native,MLP,CP Minimax,line,0.07545,1.00000,22
+native,MLP,CP Minimax,test,0.03455,1.00000,22
+native,MLP,SMOTE,line,0.07091,1.00000,22
+native,MLP,SMOTE,test,0.04773,1.00000,22
+native,MLP,plain,line,0.18591,1.00000,22
+native,MLP,plain,test,0.24318,1.00000,22
+native,MLP,re-thresholded,line,0.07091,1.00000,22
+native,MLP,re-thresholded,test,0.03682,1.00000,22
+native,MLP,weighted,line,0.06682,1.00000,22
+native,MLP,weighted,test,0.03500,1.00000,22
+native,Random Forest,CP Minimax,line,0.05727,0.00000,22
+native,Random Forest,CP Minimax,test,0.03045,0.00000,22
+native,Random Forest,SMOTE,line,0.08091,0.00000,22
+native,Random Forest,SMOTE,test,0.03500,0.00000,22
+native,Random Forest,plain,line,0.16727,0.00000,22
+native,Random Forest,plain,test,0.17727,0.00000,22
+native,Random Forest,re-thresholded,line,0.06182,0.00000,22
+native,Random Forest,re-thresholded,test,0.04636,0.00000,22
+native,Random Forest,weighted,line,0.09818,0.00000,22
+native,Random Forest,weighted,test,0.12182,0.00000,22
+native,SVM,CP Minimax,line,0.04000,1.00000,22
+native,SVM,CP Minimax,test,0.07182,1.00000,22
+native,SVM,SMOTE,line,0.05419,1.00000,22
+native,SVM,SMOTE,test,0.11682,1.00000,22
+native,SVM,plain,line,0.33455,1.00000,22
+native,SVM,plain,test,0.36045,1.00000,22
+native,SVM,re-thresholded,line,0.04500,1.00000,22
+native,SVM,re-thresholded,test,0.06773,1.00000,22
+native,SVM,weighted,line,0.37318,1.00000,22
+native,SVM,weighted,test,0.39909,1.00000,22
+native,all,CP Minimax,line,0.06045,0.50000,22
+native,all,CP Minimax,test,0.04015,0.50000,22
+native,all,SMOTE,line,0.07405,0.49926,22
+native,all,SMOTE,test,0.05212,0.50000,22
+native,all,plain,line,0.18265,0.50000,22
+native,all,plain,test,0.21038,0.50000,22
+native,all,re-thresholded,line,0.06780,0.50000,22
+native,all,re-thresholded,test,0.04644,0.50000,22
+native,all,weighted,line,0.13864,0.60000,22
+native,all,weighted,test,0.12591,0.60000,22
+native,k Nearest Neighbours,CP Minimax,line,0.03773,0.00000,22
+native,k Nearest Neighbours,CP Minimax,test,0.03955,0.00000,22
+native,k Nearest Neighbours,SMOTE,line,0.03545,0.00000,22
+native,k Nearest Neighbours,SMOTE,test,0.03227,0.00000,22
+native,k Nearest Neighbours,plain,line,0.14364,0.00000,22
+native,k Nearest Neighbours,plain,test,0.20636,0.00000,22
+native,k Nearest Neighbours,re-thresholded,line,0.05636,0.00000,22
+native,k Nearest Neighbours,re-thresholded,test,0.05773,0.00000,22
+native,smooth,CP Minimax,line,0.07364,1.00000,22
+native,smooth,CP Minimax,test,0.04727,1.00000,22
+native,smooth,SMOTE,line,0.07671,1.00000,22
+native,smooth,SMOTE,test,0.06697,1.00000,22
+native,smooth,plain,line,0.23773,1.00000,22
+native,smooth,plain,test,0.26288,1.00000,22
+native,smooth,re-thresholded,line,0.07712,1.00000,22
+native,smooth,re-thresholded,test,0.05061,1.00000,22
+native,smooth,weighted,line,0.18091,1.00000,22
+native,smooth,weighted,test,0.15576,1.00000,22
