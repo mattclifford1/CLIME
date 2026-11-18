@@ -22,6 +22,8 @@ CUTS = (0.01, 0.02, 0.05, *np.round(np.arange(0.1, 0.91, 0.05), 2), 0.95, 0.98, 
 DELTAS = ('CP Minimax',)
 REDRAW = 'surrogate training sample, second draw'
 GRADIENT = 'gradient'
+# a probability this close to 0 or 1 is where the logit surrogate's target is clipped
+SATURATED = 1e-6
 
 
 def _fit(box, q, test, **extra):
@@ -74,8 +76,12 @@ def explain(box, task, q, plain_lime=None, sweep=False):
                                         weights=fitted['CLIME']._get_sampled_weights(sample))}
 
     f_query = float(box.predict_proba([q])[0, 1])
+    weight = costs.weights_based_on_distance(q, sample['X'])
     query = {'f_query': f_query, 'f_class': int(f_query > 0.5),
-             'sample_minority': min(share, 1 - share), 'has_gradient': bool(truths)}
+             'sample_minority': min(share, 1 - share), 'has_gradient': bool(truths),
+             'sample_effective_share': scores.effective_share(weight),
+             'sample_saturated': float(np.average(np.abs(f_sample - 0.5) > 0.5 - SATURATED,
+                                                  weights=weight))}
     for where, (f_prob, f_class, w, X) in sets.items():
         for suffix, c in constant.items():
             flat = scores.calibration(np.full(len(X), c), f_prob, f_class, w)

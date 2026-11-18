@@ -1,0 +1,14 @@
+\begin{tabular}{@{}llrrrrrrrr@{}}
+  \toprule
+   &  & \multicolumn{5}{c}{agreement with the black box} &  & \multicolumn{2}{c}{cosine with gradient} \\
+  \cmidrule(lr){3-7} \cmidrule(lr){9-10}
+   &  & Fid. & Bal.\ fid. & AUC & Skill & Bal.\ skill & Stability & at $q$ & local mean \\
+  \midrule
+  imbalanced 200:20 & LIME & 0.95 & 0.59 & 0.89 & 0.68 & 0.26 & 0.79 & 0.73 & 0.79 \\
+   & CLIME & 0.95 & 0.70 & 0.90 & 0.58 & 0.56 & 0.79 & 0.72 & 0.78 \\
+   & Logit-LIME & 0.96 & 0.66 & 0.88 & 0.71 & 0.11 & 0.80 & 0.76 & 0.81 \\
+   & Logit-CLIME & 0.96 & 0.71 & 0.90 & 0.70 & 0.38 & 0.80 & 0.75 & 0.80 \\
+   & Soft logistic & 0.95 & 0.66 & 0.90 & 0.68 & 0.39 & 0.82 & 0.74 & 0.78 \\
+   & Soft logistic, CLIME weights & 0.94 & 0.73 & 0.90 & 0.56 & 0.55 & 0.82 & 0.72 & 0.76 \\
+  \bottomrule
+\end{tabular}

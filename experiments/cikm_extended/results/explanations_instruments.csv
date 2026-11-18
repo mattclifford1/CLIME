@@ -1,0 +1,873 @@
+setting,family,kind,explainer,where,score,n,rho
+imbalanced,Logistic,line,CLIME,test,fidelity,60,0.17353
+imbalanced,Logistic,line,CLIME,test,balanced,56,0.75525
+imbalanced,Logistic,line,CLIME,test,auc,56,0.69621
+imbalanced,Logistic,line,CLIME,test,brier,60,0.44715
+imbalanced,Logistic,line,CLIME,test,brier_balanced,56,0.82481
+imbalanced,Logistic,line,CLIME,test,kl,60,0.28915
+imbalanced,Logistic,line,CLIME,test,kl_balanced,56,0.69228
+imbalanced,Logistic,line,CLIME,local,fidelity,60,-0.57645
+imbalanced,Logistic,line,CLIME,local,balanced,45,0.77858
+imbalanced,Logistic,line,CLIME,local,auc,45,-0.17469
+imbalanced,Logistic,line,CLIME,local,brier,60,-0.45579
+imbalanced,Logistic,line,CLIME,local,brier_balanced,45,0.89460
+imbalanced,Logistic,line,CLIME,local,kl,60,-0.40634
+imbalanced,Logistic,line,CLIME,local,kl_balanced,45,0.87708
+imbalanced,Logistic,line,LIME,test,fidelity,60,-0.08433
+imbalanced,Logistic,line,LIME,test,balanced,56,0.65830
+imbalanced,Logistic,line,LIME,test,auc,56,0.65438
+imbalanced,Logistic,line,LIME,test,brier,60,0.41503
+imbalanced,Logistic,line,LIME,test,brier_balanced,56,0.76111
+imbalanced,Logistic,line,LIME,test,kl,60,0.31049
+imbalanced,Logistic,line,LIME,test,kl_balanced,56,0.79904
+imbalanced,Logistic,line,LIME,local,fidelity,60,-0.66526
+imbalanced,Logistic,line,LIME,local,balanced,45,0.61380
+imbalanced,Logistic,line,LIME,local,auc,45,0.04280
+imbalanced,Logistic,line,LIME,local,brier,60,-0.57410
+imbalanced,Logistic,line,LIME,local,brier_balanced,45,0.85758
+imbalanced,Logistic,line,LIME,local,kl,60,-0.53848
+imbalanced,Logistic,line,LIME,local,kl_balanced,45,0.85191
+imbalanced,Logistic,line,LIME and CLIME,test,fidelity,120,0.01785
+imbalanced,Logistic,line,LIME and CLIME,test,balanced,112,0.64328
+imbalanced,Logistic,line,LIME and CLIME,test,auc,112,0.68205
+imbalanced,Logistic,line,LIME and CLIME,test,brier,120,0.43766
+imbalanced,Logistic,line,LIME and CLIME,test,brier_balanced,112,0.74715
+imbalanced,Logistic,line,LIME and CLIME,test,kl,120,0.29566
+imbalanced,Logistic,line,LIME and CLIME,test,kl_balanced,112,0.71327
+imbalanced,Logistic,line,LIME and CLIME,local,fidelity,120,-0.63392
+imbalanced,Logistic,line,LIME and CLIME,local,balanced,90,0.66144
+imbalanced,Logistic,line,LIME and CLIME,local,auc,90,-0.07882
+imbalanced,Logistic,line,LIME and CLIME,local,brier,120,-0.49365
+imbalanced,Logistic,line,LIME and CLIME,local,brier_balanced,90,0.84195
+imbalanced,Logistic,line,LIME and CLIME,local,kl,120,-0.42892
+imbalanced,Logistic,line,LIME and CLIME,local,kl_balanced,90,0.84043
+imbalanced,Logistic,line,Logit-CLIME,test,fidelity,60,0.64079
+imbalanced,Logistic,line,Logit-CLIME,test,balanced,56,0.78404
+imbalanced,Logistic,line,Logit-CLIME,test,auc,56,0.70460
+imbalanced,Logistic,line,Logit-CLIME,test,brier,60,0.63290
+imbalanced,Logistic,line,Logit-CLIME,test,brier_balanced,56,0.95660
+imbalanced,Logistic,line,Logit-CLIME,test,kl,60,0.62515
+imbalanced,Logistic,line,Logit-CLIME,test,kl_balanced,56,0.95933
+imbalanced,Logistic,line,Logit-CLIME,local,fidelity,60,0.11187
+imbalanced,Logistic,line,Logit-CLIME,local,balanced,45,0.64641
+imbalanced,Logistic,line,Logit-CLIME,local,auc,45,0.30584
+imbalanced,Logistic,line,Logit-CLIME,local,brier,60,-0.23795
+imbalanced,Logistic,line,Logit-CLIME,local,brier_balanced,45,0.94638
+imbalanced,Logistic,line,Logit-CLIME,local,kl,60,0.02078
+imbalanced,Logistic,line,Logit-CLIME,local,kl_balanced,45,0.95441
+imbalanced,Logistic,line,Logit-LIME,test,fidelity,60,0.61464
+imbalanced,Logistic,line,Logit-LIME,test,balanced,56,0.76545
+imbalanced,Logistic,line,Logit-LIME,test,auc,56,0.69019
+imbalanced,Logistic,line,Logit-LIME,test,brier,60,0.59189
+imbalanced,Logistic,line,Logit-LIME,test,brier_balanced,56,0.88722
+imbalanced,Logistic,line,Logit-LIME,test,kl,60,0.58842
+imbalanced,Logistic,line,Logit-LIME,test,kl_balanced,56,0.89371
+imbalanced,Logistic,line,Logit-LIME,local,fidelity,60,0.17389
+imbalanced,Logistic,line,Logit-LIME,local,balanced,45,0.67274
+imbalanced,Logistic,line,Logit-LIME,local,auc,45,0.30584
+imbalanced,Logistic,line,Logit-LIME,local,brier,60,-0.15960
+imbalanced,Logistic,line,Logit-LIME,local,brier_balanced,45,0.90053
+imbalanced,Logistic,line,Logit-LIME,local,kl,60,0.02328
+imbalanced,Logistic,line,Logit-LIME,local,kl_balanced,45,0.90606
+imbalanced,Logistic,line,Soft logistic,test,fidelity,60,0.50986
+imbalanced,Logistic,line,Soft logistic,test,balanced,56,0.92213
+imbalanced,Logistic,line,Soft logistic,test,auc,56,0.83042
+imbalanced,Logistic,line,Soft logistic,test,brier,60,0.55654
+imbalanced,Logistic,line,Soft logistic,test,brier_balanced,56,0.91907
+imbalanced,Logistic,line,Soft logistic,test,kl,60,0.59059
+imbalanced,Logistic,line,Soft logistic,test,kl_balanced,56,0.95940
+imbalanced,Logistic,line,Soft logistic,local,fidelity,60,-0.17468
+imbalanced,Logistic,line,Soft logistic,local,balanced,45,0.82355
+imbalanced,Logistic,line,Soft logistic,local,auc,45,0.57416
+imbalanced,Logistic,line,Soft logistic,local,brier,60,-0.13315
+imbalanced,Logistic,line,Soft logistic,local,brier_balanced,45,0.96561
+imbalanced,Logistic,line,Soft logistic,local,kl,60,0.08397
+imbalanced,Logistic,line,Soft logistic,local,kl_balanced,45,0.96416
+imbalanced,Logistic,line,Soft logistic CLIME,test,fidelity,60,0.59821
+imbalanced,Logistic,line,Soft logistic CLIME,test,balanced,56,0.88103
+imbalanced,Logistic,line,Soft logistic CLIME,test,auc,56,0.82961
+imbalanced,Logistic,line,Soft logistic CLIME,test,brier,60,0.53732
+imbalanced,Logistic,line,Soft logistic CLIME,test,brier_balanced,56,0.89836
+imbalanced,Logistic,line,Soft logistic CLIME,test,kl,60,0.56669
+imbalanced,Logistic,line,Soft logistic CLIME,test,kl_balanced,56,0.92454
+imbalanced,Logistic,line,Soft logistic CLIME,local,fidelity,60,0.02602
+imbalanced,Logistic,line,Soft logistic CLIME,local,balanced,45,0.78755
+imbalanced,Logistic,line,Soft logistic CLIME,local,auc,45,0.57618
+imbalanced,Logistic,line,Soft logistic CLIME,local,brier,60,-0.19222
+imbalanced,Logistic,line,Soft logistic CLIME,local,brier_balanced,45,0.95494
+imbalanced,Logistic,line,Soft logistic CLIME,local,kl,60,0.08658
+imbalanced,Logistic,line,Soft logistic CLIME,local,kl_balanced,45,0.95257
+imbalanced,Logistic,line,all,test,fidelity,360,0.51979
+imbalanced,Logistic,line,all,test,balanced,336,0.85056
+imbalanced,Logistic,line,all,test,auc,336,0.74405
+imbalanced,Logistic,line,all,test,brier,360,0.60114
+imbalanced,Logistic,line,all,test,brier_balanced,336,0.89970
+imbalanced,Logistic,line,all,test,kl,360,0.60042
+imbalanced,Logistic,line,all,test,kl_balanced,336,0.92125
+imbalanced,Logistic,line,all,local,fidelity,360,0.00549
+imbalanced,Logistic,line,all,local,balanced,270,0.79666
+imbalanced,Logistic,line,all,local,auc,270,0.36016
+imbalanced,Logistic,line,all,local,brier,360,-0.07922
+imbalanced,Logistic,line,all,local,brier_balanced,270,0.92988
+imbalanced,Logistic,line,all,local,kl,360,0.05459
+imbalanced,Logistic,line,all,local,kl_balanced,270,0.93451
+imbalanced,Logistic,test,CLIME,test,fidelity,59,0.55787
+imbalanced,Logistic,test,CLIME,test,balanced,59,0.54096
+imbalanced,Logistic,test,CLIME,test,auc,59,0.78932
+imbalanced,Logistic,test,CLIME,test,brier,59,0.61834
+imbalanced,Logistic,test,CLIME,test,brier_balanced,59,0.83021
+imbalanced,Logistic,test,CLIME,test,kl,59,-0.05351
+imbalanced,Logistic,test,CLIME,test,kl_balanced,59,0.69456
+imbalanced,Logistic,test,CLIME,local,fidelity,59,-0.15324
+imbalanced,Logistic,test,CLIME,local,balanced,55,0.15618
+imbalanced,Logistic,test,CLIME,local,auc,55,-0.13772
+imbalanced,Logistic,test,CLIME,local,brier,59,0.09278
+imbalanced,Logistic,test,CLIME,local,brier_balanced,55,0.57646
+imbalanced,Logistic,test,CLIME,local,kl,59,0.25883
+imbalanced,Logistic,test,CLIME,local,kl_balanced,55,0.64761
+imbalanced,Logistic,test,LIME,test,fidelity,59,0.29224
+imbalanced,Logistic,test,LIME,test,balanced,59,0.14373
+imbalanced,Logistic,test,LIME,test,auc,59,0.75441
+imbalanced,Logistic,test,LIME,test,brier,59,0.56849
+imbalanced,Logistic,test,LIME,test,brier_balanced,59,0.53774
+imbalanced,Logistic,test,LIME,test,kl,59,0.22160
+imbalanced,Logistic,test,LIME,test,kl_balanced,59,0.54078
+imbalanced,Logistic,test,LIME,local,fidelity,59,-0.02401
+imbalanced,Logistic,test,LIME,local,balanced,55,-0.05699
+imbalanced,Logistic,test,LIME,local,auc,55,-0.35802
+imbalanced,Logistic,test,LIME,local,brier,59,0.13872
+imbalanced,Logistic,test,LIME,local,brier_balanced,55,0.34810
+imbalanced,Logistic,test,LIME,local,kl,59,0.11400
+imbalanced,Logistic,test,LIME,local,kl_balanced,55,0.41556
+imbalanced,Logistic,test,LIME and CLIME,test,fidelity,118,0.37034
+imbalanced,Logistic,test,LIME and CLIME,test,balanced,118,0.27077
+imbalanced,Logistic,test,LIME and CLIME,test,auc,118,0.76922
+imbalanced,Logistic,test,LIME and CLIME,test,brier,118,0.59885
+imbalanced,Logistic,test,LIME and CLIME,test,brier_balanced,118,0.61974
+imbalanced,Logistic,test,LIME and CLIME,test,kl,118,0.12560
+imbalanced,Logistic,test,LIME and CLIME,test,kl_balanced,118,0.58017
+imbalanced,Logistic,test,LIME and CLIME,local,fidelity,118,-0.10923
+imbalanced,Logistic,test,LIME and CLIME,local,balanced,110,-0.00744
+imbalanced,Logistic,test,LIME and CLIME,local,auc,110,-0.25954
+imbalanced,Logistic,test,LIME and CLIME,local,brier,118,0.14084
+imbalanced,Logistic,test,LIME and CLIME,local,brier_balanced,110,0.39470
+imbalanced,Logistic,test,LIME and CLIME,local,kl,118,0.23717
+imbalanced,Logistic,test,LIME and CLIME,local,kl_balanced,110,0.47900
+imbalanced,Logistic,test,Logit-CLIME,test,fidelity,60,0.76296
+imbalanced,Logistic,test,Logit-CLIME,test,balanced,59,0.80039
+imbalanced,Logistic,test,Logit-CLIME,test,auc,59,0.79556
+imbalanced,Logistic,test,Logit-CLIME,test,brier,60,0.83612
+imbalanced,Logistic,test,Logit-CLIME,test,brier_balanced,59,0.89480
+imbalanced,Logistic,test,Logit-CLIME,test,kl,60,0.83906
+imbalanced,Logistic,test,Logit-CLIME,test,kl_balanced,59,0.92560
+imbalanced,Logistic,test,Logit-CLIME,local,fidelity,60,0.41528
+imbalanced,Logistic,test,Logit-CLIME,local,balanced,55,0.44352
+imbalanced,Logistic,test,Logit-CLIME,local,auc,55,-0.02939
+imbalanced,Logistic,test,Logit-CLIME,local,brier,60,0.81311
+imbalanced,Logistic,test,Logit-CLIME,local,brier_balanced,55,0.92222
+imbalanced,Logistic,test,Logit-CLIME,local,kl,60,0.83195
+imbalanced,Logistic,test,Logit-CLIME,local,kl_balanced,55,0.95115
+imbalanced,Logistic,test,Logit-LIME,test,fidelity,60,0.76296
+imbalanced,Logistic,test,Logit-LIME,test,balanced,59,0.80039
+imbalanced,Logistic,test,Logit-LIME,test,auc,59,0.79556
+imbalanced,Logistic,test,Logit-LIME,test,brier,60,0.81089
+imbalanced,Logistic,test,Logit-LIME,test,brier_balanced,59,0.87171
+imbalanced,Logistic,test,Logit-LIME,test,kl,60,0.81055
+imbalanced,Logistic,test,Logit-LIME,test,kl_balanced,59,0.90491
+imbalanced,Logistic,test,Logit-LIME,local,fidelity,60,0.41528
+imbalanced,Logistic,test,Logit-LIME,local,balanced,55,0.44352
+imbalanced,Logistic,test,Logit-LIME,local,auc,55,-0.05578
+imbalanced,Logistic,test,Logit-LIME,local,brier,60,0.79927
+imbalanced,Logistic,test,Logit-LIME,local,brier_balanced,55,0.87323
+imbalanced,Logistic,test,Logit-LIME,local,kl,60,0.81128
+imbalanced,Logistic,test,Logit-LIME,local,kl_balanced,55,0.90238
+imbalanced,Logistic,test,Soft logistic,test,fidelity,59,0.83492
+imbalanced,Logistic,test,Soft logistic,test,balanced,59,0.83960
+imbalanced,Logistic,test,Soft logistic,test,auc,59,0.77350
+imbalanced,Logistic,test,Soft logistic,test,brier,59,0.93881
+imbalanced,Logistic,test,Soft logistic,test,brier_balanced,59,0.94950
+imbalanced,Logistic,test,Soft logistic,test,kl,59,0.95190
+imbalanced,Logistic,test,Soft logistic,test,kl_balanced,59,0.95856
+imbalanced,Logistic,test,Soft logistic,local,fidelity,59,0.33354
+imbalanced,Logistic,test,Soft logistic,local,balanced,55,0.40853
+imbalanced,Logistic,test,Soft logistic,local,auc,55,-0.13133
+imbalanced,Logistic,test,Soft logistic,local,brier,59,0.95050
+imbalanced,Logistic,test,Soft logistic,local,brier_balanced,55,0.94668
+imbalanced,Logistic,test,Soft logistic,local,kl,59,0.95885
+imbalanced,Logistic,test,Soft logistic,local,kl_balanced,55,0.94747
+imbalanced,Logistic,test,Soft logistic CLIME,test,fidelity,59,0.80578
+imbalanced,Logistic,test,Soft logistic CLIME,test,balanced,59,0.80594
+imbalanced,Logistic,test,Soft logistic CLIME,test,auc,59,0.78716
+imbalanced,Logistic,test,Soft logistic CLIME,test,brier,59,0.87872
+imbalanced,Logistic,test,Soft logistic CLIME,test,brier_balanced,59,0.92729
+imbalanced,Logistic,test,Soft logistic CLIME,test,kl,59,0.90532
+imbalanced,Logistic,test,Soft logistic CLIME,test,kl_balanced,59,0.93518
+imbalanced,Logistic,test,Soft logistic CLIME,local,fidelity,59,0.39988
+imbalanced,Logistic,test,Soft logistic CLIME,local,balanced,55,0.47599
+imbalanced,Logistic,test,Soft logistic CLIME,local,auc,55,-0.09732
+imbalanced,Logistic,test,Soft logistic CLIME,local,brier,59,0.82974
+imbalanced,Logistic,test,Soft logistic CLIME,local,brier_balanced,55,0.92994
+imbalanced,Logistic,test,Soft logistic CLIME,local,kl,59,0.89935
+imbalanced,Logistic,test,Soft logistic CLIME,local,kl_balanced,55,0.93117
+imbalanced,Logistic,test,all,test,fidelity,356,0.75624
+imbalanced,Logistic,test,all,test,balanced,354,0.74958
+imbalanced,Logistic,test,all,test,auc,354,0.79432
+imbalanced,Logistic,test,all,test,brier,356,0.86470
+imbalanced,Logistic,test,all,test,brier_balanced,354,0.89786
+imbalanced,Logistic,test,all,test,kl,356,0.77917
+imbalanced,Logistic,test,all,test,kl_balanced,354,0.89227
+imbalanced,Logistic,test,all,local,fidelity,356,0.36800
+imbalanced,Logistic,test,all,local,balanced,330,0.41595
+imbalanced,Logistic,test,all,local,auc,330,-0.16680
+imbalanced,Logistic,test,all,local,brier,356,0.75279
+imbalanced,Logistic,test,all,local,brier_balanced,330,0.81790
+imbalanced,Logistic,test,all,local,kl,356,0.79066
+imbalanced,Logistic,test,all,local,kl_balanced,330,0.85135
+imbalanced,MLP,line,CLIME,test,fidelity,60,-0.33194
+imbalanced,MLP,line,CLIME,test,balanced,36,0.53534
+imbalanced,MLP,line,CLIME,test,auc,36,0.16396
+imbalanced,MLP,line,CLIME,test,brier,60,0.04251
+imbalanced,MLP,line,CLIME,test,brier_balanced,36,0.69086
+imbalanced,MLP,line,CLIME,test,kl,60,0.04363
+imbalanced,MLP,line,CLIME,test,kl_balanced,36,0.68546
+imbalanced,MLP,line,CLIME,local,fidelity,60,-0.60334
+imbalanced,MLP,line,CLIME,local,balanced,30,0.11785
+imbalanced,MLP,line,CLIME,local,auc,30,-0.84402
+imbalanced,MLP,line,CLIME,local,brier,60,-0.57849
+imbalanced,MLP,line,CLIME,local,brier_balanced,30,0.46073
+imbalanced,MLP,line,CLIME,local,kl,60,-0.63534
+imbalanced,MLP,line,CLIME,local,kl_balanced,30,0.51324
+imbalanced,MLP,line,LIME,test,fidelity,60,-0.48350
+imbalanced,MLP,line,LIME,test,balanced,36,0.33849
+imbalanced,MLP,line,LIME,test,auc,36,0.05817
+imbalanced,MLP,line,LIME,test,brier,60,-0.15438
+imbalanced,MLP,line,LIME,test,brier_balanced,36,0.29550
+imbalanced,MLP,line,LIME,test,kl,60,-0.08458
+imbalanced,MLP,line,LIME,test,kl_balanced,36,0.43861
+imbalanced,MLP,line,LIME,local,fidelity,60,-0.49515
+imbalanced,MLP,line,LIME,local,balanced,30,0.31849
+imbalanced,MLP,line,LIME,local,auc,30,-0.68296
+imbalanced,MLP,line,LIME,local,brier,60,-0.37566
+imbalanced,MLP,line,LIME,local,brier_balanced,30,0.56085
+imbalanced,MLP,line,LIME,local,kl,60,-0.50264
+imbalanced,MLP,line,LIME,local,kl_balanced,30,0.64449
+imbalanced,MLP,line,LIME and CLIME,test,fidelity,120,-0.41154
+imbalanced,MLP,line,LIME and CLIME,test,balanced,72,0.39110
+imbalanced,MLP,line,LIME and CLIME,test,auc,72,0.12155
+imbalanced,MLP,line,LIME and CLIME,test,brier,120,-0.06629
+imbalanced,MLP,line,LIME and CLIME,test,brier_balanced,72,0.44764
+imbalanced,MLP,line,LIME and CLIME,test,kl,120,-0.02773
+imbalanced,MLP,line,LIME and CLIME,test,kl_balanced,72,0.50445
+imbalanced,MLP,line,LIME and CLIME,local,fidelity,120,-0.54628
+imbalanced,MLP,line,LIME and CLIME,local,balanced,60,0.20790
+imbalanced,MLP,line,LIME and CLIME,local,auc,60,-0.75768
+imbalanced,MLP,line,LIME and CLIME,local,brier,120,-0.45277
+imbalanced,MLP,line,LIME and CLIME,local,brier_balanced,60,0.48244
+imbalanced,MLP,line,LIME and CLIME,local,kl,120,-0.55106
+imbalanced,MLP,line,LIME and CLIME,local,kl_balanced,60,0.55037
+imbalanced,MLP,line,Logit-CLIME,test,fidelity,60,-0.42661
+imbalanced,MLP,line,Logit-CLIME,test,balanced,36,0.33986
+imbalanced,MLP,line,Logit-CLIME,test,auc,36,0.25858
+imbalanced,MLP,line,Logit-CLIME,test,brier,60,0.24207
+imbalanced,MLP,line,Logit-CLIME,test,brier_balanced,36,0.75393
+imbalanced,MLP,line,Logit-CLIME,test,kl,60,0.30232
+imbalanced,MLP,line,Logit-CLIME,test,kl_balanced,36,0.76396
+imbalanced,MLP,line,Logit-CLIME,local,fidelity,60,-0.53047
+imbalanced,MLP,line,Logit-CLIME,local,balanced,30,-0.03304
+imbalanced,MLP,line,Logit-CLIME,local,auc,30,-0.75212
+imbalanced,MLP,line,Logit-CLIME,local,brier,60,-0.35804
+imbalanced,MLP,line,Logit-CLIME,local,brier_balanced,30,0.17864
+imbalanced,MLP,line,Logit-CLIME,local,kl,60,-0.31953
+imbalanced,MLP,line,Logit-CLIME,local,kl_balanced,30,0.22225
+imbalanced,MLP,line,Logit-LIME,test,fidelity,60,-0.54089
+imbalanced,MLP,line,Logit-LIME,test,balanced,36,0.32003
+imbalanced,MLP,line,Logit-LIME,test,auc,36,0.17556
+imbalanced,MLP,line,Logit-LIME,test,brier,60,0.02906
+imbalanced,MLP,line,Logit-LIME,test,brier_balanced,36,0.43938
+imbalanced,MLP,line,Logit-LIME,test,kl,60,0.12988
+imbalanced,MLP,line,Logit-LIME,test,kl_balanced,36,0.42214
+imbalanced,MLP,line,Logit-LIME,local,fidelity,60,-0.53878
+imbalanced,MLP,line,Logit-LIME,local,balanced,30,-0.09939
+imbalanced,MLP,line,Logit-LIME,local,auc,30,-0.57680
+imbalanced,MLP,line,Logit-LIME,local,brier,60,-0.33704
+imbalanced,MLP,line,Logit-LIME,local,brier_balanced,30,0.05184
+imbalanced,MLP,line,Logit-LIME,local,kl,60,-0.26613
+imbalanced,MLP,line,Logit-LIME,local,kl_balanced,30,0.15996
+imbalanced,MLP,line,Soft logistic,test,fidelity,60,-0.55971
+imbalanced,MLP,line,Soft logistic,test,balanced,36,0.79904
+imbalanced,MLP,line,Soft logistic,test,auc,36,0.11866
+imbalanced,MLP,line,Soft logistic,test,brier,60,0.10642
+imbalanced,MLP,line,Soft logistic,test,brier_balanced,36,0.76834
+imbalanced,MLP,line,Soft logistic,test,kl,60,0.16317
+imbalanced,MLP,line,Soft logistic,test,kl_balanced,36,0.72535
+imbalanced,MLP,line,Soft logistic,local,fidelity,60,-0.52448
+imbalanced,MLP,line,Soft logistic,local,balanced,30,0.66731
+imbalanced,MLP,line,Soft logistic,local,auc,30,-0.47609
+imbalanced,MLP,line,Soft logistic,local,brier,60,-0.33859
+imbalanced,MLP,line,Soft logistic,local,brier_balanced,30,0.80289
+imbalanced,MLP,line,Soft logistic,local,kl,60,-0.25196
+imbalanced,MLP,line,Soft logistic,local,kl_balanced,30,0.81935
+imbalanced,MLP,line,Soft logistic CLIME,test,fidelity,60,-0.50012
+imbalanced,MLP,line,Soft logistic CLIME,test,balanced,36,0.61442
+imbalanced,MLP,line,Soft logistic CLIME,test,auc,36,0.17297
+imbalanced,MLP,line,Soft logistic CLIME,test,brier,60,0.14071
+imbalanced,MLP,line,Soft logistic CLIME,test,brier_balanced,36,0.74903
+imbalanced,MLP,line,Soft logistic CLIME,test,kl,60,0.15472
+imbalanced,MLP,line,Soft logistic CLIME,test,kl_balanced,36,0.72458
+imbalanced,MLP,line,Soft logistic CLIME,local,fidelity,60,-0.58951
+imbalanced,MLP,line,Soft logistic CLIME,local,balanced,30,0.17053
+imbalanced,MLP,line,Soft logistic CLIME,local,auc,30,-0.62391
+imbalanced,MLP,line,Soft logistic CLIME,local,brier,60,-0.39744
+imbalanced,MLP,line,Soft logistic CLIME,local,brier_balanced,30,0.65206
+imbalanced,MLP,line,Soft logistic CLIME,local,kl,60,-0.36988
+imbalanced,MLP,line,Soft logistic CLIME,local,kl_balanced,30,0.69344
+imbalanced,MLP,line,all,test,fidelity,360,-0.47401
+imbalanced,MLP,line,all,test,balanced,216,0.50555
+imbalanced,MLP,line,all,test,auc,216,0.16148
+imbalanced,MLP,line,all,test,brier,360,0.07228
+imbalanced,MLP,line,all,test,brier_balanced,216,0.64289
+imbalanced,MLP,line,all,test,kl,360,0.11997
+imbalanced,MLP,line,all,test,kl_balanced,216,0.64033
+imbalanced,MLP,line,all,local,fidelity,360,-0.54381
+imbalanced,MLP,line,all,local,balanced,180,0.20755
+imbalanced,MLP,line,all,local,auc,180,-0.65062
+imbalanced,MLP,line,all,local,brier,360,-0.39429
+imbalanced,MLP,line,all,local,brier_balanced,180,0.47835
+imbalanced,MLP,line,all,local,kl,360,-0.37051
+imbalanced,MLP,line,all,local,kl_balanced,180,0.53520
+imbalanced,MLP,test,CLIME,test,fidelity,60,-0.06979
+imbalanced,MLP,test,CLIME,test,balanced,39,0.62179
+imbalanced,MLP,test,CLIME,test,auc,39,-0.03462
+imbalanced,MLP,test,CLIME,test,brier,60,0.21043
+imbalanced,MLP,test,CLIME,test,brier_balanced,39,0.75810
+imbalanced,MLP,test,CLIME,test,kl,60,0.08867
+imbalanced,MLP,test,CLIME,test,kl_balanced,39,0.52773
+imbalanced,MLP,test,CLIME,local,fidelity,60,-0.15648
+imbalanced,MLP,test,CLIME,local,balanced,32,0.09439
+imbalanced,MLP,test,CLIME,local,auc,32,-0.79720
+imbalanced,MLP,test,CLIME,local,brier,60,-0.02026
+imbalanced,MLP,test,CLIME,local,brier_balanced,32,0.47251
+imbalanced,MLP,test,CLIME,local,kl,60,0.02576
+imbalanced,MLP,test,CLIME,local,kl_balanced,32,0.27823
+imbalanced,MLP,test,LIME,test,fidelity,60,-0.10903
+imbalanced,MLP,test,LIME,test,balanced,39,0.57878
+imbalanced,MLP,test,LIME,test,auc,39,0.05951
+imbalanced,MLP,test,LIME,test,brier,60,0.03804
+imbalanced,MLP,test,LIME,test,brier_balanced,39,0.56721
+imbalanced,MLP,test,LIME,test,kl,60,0.04604
+imbalanced,MLP,test,LIME,test,kl_balanced,39,0.51862
+imbalanced,MLP,test,LIME,local,fidelity,60,-0.29723
+imbalanced,MLP,test,LIME,local,balanced,32,0.01226
+imbalanced,MLP,test,LIME,local,auc,32,-0.79325
+imbalanced,MLP,test,LIME,local,brier,60,0.03565
+imbalanced,MLP,test,LIME,local,brier_balanced,32,0.49890
+imbalanced,MLP,test,LIME,local,kl,60,0.09656
+imbalanced,MLP,test,LIME,local,kl_balanced,32,0.49560
+imbalanced,MLP,test,LIME and CLIME,test,fidelity,120,-0.09147
+imbalanced,MLP,test,LIME and CLIME,test,balanced,78,0.55103
+imbalanced,MLP,test,LIME and CLIME,test,auc,78,0.01519
+imbalanced,MLP,test,LIME and CLIME,test,brier,120,0.12916
+imbalanced,MLP,test,LIME and CLIME,test,brier_balanced,78,0.62316
+imbalanced,MLP,test,LIME and CLIME,test,kl,120,0.08462
+imbalanced,MLP,test,LIME and CLIME,test,kl_balanced,78,0.49617
+imbalanced,MLP,test,LIME and CLIME,local,fidelity,120,-0.22927
+imbalanced,MLP,test,LIME and CLIME,local,balanced,64,0.00330
+imbalanced,MLP,test,LIME and CLIME,local,auc,64,-0.80094
+imbalanced,MLP,test,LIME and CLIME,local,brier,120,0.00897
+imbalanced,MLP,test,LIME and CLIME,local,brier_balanced,64,0.43951
+imbalanced,MLP,test,LIME and CLIME,local,kl,120,0.06914
+imbalanced,MLP,test,LIME and CLIME,local,kl_balanced,64,0.35456
+imbalanced,MLP,test,Logit-CLIME,test,fidelity,60,-0.52353
+imbalanced,MLP,test,Logit-CLIME,test,balanced,39,0.72045
+imbalanced,MLP,test,Logit-CLIME,test,auc,39,-0.12773
+imbalanced,MLP,test,Logit-CLIME,test,brier,60,0.00570
+imbalanced,MLP,test,Logit-CLIME,test,brier_balanced,39,0.74352
+imbalanced,MLP,test,Logit-CLIME,test,kl,60,0.35930
+imbalanced,MLP,test,Logit-CLIME,test,kl_balanced,39,0.76984
+imbalanced,MLP,test,Logit-CLIME,local,fidelity,60,-0.45446
+imbalanced,MLP,test,Logit-CLIME,local,balanced,32,-0.27110
+imbalanced,MLP,test,Logit-CLIME,local,auc,32,-0.71096
+imbalanced,MLP,test,Logit-CLIME,local,brier,60,-0.11106
+imbalanced,MLP,test,Logit-CLIME,local,brier_balanced,32,0.11620
+imbalanced,MLP,test,Logit-CLIME,local,kl,60,0.03721
+imbalanced,MLP,test,Logit-CLIME,local,kl_balanced,32,0.43878
+imbalanced,MLP,test,Logit-LIME,test,fidelity,60,-0.50144
+imbalanced,MLP,test,Logit-LIME,test,balanced,39,0.88016
+imbalanced,MLP,test,Logit-LIME,test,auc,39,-0.32308
+imbalanced,MLP,test,Logit-LIME,test,brier,60,-0.01325
+imbalanced,MLP,test,Logit-LIME,test,brier_balanced,39,0.88927
+imbalanced,MLP,test,Logit-LIME,test,kl,60,0.35808
+imbalanced,MLP,test,Logit-LIME,test,kl_balanced,39,0.88158
+imbalanced,MLP,test,Logit-LIME,local,fidelity,60,-0.44658
+imbalanced,MLP,test,Logit-LIME,local,balanced,32,-0.36084
+imbalanced,MLP,test,Logit-LIME,local,auc,32,-0.54403
+imbalanced,MLP,test,Logit-LIME,local,brier,60,-0.09822
+imbalanced,MLP,test,Logit-LIME,local,brier_balanced,32,0.25110
+imbalanced,MLP,test,Logit-LIME,local,kl,60,0.01931
+imbalanced,MLP,test,Logit-LIME,local,kl_balanced,32,0.60924
+imbalanced,MLP,test,Soft logistic,test,fidelity,60,-0.18421
+imbalanced,MLP,test,Soft logistic,test,balanced,39,0.82702
+imbalanced,MLP,test,Soft logistic,test,auc,39,-0.04231
+imbalanced,MLP,test,Soft logistic,test,brier,60,0.26683
+imbalanced,MLP,test,Soft logistic,test,brier_balanced,39,0.77045
+imbalanced,MLP,test,Soft logistic,test,kl,60,0.46806
+imbalanced,MLP,test,Soft logistic,test,kl_balanced,39,0.75830
+imbalanced,MLP,test,Soft logistic,local,fidelity,60,-0.51432
+imbalanced,MLP,test,Soft logistic,local,balanced,32,0.75211
+imbalanced,MLP,test,Soft logistic,local,auc,32,-0.43758
+imbalanced,MLP,test,Soft logistic,local,brier,60,0.32263
+imbalanced,MLP,test,Soft logistic,local,brier_balanced,32,0.74670
+imbalanced,MLP,test,Soft logistic,local,kl,60,0.49768
+imbalanced,MLP,test,Soft logistic,local,kl_balanced,32,0.74817
+imbalanced,MLP,test,Soft logistic CLIME,test,fidelity,60,-0.06833
+imbalanced,MLP,test,Soft logistic CLIME,test,balanced,39,0.61385
+imbalanced,MLP,test,Soft logistic CLIME,test,auc,39,0.01134
+imbalanced,MLP,test,Soft logistic CLIME,test,brier,60,0.30734
+imbalanced,MLP,test,Soft logistic CLIME,test,brier_balanced,39,0.69251
+imbalanced,MLP,test,Soft logistic CLIME,test,kl,60,0.44355
+imbalanced,MLP,test,Soft logistic CLIME,test,kl_balanced,39,0.68603
+imbalanced,MLP,test,Soft logistic CLIME,local,fidelity,60,-0.36554
+imbalanced,MLP,test,Soft logistic CLIME,local,balanced,32,0.17180
+imbalanced,MLP,test,Soft logistic CLIME,local,auc,32,-0.51449
+imbalanced,MLP,test,Soft logistic CLIME,local,brier,60,0.27167
+imbalanced,MLP,test,Soft logistic CLIME,local,brier_balanced,32,0.59531
+imbalanced,MLP,test,Soft logistic CLIME,local,kl,60,0.45511
+imbalanced,MLP,test,Soft logistic CLIME,local,kl_balanced,32,0.62720
+imbalanced,MLP,test,all,test,fidelity,360,-0.24710
+imbalanced,MLP,test,all,test,balanced,234,0.68067
+imbalanced,MLP,test,all,test,auc,234,-0.08051
+imbalanced,MLP,test,all,test,brier,360,0.14482
+imbalanced,MLP,test,all,test,brier_balanced,234,0.73896
+imbalanced,MLP,test,all,test,kl,360,0.34557
+imbalanced,MLP,test,all,test,kl_balanced,234,0.72251
+imbalanced,MLP,test,all,local,fidelity,360,-0.38186
+imbalanced,MLP,test,all,local,balanced,192,0.05733
+imbalanced,MLP,test,all,local,auc,192,-0.63410
+imbalanced,MLP,test,all,local,brier,360,0.06166
+imbalanced,MLP,test,all,local,brier_balanced,192,0.45639
+imbalanced,MLP,test,all,local,kl,360,0.20375
+imbalanced,MLP,test,all,local,kl_balanced,192,0.53013
+imbalanced,SVM,line,CLIME,test,fidelity,55,-0.34620
+imbalanced,SVM,line,CLIME,test,balanced,35,0.14262
+imbalanced,SVM,line,CLIME,test,auc,35,-0.27812
+imbalanced,SVM,line,CLIME,test,brier,55,-0.48297
+imbalanced,SVM,line,CLIME,test,brier_balanced,35,-0.09216
+imbalanced,SVM,line,CLIME,test,kl,55,-0.53651
+imbalanced,SVM,line,CLIME,test,kl_balanced,35,-0.10392
+imbalanced,SVM,line,CLIME,local,fidelity,55,-0.48358
+imbalanced,SVM,line,CLIME,local,brier,55,-0.52932
+imbalanced,SVM,line,CLIME,local,kl,55,-0.47421
+imbalanced,SVM,line,LIME,test,fidelity,55,-0.46007
+imbalanced,SVM,line,LIME,test,balanced,35,0.33565
+imbalanced,SVM,line,LIME,test,auc,35,-0.28937
+imbalanced,SVM,line,LIME,test,brier,55,-0.64315
+imbalanced,SVM,line,LIME,test,brier_balanced,35,-0.32465
+imbalanced,SVM,line,LIME,test,kl,55,-0.69553
+imbalanced,SVM,line,LIME,test,kl_balanced,35,-0.33950
+imbalanced,SVM,line,LIME,local,fidelity,55,-0.52271
+imbalanced,SVM,line,LIME,local,brier,55,-0.67155
+imbalanced,SVM,line,LIME,local,kl,55,-0.67672
+imbalanced,SVM,line,LIME and CLIME,test,fidelity,110,-0.41245
+imbalanced,SVM,line,LIME and CLIME,test,balanced,70,0.18946
+imbalanced,SVM,line,LIME and CLIME,test,auc,70,-0.28640
+imbalanced,SVM,line,LIME and CLIME,test,brier,110,-0.56663
+imbalanced,SVM,line,LIME and CLIME,test,brier_balanced,70,-0.23208
+imbalanced,SVM,line,LIME and CLIME,test,kl,110,-0.62110
+imbalanced,SVM,line,LIME and CLIME,test,kl_balanced,70,-0.24237
+imbalanced,SVM,line,LIME and CLIME,local,fidelity,110,-0.50296
+imbalanced,SVM,line,LIME and CLIME,local,balanced,30,0.08411
+imbalanced,SVM,line,LIME and CLIME,local,auc,30,-0.05984
+imbalanced,SVM,line,LIME and CLIME,local,brier,110,-0.59356
+imbalanced,SVM,line,LIME and CLIME,local,brier_balanced,30,0.54972
+imbalanced,SVM,line,LIME and CLIME,local,kl,110,-0.56849
+imbalanced,SVM,line,LIME and CLIME,local,kl_balanced,30,0.55150
+imbalanced,SVM,line,Logit-CLIME,test,fidelity,55,-0.39281
+imbalanced,SVM,line,Logit-CLIME,test,balanced,35,0.12939
+imbalanced,SVM,line,Logit-CLIME,test,auc,35,-0.29528
+imbalanced,SVM,line,Logit-CLIME,test,brier,55,-0.55577
+imbalanced,SVM,line,Logit-CLIME,test,brier_balanced,35,-0.13725
+imbalanced,SVM,line,Logit-CLIME,test,kl,55,-0.57395
+imbalanced,SVM,line,Logit-CLIME,test,kl_balanced,35,-0.18683
+imbalanced,SVM,line,Logit-CLIME,local,fidelity,55,-0.52928
+imbalanced,SVM,line,Logit-CLIME,local,brier,55,-0.59026
+imbalanced,SVM,line,Logit-CLIME,local,kl,55,-0.57068
+imbalanced,SVM,line,Logit-LIME,test,fidelity,55,-0.56126
+imbalanced,SVM,line,Logit-LIME,test,balanced,35,0.32822
+imbalanced,SVM,line,Logit-LIME,test,auc,35,-0.27166
+imbalanced,SVM,line,Logit-LIME,test,brier,55,-0.70238
+imbalanced,SVM,line,Logit-LIME,test,brier_balanced,35,-0.25462
+imbalanced,SVM,line,Logit-LIME,test,kl,55,-0.73261
+imbalanced,SVM,line,Logit-LIME,test,kl_balanced,35,-0.28235
+imbalanced,SVM,line,Logit-LIME,local,fidelity,55,-0.62407
+imbalanced,SVM,line,Logit-LIME,local,brier,55,-0.68437
+imbalanced,SVM,line,Logit-LIME,local,kl,55,-0.72119
+imbalanced,SVM,line,Soft logistic,test,fidelity,55,-0.45187
+imbalanced,SVM,line,Soft logistic,test,balanced,35,0.27634
+imbalanced,SVM,line,Soft logistic,test,auc,35,-0.02437
+imbalanced,SVM,line,Soft logistic,test,brier,55,-0.63102
+imbalanced,SVM,line,Soft logistic,test,brier_balanced,35,-0.27451
+imbalanced,SVM,line,Soft logistic,test,kl,55,-0.65736
+imbalanced,SVM,line,Soft logistic,test,kl_balanced,35,-0.31064
+imbalanced,SVM,line,Soft logistic,local,fidelity,55,-0.51158
+imbalanced,SVM,line,Soft logistic,local,brier,55,-0.67864
+imbalanced,SVM,line,Soft logistic,local,kl,55,-0.67561
+imbalanced,SVM,line,Soft logistic CLIME,test,fidelity,55,-0.41372
+imbalanced,SVM,line,Soft logistic CLIME,test,balanced,35,0.14593
+imbalanced,SVM,line,Soft logistic CLIME,test,auc,35,0.01429
+imbalanced,SVM,line,Soft logistic CLIME,test,brier,55,-0.53983
+imbalanced,SVM,line,Soft logistic CLIME,test,brier_balanced,35,-0.24342
+imbalanced,SVM,line,Soft logistic CLIME,test,kl,55,-0.54235
+imbalanced,SVM,line,Soft logistic CLIME,test,kl_balanced,35,-0.26667
+imbalanced,SVM,line,Soft logistic CLIME,local,fidelity,55,-0.49185
+imbalanced,SVM,line,Soft logistic CLIME,local,brier,55,-0.57410
+imbalanced,SVM,line,Soft logistic CLIME,local,kl,55,-0.53319
+imbalanced,SVM,line,all,test,fidelity,330,-0.43843
+imbalanced,SVM,line,all,test,balanced,210,0.19401
+imbalanced,SVM,line,all,test,auc,210,-0.19020
+imbalanced,SVM,line,all,test,brier,330,-0.59338
+imbalanced,SVM,line,all,test,brier_balanced,210,-0.24644
+imbalanced,SVM,line,all,test,kl,330,-0.62432
+imbalanced,SVM,line,all,test,kl_balanced,210,-0.27249
+imbalanced,SVM,line,all,local,fidelity,330,-0.52528
+imbalanced,SVM,line,all,local,balanced,90,0.20824
+imbalanced,SVM,line,all,local,auc,90,0.00240
+imbalanced,SVM,line,all,local,brier,330,-0.60292
+imbalanced,SVM,line,all,local,brier_balanced,90,0.46943
+imbalanced,SVM,line,all,local,kl,330,-0.60214
+imbalanced,SVM,line,all,local,kl_balanced,90,0.44281
+imbalanced,SVM,test,CLIME,test,fidelity,59,-0.30237
+imbalanced,SVM,test,CLIME,test,balanced,39,0.71541
+imbalanced,SVM,test,CLIME,test,auc,39,0.51660
+imbalanced,SVM,test,CLIME,test,brier,59,-0.20646
+imbalanced,SVM,test,CLIME,test,brier_balanced,39,0.68097
+imbalanced,SVM,test,CLIME,test,kl,59,-0.21511
+imbalanced,SVM,test,CLIME,test,kl_balanced,39,0.65121
+imbalanced,SVM,test,CLIME,local,fidelity,59,-0.55406
+imbalanced,SVM,test,CLIME,local,balanced,20,-0.58195
+imbalanced,SVM,test,CLIME,local,auc,20,-0.83609
+imbalanced,SVM,test,CLIME,local,brier,59,-0.32494
+imbalanced,SVM,test,CLIME,local,brier_balanced,20,-0.14436
+imbalanced,SVM,test,CLIME,local,kl,59,-0.22417
+imbalanced,SVM,test,CLIME,local,kl_balanced,20,0.15188
+imbalanced,SVM,test,LIME,test,fidelity,59,-0.36455
+imbalanced,SVM,test,LIME,test,balanced,39,0.78340
+imbalanced,SVM,test,LIME,test,auc,39,0.61134
+imbalanced,SVM,test,LIME,test,brier,59,-0.33370
+imbalanced,SVM,test,LIME,test,brier_balanced,39,0.40830
+imbalanced,SVM,test,LIME,test,kl,59,-0.35019
+imbalanced,SVM,test,LIME,test,kl_balanced,39,0.42004
+imbalanced,SVM,test,LIME,local,fidelity,59,-0.65551
+imbalanced,SVM,test,LIME,local,balanced,20,0.82031
+imbalanced,SVM,test,LIME,local,auc,20,0.07970
+imbalanced,SVM,test,LIME,local,brier,59,-0.42856
+imbalanced,SVM,test,LIME,local,brier_balanced,20,0.73985
+imbalanced,SVM,test,LIME,local,kl,59,-0.42523
+imbalanced,SVM,test,LIME,local,kl_balanced,20,0.67669
+imbalanced,SVM,test,LIME and CLIME,test,fidelity,118,-0.33606
+imbalanced,SVM,test,LIME and CLIME,test,balanced,78,0.70329
+imbalanced,SVM,test,LIME and CLIME,test,auc,78,0.55104
+imbalanced,SVM,test,LIME and CLIME,test,brier,118,-0.27285
+imbalanced,SVM,test,LIME and CLIME,test,brier_balanced,78,0.49818
+imbalanced,SVM,test,LIME and CLIME,test,kl,118,-0.28223
+imbalanced,SVM,test,LIME and CLIME,test,kl_balanced,78,0.49127
+imbalanced,SVM,test,LIME and CLIME,local,fidelity,118,-0.60683
+imbalanced,SVM,test,LIME and CLIME,local,balanced,40,-0.08919
+imbalanced,SVM,test,LIME and CLIME,local,auc,40,-0.50150
+imbalanced,SVM,test,LIME and CLIME,local,brier,118,-0.36772
+imbalanced,SVM,test,LIME and CLIME,local,brier_balanced,40,0.13734
+imbalanced,SVM,test,LIME and CLIME,local,kl,118,-0.31597
+imbalanced,SVM,test,LIME and CLIME,local,kl_balanced,40,0.28311
+imbalanced,SVM,test,Logit-CLIME,test,fidelity,59,-0.32500
+imbalanced,SVM,test,Logit-CLIME,test,balanced,39,0.84799
+imbalanced,SVM,test,Logit-CLIME,test,auc,39,0.60891
+imbalanced,SVM,test,Logit-CLIME,test,brier,59,-0.23183
+imbalanced,SVM,test,Logit-CLIME,test,brier_balanced,39,0.67955
+imbalanced,SVM,test,Logit-CLIME,test,kl,59,-0.22166
+imbalanced,SVM,test,Logit-CLIME,test,kl_balanced,39,0.67915
+imbalanced,SVM,test,Logit-CLIME,local,fidelity,59,-0.64477
+imbalanced,SVM,test,Logit-CLIME,local,balanced,20,0.27068
+imbalanced,SVM,test,Logit-CLIME,local,auc,20,-0.36241
+imbalanced,SVM,test,Logit-CLIME,local,brier,59,-0.42471
+imbalanced,SVM,test,Logit-CLIME,local,brier_balanced,20,0.30376
+imbalanced,SVM,test,Logit-CLIME,local,kl,59,-0.42605
+imbalanced,SVM,test,Logit-CLIME,local,kl_balanced,20,0.22406
+imbalanced,SVM,test,Logit-LIME,test,fidelity,59,-0.45010
+imbalanced,SVM,test,Logit-LIME,test,balanced,39,0.78513
+imbalanced,SVM,test,Logit-LIME,test,auc,39,0.62368
+imbalanced,SVM,test,Logit-LIME,test,brier,59,-0.36725
+imbalanced,SVM,test,Logit-LIME,test,brier_balanced,39,0.37126
+imbalanced,SVM,test,Logit-LIME,test,kl,59,-0.35299
+imbalanced,SVM,test,Logit-LIME,test,kl_balanced,39,0.35628
+imbalanced,SVM,test,Logit-LIME,local,fidelity,59,-0.71837
+imbalanced,SVM,test,Logit-LIME,local,balanced,20,0.67018
+imbalanced,SVM,test,Logit-LIME,local,auc,20,0.69925
+imbalanced,SVM,test,Logit-LIME,local,brier,59,-0.50641
+imbalanced,SVM,test,Logit-LIME,local,brier_balanced,20,0.64662
+imbalanced,SVM,test,Logit-LIME,local,kl,59,-0.49063
+imbalanced,SVM,test,Logit-LIME,local,kl_balanced,20,0.65414
+imbalanced,SVM,test,Soft logistic,test,fidelity,59,-0.35868
+imbalanced,SVM,test,Soft logistic,test,balanced,39,0.83155
+imbalanced,SVM,test,Soft logistic,test,auc,39,0.46215
+imbalanced,SVM,test,Soft logistic,test,brier,59,-0.30384
+imbalanced,SVM,test,Soft logistic,test,brier_balanced,39,0.48441
+imbalanced,SVM,test,Soft logistic,test,kl,59,-0.28566
+imbalanced,SVM,test,Soft logistic,test,kl_balanced,39,0.51903
+imbalanced,SVM,test,Soft logistic,local,fidelity,59,-0.65967
+imbalanced,SVM,test,Soft logistic,local,balanced,20,0.76541
+imbalanced,SVM,test,Soft logistic,local,auc,20,0.07970
+imbalanced,SVM,test,Soft logistic,local,brier,59,-0.42909
+imbalanced,SVM,test,Soft logistic,local,brier_balanced,20,0.72331
+imbalanced,SVM,test,Soft logistic,local,kl,59,-0.42739
+imbalanced,SVM,test,Soft logistic,local,kl_balanced,20,0.68571
+imbalanced,SVM,test,Soft logistic CLIME,test,fidelity,59,-0.30729
+imbalanced,SVM,test,Soft logistic CLIME,test,balanced,39,0.69776
+imbalanced,SVM,test,Soft logistic CLIME,test,auc,39,0.36842
+imbalanced,SVM,test,Soft logistic CLIME,test,brier,59,-0.22780
+imbalanced,SVM,test,Soft logistic CLIME,test,brier_balanced,39,0.64049
+imbalanced,SVM,test,Soft logistic CLIME,test,kl,59,-0.19413
+imbalanced,SVM,test,Soft logistic CLIME,test,kl_balanced,39,0.65891
+imbalanced,SVM,test,Soft logistic CLIME,local,fidelity,59,-0.55704
+imbalanced,SVM,test,Soft logistic CLIME,local,balanced,20,-0.59549
+imbalanced,SVM,test,Soft logistic CLIME,local,auc,20,-0.83459
+imbalanced,SVM,test,Soft logistic CLIME,local,brier,59,-0.34557
+imbalanced,SVM,test,Soft logistic CLIME,local,brier_balanced,20,-0.66767
+imbalanced,SVM,test,Soft logistic CLIME,local,kl,59,-0.29519
+imbalanced,SVM,test,Soft logistic CLIME,local,kl_balanced,20,-0.37744
+imbalanced,SVM,test,all,test,fidelity,354,-0.35884
+imbalanced,SVM,test,all,test,balanced,234,0.73556
+imbalanced,SVM,test,all,test,auc,234,0.52261
+imbalanced,SVM,test,all,test,brier,354,-0.29253
+imbalanced,SVM,test,all,test,brier_balanced,234,0.50293
+imbalanced,SVM,test,all,test,kl,354,-0.28480
+imbalanced,SVM,test,all,test,kl_balanced,234,0.50706
+imbalanced,SVM,test,all,local,fidelity,354,-0.63336
+imbalanced,SVM,test,all,local,balanced,120,0.04435
+imbalanced,SVM,test,all,local,auc,120,-0.38460
+imbalanced,SVM,test,all,local,brier,354,-0.39587
+imbalanced,SVM,test,all,local,brier_balanced,120,0.12140
+imbalanced,SVM,test,all,local,kl,354,-0.36944
+imbalanced,SVM,test,all,local,kl_balanced,120,0.18821
+imbalanced,smooth,line,CLIME,test,fidelity,175,-0.16830
+imbalanced,smooth,line,CLIME,test,balanced,127,0.55684
+imbalanced,smooth,line,CLIME,test,auc,127,0.55342
+imbalanced,smooth,line,CLIME,test,brier,175,-0.01129
+imbalanced,smooth,line,CLIME,test,brier_balanced,127,0.62685
+imbalanced,smooth,line,CLIME,test,kl,175,-0.15024
+imbalanced,smooth,line,CLIME,test,kl_balanced,127,0.62477
+imbalanced,smooth,line,CLIME,local,fidelity,175,-0.48524
+imbalanced,smooth,line,CLIME,local,balanced,90,0.46846
+imbalanced,smooth,line,CLIME,local,auc,90,0.01665
+imbalanced,smooth,line,CLIME,local,brier,175,-0.44406
+imbalanced,smooth,line,CLIME,local,brier_balanced,90,0.80949
+imbalanced,smooth,line,CLIME,local,kl,175,-0.51114
+imbalanced,smooth,line,CLIME,local,kl_balanced,90,0.82997
+imbalanced,smooth,line,LIME,test,fidelity,175,-0.37188
+imbalanced,smooth,line,LIME,test,balanced,127,0.41465
+imbalanced,smooth,line,LIME,test,auc,127,0.58833
+imbalanced,smooth,line,LIME,test,brier,175,-0.10905
+imbalanced,smooth,line,LIME,test,brier_balanced,127,0.40796
+imbalanced,smooth,line,LIME,test,kl,175,-0.21756
+imbalanced,smooth,line,LIME,test,kl_balanced,127,0.47634
+imbalanced,smooth,line,LIME,local,fidelity,175,-0.52846
+imbalanced,smooth,line,LIME,local,balanced,90,0.41777
+imbalanced,smooth,line,LIME,local,auc,90,0.06123
+imbalanced,smooth,line,LIME,local,brier,175,-0.43627
+imbalanced,smooth,line,LIME,local,brier_balanced,90,0.80081
+imbalanced,smooth,line,LIME,local,kl,175,-0.53095
+imbalanced,smooth,line,LIME,local,kl_balanced,90,0.82294
+imbalanced,smooth,line,LIME and CLIME,test,fidelity,350,-0.27360
+imbalanced,smooth,line,LIME and CLIME,test,balanced,254,0.45623
+imbalanced,smooth,line,LIME and CLIME,test,auc,254,0.57085
+imbalanced,smooth,line,LIME and CLIME,test,brier,350,-0.06302
+imbalanced,smooth,line,LIME and CLIME,test,brier_balanced,254,0.49340
+imbalanced,smooth,line,LIME and CLIME,test,kl,350,-0.18780
+imbalanced,smooth,line,LIME and CLIME,test,kl_balanced,254,0.52816
+imbalanced,smooth,line,LIME and CLIME,local,fidelity,350,-0.51016
+imbalanced,smooth,line,LIME and CLIME,local,balanced,180,0.41981
+imbalanced,smooth,line,LIME and CLIME,local,auc,180,0.03822
+imbalanced,smooth,line,LIME and CLIME,local,brier,350,-0.43580
+imbalanced,smooth,line,LIME and CLIME,local,brier_balanced,180,0.76494
+imbalanced,smooth,line,LIME and CLIME,local,kl,350,-0.51870
+imbalanced,smooth,line,LIME and CLIME,local,kl_balanced,180,0.79819
+imbalanced,smooth,line,Logit-CLIME,test,fidelity,175,0.17208
+imbalanced,smooth,line,Logit-CLIME,test,balanced,127,0.79168
+imbalanced,smooth,line,Logit-CLIME,test,auc,127,0.60326
+imbalanced,smooth,line,Logit-CLIME,test,brier,175,0.37578
+imbalanced,smooth,line,Logit-CLIME,test,brier_balanced,127,0.81968
+imbalanced,smooth,line,Logit-CLIME,test,kl,175,0.38908
+imbalanced,smooth,line,Logit-CLIME,test,kl_balanced,127,0.82900
+imbalanced,smooth,line,Logit-CLIME,local,fidelity,175,-0.10846
+imbalanced,smooth,line,Logit-CLIME,local,balanced,90,0.62543
+imbalanced,smooth,line,Logit-CLIME,local,auc,90,0.13518
+imbalanced,smooth,line,Logit-CLIME,local,brier,175,-0.06850
+imbalanced,smooth,line,Logit-CLIME,local,brier_balanced,90,0.82544
+imbalanced,smooth,line,Logit-CLIME,local,kl,175,0.01056
+imbalanced,smooth,line,Logit-CLIME,local,kl_balanced,90,0.82995
+imbalanced,smooth,line,Logit-LIME,test,fidelity,175,0.11818
+imbalanced,smooth,line,Logit-LIME,test,balanced,127,0.80668
+imbalanced,smooth,line,Logit-LIME,test,auc,127,0.60794
+imbalanced,smooth,line,Logit-LIME,test,brier,175,0.32216
+imbalanced,smooth,line,Logit-LIME,test,brier_balanced,127,0.77594
+imbalanced,smooth,line,Logit-LIME,test,kl,175,0.34594
+imbalanced,smooth,line,Logit-LIME,test,kl_balanced,127,0.79455
+imbalanced,smooth,line,Logit-LIME,local,fidelity,175,-0.13782
+imbalanced,smooth,line,Logit-LIME,local,balanced,90,0.57975
+imbalanced,smooth,line,Logit-LIME,local,auc,90,0.10503
+imbalanced,smooth,line,Logit-LIME,local,brier,175,-0.08836
+imbalanced,smooth,line,Logit-LIME,local,brier_balanced,90,0.77655
+imbalanced,smooth,line,Logit-LIME,local,kl,175,-0.02609
+imbalanced,smooth,line,Logit-LIME,local,kl_balanced,90,0.79372
+imbalanced,smooth,line,Soft logistic,test,fidelity,175,-0.07114
+imbalanced,smooth,line,Soft logistic,test,balanced,127,0.83391
+imbalanced,smooth,line,Soft logistic,test,auc,127,0.57894
+imbalanced,smooth,line,Soft logistic,test,brier,175,0.16828
+imbalanced,smooth,line,Soft logistic,test,brier_balanced,127,0.69612
+imbalanced,smooth,line,Soft logistic,test,kl,175,0.20024
+imbalanced,smooth,line,Soft logistic,test,kl_balanced,127,0.74495
+imbalanced,smooth,line,Soft logistic,local,fidelity,175,-0.34602
+imbalanced,smooth,line,Soft logistic,local,balanced,90,0.81944
+imbalanced,smooth,line,Soft logistic,local,auc,90,0.33282
+imbalanced,smooth,line,Soft logistic,local,brier,175,-0.22780
+imbalanced,smooth,line,Soft logistic,local,brier_balanced,90,0.93509
+imbalanced,smooth,line,Soft logistic,local,kl,175,-0.14035
+imbalanced,smooth,line,Soft logistic,local,kl_balanced,90,0.94381
+imbalanced,smooth,line,Soft logistic CLIME,test,fidelity,175,0.04454
+imbalanced,smooth,line,Soft logistic CLIME,test,balanced,127,0.77623
+imbalanced,smooth,line,Soft logistic CLIME,test,auc,127,0.61426
+imbalanced,smooth,line,Soft logistic CLIME,test,brier,175,0.24101
+imbalanced,smooth,line,Soft logistic CLIME,test,brier_balanced,127,0.70240
+imbalanced,smooth,line,Soft logistic CLIME,test,kl,175,0.26183
+imbalanced,smooth,line,Soft logistic CLIME,test,kl_balanced,127,0.74095
+imbalanced,smooth,line,Soft logistic CLIME,local,fidelity,175,-0.23341
+imbalanced,smooth,line,Soft logistic CLIME,local,balanced,90,0.72663
+imbalanced,smooth,line,Soft logistic CLIME,local,auc,90,0.34471
+imbalanced,smooth,line,Soft logistic CLIME,local,brier,175,-0.18139
+imbalanced,smooth,line,Soft logistic CLIME,local,brier_balanced,90,0.91727
+imbalanced,smooth,line,Soft logistic CLIME,local,kl,175,-0.09955
+imbalanced,smooth,line,Soft logistic CLIME,local,kl_balanced,90,0.92406
+imbalanced,smooth,line,all,test,fidelity,1050,-0.02978
+imbalanced,smooth,line,all,test,balanced,762,0.69892
+imbalanced,smooth,line,all,test,auc,762,0.59245
+imbalanced,smooth,line,all,test,brier,1050,0.17556
+imbalanced,smooth,line,all,test,brier_balanced,762,0.66710
+imbalanced,smooth,line,all,test,kl,1050,0.15091
+imbalanced,smooth,line,all,test,kl_balanced,762,0.68476
+imbalanced,smooth,line,all,local,fidelity,1050,-0.28969
+imbalanced,smooth,line,all,local,balanced,540,0.61624
+imbalanced,smooth,line,all,local,auc,540,0.17827
+imbalanced,smooth,line,all,local,brier,1050,-0.21841
+imbalanced,smooth,line,all,local,brier_balanced,540,0.82370
+imbalanced,smooth,line,all,local,kl,1050,-0.20195
+imbalanced,smooth,line,all,local,kl_balanced,540,0.83249
+imbalanced,smooth,test,CLIME,test,fidelity,178,0.11145
+imbalanced,smooth,test,CLIME,test,balanced,137,0.59930
+imbalanced,smooth,test,CLIME,test,auc,137,0.77053
+imbalanced,smooth,test,CLIME,test,brier,178,0.17082
+imbalanced,smooth,test,CLIME,test,brier_balanced,137,0.83280
+imbalanced,smooth,test,CLIME,test,kl,178,-0.16260
+imbalanced,smooth,test,CLIME,test,kl_balanced,137,0.79644
+imbalanced,smooth,test,CLIME,local,fidelity,178,-0.31968
+imbalanced,smooth,test,CLIME,local,balanced,107,0.06118
+imbalanced,smooth,test,CLIME,local,auc,107,0.07352
+imbalanced,smooth,test,CLIME,local,brier,178,-0.13002
+imbalanced,smooth,test,CLIME,local,brier_balanced,107,0.59036
+imbalanced,smooth,test,CLIME,local,kl,178,-0.18617
+imbalanced,smooth,test,CLIME,local,kl_balanced,107,0.62926
+imbalanced,smooth,test,LIME,test,fidelity,178,-0.10654
+imbalanced,smooth,test,LIME,test,balanced,137,0.42377
+imbalanced,smooth,test,LIME,test,auc,137,0.80884
+imbalanced,smooth,test,LIME,test,brier,178,0.07571
+imbalanced,smooth,test,LIME,test,brier_balanced,137,0.62769
+imbalanced,smooth,test,LIME,test,kl,178,-0.16557
+imbalanced,smooth,test,LIME,test,kl_balanced,137,0.63706
+imbalanced,smooth,test,LIME,local,fidelity,178,-0.40682
+imbalanced,smooth,test,LIME,local,balanced,107,0.01011
+imbalanced,smooth,test,LIME,local,auc,107,0.00051
+imbalanced,smooth,test,LIME,local,brier,178,-0.13056
+imbalanced,smooth,test,LIME,local,brier_balanced,107,0.43936
+imbalanced,smooth,test,LIME,local,kl,178,-0.22890
+imbalanced,smooth,test,LIME,local,kl_balanced,107,0.49332
+imbalanced,smooth,test,LIME and CLIME,test,fidelity,356,-0.00915
+imbalanced,smooth,test,LIME and CLIME,test,balanced,274,0.47733
+imbalanced,smooth,test,LIME and CLIME,test,auc,274,0.78815
+imbalanced,smooth,test,LIME and CLIME,test,brier,356,0.12424
+imbalanced,smooth,test,LIME and CLIME,test,brier_balanced,274,0.69945
+imbalanced,smooth,test,LIME and CLIME,test,kl,356,-0.16241
+imbalanced,smooth,test,LIME and CLIME,test,kl_balanced,274,0.69256
+imbalanced,smooth,test,LIME and CLIME,local,fidelity,356,-0.36675
+imbalanced,smooth,test,LIME and CLIME,local,balanced,214,0.00260
+imbalanced,smooth,test,LIME and CLIME,local,auc,214,0.03415
+imbalanced,smooth,test,LIME and CLIME,local,brier,356,-0.13122
+imbalanced,smooth,test,LIME and CLIME,local,brier_balanced,214,0.46193
+imbalanced,smooth,test,LIME and CLIME,local,kl,356,-0.21065
+imbalanced,smooth,test,LIME and CLIME,local,kl_balanced,214,0.52093
+imbalanced,smooth,test,Logit-CLIME,test,fidelity,179,0.21136
+imbalanced,smooth,test,Logit-CLIME,test,balanced,137,0.92348
+imbalanced,smooth,test,Logit-CLIME,test,auc,137,0.78611
+imbalanced,smooth,test,Logit-CLIME,test,brier,179,0.41221
+imbalanced,smooth,test,Logit-CLIME,test,brier_balanced,137,0.91049
+imbalanced,smooth,test,Logit-CLIME,test,kl,179,0.46631
+imbalanced,smooth,test,Logit-CLIME,test,kl_balanced,137,0.90425
+imbalanced,smooth,test,Logit-CLIME,local,fidelity,179,-0.01754
+imbalanced,smooth,test,Logit-CLIME,local,balanced,107,0.49420
+imbalanced,smooth,test,Logit-CLIME,local,auc,107,0.11841
+imbalanced,smooth,test,Logit-CLIME,local,brier,179,0.36414
+imbalanced,smooth,test,Logit-CLIME,local,brier_balanced,107,0.73509
+imbalanced,smooth,test,Logit-CLIME,local,kl,179,0.40410
+imbalanced,smooth,test,Logit-CLIME,local,kl_balanced,107,0.77603
+imbalanced,smooth,test,Logit-LIME,test,fidelity,179,0.17748
+imbalanced,smooth,test,Logit-LIME,test,balanced,137,0.90458
+imbalanced,smooth,test,Logit-LIME,test,auc,137,0.76639
+imbalanced,smooth,test,Logit-LIME,test,brier,179,0.37649
+imbalanced,smooth,test,Logit-LIME,test,brier_balanced,137,0.86368
+imbalanced,smooth,test,Logit-LIME,test,kl,179,0.43400
+imbalanced,smooth,test,Logit-LIME,test,kl_balanced,137,0.85349
+imbalanced,smooth,test,Logit-LIME,local,fidelity,179,-0.04975
+imbalanced,smooth,test,Logit-LIME,local,balanced,107,0.42872
+imbalanced,smooth,test,Logit-LIME,local,auc,107,0.10981
+imbalanced,smooth,test,Logit-LIME,local,brier,179,0.34072
+imbalanced,smooth,test,Logit-LIME,local,brier_balanced,107,0.68669
+imbalanced,smooth,test,Logit-LIME,local,kl,179,0.37123
+imbalanced,smooth,test,Logit-LIME,local,kl_balanced,107,0.74713
+imbalanced,smooth,test,Soft logistic,test,fidelity,178,0.21470
+imbalanced,smooth,test,Soft logistic,test,balanced,137,0.89494
+imbalanced,smooth,test,Soft logistic,test,auc,137,0.77911
+imbalanced,smooth,test,Soft logistic,test,brier,178,0.44236
+imbalanced,smooth,test,Soft logistic,test,brier_balanced,137,0.87065
+imbalanced,smooth,test,Soft logistic,test,kl,178,0.49129
+imbalanced,smooth,test,Soft logistic,test,kl_balanced,137,0.87579
+imbalanced,smooth,test,Soft logistic,local,fidelity,178,-0.17777
+imbalanced,smooth,test,Soft logistic,local,balanced,107,0.59190
+imbalanced,smooth,test,Soft logistic,local,auc,107,0.14588
+imbalanced,smooth,test,Soft logistic,local,brier,178,0.41468
+imbalanced,smooth,test,Soft logistic,local,brier_balanced,107,0.91736
+imbalanced,smooth,test,Soft logistic,local,kl,178,0.44967
+imbalanced,smooth,test,Soft logistic,local,kl_balanced,107,0.92321
+imbalanced,smooth,test,Soft logistic CLIME,test,fidelity,178,0.30923
+imbalanced,smooth,test,Soft logistic CLIME,test,balanced,137,0.85247
+imbalanced,smooth,test,Soft logistic CLIME,test,auc,137,0.74888
+imbalanced,smooth,test,Soft logistic CLIME,test,brier,178,0.48281
+imbalanced,smooth,test,Soft logistic CLIME,test,brier_balanced,137,0.87678
+imbalanced,smooth,test,Soft logistic CLIME,test,kl,178,0.51981
+imbalanced,smooth,test,Soft logistic CLIME,test,kl_balanced,137,0.87742
+imbalanced,smooth,test,Soft logistic CLIME,local,fidelity,178,-0.04277
+imbalanced,smooth,test,Soft logistic CLIME,local,balanced,107,0.47686
+imbalanced,smooth,test,Soft logistic CLIME,local,auc,107,0.15406
+imbalanced,smooth,test,Soft logistic CLIME,local,brier,178,0.45005
+imbalanced,smooth,test,Soft logistic CLIME,local,brier_balanced,107,0.83764
+imbalanced,smooth,test,Soft logistic CLIME,local,kl,178,0.48840
+imbalanced,smooth,test,Soft logistic CLIME,local,kl_balanced,107,0.86296
+imbalanced,smooth,test,all,test,fidelity,1070,0.16338
+imbalanced,smooth,test,all,test,balanced,822,0.77636
+imbalanced,smooth,test,all,test,auc,822,0.77811
+imbalanced,smooth,test,all,test,brier,1070,0.33629
+imbalanced,smooth,test,all,test,brier_balanced,822,0.83136
+imbalanced,smooth,test,all,test,kl,1070,0.27729
+imbalanced,smooth,test,all,test,kl_balanced,822,0.81172
+imbalanced,smooth,test,all,local,fidelity,1070,-0.15751
+imbalanced,smooth,test,all,local,balanced,642,0.36374
+imbalanced,smooth,test,all,local,auc,642,0.09678
+imbalanced,smooth,test,all,local,brier,1070,0.22939
+imbalanced,smooth,test,all,local,brier_balanced,642,0.69047
+imbalanced,smooth,test,all,local,kl,1070,0.22415
+imbalanced,smooth,test,all,local,kl_balanced,642,0.71481

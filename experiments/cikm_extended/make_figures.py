@@ -458,9 +458,146 @@ def matched():
     style.save(fig, 'matched')
 
 
+SIX = ['LIME', 'CLIME', 'Logit-LIME', 'Logit-CLIME', 'Soft logistic', 'Soft logistic CLIME']
+SMOOTH = ['Logistic', 'SVM', 'MLP']
+
+
+def cuts():
+    """one surrogate scored at every cut: the scores that move and the explanation that does not"""
+    frame = read('explanations_cuts')
+    frame = frame[(frame.family == 'all') & (frame.kind == 'line')]
+    present = settings_present(frame)
+    fig, axes = plt.subplots(1, len(present), figsize=(TEXTWIDTH, TEXTWIDTH*0.3), sharey=True,
+                             squeeze=False)
+    axes = axes[0]
+    for ax, setting in zip(axes, present):
+        for explainer in ('LIME', 'CLIME'):
+            part = frame[(frame.setting == setting) & (frame.explainer == explainer)].sort_values('cut')
+            colour = EXPLAINER_COLOURS[explainer]
+            ax.plot(part.cut, part.test_balanced, color=colour, marker='')
+            ax.plot(part.cut, part.test_fidelity, color=colour, marker='', ls=':')
+            at = part[np.isclose(part.cut, 0.5)]
+            ax.plot(at.cut, at.test_balanced, ls='', marker=EXPLAINER_MARKERS[explainer],
+                    color=colour, ms=5)
+        ax.axvline(0.5, color=MUTED, lw=0.8, ls='--', zorder=1)
+        ax.set_title(SETTING_LABELS[setting], fontsize=7.5)
+        ax.set_xlabel("cut on the surrogate's score")
+    axes[0].set_ylabel('agreement with the black box')
+    handles = [plt.Line2D([], [], color=EXPLAINER_COLOURS[n], label=EXPLAINER_LABELS[n])
+               for n in ('LIME', 'CLIME')]
+    handles += [plt.Line2D([], [], color=INK, label='balanced fidelity'),
+                plt.Line2D([], [], color=INK, ls=':', label='fidelity')]
+    fig.legend(handles=handles, ncol=4, loc='lower center', bbox_to_anchor=(0.5, -0.3))
+    style.save(fig, 'cuts')
+
+
+def truth():
+    """cosine between each surrogate's coefficients and the black box's log-odds gradient"""
+    frame = read('explanations_triad')
+    frame = frame[(frame.arm == 'plain') & (frame.kind == 'test') & frame.explainer.isin(SIX)]
+    present = settings_present(frame)
+    fig, axes = plt.subplots(1, 3, figsize=(TEXTWIDTH, TEXTWIDTH*0.32), sharey=True)
+    width = 0.8/len(SIX)
+    for ax, family in zip(axes, SMOOTH):
+        for i, explainer in enumerate(SIX):
+            part = frame[(frame.family == family) & (frame.explainer == explainer)]
+            values = [part[part.setting == s].truth_point_cosine.mean() for s in present]
+            ax.bar(np.arange(len(present)) + (i - (len(SIX) - 1)/2)*width, values, width,
+                   color=EXPLAINER_COLOURS[explainer], label=EXPLAINER_LABELS[explainer])
+        ax.set_xticks(np.arange(len(present)))
+        ax.set_xticklabels([SETTING_SHORT[s] for s in present], fontsize=6.5)
+        ax.set_title(FAMILY_SHORT[family], fontsize=7.5)
+        ax.grid(axis='x', visible=False)
+    axes[0].set_ylabel('cosine with the gradient\nat the query point')
+    handles, labels = axes[0].get_legend_handles_labels()
+    fig.legend(handles, labels, ncol=3, loc='lower center', bbox_to_anchor=(0.5, -0.25))
+    style.save(fig, 'truth')
+
+
+def moves():
+    """how far each explanation moves when the black box is corrected, at 200:20"""
+    frame = read('explanations_moves')
+    frame = frame[(frame.setting == 'imbalanced') & (frame.kind == 'test')
+                  & (frame.neighbourhood == 'all')]
+    frame = frame.assign(top_changed=100*(1 - frame.same_top))
+    shown = ['re-thresholded', 'weighted', 'SMOTE']
+    panels = [('all', 'top_changed', 'query points whose\ntop feature changes (%)'),
+              ('all', 'median_norm_ratio', 'size of the coefficients\n(ratio to the plain model)'),
+              ('smooth', 'top_changed', 'top feature changes (%),\nmodels with a gradient')]
+    fig, axes = plt.subplots(1, 3, figsize=(TEXTWIDTH, TEXTWIDTH*0.32))
+    for ax, (family, column, label) in zip(axes, panels):
+        names = SIX + (['gradient'] if family == 'smooth' else [])
+        width = 0.8/len(names)
+        for i, explainer in enumerate(names):
+            part = frame[(frame.family == family) & (frame.explainer == explainer)].set_index('arm')
+            values = [part[column].get(arm, np.nan) for arm in shown]
+            ax.bar(np.arange(len(shown)) + (i - (len(names) - 1)/2)*width, values, width,
+                   color=EXPLAINER_COLOURS[explainer], label=EXPLAINER_LABELS[explainer])
+        ax.set_xticks(np.arange(len(shown)))
+        ax.set_xticklabels(['threshold\nmoved', 'class\nweighted', 'SMOTE'], fontsize=6.5)
+        ax.set_title(label, fontsize=7.5)
+        ax.grid(axis='x', visible=False)
+        if column == 'median_norm_ratio':
+            ax.axhline(1, **style.ZERO_LINE)
+            ax.set_ylim(bottom=0.8)
+    handles, labels = axes[2].get_legend_handles_labels()
+    fig.legend(handles, labels, ncol=4, loc='lower center', bbox_to_anchor=(0.5, -0.25))
+    fig.subplots_adjust(wspace=0.3)
+    style.save(fig, 'moves')
+
+
+def losses():
+    """CLIME minus LIME under each loss: each weighting wins the loss it is fitted with"""
+    frame = read('explanations_paired')
+    frame = frame[(frame.family == 'all') & (frame.kind == 'line') & (frame.explainer == 'CLIME')]
+    present = settings_present(frame)
+    panels = [('brier', 'Brier score'), ('kl', 'KL divergence')]
+    fig, axes = plt.subplots(1, 2, figsize=(TEXTWIDTH*0.8, TEXTWIDTH*0.3))
+    x = np.arange(len(present))
+    for ax, (loss, label) in zip(axes, panels):
+        for i, (suffix, name, colour) in enumerate((('', 'kernel weighted', EXPLAINER_COLOURS['LIME']),
+                                                    ('_balanced', 'kernel weighted, class balanced',
+                                                     EXPLAINER_COLOURS['CLIME']))):
+            part = frame[frame.metric == f'test_{loss}{suffix}'].set_index('setting').reindex(present)
+            ax.bar(x + (i - 0.5)*0.38, part['diff'], 0.36, yerr=part['ci'], color=colour, label=name,
+                   error_kw=dict(lw=0.8, ecolor=INK))
+        ax.axhline(0, **style.ZERO_LINE)
+        ax.set_xticks(x)
+        ax.set_xticklabels([SETTING_SHORT[s] for s in present], fontsize=6.5)
+        ax.set_title(f'{label}: CLIME $-$ LIME\n(below zero: CLIME better)', fontsize=7.5)
+        ax.grid(axis='x', visible=False)
+    handles, labels = axes[0].get_legend_handles_labels()
+    fig.legend(handles, labels, ncol=2, loc='lower center', bbox_to_anchor=(0.5, -0.16))
+    fig.subplots_adjust(wspace=0.35)
+    style.save(fig, 'losses')
+
+
+def instruments():
+    """rank correlation of each score with the cosine to the gradient, over query points"""
+    frame = read('explanations_instruments')
+    frame = frame[(frame.family == 'smooth') & (frame.kind == 'test') & (frame.explainer == 'all')
+                  & (frame['where'] == 'test')]
+    present = settings_present(frame)
+    order = ['fidelity', 'balanced', 'auc', 'brier', 'brier_balanced', 'kl', 'kl_balanced']
+    names = ['fidelity', 'balanced fidelity', 'AUC', 'Brier', 'Brier, balanced', 'KL', 'KL, balanced']
+    fig, ax = plt.subplots(figsize=(TEXTWIDTH*0.7, TEXTWIDTH*0.3))
+    width = 0.8/len(present)
+    for i, setting in enumerate(present):
+        part = frame[frame.setting == setting].set_index('score').reindex(order)
+        ax.bar(np.arange(len(order)) + (i - (len(present) - 1)/2)*width, part.rho, width,
+               color=[INK2, roles.C['blue'], roles.C['orange']][i], label=SETTING_LABELS[setting])
+    ax.axhline(0, **style.ZERO_LINE)
+    ax.set_xticks(np.arange(len(order)))
+    ax.set_xticklabels(names, fontsize=6.5, rotation=20, ha='right')
+    ax.set_ylabel("rank correlation with\nthe cosine to the gradient")
+    ax.grid(axis='x', visible=False)
+    ax.legend(ncol=3, loc='lower center', bbox_to_anchor=(0.5, -0.6))
+    style.save(fig, 'instruments')
+
+
 FIGURES = {f.__name__: f for f in (reproduce, replication, profile, triad, one_sided, arms,
                                    families, grid, operating_point, by_class, sweep, kernel,
-                                   matched)}
+                                   matched, cuts, truth, moves, losses, instruments)}
 
 if __name__ == '__main__':
     style.use()

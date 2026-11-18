@@ -37,8 +37,11 @@ def joined(scores, queries):
     out = scores.merge(queries[[*KEY, 'sample_minority', 'f_query', *CONSTANTS]], on=KEY)
     for w in WHERE:
         for s in LOSSES:
-            out[f'{w}_{s}_beats_constant'] = (out[f'{w}_{s}'] < out[f'{w}_{s}_constant']).where(
+            beats = (out[f'{w}_{s}'] < out[f'{w}_{s}_constant']).astype(float)
+            out[f'{w}_{s}_beats_constant'] = beats.where(
                 out[f'{w}_{s}'].notna() & out[f'{w}_{s}_constant'].notna())
+    flags = [c for c in out if c.endswith('same_top')]
+    out[flags] = out[flags].astype(float)
     return out
 
 
@@ -76,12 +79,18 @@ def paired(block, arm='plain', baseline='LIME'):
     return pd.DataFrame(rows)
 
 
-def moves(pairs, queries):
-    '''how far each explanation, and the black box's gradient, moves from the plain arm's'''
-    plain = queries[queries.arm == 'plain']
+def moves(pairs, queries, models):
+    '''
+    how far each explanation, and the black box's gradient, moves from the plain arm's; a
+    placed threshold counts only where it left 0.5
+    '''
+    job = ['setting', 'dataset', 'family', 'seed']
     key = [k for k in KEY if k != 'arm']
+    plain = queries[queries.arm == 'plain']
     before = plain[[*key, 'sample_minority']].rename(columns={'sample_minority': 'before'})
-    frame = pairs.merge(before, on=key)
+    frame = pairs.merge(before, on=key).merge(models[[*job, 'arm', 'threshold', 'placement']],
+                                              on=[*job, 'arm'])
+    frame = frame[(frame.placement == 'training') | ((frame.threshold - 0.5).abs() > 1e-6)]
     frame['neighbourhood'] = np.where(frame.before < ONE_SIDED, 'one-sided', 'two-sided')
     frame = pd.concat([frame, frame.assign(neighbourhood='all')], ignore_index=True)
     by = ['setting', 'family', 'arm', 'kind', 'neighbourhood', 'explainer']
@@ -130,14 +139,15 @@ if __name__ == '__main__':
     block = blocks(full)
     save(triad(block), 'explanations_triad')
     save(paired(block), 'explanations_paired')
-    save(moves(runner.load(RUN, 'pairs'), queries), 'explanations_moves')
+    models = runner.load(RUN, 'models')
+    save(moves(runner.load(RUN, 'pairs'), queries, models), 'explanations_moves')
     save(cuts(runner.load(RUN, 'cuts')), 'explanations_cuts')
     save(instruments(full), 'explanations_instruments')
     one_sided = queries.assign(one_sided=queries.sample_minority < ONE_SIDED)
     save(stats.over_datasets(with_groups(one_sided), ['setting', 'family', 'arm', 'kind'],
                              ['one_sided', 'has_gradient']), 'explanations_neighbourhoods')
     failures = runner.load(RUN, 'failures')
-    by = ['setting', 'dataset', 'family', 'seed', 'arm', 'kind']
-    failed = failures.groupby(by, observed=True).size().rename('failed').reset_index() \
-        if len(failures) else pd.DataFrame(columns=[*by, 'failed'])
-    save(failed.assign(explained=len(queries)), 'explanations_failures')
+    save(pd.DataFrame([{'failed': len(failures), 'explained': len(queries),
+                        'jobs': len(models.drop_duplicates(['setting', 'dataset', 'family',
+                                                            'seed'])),
+                        'seeds': queries.seed.nunique()}]), 'explanations_run')

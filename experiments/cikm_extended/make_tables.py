@@ -351,6 +351,132 @@ def reproduce():
               part.fidelity.min())
 
 
+SIX = {'LIME': 'LIME', 'CLIME': 'CLIME', 'Logit-LIME': 'Logit-LIME', 'Logit-CLIME': 'Logit-CLIME',
+       'Soft logistic': 'Soft logistic', 'Soft logistic CLIME': 'Soft logistic, CLIME weights'}
+GROUPS = {'all': 'all', 'smooth': 'smooth', 'Logistic': 'LR', 'SVM': 'SVM', 'MLP': 'MLP'}
+EXPLANATION_SCORES = {
+    'test_fidelity': 'fid', 'test_balanced': 'bal', 'test_auc': 'auc', 'test_brier': 'brier',
+    'test_brier_balanced': 'brierbal', 'test_kl': 'kl', 'test_kl_balanced': 'klbal',
+    'test_brier_skill': 'skill', 'test_brier_balanced_skill': 'skillbal',
+    'test_kl_skill': 'klskill', 'test_kl_balanced_skill': 'klskillbal',
+    'test_brier_beats_constant': 'beats', 'local_brier': 'ownbrier',
+    'local_brier_balanced': 'ownbrierbal', 'local_brier_skill': 'ownskill',
+    'local_brier_balanced_skill': 'ownskillbal', 'stability_cosine': 'stable',
+    'stability_same_top': 'stabletop', 'coef_norm': 'norm'}
+TRUTH_SCORES = {'truth_point_cosine': 'truth', 'truth_mean_cosine': 'truthmean',
+                'truth_mean_probability_cosine': 'truthprob', 'truth_point_same_top': 'truthtop'}
+PAIRED = {**{k: v for k, v in EXPLANATION_SCORES.items() if 'skill' not in k and 'beats' not in k},
+          **TRUTH_SCORES}
+MOVED_ARMS = ['re-thresholded', 'CP Minimax', 'weighted', 'SMOTE']
+
+
+def _digits(tag):
+    return '{:.3f}' if 'brier' in tag or 'kl' in tag else '{:.2f}'
+
+
+def explanations():
+    frame = read('explanations_triad')
+    for _, r in frame[frame.family.isin(list(GROUPS))].iterrows():
+        base = ['exp', r.setting, r.arm, r.kind, GROUPS[r.family], r.explainer]
+        truths = {} if r.family == 'all' else TRUTH_SCORES
+        scores = EXPLANATION_SCORES if r.family in ('all', 'smooth') and r.arm == 'plain' else \
+            {k: EXPLANATION_SCORES[k] for k in ('test_fidelity', 'test_balanced', 'test_auc')} \
+            if r.family == 'all' else {}
+        for column, tag in {**scores, **truths}.items():
+            macro([*base, tag], r[column], _digits(tag))
+    plain = frame[(frame.arm == 'plain') & (frame.kind == 'test')]
+    rows = []
+    for setting, label in SETTINGS.items():
+        for explainer, name in SIX.items():
+            r = plain[(plain.setting == setting) & (plain.explainer == explainer)]
+            if r.empty:
+                continue
+            everything, smooth = (r[r.family == f].iloc[0] for f in ('all', 'smooth'))
+            rows.append([label if explainer == 'LIME' else '', name]
+                        + [f'{everything[c]:.2f}' for c in (
+                            'test_fidelity', 'test_balanced', 'test_auc', 'test_brier_skill',
+                            'test_brier_balanced_skill', 'stability_cosine')]
+                        + [f'{smooth[c]:.2f}' for c in ('truth_point_cosine', 'truth_mean_cosine')])
+        if rows and rows[-1]:
+            rows.append([])
+    write('explanations', table(
+        ['', '', 'Fid.', 'Bal.\\ fid.', 'AUC', 'Skill', 'Bal.\\ skill', 'Stability', 'at $q$',
+         'local mean'], rows, 'llrrrrrrrr',
+        [('agreement with the black box', 3, 7), ('cosine with gradient', 9, 10)]))
+
+
+def explanations_paired():
+    frame = read('explanations_paired')
+    frame = frame[frame.family.isin(list(GROUPS)) & frame.metric.isin(list(PAIRED))]
+    frame = frame[(frame.family == 'all') | frame.metric.isin(list(TRUTH_SCORES))
+                  | (frame.metric == 'stability_cosine')]
+    for _, r in frame.iterrows():
+        base = ['pair', r.setting, r.kind, GROUPS[r.family], r.explainer, PAIRED[r.metric]]
+        macro(base, r['diff'], '{:+.3f}')
+        macro([*base, 'ci'], r.ci, '{:.3f}')
+        for column in ('wins', 'losses', 'datasets'):
+            macro([*base, column], r[column], '{:.0f}')
+
+
+def explanations_moves():
+    frame = read('explanations_moves')
+    frame = frame[frame.family.isin(['all', 'smooth']) & frame.arm.isin(MOVED_ARMS)]
+    for _, r in frame.iterrows():
+        base = ['mov', r.setting, r.kind, r.family, r.arm, r.neighbourhood, r.explainer]
+        macro([*base, 'cos'], r.median_cosine, '{:.3f}')
+        macro([*base, 'norm'], r.median_norm_ratio, '{:.2f}')
+        macro([*base, 'top'], pct(r.same_top), '{:.0f}')
+        macro([*base, 'same'], pct(r.unchanged), '{:.0f}')
+    shown = frame[(frame.setting == 'imbalanced') & (frame.kind == 'test')
+                  & (frame.neighbourhood == 'all')]
+    rows = []
+    for arm in MOVED_ARMS:
+        for explainer, name in {**SIX, 'gradient': "black box's gradient"}.items():
+            family = 'smooth' if explainer == 'gradient' else 'all'
+            r = shown[(shown.arm == arm) & (shown.explainer == explainer) & (shown.family == family)]
+            if r.empty:
+                continue
+            r = r.iloc[0]
+            rows.append([ARM_NAMES.get(arm, f'deltas ({arm})') if explainer == 'LIME' else '', name,
+                         f'{r.median_cosine:.3f}', f'{r.median_norm_ratio:.2f}',
+                         f'{100*r.same_top:.0f}\\%', f'{100*r.unchanged:.0f}\\%'])
+        rows.append([])
+    write('moves', table(['Black box', 'Explanation', 'Cosine', 'Norm ratio', 'Same top feature',
+                          'Unchanged'], rows, 'llrrrr'))
+
+
+def explanations_instruments():
+    frame = read('explanations_instruments')
+    frame = frame[(frame.family == 'smooth') & frame.explainer.isin(['all', 'LIME and CLIME'])]
+    for _, r in frame.iterrows():
+        macro(['ins', r.setting, r.kind, r.explainer, r['where'], r.score.replace('_', ' ')],
+              r.rho, '{:+.2f}')
+
+
+def explanations_cuts():
+    frame = read('explanations_cuts')
+    frame = frame[frame.family == 'all']
+    for (setting, kind, explainer), part in frame.groupby(['setting', 'kind', 'explainer']):
+        base = ['cut', setting, kind, explainer]
+        best = part.loc[part.test_balanced.idxmax()]
+        macro([*base, 'best'], best.test_balanced)
+        macro([*base, 'best', 'at'], best.cut)
+        macro([*base, 'lowest'], part.test_balanced.min())
+        macro([*base, 'fid', 'highest'], part.test_fidelity.max())
+        macro([*base, 'fid', 'lowest'], part.test_fidelity.min())
+
+
+def explanations_run():
+    r = read('explanations_run').iloc[0]
+    macro(['exp', 'seeds'], r.seeds, '{:.0f}')
+    macro(['exp', 'jobs'], r.jobs, '{:.0f}')
+    macro(['exp', 'failed'], r.failed, '{:.0f}')
+    macro(['exp', 'explained', 'thousands'], r.explained/1e3, '{:.0f}')
+    one = read('explanations_neighbourhoods')
+    for _, r in one[one.family.isin(['all', 'smooth'])].iterrows():
+        macro(['exp', r.setting, r.arm, r.kind, r.family, 'onesided'], pct(r.one_sided), '{:.0f}')
+
+
 def numbers():
     lines = [f'\\newcommand{{\\{name}}}{{{value}}}' for name, value in sorted(NUMBERS.items())]
     write('numbers', '% written by make_tables.py from results/*.csv\n' + '\n'.join(lines) + '\n')
@@ -362,7 +488,9 @@ def numbers():
 if __name__ == '__main__':
     for make in (datasets, replication, triad, arms, neighbourhoods, by_class, matched,
                  surrogate_thresholds, kernel, sweep, surrogate_deltas, runs,
-                 failures, outliers, reproduce):
+                 failures, outliers, reproduce, explanations, explanations_paired,
+                 explanations_moves, explanations_instruments, explanations_cuts,
+                 explanations_run):
         try:
             make()
         except (AttributeError, TypeError, FileNotFoundError) as e:   # a results file is not there yet

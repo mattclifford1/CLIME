@@ -16,6 +16,11 @@ EXPLAINER_COLOURS = {
     'LIME + re-threshold': C['blue'],
     'LIME + DKW Minimax': C['aqua'],
     'LIME + Gaussian Predictive': C['brown'],
+    'Logit-LIME': C['aqua'],
+    'Logit-CLIME': C['blue'],
+    'Soft logistic': C['brown'],
+    'Soft logistic CLIME': C['plum'],
+    'gradient': INK2,
 }
 EXPLAINER_LABELS = {
     'LIME': r'LIME ($w_x$)',
@@ -23,9 +28,16 @@ EXPLAINER_LABELS = {
     'LIME + re-threshold': 'LIME, re-thresholded',
     'LIME + DKW Minimax': 'LIME, deltas (DKW)',
     'LIME + Gaussian Predictive': 'LIME, deltas (Gaussian)',
+    'Logit-LIME': 'Logit-LIME',
+    'Logit-CLIME': 'Logit-CLIME',
+    'Soft logistic': 'soft logistic',
+    'Soft logistic CLIME': 'soft logistic, CLIME weights',
+    'gradient': "black box's gradient",
 }
 EXPLAINER_MARKERS = {'LIME': 'o', 'CLIME': 's', 'LIME + re-threshold': 'D',
-                     'LIME + DKW Minimax': '^', 'LIME + Gaussian Predictive': 'v'}
+                     'LIME + DKW Minimax': '^', 'LIME + Gaussian Predictive': 'v',
+                     'Logit-LIME': '^', 'Logit-CLIME': 'v', 'Soft logistic': 'D',
+                     'Soft logistic CLIME': 'P'}
 ARM_COLOURS = {
     'plain': INK2,
     'weighted': C['plum'],
