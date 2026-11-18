@@ -1,0 +1,841 @@
+setting,family,kind,bin,explainer,truth_point_cosine,truth_mean_cosine,truth_mean_probability_cosine,stability_cosine,test_balanced,test_auc,n,by,share
+imbalanced,Gradient Boosting,line,1-5%,CLIME,,,,0.98567,0.67535,0.83410,11,minority,0.18333
+imbalanced,Gradient Boosting,line,1-5%,LIME,,,,0.99643,0.50000,0.84138,11,minority,0.18333
+imbalanced,Gradient Boosting,line,1-5%,Logit-CLIME,,,,0.99344,0.69955,0.84874,11,minority,0.18333
+imbalanced,Gradient Boosting,line,1-5%,Logit-LIME,,,,0.99913,0.50179,0.80974,11,minority,0.18333
+imbalanced,Gradient Boosting,line,1-5%,Soft logistic,,,,0.99749,0.60166,0.83953,11,minority,0.18333
+imbalanced,Gradient Boosting,line,1-5%,Soft logistic CLIME,,,,0.98476,0.68663,0.83654,11,minority,0.18333
+imbalanced,Gradient Boosting,line,20-50%,CLIME,,,,0.99952,0.79765,0.96411,8,minority,0.13333
+imbalanced,Gradient Boosting,line,20-50%,LIME,,,,0.99934,0.79069,0.95356,8,minority,0.13333
+imbalanced,Gradient Boosting,line,20-50%,Logit-CLIME,,,,0.99977,0.73407,0.96945,8,minority,0.13333
+imbalanced,Gradient Boosting,line,20-50%,Logit-LIME,,,,0.99970,0.72661,0.95136,8,minority,0.13333
+imbalanced,Gradient Boosting,line,20-50%,Soft logistic,,,,0.99978,0.81109,0.95328,8,minority,0.13333
+imbalanced,Gradient Boosting,line,20-50%,Soft logistic CLIME,,,,0.99978,0.80491,0.96378,8,minority,0.13333
+imbalanced,Gradient Boosting,line,5-20%,CLIME,,,,0.54543,0.52607,0.66871,35,minority,0.58333
+imbalanced,Gradient Boosting,line,5-20%,LIME,,,,0.53921,0.51325,0.67200,35,minority,0.58333
+imbalanced,Gradient Boosting,line,5-20%,Logit-CLIME,,,,0.55908,0.53513,0.66327,35,minority,0.58333
+imbalanced,Gradient Boosting,line,5-20%,Logit-LIME,,,,0.53718,0.51622,0.65712,35,minority,0.58333
+imbalanced,Gradient Boosting,line,5-20%,Soft logistic,,,,0.54417,0.55669,0.70047,35,minority,0.58333
+imbalanced,Gradient Boosting,line,5-20%,Soft logistic CLIME,,,,0.55629,0.54451,0.69767,35,minority,0.58333
+imbalanced,Gradient Boosting,line,under 1%,CLIME,,,,0.98983,0.76059,0.91743,6,minority,0.10000
+imbalanced,Gradient Boosting,line,under 1%,LIME,,,,0.98119,0.50000,0.91488,6,minority,0.10000
+imbalanced,Gradient Boosting,line,under 1%,Logit-CLIME,,,,0.98419,0.63988,0.93771,6,minority,0.10000
+imbalanced,Gradient Boosting,line,under 1%,Logit-LIME,,,,0.99951,0.50001,0.75352,6,minority,0.10000
+imbalanced,Gradient Boosting,line,under 1%,Soft logistic,,,,0.98523,0.50322,0.90248,6,minority,0.10000
+imbalanced,Gradient Boosting,line,under 1%,Soft logistic CLIME,,,,0.99248,0.70669,0.91368,6,minority,0.10000
+imbalanced,Gradient Boosting,test,1-5%,CLIME,,,,0.95352,0.71646,0.86055,14,minority,0.23333
+imbalanced,Gradient Boosting,test,1-5%,LIME,,,,0.95826,0.50001,0.83472,14,minority,0.23333
+imbalanced,Gradient Boosting,test,1-5%,Logit-CLIME,,,,0.91700,0.70262,0.85856,14,minority,0.23333
+imbalanced,Gradient Boosting,test,1-5%,Logit-LIME,,,,0.90959,0.52745,0.76744,14,minority,0.23333
+imbalanced,Gradient Boosting,test,1-5%,Soft logistic,,,,0.98059,0.63274,0.83435,14,minority,0.23333
+imbalanced,Gradient Boosting,test,1-5%,Soft logistic CLIME,,,,0.96845,0.75011,0.86069,14,minority,0.23333
+imbalanced,Gradient Boosting,test,20-50%,CLIME,,,,0.88933,0.83761,0.92563,15,minority,0.25000
+imbalanced,Gradient Boosting,test,20-50%,LIME,,,,0.90198,0.80930,0.92604,15,minority,0.25000
+imbalanced,Gradient Boosting,test,20-50%,Logit-CLIME,,,,0.90791,0.76723,0.93018,15,minority,0.25000
+imbalanced,Gradient Boosting,test,20-50%,Logit-LIME,,,,0.91807,0.75021,0.92628,15,minority,0.25000
+imbalanced,Gradient Boosting,test,20-50%,Soft logistic,,,,0.88827,0.80853,0.93143,15,minority,0.25000
+imbalanced,Gradient Boosting,test,20-50%,Soft logistic CLIME,,,,0.88995,0.83903,0.92804,15,minority,0.25000
+imbalanced,Gradient Boosting,test,5-20%,CLIME,,,,0.54528,0.56184,0.78778,27,minority,0.45000
+imbalanced,Gradient Boosting,test,5-20%,LIME,,,,0.55548,0.51761,0.78340,27,minority,0.45000
+imbalanced,Gradient Boosting,test,5-20%,Logit-CLIME,,,,0.54326,0.56070,0.80315,27,minority,0.45000
+imbalanced,Gradient Boosting,test,5-20%,Logit-LIME,,,,0.54522,0.52249,0.79229,27,minority,0.45000
+imbalanced,Gradient Boosting,test,5-20%,Soft logistic,,,,0.61329,0.52923,0.80498,27,minority,0.45000
+imbalanced,Gradient Boosting,test,5-20%,Soft logistic CLIME,,,,0.61495,0.55629,0.81202,27,minority,0.45000
+imbalanced,Gradient Boosting,test,under 1%,CLIME,,,,0.93570,0.53433,0.75248,4,minority,0.06667
+imbalanced,Gradient Boosting,test,under 1%,LIME,,,,0.99934,0.50000,0.82652,4,minority,0.06667
+imbalanced,Gradient Boosting,test,under 1%,Logit-CLIME,,,,0.95882,0.54886,0.76382,4,minority,0.06667
+imbalanced,Gradient Boosting,test,under 1%,Logit-LIME,,,,0.99943,0.50045,0.77079,4,minority,0.06667
+imbalanced,Gradient Boosting,test,under 1%,Soft logistic,,,,0.99935,0.50005,0.82570,4,minority,0.06667
+imbalanced,Gradient Boosting,test,under 1%,Soft logistic CLIME,,,,0.88895,0.54718,0.74399,4,minority,0.06667
+imbalanced,Logistic,line,1-5%,CLIME,0.99992,0.99992,0.99992,0.99991,0.71089,1.00000,9,minority,0.15000
+imbalanced,Logistic,line,1-5%,LIME,0.99994,0.99994,0.99994,0.99994,0.50416,1.00000,9,minority,0.15000
+imbalanced,Logistic,line,1-5%,Logit-CLIME,1.00000,1.00000,1.00000,1.00000,1.00000,1.00000,9,minority,0.15000
+imbalanced,Logistic,line,1-5%,Logit-LIME,1.00000,1.00000,1.00000,1.00000,1.00000,1.00000,9,minority,0.15000
+imbalanced,Logistic,line,1-5%,Soft logistic,0.99983,0.99983,0.99983,1.00000,0.98643,1.00000,9,minority,0.15000
+imbalanced,Logistic,line,1-5%,Soft logistic CLIME,0.99999,0.99999,0.99999,1.00000,1.00000,1.00000,9,minority,0.15000
+imbalanced,Logistic,line,20-50%,CLIME,0.69328,0.69328,0.69328,0.69367,0.66855,0.98757,28,minority,0.46667
+imbalanced,Logistic,line,20-50%,LIME,0.69327,0.69327,0.69327,0.69384,0.64045,0.98758,28,minority,0.46667
+imbalanced,Logistic,line,20-50%,Logit-CLIME,0.72524,0.72524,0.72524,0.79848,0.72171,0.99527,28,minority,0.46667
+imbalanced,Logistic,line,20-50%,Logit-LIME,0.72518,0.72518,0.72518,0.79844,0.72164,0.99527,28,minority,0.46667
+imbalanced,Logistic,line,20-50%,Soft logistic,0.53822,0.53822,0.53822,0.56963,0.66648,0.91115,28,minority,0.46667
+imbalanced,Logistic,line,20-50%,Soft logistic CLIME,0.53822,0.53822,0.53822,0.56977,0.66667,0.91117,28,minority,0.46667
+imbalanced,Logistic,line,5-20%,CLIME,0.99997,0.99997,0.99997,0.99997,0.84157,1.00000,8,minority,0.13333
+imbalanced,Logistic,line,5-20%,LIME,0.99998,0.99998,0.99998,0.99996,0.58845,1.00000,8,minority,0.13333
+imbalanced,Logistic,line,5-20%,Logit-CLIME,1.00000,1.00000,1.00000,1.00000,1.00000,1.00000,8,minority,0.13333
+imbalanced,Logistic,line,5-20%,Logit-LIME,1.00000,1.00000,1.00000,1.00000,1.00000,1.00000,8,minority,0.13333
+imbalanced,Logistic,line,5-20%,Soft logistic,0.99999,0.99999,0.99999,1.00000,0.99874,1.00000,8,minority,0.13333
+imbalanced,Logistic,line,5-20%,Soft logistic CLIME,1.00000,1.00000,1.00000,1.00000,1.00000,1.00000,8,minority,0.13333
+imbalanced,Logistic,line,none,CLIME,0.99965,0.99965,0.99965,0.98058,0.50000,1.00000,5,minority,0.08333
+imbalanced,Logistic,line,none,LIME,0.99965,0.99965,0.99965,0.99967,0.50000,1.00000,5,minority,0.08333
+imbalanced,Logistic,line,none,Logit-CLIME,1.00000,1.00000,1.00000,1.00000,0.99835,1.00000,5,minority,0.08333
+imbalanced,Logistic,line,none,Logit-LIME,1.00000,1.00000,1.00000,1.00000,0.99835,1.00000,5,minority,0.08333
+imbalanced,Logistic,line,none,Soft logistic,0.83461,0.83461,0.83461,0.99948,0.50000,0.97369,5,minority,0.08333
+imbalanced,Logistic,line,none,Soft logistic CLIME,0.83461,0.83461,0.83461,0.99300,0.50000,0.97369,5,minority,0.08333
+imbalanced,Logistic,line,under 1%,CLIME,0.98823,0.98823,0.98823,0.98443,0.58702,0.99863,10,minority,0.16667
+imbalanced,Logistic,line,under 1%,LIME,0.99986,0.99986,0.99986,0.99964,0.50000,1.00000,10,minority,0.16667
+imbalanced,Logistic,line,under 1%,Logit-CLIME,1.00000,1.00000,1.00000,1.00000,1.00000,1.00000,10,minority,0.16667
+imbalanced,Logistic,line,under 1%,Logit-LIME,1.00000,1.00000,1.00000,1.00000,1.00000,1.00000,10,minority,0.16667
+imbalanced,Logistic,line,under 1%,Soft logistic,0.98816,0.98816,0.98816,0.99978,0.83798,0.99564,10,minority,0.16667
+imbalanced,Logistic,line,under 1%,Soft logistic CLIME,0.98887,0.98887,0.98887,0.99791,0.94965,0.99575,10,minority,0.16667
+imbalanced,Logistic,test,1-5%,CLIME,0.99988,0.99988,0.99988,0.99968,0.78020,1.00000,14,minority,0.23333
+imbalanced,Logistic,test,1-5%,LIME,0.99998,0.99998,0.99998,0.99992,0.50000,1.00000,14,minority,0.23333
+imbalanced,Logistic,test,1-5%,Logit-CLIME,1.00000,1.00000,1.00000,1.00000,1.00000,1.00000,14,minority,0.23333
+imbalanced,Logistic,test,1-5%,Logit-LIME,1.00000,1.00000,1.00000,1.00000,1.00000,1.00000,14,minority,0.23333
+imbalanced,Logistic,test,1-5%,Soft logistic,0.99982,0.99982,0.99982,1.00000,0.98088,1.00000,14,minority,0.23333
+imbalanced,Logistic,test,1-5%,Soft logistic CLIME,0.99999,0.99999,0.99999,1.00000,1.00000,1.00000,14,minority,0.23333
+imbalanced,Logistic,test,20-50%,CLIME,0.76348,0.76348,0.76348,0.79203,0.74955,0.97993,31,minority,0.51667
+imbalanced,Logistic,test,20-50%,LIME,0.76345,0.76345,0.76345,0.79247,0.74338,0.97995,31,minority,0.51667
+imbalanced,Logistic,test,20-50%,Logit-CLIME,0.79343,0.79343,0.81340,0.84396,0.74930,0.98557,31,minority,0.51667
+imbalanced,Logistic,test,20-50%,Logit-LIME,0.79318,0.79318,0.81315,0.84394,0.74933,0.98551,31,minority,0.51667
+imbalanced,Logistic,test,20-50%,Soft logistic,0.72585,0.72585,0.72585,0.81822,0.69309,0.97508,31,minority,0.51667
+imbalanced,Logistic,test,20-50%,Soft logistic CLIME,0.72588,0.72588,0.72588,0.81803,0.69324,0.97507,31,minority,0.51667
+imbalanced,Logistic,test,5-20%,CLIME,0.99997,0.99997,0.99997,0.99989,0.73753,1.00000,10,minority,0.16667
+imbalanced,Logistic,test,5-20%,LIME,0.99997,0.99997,0.99997,0.99990,0.64579,1.00000,10,minority,0.16667
+imbalanced,Logistic,test,5-20%,Logit-CLIME,1.00000,1.00000,1.00000,1.00000,1.00000,1.00000,10,minority,0.16667
+imbalanced,Logistic,test,5-20%,Logit-LIME,1.00000,1.00000,1.00000,1.00000,1.00000,1.00000,10,minority,0.16667
+imbalanced,Logistic,test,5-20%,Soft logistic,0.99999,0.99999,0.99999,1.00000,0.99996,1.00000,10,minority,0.16667
+imbalanced,Logistic,test,5-20%,Soft logistic CLIME,1.00000,1.00000,1.00000,1.00000,1.00000,1.00000,10,minority,0.16667
+imbalanced,Logistic,test,none,CLIME,0.99995,0.99995,0.99995,0.99931,0.50000,1.00000,1,minority,0.01667
+imbalanced,Logistic,test,none,LIME,0.99995,0.99995,0.99995,0.99989,0.50000,1.00000,1,minority,0.01667
+imbalanced,Logistic,test,none,Logit-CLIME,1.00000,1.00000,1.00000,1.00000,1.00000,1.00000,1,minority,0.01667
+imbalanced,Logistic,test,none,Logit-LIME,1.00000,1.00000,1.00000,1.00000,1.00000,1.00000,1,minority,0.01667
+imbalanced,Logistic,test,none,Soft logistic,0.99998,0.99998,0.99998,1.00000,0.53459,1.00000,1,minority,0.01667
+imbalanced,Logistic,test,none,Soft logistic CLIME,0.99998,0.99998,0.99998,1.00000,0.53459,1.00000,1,minority,0.01667
+imbalanced,Logistic,test,under 1%,CLIME,0.99957,0.99957,0.99957,0.99969,0.50000,1.00000,4,minority,0.06667
+imbalanced,Logistic,test,under 1%,LIME,0.99998,0.99998,0.99998,0.99993,0.50000,1.00000,4,minority,0.06667
+imbalanced,Logistic,test,under 1%,Logit-CLIME,1.00000,1.00000,1.00000,1.00000,1.00000,1.00000,4,minority,0.06667
+imbalanced,Logistic,test,under 1%,Logit-LIME,1.00000,1.00000,1.00000,1.00000,1.00000,1.00000,4,minority,0.06667
+imbalanced,Logistic,test,under 1%,Soft logistic,0.99999,0.99999,0.99999,1.00000,0.78312,1.00000,4,minority,0.06667
+imbalanced,Logistic,test,under 1%,Soft logistic CLIME,0.99999,0.99999,0.99999,1.00000,0.89450,1.00000,4,minority,0.06667
+imbalanced,MLP,line,1-5%,CLIME,0.97219,0.96760,0.98793,0.99886,0.86181,0.95720,3,minority,0.07500
+imbalanced,MLP,line,1-5%,LIME,0.99553,0.99307,0.99981,0.99982,0.50000,0.97200,3,minority,0.07500
+imbalanced,MLP,line,1-5%,Logit-CLIME,0.99521,0.99447,0.99867,0.99985,0.85271,0.97031,3,minority,0.07500
+imbalanced,MLP,line,1-5%,Logit-LIME,0.99820,0.99984,0.99235,0.99998,0.76049,0.97560,3,minority,0.07500
+imbalanced,MLP,line,1-5%,Soft logistic,0.99485,0.99229,0.99944,0.99989,0.83289,0.96996,3,minority,0.07500
+imbalanced,MLP,line,1-5%,Soft logistic CLIME,0.97754,0.97302,0.99167,0.99967,0.88661,0.95899,3,minority,0.07500
+imbalanced,MLP,line,20-50%,CLIME,0.99626,0.99795,0.99946,0.99995,0.84715,0.98565,4,minority,0.10000
+imbalanced,MLP,line,20-50%,LIME,0.99654,0.99869,0.99979,0.99996,0.88749,0.98558,4,minority,0.10000
+imbalanced,MLP,line,20-50%,Logit-CLIME,0.99499,0.99926,0.99942,0.99995,0.81442,0.98338,4,minority,0.10000
+imbalanced,MLP,line,20-50%,Logit-LIME,0.99462,0.99981,0.99927,0.99996,0.78223,0.98437,4,minority,0.10000
+imbalanced,MLP,line,20-50%,Soft logistic,0.99641,0.99889,0.99980,0.99998,0.87092,0.98574,4,minority,0.10000
+imbalanced,MLP,line,20-50%,Soft logistic CLIME,0.99620,0.99818,0.99952,0.99997,0.84923,0.98533,4,minority,0.10000
+imbalanced,MLP,line,5-20%,CLIME,0.99045,0.98930,0.99728,0.99942,0.88134,0.97252,5,minority,0.12500
+imbalanced,MLP,line,5-20%,LIME,0.99524,0.99639,0.99958,0.99984,0.68627,0.97816,5,minority,0.12500
+imbalanced,MLP,line,5-20%,Logit-CLIME,0.99406,0.99714,0.99905,0.99986,0.84429,0.97590,5,minority,0.12500
+imbalanced,MLP,line,5-20%,Logit-LIME,0.99359,0.99968,0.99560,0.99995,0.83798,0.97945,5,minority,0.12500
+imbalanced,MLP,line,5-20%,Soft logistic,0.99505,0.99624,0.99954,0.99993,0.87514,0.97716,5,minority,0.12500
+imbalanced,MLP,line,5-20%,Soft logistic CLIME,0.99151,0.99033,0.99789,0.99968,0.86936,0.97407,5,minority,0.12500
+imbalanced,MLP,line,none,CLIME,0.89169,0.94359,0.94884,0.99978,0.50000,0.99814,23,minority,0.57500
+imbalanced,MLP,line,none,LIME,0.89169,0.94359,0.94884,0.99978,0.50000,0.99814,23,minority,0.57500
+imbalanced,MLP,line,none,Logit-CLIME,0.88308,0.95318,0.93741,0.99983,0.74593,0.99575,23,minority,0.57500
+imbalanced,MLP,line,none,Logit-LIME,0.88308,0.95318,0.93741,0.99983,0.74593,0.99575,23,minority,0.57500
+imbalanced,MLP,line,none,Soft logistic,0.88975,0.94193,0.93702,0.99979,0.50022,0.99043,23,minority,0.57500
+imbalanced,MLP,line,none,Soft logistic CLIME,0.88975,0.94193,0.93702,0.99979,0.50022,0.99043,23,minority,0.57500
+imbalanced,MLP,line,under 1%,CLIME,0.94227,0.94818,0.98004,0.96753,0.77347,0.97117,5,minority,0.12500
+imbalanced,MLP,line,under 1%,LIME,0.98150,0.98757,0.99948,0.99981,0.50000,0.98346,5,minority,0.12500
+imbalanced,MLP,line,under 1%,Logit-CLIME,0.99255,0.99635,0.99243,0.99937,0.80771,0.98226,5,minority,0.12500
+imbalanced,MLP,line,under 1%,Logit-LIME,0.99740,0.99984,0.98557,0.99997,0.67969,0.98327,5,minority,0.12500
+imbalanced,MLP,line,under 1%,Soft logistic,0.98655,0.99194,0.99603,0.99992,0.67297,0.97993,5,minority,0.12500
+imbalanced,MLP,line,under 1%,Soft logistic CLIME,0.94463,0.95072,0.98311,0.98937,0.92582,0.97324,5,minority,0.12500
+imbalanced,MLP,test,1-5%,CLIME,0.88559,0.96041,0.99429,0.99944,0.93937,0.99676,7,minority,0.17500
+imbalanced,MLP,test,1-5%,LIME,0.91758,0.97953,0.99934,0.99979,0.51333,0.99598,7,minority,0.17500
+imbalanced,MLP,test,1-5%,Logit-CLIME,0.95376,0.99661,0.99472,0.99990,0.90548,0.99233,7,minority,0.17500
+imbalanced,MLP,test,1-5%,Logit-LIME,0.96965,0.99986,0.98404,0.99998,0.79930,0.98923,7,minority,0.17500
+imbalanced,MLP,test,1-5%,Soft logistic,0.92450,0.98439,0.99963,0.99998,0.90124,0.99564,7,minority,0.17500
+imbalanced,MLP,test,1-5%,Soft logistic CLIME,0.89292,0.96513,0.99624,0.99972,0.95499,0.99676,7,minority,0.17500
+imbalanced,MLP,test,20-50%,CLIME,0.98289,0.99782,0.99956,0.99989,0.85872,0.98017,11,minority,0.27500
+imbalanced,MLP,test,20-50%,LIME,0.98565,0.99875,0.99981,0.99986,0.83962,0.97981,11,minority,0.27500
+imbalanced,MLP,test,20-50%,Logit-CLIME,0.98659,0.99948,0.99942,0.99995,0.83388,0.97795,11,minority,0.27500
+imbalanced,MLP,test,20-50%,Logit-LIME,0.98956,0.99987,0.99874,0.99996,0.83760,0.97694,11,minority,0.27500
+imbalanced,MLP,test,20-50%,Soft logistic,0.98572,0.99895,0.99981,0.99995,0.85712,0.97945,11,minority,0.27500
+imbalanced,MLP,test,20-50%,Soft logistic CLIME,0.98323,0.99809,0.99961,0.99995,0.84304,0.97977,11,minority,0.27500
+imbalanced,MLP,test,none,CLIME,0.93566,0.95497,0.95659,0.99992,,,20,minority,0.50000
+imbalanced,MLP,test,none,LIME,0.93566,0.95497,0.95659,0.99992,,,20,minority,0.50000
+imbalanced,MLP,test,none,Logit-CLIME,0.92726,0.96087,0.94944,0.99996,,,20,minority,0.50000
+imbalanced,MLP,test,none,Logit-LIME,0.92726,0.96087,0.94944,0.99996,,,20,minority,0.50000
+imbalanced,MLP,test,none,Soft logistic,0.93592,0.95523,0.95661,0.99996,,,20,minority,0.50000
+imbalanced,MLP,test,none,Soft logistic CLIME,0.93592,0.95523,0.95661,0.99996,,,20,minority,0.50000
+imbalanced,MLP,test,under 1%,CLIME,0.90305,0.95234,0.99239,0.99922,0.93113,0.99510,2,minority,0.05000
+imbalanced,MLP,test,under 1%,LIME,0.94430,0.98104,0.99968,0.99954,0.50000,0.99595,2,minority,0.05000
+imbalanced,MLP,test,under 1%,Logit-CLIME,0.97429,0.99744,0.99258,0.99985,0.85685,0.99048,2,minority,0.05000
+imbalanced,MLP,test,under 1%,Logit-LIME,0.98550,0.99994,0.98177,0.99999,0.82836,0.98799,2,minority,0.05000
+imbalanced,MLP,test,under 1%,Soft logistic,0.95332,0.98746,0.99906,0.99998,0.83286,0.99495,2,minority,0.05000
+imbalanced,MLP,test,under 1%,Soft logistic CLIME,0.91861,0.96449,0.99709,0.99989,0.95967,0.99609,2,minority,0.05000
+imbalanced,Random Forest,line,1-5%,CLIME,,,,0.99509,0.63343,0.86983,17,minority,0.28333
+imbalanced,Random Forest,line,1-5%,LIME,,,,0.99875,0.50000,0.81437,17,minority,0.28333
+imbalanced,Random Forest,line,1-5%,Logit-CLIME,,,,0.99804,0.59441,0.86016,17,minority,0.28333
+imbalanced,Random Forest,line,1-5%,Logit-LIME,,,,0.99865,0.52320,0.79919,17,minority,0.28333
+imbalanced,Random Forest,line,1-5%,Soft logistic,,,,0.99880,0.50854,0.81442,17,minority,0.28333
+imbalanced,Random Forest,line,1-5%,Soft logistic CLIME,,,,0.99505,0.61997,0.86903,17,minority,0.28333
+imbalanced,Random Forest,line,20-50%,CLIME,,,,0.45488,0.60418,0.61952,25,minority,0.41667
+imbalanced,Random Forest,line,20-50%,LIME,,,,0.44200,0.61100,0.61887,25,minority,0.41667
+imbalanced,Random Forest,line,20-50%,Logit-CLIME,,,,0.44825,0.57820,0.60165,25,minority,0.41667
+imbalanced,Random Forest,line,20-50%,Logit-LIME,,,,0.43433,0.61305,0.60805,25,minority,0.41667
+imbalanced,Random Forest,line,20-50%,Soft logistic,,,,0.48356,0.57730,0.58263,25,minority,0.41667
+imbalanced,Random Forest,line,20-50%,Soft logistic CLIME,,,,0.50047,0.60377,0.64651,25,minority,0.41667
+imbalanced,Random Forest,line,5-20%,CLIME,,,,0.99520,0.73183,0.86581,10,minority,0.16667
+imbalanced,Random Forest,line,5-20%,LIME,,,,0.99912,0.55978,0.89613,10,minority,0.16667
+imbalanced,Random Forest,line,5-20%,Logit-CLIME,,,,0.99788,0.64310,0.90266,10,minority,0.16667
+imbalanced,Random Forest,line,5-20%,Logit-LIME,,,,0.99924,0.60463,0.86463,10,minority,0.16667
+imbalanced,Random Forest,line,5-20%,Soft logistic,,,,0.99932,0.68307,0.89742,10,minority,0.16667
+imbalanced,Random Forest,line,5-20%,Soft logistic CLIME,,,,0.99531,0.72417,0.86590,10,minority,0.16667
+imbalanced,Random Forest,line,under 1%,CLIME,,,,0.97672,0.60392,0.90333,8,minority,0.13333
+imbalanced,Random Forest,line,under 1%,LIME,,,,0.99885,0.50000,0.59909,8,minority,0.13333
+imbalanced,Random Forest,line,under 1%,Logit-CLIME,,,,0.98622,0.57821,0.85124,8,minority,0.13333
+imbalanced,Random Forest,line,under 1%,Logit-LIME,,,,0.99744,0.51222,0.64866,8,minority,0.13333
+imbalanced,Random Forest,line,under 1%,Soft logistic,,,,0.99912,0.50445,0.58516,8,minority,0.13333
+imbalanced,Random Forest,line,under 1%,Soft logistic CLIME,,,,0.97268,0.77883,0.89935,8,minority,0.13333
+imbalanced,Random Forest,test,1-5%,CLIME,,,,0.99755,0.67706,0.87094,20,minority,0.33333
+imbalanced,Random Forest,test,1-5%,LIME,,,,0.99929,0.50001,0.78929,20,minority,0.33333
+imbalanced,Random Forest,test,1-5%,Logit-CLIME,,,,0.99913,0.61620,0.83360,20,minority,0.33333
+imbalanced,Random Forest,test,1-5%,Logit-LIME,,,,0.99919,0.51704,0.70894,20,minority,0.33333
+imbalanced,Random Forest,test,1-5%,Soft logistic,,,,0.99927,0.50246,0.78981,20,minority,0.33333
+imbalanced,Random Forest,test,1-5%,Soft logistic CLIME,,,,0.99781,0.67869,0.87147,20,minority,0.33333
+imbalanced,Random Forest,test,20-50%,CLIME,,,,0.60210,0.64509,0.83156,30,minority,0.50000
+imbalanced,Random Forest,test,20-50%,LIME,,,,0.60365,0.63142,0.83007,30,minority,0.50000
+imbalanced,Random Forest,test,20-50%,Logit-CLIME,,,,0.59237,0.59083,0.81402,30,minority,0.50000
+imbalanced,Random Forest,test,20-50%,Logit-LIME,,,,0.58991,0.56910,0.80980,30,minority,0.50000
+imbalanced,Random Forest,test,20-50%,Soft logistic,,,,0.65910,0.63289,0.85023,30,minority,0.50000
+imbalanced,Random Forest,test,20-50%,Soft logistic CLIME,,,,0.66460,0.64297,0.84883,30,minority,0.50000
+imbalanced,Random Forest,test,5-20%,CLIME,,,,0.76706,0.75610,0.90224,5,minority,0.08333
+imbalanced,Random Forest,test,5-20%,LIME,,,,0.80131,0.52155,0.89332,5,minority,0.08333
+imbalanced,Random Forest,test,5-20%,Logit-CLIME,,,,0.77587,0.62722,0.88871,5,minority,0.08333
+imbalanced,Random Forest,test,5-20%,Logit-LIME,,,,0.81721,0.50059,0.77439,5,minority,0.08333
+imbalanced,Random Forest,test,5-20%,Soft logistic,,,,0.78058,0.57811,0.89973,5,minority,0.08333
+imbalanced,Random Forest,test,5-20%,Soft logistic CLIME,,,,0.75470,0.75103,0.90943,5,minority,0.08333
+imbalanced,Random Forest,test,under 1%,CLIME,,,,0.98277,0.59977,0.76441,5,minority,0.08333
+imbalanced,Random Forest,test,under 1%,LIME,,,,0.99960,0.50000,0.75948,5,minority,0.08333
+imbalanced,Random Forest,test,under 1%,Logit-CLIME,,,,0.98874,0.57048,0.78239,5,minority,0.08333
+imbalanced,Random Forest,test,under 1%,Logit-LIME,,,,0.99761,0.52234,0.78252,5,minority,0.08333
+imbalanced,Random Forest,test,under 1%,Soft logistic,,,,0.99957,0.50083,0.75960,5,minority,0.08333
+imbalanced,Random Forest,test,under 1%,Soft logistic CLIME,,,,0.98344,0.67487,0.76303,5,minority,0.08333
+imbalanced,SVM,line,1-5%,CLIME,0.55695,0.69797,0.72776,0.99966,0.71122,0.73971,3,minority,0.07500
+imbalanced,SVM,line,1-5%,LIME,0.86636,0.96886,0.97702,0.99576,0.50000,0.54990,3,minority,0.07500
+imbalanced,SVM,line,1-5%,Logit-CLIME,0.72137,0.83862,0.83924,0.99930,0.67942,0.68031,3,minority,0.07500
+imbalanced,SVM,line,1-5%,Logit-LIME,0.95422,0.99451,0.95932,0.99800,0.50000,0.51894,3,minority,0.07500
+imbalanced,SVM,line,1-5%,Soft logistic,0.86464,0.96595,0.97838,0.99610,0.56423,0.54972,3,minority,0.07500
+imbalanced,SVM,line,1-5%,Soft logistic CLIME,0.56867,0.70708,0.73381,0.99947,0.78730,0.73823,3,minority,0.07500
+imbalanced,SVM,line,20-50%,CLIME,0.98307,0.99860,0.99986,0.99997,0.96021,0.99930,4,minority,0.10000
+imbalanced,SVM,line,20-50%,LIME,0.98357,0.99871,0.99983,0.99995,0.96974,0.99930,4,minority,0.10000
+imbalanced,SVM,line,20-50%,Logit-CLIME,0.98292,0.99985,0.99822,0.99999,0.98590,0.99948,4,minority,0.10000
+imbalanced,SVM,line,20-50%,Logit-LIME,0.98276,0.99954,0.99714,0.99998,0.98974,0.99947,4,minority,0.10000
+imbalanced,SVM,line,20-50%,Soft logistic,0.98315,0.99833,0.99985,0.99998,0.96720,0.99926,4,minority,0.10000
+imbalanced,SVM,line,20-50%,Soft logistic CLIME,0.98259,0.99826,0.99978,0.99998,0.96476,0.99930,4,minority,0.10000
+imbalanced,SVM,line,5-20%,CLIME,0.94371,0.98141,0.99901,0.99978,0.77102,0.60186,7,minority,0.17500
+imbalanced,SVM,line,5-20%,LIME,0.95363,0.98813,0.99947,0.99980,0.55254,0.59745,7,minority,0.17500
+imbalanced,SVM,line,5-20%,Logit-CLIME,0.96446,0.99692,0.99284,0.99989,0.77599,0.59037,7,minority,0.17500
+imbalanced,SVM,line,5-20%,Logit-LIME,0.97827,0.99725,0.97663,0.99983,0.65037,0.58050,7,minority,0.17500
+imbalanced,SVM,line,5-20%,Soft logistic,0.95275,0.98689,0.99960,0.99995,0.75237,0.59874,7,minority,0.17500
+imbalanced,SVM,line,5-20%,Soft logistic CLIME,0.94182,0.98029,0.99881,0.99991,0.76233,0.60228,7,minority,0.17500
+imbalanced,SVM,line,none,CLIME,0.56679,0.99092,0.99340,0.99921,0.50000,0.00330,23,minority,0.57500
+imbalanced,SVM,line,none,LIME,0.56679,0.99092,0.99340,0.99921,0.50000,0.00330,23,minority,0.57500
+imbalanced,SVM,line,none,Logit-CLIME,0.57499,0.99360,0.99152,0.99918,0.50000,0.00517,23,minority,0.57500
+imbalanced,SVM,line,none,Logit-LIME,0.57499,0.99360,0.99152,0.99918,0.50000,0.00517,23,minority,0.57500
+imbalanced,SVM,line,none,Soft logistic,0.56700,0.99096,0.99319,0.99923,0.50000,0.00521,23,minority,0.57500
+imbalanced,SVM,line,none,Soft logistic CLIME,0.56700,0.99096,0.99319,0.99923,0.50000,0.00521,23,minority,0.57500
+imbalanced,SVM,line,under 1%,CLIME,0.04288,0.24549,0.37306,0.44459,0.67201,0.71068,3,minority,0.07500
+imbalanced,SVM,line,under 1%,LIME,0.71189,0.90031,0.97928,0.99943,0.50000,0.42844,3,minority,0.07500
+imbalanced,SVM,line,under 1%,Logit-CLIME,0.34134,0.52978,0.55175,0.46618,0.65588,0.68071,3,minority,0.07500
+imbalanced,SVM,line,under 1%,Logit-LIME,0.92387,0.99708,0.89650,0.99958,0.50000,0.38082,3,minority,0.07500
+imbalanced,SVM,line,under 1%,Soft logistic,0.70086,0.89402,0.98103,0.99963,0.50000,0.42709,3,minority,0.07500
+imbalanced,SVM,line,under 1%,Soft logistic CLIME,0.05985,0.27284,0.39561,0.48268,0.78915,0.71809,3,minority,0.07500
+imbalanced,SVM,test,1-5%,CLIME,0.40934,0.73745,0.92444,0.99904,0.89127,0.99613,6,minority,0.15000
+imbalanced,SVM,test,1-5%,LIME,0.67715,0.90820,0.99702,0.99942,0.50000,0.98022,6,minority,0.15000
+imbalanced,SVM,test,1-5%,Logit-CLIME,0.64591,0.89793,0.98107,0.99945,0.74711,0.99526,6,minority,0.15000
+imbalanced,SVM,test,1-5%,Logit-LIME,0.90268,0.99842,0.92216,0.99969,0.50000,0.90982,6,minority,0.15000
+imbalanced,SVM,test,1-5%,Soft logistic,0.67508,0.90493,0.99692,0.99960,0.51016,0.97665,6,minority,0.15000
+imbalanced,SVM,test,1-5%,Soft logistic CLIME,0.42424,0.74876,0.92999,0.99953,0.88106,0.99643,6,minority,0.15000
+imbalanced,SVM,test,20-50%,CLIME,0.98549,0.99474,0.99840,0.99991,0.92353,0.97883,10,minority,0.25000
+imbalanced,SVM,test,20-50%,LIME,0.98899,0.99692,0.99946,0.99990,0.91138,0.98293,10,minority,0.25000
+imbalanced,SVM,test,20-50%,Logit-CLIME,0.98479,0.99825,0.99737,0.99990,0.95121,0.98418,10,minority,0.25000
+imbalanced,SVM,test,20-50%,Logit-LIME,0.98709,0.99946,0.99635,0.99988,0.91012,0.98773,10,minority,0.25000
+imbalanced,SVM,test,20-50%,Soft logistic,0.98901,0.99675,0.99940,0.99995,0.90534,0.98247,10,minority,0.25000
+imbalanced,SVM,test,20-50%,Soft logistic CLIME,0.98543,0.99467,0.99841,0.99994,0.92010,0.97864,10,minority,0.25000
+imbalanced,SVM,test,5-20%,CLIME,0.87922,0.93428,0.99012,0.99973,0.94725,0.99853,3,minority,0.07500
+imbalanced,SVM,test,5-20%,LIME,0.92452,0.96793,0.99928,0.99953,0.76510,0.99865,3,minority,0.07500
+imbalanced,SVM,test,5-20%,Logit-CLIME,0.93958,0.97955,0.99443,0.99995,0.94055,0.99895,3,minority,0.07500
+imbalanced,SVM,test,5-20%,Logit-LIME,0.97827,0.99781,0.96973,0.99991,0.74139,0.99606,3,minority,0.07500
+imbalanced,SVM,test,5-20%,Soft logistic,0.92558,0.96901,0.99958,0.99995,0.85879,0.99853,3,minority,0.07500
+imbalanced,SVM,test,5-20%,Soft logistic CLIME,0.88013,0.93577,0.99035,0.99997,0.95938,0.99832,3,minority,0.07500
+imbalanced,SVM,test,none,CLIME,0.38811,0.97797,0.97874,0.99668,,,20,minority,0.50000
+imbalanced,SVM,test,none,LIME,0.38811,0.97797,0.97874,0.99668,,,20,minority,0.50000
+imbalanced,SVM,test,none,Logit-CLIME,0.39833,0.97921,0.97436,0.99686,,,20,minority,0.50000
+imbalanced,SVM,test,none,Logit-LIME,0.39833,0.97921,0.97436,0.99686,,,20,minority,0.50000
+imbalanced,SVM,test,none,Soft logistic,0.38765,0.97783,0.97871,0.99674,,,20,minority,0.50000
+imbalanced,SVM,test,none,Soft logistic CLIME,0.38765,0.97783,0.97871,0.99674,,,20,minority,0.50000
+imbalanced,SVM,test,under 1%,CLIME,0.32069,0.40711,0.76326,0.99718,0.87060,0.99534,1,minority,0.02500
+imbalanced,SVM,test,under 1%,LIME,0.81001,0.87460,0.99834,0.99997,0.50000,0.82058,1,minority,0.02500
+imbalanced,SVM,test,under 1%,Logit-CLIME,0.68707,0.76994,0.96648,0.98975,0.49998,0.89945,1,minority,0.02500
+imbalanced,SVM,test,under 1%,Logit-LIME,0.94956,0.99881,0.87508,0.99970,0.50000,0.61628,1,minority,0.02500
+imbalanced,SVM,test,under 1%,Soft logistic,0.82226,0.88423,0.99915,0.99996,0.50000,0.81294,1,minority,0.02500
+imbalanced,SVM,test,under 1%,Soft logistic CLIME,0.37002,0.45257,0.79452,0.99657,0.85897,0.99391,1,minority,0.02500
+imbalanced,all,line,1-5%,CLIME,0.90578,0.93306,0.94309,0.95263,0.71683,0.88800,60,minority,0.18750
+imbalanced,all,line,1-5%,LIME,0.97234,0.99235,0.99533,0.94719,0.50745,0.86305,60,minority,0.18750
+imbalanced,all,line,1-5%,Logit-CLIME,0.94332,0.96662,0.96758,0.94631,0.72824,0.87175,60,minority,0.18750
+imbalanced,all,line,1-5%,Logit-LIME,0.99048,0.99887,0.99033,0.94111,0.59115,0.83735,60,minority,0.18750
+imbalanced,all,line,1-5%,Soft logistic,0.97180,0.99155,0.99546,0.94823,0.65546,0.86067,60,minority,0.18750
+imbalanced,all,line,1-5%,Soft logistic CLIME,0.90924,0.93601,0.94509,0.96845,0.76032,0.87551,60,minority,0.18750
+imbalanced,all,line,20-50%,CLIME,0.75914,0.76106,0.76136,0.69987,0.70987,0.86816,74,minority,0.23125
+imbalanced,all,line,20-50%,LIME,0.75922,0.76114,0.76139,0.69556,0.70223,0.86666,74,minority,0.23125
+imbalanced,all,line,20-50%,Logit-CLIME,0.78384,0.78620,0.78603,0.73731,0.71091,0.86577,74,minority,0.23125
+imbalanced,all,line,20-50%,Logit-LIME,0.78374,0.78618,0.78585,0.73258,0.71947,0.86565,74,minority,0.23125
+imbalanced,all,line,20-50%,Soft logistic,0.63857,0.64053,0.64080,0.66266,0.70111,0.82731,74,minority,0.23125
+imbalanced,all,line,20-50%,Soft logistic CLIME,0.63848,0.64044,0.64076,0.66842,0.70901,0.84888,74,minority,0.23125
+imbalanced,all,line,5-20%,CLIME,0.97790,0.99081,0.99896,0.74766,0.66448,0.80807,97,minority,0.30312
+imbalanced,all,line,5-20%,LIME,0.98257,0.99494,0.99970,0.76114,0.55822,0.81918,97,minority,0.30312
+imbalanced,all,line,5-20%,Logit-CLIME,0.98608,0.99821,0.99726,0.74216,0.64337,0.82331,97,minority,0.30312
+imbalanced,all,line,5-20%,Logit-LIME,0.99079,0.99896,0.99072,0.74947,0.60172,0.81389,97,minority,0.30312
+imbalanced,all,line,5-20%,Soft logistic,0.98222,0.99447,0.99974,0.77586,0.63950,0.82926,97,minority,0.30312
+imbalanced,all,line,5-20%,Soft logistic CLIME,0.97752,0.99068,0.99905,0.77514,0.67344,0.81701,97,minority,0.30312
+imbalanced,all,line,none,CLIME,0.75575,0.97044,0.97391,0.99678,0.50000,0.74492,54,minority,0.16875
+imbalanced,all,line,none,LIME,0.75575,0.97044,0.97391,0.99858,0.50000,0.74492,54,minority,0.16875
+imbalanced,all,line,none,Logit-CLIME,0.75560,0.97600,0.96795,0.98930,0.73068,0.74481,54,minority,0.16875
+imbalanced,all,line,none,Logit-LIME,0.75560,0.97600,0.96795,0.98930,0.73068,0.74481,54,minority,0.16875
+imbalanced,all,line,none,Soft logistic,0.73879,0.95352,0.95231,0.99909,0.50005,0.72854,54,minority,0.16875
+imbalanced,all,line,none,Soft logistic CLIME,0.73879,0.95352,0.95231,0.99848,0.50005,0.72854,54,minority,0.16875
+imbalanced,all,line,under 1%,CLIME,0.81790,0.85331,0.88342,0.92199,0.66788,0.93111,35,minority,0.10938
+imbalanced,all,line,under 1%,LIME,0.94676,0.97985,0.99632,0.99410,0.50000,0.84202,35,minority,0.10938
+imbalanced,all,line,under 1%,Logit-CLIME,0.88815,0.92061,0.92319,0.93505,0.74913,0.92242,35,minority,0.10938
+imbalanced,all,line,under 1%,Logit-LIME,0.98659,0.99947,0.97874,0.99766,0.67132,0.82162,35,minority,0.10938
+imbalanced,all,line,under 1%,Soft logistic,0.93983,0.97352,0.98916,0.99540,0.62437,0.83334,35,minority,0.10938
+imbalanced,all,line,under 1%,Soft logistic CLIME,0.82174,0.85893,0.88839,0.93370,0.84106,0.92828,35,minority,0.10938
+imbalanced,all,test,1-5%,CLIME,0.83902,0.93133,0.98167,0.85616,0.73940,0.92785,92,minority,0.28750
+imbalanced,all,test,1-5%,LIME,0.90687,0.97428,0.99915,0.85555,0.50136,0.90241,92,minority,0.28750
+imbalanced,all,test,1-5%,Logit-CLIME,0.90932,0.97644,0.99442,0.83944,0.74413,0.91664,92,minority,0.28750
+imbalanced,all,test,1-5%,Logit-LIME,0.97050,0.99961,0.97856,0.83771,0.63218,0.86812,92,minority,0.28750
+imbalanced,all,test,1-5%,Soft logistic,0.90813,0.97473,0.99913,0.89416,0.65668,0.91553,92,minority,0.28750
+imbalanced,all,test,1-5%,Soft logistic CLIME,0.84429,0.93512,0.98346,0.89922,0.78202,0.93816,92,minority,0.28750
+imbalanced,all,test,20-50%,CLIME,0.85434,0.85937,0.86046,0.81283,0.77263,0.93078,108,minority,0.33750
+imbalanced,all,test,20-50%,LIME,0.85560,0.85998,0.86071,0.81518,0.75989,0.93083,108,minority,0.33750
+imbalanced,all,test,20-50%,Logit-CLIME,0.87109,0.87640,0.88959,0.82741,0.74702,0.92860,108,minority,0.33750
+imbalanced,all,test,20-50%,Logit-LIME,0.87202,0.87658,0.88910,0.82814,0.73464,0.92711,108,minority,0.33750
+imbalanced,all,test,20-50%,Soft logistic,0.83350,0.83787,0.83858,0.82867,0.74621,0.93568,108,minority,0.33750
+imbalanced,all,test,20-50%,Soft logistic CLIME,0.83228,0.83730,0.83836,0.83039,0.75384,0.93444,108,minority,0.33750
+imbalanced,all,test,5-20%,CLIME,0.97210,0.98481,0.99770,0.75627,0.70128,0.88448,58,minority,0.18125
+imbalanced,all,test,5-20%,LIME,0.98256,0.99258,0.99981,0.76218,0.55205,0.88241,58,minority,0.18125
+imbalanced,all,test,5-20%,Logit-CLIME,0.98606,0.99528,0.99871,0.74726,0.70864,0.89035,58,minority,0.18125
+imbalanced,all,test,5-20%,Logit-LIME,0.99499,0.99950,0.99301,0.75345,0.64858,0.87391,58,minority,0.18125
+imbalanced,all,test,5-20%,Soft logistic,0.98282,0.99284,0.99989,0.79105,0.66745,0.89256,58,minority,0.18125
+imbalanced,all,test,5-20%,Soft logistic CLIME,0.97234,0.98517,0.99777,0.79209,0.74529,0.89585,58,minority,0.18125
+imbalanced,all,test,none,CLIME,0.67013,0.96729,0.96845,0.99832,0.50000,1.00000,41,minority,0.12812
+imbalanced,all,test,none,LIME,0.67013,0.96729,0.96845,0.99834,0.50000,1.00000,41,minority,0.12812
+imbalanced,all,test,none,Logit-CLIME,0.67102,0.97077,0.96282,0.99845,1.00000,1.00000,41,minority,0.12812
+imbalanced,all,test,none,Logit-LIME,0.67102,0.97077,0.96282,0.99845,1.00000,1.00000,41,minority,0.12812
+imbalanced,all,test,none,Soft logistic,0.67003,0.96734,0.96845,0.99839,0.53459,1.00000,41,minority,0.12812
+imbalanced,all,test,none,Soft logistic CLIME,0.67003,0.96734,0.96845,0.99839,0.53459,1.00000,41,minority,0.12812
+imbalanced,all,test,under 1%,CLIME,0.87501,0.90144,0.96376,0.98263,0.61957,0.89537,21,minority,0.06563
+imbalanced,all,test,under 1%,LIME,0.95693,0.97666,0.99966,0.99952,0.50000,0.89065,21,minority,0.06563
+imbalanced,all,test,under 1%,Logit-CLIME,0.94795,0.96640,0.99309,0.98853,0.73178,0.88794,21,minority,0.06563
+imbalanced,all,test,under 1%,Logit-LIME,0.98865,0.99981,0.97695,0.99912,0.63182,0.87501,21,minority,0.06563
+imbalanced,all,test,under 1%,Soft logistic,0.96127,0.97987,0.99961,0.99962,0.64117,0.88992,21,minority,0.06563
+imbalanced,all,test,under 1%,Soft logistic CLIME,0.88674,0.91164,0.96981,0.97405,0.77480,0.89333,21,minority,0.06563
+imbalanced,k Nearest Neighbours,line,1-5%,CLIME,,,,0.84729,0.82466,0.89735,17,minority,0.28333
+imbalanced,k Nearest Neighbours,line,1-5%,LIME,,,,0.81798,0.52764,0.89489,17,minority,0.28333
+imbalanced,k Nearest Neighbours,line,1-5%,Logit-CLIME,,,,0.81687,0.72237,0.84135,17,minority,0.28333
+imbalanced,k Nearest Neighbours,line,1-5%,Logit-LIME,,,,0.79443,0.46428,0.83945,17,minority,0.28333
+imbalanced,k Nearest Neighbours,line,1-5%,Soft logistic,,,,0.82080,0.64489,0.88708,17,minority,0.28333
+imbalanced,k Nearest Neighbours,line,1-5%,Soft logistic CLIME,,,,0.90363,0.80172,0.84548,17,minority,0.28333
+imbalanced,k Nearest Neighbours,line,20-50%,CLIME,,,,0.99992,0.90155,0.98683,5,minority,0.08333
+imbalanced,k Nearest Neighbours,line,20-50%,LIME,,,,0.99988,0.87827,0.98669,5,minority,0.08333
+imbalanced,k Nearest Neighbours,line,20-50%,Logit-CLIME,,,,0.99978,0.87659,0.98649,5,minority,0.08333
+imbalanced,k Nearest Neighbours,line,20-50%,Logit-LIME,,,,0.99975,0.87811,0.98633,5,minority,0.08333
+imbalanced,k Nearest Neighbours,line,20-50%,Soft logistic,,,,0.99995,0.86263,0.98662,5,minority,0.08333
+imbalanced,k Nearest Neighbours,line,20-50%,Soft logistic CLIME,,,,0.99995,0.88401,0.98650,5,minority,0.08333
+imbalanced,k Nearest Neighbours,line,5-20%,CLIME,,,,0.73393,0.67605,0.89646,32,minority,0.53333
+imbalanced,k Nearest Neighbours,line,5-20%,LIME,,,,0.78030,0.57497,0.91617,32,minority,0.53333
+imbalanced,k Nearest Neighbours,line,5-20%,Logit-CLIME,,,,0.70139,0.59875,0.93649,32,minority,0.53333
+imbalanced,k Nearest Neighbours,line,5-20%,Logit-LIME,,,,0.74708,0.53652,0.92858,32,minority,0.53333
+imbalanced,k Nearest Neighbours,line,5-20%,Soft logistic,,,,0.81936,0.55478,0.91735,32,minority,0.53333
+imbalanced,k Nearest Neighbours,line,5-20%,Soft logistic CLIME,,,,0.80524,0.65081,0.89402,32,minority,0.53333
+imbalanced,k Nearest Neighbours,line,none,CLIME,,,,0.97479,0.50000,0.80818,3,minority,0.05000
+imbalanced,k Nearest Neighbours,line,none,LIME,,,,0.97479,0.50000,0.80818,3,minority,0.05000
+imbalanced,k Nearest Neighbours,line,none,Logit-CLIME,,,,0.81494,0.50000,0.80818,3,minority,0.05000
+imbalanced,k Nearest Neighbours,line,none,Logit-LIME,,,,0.81494,0.50000,0.80818,3,minority,0.05000
+imbalanced,k Nearest Neighbours,line,none,Soft logistic,,,,0.98857,0.50000,0.78138,3,minority,0.05000
+imbalanced,k Nearest Neighbours,line,none,Soft logistic CLIME,,,,0.98857,0.50000,0.78138,3,minority,0.05000
+imbalanced,k Nearest Neighbours,line,under 1%,CLIME,,,,0.83372,0.74238,0.96112,3,minority,0.05000
+imbalanced,k Nearest Neighbours,line,under 1%,LIME,,,,0.97394,0.50000,0.99540,3,minority,0.05000
+imbalanced,k Nearest Neighbours,line,under 1%,Logit-CLIME,,,,0.84552,0.58283,0.96498,3,minority,0.05000
+imbalanced,k Nearest Neighbours,line,under 1%,Logit-LIME,,,,0.98094,0.50000,0.99578,3,minority,0.05000
+imbalanced,k Nearest Neighbours,line,under 1%,Soft logistic,,,,0.97942,0.51781,0.97780,3,minority,0.05000
+imbalanced,k Nearest Neighbours,line,under 1%,Soft logistic CLIME,,,,0.85634,0.82448,0.94498,3,minority,0.05000
+imbalanced,k Nearest Neighbours,test,1-5%,CLIME,,,,0.59614,0.69700,0.93361,31,minority,0.51667
+imbalanced,k Nearest Neighbours,test,1-5%,LIME,,,,0.59080,0.50103,0.92571,31,minority,0.51667
+imbalanced,k Nearest Neighbours,test,1-5%,Logit-CLIME,,,,0.56169,0.69285,0.92650,31,minority,0.51667
+imbalanced,k Nearest Neighbours,test,1-5%,Logit-LIME,,,,0.55978,0.57550,0.92131,31,minority,0.51667
+imbalanced,k Nearest Neighbours,test,1-5%,Soft logistic,,,,0.69521,0.59370,0.96525,31,minority,0.51667
+imbalanced,k Nearest Neighbours,test,1-5%,Soft logistic CLIME,,,,0.71672,0.70643,0.96373,31,minority,0.51667
+imbalanced,k Nearest Neighbours,test,20-50%,CLIME,,,,0.99982,0.86865,0.97637,11,minority,0.18333
+imbalanced,k Nearest Neighbours,test,20-50%,LIME,,,,0.99979,0.86867,0.97692,11,minority,0.18333
+imbalanced,k Nearest Neighbours,test,20-50%,Logit-CLIME,,,,0.99983,0.86311,0.97779,11,minority,0.18333
+imbalanced,k Nearest Neighbours,test,20-50%,Logit-LIME,,,,0.99983,0.85857,0.97792,11,minority,0.18333
+imbalanced,k Nearest Neighbours,test,20-50%,Soft logistic,,,,0.91141,0.85954,0.97675,11,minority,0.18333
+imbalanced,k Nearest Neighbours,test,20-50%,Soft logistic CLIME,,,,0.91140,0.86496,0.97639,11,minority,0.18333
+imbalanced,k Nearest Neighbours,test,5-20%,CLIME,,,,0.94673,0.87445,0.95585,13,minority,0.21667
+imbalanced,k Nearest Neighbours,test,5-20%,LIME,,,,0.93879,0.51141,0.95894,13,minority,0.21667
+imbalanced,k Nearest Neighbours,test,5-20%,Logit-CLIME,,,,0.90720,0.75821,0.95597,13,minority,0.21667
+imbalanced,k Nearest Neighbours,test,5-20%,Logit-LIME,,,,0.91486,0.66592,0.95024,13,minority,0.21667
+imbalanced,k Nearest Neighbours,test,5-20%,Soft logistic,,,,0.95534,0.67834,0.95784,13,minority,0.21667
+imbalanced,k Nearest Neighbours,test,5-20%,Soft logistic CLIME,,,,0.96645,0.87577,0.95455,13,minority,0.21667
+imbalanced,k Nearest Neighbours,test,under 1%,CLIME,,,,0.99685,0.62841,0.99706,5,minority,0.08333
+imbalanced,k Nearest Neighbours,test,under 1%,LIME,,,,0.99914,0.50000,0.95755,5,minority,0.08333
+imbalanced,k Nearest Neighbours,test,under 1%,Logit-CLIME,,,,0.99813,0.82120,0.95984,5,minority,0.08333
+imbalanced,k Nearest Neighbours,test,under 1%,Logit-LIME,,,,0.99920,0.49958,0.95744,5,minority,0.08333
+imbalanced,k Nearest Neighbours,test,under 1%,Soft logistic,,,,0.99936,0.73241,0.95694,5,minority,0.08333
+imbalanced,k Nearest Neighbours,test,under 1%,Soft logistic CLIME,,,,0.99712,0.87029,0.99655,5,minority,0.08333
+imbalanced,smooth,line,1-5%,CLIME,0.90578,0.93306,0.94309,0.99965,0.74114,0.93938,15,minority,0.10714
+imbalanced,smooth,line,1-5%,LIME,0.97234,0.99235,0.99533,0.99908,0.50250,0.90438,15,minority,0.10714
+imbalanced,smooth,line,1-5%,Logit-CLIME,0.94332,0.96662,0.96758,0.99983,0.90643,0.93012,15,minority,0.10714
+imbalanced,smooth,line,1-5%,Logit-LIME,0.99048,0.99887,0.99033,0.99960,0.85210,0.89891,15,minority,0.10714
+imbalanced,smooth,line,1-5%,Soft logistic,0.97180,0.99155,0.99546,0.99920,0.87128,0.90394,15,minority,0.10714
+imbalanced,smooth,line,1-5%,Soft logistic CLIME,0.90924,0.93601,0.94509,0.99983,0.93478,0.93944,15,minority,0.10714
+imbalanced,smooth,line,20-50%,CLIME,0.75914,0.76106,0.76136,0.76173,0.72734,0.98880,36,minority,0.25714
+imbalanced,smooth,line,20-50%,LIME,0.75922,0.76114,0.76139,0.76187,0.71249,0.98879,36,minority,0.25714
+imbalanced,smooth,line,20-50%,Logit-CLIME,0.78384,0.78620,0.78603,0.84326,0.76633,0.99431,36,minority,0.25714
+imbalanced,smooth,line,20-50%,Logit-LIME,0.78374,0.78618,0.78585,0.84323,0.76273,0.99443,36,minority,0.25714
+imbalanced,smooth,line,20-50%,Soft logistic,0.63857,0.64053,0.64080,0.66527,0.72963,0.93149,36,minority,0.25714
+imbalanced,smooth,line,20-50%,Soft logistic CLIME,0.63848,0.64044,0.64076,0.66537,0.72675,0.93145,36,minority,0.25714
+imbalanced,smooth,line,5-20%,CLIME,0.97790,0.99081,0.99896,0.99977,0.82682,0.85378,20,minority,0.14286
+imbalanced,smooth,line,5-20%,LIME,0.98257,0.99494,0.99970,0.99988,0.60034,0.85365,20,minority,0.14286
+imbalanced,smooth,line,5-20%,Logit-CLIME,0.98608,0.99821,0.99726,0.99993,0.88267,0.85060,20,minority,0.14286
+imbalanced,smooth,line,5-20%,Logit-LIME,0.99079,0.99896,0.99072,0.99993,0.83712,0.84804,20,minority,0.14286
+imbalanced,smooth,line,5-20%,Soft logistic,0.98222,0.99447,0.99974,0.99996,0.88161,0.85385,20,minority,0.14286
+imbalanced,smooth,line,5-20%,Soft logistic CLIME,0.97752,0.99068,0.99905,0.99989,0.88415,0.85431,20,minority,0.14286
+imbalanced,smooth,line,none,CLIME,0.75575,0.97044,0.97391,0.99764,0.50000,0.72767,51,minority,0.36429
+imbalanced,smooth,line,none,LIME,0.75575,0.97044,0.97391,0.99951,0.50000,0.72767,51,minority,0.36429
+imbalanced,smooth,line,none,Logit-CLIME,0.75560,0.97600,0.96795,0.99956,0.79359,0.72752,51,minority,0.36429
+imbalanced,smooth,line,none,Logit-LIME,0.75560,0.97600,0.96795,0.99956,0.79359,0.72752,51,minority,0.36429
+imbalanced,smooth,line,none,Soft logistic,0.73879,0.95352,0.95231,0.99951,0.50006,0.71413,51,minority,0.36429
+imbalanced,smooth,line,none,Soft logistic CLIME,0.73879,0.95352,0.95231,0.99887,0.50006,0.71413,51,minority,0.36429
+imbalanced,smooth,line,under 1%,CLIME,0.81790,0.85331,0.88342,0.88976,0.65298,0.94301,18,minority,0.12857
+imbalanced,smooth,line,under 1%,LIME,0.94676,0.97985,0.99632,0.99965,0.50000,0.90014,18,minority,0.12857
+imbalanced,smooth,line,under 1%,Logit-CLIME,0.88815,0.92061,0.92319,0.91085,0.88923,0.94186,18,minority,0.12857
+imbalanced,smooth,line,under 1%,Logit-LIME,0.98659,0.99947,0.97874,0.99992,0.82769,0.89216,18,minority,0.12857
+imbalanced,smooth,line,under 1%,Soft logistic,0.93983,0.97352,0.98916,0.99979,0.73581,0.89651,18,minority,0.12857
+imbalanced,smooth,line,under 1%,Soft logistic CLIME,0.82174,0.85893,0.88839,0.90967,0.91628,0.94322,18,minority,0.12857
+imbalanced,smooth,test,1-5%,CLIME,0.83902,0.93133,0.98167,0.99948,0.84615,0.99830,27,minority,0.19286
+imbalanced,smooth,test,1-5%,LIME,0.90687,0.97428,0.99915,0.99978,0.50346,0.99456,27,minority,0.19286
+imbalanced,smooth,test,1-5%,Logit-CLIME,0.90932,0.97644,0.99442,0.99985,0.91930,0.99696,27,minority,0.19286
+imbalanced,smooth,test,1-5%,Logit-LIME,0.97050,0.99961,0.97856,0.99993,0.83686,0.97717,27,minority,0.19286
+imbalanced,smooth,test,1-5%,Soft logistic,0.90813,0.97473,0.99913,0.99991,0.85563,0.99368,27,minority,0.19286
+imbalanced,smooth,test,1-5%,Soft logistic CLIME,0.84429,0.93512,0.98346,0.99982,0.96190,0.99837,27,minority,0.19286
+imbalanced,smooth,test,20-50%,CLIME,0.85434,0.85937,0.86046,0.87762,0.80721,0.97977,52,minority,0.37143
+imbalanced,smooth,test,20-50%,LIME,0.85560,0.85998,0.86071,0.87788,0.79708,0.98050,52,minority,0.37143
+imbalanced,smooth,test,20-50%,Logit-CLIME,0.87109,0.87640,0.88959,0.90818,0.80713,0.98365,52,minority,0.37143
+imbalanced,smooth,test,20-50%,Logit-LIME,0.87202,0.87658,0.88910,0.90817,0.79989,0.98410,52,minority,0.37143
+imbalanced,smooth,test,20-50%,Soft logistic,0.83350,0.83787,0.83858,0.89305,0.77009,0.97747,52,minority,0.37143
+imbalanced,smooth,test,20-50%,Soft logistic CLIME,0.83228,0.83730,0.83836,0.89294,0.77003,0.97678,52,minority,0.37143
+imbalanced,smooth,test,5-20%,CLIME,0.97210,0.98481,0.99770,0.99986,0.78592,0.99966,13,minority,0.09286
+imbalanced,smooth,test,5-20%,LIME,0.98256,0.99258,0.99981,0.99982,0.67332,0.99969,13,minority,0.09286
+imbalanced,smooth,test,5-20%,Logit-CLIME,0.98606,0.99528,0.99871,0.99999,0.98628,0.99976,13,minority,0.09286
+imbalanced,smooth,test,5-20%,Logit-LIME,0.99499,0.99950,0.99301,0.99998,0.94032,0.99909,13,minority,0.09286
+imbalanced,smooth,test,5-20%,Soft logistic,0.98282,0.99284,0.99989,0.99999,0.96739,0.99966,13,minority,0.09286
+imbalanced,smooth,test,5-20%,Soft logistic CLIME,0.97234,0.98517,0.99777,0.99999,0.99063,0.99961,13,minority,0.09286
+imbalanced,smooth,test,none,CLIME,0.67013,0.96729,0.96845,0.99832,0.50000,1.00000,41,minority,0.29286
+imbalanced,smooth,test,none,LIME,0.67013,0.96729,0.96845,0.99834,0.50000,1.00000,41,minority,0.29286
+imbalanced,smooth,test,none,Logit-CLIME,0.67102,0.97077,0.96282,0.99845,1.00000,1.00000,41,minority,0.29286
+imbalanced,smooth,test,none,Logit-LIME,0.67102,0.97077,0.96282,0.99845,1.00000,1.00000,41,minority,0.29286
+imbalanced,smooth,test,none,Soft logistic,0.67003,0.96734,0.96845,0.99839,0.53459,1.00000,41,minority,0.29286
+imbalanced,smooth,test,none,Soft logistic CLIME,0.67003,0.96734,0.96845,0.99839,0.53459,1.00000,41,minority,0.29286
+imbalanced,smooth,test,under 1%,CLIME,0.87501,0.90144,0.96376,0.99920,0.67612,0.99793,7,minority,0.05000
+imbalanced,smooth,test,under 1%,LIME,0.95693,0.97666,0.99966,0.99983,0.50000,0.97321,7,minority,0.05000
+imbalanced,smooth,test,under 1%,Logit-CLIME,0.94795,0.96640,0.99309,0.99849,0.88767,0.98292,7,minority,0.05000
+imbalanced,smooth,test,under 1%,Logit-LIME,0.98865,0.99981,0.97695,0.99995,0.87953,0.94175,7,minority,0.05000
+imbalanced,smooth,test,under 1%,Soft logistic,0.96127,0.97987,0.99961,0.99999,0.75689,0.97183,7,minority,0.05000
+imbalanced,smooth,test,under 1%,Soft logistic CLIME,0.88674,0.91164,0.96981,0.99948,0.90804,0.99801,7,minority,0.05000
+imbalanced,Gradient Boosting,line,over 30%,CLIME,,,,0.99421,0.68134,0.90510,40,effective,0.66667
+imbalanced,Gradient Boosting,line,over 30%,LIME,,,,0.99588,0.56301,0.90206,40,effective,0.66667
+imbalanced,Gradient Boosting,line,over 30%,Logit-CLIME,,,,0.99558,0.65637,0.91138,40,effective,0.66667
+imbalanced,Gradient Boosting,line,over 30%,Logit-LIME,,,,0.99942,0.55463,0.86560,40,effective,0.66667
+imbalanced,Gradient Boosting,line,over 30%,Soft logistic,,,,0.99693,0.62958,0.89964,40,effective,0.66667
+imbalanced,Gradient Boosting,line,over 30%,Soft logistic CLIME,,,,0.99444,0.68104,0.90567,40,effective,0.66667
+imbalanced,Gradient Boosting,line,under 1%,CLIME,,,,0.20495,0.46425,0.43239,20,effective,0.33333
+imbalanced,Gradient Boosting,line,under 1%,LIME,,,,0.19400,0.51348,0.44517,20,effective,0.33333
+imbalanced,Gradient Boosting,line,under 1%,Logit-CLIME,,,,0.22879,0.48381,0.42650,20,effective,0.33333
+imbalanced,Gradient Boosting,line,under 1%,Logit-LIME,,,,0.19049,0.50938,0.42410,20,effective,0.33333
+imbalanced,Gradient Boosting,line,under 1%,Soft logistic,,,,0.20253,0.51253,0.50031,20,effective,0.33333
+imbalanced,Gradient Boosting,line,under 1%,Soft logistic CLIME,,,,0.22390,0.49191,0.48721,20,effective,0.33333
+imbalanced,Gradient Boosting,test,over 30%,CLIME,,,,0.99098,0.73105,0.88381,40,effective,0.66667
+imbalanced,Gradient Boosting,test,over 30%,LIME,,,,0.99869,0.61607,0.88086,40,effective,0.66667
+imbalanced,Gradient Boosting,test,over 30%,Logit-CLIME,,,,0.99468,0.70085,0.88612,40,effective,0.66667
+imbalanced,Gradient Boosting,test,over 30%,Logit-LIME,,,,0.99954,0.60848,0.84784,40,effective,0.66667
+imbalanced,Gradient Boosting,test,over 30%,Soft logistic,,,,0.99950,0.68116,0.88052,40,effective,0.66667
+imbalanced,Gradient Boosting,test,over 30%,Soft logistic CLIME,,,,0.98651,0.74715,0.88261,40,effective,0.66667
+imbalanced,Gradient Boosting,test,under 1%,CLIME,,,,0.27578,0.53147,0.74063,20,effective,0.33333
+imbalanced,Gradient Boosting,test,under 1%,LIME,,,,0.29965,0.52393,0.73774,20,effective,0.33333
+imbalanced,Gradient Boosting,test,under 1%,Logit-CLIME,,,,0.25863,0.53078,0.76131,20,effective,0.33333
+imbalanced,Gradient Boosting,test,under 1%,Logit-LIME,,,,0.26211,0.52026,0.75829,20,effective,0.33333
+imbalanced,Gradient Boosting,test,under 1%,Soft logistic,,,,0.38143,0.50000,0.77177,20,effective,0.33333
+imbalanced,Gradient Boosting,test,under 1%,Soft logistic CLIME,,,,0.38032,0.51859,0.77654,20,effective,0.33333
+imbalanced,Logistic,line,over 30%,CLIME,0.99699,0.99699,0.99699,0.99365,0.73716,0.99966,40,effective,0.66667
+imbalanced,Logistic,line,over 30%,LIME,0.99990,0.99990,0.99990,0.99984,0.60140,1.00000,40,effective,0.66667
+imbalanced,Logistic,line,over 30%,Logit-CLIME,1.00000,1.00000,1.00000,1.00000,0.99979,1.00000,40,effective,0.66667
+imbalanced,Logistic,line,over 30%,Logit-LIME,1.00000,1.00000,1.00000,1.00000,0.99979,1.00000,40,effective,0.66667
+imbalanced,Logistic,line,over 30%,Soft logistic,0.97633,0.97633,0.97633,0.99988,0.89358,0.99562,40,effective,0.66667
+imbalanced,Logistic,line,over 30%,Soft logistic CLIME,0.97654,0.97654,0.97654,0.99860,0.92491,0.99565,40,effective,0.66667
+imbalanced,Logistic,line,under 1%,CLIME,0.57059,0.57059,0.57059,0.57114,0.50374,0.98136,20,effective,0.33333
+imbalanced,Logistic,line,under 1%,LIME,0.57058,0.57058,0.57058,0.57139,0.50373,0.98137,20,effective,0.33333
+imbalanced,Logistic,line,under 1%,Logit-CLIME,0.61533,0.61533,0.61533,0.71788,0.58257,0.99290,20,effective,0.33333
+imbalanced,Logistic,line,under 1%,Logit-LIME,0.61525,0.61525,0.61525,0.71782,0.58247,0.99290,20,effective,0.33333
+imbalanced,Logistic,line,under 1%,Soft logistic,0.35352,0.35352,0.35352,0.39749,0.50000,0.86673,20,effective,0.33333
+imbalanced,Logistic,line,under 1%,Soft logistic CLIME,0.35351,0.35351,0.35351,0.39767,0.50000,0.86675,20,effective,0.33333
+imbalanced,Logistic,test,over 30%,CLIME,0.99990,0.99990,0.99990,0.99981,0.79445,1.00000,40,effective,0.66667
+imbalanced,Logistic,test,over 30%,LIME,0.99998,0.99998,0.99998,0.99993,0.66882,1.00000,40,effective,0.66667
+imbalanced,Logistic,test,over 30%,Logit-CLIME,1.00000,1.00000,1.00000,1.00000,1.00000,1.00000,40,effective,0.66667
+imbalanced,Logistic,test,over 30%,Logit-LIME,1.00000,1.00000,1.00000,1.00000,1.00000,1.00000,40,effective,0.66667
+imbalanced,Logistic,test,over 30%,Soft logistic,0.99993,0.99993,0.99993,1.00000,0.95980,1.00000,40,effective,0.66667
+imbalanced,Logistic,test,over 30%,Soft logistic CLIME,0.99999,0.99999,0.99999,1.00000,0.97781,1.00000,40,effective,0.66667
+imbalanced,Logistic,test,under 1%,CLIME,0.62656,0.62656,0.62656,0.67164,0.60560,0.96831,20,effective,0.33333
+imbalanced,Logistic,test,under 1%,LIME,0.62651,0.62651,0.62651,0.67234,0.60561,0.96834,20,effective,0.33333
+imbalanced,Logistic,test,under 1%,Logit-CLIME,0.67981,0.67981,0.70537,0.75363,0.60415,0.97721,20,effective,0.33333
+imbalanced,Logistic,test,under 1%,Logit-LIME,0.67944,0.67944,0.70497,0.75359,0.60420,0.97713,20,effective,0.33333
+imbalanced,Logistic,test,under 1%,Soft logistic,0.56714,0.56714,0.56714,0.71298,0.51577,0.96066,20,effective,0.33333
+imbalanced,Logistic,test,under 1%,Soft logistic CLIME,0.56718,0.56718,0.56718,0.71267,0.51564,0.96064,20,effective,0.33333
+imbalanced,MLP,line,over 30%,CLIME,0.92685,0.95712,0.96679,0.99565,0.78741,0.97636,40,effective,1.00000
+imbalanced,MLP,line,over 30%,LIME,0.93413,0.96491,0.97043,0.99981,0.62407,0.98304,40,effective,1.00000
+imbalanced,MLP,line,over 30%,Logit-CLIME,0.93024,0.97177,0.96279,0.99979,0.81568,0.98112,40,effective,1.00000
+imbalanced,MLP,line,over 30%,Logit-LIME,0.93097,0.97299,0.96101,0.99989,0.76183,0.98326,40,effective,1.00000
+imbalanced,MLP,line,over 30%,Soft logistic,0.93356,0.96445,0.96317,0.99985,0.76118,0.98048,40,effective,1.00000
+imbalanced,MLP,line,over 30%,Soft logistic CLIME,0.92656,0.95704,0.96074,0.99848,0.82666,0.97631,40,effective,1.00000
+imbalanced,MLP,test,over 30%,CLIME,0.93825,0.96757,0.97679,0.99979,0.89419,0.98747,40,effective,1.00000
+imbalanced,MLP,test,over 30%,LIME,0.94667,0.97261,0.97811,0.99986,0.69146,0.98709,40,effective,1.00000
+imbalanced,MLP,test,over 30%,Logit-CLIME,0.95056,0.97957,0.97326,0.99994,0.86124,0.98424,40,effective,1.00000
+imbalanced,MLP,test,over 30%,Logit-LIME,0.95472,0.98037,0.97067,0.99997,0.82328,0.98235,40,effective,1.00000
+imbalanced,MLP,test,over 30%,Soft logistic,0.94848,0.97397,0.97814,0.99996,0.87014,0.98666,40,effective,1.00000
+imbalanced,MLP,test,over 30%,Soft logistic CLIME,0.94054,0.96921,0.97739,0.99991,0.89389,0.98735,40,effective,1.00000
+imbalanced,Random Forest,line,over 30%,CLIME,,,,0.99203,0.68367,0.89079,40,effective,0.66667
+imbalanced,Random Forest,line,over 30%,LIME,,,,0.99899,0.56271,0.81387,40,effective,0.66667
+imbalanced,Random Forest,line,over 30%,Logit-CLIME,,,,0.99584,0.61884,0.87962,40,effective,0.66667
+imbalanced,Random Forest,line,over 30%,Logit-LIME,,,,0.99868,0.56865,0.80305,40,effective,0.66667
+imbalanced,Random Forest,line,over 30%,Soft logistic,,,,0.99912,0.59864,0.81144,40,effective,0.66667
+imbalanced,Random Forest,line,over 30%,Soft logistic CLIME,,,,0.99124,0.71102,0.88970,40,effective,0.66667
+imbalanced,Random Forest,line,under 1%,CLIME,,,,0.31865,0.51618,0.50314,20,effective,0.33333
+imbalanced,Random Forest,line,under 1%,LIME,,,,0.30256,0.52626,0.50248,20,effective,0.33333
+imbalanced,Random Forest,line,under 1%,Logit-CLIME,,,,0.31039,0.53439,0.49432,20,effective,0.33333
+imbalanced,Random Forest,line,under 1%,Logit-LIME,,,,0.29300,0.57289,0.50430,20,effective,0.33333
+imbalanced,Random Forest,line,under 1%,Soft logistic,,,,0.35449,0.48057,0.45488,20,effective,0.33333
+imbalanced,Random Forest,line,under 1%,Soft logistic CLIME,,,,0.37562,0.51563,0.53852,20,effective,0.33333
+imbalanced,Random Forest,test,over 30%,CLIME,,,,0.99619,0.73683,0.88926,40,effective,0.66667
+imbalanced,Random Forest,test,over 30%,LIME,,,,0.99944,0.59695,0.84602,40,effective,0.66667
+imbalanced,Random Forest,test,over 30%,Logit-CLIME,,,,0.99786,0.64406,0.86416,40,effective,0.66667
+imbalanced,Random Forest,test,over 30%,Logit-LIME,,,,0.99913,0.55639,0.78448,40,effective,0.66667
+imbalanced,Random Forest,test,over 30%,Soft logistic,,,,0.99948,0.60740,0.84629,40,effective,0.66667
+imbalanced,Random Forest,test,over 30%,Soft logistic CLIME,,,,0.99646,0.74589,0.88934,40,effective,0.66667
+imbalanced,Random Forest,test,under 1%,CLIME,,,,0.34579,0.50290,0.75246,20,effective,0.33333
+imbalanced,Random Forest,test,under 1%,LIME,,,,0.35613,0.50217,0.75162,20,effective,0.33333
+imbalanced,Random Forest,test,under 1%,Logit-CLIME,,,,0.33310,0.50969,0.74039,20,effective,0.33333
+imbalanced,Random Forest,test,under 1%,Logit-LIME,,,,0.33949,0.51073,0.74045,20,effective,0.33333
+imbalanced,Random Forest,test,under 1%,Soft logistic,,,,0.43400,0.50009,0.78411,20,effective,0.33333
+imbalanced,Random Forest,test,under 1%,Soft logistic CLIME,,,,0.43632,0.50073,0.78073,20,effective,0.33333
+imbalanced,SVM,line,over 30%,CLIME,0.63435,0.91215,0.92858,0.95782,0.74439,0.62856,40,effective,1.00000
+imbalanced,SVM,line,over 30%,LIME,0.70952,0.98276,0.99282,0.99914,0.61234,0.55621,40,effective,1.00000
+imbalanced,SVM,line,over 30%,Logit-CLIME,0.67739,0.94839,0.94802,0.95942,0.74407,0.61145,40,effective,1.00000
+imbalanced,SVM,line,over 30%,Logit-LIME,0.74095,0.99516,0.97993,0.99932,0.65058,0.53881,40,effective,1.00000
+imbalanced,SVM,line,over 30%,Soft logistic,0.70848,0.98184,0.99296,0.99923,0.69140,0.55671,40,effective,1.00000
+imbalanced,SVM,line,over 30%,Soft logistic CLIME,0.63624,0.91467,0.93056,0.96070,0.77124,0.62989,40,effective,1.00000
+imbalanced,SVM,test,over 30%,CLIME,0.57579,0.92853,0.97098,0.99808,0.91476,0.98780,40,effective,1.00000
+imbalanced,SVM,test,over 30%,LIME,0.63246,0.96890,0.98869,0.99819,0.74546,0.97636,40,effective,1.00000
+imbalanced,SVM,test,over 30%,Logit-CLIME,0.62989,0.96657,0.98243,0.99806,0.86582,0.98548,40,effective,1.00000
+imbalanced,SVM,test,over 30%,Logit-LIME,0.67845,0.98904,0.96920,0.99834,0.74127,0.94703,40,effective,1.00000
+imbalanced,SVM,test,over 30%,Soft logistic,0.63231,0.96862,0.98869,0.99829,0.75954,0.97466,40,effective,1.00000
+imbalanced,SVM,test,over 30%,Soft logistic CLIME,0.57908,0.93139,0.97260,0.99820,0.91122,0.98769,40,effective,1.00000
+imbalanced,all,line,over 30%,CLIME,0.85273,0.95542,0.96412,0.98610,0.73114,0.90754,240,effective,0.75000
+imbalanced,all,line,over 30%,LIME,0.88118,0.98253,0.98771,0.99821,0.57946,0.88642,240,effective,0.75000
+imbalanced,all,line,over 30%,Logit-CLIME,0.86921,0.97339,0.97027,0.98711,0.75289,0.90969,240,effective,0.75000
+imbalanced,all,line,over 30%,Logit-LIME,0.89064,0.98938,0.98031,0.99670,0.67725,0.87837,240,effective,0.75000
+imbalanced,all,line,over 30%,Soft logistic,0.87279,0.97420,0.97748,0.99866,0.69454,0.88314,240,effective,0.75000
+imbalanced,all,line,over 30%,Soft logistic CLIME,0.84645,0.94942,0.95595,0.98802,0.78388,0.90624,240,effective,0.75000
+imbalanced,all,line,under 1%,CLIME,0.57059,0.57059,0.57059,0.38615,0.51778,0.68577,80,effective,0.25000
+imbalanced,all,line,under 1%,LIME,0.57058,0.57058,0.57058,0.39100,0.55068,0.69526,80,effective,0.25000
+imbalanced,all,line,under 1%,Logit-CLIME,0.61533,0.61533,0.61533,0.40714,0.52514,0.67957,80,effective,0.25000
+imbalanced,all,line,under 1%,Logit-LIME,0.61525,0.61525,0.61525,0.40635,0.54486,0.67791,80,effective,0.25000
+imbalanced,all,line,under 1%,Soft logistic,0.35352,0.35352,0.35352,0.37874,0.50852,0.66953,80,effective,0.25000
+imbalanced,all,line,under 1%,Soft logistic CLIME,0.35351,0.35351,0.35351,0.40276,0.49883,0.66697,80,effective,0.25000
+imbalanced,all,test,over 30%,CLIME,0.83798,0.96534,0.98256,0.99725,0.80766,0.94779,240,effective,0.75000
+imbalanced,all,test,over 30%,LIME,0.85970,0.98050,0.98893,0.99916,0.63912,0.93615,240,effective,0.75000
+imbalanced,all,test,over 30%,Logit-CLIME,0.86015,0.98205,0.98523,0.99814,0.80722,0.94176,240,effective,0.75000
+imbalanced,all,test,over 30%,Logit-LIME,0.87772,0.98980,0.97995,0.99928,0.72373,0.91326,240,effective,0.75000
+imbalanced,all,test,over 30%,Soft logistic,0.86024,0.98084,0.98892,0.99940,0.76254,0.93581,240,effective,0.75000
+imbalanced,all,test,over 30%,Soft logistic CLIME,0.83987,0.96686,0.98333,0.99666,0.85768,0.94749,240,effective,0.75000
+imbalanced,all,test,under 1%,CLIME,0.62656,0.62656,0.62656,0.39764,0.54082,0.83886,80,effective,0.25000
+imbalanced,all,test,under 1%,LIME,0.62651,0.62651,0.62651,0.40318,0.53365,0.83593,80,effective,0.25000
+imbalanced,all,test,under 1%,Logit-CLIME,0.67981,0.67981,0.70537,0.38995,0.55544,0.84052,80,effective,0.25000
+imbalanced,all,test,under 1%,Logit-LIME,0.67944,0.67944,0.70497,0.39287,0.54985,0.83882,80,effective,0.25000
+imbalanced,all,test,under 1%,Soft logistic,0.56714,0.56714,0.56714,0.49216,0.50396,0.86682,80,effective,0.25000
+imbalanced,all,test,under 1%,Soft logistic CLIME,0.56718,0.56718,0.56718,0.50269,0.51119,0.86517,80,effective,0.25000
+imbalanced,k Nearest Neighbours,line,over 30%,CLIME,,,,0.98314,0.78762,0.93968,40,effective,0.66667
+imbalanced,k Nearest Neighbours,line,over 30%,LIME,,,,0.99551,0.55196,0.94656,40,effective,0.66667
+imbalanced,k Nearest Neighbours,line,over 30%,Logit-CLIME,,,,0.97204,0.70957,0.96115,40,effective,0.66667
+imbalanced,k Nearest Neighbours,line,over 30%,Logit-LIME,,,,0.98290,0.55698,0.96217,40,effective,0.66667
+imbalanced,k Nearest Neighbours,line,over 30%,Soft logistic,,,,0.99690,0.62459,0.94042,40,effective,0.66667
+imbalanced,k Nearest Neighbours,line,over 30%,Soft logistic CLIME,,,,0.98457,0.80350,0.93709,40,effective,0.66667
+imbalanced,k Nearest Neighbours,line,under 1%,CLIME,,,,0.44987,0.58288,0.81793,20,effective,0.33333
+imbalanced,k Nearest Neighbours,line,under 1%,LIME,,,,0.49606,0.65287,0.84281,20,effective,0.33333
+imbalanced,k Nearest Neighbours,line,under 1%,Logit-CLIME,,,,0.37149,0.50129,0.79721,20,effective,0.33333
+imbalanced,k Nearest Neighbours,line,under 1%,Logit-LIME,,,,0.42411,0.51647,0.78372,20,effective,0.33333
+imbalanced,k Nearest Neighbours,line,under 1%,Soft logistic,,,,0.56047,0.53907,0.84520,20,effective,0.33333
+imbalanced,k Nearest Neighbours,line,under 1%,Soft logistic CLIME,,,,0.61385,0.48844,0.76901,20,effective,0.33333
+imbalanced,k Nearest Neighbours,test,over 30%,CLIME,,,,0.99868,0.87151,0.97826,40,effective,0.66667
+imbalanced,k Nearest Neighbours,test,over 30%,LIME,,,,0.99887,0.59530,0.97216,40,effective,0.66667
+imbalanced,k Nearest Neighbours,test,over 30%,Logit-CLIME,,,,0.99830,0.82767,0.97365,40,effective,0.66667
+imbalanced,k Nearest Neighbours,test,over 30%,Logit-LIME,,,,0.99867,0.67153,0.96928,40,effective,0.66667
+imbalanced,k Nearest Neighbours,test,over 30%,Soft logistic,,,,0.99920,0.74951,0.97158,40,effective,0.66667
+imbalanced,k Nearest Neighbours,test,over 30%,Soft logistic CLIME,,,,0.99885,0.91498,0.97797,40,effective,0.66667
+imbalanced,k Nearest Neighbours,test,under 1%,CLIME,,,,0.30648,0.52332,0.89402,20,effective,0.33333
+imbalanced,k Nearest Neighbours,test,under 1%,LIME,,,,0.29252,0.50288,0.88600,20,effective,0.33333
+imbalanced,k Nearest Neighbours,test,under 1%,Logit-CLIME,,,,0.22435,0.57714,0.88316,20,effective,0.33333
+imbalanced,k Nearest Neighbours,test,under 1%,Logit-LIME,,,,0.22599,0.56421,0.87942,20,effective,0.33333
+imbalanced,k Nearest Neighbours,test,under 1%,Soft logistic,,,,0.45125,0.50000,0.95073,20,effective,0.33333
+imbalanced,k Nearest Neighbours,test,under 1%,Soft logistic CLIME,,,,0.49196,0.50979,0.94277,20,effective,0.33333
+imbalanced,smooth,line,over 30%,CLIME,0.85273,0.95542,0.96412,0.98237,0.75153,0.90106,120,effective,0.85714
+imbalanced,smooth,line,over 30%,LIME,0.88118,0.98253,0.98771,0.99960,0.60980,0.88481,120,effective,0.85714
+imbalanced,smooth,line,over 30%,Logit-CLIME,0.86921,0.97339,0.97027,0.98640,0.88983,0.89814,120,effective,0.85714
+imbalanced,smooth,line,over 30%,Logit-LIME,0.89064,0.98938,0.98031,0.99974,0.85300,0.88052,120,effective,0.85714
+imbalanced,smooth,line,over 30%,Soft logistic,0.87279,0.97420,0.97748,0.99965,0.80994,0.88211,120,effective,0.85714
+imbalanced,smooth,line,over 30%,Soft logistic CLIME,0.84645,0.94942,0.95595,0.98593,0.86193,0.89937,120,effective,0.85714
+imbalanced,smooth,line,under 1%,CLIME,0.57059,0.57059,0.57059,0.57114,0.50374,0.98136,20,effective,0.14286
+imbalanced,smooth,line,under 1%,LIME,0.57058,0.57058,0.57058,0.57139,0.50373,0.98137,20,effective,0.14286
+imbalanced,smooth,line,under 1%,Logit-CLIME,0.61533,0.61533,0.61533,0.71788,0.58257,0.99290,20,effective,0.14286
+imbalanced,smooth,line,under 1%,Logit-LIME,0.61525,0.61525,0.61525,0.71782,0.58247,0.99290,20,effective,0.14286
+imbalanced,smooth,line,under 1%,Soft logistic,0.35352,0.35352,0.35352,0.39749,0.50000,0.86673,20,effective,0.14286
+imbalanced,smooth,line,under 1%,Soft logistic CLIME,0.35351,0.35351,0.35351,0.39767,0.50000,0.86675,20,effective,0.14286
+imbalanced,smooth,test,over 30%,CLIME,0.83798,0.96534,0.98256,0.99923,0.84946,0.99382,120,effective,0.85714
+imbalanced,smooth,test,over 30%,LIME,0.85970,0.98050,0.98893,0.99933,0.69364,0.99086,120,effective,0.85714
+imbalanced,smooth,test,over 30%,Logit-CLIME,0.86015,0.98205,0.98523,0.99933,0.93176,0.99243,120,effective,0.85714
+imbalanced,smooth,test,over 30%,Logit-LIME,0.87772,0.98980,0.97995,0.99944,0.89114,0.98235,120,effective,0.85714
+imbalanced,smooth,test,over 30%,Soft logistic,0.86024,0.98084,0.98892,0.99942,0.88732,0.99033,120,effective,0.85714
+imbalanced,smooth,test,over 30%,Soft logistic CLIME,0.83987,0.96686,0.98333,0.99937,0.94018,0.99376,120,effective,0.85714
+imbalanced,smooth,test,under 1%,CLIME,0.62656,0.62656,0.62656,0.67164,0.60560,0.96831,20,effective,0.14286
+imbalanced,smooth,test,under 1%,LIME,0.62651,0.62651,0.62651,0.67234,0.60561,0.96834,20,effective,0.14286
+imbalanced,smooth,test,under 1%,Logit-CLIME,0.67981,0.67981,0.70537,0.75363,0.60415,0.97721,20,effective,0.14286
+imbalanced,smooth,test,under 1%,Logit-LIME,0.67944,0.67944,0.70497,0.75359,0.60420,0.97713,20,effective,0.14286
+imbalanced,smooth,test,under 1%,Soft logistic,0.56714,0.56714,0.56714,0.71298,0.51577,0.96066,20,effective,0.14286
+imbalanced,smooth,test,under 1%,Soft logistic CLIME,0.56718,0.56718,0.56718,0.71267,0.51564,0.96064,20,effective,0.14286
+imbalanced,Gradient Boosting,line,under 1%,CLIME,,,,0.73112,0.61931,0.77004,60,saturated,1.00000
+imbalanced,Gradient Boosting,line,under 1%,LIME,,,,0.72858,0.54886,0.77152,60,saturated,1.00000
+imbalanced,Gradient Boosting,line,under 1%,Logit-CLIME,,,,0.73999,0.60707,0.77284,60,saturated,1.00000
+imbalanced,Gradient Boosting,line,under 1%,Logit-LIME,,,,0.72977,0.54170,0.73946,60,saturated,1.00000
+imbalanced,Gradient Boosting,line,under 1%,Soft logistic,,,,0.73213,0.59614,0.78555,60,saturated,1.00000
+imbalanced,Gradient Boosting,line,under 1%,Soft logistic CLIME,,,,0.73760,0.62700,0.78611,60,saturated,1.00000
+imbalanced,Gradient Boosting,test,under 1%,CLIME,,,,0.75258,0.66677,0.83770,60,saturated,1.00000
+imbalanced,Gradient Boosting,test,under 1%,LIME,,,,0.76568,0.58640,0.83477,60,saturated,1.00000
+imbalanced,Gradient Boosting,test,under 1%,Logit-CLIME,,,,0.74933,0.64608,0.84593,60,saturated,1.00000
+imbalanced,Gradient Boosting,test,under 1%,Logit-LIME,,,,0.75373,0.58007,0.81900,60,saturated,1.00000
+imbalanced,Gradient Boosting,test,under 1%,Soft logistic,,,,0.79347,0.62282,0.84550,60,saturated,1.00000
+imbalanced,Gradient Boosting,test,under 1%,Soft logistic CLIME,,,,0.78445,0.67354,0.84845,60,saturated,1.00000
+imbalanced,Logistic,line,1-50%,CLIME,0.85678,0.85678,0.85678,0.85628,0.50044,0.99633,7,saturated,0.11667
+imbalanced,Logistic,line,1-50%,LIME,0.86772,0.86772,0.86772,0.86832,0.50000,0.99783,7,saturated,0.11667
+imbalanced,Logistic,line,1-50%,Logit-CLIME,0.88329,0.88329,0.88329,0.95346,0.85666,1.00000,7,saturated,0.11667
+imbalanced,Logistic,line,1-50%,Logit-LIME,0.88322,0.88322,0.88322,0.95348,0.85666,1.00000,7,saturated,0.11667
+imbalanced,Logistic,line,1-50%,Soft logistic,0.73514,0.73514,0.73514,0.91954,0.50031,0.97678,7,saturated,0.11667
+imbalanced,Logistic,line,1-50%,Soft logistic CLIME,0.73136,0.73136,0.73136,0.91784,0.53620,0.97599,7,saturated,0.11667
+imbalanced,Logistic,line,over 50%,CLIME,0.58111,0.58111,0.58111,0.59026,0.50000,0.99983,13,saturated,0.21667
+imbalanced,Logistic,line,over 50%,LIME,0.58111,0.58111,0.58111,0.59026,0.50000,0.99983,13,saturated,0.21667
+imbalanced,Logistic,line,over 50%,Logit-CLIME,0.61337,0.61337,0.61337,0.67809,0.50000,0.99983,13,saturated,0.21667
+imbalanced,Logistic,line,over 50%,Logit-LIME,0.61337,0.61337,0.61337,0.67809,0.50000,0.99983,13,saturated,0.21667
+imbalanced,Logistic,line,over 50%,Soft logistic,0.25579,0.25579,0.25579,0.23178,0.50000,0.77778,13,saturated,0.21667
+imbalanced,Logistic,line,over 50%,Soft logistic CLIME,0.25579,0.25579,0.25579,0.23178,0.50000,0.77778,13,saturated,0.21667
+imbalanced,Logistic,line,under 1%,CLIME,0.94349,0.94349,0.94349,0.93754,0.73858,0.99288,40,saturated,0.66667
+imbalanced,Logistic,line,under 1%,LIME,0.94448,0.94448,0.94448,0.94175,0.60289,0.99297,40,saturated,0.66667
+imbalanced,Logistic,line,under 1%,Logit-CLIME,0.95375,0.95375,0.95375,0.97170,0.97041,0.99720,40,saturated,0.66667
+imbalanced,Logistic,line,under 1%,Logit-LIME,0.95372,0.95372,0.95372,0.97167,0.97036,0.99720,40,saturated,0.66667
+imbalanced,Logistic,line,under 1%,Soft logistic,0.94130,0.94130,0.94130,0.96238,0.89353,0.99637,40,saturated,0.66667
+imbalanced,Logistic,line,under 1%,Soft logistic CLIME,0.94217,0.94217,0.94217,0.96149,0.91858,0.99655,40,saturated,0.66667
+imbalanced,Logistic,test,over 50%,CLIME,,,,,,,1,saturated,0.01667
+imbalanced,Logistic,test,over 50%,LIME,,,,,,,1,saturated,0.01667
+imbalanced,Logistic,test,over 50%,Logit-CLIME,0.19427,0.19427,,,,,1,saturated,0.01667
+imbalanced,Logistic,test,over 50%,Logit-LIME,0.19427,0.19427,,,,,1,saturated,0.01667
+imbalanced,Logistic,test,over 50%,Soft logistic,,,,,,,1,saturated,0.01667
+imbalanced,Logistic,test,over 50%,Soft logistic CLIME,,,,,,,1,saturated,0.01667
+imbalanced,Logistic,test,under 1%,CLIME,0.87967,0.87967,0.87967,0.89413,0.73364,0.98979,59,saturated,0.98333
+imbalanced,Logistic,test,under 1%,LIME,0.87971,0.87971,0.87971,0.89444,0.64846,0.98980,59,saturated,0.98333
+imbalanced,Logistic,test,under 1%,Logit-CLIME,0.90512,0.90512,0.90512,0.92066,0.87252,0.99266,59,saturated,0.98333
+imbalanced,Logistic,test,under 1%,Logit-LIME,0.90499,0.90499,0.90499,0.92065,0.87254,0.99263,59,saturated,0.98333
+imbalanced,Logistic,test,under 1%,Soft logistic,0.86056,0.86056,0.86056,0.90757,0.81681,0.98733,59,saturated,0.98333
+imbalanced,Logistic,test,under 1%,Soft logistic CLIME,0.86061,0.86061,0.86061,0.90747,0.82898,0.98732,59,saturated,0.98333
+imbalanced,MLP,line,1-50%,CLIME,0.97499,0.98472,0.99840,0.99983,0.50000,0.99853,1,saturated,0.02500
+imbalanced,MLP,line,1-50%,LIME,0.97499,0.98472,0.99840,0.99983,0.50000,0.99853,1,saturated,0.02500
+imbalanced,MLP,line,1-50%,Logit-CLIME,0.99175,0.99997,0.97481,1.00000,0.79581,0.99687,1,saturated,0.02500
+imbalanced,MLP,line,1-50%,Logit-LIME,0.99175,0.99997,0.97481,1.00000,0.79581,0.99687,1,saturated,0.02500
+imbalanced,MLP,line,1-50%,Soft logistic,0.93254,0.93471,0.83653,0.99988,0.50000,0.98651,1,saturated,0.02500
+imbalanced,MLP,line,1-50%,Soft logistic CLIME,0.93254,0.93471,0.83653,0.99988,0.50000,0.98651,1,saturated,0.02500
+imbalanced,MLP,line,under 1%,CLIME,0.92562,0.95641,0.96598,0.99555,0.80253,0.97519,39,saturated,0.97500
+imbalanced,MLP,line,under 1%,LIME,0.93308,0.96440,0.96971,0.99981,0.63060,0.98223,39,saturated,0.97500
+imbalanced,MLP,line,under 1%,Logit-CLIME,0.92866,0.97105,0.96248,0.99979,0.81673,0.98029,39,saturated,0.97500
+imbalanced,MLP,line,under 1%,Logit-LIME,0.92942,0.97229,0.96065,0.99989,0.76004,0.98254,39,saturated,0.97500
+imbalanced,MLP,line,under 1%,Soft logistic,0.93359,0.96521,0.96642,0.99985,0.77493,0.98016,39,saturated,0.97500
+imbalanced,MLP,line,under 1%,Soft logistic CLIME,0.92640,0.95761,0.96392,0.99845,0.84386,0.97577,39,saturated,0.97500
+imbalanced,MLP,test,under 1%,CLIME,0.93825,0.96757,0.97679,0.99979,0.89419,0.98747,40,saturated,1.00000
+imbalanced,MLP,test,under 1%,LIME,0.94667,0.97261,0.97811,0.99986,0.69146,0.98709,40,saturated,1.00000
+imbalanced,MLP,test,under 1%,Logit-CLIME,0.95056,0.97957,0.97326,0.99994,0.86124,0.98424,40,saturated,1.00000
+imbalanced,MLP,test,under 1%,Logit-LIME,0.95472,0.98037,0.97067,0.99997,0.82328,0.98235,40,saturated,1.00000
+imbalanced,MLP,test,under 1%,Soft logistic,0.94848,0.97397,0.97814,0.99996,0.87014,0.98666,40,saturated,1.00000
+imbalanced,MLP,test,under 1%,Soft logistic CLIME,0.94054,0.96921,0.97739,0.99991,0.89389,0.98735,40,saturated,1.00000
+imbalanced,Random Forest,line,1-50%,CLIME,,,,0.99225,0.67218,0.88406,32,saturated,0.53333
+imbalanced,Random Forest,line,1-50%,LIME,,,,0.99910,0.57839,0.85680,32,saturated,0.53333
+imbalanced,Random Forest,line,1-50%,Logit-CLIME,,,,0.99647,0.61006,0.87047,32,saturated,0.53333
+imbalanced,Random Forest,line,1-50%,Logit-LIME,,,,0.99881,0.58571,0.83913,32,saturated,0.53333
+imbalanced,Random Forest,line,1-50%,Soft logistic,,,,0.99925,0.61465,0.85704,32,saturated,0.53333
+imbalanced,Random Forest,line,1-50%,Soft logistic CLIME,,,,0.99200,0.66667,0.88436,32,saturated,0.53333
+imbalanced,Random Forest,line,over 50%,CLIME,,,,0.99159,0.78107,0.99782,7,saturated,0.11667
+imbalanced,Random Forest,line,over 50%,LIME,,,,0.99870,0.50000,0.64079,7,saturated,0.11667
+imbalanced,Random Forest,line,over 50%,Logit-CLIME,,,,0.99425,0.66775,0.95049,7,saturated,0.11667
+imbalanced,Random Forest,line,over 50%,Logit-LIME,,,,0.99802,0.50049,0.63468,7,saturated,0.11667
+imbalanced,Random Forest,line,over 50%,Soft logistic,,,,0.99882,0.53955,0.62578,7,saturated,0.11667
+imbalanced,Random Forest,line,over 50%,Soft logistic CLIME,,,,0.98820,0.96250,0.99038,7,saturated,0.11667
+imbalanced,Random Forest,line,under 1%,CLIME,,,,0.35053,0.50756,0.49453,21,saturated,0.35000
+imbalanced,Random Forest,line,under 1%,LIME,,,,0.33564,0.52472,0.51127,21,saturated,0.35000
+imbalanced,Random Forest,line,under 1%,Logit-CLIME,,,,0.34261,0.53573,0.50503,21,saturated,0.35000
+imbalanced,Random Forest,line,under 1%,Logit-LIME,,,,0.32663,0.56861,0.52328,21,saturated,0.35000
+imbalanced,Random Forest,line,under 1%,Soft logistic,,,,0.38510,0.48171,0.46647,21,saturated,0.35000
+imbalanced,Random Forest,line,under 1%,Soft logistic CLIME,,,,0.40479,0.50705,0.52778,21,saturated,0.35000
+imbalanced,Random Forest,test,1-50%,CLIME,,,,0.99639,0.73716,0.89905,33,saturated,0.55000
+imbalanced,Random Forest,test,1-50%,LIME,,,,0.99945,0.60124,0.84349,33,saturated,0.55000
+imbalanced,Random Forest,test,1-50%,Logit-CLIME,,,,0.99802,0.62963,0.86540,33,saturated,0.55000
+imbalanced,Random Forest,test,1-50%,Logit-LIME,,,,0.99911,0.55914,0.78448,33,saturated,0.55000
+imbalanced,Random Forest,test,1-50%,Soft logistic,,,,0.99950,0.61310,0.84386,33,saturated,0.55000
+imbalanced,Random Forest,test,1-50%,Soft logistic CLIME,,,,0.99667,0.73851,0.89824,33,saturated,0.55000
+imbalanced,Random Forest,test,over 50%,CLIME,,,,0.98931,0.72612,0.83557,2,saturated,0.03333
+imbalanced,Random Forest,test,over 50%,LIME,,,,0.99933,0.50000,0.89419,2,saturated,0.03333
+imbalanced,Random Forest,test,over 50%,Logit-CLIME,,,,0.99333,0.66859,0.81835,2,saturated,0.03333
+imbalanced,Random Forest,test,over 50%,Logit-LIME,,,,0.99848,0.50090,0.65950,2,saturated,0.03333
+imbalanced,Random Forest,test,over 50%,Soft logistic,,,,0.99939,0.51339,0.89366,2,saturated,0.03333
+imbalanced,Random Forest,test,over 50%,Soft logistic CLIME,,,,0.99028,0.87463,0.84565,2,saturated,0.03333
+imbalanced,Random Forest,test,under 1%,CLIME,,,,0.47615,0.55207,0.77197,25,saturated,0.41667
+imbalanced,Random Forest,test,under 1%,LIME,,,,0.48478,0.52410,0.77076,25,saturated,0.41667
+imbalanced,Random Forest,test,under 1%,Logit-CLIME,,,,0.46621,0.55548,0.76830,25,saturated,0.41667
+imbalanced,Random Forest,test,under 1%,Logit-LIME,,,,0.47150,0.52108,0.76003,25,saturated,0.41667
+imbalanced,Random Forest,test,under 1%,Soft logistic,,,,0.54707,0.52245,0.79646,25,saturated,0.41667
+imbalanced,Random Forest,test,under 1%,Soft logistic CLIME,,,,0.54857,0.55123,0.79476,25,saturated,0.41667
+imbalanced,SVM,line,1-50%,CLIME,0.78275,0.84544,0.86367,0.99965,0.75493,0.71781,6,saturated,0.15000
+imbalanced,SVM,line,1-50%,LIME,0.93767,0.98180,0.98821,0.99776,0.60740,0.62048,6,saturated,0.15000
+imbalanced,SVM,line,1-50%,Logit-CLIME,0.87042,0.92153,0.91455,0.99955,0.74387,0.68292,6,saturated,0.15000
+imbalanced,SVM,line,1-50%,Logit-LIME,0.97895,0.99478,0.96861,0.99886,0.67155,0.59432,6,saturated,0.15000
+imbalanced,SVM,line,1-50%,Soft logistic,0.93931,0.98168,0.98905,0.99803,0.73113,0.62109,6,saturated,0.15000
+imbalanced,SVM,line,1-50%,Soft logistic CLIME,0.78442,0.84729,0.86620,0.99967,0.79461,0.71701,6,saturated,0.15000
+imbalanced,SVM,line,under 1%,CLIME,0.60816,0.92392,0.94003,0.95044,0.73987,0.59031,34,saturated,0.85000
+imbalanced,SVM,line,under 1%,LIME,0.66925,0.98293,0.99363,0.99939,0.61446,0.52867,34,saturated,0.85000
+imbalanced,SVM,line,under 1%,Logit-CLIME,0.64333,0.95313,0.95392,0.95234,0.74416,0.58083,34,saturated,0.85000
+imbalanced,SVM,line,under 1%,Logit-LIME,0.69895,0.99523,0.98193,0.99940,0.64159,0.51501,34,saturated,0.85000
+imbalanced,SVM,line,under 1%,Soft logistic,0.66775,0.98187,0.99365,0.99944,0.67438,0.52912,34,saturated,0.85000
+imbalanced,SVM,line,under 1%,Soft logistic CLIME,0.61009,0.92656,0.94192,0.95382,0.76122,0.59255,34,saturated,0.85000
+imbalanced,SVM,test,1-50%,CLIME,0.98656,0.99301,0.99853,0.99969,0.92743,0.98906,3,saturated,0.07500
+imbalanced,SVM,test,1-50%,LIME,0.98828,0.99392,0.99866,0.99958,0.94535,0.98811,3,saturated,0.07500
+imbalanced,SVM,test,1-50%,Logit-CLIME,0.98670,0.99958,0.99635,0.99995,0.95690,0.99260,3,saturated,0.07500
+imbalanced,SVM,test,1-50%,Logit-LIME,0.98407,0.99797,0.99089,0.99996,0.96121,0.99106,3,saturated,0.07500
+imbalanced,SVM,test,1-50%,Soft logistic,0.98785,0.99424,0.99862,0.99996,0.95634,0.98767,3,saturated,0.07500
+imbalanced,SVM,test,1-50%,Soft logistic CLIME,0.98522,0.99301,0.99852,0.99995,0.93770,0.98891,3,saturated,0.07500
+imbalanced,SVM,test,under 1%,CLIME,0.54248,0.92331,0.96874,0.99795,0.91252,0.98758,37,saturated,0.92500
+imbalanced,SVM,test,under 1%,LIME,0.60361,0.96688,0.98788,0.99808,0.71018,0.97429,37,saturated,0.92500
+imbalanced,SVM,test,under 1%,Logit-CLIME,0.60096,0.96390,0.98130,0.99791,0.84975,0.98423,37,saturated,0.92500
+imbalanced,SVM,test,under 1%,Logit-LIME,0.65367,0.98832,0.96744,0.99821,0.70246,0.93926,37,saturated,0.92500
+imbalanced,SVM,test,under 1%,Soft logistic,0.60348,0.96654,0.98789,0.99816,0.72481,0.97236,37,saturated,0.92500
+imbalanced,SVM,test,under 1%,Soft logistic CLIME,0.54615,0.92640,0.97049,0.99805,0.90655,0.98748,37,saturated,0.92500
+imbalanced,all,line,1-50%,CLIME,0.83350,0.86106,0.86985,0.88433,0.64307,0.87458,71,saturated,0.22187
+imbalanced,all,line,1-50%,LIME,0.90536,0.92497,0.92869,0.90474,0.58416,0.85955,71,saturated,0.22187
+imbalanced,all,line,1-50%,Logit-CLIME,0.88552,0.90801,0.90322,0.88865,0.61606,0.87032,71,saturated,0.22187
+imbalanced,all,line,1-50%,Logit-LIME,0.93200,0.93937,0.92636,0.90253,0.59934,0.84327,71,saturated,0.22187
+imbalanced,all,line,1-50%,Soft logistic,0.83674,0.85505,0.85120,0.91868,0.58573,0.85964,71,saturated,0.22187
+imbalanced,all,line,1-50%,Soft logistic CLIME,0.76847,0.79557,0.79666,0.91566,0.62244,0.86000,71,saturated,0.22187
+imbalanced,all,line,over 50%,CLIME,0.58111,0.58111,0.58111,0.83506,0.75894,0.97176,52,saturated,0.16250
+imbalanced,all,line,over 50%,LIME,0.58111,0.58111,0.58111,0.83536,0.53805,0.91760,52,saturated,0.16250
+imbalanced,all,line,over 50%,Logit-CLIME,0.61337,0.61337,0.61337,0.84045,0.69837,0.96428,52,saturated,0.16250
+imbalanced,all,line,over 50%,Logit-LIME,0.61337,0.61337,0.61337,0.84206,0.54288,0.91658,52,saturated,0.16250
+imbalanced,all,line,over 50%,Soft logistic,0.25579,0.25579,0.25579,0.75174,0.60877,0.86525,52,saturated,0.16250
+imbalanced,all,line,over 50%,Soft logistic CLIME,0.25579,0.25579,0.25579,0.76206,0.80127,0.92370,52,saturated,0.16250
+imbalanced,all,line,under 1%,CLIME,0.83642,0.94206,0.95021,0.81824,0.67163,0.80710,197,saturated,0.61562
+imbalanced,all,line,under 1%,LIME,0.85774,0.96293,0.96798,0.82747,0.57717,0.80642,197,saturated,0.61562
+imbalanced,all,line,under 1%,Logit-CLIME,0.85169,0.95953,0.95681,0.82579,0.73520,0.81157,197,saturated,0.61562
+imbalanced,all,line,under 1%,Logit-LIME,0.86867,0.97262,0.96460,0.83173,0.69721,0.79611,197,saturated,0.61562
+imbalanced,all,line,under 1%,Soft logistic,0.85633,0.96176,0.96572,0.83967,0.69114,0.80656,197,saturated,0.61562
+imbalanced,all,line,under 1%,Soft logistic CLIME,0.83681,0.94280,0.94960,0.83493,0.73121,0.81862,197,saturated,0.61562
+imbalanced,all,test,1-50%,CLIME,0.98656,0.99301,0.99853,0.94828,0.75056,0.92146,53,saturated,0.16562
+imbalanced,all,test,1-50%,LIME,0.98828,0.99392,0.99866,0.94279,0.61780,0.88535,53,saturated,0.16562
+imbalanced,all,test,1-50%,Logit-CLIME,0.98670,0.99958,0.99635,0.92883,0.67302,0.89657,53,saturated,0.16562
+imbalanced,all,test,1-50%,Logit-LIME,0.98407,0.99797,0.99089,0.92838,0.61376,0.84553,53,saturated,0.16562
+imbalanced,all,test,1-50%,Soft logistic,0.98785,0.99424,0.99862,0.94831,0.63099,0.88667,53,saturated,0.16562
+imbalanced,all,test,1-50%,Soft logistic CLIME,0.98522,0.99301,0.99852,0.95578,0.75559,0.92032,53,saturated,0.16562
+imbalanced,all,test,over 50%,CLIME,,,,0.77365,0.76818,0.94721,44,saturated,0.13750
+imbalanced,all,test,over 50%,LIME,,,,0.77487,0.55296,0.94013,44,saturated,0.13750
+imbalanced,all,test,over 50%,Logit-CLIME,0.19427,0.19427,,0.76377,0.76333,0.94258,44,saturated,0.13750
+imbalanced,all,test,over 50%,Logit-LIME,0.19427,0.19427,,0.76219,0.62468,0.92785,44,saturated,0.13750
+imbalanced,all,test,over 50%,Soft logistic,,,,0.84746,0.68991,0.96682,44,saturated,0.13750
+imbalanced,all,test,over 50%,Soft logistic CLIME,,,,0.85965,0.80633,0.97196,44,saturated,0.13750
+imbalanced,all,test,under 1%,CLIME,0.80517,0.91740,0.93247,0.84158,0.72124,0.90969,223,saturated,0.69688
+imbalanced,all,test,under 1%,LIME,0.82429,0.93075,0.93808,0.84666,0.62145,0.90784,223,saturated,0.69688
+imbalanced,all,test,under 1%,Logit-CLIME,0.83574,0.94301,0.94589,0.84640,0.75091,0.91213,223,saturated,0.69688
+imbalanced,all,test,under 1%,Logit-LIME,0.85124,0.94983,0.94130,0.84906,0.70636,0.89828,223,saturated,0.69688
+imbalanced,all,test,under 1%,Soft logistic,0.81648,0.92275,0.92978,0.86115,0.70945,0.91374,223,saturated,0.69688
+imbalanced,all,test,under 1%,Soft logistic CLIME,0.79857,0.91045,0.92485,0.85780,0.75371,0.91488,223,saturated,0.69688
+imbalanced,k Nearest Neighbours,line,1-50%,CLIME,,,,0.72176,0.62462,0.86102,25,saturated,0.41667
+imbalanced,k Nearest Neighbours,line,1-50%,LIME,,,,0.76803,0.61290,0.87617,25,saturated,0.41667
+imbalanced,k Nearest Neighbours,line,1-50%,Logit-CLIME,,,,0.70144,0.51852,0.87374,25,saturated,0.41667
+imbalanced,k Nearest Neighbours,line,1-50%,Logit-LIME,,,,0.73801,0.51954,0.85830,25,saturated,0.41667
+imbalanced,k Nearest Neighbours,line,1-50%,Soft logistic,,,,0.79301,0.54115,0.88234,25,saturated,0.41667
+imbalanced,k Nearest Neighbours,line,1-50%,Soft logistic CLIME,,,,0.79381,0.55355,0.82561,25,saturated,0.41667
+imbalanced,k Nearest Neighbours,line,over 50%,CLIME,,,,0.90238,0.83396,0.95675,32,saturated,0.53333
+imbalanced,k Nearest Neighbours,line,over 50%,LIME,,,,0.90126,0.55904,0.95890,32,saturated,0.53333
+imbalanced,k Nearest Neighbours,line,over 50%,Logit-CLIME,,,,0.87277,0.76732,0.95658,32,saturated,0.53333
+imbalanced,k Nearest Neighbours,line,over 50%,Logit-LIME,,,,0.87455,0.56642,0.95878,32,saturated,0.53333
+imbalanced,k Nearest Neighbours,line,over 50%,Soft logistic,,,,0.91399,0.65924,0.95020,32,saturated,0.53333
+imbalanced,k Nearest Neighbours,line,over 50%,Soft logistic CLIME,,,,0.93338,0.85586,0.95289,32,saturated,0.53333
+imbalanced,k Nearest Neighbours,line,under 1%,CLIME,,,,0.44082,0.53786,0.74014,3,saturated,0.05000
+imbalanced,k Nearest Neighbours,line,under 1%,LIME,,,,0.53539,0.54757,0.82595,3,saturated,0.05000
+imbalanced,k Nearest Neighbours,line,under 1%,Logit-CLIME,,,,0.28228,0.56314,0.80471,3,saturated,0.05000
+imbalanced,k Nearest Neighbours,line,under 1%,Logit-LIME,,,,0.45416,0.54816,0.84933,3,saturated,0.05000
+imbalanced,k Nearest Neighbours,line,under 1%,Soft logistic,,,,0.64308,0.50044,0.79023,3,saturated,0.05000
+imbalanced,k Nearest Neighbours,line,under 1%,Soft logistic CLIME,,,,0.63172,0.59499,0.76095,3,saturated,0.05000
+imbalanced,k Nearest Neighbours,test,1-50%,CLIME,,,,0.84583,0.74536,0.95303,17,saturated,0.28333
+imbalanced,k Nearest Neighbours,test,1-50%,LIME,,,,0.82280,0.59214,0.94847,17,saturated,0.28333
+imbalanced,k Nearest Neighbours,test,1-50%,Logit-CLIME,,,,0.78197,0.70716,0.94013,17,saturated,0.28333
+imbalanced,k Nearest Neighbours,test,1-50%,Logit-LIME,,,,0.77844,0.65848,0.93836,17,saturated,0.28333
+imbalanced,k Nearest Neighbours,test,1-50%,Soft logistic,,,,0.83983,0.60830,0.95196,17,saturated,0.28333
+imbalanced,k Nearest Neighbours,test,1-50%,Soft logistic CLIME,,,,0.86861,0.75662,0.95108,17,saturated,0.28333
+imbalanced,k Nearest Neighbours,test,over 50%,CLIME,,,,0.76313,0.77023,0.95265,41,saturated,0.68333
+imbalanced,k Nearest Neighbours,test,over 50%,LIME,,,,0.76392,0.55554,0.94237,41,saturated,0.68333
+imbalanced,k Nearest Neighbours,test,over 50%,Logit-CLIME,,,,0.75257,0.76795,0.94863,41,saturated,0.68333
+imbalanced,k Nearest Neighbours,test,over 50%,Logit-LIME,,,,0.75067,0.63072,0.94094,41,saturated,0.68333
+imbalanced,k Nearest Neighbours,test,over 50%,Soft logistic,,,,0.84005,0.69853,0.97039,41,saturated,0.68333
+imbalanced,k Nearest Neighbours,test,over 50%,Soft logistic CLIME,,,,0.85328,0.80299,0.97812,41,saturated,0.68333
+imbalanced,k Nearest Neighbours,test,under 1%,CLIME,,,,0.10269,0.55301,0.85665,2,saturated,0.03333
+imbalanced,k Nearest Neighbours,test,under 1%,LIME,,,,0.20419,0.52318,0.95914,2,saturated,0.03333
+imbalanced,k Nearest Neighbours,test,under 1%,Logit-CLIME,,,,0.04592,0.56453,0.84994,2,saturated,0.03333
+imbalanced,k Nearest Neighbours,test,under 1%,Logit-LIME,,,,0.22971,0.52742,0.94950,2,saturated,0.03333
+imbalanced,k Nearest Neighbours,test,under 1%,Soft logistic,,,,0.13704,0.50000,0.95764,2,saturated,0.03333
+imbalanced,k Nearest Neighbours,test,under 1%,Soft logistic CLIME,,,,0.02107,0.50000,0.76018,2,saturated,0.03333
+imbalanced,smooth,line,1-50%,CLIME,0.83350,0.86106,0.86985,0.92798,0.60948,0.87712,14,saturated,0.10000
+imbalanced,smooth,line,1-50%,LIME,0.90536,0.92497,0.92869,0.93319,0.54603,0.83616,14,saturated,0.10000
+imbalanced,smooth,line,1-50%,Logit-CLIME,0.88552,0.90801,0.90322,0.97653,0.80398,0.86388,14,saturated,0.10000
+imbalanced,smooth,line,1-50%,Logit-LIME,0.93200,0.93937,0.92636,0.97625,0.77298,0.82592,14,saturated,0.10000
+imbalanced,smooth,line,1-50%,Soft logistic,0.83674,0.85505,0.85120,0.95891,0.59921,0.82504,14,saturated,0.10000
+imbalanced,smooth,line,1-50%,Soft logistic CLIME,0.76847,0.79557,0.79666,0.95877,0.64436,0.86575,14,saturated,0.10000
+imbalanced,smooth,line,over 50%,CLIME,0.58111,0.58111,0.58111,0.59026,0.50000,0.99983,13,saturated,0.09286
+imbalanced,smooth,line,over 50%,LIME,0.58111,0.58111,0.58111,0.59026,0.50000,0.99983,13,saturated,0.09286
+imbalanced,smooth,line,over 50%,Logit-CLIME,0.61337,0.61337,0.61337,0.67809,0.50000,0.99983,13,saturated,0.09286
+imbalanced,smooth,line,over 50%,Logit-LIME,0.61337,0.61337,0.61337,0.67809,0.50000,0.99983,13,saturated,0.09286
+imbalanced,smooth,line,over 50%,Soft logistic,0.25579,0.25579,0.25579,0.23178,0.50000,0.77778,13,saturated,0.09286
+imbalanced,smooth,line,over 50%,Soft logistic CLIME,0.25579,0.25579,0.25579,0.23178,0.50000,0.77778,13,saturated,0.09286
+imbalanced,smooth,line,under 1%,CLIME,0.83642,0.94206,0.95021,0.96144,0.75547,0.91107,113,saturated,0.80714
+imbalanced,smooth,line,under 1%,LIME,0.85774,0.96293,0.96798,0.97913,0.61232,0.90113,113,saturated,0.80714
+imbalanced,smooth,line,under 1%,Logit-CLIME,0.85169,0.95953,0.95681,0.97557,0.88702,0.91295,113,saturated,0.80714
+imbalanced,smooth,line,under 1%,Logit-LIME,0.86867,0.97262,0.96460,0.98975,0.85257,0.90091,113,saturated,0.80714
+imbalanced,smooth,line,under 1%,Soft logistic,0.85633,0.96176,0.96572,0.98646,0.82063,0.90254,113,saturated,0.80714
+imbalanced,smooth,line,under 1%,Soft logistic CLIME,0.83681,0.94280,0.94960,0.97194,0.86895,0.91366,113,saturated,0.80714
+imbalanced,smooth,test,1-50%,CLIME,0.98656,0.99301,0.99853,0.99969,0.92743,0.98906,3,saturated,0.02143
+imbalanced,smooth,test,1-50%,LIME,0.98828,0.99392,0.99866,0.99958,0.94535,0.98811,3,saturated,0.02143
+imbalanced,smooth,test,1-50%,Logit-CLIME,0.98670,0.99958,0.99635,0.99995,0.95690,0.99260,3,saturated,0.02143
+imbalanced,smooth,test,1-50%,Logit-LIME,0.98407,0.99797,0.99089,0.99996,0.96121,0.99106,3,saturated,0.02143
+imbalanced,smooth,test,1-50%,Soft logistic,0.98785,0.99424,0.99862,0.99996,0.95634,0.98767,3,saturated,0.02143
+imbalanced,smooth,test,1-50%,Soft logistic CLIME,0.98522,0.99301,0.99852,0.99995,0.93770,0.98891,3,saturated,0.02143
+imbalanced,smooth,test,over 50%,CLIME,,,,,,,1,saturated,0.00714
+imbalanced,smooth,test,over 50%,LIME,,,,,,,1,saturated,0.00714
+imbalanced,smooth,test,over 50%,Logit-CLIME,0.19427,0.19427,,,,,1,saturated,0.00714
+imbalanced,smooth,test,over 50%,Logit-LIME,0.19427,0.19427,,,,,1,saturated,0.00714
+imbalanced,smooth,test,over 50%,Soft logistic,,,,,,,1,saturated,0.00714
+imbalanced,smooth,test,over 50%,Soft logistic CLIME,,,,,,,1,saturated,0.00714
+imbalanced,smooth,test,under 1%,CLIME,0.80517,0.91740,0.93247,0.95345,0.79876,0.98892,136,saturated,0.97143
+imbalanced,smooth,test,under 1%,LIME,0.82429,0.93075,0.93808,0.95364,0.66835,0.98649,136,saturated,0.97143
+imbalanced,smooth,test,under 1%,Logit-CLIME,0.83574,0.94301,0.94589,0.96499,0.86614,0.98941,136,saturated,0.97143
+imbalanced,smooth,test,under 1%,Logit-LIME,0.85124,0.94983,0.94130,0.96508,0.83216,0.98104,136,saturated,0.97143
+imbalanced,smooth,test,under 1%,Soft logistic,0.81648,0.92275,0.92978,0.95939,0.81163,0.98454,136,saturated,0.97143
+imbalanced,smooth,test,under 1%,Soft logistic CLIME,0.79857,0.91045,0.92485,0.95930,0.85624,0.98736,136,saturated,0.97143

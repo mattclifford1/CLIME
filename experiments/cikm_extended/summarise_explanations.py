@@ -10,7 +10,7 @@ import numpy as np
 import pandas as pd
 from scipy.stats import spearmanr
 from common import explanations, gradients, runner, stats
-from summarise import KEY, ONE_SIDED, save, with_all
+from summarise import KEY, MINORITY_BINS, MINORITY_LABELS, ONE_SIDED, save, with_all
 
 RUN = 'explanations'
 SMOOTH = 'smooth'
@@ -24,6 +24,10 @@ VALUES = [*(f'{w}_{s}' for w in WHERE for s in [*OPERATING, *LOSSES]), *AGREEMEN
 CONSTANTS = [f'{w}_{s}_constant' for w in WHERE for s in LOSSES]
 BEATS = [f'{w}_{s}_beats_constant' for w in WHERE for s in LOSSES]
 BLOCK = ['setting', 'dataset', 'family', 'seed', 'arm', 'kind', 'explainer']
+EFFECTIVE_BINS = [0, 0.01, 0.1, 0.3, 1]
+EFFECTIVE_LABELS = ['under 1%', '1-10%', '10-30%', 'over 30%']
+SATURATED_BINS = [-1, 0.01, 0.5, 1]
+SATURATED_LABELS = ['under 1%', '1-50%', 'over 50%']
 
 
 def with_groups(frame):
@@ -34,7 +38,8 @@ def with_groups(frame):
 
 def joined(scores, queries):
     '''score rows with the constant surrogate's losses and the neighbourhood's minority share'''
-    out = scores.merge(queries[[*KEY, 'sample_minority', 'f_query', *CONSTANTS]], on=KEY)
+    out = scores.merge(queries[[*KEY, 'sample_minority', 'sample_effective_share',
+                                'sample_saturated', 'f_query', *CONSTANTS]], on=KEY)
     for w in WHERE:
         for s in LOSSES:
             beats = (out[f'{w}_{s}'] < out[f'{w}_{s}_constant']).astype(float)
@@ -103,6 +108,28 @@ def moves(pairs, queries, models):
     return out.reset_index()
 
 
+def neighbourhoods(full, arm='plain'):
+    '''
+    explanation scores by the neighbourhood sample: its share of the rarer black-box class,
+    the kernel's effective share of it, and its share of saturated probabilities
+    '''
+    part = full[(full.arm == arm) & full.explainer.isin(list(explanations.EXPLAINERS))]
+    bins = {'minority': pd.cut(part.sample_minority, MINORITY_BINS, labels=MINORITY_LABELS),
+            'effective': pd.cut(part.sample_effective_share, EFFECTIVE_BINS,
+                                labels=EFFECTIVE_LABELS, include_lowest=True),
+            'saturated': pd.cut(part.sample_saturated, SATURATED_BINS, labels=SATURATED_LABELS)}
+    out = []
+    for name, value in bins.items():
+        frame = with_groups(part.assign(bin=value.astype(str)))
+        grouped = frame.groupby(['setting', 'family', 'kind', 'bin', 'explainer'], observed=True)
+        found = grouped[[*AGREEMENT, 'test_balanced', 'test_auc']].mean()
+        found['n'] = grouped.size()
+        found = found.reset_index().assign(by=name)
+        total = found.groupby(['setting', 'family', 'kind', 'explainer'])['n'].transform('sum')
+        out.append(found.assign(share=found['n']/total))
+    return pd.concat(out, ignore_index=True)
+
+
 def cuts(frame):
     values = [f'{w}_{s}' for w in WHERE for s in ('fidelity', 'balanced')]
     return stats.over_datasets(with_all(frame), ['setting', 'family', 'kind', 'explainer', 'cut'],
@@ -143,6 +170,7 @@ if __name__ == '__main__':
     save(moves(runner.load(RUN, 'pairs'), queries, models), 'explanations_moves')
     save(cuts(runner.load(RUN, 'cuts')), 'explanations_cuts')
     save(instruments(full), 'explanations_instruments')
+    save(neighbourhoods(full), 'explanations_where')
     one_sided = queries.assign(one_sided=queries.sample_minority < ONE_SIDED)
     save(stats.over_datasets(with_groups(one_sided), ['setting', 'family', 'arm', 'kind'],
                              ['one_sided', 'has_gradient']), 'explanations_neighbourhoods')
