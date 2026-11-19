@@ -13,7 +13,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import clime   # noqa: E402
 from clime.evaluation import AVAILABLE_EVALUATION_METRICS   # noqa: E402
 from clime.explainer import AVAILABLE_EXPLAINERS   # noqa: E402
-from common import boxes, evaluate, explanations, gradients, scores, surrogates, tasks   # noqa: E402
+from common import boxes, evaluate, explanations, gradients, patches, scores, surrogates, tasks   # noqa: E402
 
 
 @pytest.fixture(scope='module')
@@ -141,3 +141,40 @@ def test_a_threshold_move_leaves_the_plain_explanation_to_score(task):
     assert last['explainer'] == explanations.THRESHOLD_ONLY and last['cut'] == pytest.approx(0.2)
     cosine = scores.explanation_agreement(coefs['Logit-LIME'], shifted['Logit-LIME'])['cosine']
     assert cosine == pytest.approx(1, abs=1e-6)
+
+
+@pytest.fixture(scope='module')
+def game():
+    '''every mask, its kernel weight, and a logit that is not additive in the patches'''
+    rng = np.random.default_rng(0)
+    M = patches.masks()
+    z = -4 + M @ rng.normal(size=patches.PATCHES) + 0.8*M[:, 0]*M[:, 5] - 0.5*M[:, 3]*M[:, 7]*M[:, 9]
+    return M, patches.kernel(M), z, rng.integers(0, patches.FULL + 1, 1000)
+
+
+def test_shapley_values_sum_to_the_full_image_minus_the_empty_one(game):
+    _, _, z, _ = game
+    assert np.isclose(patches.shapley(z).sum(), z[patches.FULL] - z[0])
+
+
+def test_patch_surrogates_match_the_tabular_ones(game):
+    from scipy.special import expit
+    from sklearn.linear_model import Ridge
+    from clime.models import soft_logistic_regression
+    M, w, z, index = game
+    X, p, weight = M[index], expit(z[index]), w[index]
+    ridge = Ridge(alpha=1).fit(X, p, sample_weight=weight)
+    assert np.allclose(patches.fit('LIME', X, z[index], weight)[0], ridge.coef_)
+    soft = soft_logistic_regression()
+    soft.fit(X, p, sample_weight=weight)
+    assert np.allclose(patches.fit('Soft logistic', X, z[index], weight)[0], soft.coef_[0], atol=1e-5)
+
+
+def test_a_logit_shift_leaves_the_logit_surrogate_and_the_truths(game):
+    M, w, z, index = game
+    before, _ = patches.fit('Logit-LIME', M[index], z[index], w[index])
+    after, _ = patches.fit('Logit-LIME', M[index], z[index] + 4.6, w[index])
+    assert np.allclose(before, after)
+    assert np.allclose(patches.leave_one_out(z), patches.leave_one_out(z + 4.6))
+    assert np.allclose(patches.shapley(z), patches.shapley(z + 4.6))
+
