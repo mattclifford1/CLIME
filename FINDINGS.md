@@ -1160,9 +1160,12 @@ committed first (`experiments/cikm_extended/PREREGISTRATION.md`): 1, 3, 4 and 7 
 - **Failed prediction, explained (`check_logistic.py`, 5 seeds, 2026-11-18):** on logistic
   regression LIME's mean cosine with the gradient is 0.96 at 200:20, not above 0.99; 12 of
   21 datasets are above 0.99 and the lowest is 0.75. The cause is too few samples, not the
-  kernel: ten times the samples gives 0.988 (16 datasets above 0.99), while a wider kernel
+  kernel: 100,000 samples give 0.988 (16 datasets above 0.99), while a wider kernel
   is worse (0.957 at twice the width, 0.916 with none). The ridge penalty costs 0.008 at
   LIME's width (0.992 on an exactly linear target) and removing it is far worse (0.63).
+  Over 300 to 100,000 samples (`figures/samples.pdf`) LIME goes 0.890 to 0.988; Logit-LIME
+  on 300 samples (0.961) is level with LIME on 10,000 (0.964), CLIME is behind LIME at
+  every size, and what LIME still misses on 100,000 is the wide datasets.
 
 Not done: images (planned in the write-up's section 6); a ground truth for the tree models
 and k-NN.

@@ -595,9 +595,41 @@ def instruments():
     style.save(fig, 'instruments')
 
 
+def samples():
+    """cosine with a logistic regression's gradient against the size of the neighbourhood sample"""
+    frame, per_dataset = read('logistic_samples'), read('logistic_samples_datasets')
+    fig, axes = plt.subplots(1, 2, figsize=(TEXTWIDTH*0.9, TEXTWIDTH*0.34),
+                             gridspec_kw=dict(wspace=0.42))
+    for explainer in SIX:
+        part = frame[frame.explainer == explainer].sort_values('samples')
+        axes[0].plot(part.samples, part['mean'], color=EXPLAINER_COLOURS[explainer],
+                     marker=EXPLAINER_MARKERS[explainer], ms=3, label=EXPLAINER_LABELS[explainer])
+    axes[0].axvline(10_000, color=MUTED, lw=0.8, ls=':')
+    axes[0].set(xscale='log', ylim=(0.85, 1.003), ylabel='cosine with the gradient')
+    axes[0].set_title('mean over datasets', fontsize=7.5)
+    lime = per_dataset[per_dataset.explainer == 'LIME']
+    wide = lime.features > lime.features.median()
+    floor = 1e-5   # the precision of the results file
+    for mask, colour, label in ((~wide, INK2, 'fewer features'),
+                                (wide, EXPLAINER_COLOURS['LIME'], 'more features')):
+        for i, (_, line) in enumerate(lime[mask].groupby('dataset')):
+            line = line.sort_values('samples')
+            axes[1].plot(line.samples, np.maximum(1 - line['mean'], floor), color=colour, lw=0.8,
+                         alpha=0.8, label=label if i == 0 else None)
+    axes[1].set(xscale='log', yscale='log', ylabel='1 $-$ cosine')
+    axes[1].set_title('LIME, one line per dataset', fontsize=7.5)
+    axes[1].legend(fontsize=6.5, loc='lower left')
+    for ax in axes:
+        ax.set_xlabel('samples in the neighbourhood')
+    handles, labels = axes[0].get_legend_handles_labels()
+    fig.legend(handles, labels, ncol=3, loc='lower center', bbox_to_anchor=(0.5, -0.38))
+    style.save(fig, 'samples')
+
+
 FIGURES = {f.__name__: f for f in (reproduce, replication, profile, triad, one_sided, arms,
                                    families, grid, operating_point, by_class, sweep, kernel,
-                                   matched, cuts, truth, moves, losses, instruments)}
+                                   matched, cuts, truth, moves, losses, instruments,
+                                   samples)}
 
 if __name__ == '__main__':
     style.use()

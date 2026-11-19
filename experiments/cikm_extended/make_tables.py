@@ -474,11 +474,20 @@ def logistic_check():
     rows = [[label, f'{100*frame.loc[("effective share", width), "mean"]:.0f}\\%',
              *cell('probability', width), *cell('linear target', width)]
             for width, label in widths.items()]
-    rows += [[], ['0.75, no penalty', '', *cell('no penalty', 'default'), '', ''],
-             ['0.75, 100,000 samples', '', *cell('more samples', 'default'), '', '']]
+    rows += [[], ['0.75, no penalty', '', *cell('no penalty', 'default'), '', '']]
     write('logistic', table(['Kernel width', 'Effective sample', 'Cosine', 'Above 0.99',
                              'Cosine', 'Above 0.99'], rows,
                             groups=[('black box\'s probability', 3, 4), ('linear target', 5, 6)]))
+
+
+def logistic_samples():
+    counts = {300: 'three hundred', 1000: 'thousand', 3000: 'three thousand', 10000: 'ten thousand',
+              30000: 'thirty thousand', 100000: 'hundred thousand'}
+    for _, r in read('logistic_samples').iterrows():
+        base = ['lgs', r.explainer, counts[r.samples]]
+        macro([*base, 'mean'], r['mean'], '{:.3f}')
+        macro([*base, 'lowest'], r.lowest)
+        macro([*base, 'close'], r.close, '{:.0f}')
 
 
 def explanations_instruments():
@@ -526,7 +535,7 @@ if __name__ == '__main__':
                  surrogate_thresholds, kernel, sweep, surrogate_deltas, runs,
                  failures, outliers, reproduce, explanations, explanations_paired,
                  explanations_moves, explanations_spread, explanations_instruments,
-                 explanations_cuts, logistic_check,
+                 explanations_cuts, logistic_check, logistic_samples,
                  explanations_run):
         try:
             make()

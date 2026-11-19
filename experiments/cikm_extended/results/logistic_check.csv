@@ -18,4 +18,3 @@ probability,uniform,0.91606,0.99721,0.11628,12,21
 linear target,uniform,0.99926,1.00000,0.98472,20,21
 effective share,uniform,1.00000,1.00000,1.00000,21,21
 no penalty,default,0.62623,0.80037,0.00343,9,21
-more samples,default,0.98805,0.99988,0.91759,16,21

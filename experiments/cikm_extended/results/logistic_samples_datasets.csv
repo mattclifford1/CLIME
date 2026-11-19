@@ -1,0 +1,757 @@
+explainer,samples,dataset,features,mean,count
+LIME,300,Banknote Authentication,4,0.99804,100
+CLIME,300,Banknote Authentication,4,0.99031,100
+Logit-LIME,300,Banknote Authentication,4,0.99988,100
+Logit-CLIME,300,Banknote Authentication,4,0.99992,100
+Soft logistic,300,Banknote Authentication,4,0.95021,100
+Soft logistic CLIME,300,Banknote Authentication,4,0.96412,100
+LIME,1000,Banknote Authentication,4,0.99940,100
+CLIME,1000,Banknote Authentication,4,0.99781,100
+Logit-LIME,1000,Banknote Authentication,4,0.99999,100
+Logit-CLIME,1000,Banknote Authentication,4,0.99999,100
+Soft logistic,1000,Banknote Authentication,4,0.98515,100
+Soft logistic CLIME,1000,Banknote Authentication,4,0.99311,100
+LIME,3000,Banknote Authentication,4,0.99981,100
+CLIME,3000,Banknote Authentication,4,0.99872,100
+Logit-LIME,3000,Banknote Authentication,4,1.00000,100
+Logit-CLIME,3000,Banknote Authentication,4,1.00000,100
+Soft logistic,3000,Banknote Authentication,4,0.99569,100
+Soft logistic CLIME,3000,Banknote Authentication,4,0.99700,100
+LIME,10000,Banknote Authentication,4,0.99994,100
+CLIME,10000,Banknote Authentication,4,0.99918,100
+Logit-LIME,10000,Banknote Authentication,4,1.00000,100
+Logit-CLIME,10000,Banknote Authentication,4,1.00000,100
+Soft logistic,10000,Banknote Authentication,4,0.99872,100
+Soft logistic CLIME,10000,Banknote Authentication,4,0.99859,100
+LIME,30000,Banknote Authentication,4,0.99998,100
+CLIME,30000,Banknote Authentication,4,0.99962,100
+Logit-LIME,30000,Banknote Authentication,4,1.00000,100
+Logit-CLIME,30000,Banknote Authentication,4,1.00000,100
+Soft logistic,30000,Banknote Authentication,4,0.99971,100
+Soft logistic CLIME,30000,Banknote Authentication,4,0.99987,100
+LIME,100000,Banknote Authentication,4,1.00000,100
+CLIME,100000,Banknote Authentication,4,0.99994,100
+Logit-LIME,100000,Banknote Authentication,4,1.00000,100
+Logit-CLIME,100000,Banknote Authentication,4,1.00000,100
+Soft logistic,100000,Banknote Authentication,4,0.99996,100
+Soft logistic CLIME,100000,Banknote Authentication,4,1.00000,100
+LIME,300,Blood Transfusion,4,0.99942,100
+CLIME,300,Blood Transfusion,4,0.99535,100
+Logit-LIME,300,Blood Transfusion,4,0.99999,100
+Logit-CLIME,300,Blood Transfusion,4,0.99999,100
+Soft logistic,300,Blood Transfusion,4,0.99698,100
+Soft logistic CLIME,300,Blood Transfusion,4,0.99657,100
+LIME,1000,Blood Transfusion,4,0.99984,100
+CLIME,1000,Blood Transfusion,4,0.99766,100
+Logit-LIME,1000,Blood Transfusion,4,1.00000,100
+Logit-CLIME,1000,Blood Transfusion,4,1.00000,100
+Soft logistic,1000,Blood Transfusion,4,0.99921,100
+Soft logistic CLIME,1000,Blood Transfusion,4,0.99920,100
+LIME,3000,Blood Transfusion,4,0.99995,100
+CLIME,3000,Blood Transfusion,4,0.99877,100
+Logit-LIME,3000,Blood Transfusion,4,1.00000,100
+Logit-CLIME,3000,Blood Transfusion,4,1.00000,100
+Soft logistic,3000,Blood Transfusion,4,0.99957,100
+Soft logistic CLIME,3000,Blood Transfusion,4,0.99957,100
+LIME,10000,Blood Transfusion,4,0.99998,100
+CLIME,10000,Blood Transfusion,4,0.99940,100
+Logit-LIME,10000,Blood Transfusion,4,1.00000,100
+Logit-CLIME,10000,Blood Transfusion,4,1.00000,100
+Soft logistic,10000,Blood Transfusion,4,0.99963,100
+Soft logistic CLIME,10000,Blood Transfusion,4,0.99963,100
+LIME,30000,Blood Transfusion,4,1.00000,100
+CLIME,30000,Blood Transfusion,4,0.99972,100
+Logit-LIME,30000,Blood Transfusion,4,1.00000,100
+Logit-CLIME,30000,Blood Transfusion,4,1.00000,100
+Soft logistic,30000,Blood Transfusion,4,0.99970,100
+Soft logistic CLIME,30000,Blood Transfusion,4,0.99970,100
+LIME,100000,Blood Transfusion,4,1.00000,100
+CLIME,100000,Blood Transfusion,4,0.99985,100
+Logit-LIME,100000,Blood Transfusion,4,1.00000,100
+Logit-CLIME,100000,Blood Transfusion,4,1.00000,100
+Soft logistic,100000,Blood Transfusion,4,0.99984,100
+Soft logistic CLIME,100000,Blood Transfusion,4,0.99984,100
+LIME,300,Cervical Cancer,32,0.89292,100
+CLIME,300,Cervical Cancer,32,0.77714,100
+Logit-LIME,300,Cervical Cancer,32,0.98243,100
+Logit-CLIME,300,Cervical Cancer,32,0.98277,100
+Soft logistic,300,Cervical Cancer,32,0.90908,100
+Soft logistic CLIME,300,Cervical Cancer,32,0.91411,100
+LIME,1000,Cervical Cancer,32,0.93681,100
+CLIME,1000,Cervical Cancer,32,0.82137,100
+Logit-LIME,1000,Cervical Cancer,32,0.98426,100
+Logit-CLIME,1000,Cervical Cancer,32,0.98438,100
+Soft logistic,1000,Cervical Cancer,32,0.95614,100
+Soft logistic CLIME,1000,Cervical Cancer,32,0.96186,100
+LIME,3000,Cervical Cancer,32,0.96214,100
+CLIME,3000,Cervical Cancer,32,0.87848,100
+Logit-LIME,3000,Cervical Cancer,32,0.98464,100
+Logit-CLIME,3000,Cervical Cancer,32,0.98467,100
+Soft logistic,3000,Cervical Cancer,32,0.97311,100
+Soft logistic CLIME,3000,Cervical Cancer,32,0.97619,100
+LIME,10000,Cervical Cancer,32,0.97751,100
+CLIME,10000,Cervical Cancer,32,0.92667,100
+Logit-LIME,10000,Cervical Cancer,32,0.98471,100
+Logit-CLIME,10000,Cervical Cancer,32,0.98472,100
+Soft logistic,10000,Cervical Cancer,32,0.97938,100
+Soft logistic CLIME,10000,Cervical Cancer,32,0.98063,100
+LIME,30000,Cervical Cancer,32,0.98207,100
+CLIME,30000,Cervical Cancer,32,0.94664,100
+Logit-LIME,30000,Cervical Cancer,32,0.98472,100
+Logit-CLIME,30000,Cervical Cancer,32,0.98472,100
+Soft logistic,30000,Cervical Cancer,32,0.98108,100
+Soft logistic CLIME,30000,Cervical Cancer,32,0.98150,100
+LIME,100000,Cervical Cancer,32,0.98364,100
+CLIME,100000,Cervical Cancer,32,0.97031,100
+Logit-LIME,100000,Cervical Cancer,32,0.98472,100
+Logit-CLIME,100000,Cervical Cancer,32,0.98472,100
+Soft logistic,100000,Cervical Cancer,32,0.98169,100
+Soft logistic CLIME,100000,Cervical Cancer,32,0.98180,100
+LIME,300,Costcla Credit Scoring Kaggle 2011,10,0.50910,100
+CLIME,300,Costcla Credit Scoring Kaggle 2011,10,0.50816,100
+Logit-LIME,300,Costcla Credit Scoring Kaggle 2011,10,0.56088,100
+Logit-CLIME,300,Costcla Credit Scoring Kaggle 2011,10,0.56115,100
+Soft logistic,300,Costcla Credit Scoring Kaggle 2011,10,0.47578,100
+Soft logistic CLIME,300,Costcla Credit Scoring Kaggle 2011,10,0.46288,100
+LIME,1000,Costcla Credit Scoring Kaggle 2011,10,0.56132,100
+CLIME,1000,Costcla Credit Scoring Kaggle 2011,10,0.56071,100
+Logit-LIME,1000,Costcla Credit Scoring Kaggle 2011,10,0.65061,100
+Logit-CLIME,1000,Costcla Credit Scoring Kaggle 2011,10,0.65065,100
+Soft logistic,1000,Costcla Credit Scoring Kaggle 2011,10,0.57951,100
+Soft logistic CLIME,1000,Costcla Credit Scoring Kaggle 2011,10,0.57860,100
+LIME,3000,Costcla Credit Scoring Kaggle 2011,10,0.64101,100
+CLIME,3000,Costcla Credit Scoring Kaggle 2011,10,0.64078,100
+Logit-LIME,3000,Costcla Credit Scoring Kaggle 2011,10,0.75813,100
+Logit-CLIME,3000,Costcla Credit Scoring Kaggle 2011,10,0.75834,100
+Soft logistic,3000,Costcla Credit Scoring Kaggle 2011,10,0.67433,100
+Soft logistic CLIME,3000,Costcla Credit Scoring Kaggle 2011,10,0.67445,100
+LIME,10000,Costcla Credit Scoring Kaggle 2011,10,0.75251,100
+CLIME,10000,Costcla Credit Scoring Kaggle 2011,10,0.75245,100
+Logit-LIME,10000,Costcla Credit Scoring Kaggle 2011,10,0.85536,100
+Logit-CLIME,10000,Costcla Credit Scoring Kaggle 2011,10,0.85560,100
+Soft logistic,10000,Costcla Credit Scoring Kaggle 2011,10,0.75274,100
+Soft logistic CLIME,10000,Costcla Credit Scoring Kaggle 2011,10,0.75294,100
+LIME,30000,Costcla Credit Scoring Kaggle 2011,10,0.85181,100
+CLIME,30000,Costcla Credit Scoring Kaggle 2011,10,0.85187,100
+Logit-LIME,30000,Costcla Credit Scoring Kaggle 2011,10,0.92098,100
+Logit-CLIME,30000,Costcla Credit Scoring Kaggle 2011,10,0.92111,100
+Soft logistic,30000,Costcla Credit Scoring Kaggle 2011,10,0.81731,100
+Soft logistic CLIME,30000,Costcla Credit Scoring Kaggle 2011,10,0.81747,100
+LIME,100000,Costcla Credit Scoring Kaggle 2011,10,0.91678,100
+CLIME,100000,Costcla Credit Scoring Kaggle 2011,10,0.91670,100
+Logit-LIME,100000,Costcla Credit Scoring Kaggle 2011,10,0.97094,100
+Logit-CLIME,100000,Costcla Credit Scoring Kaggle 2011,10,0.97098,100
+Soft logistic,100000,Costcla Credit Scoring Kaggle 2011,10,0.87322,100
+Soft logistic CLIME,100000,Costcla Credit Scoring Kaggle 2011,10,0.87334,100
+LIME,300,Costcla Credit Scoring PAKDD 2009,34,0.96103,100
+CLIME,300,Costcla Credit Scoring PAKDD 2009,34,0.93580,100
+Logit-LIME,300,Costcla Credit Scoring PAKDD 2009,34,0.99993,100
+Logit-CLIME,300,Costcla Credit Scoring PAKDD 2009,34,0.99994,100
+Soft logistic,300,Costcla Credit Scoring PAKDD 2009,34,0.96536,100
+Soft logistic CLIME,300,Costcla Credit Scoring PAKDD 2009,34,0.96503,100
+LIME,1000,Costcla Credit Scoring PAKDD 2009,34,0.98820,100
+CLIME,1000,Costcla Credit Scoring PAKDD 2009,34,0.96644,100
+Logit-LIME,1000,Costcla Credit Scoring PAKDD 2009,34,1.00000,100
+Logit-CLIME,1000,Costcla Credit Scoring PAKDD 2009,34,1.00000,100
+Soft logistic,1000,Costcla Credit Scoring PAKDD 2009,34,0.99029,100
+Soft logistic CLIME,1000,Costcla Credit Scoring PAKDD 2009,34,0.99121,100
+LIME,3000,Costcla Credit Scoring PAKDD 2009,34,0.99595,100
+CLIME,3000,Costcla Credit Scoring PAKDD 2009,34,0.97948,100
+Logit-LIME,3000,Costcla Credit Scoring PAKDD 2009,34,1.00000,100
+Logit-CLIME,3000,Costcla Credit Scoring PAKDD 2009,34,1.00000,100
+Soft logistic,3000,Costcla Credit Scoring PAKDD 2009,34,0.99646,100
+Soft logistic CLIME,3000,Costcla Credit Scoring PAKDD 2009,34,0.99713,100
+LIME,10000,Costcla Credit Scoring PAKDD 2009,34,0.99869,100
+CLIME,10000,Costcla Credit Scoring PAKDD 2009,34,0.98776,100
+Logit-LIME,10000,Costcla Credit Scoring PAKDD 2009,34,1.00000,100
+Logit-CLIME,10000,Costcla Credit Scoring PAKDD 2009,34,1.00000,100
+Soft logistic,10000,Costcla Credit Scoring PAKDD 2009,34,0.99893,100
+Soft logistic CLIME,10000,Costcla Credit Scoring PAKDD 2009,34,0.99917,100
+LIME,30000,Costcla Credit Scoring PAKDD 2009,34,0.99956,100
+CLIME,30000,Costcla Credit Scoring PAKDD 2009,34,0.99624,100
+Logit-LIME,30000,Costcla Credit Scoring PAKDD 2009,34,1.00000,100
+Logit-CLIME,30000,Costcla Credit Scoring PAKDD 2009,34,1.00000,100
+Soft logistic,30000,Costcla Credit Scoring PAKDD 2009,34,0.99969,100
+Soft logistic CLIME,30000,Costcla Credit Scoring PAKDD 2009,34,0.99979,100
+LIME,100000,Costcla Credit Scoring PAKDD 2009,34,0.99988,100
+CLIME,100000,Costcla Credit Scoring PAKDD 2009,34,0.99889,100
+Logit-LIME,100000,Costcla Credit Scoring PAKDD 2009,34,1.00000,100
+Logit-CLIME,100000,Costcla Credit Scoring PAKDD 2009,34,1.00000,100
+Soft logistic,100000,Costcla Credit Scoring PAKDD 2009,34,0.99995,100
+Soft logistic CLIME,100000,Costcla Credit Scoring PAKDD 2009,34,0.99997,100
+LIME,300,Costcla Direct Marketing,32,0.96143,100
+CLIME,300,Costcla Direct Marketing,32,0.93151,100
+Logit-LIME,300,Costcla Direct Marketing,32,0.99994,100
+Logit-CLIME,300,Costcla Direct Marketing,32,0.99995,100
+Soft logistic,300,Costcla Direct Marketing,32,0.97550,100
+Soft logistic CLIME,300,Costcla Direct Marketing,32,0.97558,100
+LIME,1000,Costcla Direct Marketing,32,0.98879,100
+CLIME,1000,Costcla Direct Marketing,32,0.95924,100
+Logit-LIME,1000,Costcla Direct Marketing,32,1.00000,100
+Logit-CLIME,1000,Costcla Direct Marketing,32,1.00000,100
+Soft logistic,1000,Costcla Direct Marketing,32,0.99440,100
+Soft logistic CLIME,1000,Costcla Direct Marketing,32,0.99487,100
+LIME,3000,Costcla Direct Marketing,32,0.99549,100
+CLIME,3000,Costcla Direct Marketing,32,0.98016,100
+Logit-LIME,3000,Costcla Direct Marketing,32,1.00000,100
+Logit-CLIME,3000,Costcla Direct Marketing,32,1.00000,100
+Soft logistic,3000,Costcla Direct Marketing,32,0.99856,100
+Soft logistic CLIME,3000,Costcla Direct Marketing,32,0.99874,100
+LIME,10000,Costcla Direct Marketing,32,0.99865,100
+CLIME,10000,Costcla Direct Marketing,32,0.98271,100
+Logit-LIME,10000,Costcla Direct Marketing,32,1.00000,100
+Logit-CLIME,10000,Costcla Direct Marketing,32,1.00000,100
+Soft logistic,10000,Costcla Direct Marketing,32,0.99973,100
+Soft logistic CLIME,10000,Costcla Direct Marketing,32,0.99974,100
+LIME,30000,Costcla Direct Marketing,32,0.99956,100
+CLIME,30000,Costcla Direct Marketing,32,0.98617,100
+Logit-LIME,30000,Costcla Direct Marketing,32,1.00000,100
+Logit-CLIME,30000,Costcla Direct Marketing,32,1.00000,100
+Soft logistic,30000,Costcla Direct Marketing,32,0.99996,100
+Soft logistic CLIME,30000,Costcla Direct Marketing,32,0.99997,100
+LIME,100000,Costcla Direct Marketing,32,0.99988,100
+CLIME,100000,Costcla Direct Marketing,32,0.99666,100
+Logit-LIME,100000,Costcla Direct Marketing,32,1.00000,100
+Logit-CLIME,100000,Costcla Direct Marketing,32,1.00000,100
+Soft logistic,100000,Costcla Direct Marketing,32,1.00000,100
+Soft logistic CLIME,100000,Costcla Direct Marketing,32,1.00000,100
+LIME,300,Default of Credit Card Clients,23,0.93974,100
+CLIME,300,Default of Credit Card Clients,23,0.91168,100
+Logit-LIME,300,Default of Credit Card Clients,23,0.99567,100
+Logit-CLIME,300,Default of Credit Card Clients,23,0.99688,100
+Soft logistic,300,Default of Credit Card Clients,23,0.89016,100
+Soft logistic CLIME,300,Default of Credit Card Clients,23,0.90579,100
+LIME,1000,Default of Credit Card Clients,23,0.97630,100
+CLIME,1000,Default of Credit Card Clients,23,0.94692,100
+Logit-LIME,1000,Default of Credit Card Clients,23,0.99954,100
+Logit-CLIME,1000,Default of Credit Card Clients,23,0.99972,100
+Soft logistic,1000,Default of Credit Card Clients,23,0.94946,100
+Soft logistic CLIME,1000,Default of Credit Card Clients,23,0.96269,100
+LIME,3000,Default of Credit Card Clients,23,0.99163,100
+CLIME,3000,Default of Credit Card Clients,23,0.96825,100
+Logit-LIME,3000,Default of Credit Card Clients,23,0.99995,100
+Logit-CLIME,3000,Default of Credit Card Clients,23,0.99997,100
+Soft logistic,3000,Default of Credit Card Clients,23,0.98076,100
+Soft logistic CLIME,3000,Default of Credit Card Clients,23,0.98766,100
+LIME,10000,Default of Credit Card Clients,23,0.99708,100
+CLIME,10000,Default of Credit Card Clients,23,0.98035,100
+Logit-LIME,10000,Default of Credit Card Clients,23,1.00000,100
+Logit-CLIME,10000,Default of Credit Card Clients,23,1.00000,100
+Soft logistic,10000,Default of Credit Card Clients,23,0.99503,100
+Soft logistic CLIME,10000,Default of Credit Card Clients,23,0.99724,100
+LIME,30000,Default of Credit Card Clients,23,0.99905,100
+CLIME,30000,Default of Credit Card Clients,23,0.98775,100
+Logit-LIME,30000,Default of Credit Card Clients,23,1.00000,100
+Logit-CLIME,30000,Default of Credit Card Clients,23,1.00000,100
+Soft logistic,30000,Default of Credit Card Clients,23,0.99876,100
+Soft logistic CLIME,30000,Default of Credit Card Clients,23,0.99950,100
+LIME,100000,Default of Credit Card Clients,23,0.99973,100
+CLIME,100000,Default of Credit Card Clients,23,0.99274,100
+Logit-LIME,100000,Default of Credit Card Clients,23,1.00000,100
+Logit-CLIME,100000,Default of Credit Card Clients,23,1.00000,100
+Soft logistic,100000,Default of Credit Card Clients,23,0.99977,100
+Soft logistic CLIME,100000,Default of Credit Card Clients,23,0.99998,100
+LIME,300,Diabetes Pima Indian,8,0.99681,100
+CLIME,300,Diabetes Pima Indian,8,0.97663,100
+Logit-LIME,300,Diabetes Pima Indian,8,0.99998,100
+Logit-CLIME,300,Diabetes Pima Indian,8,0.99998,100
+Soft logistic,300,Diabetes Pima Indian,8,0.98748,100
+Soft logistic CLIME,300,Diabetes Pima Indian,8,0.98612,100
+LIME,1000,Diabetes Pima Indian,8,0.99902,100
+CLIME,1000,Diabetes Pima Indian,8,0.98922,100
+Logit-LIME,1000,Diabetes Pima Indian,8,1.00000,100
+Logit-CLIME,1000,Diabetes Pima Indian,8,1.00000,100
+Soft logistic,1000,Diabetes Pima Indian,8,0.99668,100
+Soft logistic CLIME,1000,Diabetes Pima Indian,8,0.99663,100
+LIME,3000,Diabetes Pima Indian,8,0.99965,100
+CLIME,3000,Diabetes Pima Indian,8,0.99494,100
+Logit-LIME,3000,Diabetes Pima Indian,8,1.00000,100
+Logit-CLIME,3000,Diabetes Pima Indian,8,1.00000,100
+Soft logistic,3000,Diabetes Pima Indian,8,0.99871,100
+Soft logistic CLIME,3000,Diabetes Pima Indian,8,0.99875,100
+LIME,10000,Diabetes Pima Indian,8,0.99991,100
+CLIME,10000,Diabetes Pima Indian,8,0.99736,100
+Logit-LIME,10000,Diabetes Pima Indian,8,1.00000,100
+Logit-CLIME,10000,Diabetes Pima Indian,8,1.00000,100
+Soft logistic,10000,Diabetes Pima Indian,8,0.99950,100
+Soft logistic CLIME,10000,Diabetes Pima Indian,8,0.99950,100
+LIME,30000,Diabetes Pima Indian,8,0.99997,100
+CLIME,30000,Diabetes Pima Indian,8,0.99884,100
+Logit-LIME,30000,Diabetes Pima Indian,8,1.00000,100
+Logit-CLIME,30000,Diabetes Pima Indian,8,1.00000,100
+Soft logistic,30000,Diabetes Pima Indian,8,0.99987,100
+Soft logistic CLIME,30000,Diabetes Pima Indian,8,0.99988,100
+LIME,100000,Diabetes Pima Indian,8,0.99999,100
+CLIME,100000,Diabetes Pima Indian,8,0.99894,100
+Logit-LIME,100000,Diabetes Pima Indian,8,1.00000,100
+Logit-CLIME,100000,Diabetes Pima Indian,8,1.00000,100
+Soft logistic,100000,Diabetes Pima Indian,8,0.99998,100
+Soft logistic CLIME,100000,Diabetes Pima Indian,8,0.99998,100
+LIME,300,EEG Eye State,14,0.77379,100
+CLIME,300,EEG Eye State,14,0.75297,100
+Logit-LIME,300,EEG Eye State,14,0.83124,100
+Logit-CLIME,300,EEG Eye State,14,0.83304,100
+Soft logistic,300,EEG Eye State,14,0.73354,100
+Soft logistic CLIME,300,EEG Eye State,14,0.73956,100
+LIME,1000,EEG Eye State,14,0.84867,100
+CLIME,1000,EEG Eye State,14,0.83077,100
+Logit-LIME,1000,EEG Eye State,14,0.89851,100
+Logit-CLIME,1000,EEG Eye State,14,0.89948,100
+Soft logistic,1000,EEG Eye State,14,0.81546,100
+Soft logistic CLIME,1000,EEG Eye State,14,0.82202,100
+LIME,3000,EEG Eye State,14,0.92928,100
+CLIME,3000,EEG Eye State,14,0.91328,100
+Logit-LIME,3000,EEG Eye State,14,0.97086,100
+Logit-CLIME,3000,EEG Eye State,14,0.97113,100
+Soft logistic,3000,EEG Eye State,14,0.88558,100
+Soft logistic CLIME,3000,EEG Eye State,14,0.89046,100
+LIME,10000,EEG Eye State,14,0.97941,100
+CLIME,10000,EEG Eye State,14,0.96669,100
+Logit-LIME,10000,EEG Eye State,14,0.99586,100
+Logit-CLIME,10000,EEG Eye State,14,0.99590,100
+Soft logistic,10000,EEG Eye State,14,0.93935,100
+Soft logistic CLIME,10000,EEG Eye State,14,0.94213,100
+LIME,30000,EEG Eye State,14,0.99147,100
+CLIME,30000,EEG Eye State,14,0.98633,100
+Logit-LIME,30000,EEG Eye State,14,0.99943,100
+Logit-CLIME,30000,EEG Eye State,14,0.99944,100
+Soft logistic,30000,EEG Eye State,14,0.97094,100
+Soft logistic CLIME,30000,EEG Eye State,14,0.97218,100
+LIME,100000,EEG Eye State,14,0.99566,100
+CLIME,100000,EEG Eye State,14,0.99174,100
+Logit-LIME,100000,EEG Eye State,14,0.99993,100
+Logit-CLIME,100000,EEG Eye State,14,0.99993,100
+Soft logistic,100000,EEG Eye State,14,0.98905,100
+Soft logistic CLIME,100000,EEG Eye State,14,0.98934,100
+LIME,300,Framingham CHD,15,0.99047,100
+CLIME,300,Framingham CHD,15,0.95122,100
+Logit-LIME,300,Framingham CHD,15,0.99994,100
+Logit-CLIME,300,Framingham CHD,15,0.99996,100
+Soft logistic,300,Framingham CHD,15,0.98091,100
+Soft logistic CLIME,300,Framingham CHD,15,0.97867,100
+LIME,1000,Framingham CHD,15,0.99715,100
+CLIME,1000,Framingham CHD,15,0.96371,100
+Logit-LIME,1000,Framingham CHD,15,1.00000,100
+Logit-CLIME,1000,Framingham CHD,15,1.00000,100
+Soft logistic,1000,Framingham CHD,15,0.99507,100
+Soft logistic CLIME,1000,Framingham CHD,15,0.99469,100
+LIME,3000,Framingham CHD,15,0.99899,100
+CLIME,3000,Framingham CHD,15,0.97492,100
+Logit-LIME,3000,Framingham CHD,15,1.00000,100
+Logit-CLIME,3000,Framingham CHD,15,1.00000,100
+Soft logistic,3000,Framingham CHD,15,0.99891,100
+Soft logistic CLIME,3000,Framingham CHD,15,0.99897,100
+LIME,10000,Framingham CHD,15,0.99968,100
+CLIME,10000,Framingham CHD,15,0.98768,100
+Logit-LIME,10000,Framingham CHD,15,1.00000,100
+Logit-CLIME,10000,Framingham CHD,15,1.00000,100
+Soft logistic,10000,Framingham CHD,15,0.99985,100
+Soft logistic CLIME,10000,Framingham CHD,15,0.99990,100
+LIME,30000,Framingham CHD,15,0.99990,100
+CLIME,30000,Framingham CHD,15,0.98877,100
+Logit-LIME,30000,Framingham CHD,15,1.00000,100
+Logit-CLIME,30000,Framingham CHD,15,1.00000,100
+Soft logistic,30000,Framingham CHD,15,0.99998,100
+Soft logistic CLIME,30000,Framingham CHD,15,0.99999,100
+LIME,100000,Framingham CHD,15,0.99997,100
+CLIME,100000,Framingham CHD,15,0.99408,100
+Logit-LIME,100000,Framingham CHD,15,1.00000,100
+Logit-CLIME,100000,Framingham CHD,15,1.00000,100
+Soft logistic,100000,Framingham CHD,15,1.00000,100
+Soft logistic CLIME,100000,Framingham CHD,15,1.00000,100
+LIME,300,German Credit,20,0.97852,100
+CLIME,300,German Credit,20,0.93244,100
+Logit-LIME,300,German Credit,20,0.99996,100
+Logit-CLIME,300,German Credit,20,0.99997,100
+Soft logistic,300,German Credit,20,0.97405,100
+Soft logistic CLIME,300,German Credit,20,0.96999,100
+LIME,1000,German Credit,20,0.99336,100
+CLIME,1000,German Credit,20,0.96340,100
+Logit-LIME,1000,German Credit,20,1.00000,100
+Logit-CLIME,1000,German Credit,20,1.00000,100
+Soft logistic,1000,German Credit,20,0.99442,100
+Soft logistic CLIME,1000,German Credit,20,0.99397,100
+LIME,3000,German Credit,20,0.99787,100
+CLIME,3000,German Credit,20,0.97609,100
+Logit-LIME,3000,German Credit,20,1.00000,100
+Logit-CLIME,3000,German Credit,20,1.00000,100
+Soft logistic,3000,German Credit,20,0.99888,100
+Soft logistic CLIME,3000,German Credit,20,0.99886,100
+LIME,10000,German Credit,20,0.99933,100
+CLIME,10000,German Credit,20,0.98603,100
+Logit-LIME,10000,German Credit,20,1.00000,100
+Logit-CLIME,10000,German Credit,20,1.00000,100
+Soft logistic,10000,German Credit,20,0.99983,100
+Soft logistic CLIME,10000,German Credit,20,0.99983,100
+LIME,30000,German Credit,20,0.99979,100
+CLIME,30000,German Credit,20,0.99153,100
+Logit-LIME,30000,German Credit,20,1.00000,100
+Logit-CLIME,30000,German Credit,20,1.00000,100
+Soft logistic,30000,German Credit,20,0.99998,100
+Soft logistic CLIME,30000,German Credit,20,0.99998,100
+LIME,100000,German Credit,20,0.99993,100
+CLIME,100000,German Credit,20,0.99709,100
+Logit-LIME,100000,German Credit,20,1.00000,100
+Logit-CLIME,100000,German Credit,20,1.00000,100
+Soft logistic,100000,German Credit,20,1.00000,100
+Soft logistic CLIME,100000,German Credit,20,1.00000,100
+LIME,300,KC1 Software Defects,21,0.94052,100
+CLIME,300,KC1 Software Defects,21,0.89211,100
+Logit-LIME,300,KC1 Software Defects,21,0.98544,100
+Logit-CLIME,300,KC1 Software Defects,21,0.98728,100
+Soft logistic,300,KC1 Software Defects,21,0.84764,100
+Soft logistic CLIME,300,KC1 Software Defects,21,0.86851,100
+LIME,1000,KC1 Software Defects,21,0.96184,100
+CLIME,1000,KC1 Software Defects,21,0.86419,100
+Logit-LIME,1000,KC1 Software Defects,21,0.99524,100
+Logit-CLIME,1000,KC1 Software Defects,21,0.99620,100
+Soft logistic,1000,KC1 Software Defects,21,0.93267,100
+Soft logistic CLIME,1000,KC1 Software Defects,21,0.94639,100
+LIME,3000,KC1 Software Defects,21,0.97357,100
+CLIME,3000,KC1 Software Defects,21,0.85332,100
+Logit-LIME,3000,KC1 Software Defects,21,0.99869,100
+Logit-CLIME,3000,KC1 Software Defects,21,0.99909,100
+Soft logistic,3000,KC1 Software Defects,21,0.97215,100
+Soft logistic CLIME,3000,KC1 Software Defects,21,0.97930,100
+LIME,10000,KC1 Software Defects,21,0.98595,100
+CLIME,10000,KC1 Software Defects,21,0.89061,100
+Logit-LIME,10000,KC1 Software Defects,21,0.99979,100
+Logit-CLIME,10000,KC1 Software Defects,21,0.99988,100
+Soft logistic,10000,KC1 Software Defects,21,0.98914,100
+Soft logistic CLIME,10000,KC1 Software Defects,21,0.99310,100
+LIME,30000,KC1 Software Defects,21,0.99464,100
+CLIME,30000,KC1 Software Defects,21,0.92933,100
+Logit-LIME,30000,KC1 Software Defects,21,0.99997,100
+Logit-CLIME,30000,KC1 Software Defects,21,0.99998,100
+Soft logistic,30000,KC1 Software Defects,21,0.99573,100
+Soft logistic CLIME,30000,KC1 Software Defects,21,0.99788,100
+LIME,100000,KC1 Software Defects,21,0.99802,100
+CLIME,100000,KC1 Software Defects,21,0.95349,100
+Logit-LIME,100000,KC1 Software Defects,21,1.00000,100
+Logit-CLIME,100000,KC1 Software Defects,21,1.00000,100
+Soft logistic,100000,KC1 Software Defects,21,0.99885,100
+Soft logistic CLIME,100000,KC1 Software Defects,21,0.99965,100
+LIME,300,MAGIC Gamma Telescope,10,0.97585,100
+CLIME,300,MAGIC Gamma Telescope,10,0.91847,100
+Logit-LIME,300,MAGIC Gamma Telescope,10,0.99922,100
+Logit-CLIME,300,MAGIC Gamma Telescope,10,0.99939,100
+Soft logistic,300,MAGIC Gamma Telescope,10,0.95966,100
+Soft logistic CLIME,300,MAGIC Gamma Telescope,10,0.95809,100
+LIME,1000,MAGIC Gamma Telescope,10,0.99220,100
+CLIME,1000,MAGIC Gamma Telescope,10,0.93546,100
+Logit-LIME,1000,MAGIC Gamma Telescope,10,0.99990,100
+Logit-CLIME,1000,MAGIC Gamma Telescope,10,0.99994,100
+Soft logistic,1000,MAGIC Gamma Telescope,10,0.98471,100
+Soft logistic CLIME,1000,MAGIC Gamma Telescope,10,0.98607,100
+LIME,3000,MAGIC Gamma Telescope,10,0.99702,100
+CLIME,3000,MAGIC Gamma Telescope,10,0.96860,100
+Logit-LIME,3000,MAGIC Gamma Telescope,10,0.99999,100
+Logit-CLIME,3000,MAGIC Gamma Telescope,10,0.99999,100
+Soft logistic,3000,MAGIC Gamma Telescope,10,0.99337,100
+Soft logistic CLIME,3000,MAGIC Gamma Telescope,10,0.99462,100
+LIME,10000,MAGIC Gamma Telescope,10,0.99904,100
+CLIME,10000,MAGIC Gamma Telescope,10,0.98463,100
+Logit-LIME,10000,MAGIC Gamma Telescope,10,1.00000,100
+Logit-CLIME,10000,MAGIC Gamma Telescope,10,1.00000,100
+Soft logistic,10000,MAGIC Gamma Telescope,10,0.99708,100
+Soft logistic CLIME,10000,MAGIC Gamma Telescope,10,0.99779,100
+LIME,30000,MAGIC Gamma Telescope,10,0.99967,100
+CLIME,30000,MAGIC Gamma Telescope,10,0.99260,100
+Logit-LIME,30000,MAGIC Gamma Telescope,10,1.00000,100
+Logit-CLIME,30000,MAGIC Gamma Telescope,10,1.00000,100
+Soft logistic,30000,MAGIC Gamma Telescope,10,0.99871,100
+Soft logistic CLIME,30000,MAGIC Gamma Telescope,10,0.99895,100
+LIME,100000,MAGIC Gamma Telescope,10,0.99990,100
+CLIME,100000,MAGIC Gamma Telescope,10,0.99867,100
+Logit-LIME,100000,MAGIC Gamma Telescope,10,1.00000,100
+Logit-CLIME,100000,MAGIC Gamma Telescope,10,1.00000,100
+Soft logistic,100000,MAGIC Gamma Telescope,10,0.99964,100
+Soft logistic CLIME,100000,MAGIC Gamma Telescope,10,0.99968,100
+LIME,300,Mammographic Mass,5,0.99430,100
+CLIME,300,Mammographic Mass,5,0.98191,100
+Logit-LIME,300,Mammographic Mass,5,0.99997,100
+Logit-CLIME,300,Mammographic Mass,5,0.99997,100
+Soft logistic,300,Mammographic Mass,5,0.98659,100
+Soft logistic CLIME,300,Mammographic Mass,5,0.98663,100
+LIME,1000,Mammographic Mass,5,0.99824,100
+CLIME,1000,Mammographic Mass,5,0.99444,100
+Logit-LIME,1000,Mammographic Mass,5,1.00000,100
+Logit-CLIME,1000,Mammographic Mass,5,1.00000,100
+Soft logistic,1000,Mammographic Mass,5,0.99516,100
+Soft logistic CLIME,1000,Mammographic Mass,5,0.99604,100
+LIME,3000,Mammographic Mass,5,0.99945,100
+CLIME,3000,Mammographic Mass,5,0.99532,100
+Logit-LIME,3000,Mammographic Mass,5,1.00000,100
+Logit-CLIME,3000,Mammographic Mass,5,1.00000,100
+Soft logistic,3000,Mammographic Mass,5,0.99836,100
+Soft logistic CLIME,3000,Mammographic Mass,5,0.99860,100
+LIME,10000,Mammographic Mass,5,0.99983,100
+CLIME,10000,Mammographic Mass,5,0.99817,100
+Logit-LIME,10000,Mammographic Mass,5,1.00000,100
+Logit-CLIME,10000,Mammographic Mass,5,1.00000,100
+Soft logistic,10000,Mammographic Mass,5,0.99950,100
+Soft logistic CLIME,10000,Mammographic Mass,5,0.99953,100
+LIME,30000,Mammographic Mass,5,0.99995,100
+CLIME,30000,Mammographic Mass,5,0.99932,100
+Logit-LIME,30000,Mammographic Mass,5,1.00000,100
+Logit-CLIME,30000,Mammographic Mass,5,1.00000,100
+Soft logistic,30000,Mammographic Mass,5,0.99988,100
+Soft logistic CLIME,30000,Mammographic Mass,5,0.99988,100
+LIME,100000,Mammographic Mass,5,0.99999,100
+CLIME,100000,Mammographic Mass,5,0.99975,100
+Logit-LIME,100000,Mammographic Mass,5,1.00000,100
+Logit-CLIME,100000,Mammographic Mass,5,1.00000,100
+Soft logistic,100000,Mammographic Mass,5,0.99998,100
+Soft logistic CLIME,100000,Mammographic Mass,5,0.99999,100
+LIME,300,Ozone Level 8hr,72,0.59211,100
+CLIME,300,Ozone Level 8hr,72,0.57566,100
+Logit-LIME,300,Ozone Level 8hr,72,0.98401,100
+Logit-CLIME,300,Ozone Level 8hr,72,0.98535,100
+Soft logistic,300,Ozone Level 8hr,72,0.83483,100
+Soft logistic CLIME,300,Ozone Level 8hr,72,0.85065,100
+LIME,1000,Ozone Level 8hr,72,0.65160,100
+CLIME,1000,Ozone Level 8hr,72,0.63636,100
+Logit-LIME,1000,Ozone Level 8hr,72,0.99224,100
+Logit-CLIME,1000,Ozone Level 8hr,72,0.99286,100
+Soft logistic,1000,Ozone Level 8hr,72,0.92293,100
+Soft logistic CLIME,1000,Ozone Level 8hr,72,0.93573,100
+LIME,3000,Ozone Level 8hr,72,0.69574,100
+CLIME,3000,Ozone Level 8hr,72,0.69031,100
+Logit-LIME,3000,Ozone Level 8hr,72,0.99536,100
+Logit-CLIME,3000,Ozone Level 8hr,72,0.99557,100
+Soft logistic,3000,Ozone Level 8hr,72,0.96002,100
+Soft logistic CLIME,3000,Ozone Level 8hr,72,0.96801,100
+LIME,10000,Ozone Level 8hr,72,0.79110,100
+CLIME,10000,Ozone Level 8hr,72,0.79527,100
+Logit-LIME,10000,Ozone Level 8hr,72,0.99661,100
+Logit-CLIME,10000,Ozone Level 8hr,72,0.99664,100
+Soft logistic,10000,Ozone Level 8hr,72,0.97711,100
+Soft logistic CLIME,10000,Ozone Level 8hr,72,0.98236,100
+LIME,30000,Ozone Level 8hr,72,0.87971,100
+CLIME,30000,Ozone Level 8hr,72,0.87396,100
+Logit-LIME,30000,Ozone Level 8hr,72,0.99869,100
+Logit-CLIME,30000,Ozone Level 8hr,72,0.99676,100
+Soft logistic,30000,Ozone Level 8hr,72,0.98513,100
+Soft logistic CLIME,30000,Ozone Level 8hr,72,0.98736,100
+LIME,100000,Ozone Level 8hr,72,0.94618,100
+CLIME,100000,Ozone Level 8hr,72,0.93446,100
+Logit-LIME,100000,Ozone Level 8hr,72,0.99972,100
+Logit-CLIME,100000,Ozone Level 8hr,72,0.99668,100
+Soft logistic,100000,Ozone Level 8hr,72,0.98947,100
+Soft logistic CLIME,100000,Ozone Level 8hr,72,0.99039,100
+LIME,300,Phoneme,5,0.99897,100
+CLIME,300,Phoneme,5,0.99355,100
+Logit-LIME,300,Phoneme,5,0.99999,100
+Logit-CLIME,300,Phoneme,5,0.99999,100
+Soft logistic,300,Phoneme,5,0.99415,100
+Soft logistic CLIME,300,Phoneme,5,0.99394,100
+LIME,1000,Phoneme,5,0.99973,100
+CLIME,1000,Phoneme,5,0.99449,100
+Logit-LIME,1000,Phoneme,5,1.00000,100
+Logit-CLIME,1000,Phoneme,5,1.00000,100
+Soft logistic,1000,Phoneme,5,0.99886,100
+Soft logistic CLIME,1000,Phoneme,5,0.99887,100
+LIME,3000,Phoneme,5,0.99990,100
+CLIME,3000,Phoneme,5,0.99577,100
+Logit-LIME,3000,Phoneme,5,1.00000,100
+Logit-CLIME,3000,Phoneme,5,1.00000,100
+Soft logistic,3000,Phoneme,5,0.99983,100
+Soft logistic CLIME,3000,Phoneme,5,0.99984,100
+LIME,10000,Phoneme,5,0.99997,100
+CLIME,10000,Phoneme,5,0.99713,100
+Logit-LIME,10000,Phoneme,5,1.00000,100
+Logit-CLIME,10000,Phoneme,5,1.00000,100
+Soft logistic,10000,Phoneme,5,0.99998,100
+Soft logistic CLIME,10000,Phoneme,5,0.99999,100
+LIME,30000,Phoneme,5,0.99999,100
+CLIME,30000,Phoneme,5,0.99791,100
+Logit-LIME,30000,Phoneme,5,1.00000,100
+Logit-CLIME,30000,Phoneme,5,1.00000,100
+Soft logistic,30000,Phoneme,5,1.00000,100
+Soft logistic CLIME,30000,Phoneme,5,1.00000,100
+LIME,100000,Phoneme,5,1.00000,100
+CLIME,100000,Phoneme,5,0.99839,100
+Logit-LIME,100000,Phoneme,5,1.00000,100
+Logit-CLIME,100000,Phoneme,5,1.00000,100
+Soft logistic,100000,Phoneme,5,1.00000,100
+Soft logistic CLIME,100000,Phoneme,5,1.00000,100
+LIME,300,QSAR Biodegradation,41,0.78631,100
+CLIME,300,QSAR Biodegradation,41,0.77431,100
+Logit-LIME,300,QSAR Biodegradation,41,0.99111,100
+Logit-CLIME,300,QSAR Biodegradation,41,0.99305,100
+Soft logistic,300,QSAR Biodegradation,41,0.86659,100
+Soft logistic CLIME,300,QSAR Biodegradation,41,0.88018,100
+LIME,1000,QSAR Biodegradation,41,0.87774,100
+CLIME,1000,QSAR Biodegradation,41,0.86868,100
+Logit-LIME,1000,QSAR Biodegradation,41,0.99858,100
+Logit-CLIME,1000,QSAR Biodegradation,41,0.99896,100
+Soft logistic,1000,QSAR Biodegradation,41,0.93958,100
+Soft logistic CLIME,1000,QSAR Biodegradation,41,0.95333,100
+LIME,3000,QSAR Biodegradation,41,0.93041,100
+CLIME,3000,QSAR Biodegradation,41,0.92401,100
+Logit-LIME,3000,QSAR Biodegradation,41,0.99976,100
+Logit-CLIME,3000,QSAR Biodegradation,41,0.99978,100
+Soft logistic,3000,QSAR Biodegradation,41,0.97208,100
+Soft logistic CLIME,3000,QSAR Biodegradation,41,0.98182,100
+LIME,10000,QSAR Biodegradation,41,0.97113,100
+CLIME,10000,QSAR Biodegradation,41,0.96687,100
+Logit-LIME,10000,QSAR Biodegradation,41,0.99998,100
+Logit-CLIME,10000,QSAR Biodegradation,41,0.99992,100
+Soft logistic,10000,QSAR Biodegradation,41,0.99047,100
+Soft logistic CLIME,10000,QSAR Biodegradation,41,0.99546,100
+LIME,30000,QSAR Biodegradation,41,0.98786,100
+CLIME,30000,QSAR Biodegradation,41,0.98335,100
+Logit-LIME,30000,QSAR Biodegradation,41,1.00000,100
+Logit-CLIME,30000,QSAR Biodegradation,41,0.99998,100
+Soft logistic,30000,QSAR Biodegradation,41,0.99686,100
+Soft logistic CLIME,30000,QSAR Biodegradation,41,0.99923,100
+LIME,100000,QSAR Biodegradation,41,0.99568,100
+CLIME,100000,QSAR Biodegradation,41,0.99332,100
+Logit-LIME,100000,QSAR Biodegradation,41,1.00000,100
+Logit-CLIME,100000,QSAR Biodegradation,41,1.00000,100
+Soft logistic,100000,QSAR Biodegradation,41,0.99909,100
+Soft logistic CLIME,100000,QSAR Biodegradation,41,0.99993,100
+LIME,300,Spambase,57,0.59107,100
+CLIME,300,Spambase,57,0.59539,100
+Logit-LIME,300,Spambase,57,0.87269,100
+Logit-CLIME,300,Spambase,57,0.87590,100
+Soft logistic,300,Spambase,57,0.68291,100
+Soft logistic CLIME,300,Spambase,57,0.69267,100
+LIME,1000,Spambase,57,0.69963,100
+CLIME,1000,Spambase,57,0.70246,100
+Logit-LIME,1000,Spambase,57,0.93799,100
+Logit-CLIME,1000,Spambase,57,0.93971,100
+Soft logistic,1000,Spambase,57,0.80984,100
+Soft logistic CLIME,1000,Spambase,57,0.81826,100
+LIME,3000,Spambase,57,0.77591,100
+CLIME,3000,Spambase,57,0.77696,100
+Logit-LIME,3000,Spambase,57,0.97465,100
+Logit-CLIME,3000,Spambase,57,0.97582,100
+Soft logistic,3000,Spambase,57,0.88362,100
+Soft logistic CLIME,3000,Spambase,57,0.89021,100
+LIME,10000,Spambase,57,0.84232,100
+CLIME,10000,Spambase,57,0.84075,100
+Logit-LIME,10000,Spambase,57,0.99218,100
+Logit-CLIME,10000,Spambase,57,0.99235,100
+Soft logistic,10000,Spambase,57,0.93586,100
+Soft logistic CLIME,10000,Spambase,57,0.94264,100
+LIME,30000,Spambase,57,0.89220,100
+CLIME,30000,Spambase,57,0.88967,100
+Logit-LIME,30000,Spambase,57,0.99658,100
+Logit-CLIME,30000,Spambase,57,0.99718,100
+Soft logistic,30000,Spambase,57,0.96931,100
+Soft logistic CLIME,30000,Spambase,57,0.97401,100
+LIME,100000,Spambase,57,0.93229,100
+CLIME,100000,Spambase,57,0.92743,100
+Logit-LIME,100000,Spambase,57,0.99830,100
+Logit-CLIME,100000,Spambase,57,0.99791,100
+Soft logistic,100000,Spambase,57,0.98643,100
+Soft logistic CLIME,100000,Spambase,57,0.98961,100
+LIME,300,Steel Plates Fault,27,0.89576,100
+CLIME,300,Steel Plates Fault,27,0.86406,100
+Logit-LIME,300,Steel Plates Fault,27,0.98723,100
+Logit-CLIME,300,Steel Plates Fault,27,0.98950,100
+Soft logistic,300,Steel Plates Fault,27,0.87127,100
+Soft logistic CLIME,300,Steel Plates Fault,27,0.89015,100
+LIME,1000,Steel Plates Fault,27,0.93753,100
+CLIME,1000,Steel Plates Fault,27,0.90875,100
+Logit-LIME,1000,Steel Plates Fault,27,0.99633,100
+Logit-CLIME,1000,Steel Plates Fault,27,0.99717,100
+Soft logistic,1000,Steel Plates Fault,27,0.93235,100
+Soft logistic CLIME,1000,Steel Plates Fault,27,0.94512,100
+LIME,3000,Steel Plates Fault,27,0.95684,100
+CLIME,3000,Steel Plates Fault,27,0.92630,100
+Logit-LIME,3000,Steel Plates Fault,27,0.99885,100
+Logit-CLIME,3000,Steel Plates Fault,27,0.99911,100
+Soft logistic,3000,Steel Plates Fault,27,0.96273,100
+Soft logistic CLIME,3000,Steel Plates Fault,27,0.96920,100
+LIME,10000,Steel Plates Fault,27,0.97058,100
+CLIME,10000,Steel Plates Fault,27,0.94984,100
+Logit-LIME,10000,Steel Plates Fault,27,0.99965,100
+Logit-CLIME,10000,Steel Plates Fault,27,0.99973,100
+Soft logistic,10000,Steel Plates Fault,27,0.97994,100
+Soft logistic CLIME,10000,Steel Plates Fault,27,0.98325,100
+LIME,30000,Steel Plates Fault,27,0.97918,100
+CLIME,30000,Steel Plates Fault,27,0.95592,100
+Logit-LIME,30000,Steel Plates Fault,27,0.99989,100
+Logit-CLIME,30000,Steel Plates Fault,27,0.99992,100
+Soft logistic,30000,Steel Plates Fault,27,0.98856,100
+Soft logistic CLIME,30000,Steel Plates Fault,27,0.99003,100
+LIME,100000,Steel Plates Fault,27,0.98216,100
+CLIME,100000,Steel Plates Fault,27,0.94980,100
+Logit-LIME,100000,Steel Plates Fault,27,0.99997,100
+Logit-CLIME,100000,Steel Plates Fault,27,0.99997,100
+Soft logistic,100000,Steel Plates Fault,27,0.99393,100
+Soft logistic CLIME,100000,Steel Plates Fault,27,0.99451,100
+LIME,300,Stroke Prediction,10,0.99458,100
+CLIME,300,Stroke Prediction,10,0.98449,100
+Logit-LIME,300,Stroke Prediction,10,0.99996,100
+Logit-CLIME,300,Stroke Prediction,10,0.99998,100
+Soft logistic,300,Stroke Prediction,10,0.98153,100
+Soft logistic CLIME,300,Stroke Prediction,10,0.98370,100
+LIME,1000,Stroke Prediction,10,0.99837,100
+CLIME,1000,Stroke Prediction,10,0.98591,100
+Logit-LIME,1000,Stroke Prediction,10,1.00000,100
+Logit-CLIME,1000,Stroke Prediction,10,1.00000,100
+Soft logistic,1000,Stroke Prediction,10,0.99555,100
+Soft logistic CLIME,1000,Stroke Prediction,10,0.99560,100
+LIME,3000,Stroke Prediction,10,0.99952,100
+CLIME,3000,Stroke Prediction,10,0.99119,100
+Logit-LIME,3000,Stroke Prediction,10,1.00000,100
+Logit-CLIME,3000,Stroke Prediction,10,1.00000,100
+Soft logistic,3000,Stroke Prediction,10,0.99899,100
+Soft logistic CLIME,3000,Stroke Prediction,10,0.99904,100
+LIME,10000,Stroke Prediction,10,0.99986,100
+CLIME,10000,Stroke Prediction,10,0.99452,100
+Logit-LIME,10000,Stroke Prediction,10,1.00000,100
+Logit-CLIME,10000,Stroke Prediction,10,1.00000,100
+Soft logistic,10000,Stroke Prediction,10,0.99987,100
+Soft logistic CLIME,10000,Stroke Prediction,10,0.99989,100
+LIME,30000,Stroke Prediction,10,0.99995,100
+CLIME,30000,Stroke Prediction,10,0.99627,100
+Logit-LIME,30000,Stroke Prediction,10,1.00000,100
+Logit-CLIME,30000,Stroke Prediction,10,1.00000,100
+Soft logistic,30000,Stroke Prediction,10,0.99998,100
+Soft logistic CLIME,30000,Stroke Prediction,10,0.99999,100
+LIME,100000,Stroke Prediction,10,0.99999,100
+CLIME,100000,Stroke Prediction,10,0.99921,100
+Logit-LIME,100000,Stroke Prediction,10,1.00000,100
+Logit-CLIME,100000,Stroke Prediction,10,1.00000,100
+Soft logistic,100000,Stroke Prediction,10,1.00000,100
+Soft logistic CLIME,100000,Stroke Prediction,10,1.00000,100
+LIME,300,Thyroid Sick,28,0.91161,100
+CLIME,300,Thyroid Sick,28,0.88452,100
+Logit-LIME,300,Thyroid Sick,28,0.99936,100
+Logit-CLIME,300,Thyroid Sick,28,0.99952,100
+Soft logistic,300,Thyroid Sick,28,0.93616,100
+Soft logistic CLIME,300,Thyroid Sick,28,0.93747,100
+LIME,1000,Thyroid Sick,28,0.94524,100
+CLIME,1000,Thyroid Sick,28,0.91651,100
+Logit-LIME,1000,Thyroid Sick,28,0.99991,100
+Logit-CLIME,1000,Thyroid Sick,28,0.99994,100
+Soft logistic,1000,Thyroid Sick,28,0.97403,100
+Soft logistic CLIME,1000,Thyroid Sick,28,0.97519,100
+LIME,3000,Thyroid Sick,28,0.95971,100
+CLIME,3000,Thyroid Sick,28,0.94131,100
+Logit-LIME,3000,Thyroid Sick,28,0.99996,100
+Logit-CLIME,3000,Thyroid Sick,28,0.99997,100
+Soft logistic,3000,Thyroid Sick,28,0.98887,100
+Soft logistic CLIME,3000,Thyroid Sick,28,0.99041,100
+LIME,10000,Thyroid Sick,28,0.98145,100
+CLIME,10000,Thyroid Sick,28,0.96557,100
+Logit-LIME,10000,Thyroid Sick,28,0.99999,100
+Logit-CLIME,10000,Thyroid Sick,28,0.99999,100
+Soft logistic,10000,Thyroid Sick,28,0.99547,100
+Soft logistic CLIME,10000,Thyroid Sick,28,0.99645,100
+LIME,30000,Thyroid Sick,28,0.98921,100
+CLIME,30000,Thyroid Sick,28,0.97207,100
+Logit-LIME,30000,Thyroid Sick,28,1.00000,100
+Logit-CLIME,30000,Thyroid Sick,28,0.99976,100
+Soft logistic,30000,Thyroid Sick,28,0.99747,100
+Soft logistic CLIME,30000,Thyroid Sick,28,0.99771,100
+LIME,100000,Thyroid Sick,28,0.99852,100
+CLIME,100000,Thyroid Sick,28,0.99276,100
+Logit-LIME,100000,Thyroid Sick,28,1.00000,100
+Logit-CLIME,100000,Thyroid Sick,28,0.99994,100
+Soft logistic,100000,Thyroid Sick,28,0.99905,100
+Soft logistic CLIME,100000,Thyroid Sick,28,0.99916,100
