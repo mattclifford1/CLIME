@@ -490,6 +490,104 @@ def logistic_samples():
         macro([*base, 'close'], r.close, '{:.0f}')
 
 
+IMAGE_RATIOS = {1: ('4000:4000', 'balanced'), 10: ('5000:500', 'ten'), 100: ('5000:50', 'hundred')}
+IMAGE_SCORES = {'fidelity': 'fid', 'balanced': 'bal', 'auc': 'auc', 'skill': 'skill',
+                'skill_balanced': 'skillbal', 'stability_cosine': 'stable',
+                'converged_cosine': 'converged', 'truth_leave_one_out_cosine': 'loo',
+                'truth_shapley_cosine': 'shapley', 'exact_leave_one_out_cosine': 'exactloo',
+                'exact_shapley_cosine': 'exactshapley'}
+IMAGE_TRUTHS = {'leave one out': 'leave-one-out effects', 'Shapley': 'Shapley values'}
+IMAGE_ARMS = {'prior shift': 'prior shift', 're-thresholded': 're-thresholded (validation)',
+              'CP Minimax': 'deltas (CP Minimax)', 'weighted': 'class weighted',
+              'logit adjusted': 'logit-adjusted loss'}
+
+
+def images():
+    frame = read('images_triad')
+    for _, r in frame.iterrows():
+        base = ['img', r.network, IMAGE_RATIOS[r.ratio][1], r.arm, r.explainer]
+        for column, tag in IMAGE_SCORES.items():
+            macro([*base, tag], r[column])
+    plain = frame[(frame.network == 'scratch') & (frame.arm == 'plain')]
+    rows = []
+    for ratio, (label, _) in IMAGE_RATIOS.items():
+        for explainer, name in SIX.items():
+            r = plain[(plain.ratio == ratio) & (plain.explainer == explainer)]
+            if r.empty:
+                continue
+            rows.append([label if explainer == 'LIME' else '', name]
+                        + [f'{r.iloc[0][c]:.2f}' for c in (
+                            'fidelity', 'balanced', 'auc', 'skill', 'skill_balanced',
+                            'stability_cosine', 'converged_cosine', 'truth_leave_one_out_cosine',
+                            'truth_shapley_cosine')])
+        if rows and rows[-1]:
+            rows.append([])
+    write('images', table(
+        ['', '', 'Fid.', 'Bal.\\ fid.', 'AUC', 'Skill', 'Bal.\\ skill', 'Stability', 'exact fit',
+         'leave one out', 'Shapley'], rows, 'llrrrrrrrrr',
+        [('agreement with the black box', 3, 7), ('cosine with', 9, 11)]))
+
+
+def images_paired():
+    frame = read('images_paired')
+    for _, r in frame[frame.metric.isin(list(IMAGE_SCORES))].iterrows():
+        base = ['imp', r.network, IMAGE_RATIOS[r.ratio][1], r.arm, r.explainer, IMAGE_SCORES[r.metric]]
+        macro(base, r['diff'], '{:+.3f}')
+        macro([*base, 'ci'], r.ci, '{:.3f}')
+        for column in ('wins', 'losses', 'datasets'):
+            macro([*base, column], r[column], '{:.0f}')
+
+
+def images_samples():
+    counts = {100: 'hundred', 300: 'three hundred', 1000: 'thousand', 3000: 'three thousand',
+              10000: 'ten thousand'}
+    for _, r in read('images_samples').iterrows():
+        base = ['ims', r.network, IMAGE_RATIOS[r.ratio][1], r.arm, r.explainer, counts[r.samples]]
+        macro(base, r.cosine, '{:.3f}')
+        macro([*base, 'close'], pct(r.close), '{:.0f}')
+
+
+def images_moves():
+    frame = read('images_moves')
+    for _, r in frame.iterrows():
+        base = ['imm', r.network, IMAGE_RATIOS[r.ratio][1], r.arm, r.neighbourhood, r.explainer, r.fit]
+        macro([*base, 'cos'], r.median_cosine, '{:.3f}')
+        macro([*base, 'norm'], r.median_norm_ratio, '{:.2f}')
+        macro([*base, 'changed'], pct(1 - r.same_top), '{:.0f}')
+        macro([*base, 'same'], pct(r.unchanged), '{:.0f}')
+    shown = frame[(frame.network == 'scratch') & (frame.ratio == 100) & (frame.neighbourhood == 'all')
+                  & frame.fit.isin(['sample', 'truth'])]
+    rows = []
+    for arm, label in IMAGE_ARMS.items():
+        for explainer, name in {**SIX, **IMAGE_TRUTHS}.items():
+            r = shown[(shown.arm == arm) & (shown.explainer == explainer)]
+            if r.empty:
+                continue
+            r = r.iloc[0]
+            rows.append([label if explainer == 'LIME' else '', name, f'{r.median_cosine:.3f}',
+                         f'{r.median_norm_ratio:.2f}', f'{100*r.same_top:.0f}\\%',
+                         f'{100*r.unchanged:.0f}\\%'])
+        if rows and rows[-1]:
+            rows.append([])
+    write('images_moves', table(['Black box', 'Explanation', 'Cosine', 'Norm ratio', 'Same top patch',
+                                 'Unchanged'], rows, 'llrrrr'))
+
+
+def images_models():
+    for _, r in read('images_models').iterrows():
+        base = ['imo', r.network, IMAGE_RATIOS[r.ratio][1], r.arm]
+        macro([*base, 'balacc'], r.balanced_accuracy)
+        macro([*base, 'recall'], r.recall_minority)
+        macro([*base, 'positive'], pct(r.positive_rate), '{:.1f}')
+        macro([*base, 'shift'], r['shift'])
+    for _, r in read('images_neighbourhoods').iterrows():
+        base = ['imn', r.network, IMAGE_RATIOS[r.ratio][1], r.arm, r.label]
+        macro([*base, 'onesided'], pct(r.one_sided), '{:.0f}')
+    run = read('images_run').iloc[0]
+    for column in run.index:
+        macro(['img', 'run', column], run[column], '{:.0f}')
+
+
 def explanations_instruments():
     frame = read('explanations_instruments')
     frame = frame[(frame.family == 'smooth') & frame.explainer.isin(['all', 'LIME and CLIME'])]
@@ -536,6 +634,7 @@ if __name__ == '__main__':
                  failures, outliers, reproduce, explanations, explanations_paired,
                  explanations_moves, explanations_spread, explanations_instruments,
                  explanations_cuts, logistic_check, logistic_samples,
+                 images, images_paired, images_samples, images_moves, images_models,
                  explanations_run):
         try:
             make()

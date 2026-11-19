@@ -79,6 +79,8 @@ def moves(coefs, queries):
         columns={'minority_weighted': 'before'})
     key = [*IMAGE, 'explainer', 'fit']
     frame = coefs[coefs.arm != PLAIN].merge(plain[[*key, 'coef']], on=key, suffixes=('', '_plain'))
+    if frame.empty:
+        return pd.DataFrame()
     found = pd.DataFrame([scores.explanation_agreement(np.asarray(a), np.asarray(b))
                           for a, b in zip(frame.coef_plain, frame.coef)], index=frame.index)
     frame = pd.concat([frame.drop(columns=['coef', 'coef_plain']), found], axis=1).merge(before, on=IMAGE)
@@ -102,7 +104,9 @@ if __name__ == '__main__':
     save(triad(full), 'images_triad')
     save(paired(full), 'images_paired')
     save(samples(runner.load(RUN, 'samples')), 'images_samples')
-    save(moves(runner.load(RUN, 'coefs'), queries), 'images_moves')
+    moved = moves(runner.load(RUN, 'coefs'), queries)
+    if not moved.empty:
+        save(moved, 'images_moves')
     save(pd.DataFrame([{'networks': len(models.drop_duplicates([*SETTING, 'dataset', 'seed', 'trained'])),
                         'images': len(queries.drop_duplicates([*IMAGE, 'trained'])),
                         'seeds': queries.seed.nunique(), 'classes': queries.dataset.nunique()}]),

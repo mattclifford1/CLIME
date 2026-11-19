@@ -626,10 +626,95 @@ def samples():
     style.save(fig, 'samples')
 
 
+IMAGE_RATIOS = {1: '4000:4000', 10: '5000:500', 100: '5000:50'}
+
+
+def images_truth():
+    """cosine of each surrogate's patch coefficients with the two truths, ResNet-20 as trained"""
+    frame = read('images_triad')
+    frame = frame[(frame.network == 'scratch') & (frame.arm == 'plain')]
+    ratios = [r for r in IMAGE_RATIOS if r in set(frame.ratio)]
+    panels = [('truth_leave_one_out_cosine', 'leave-one-out effect of each patch'),
+              ('truth_shapley_cosine', 'Shapley value of each patch')]
+    fig, axes = plt.subplots(1, 2, figsize=(TEXTWIDTH*0.85, TEXTWIDTH*0.3), sharey=True)
+    width = 0.8/len(SIX)
+    for ax, (column, label) in zip(axes, panels):
+        for i, explainer in enumerate(SIX):
+            part = frame[frame.explainer == explainer].set_index('ratio')
+            ax.bar(np.arange(len(ratios)) + (i - (len(SIX) - 1)/2)*width,
+                   [part[column].get(r, np.nan) for r in ratios], width,
+                   color=EXPLAINER_COLOURS[explainer], label=EXPLAINER_LABELS[explainer])
+        ax.set_xticks(np.arange(len(ratios)))
+        ax.set_xticklabels([IMAGE_RATIOS[r] for r in ratios], fontsize=6.5)
+        ax.set_title(label, fontsize=7.5)
+        ax.grid(axis='x', visible=False)
+    axes[0].set_ylabel('cosine with the truth')
+    handles, labels = axes[0].get_legend_handles_labels()
+    fig.legend(handles, labels, ncol=3, loc='lower center', bbox_to_anchor=(0.5, -0.3))
+    style.save(fig, 'images_truth')
+
+
+def images_samples():
+    """cosine between a fit on n masks and the surrogate's exact fit on all 65,536"""
+    frame = read('images_samples')
+    frame = frame[(frame.network == 'scratch') & (frame.arm == 'plain')]
+    ratios = [r for r in IMAGE_RATIOS if r in set(frame.ratio)]
+    fig, axes = plt.subplots(1, len(ratios), figsize=(TEXTWIDTH, TEXTWIDTH*0.3), sharey=True,
+                             squeeze=False)
+    for ax, ratio in zip(axes[0], ratios):
+        for explainer in SIX:
+            part = frame[(frame.ratio == ratio) & (frame.explainer == explainer)].sort_values('samples')
+            ax.plot(part.samples, part.cosine, color=EXPLAINER_COLOURS[explainer],
+                    marker=EXPLAINER_MARKERS[explainer], ms=3, label=EXPLAINER_LABELS[explainer])
+        ax.axvline(1000, color=MUTED, lw=0.8, ls=':')
+        ax.set(xscale='log', xlabel='masks sampled')
+        ax.set_title(IMAGE_RATIOS[ratio], fontsize=7.5)
+    axes[0, 0].set_ylabel('cosine with the\nsurrogate\'s exact fit')
+    handles, labels = axes[0, 0].get_legend_handles_labels()
+    fig.legend(handles, labels, ncol=3, loc='lower center', bbox_to_anchor=(0.5, -0.38))
+    style.save(fig, 'images_samples')
+
+
+def images_moves():
+    """how far each patch explanation, and each truth, moves when the network is corrected, at 5000:50"""
+    frame = read('images_moves')
+    frame = frame[(frame.network == 'scratch') & (frame.ratio == 100) & (frame.neighbourhood == 'all')
+                  & frame.fit.isin(['sample', 'truth'])]
+    frame = frame.assign(top_changed=100*(1 - frame.same_top))
+    arms = {'prior shift': 'threshold\nmoved', 'weighted': 'class\nweighted',
+            'logit adjusted': 'logit-adjusted\nloss'}
+    shown = [a for a in arms if a in set(frame.arm)]
+    truths = {'leave one out': (INK2, 'leave-one-out effects'), 'Shapley': (MUTED, 'Shapley values')}
+    panels = [('top_changed', 'query images whose\ntop patch changes (%)'),
+              ('median_norm_ratio', 'size of the coefficients\n(ratio to the plain network)'),
+              ('median_cosine', 'cosine with the\nplain network\'s')]
+    names = [*SIX, *truths]
+    fig, axes = plt.subplots(1, 3, figsize=(TEXTWIDTH, TEXTWIDTH*0.32))
+    width = 0.8/len(names)
+    for ax, (column, label) in zip(axes, panels):
+        for i, explainer in enumerate(names):
+            part = frame[frame.explainer == explainer].set_index('arm')
+            colour, name = truths.get(explainer, (EXPLAINER_COLOURS.get(explainer),
+                                                  EXPLAINER_LABELS.get(explainer)))
+            ax.bar(np.arange(len(shown)) + (i - (len(names) - 1)/2)*width,
+                   [part[column].get(arm, np.nan) for arm in shown], width, color=colour, label=name)
+        ax.set_xticks(np.arange(len(shown)))
+        ax.set_xticklabels([arms[a] for a in shown], fontsize=6.5)
+        ax.set_title(label, fontsize=7.5)
+        ax.grid(axis='x', visible=False)
+        if column == 'median_norm_ratio':
+            ax.axhline(1, **style.ZERO_LINE)
+            ax.set_yscale('log')
+    handles, labels = axes[0].get_legend_handles_labels()
+    fig.legend(handles, labels, ncol=4, loc='lower center', bbox_to_anchor=(0.5, -0.25))
+    fig.subplots_adjust(wspace=0.3)
+    style.save(fig, 'images_moves')
+
+
 FIGURES = {f.__name__: f for f in (reproduce, replication, profile, triad, one_sided, arms,
                                    families, grid, operating_point, by_class, sweep, kernel,
                                    matched, cuts, truth, moves, losses, instruments,
-                                   samples)}
+                                   samples, images_truth, images_samples, images_moves)}
 
 if __name__ == '__main__':
     style.use()
