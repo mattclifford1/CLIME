@@ -129,7 +129,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
     for ratio in args.ratios:
         for arm in args.arms:
-            if ratio == 1 and arm != 'plain':
+            if ratio == 1 and ARMS[arm] != 'imbalanced':
                 continue
             for positive in args.classes:
                 for seed in range(args.seeds):

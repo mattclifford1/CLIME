@@ -374,6 +374,131 @@ scratch,10,plain,brier_balanced_constant,Logit-CLIME,0.14121,0.14121,0.00000,0.0
 scratch,10,plain,brier_balanced_constant,Logit-LIME,0.14121,0.14121,0.00000,0.00000,1.00000,20,10,0,10,0
 scratch,10,plain,brier_balanced_constant,Soft logistic,0.14121,0.14121,0.00000,0.00000,1.00000,20,10,0,10,0
 scratch,10,plain,brier_balanced_constant,Soft logistic CLIME,0.14121,0.14121,0.00000,0.00000,1.00000,20,10,0,10,0
+scratch,10,reseeded,coef_norm,CLIME,0.32631,0.22740,0.09891,0.01194,0.00000,20,10,10,0,0
+scratch,10,reseeded,coef_norm,Logit-CLIME,4.30538,0.22740,4.07798,0.41580,0.00000,20,10,10,0,0
+scratch,10,reseeded,coef_norm,Logit-LIME,3.83010,0.22740,3.60270,0.35438,0.00000,20,10,10,0,0
+scratch,10,reseeded,coef_norm,Soft logistic,1.89484,0.22740,1.66744,0.15013,0.00000,20,10,10,0,0
+scratch,10,reseeded,coef_norm,Soft logistic CLIME,2.37864,0.22740,2.15124,0.20427,0.00000,20,10,10,0,0
+scratch,10,reseeded,fidelity,CLIME,0.94317,0.94935,-0.00617,0.00210,0.00005,20,10,0,3,7
+scratch,10,reseeded,fidelity,Logit-CLIME,0.94930,0.94935,-0.00005,0.00125,0.86949,20,10,0,10,0
+scratch,10,reseeded,fidelity,Logit-LIME,0.94984,0.94935,0.00049,0.00069,0.29425,20,10,0,10,0
+scratch,10,reseeded,fidelity,Soft logistic,0.95334,0.94935,0.00399,0.00085,0.00000,20,10,2,8,0
+scratch,10,reseeded,fidelity,Soft logistic CLIME,0.94914,0.94935,-0.00020,0.00157,0.78413,20,10,0,10,0
+scratch,10,reseeded,fidelity_0,CLIME,0.93140,0.91958,0.01181,0.02076,0.52167,20,10,4,2,4
+scratch,10,reseeded,fidelity_0,Logit-CLIME,0.93564,0.91958,0.01606,0.01605,0.06958,20,10,6,0,4
+scratch,10,reseeded,fidelity_0,Logit-LIME,0.92792,0.91958,0.00834,0.00568,0.02148,20,10,4,6,0
+scratch,10,reseeded,fidelity_0,Soft logistic,0.92785,0.91958,0.00827,0.00447,0.00021,20,10,5,5,0
+scratch,10,reseeded,fidelity_0,Soft logistic CLIME,0.93651,0.91958,0.01693,0.01876,0.12309,20,10,5,1,4
+scratch,10,reseeded,fidelity_1,CLIME,0.74915,0.45092,0.29823,0.03929,0.00000,20,10,10,0,0
+scratch,10,reseeded,fidelity_1,Logit-CLIME,0.68578,0.45092,0.23485,0.02999,0.00000,20,10,10,0,0
+scratch,10,reseeded,fidelity_1,Logit-LIME,0.49580,0.45092,0.04487,0.01422,0.00001,20,10,10,0,0
+scratch,10,reseeded,fidelity_1,Soft logistic,0.49969,0.45092,0.04877,0.01257,0.00000,20,10,10,0,0
+scratch,10,reseeded,fidelity_1,Soft logistic CLIME,0.73200,0.45092,0.28108,0.03473,0.00000,20,10,10,0,0
+scratch,10,reseeded,balanced,CLIME,0.82065,0.66498,0.15567,0.01159,0.00000,20,10,10,0,0
+scratch,10,reseeded,balanced,Logit-CLIME,0.79333,0.66498,0.12835,0.00876,0.00000,20,10,10,0,0
+scratch,10,reseeded,balanced,Logit-LIME,0.69352,0.66498,0.02854,0.00681,0.00000,20,10,10,0,0
+scratch,10,reseeded,balanced,Soft logistic,0.69542,0.66498,0.03044,0.00552,0.00000,20,10,10,0,0
+scratch,10,reseeded,balanced,Soft logistic CLIME,0.81665,0.66498,0.15167,0.01133,0.00000,20,10,10,0,0
+scratch,10,reseeded,auc,CLIME,0.95520,0.95639,-0.00119,0.00076,0.00365,20,10,0,10,0
+scratch,10,reseeded,auc,Logit-CLIME,0.95385,0.95639,-0.00254,0.00096,0.00001,20,10,0,9,1
+scratch,10,reseeded,auc,Logit-LIME,0.94600,0.95639,-0.01039,0.00211,0.00000,20,10,0,0,10
+scratch,10,reseeded,auc,Soft logistic,0.95713,0.95639,0.00075,0.00020,0.00001,20,10,0,10,0
+scratch,10,reseeded,auc,Soft logistic CLIME,0.95649,0.95639,0.00010,0.00053,0.52167,20,10,0,10,0
+scratch,10,reseeded,brier,CLIME,0.02438,0.01761,0.00677,0.00109,0.00000,20,10,0,2,8
+scratch,10,reseeded,brier,Logit-CLIME,0.01586,0.01761,-0.00176,0.00074,0.00021,20,10,0,10,0
+scratch,10,reseeded,brier,Logit-LIME,0.01617,0.01761,-0.00144,0.00056,0.00005,20,10,0,10,0
+scratch,10,reseeded,brier,Soft logistic,0.01424,0.01761,-0.00338,0.00064,0.00000,20,10,2,8,0
+scratch,10,reseeded,brier,Soft logistic CLIME,0.01669,0.01761,-0.00092,0.00062,0.01531,20,10,0,10,0
+scratch,10,reseeded,brier_balanced,CLIME,0.04633,0.08994,-0.04362,0.00637,0.00000,20,10,10,0,0
+scratch,10,reseeded,brier_balanced,Logit-CLIME,0.04902,0.08994,-0.04093,0.00555,0.00000,20,10,10,0,0
+scratch,10,reseeded,brier_balanced,Logit-LIME,0.09365,0.08994,0.00371,0.00333,0.06958,20,10,0,5,5
+scratch,10,reseeded,brier_balanced,Soft logistic,0.07815,0.08994,-0.01179,0.00168,0.00000,20,10,10,0,0
+scratch,10,reseeded,brier_balanced,Soft logistic CLIME,0.04283,0.08994,-0.04711,0.00637,0.00000,20,10,10,0,0
+scratch,10,reseeded,kl,CLIME,0.08906,0.06636,0.02270,0.00311,0.00000,20,10,0,0,10
+scratch,10,reseeded,kl,Logit-CLIME,0.05021,0.06636,-0.01615,0.00251,0.00000,20,10,10,0,0
+scratch,10,reseeded,kl,Logit-LIME,0.05338,0.06636,-0.01298,0.00259,0.00000,20,10,10,0,0
+scratch,10,reseeded,kl,Soft logistic,0.04625,0.06636,-0.02011,0.00187,0.00000,20,10,10,0,0
+scratch,10,reseeded,kl,Soft logistic CLIME,0.05344,0.06636,-0.01292,0.00203,0.00000,20,10,10,0,0
+scratch,10,reseeded,kl_balanced,CLIME,0.17182,0.29163,-0.11980,0.02200,0.00000,20,10,10,0,0
+scratch,10,reseeded,kl_balanced,Logit-CLIME,0.17734,0.29163,-0.11428,0.01816,0.00000,20,10,10,0,0
+scratch,10,reseeded,kl_balanced,Logit-LIME,0.36090,0.29163,0.06927,0.03133,0.00010,20,10,0,0,10
+scratch,10,reseeded,kl_balanced,Soft logistic,0.27131,0.29163,-0.02032,0.01014,0.00143,20,10,8,1,1
+scratch,10,reseeded,kl_balanced,Soft logistic CLIME,0.16103,0.29163,-0.13059,0.02048,0.00000,20,10,10,0,0
+scratch,10,reseeded,stability_cosine,CLIME,0.95066,0.96925,-0.01858,0.00515,0.00000,20,10,0,2,8
+scratch,10,reseeded,stability_cosine,Logit-CLIME,0.98249,0.96925,0.01325,0.00229,0.00000,20,10,10,0,0
+scratch,10,reseeded,stability_cosine,Logit-LIME,0.99085,0.96925,0.02160,0.00316,0.00000,20,10,10,0,0
+scratch,10,reseeded,stability_cosine,Soft logistic,0.96864,0.96925,-0.00061,0.00083,0.11399,20,10,0,10,0
+scratch,10,reseeded,stability_cosine,Soft logistic CLIME,0.95405,0.96925,-0.01520,0.00381,0.00000,20,10,0,1,9
+scratch,10,reseeded,stability_same_top,CLIME,0.79833,0.85000,-0.05167,0.02902,0.00521,20,10,1,0,9
+scratch,10,reseeded,stability_same_top,Logit-CLIME,0.89000,0.85000,0.04000,0.03954,0.06329,20,10,7,1,2
+scratch,10,reseeded,stability_same_top,Logit-LIME,0.91500,0.85000,0.06500,0.03776,0.00770,20,10,8,2,0
+scratch,10,reseeded,stability_same_top,Soft logistic,0.86500,0.85000,0.01500,0.03835,0.35833,20,10,6,1,3
+scratch,10,reseeded,stability_same_top,Soft logistic CLIME,0.82667,0.85000,-0.02333,0.03795,0.18011,20,10,2,0,8
+scratch,10,reseeded,converged_cosine,CLIME,0.97042,0.98465,-0.01423,0.00365,0.00000,20,10,0,2,8
+scratch,10,reseeded,converged_cosine,Logit-CLIME,0.98812,0.98465,0.00347,0.00161,0.00048,20,10,3,7,0
+scratch,10,reseeded,converged_cosine,Logit-LIME,0.99546,0.98465,0.01081,0.00159,0.00000,20,10,10,0,0
+scratch,10,reseeded,converged_cosine,Soft logistic,0.98299,0.98465,-0.00165,0.00052,0.00003,20,10,0,10,0
+scratch,10,reseeded,converged_cosine,Soft logistic CLIME,0.97006,0.98465,-0.01459,0.00352,0.00000,20,10,0,2,8
+scratch,10,reseeded,converged_same_top,CLIME,0.85667,0.88500,-0.02833,0.01970,0.01378,20,10,2,1,7
+scratch,10,reseeded,converged_same_top,Logit-CLIME,0.92167,0.88500,0.03667,0.03140,0.03977,20,10,8,0,2
+scratch,10,reseeded,converged_same_top,Logit-LIME,0.94000,0.88500,0.05500,0.03556,0.00979,20,10,7,1,2
+scratch,10,reseeded,converged_same_top,Soft logistic,0.87667,0.88500,-0.00833,0.02634,0.71083,20,10,4,1,5
+scratch,10,reseeded,converged_same_top,Soft logistic CLIME,0.86167,0.88500,-0.02333,0.02887,0.19283,20,10,3,1,6
+scratch,10,reseeded,truth_leave_one_out_cosine,CLIME,0.69255,0.71078,-0.01824,0.00450,0.00001,20,10,0,1,9
+scratch,10,reseeded,truth_leave_one_out_cosine,Logit-CLIME,0.75857,0.71078,0.04778,0.00849,0.00000,20,10,10,0,0
+scratch,10,reseeded,truth_leave_one_out_cosine,Logit-LIME,0.76926,0.71078,0.05847,0.01222,0.00000,20,10,10,0,0
+scratch,10,reseeded,truth_leave_one_out_cosine,Soft logistic,0.71255,0.71078,0.00176,0.00116,0.01069,20,10,0,10,0
+scratch,10,reseeded,truth_leave_one_out_cosine,Soft logistic CLIME,0.69791,0.71078,-0.01287,0.00424,0.00008,20,10,0,2,8
+scratch,10,reseeded,truth_leave_one_out_same_top,CLIME,0.46500,0.48000,-0.01500,0.01534,0.03063,20,10,2,1,7
+scratch,10,reseeded,truth_leave_one_out_same_top,Logit-CLIME,0.48833,0.48000,0.00833,0.02217,0.48254,20,10,6,1,3
+scratch,10,reseeded,truth_leave_one_out_same_top,Logit-LIME,0.49000,0.48000,0.01000,0.02375,0.44148,20,10,5,3,2
+scratch,10,reseeded,truth_leave_one_out_same_top,Soft logistic,0.48833,0.48000,0.00833,0.01633,0.48514,20,10,5,1,4
+scratch,10,reseeded,truth_leave_one_out_same_top,Soft logistic CLIME,0.48333,0.48000,0.00333,0.01949,0.74829,20,10,4,2,4
+scratch,10,reseeded,exact_leave_one_out_cosine,CLIME,0.69786,0.71939,-0.02153,0.00599,0.00001,20,10,0,1,9
+scratch,10,reseeded,exact_leave_one_out_cosine,Logit-CLIME,0.75729,0.71939,0.03790,0.00816,0.00000,20,10,10,0,0
+scratch,10,reseeded,exact_leave_one_out_cosine,Logit-LIME,0.77159,0.71939,0.05220,0.01288,0.00000,20,10,9,1,0
+scratch,10,reseeded,exact_leave_one_out_cosine,Soft logistic,0.72237,0.71939,0.00298,0.00145,0.00085,20,10,3,7,0
+scratch,10,reseeded,exact_leave_one_out_cosine,Soft logistic CLIME,0.70741,0.71939,-0.01198,0.00410,0.00004,20,10,0,1,9
+scratch,10,reseeded,exact_leave_one_out_same_top,CLIME,0.46000,0.48667,-0.02667,0.01218,0.00290,20,10,0,2,8
+scratch,10,reseeded,exact_leave_one_out_same_top,Logit-CLIME,0.49667,0.48667,0.01000,0.02016,0.31944,20,10,5,0,5
+scratch,10,reseeded,exact_leave_one_out_same_top,Logit-LIME,0.49167,0.48667,0.00500,0.02134,0.61933,20,10,6,1,3
+scratch,10,reseeded,exact_leave_one_out_same_top,Soft logistic,0.48167,0.48667,-0.00500,0.01278,0.41696,20,10,1,6,3
+scratch,10,reseeded,exact_leave_one_out_same_top,Soft logistic CLIME,0.46000,0.48667,-0.02667,0.01988,0.01858,20,10,1,2,7
+scratch,10,reseeded,truth_shapley_cosine,CLIME,0.90635,0.92730,-0.02096,0.00428,0.00000,20,10,0,0,10
+scratch,10,reseeded,truth_shapley_cosine,Logit-CLIME,0.96290,0.92730,0.03560,0.00450,0.00000,20,10,10,0,0
+scratch,10,reseeded,truth_shapley_cosine,Logit-LIME,0.97250,0.92730,0.04519,0.00670,0.00000,20,10,10,0,0
+scratch,10,reseeded,truth_shapley_cosine,Soft logistic,0.92774,0.92730,0.00043,0.00081,0.38838,20,10,0,10,0
+scratch,10,reseeded,truth_shapley_cosine,Soft logistic CLIME,0.91195,0.92730,-0.01535,0.00325,0.00000,20,10,0,0,10
+scratch,10,reseeded,truth_shapley_same_top,CLIME,0.71667,0.75833,-0.04167,0.02113,0.00274,20,10,1,2,7
+scratch,10,reseeded,truth_shapley_same_top,Logit-CLIME,0.81667,0.75833,0.05833,0.02502,0.00174,20,10,9,0,1
+scratch,10,reseeded,truth_shapley_same_top,Logit-LIME,0.83500,0.75833,0.07667,0.02421,0.00028,20,10,10,0,0
+scratch,10,reseeded,truth_shapley_same_top,Soft logistic,0.75500,0.75833,-0.00333,0.01949,0.72408,20,10,4,0,6
+scratch,10,reseeded,truth_shapley_same_top,Soft logistic CLIME,0.72167,0.75833,-0.03667,0.02719,0.01512,20,10,1,4,5
+scratch,10,reseeded,exact_shapley_cosine,CLIME,0.91795,0.94051,-0.02256,0.00370,0.00000,20,10,0,0,10
+scratch,10,reseeded,exact_shapley_cosine,Logit-CLIME,0.96638,0.94051,0.02587,0.00360,0.00000,20,10,10,0,0
+scratch,10,reseeded,exact_shapley_cosine,Logit-LIME,0.97654,0.94051,0.03603,0.00553,0.00000,20,10,10,0,0
+scratch,10,reseeded,exact_shapley_cosine,Soft logistic,0.94427,0.94051,0.00376,0.00090,0.00000,20,10,2,8,0
+scratch,10,reseeded,exact_shapley_cosine,Soft logistic CLIME,0.93034,0.94051,-0.01017,0.00228,0.00000,20,10,0,2,8
+scratch,10,reseeded,exact_shapley_same_top,CLIME,0.74500,0.79000,-0.04500,0.01852,0.00133,20,10,0,0,10
+scratch,10,reseeded,exact_shapley_same_top,Logit-CLIME,0.83667,0.79000,0.04667,0.03123,0.01236,20,10,8,2,0
+scratch,10,reseeded,exact_shapley_same_top,Logit-LIME,0.85167,0.79000,0.06167,0.03189,0.00106,20,10,10,0,0
+scratch,10,reseeded,exact_shapley_same_top,Soft logistic,0.79167,0.79000,0.00167,0.01380,0.52173,20,10,3,5,2
+scratch,10,reseeded,exact_shapley_same_top,Soft logistic CLIME,0.76833,0.79000,-0.02167,0.01912,0.08330,20,10,1,1,8
+scratch,10,reseeded,minority_weighted,CLIME,0.10924,0.10924,0.00000,0.00000,1.00000,20,10,0,10,0
+scratch,10,reseeded,minority_weighted,Logit-CLIME,0.10924,0.10924,0.00000,0.00000,1.00000,20,10,0,10,0
+scratch,10,reseeded,minority_weighted,Logit-LIME,0.10924,0.10924,0.00000,0.00000,1.00000,20,10,0,10,0
+scratch,10,reseeded,minority_weighted,Soft logistic,0.10924,0.10924,0.00000,0.00000,1.00000,20,10,0,10,0
+scratch,10,reseeded,minority_weighted,Soft logistic CLIME,0.10924,0.10924,0.00000,0.00000,1.00000,20,10,0,10,0
+scratch,10,reseeded,brier_constant,CLIME,0.04641,0.04641,0.00000,0.00000,1.00000,20,10,0,10,0
+scratch,10,reseeded,brier_constant,Logit-CLIME,0.04641,0.04641,0.00000,0.00000,1.00000,20,10,0,10,0
+scratch,10,reseeded,brier_constant,Logit-LIME,0.04641,0.04641,0.00000,0.00000,1.00000,20,10,0,10,0
+scratch,10,reseeded,brier_constant,Soft logistic,0.04641,0.04641,0.00000,0.00000,1.00000,20,10,0,10,0
+scratch,10,reseeded,brier_constant,Soft logistic CLIME,0.04641,0.04641,0.00000,0.00000,1.00000,20,10,0,10,0
+scratch,10,reseeded,brier_balanced_constant,CLIME,0.13948,0.13948,0.00000,0.00000,1.00000,20,10,0,10,0
+scratch,10,reseeded,brier_balanced_constant,Logit-CLIME,0.13948,0.13948,0.00000,0.00000,1.00000,20,10,0,10,0
+scratch,10,reseeded,brier_balanced_constant,Logit-LIME,0.13948,0.13948,0.00000,0.00000,1.00000,20,10,0,10,0
+scratch,10,reseeded,brier_balanced_constant,Soft logistic,0.13948,0.13948,0.00000,0.00000,1.00000,20,10,0,10,0
+scratch,10,reseeded,brier_balanced_constant,Soft logistic CLIME,0.13948,0.13948,0.00000,0.00000,1.00000,20,10,0,10,0
 scratch,10,weighted,coef_norm,CLIME,0.32237,0.24173,0.08064,0.00967,0.00000,20,10,10,0,0
 scratch,10,weighted,coef_norm,Logit-CLIME,3.70583,0.24173,3.46410,0.35359,0.00000,20,10,10,0,0
 scratch,10,weighted,coef_norm,Logit-LIME,3.42424,0.24173,3.18251,0.32977,0.00000,20,10,10,0,0
@@ -749,6 +874,131 @@ scratch,100,plain,brier_balanced_constant,Logit-CLIME,0.08007,0.08007,0.00000,0.
 scratch,100,plain,brier_balanced_constant,Logit-LIME,0.08007,0.08007,0.00000,0.00000,1.00000,10,6,0,6,0
 scratch,100,plain,brier_balanced_constant,Soft logistic,0.08007,0.08007,0.00000,0.00000,1.00000,10,6,0,6,0
 scratch,100,plain,brier_balanced_constant,Soft logistic CLIME,0.08007,0.08007,0.00000,0.00000,1.00000,10,6,0,6,0
+scratch,100,reseeded,coef_norm,CLIME,0.04506,0.03121,0.01385,0.00888,0.00287,20,10,6,4,0
+scratch,100,reseeded,coef_norm,Logit-CLIME,1.71339,0.03121,1.68217,0.17127,0.00000,20,10,10,0,0
+scratch,100,reseeded,coef_norm,Logit-LIME,1.65516,0.03121,1.62394,0.14525,0.00000,20,10,10,0,0
+scratch,100,reseeded,coef_norm,Soft logistic,0.47160,0.03121,0.44039,0.07969,0.00000,20,10,10,0,0
+scratch,100,reseeded,coef_norm,Soft logistic CLIME,0.53414,0.03121,0.50293,0.11524,0.00000,20,10,10,0,0
+scratch,100,reseeded,fidelity,CLIME,0.99627,0.99584,0.00043,0.00061,0.07119,20,10,0,10,0
+scratch,100,reseeded,fidelity,Logit-CLIME,0.99559,0.99584,-0.00024,0.00104,0.94791,20,10,0,10,0
+scratch,100,reseeded,fidelity,Logit-LIME,0.99516,0.99584,-0.00067,0.00098,0.02168,20,10,0,10,0
+scratch,100,reseeded,fidelity,Soft logistic,0.99599,0.99584,0.00016,0.00036,0.15486,20,10,0,10,0
+scratch,100,reseeded,fidelity,Soft logistic CLIME,0.99640,0.99584,0.00056,0.00070,0.01591,20,10,0,10,0
+scratch,100,reseeded,fidelity_0,CLIME,0.99817,0.99924,-0.00108,0.00100,0.03666,20,10,0,10,0
+scratch,100,reseeded,fidelity_0,Logit-CLIME,0.99762,0.99924,-0.00162,0.00116,0.00020,20,10,0,10,0
+scratch,100,reseeded,fidelity_0,Logit-LIME,0.99802,0.99924,-0.00123,0.00105,0.00029,20,10,0,10,0
+scratch,100,reseeded,fidelity_0,Soft logistic,0.99903,0.99924,-0.00021,0.00022,0.01660,20,10,0,10,0
+scratch,100,reseeded,fidelity_0,Soft logistic CLIME,0.99823,0.99924,-0.00102,0.00083,0.01860,20,10,0,10,0
+scratch,100,reseeded,fidelity_1,CLIME,0.32798,0.12294,0.20504,0.07188,0.00049,12,8,8,0,0
+scratch,100,reseeded,fidelity_1,Logit-CLIME,0.39657,0.12294,0.27363,0.08672,0.00049,12,8,8,0,0
+scratch,100,reseeded,fidelity_1,Logit-LIME,0.29108,0.12294,0.16814,0.14668,0.00098,12,8,7,1,0
+scratch,100,reseeded,fidelity_1,Soft logistic,0.18770,0.12294,0.06475,0.04814,0.00195,12,8,6,2,0
+scratch,100,reseeded,fidelity_1,Soft logistic CLIME,0.40140,0.12294,0.27846,0.08762,0.00049,12,8,8,0,0
+scratch,100,reseeded,balanced,CLIME,0.64341,0.54247,0.10095,0.03263,0.00049,12,8,7,1,0
+scratch,100,reseeded,balanced,Logit-CLIME,0.67747,0.54247,0.13500,0.04203,0.00049,12,8,8,0,0
+scratch,100,reseeded,balanced,Logit-LIME,0.62212,0.54247,0.07965,0.07153,0.00098,12,8,7,1,0
+scratch,100,reseeded,balanced,Soft logistic,0.57450,0.54247,0.03203,0.02386,0.00195,12,8,6,2,0
+scratch,100,reseeded,balanced,Soft logistic CLIME,0.68134,0.54247,0.13887,0.04137,0.00049,12,8,8,0,0
+scratch,100,reseeded,auc,CLIME,0.97536,0.97551,-0.00015,0.00389,0.62207,12,8,1,6,1
+scratch,100,reseeded,auc,Logit-CLIME,0.97123,0.97551,-0.00427,0.00491,0.05225,12,8,1,6,1
+scratch,100,reseeded,auc,Logit-LIME,0.96488,0.97551,-0.01062,0.00484,0.00244,12,8,0,2,6
+scratch,100,reseeded,auc,Soft logistic,0.97649,0.97551,0.00099,0.00043,0.00049,12,8,0,8,0
+scratch,100,reseeded,auc,Soft logistic CLIME,0.97696,0.97551,0.00146,0.00378,0.06396,12,8,1,6,1
+scratch,100,reseeded,brier,CLIME,0.00181,0.00114,0.00067,0.00049,0.00222,20,10,0,10,0
+scratch,100,reseeded,brier,Logit-CLIME,0.00109,0.00114,-0.00005,0.00024,1.00000,20,10,0,10,0
+scratch,100,reseeded,brier,Logit-LIME,0.00129,0.00114,0.00014,0.00025,0.08255,20,10,0,10,0
+scratch,100,reseeded,brier,Soft logistic,0.00094,0.00114,-0.00021,0.00018,0.00558,20,10,0,10,0
+scratch,100,reseeded,brier,Soft logistic CLIME,0.00101,0.00114,-0.00013,0.00017,0.04844,20,10,0,10,0
+scratch,100,reseeded,brier_balanced,CLIME,0.02864,0.06113,-0.03249,0.01186,0.00049,12,8,7,1,0
+scratch,100,reseeded,brier_balanced,Logit-CLIME,0.03061,0.06113,-0.03052,0.01275,0.00146,12,8,7,0,1
+scratch,100,reseeded,brier_balanced,Logit-LIME,0.06114,0.06113,0.00001,0.00823,1.00000,12,8,4,1,3
+scratch,100,reseeded,brier_balanced,Soft logistic,0.04972,0.06113,-0.01141,0.00387,0.00098,12,8,7,1,0
+scratch,100,reseeded,brier_balanced,Soft logistic CLIME,0.02639,0.06113,-0.03474,0.01205,0.00098,12,8,7,1,0
+scratch,100,reseeded,kl,CLIME,0.01032,0.00712,0.00320,0.00198,0.00222,20,10,0,8,2
+scratch,100,reseeded,kl,Logit-CLIME,0.00471,0.00712,-0.00241,0.00103,0.00000,20,10,1,9,0
+scratch,100,reseeded,kl,Logit-LIME,0.00563,0.00712,-0.00149,0.00090,0.00085,20,10,0,10,0
+scratch,100,reseeded,kl,Soft logistic,0.00474,0.00712,-0.00237,0.00102,0.00000,20,10,1,9,0
+scratch,100,reseeded,kl,Soft logistic CLIME,0.00512,0.00712,-0.00200,0.00082,0.00000,20,10,0,10,0
+scratch,100,reseeded,kl_balanced,CLIME,0.11914,0.20372,-0.08458,0.03500,0.00098,12,8,7,1,0
+scratch,100,reseeded,kl_balanced,Logit-CLIME,0.13207,0.20372,-0.07165,0.03949,0.00244,12,8,6,0,2
+scratch,100,reseeded,kl_balanced,Logit-LIME,0.24449,0.20372,0.04077,0.04878,0.20361,12,8,3,0,5
+scratch,100,reseeded,kl_balanced,Soft logistic,0.18470,0.20372,-0.01902,0.02556,0.10986,12,8,5,2,1
+scratch,100,reseeded,kl_balanced,Soft logistic CLIME,0.11681,0.20372,-0.08691,0.04326,0.00488,12,8,6,1,1
+scratch,100,reseeded,stability_cosine,CLIME,0.97543,0.98100,-0.00557,0.00328,0.00222,20,10,0,5,5
+scratch,100,reseeded,stability_cosine,Logit-CLIME,0.99103,0.98100,0.01003,0.00242,0.00000,20,10,9,1,0
+scratch,100,reseeded,stability_cosine,Logit-LIME,0.99262,0.98100,0.01162,0.00296,0.00000,20,10,9,1,0
+scratch,100,reseeded,stability_cosine,Soft logistic,0.97276,0.98100,-0.00824,0.00069,0.00000,20,10,0,0,10
+scratch,100,reseeded,stability_cosine,Soft logistic CLIME,0.97025,0.98100,-0.01074,0.00152,0.00000,20,10,0,0,10
+scratch,100,reseeded,stability_same_top,CLIME,0.85333,0.87000,-0.01667,0.02093,0.08447,20,10,1,4,5
+scratch,100,reseeded,stability_same_top,Logit-CLIME,0.93167,0.87000,0.06167,0.03259,0.00268,20,10,9,0,1
+scratch,100,reseeded,stability_same_top,Logit-LIME,0.93333,0.87000,0.06333,0.03314,0.00268,20,10,9,0,1
+scratch,100,reseeded,stability_same_top,Soft logistic,0.87167,0.87000,0.00167,0.02529,0.93684,20,10,5,2,3
+scratch,100,reseeded,stability_same_top,Soft logistic CLIME,0.86000,0.87000,-0.01000,0.02926,0.52615,20,10,3,1,6
+scratch,100,reseeded,converged_cosine,CLIME,0.98631,0.99061,-0.00431,0.00293,0.00222,20,10,0,6,4
+scratch,100,reseeded,converged_cosine,Logit-CLIME,0.99468,0.99061,0.00407,0.00126,0.00001,20,10,3,7,0
+scratch,100,reseeded,converged_cosine,Logit-LIME,0.99643,0.99061,0.00582,0.00148,0.00000,20,10,5,5,0
+scratch,100,reseeded,converged_cosine,Soft logistic,0.98543,0.99061,-0.00518,0.00048,0.00000,20,10,0,4,6
+scratch,100,reseeded,converged_cosine,Soft logistic CLIME,0.98312,0.99061,-0.00749,0.00138,0.00000,20,10,0,2,8
+scratch,100,reseeded,converged_same_top,CLIME,0.88167,0.89667,-0.01500,0.01380,0.03843,20,10,0,6,4
+scratch,100,reseeded,converged_same_top,Logit-CLIME,0.94500,0.89667,0.04833,0.03089,0.01284,20,10,9,0,1
+scratch,100,reseeded,converged_same_top,Logit-LIME,0.94833,0.89667,0.05167,0.03196,0.01016,20,10,9,0,1
+scratch,100,reseeded,converged_same_top,Soft logistic,0.89333,0.89667,-0.00333,0.02268,0.74835,20,10,4,2,4
+scratch,100,reseeded,converged_same_top,Soft logistic CLIME,0.88333,0.89667,-0.01333,0.02435,0.25844,20,10,4,1,5
+scratch,100,reseeded,truth_leave_one_out_cosine,CLIME,0.77307,0.77746,-0.00439,0.00302,0.00474,20,10,0,7,3
+scratch,100,reseeded,truth_leave_one_out_cosine,Logit-CLIME,0.80992,0.77746,0.03246,0.01020,0.00000,20,10,10,0,0
+scratch,100,reseeded,truth_leave_one_out_cosine,Logit-LIME,0.81086,0.77746,0.03339,0.01098,0.00000,20,10,10,0,0
+scratch,100,reseeded,truth_leave_one_out_cosine,Soft logistic,0.77353,0.77746,-0.00393,0.00134,0.00006,20,10,0,7,3
+scratch,100,reseeded,truth_leave_one_out_cosine,Soft logistic CLIME,0.77093,0.77746,-0.00654,0.00276,0.00004,20,10,0,4,6
+scratch,100,reseeded,truth_leave_one_out_same_top,CLIME,0.52167,0.52833,-0.00667,0.00899,0.15730,20,10,0,8,2
+scratch,100,reseeded,truth_leave_one_out_same_top,Logit-CLIME,0.53833,0.52833,0.01000,0.02964,0.51300,20,10,6,1,3
+scratch,100,reseeded,truth_leave_one_out_same_top,Logit-LIME,0.53833,0.52833,0.01000,0.03148,0.54838,20,10,6,1,3
+scratch,100,reseeded,truth_leave_one_out_same_top,Soft logistic,0.53167,0.52833,0.00333,0.01635,0.67224,20,10,6,0,4
+scratch,100,reseeded,truth_leave_one_out_same_top,Soft logistic CLIME,0.52833,0.52833,0.00000,0.01773,0.86796,20,10,6,0,4
+scratch,100,reseeded,exact_leave_one_out_cosine,CLIME,0.77594,0.78248,-0.00654,0.00506,0.00474,20,10,0,6,4
+scratch,100,reseeded,exact_leave_one_out_cosine,Logit-CLIME,0.81074,0.78248,0.02826,0.01037,0.00000,20,10,10,0,0
+scratch,100,reseeded,exact_leave_one_out_cosine,Logit-LIME,0.81220,0.78248,0.02972,0.01216,0.00003,20,10,9,1,0
+scratch,100,reseeded,exact_leave_one_out_cosine,Soft logistic,0.78417,0.78248,0.00169,0.00127,0.00944,20,10,1,9,0
+scratch,100,reseeded,exact_leave_one_out_cosine,Soft logistic CLIME,0.78143,0.78248,-0.00106,0.00300,0.40910,20,10,0,9,1
+scratch,100,reseeded,exact_leave_one_out_same_top,CLIME,0.53500,0.53833,-0.00333,0.00653,0.31731,20,10,1,6,3
+scratch,100,reseeded,exact_leave_one_out_same_top,Logit-CLIME,0.54667,0.53833,0.00833,0.03030,0.52618,20,10,5,2,3
+scratch,100,reseeded,exact_leave_one_out_same_top,Logit-LIME,0.54667,0.53833,0.00833,0.03175,0.61058,20,10,5,2,3
+scratch,100,reseeded,exact_leave_one_out_same_top,Soft logistic,0.53833,0.53833,0.00000,0.00948,1.00000,20,10,2,5,3
+scratch,100,reseeded,exact_leave_one_out_same_top,Soft logistic CLIME,0.53833,0.53833,0.00000,0.00948,1.00000,20,10,2,5,3
+scratch,100,reseeded,truth_shapley_cosine,CLIME,0.94799,0.95337,-0.00538,0.00299,0.00222,20,10,0,6,4
+scratch,100,reseeded,truth_shapley_cosine,Logit-CLIME,0.97852,0.95337,0.02515,0.00589,0.00000,20,10,10,0,0
+scratch,100,reseeded,truth_shapley_cosine,Logit-LIME,0.97981,0.95337,0.02644,0.00604,0.00000,20,10,10,0,0
+scratch,100,reseeded,truth_shapley_cosine,Soft logistic,0.94919,0.95337,-0.00418,0.00063,0.00000,20,10,0,8,2
+scratch,100,reseeded,truth_shapley_cosine,Soft logistic CLIME,0.94615,0.95337,-0.00722,0.00184,0.00000,20,10,0,2,8
+scratch,100,reseeded,truth_shapley_same_top,CLIME,0.77167,0.78500,-0.01333,0.01289,0.06560,20,10,0,7,3
+scratch,100,reseeded,truth_shapley_same_top,Logit-CLIME,0.86333,0.78500,0.07833,0.03916,0.00300,20,10,9,1,0
+scratch,100,reseeded,truth_shapley_same_top,Logit-LIME,0.86167,0.78500,0.07667,0.03795,0.00252,20,10,9,1,0
+scratch,100,reseeded,truth_shapley_same_top,Soft logistic,0.79167,0.78500,0.00667,0.02253,0.79950,20,10,5,1,4
+scratch,100,reseeded,truth_shapley_same_top,Soft logistic CLIME,0.78000,0.78500,-0.00500,0.02335,0.44640,20,10,4,1,5
+scratch,100,reseeded,exact_shapley_cosine,CLIME,0.95371,0.96152,-0.00781,0.00491,0.00222,20,10,0,5,5
+scratch,100,reseeded,exact_shapley_cosine,Logit-CLIME,0.98140,0.96152,0.01988,0.00472,0.00000,20,10,10,0,0
+scratch,100,reseeded,exact_shapley_cosine,Logit-LIME,0.98364,0.96152,0.02212,0.00536,0.00000,20,10,10,0,0
+scratch,100,reseeded,exact_shapley_cosine,Soft logistic,0.96370,0.96152,0.00218,0.00072,0.00000,20,10,1,9,0
+scratch,100,reseeded,exact_shapley_cosine,Soft logistic CLIME,0.96046,0.96152,-0.00106,0.00165,0.78413,20,10,0,9,1
+scratch,100,reseeded,exact_shapley_same_top,CLIME,0.80000,0.81000,-0.01000,0.01070,0.07075,20,10,0,6,4
+scratch,100,reseeded,exact_shapley_same_top,Logit-CLIME,0.88000,0.81000,0.07000,0.03246,0.00186,20,10,10,0,0
+scratch,100,reseeded,exact_shapley_same_top,Logit-LIME,0.88167,0.81000,0.07167,0.02970,0.00075,20,10,10,0,0
+scratch,100,reseeded,exact_shapley_same_top,Soft logistic,0.81500,0.81000,0.00500,0.01089,0.36571,20,10,4,3,3
+scratch,100,reseeded,exact_shapley_same_top,Soft logistic CLIME,0.81333,0.81000,0.00333,0.01151,0.56370,20,10,4,3,3
+scratch,100,reseeded,minority_weighted,CLIME,0.00526,0.00526,0.00000,0.00000,1.00000,20,10,0,10,0
+scratch,100,reseeded,minority_weighted,Logit-CLIME,0.00526,0.00526,0.00000,0.00000,1.00000,20,10,0,10,0
+scratch,100,reseeded,minority_weighted,Logit-LIME,0.00526,0.00526,0.00000,0.00000,1.00000,20,10,0,10,0
+scratch,100,reseeded,minority_weighted,Soft logistic,0.00526,0.00526,0.00000,0.00000,1.00000,20,10,0,10,0
+scratch,100,reseeded,minority_weighted,Soft logistic CLIME,0.00526,0.00526,0.00000,0.00000,1.00000,20,10,0,10,0
+scratch,100,reseeded,brier_constant,CLIME,0.00283,0.00283,0.00000,0.00000,1.00000,20,10,0,10,0
+scratch,100,reseeded,brier_constant,Logit-CLIME,0.00283,0.00283,0.00000,0.00000,1.00000,20,10,0,10,0
+scratch,100,reseeded,brier_constant,Logit-LIME,0.00283,0.00283,0.00000,0.00000,1.00000,20,10,0,10,0
+scratch,100,reseeded,brier_constant,Soft logistic,0.00283,0.00283,0.00000,0.00000,1.00000,20,10,0,10,0
+scratch,100,reseeded,brier_constant,Soft logistic CLIME,0.00283,0.00283,0.00000,0.00000,1.00000,20,10,0,10,0
+scratch,100,reseeded,brier_balanced_constant,CLIME,0.07874,0.07874,0.00000,0.00000,1.00000,12,8,0,8,0
+scratch,100,reseeded,brier_balanced_constant,Logit-CLIME,0.07874,0.07874,0.00000,0.00000,1.00000,12,8,0,8,0
+scratch,100,reseeded,brier_balanced_constant,Logit-LIME,0.07874,0.07874,0.00000,0.00000,1.00000,12,8,0,8,0
+scratch,100,reseeded,brier_balanced_constant,Soft logistic,0.07874,0.07874,0.00000,0.00000,1.00000,12,8,0,8,0
+scratch,100,reseeded,brier_balanced_constant,Soft logistic CLIME,0.07874,0.07874,0.00000,0.00000,1.00000,12,8,0,8,0
 scratch,100,weighted,coef_norm,CLIME,0.13086,0.10990,0.02096,0.01090,0.00013,20,10,7,3,0
 scratch,100,weighted,coef_norm,Logit-CLIME,1.47345,0.10990,1.36355,0.50719,0.00000,20,10,10,0,0
 scratch,100,weighted,coef_norm,Logit-LIME,1.41974,0.10990,1.30983,0.47765,0.00000,20,10,10,0,0

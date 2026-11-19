@@ -1182,13 +1182,16 @@ committed first (`experiments/cikm_extended/PREREGISTRATION.md`): 1, 3, 4 and 7 
     at 9% of images (median cosine 0.998); Logit-LIME and the truths do not move.
   - Of seven predictions five hold and two hold in part: the top patch changes at 9%, not
     10%, and the logit's lead in samples does not grow with imbalance.
-  - Class-weighted and logit-adjusted networks (40 each): at 5000:50 their Shapley values
-    have median cosine 0.13 and 0.20 with the plain network's at the same image, and every
-    surrogate moves with them. On the logit-adjusted networks, where CLIME has two classes
-    to weight, it is again further from the Shapley values than LIME (−0.027) and
-    Logit-LIME closer (+0.017).
-  - Running: the plain network retrained from another seed (the control for the line
-    above), and a pretrained ResNet-18.
+  - Class-weighted and logit-adjusted networks (40 each), and a control: the plain network
+    retrained on the same data from another seed (40). At 5000:50 the Shapley values have
+    median cosine 0.13 (class weighted), 0.20 (logit adjusted) and 0.23 (control) with the
+    plain network's at the same image, so the truth moves because the network was
+    retrained. Paired against the control, the logit-adjusted loss adds nothing
+    (−0.009 ± 0.032) and class weighting a little (−0.078 ± 0.042). Every surrogate
+    follows the network. A patch explanation of these networks describes one training run.
+  - On the logit-adjusted networks, where CLIME has two classes to weight, it is again
+    further from the Shapley values than LIME (−0.027) and Logit-LIME closer (+0.017).
+  - Running: a pretrained ResNet-18, and the control at 4000:4000.
 
 Not done: a ground truth for the tree models and k-NN.
 

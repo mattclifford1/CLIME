@@ -573,6 +573,17 @@ def images_moves():
                                  'Unchanged'], rows, 'llrrrr'))
 
 
+def images_control():
+    for _, r in read('images_control').iterrows():
+        base = ['imr', r.network, IMAGE_RATIOS[r.ratio][1], r.arm, r.explainer, r.fit]
+        macro(base, r['diff'], '{:+.3f}')
+        macro([*base, 'ci'], r.ci, '{:.3f}')
+        macro([*base, 'mean'], r.mean_a)
+        macro([*base, 'control'], r.mean_b)
+        for column in ('wins', 'losses', 'datasets'):
+            macro([*base, column], r[column], '{:.0f}')
+
+
 def images_models():
     for _, r in read('images_models').iterrows():
         base = ['imo', r.network, IMAGE_RATIOS[r.ratio][1], r.arm]
@@ -642,7 +653,8 @@ if __name__ == '__main__':
                  failures, outliers, reproduce, explanations, explanations_paired,
                  explanations_moves, explanations_spread, explanations_instruments,
                  explanations_cuts, logistic_check, logistic_samples,
-                 images, images_paired, images_samples, images_moves, images_models,
+                 images, images_paired, images_samples, images_moves, images_control,
+                 images_models,
                  explanations_run):
         try:
             make()

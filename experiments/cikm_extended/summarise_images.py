@@ -15,6 +15,7 @@ RUN = 'images_explained'
 SETTING = ['network', 'ratio']
 IMAGE = [*SETTING, 'dataset', 'seed', 'index']
 PLAIN = 'plain'
+CONTROL = 'reseeded'   # the plain network retrained from another seed
 LOSSES = ('brier', 'brier_balanced', 'kl', 'kl_balanced')
 CLASSES = {0: 'majority', 1: 'minority'}
 
@@ -75,19 +76,23 @@ def samples(frame):
     return out
 
 
-def moves(coefs, queries):
-    '''how far each explanation, and each truth, moves from the plain network's at the same image'''
+def moved(coefs, queries):
+    '''each explanation, and each truth, against the plain network's at the same image'''
     plain = coefs[coefs.arm == PLAIN]
     before = queries[queries.arm == PLAIN][[*IMAGE, 'minority_weighted']].rename(
         columns={'minority_weighted': 'before'})
     key = [*IMAGE, 'explainer', 'fit']
     frame = coefs[coefs.arm != PLAIN].merge(plain[[*key, 'coef']], on=key, suffixes=('', '_plain'))
     if frame.empty:
-        return pd.DataFrame()
+        return frame
     found = pd.DataFrame([scores.explanation_agreement(np.asarray(a), np.asarray(b))
                           for a, b in zip(frame.coef_plain, frame.coef)], index=frame.index)
     frame = pd.concat([frame.drop(columns=['coef', 'coef_plain']), found], axis=1).merge(before, on=IMAGE)
     frame['neighbourhood'] = np.where(frame.before < ONE_SIDED, 'one-sided', 'two-sided')
+    return frame
+
+
+def moves(frame):
     frame = pd.concat([frame, frame.assign(neighbourhood='all')], ignore_index=True)
     grouped = frame.groupby([*SETTING, 'arm', 'neighbourhood', 'explainer', 'fit'], observed=True)
     out = grouped[['cosine', 'norm_ratio', 'rank']].median().add_prefix('median_')
@@ -95,6 +100,21 @@ def moves(coefs, queries):
     out['unchanged'] = grouped['cosine'].agg(lambda c: (c > 0.999).mean())
     out['n'] = grouped.size()
     return out.reset_index()
+
+
+def against_control(frame):
+    '''cosine with the plain network's, each retrained network minus the control, paired over blocks'''
+    frame = frame[frame.arm == frame.trained]
+    rows = []
+    for key, part in frame.groupby([*SETTING, 'explainer', 'fit'], observed=True):
+        wide = part.pivot_table(index=['dataset', 'seed'], columns='arm', values='cosine')
+        if CONTROL not in wide:
+            continue
+        for other in wide.columns.drop(CONTROL):
+            row = stats.paired(wide, other, CONTROL)
+            if row:
+                rows.append({**dict(zip([*SETTING, 'explainer', 'fit'], key)), 'arm': other, **row})
+    return pd.DataFrame(rows)
 
 
 def checks(coefs, queries):
@@ -126,9 +146,10 @@ if __name__ == '__main__':
     save(samples(runner.load(RUN, 'samples')), 'images_samples')
     coefs = runner.load(RUN, 'coefs')
     save(checks(coefs, queries), 'images_checks')
-    moved = moves(coefs, queries)
-    if not moved.empty:
-        save(moved, 'images_moves')
+    frame = moved(coefs, queries)
+    if not frame.empty:
+        save(moves(frame), 'images_moves')
+        save(against_control(frame), 'images_control')
     trained = models[models.arm == models.trained].groupby(['network', 'trained'])
     save(pd.DataFrame({'networks': trained.size(), 'seeds': trained.seed.nunique(),
                        'classes': trained.dataset.nunique()}).reset_index(), 'images_run')

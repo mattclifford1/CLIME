@@ -681,15 +681,15 @@ def images_moves():
     frame = frame[(frame.network == 'scratch') & (frame.ratio == 100) & (frame.neighbourhood == 'all')
                   & frame.fit.isin(['sample', 'truth'])]
     frame = frame.assign(top_changed=100*(1 - frame.same_top))
-    arms = {'prior shift': 'threshold\nmoved', 'reseeded': 'another\ntraining seed',
-            'weighted': 'class\nweighted', 'logit adjusted': 'logit-adjusted\nloss'}
+    arms = {'prior shift': 'threshold\nmove', 'reseeded': 'other\nseed',
+            'weighted': 'class\nweights', 'logit adjusted': 'logit\nadjusted'}
     shown = [a for a in arms if a in set(frame.arm)]
     truths = {'leave one out': (INK2, 'leave-one-out effects'), 'Shapley': (MUTED, 'Shapley values')}
     panels = [('top_changed', 'query images whose\ntop patch changes (%)'),
               ('median_norm_ratio', 'size of the coefficients\n(ratio to the plain network)'),
               ('median_cosine', 'cosine with the\nplain network\'s')]
     names = [*SIX, *truths]
-    fig, axes = plt.subplots(1, 3, figsize=(TEXTWIDTH, TEXTWIDTH*0.32))
+    fig, axes = plt.subplots(1, 3, figsize=(TEXTWIDTH, TEXTWIDTH*0.34))
     width = 0.8/len(names)
     for ax, (column, label) in zip(axes, panels):
         for i, explainer in enumerate(names):
@@ -701,7 +701,7 @@ def images_moves():
             ax.bar(np.arange(len(shown)) + (i - (len(names) - 1)/2)*width, heights - base, width,
                    bottom=base, color=colour, label=name)
         ax.set_xticks(np.arange(len(shown)))
-        ax.set_xticklabels([arms[a] for a in shown], fontsize=6.5)
+        ax.set_xticklabels([arms[a] for a in shown], fontsize=6)
         ax.set_title(label, fontsize=7.5)
         ax.grid(axis='x', visible=False)
         if column == 'median_norm_ratio':
