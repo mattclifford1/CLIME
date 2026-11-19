@@ -5,6 +5,7 @@ Runs on the GPU, in the environment of the imbalanced-explanations repository.
 
 usage: uv run --project ../../../../imbalanced-explanations/imbalanced-explanations \\
            python run_images.py [--ratios 1 10 100] [--arms plain] [--seeds 2] [--pretrained]
+       --pictures stores the query images themselves instead, for figures
 '''
 # author: Matt Clifford <matt.clifford@bristol.ac.uk>
 
@@ -71,20 +72,37 @@ def balanced(positive, seed):
                    seed, X[val], binary(y[val]))
 
 
+def problem_for(positive, seed, ratio):
+    return balanced(positive, seed) if ratio == 1 else load(positive, seed, imbalance=ratio)
+
+
+def queries(problem, positive, seed):
+    '''test rows explained: QUERIES of each class, the same for every training arm'''
+    rng = np.random.default_rng([seed, positive, 20261119])
+    return np.concatenate([rng.choice(np.flatnonzero(problem.y_test == c), QUERIES, replace=False)
+                           for c in (0, 1)])
+
+
+def pictures(positive, seed, ratio):
+    problem = problem_for(positive, seed, ratio)
+    query = queries(problem, positive, seed)
+    path = RAW.parent/'images_pictures'/f'{ratio}_{CLASSES[positive]}_{seed}.npz'
+    path.parent.mkdir(parents=True, exist_ok=True)
+    np.savez(path, images=problem.X_test[query], query=query, y_query=problem.y_test[query])
+
+
 def run(positive, seed, ratio, arm, pretrained):
     name = f"{'pretrained' if pretrained else 'scratch'}_{ratio}_{CLASSES[positive]}_{seed}_{arm}"
     path = RAW/f'{name.replace(" ", "-")}.npz'
     if path.exists():
         return
     start = time.time()
-    problem = balanced(positive, seed) if ratio == 1 else load(positive, seed, imbalance=ratio)
+    problem = problem_for(positive, seed, ratio)
     device = torch.device('cuda')
     net = train_net(problem, ARMS[arm], seed, EPOCHS[pretrained], pretrained=pretrained).float()
     split = {k: logits(net, torch.from_numpy(X).to(device)).cpu().numpy()
              for k, X in (('train', problem.X), ('val', problem.X_val), ('test', problem.X_test))}
-    rng = np.random.default_rng([seed, positive, 20261119])
-    query = np.concatenate([rng.choice(np.flatnonzero(problem.y_test == c), QUERIES, replace=False)
-                            for c in (0, 1)])
+    query = queries(problem, positive, seed)
     masks = all_masks(device)
     X_test = torch.from_numpy(problem.X_test).to(device)
     found = torch.stack([enumerate_masks(net, X_test[i], masks) for i in query]).cpu().numpy()
@@ -104,6 +122,7 @@ if __name__ == '__main__':
     parser.add_argument('--seeds', type=int, default=2)
     parser.add_argument('--arms', nargs='+', default=['plain'], choices=list(ARMS))
     parser.add_argument('--pretrained', action='store_true')
+    parser.add_argument('--pictures', action='store_true')
     args = parser.parse_args()
     for ratio in args.ratios:
         for arm in args.arms:
@@ -111,4 +130,7 @@ if __name__ == '__main__':
                 continue
             for positive in args.classes:
                 for seed in range(args.seeds):
-                    run(positive, seed, ratio, arm, args.pretrained)
+                    if args.pictures:
+                        pictures(positive, seed, ratio)
+                    else:
+                        run(positive, seed, ratio, arm, args.pretrained)

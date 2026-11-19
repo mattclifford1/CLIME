@@ -33,10 +33,13 @@ def neighbourhoods(queries):
     '''share of query images whose masks are under 1% the rarer black-box class, by true class'''
     frame = queries.assign(one_sided=queries.minority_weighted < ONE_SIDED,
                            one_sided_unweighted=queries.minority < ONE_SIDED,
+                           single_class=queries.minority == 0,
+                           single_class_sample=queries.sample_minority == 0,
                            label=queries.label.map(CLASSES))
     frame = pd.concat([frame, frame.assign(label='all')], ignore_index=True)
     return stats.over_datasets(frame, [*SETTING, 'arm', 'label'],
-                               ['one_sided', 'one_sided_unweighted', 'minority_weighted', 'f_class'])
+                               ['one_sided', 'one_sided_unweighted', 'single_class', 'single_class_sample',
+                                'minority_weighted', 'f_class'])
 
 
 def triad(full):
@@ -94,6 +97,23 @@ def moves(coefs, queries):
     return out.reset_index()
 
 
+def checks(coefs, queries):
+    '''largest coefficient gap in the two identities that must hold exactly'''
+    key = [*IMAGE, 'arm']
+    fits = coefs[coefs.fit == 'sample'].pivot(index=[*key, 'trained'], columns='explainer', values='coef')
+    fits = fits.reset_index().merge(queries[[*key, 'sample_minority']], on=key)
+
+    def gap(a, b):
+        return max(np.abs(np.asarray(x) - np.asarray(y)).max() for x, y in zip(a, b))
+
+    single = fits[fits.sample_minority == 0]
+    moved = fits[fits.arm != fits.trained].merge(fits[fits.arm == fits.trained], on=[*IMAGE, 'trained'],
+                                                 suffixes=('', '_trained'))
+    return pd.DataFrame([{'clime_is_lime': gap(single['CLIME'], single['LIME']), 'single_class': len(single),
+                          'logit_lime_moved': gap(moved['Logit-LIME'], moved['Logit-LIME_trained']),
+                          'moves': len(moved), 'fits': len(fits)}])
+
+
 if __name__ == '__main__':
     queries, models = runner.load(RUN, 'queries'), runner.load(RUN, 'models')
     full = runner.load(RUN, 'scores').merge(
@@ -104,7 +124,9 @@ if __name__ == '__main__':
     save(triad(full), 'images_triad')
     save(paired(full), 'images_paired')
     save(samples(runner.load(RUN, 'samples')), 'images_samples')
-    moved = moves(runner.load(RUN, 'coefs'), queries)
+    coefs = runner.load(RUN, 'coefs')
+    save(checks(coefs, queries), 'images_checks')
+    moved = moves(coefs, queries)
     if not moved.empty:
         save(moved, 'images_moves')
     save(pd.DataFrame([{'networks': len(models.drop_duplicates([*SETTING, 'dataset', 'seed', 'trained'])),

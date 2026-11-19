@@ -1167,8 +1167,24 @@ committed first (`experiments/cikm_extended/PREREGISTRATION.md`): 1, 3, 4 and 7 
   on 300 samples (0.961) is level with LIME on 10,000 (0.964), CLIME is behind LIME at
   every size, and what LIME still misses on 100,000 is the wide datasets.
 
-Not done: images (planned in the write-up's section 6); a ground truth for the tree models
-and k-NN.
+- **Images (`run_images.py`, `explain_images.py`, 2026-11-19; predictions in
+  `PREREGISTRATION_IMAGES.md`).** CIFAR-10 one class against the rest, ResNet-20 from scratch,
+  16 patches, the logit stored on all 65,536 masks of 30 query images per network, so each
+  surrogate's fit on every mask and the exact Shapley values are known. 60 plain networks:
+  - At 5000:50 every mask is one class at 94% of query images, and there CLIME equals LIME.
+  - At 4000:4000 CLIME wins balanced fidelity (0.81 against 0.67) and is further from the
+    Shapley values (−0.027), less stable and further from its own exact fit.
+  - Logit-LIME is closest to both truths at every ratio (+0.036, +0.045, +0.027 on LIME in
+    cosine with Shapley). Most of that gap is the target: fitted to every mask LIME reaches
+    0.951 and Logit-LIME 0.980.
+  - Logit-LIME on 300 masks is about where LIME is on 1,000; CLIME needs about 3,000.
+  - A prior shift at 5000:50 multiplies LIME's coefficients by 70 and changes its top patch
+    at 9% of images (median cosine 0.998); Logit-LIME and the truths do not move.
+  - Of seven predictions five hold and two hold in part: the top patch changes at 9%, not
+    10%, and the logit's lead in samples does not grow with imbalance.
+  - Running: class-weighted and logit-adjusted networks, and a pretrained ResNet-18.
+
+Not done: a ground truth for the tree models and k-NN.
 
 ---
 

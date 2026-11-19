@@ -553,6 +553,7 @@ def images_moves():
         base = ['imm', r.network, IMAGE_RATIOS[r.ratio][1], r.arm, r.neighbourhood, r.explainer, r.fit]
         macro([*base, 'cos'], r.median_cosine, '{:.3f}')
         macro([*base, 'norm'], r.median_norm_ratio, '{:.2f}')
+        macro([*base, 'fold'], r.median_norm_ratio, '{:.0f}' if r.median_norm_ratio >= 10 else '{:.1f}')
         macro([*base, 'changed'], pct(1 - r.same_top), '{:.0f}')
         macro([*base, 'same'], pct(r.unchanged), '{:.0f}')
     shown = frame[(frame.network == 'scratch') & (frame.ratio == 100) & (frame.neighbourhood == 'all')
@@ -580,9 +581,17 @@ def images_models():
         macro([*base, 'recall'], r.recall_minority)
         macro([*base, 'positive'], pct(r.positive_rate), '{:.1f}')
         macro([*base, 'shift'], r['shift'])
+        macro([*base, 'ranking'], r.roc_auc)
     for _, r in read('images_neighbourhoods').iterrows():
         base = ['imn', r.network, IMAGE_RATIOS[r.ratio][1], r.arm, r.label]
         macro([*base, 'onesided'], pct(r.one_sided), '{:.0f}')
+        macro([*base, 'single'], pct(r.single_class), '{:.0f}')
+        macro([*base, 'single', 'sample'], pct(r.single_class_sample), '{:.0f}')
+    checks = read('images_checks').iloc[0]
+    for column in ('single_class', 'moves', 'fits'):
+        macro(['img', 'check', column], checks[column], '{:,.0f}')
+    for column in ('clime_is_lime', 'logit_lime_moved'):
+        macro(['img', 'check', column], checks[column], '{:.5f}')
     run = read('images_run').iloc[0]
     for column in run.index:
         macro(['img', 'run', column], run[column], '{:.0f}')

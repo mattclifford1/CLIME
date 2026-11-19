@@ -711,10 +711,60 @@ def images_moves():
     style.save(fig, 'images_moves')
 
 
+def images_example(dataset='airplane', seed=0, ratio=100):
+    """one image's patch explanations before and after the prior shift"""
+    from common import patches
+    from explain_images import DEFAULT, draws
+    stored = np.load(paths.raw('images')/f'scratch_{ratio}_{dataset}_{seed}_plain.npz')
+    pictures = np.load(paths.raw('images_pictures')/f'{ratio}_{dataset}_{seed}.npz')
+    M = patches.masks()
+    w = patches.kernel(M)
+    shift = np.log(ratio)
+
+    def fitted(name, z, query):
+        rows = draws(seed, query)[0][:DEFAULT]
+        return patches.fit(name, M[rows], z[rows], w[rows])[0]
+
+    found = {}
+    for i in np.flatnonzero(stored['y_query'] == 1):
+        z, query = stored['masks'][i].astype(np.float64), stored['query'][i]
+        found[i] = {'Shapley values\nof the logit': patches.shapley(z),
+                    'Logit-LIME,\nbefore and after': fitted('Logit-LIME', z, query),
+                    'LIME,\nas trained': fitted('LIME', z, query),
+                    'LIME, threshold\nmoved': fitted('LIME', z + shift, query)}
+    growth = {i: np.linalg.norm(v['LIME, threshold\nmoved'])/np.linalg.norm(v['LIME,\nas trained'])
+              for i, v in found.items()}
+    chosen = sorted(growth, key=growth.get)[len(growth)//2]   # the median growth
+    image = pictures['images'][chosen].transpose(1, 2, 0)
+    side = image.shape[0]//4
+    hidden = M[draws(seed, stored['query'][chosen])[0][1]].reshape(4, 4).astype(bool)
+    masked = image.copy()
+    for r, c in zip(*np.nonzero(~hidden)):
+        block = masked[r*side:(r + 1)*side, c*side:(c + 1)*side]
+        block[:] = block.reshape(-1, 3).mean(axis=0).round()
+    fig, axes = plt.subplots(1, 6, figsize=(TEXTWIDTH, TEXTWIDTH*0.22))
+    for ax, picture, title in zip(axes, (image, masked), ('query image', 'one mask')):
+        ax.imshow(picture, interpolation='nearest')
+        ax.set_title(title, fontsize=7)
+        for edge in np.arange(1, 4)*side - 0.5:
+            ax.axhline(edge, color='white', lw=0.4)
+            ax.axvline(edge, color='white', lw=0.4)
+    for ax, (title, coef) in zip(axes[2:], found[chosen].items()):
+        limit = np.abs(coef).max()
+        ax.imshow(coef.reshape(4, 4), cmap=roles.DIVERGING_CMAP, vmin=-limit, vmax=limit)
+        ax.set_title(title, fontsize=7)
+        ax.set_xlabel(f'largest {limit:.2g}', fontsize=6.5)
+    for ax in axes:
+        ax.set(xticks=[], yticks=[])
+        ax.grid(False)
+    style.save(fig, 'images_example')
+
+
 FIGURES = {f.__name__: f for f in (reproduce, replication, profile, triad, one_sided, arms,
                                    families, grid, operating_point, by_class, sweep, kernel,
                                    matched, cuts, truth, moves, losses, instruments,
-                                   samples, images_truth, images_samples, images_moves)}
+                                   samples, images_truth, images_samples, images_moves,
+                                   images_example)}
 
 if __name__ == '__main__':
     style.use()
