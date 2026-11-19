@@ -696,8 +696,10 @@ def images_moves():
             part = frame[frame.explainer == explainer].set_index('arm')
             colour, name = truths.get(explainer, (EXPLAINER_COLOURS.get(explainer),
                                                   EXPLAINER_LABELS.get(explainer)))
-            ax.bar(np.arange(len(shown)) + (i - (len(names) - 1)/2)*width,
-                   [part[column].get(arm, np.nan) for arm in shown], width, color=colour, label=name)
+            heights = np.array([part[column].get(arm, np.nan) for arm in shown])
+            base = 1.0 if column == 'median_norm_ratio' else 0.0
+            ax.bar(np.arange(len(shown)) + (i - (len(names) - 1)/2)*width, heights - base, width,
+                   bottom=base, color=colour, label=name)
         ax.set_xticks(np.arange(len(shown)))
         ax.set_xticklabels([arms[a] for a in shown], fontsize=6.5)
         ax.set_title(label, fontsize=7.5)

@@ -29,6 +29,36 @@ scratch,1,plain,Soft logistic CLIME,300,0.93480,0.79667,10,0.11000
 scratch,1,plain,Soft logistic CLIME,1000,0.97171,0.86667,10,0.51167
 scratch,1,plain,Soft logistic CLIME,3000,0.98561,0.90333,10,0.75833
 scratch,1,plain,Soft logistic CLIME,10000,0.99424,0.95833,10,0.90500
+scratch,10,logit adjusted,CLIME,100,0.86198,0.64000,10,0.00500
+scratch,10,logit adjusted,CLIME,300,0.93289,0.77333,10,0.10167
+scratch,10,logit adjusted,CLIME,1000,0.97021,0.85500,10,0.53167
+scratch,10,logit adjusted,CLIME,3000,0.98443,0.87833,10,0.79667
+scratch,10,logit adjusted,CLIME,10000,0.99271,0.91333,10,0.91500
+scratch,10,logit adjusted,LIME,100,0.88941,0.69167,10,0.00167
+scratch,10,logit adjusted,LIME,300,0.95807,0.82333,10,0.10167
+scratch,10,logit adjusted,LIME,1000,0.98710,0.91167,10,0.58167
+scratch,10,logit adjusted,LIME,3000,0.99564,0.92500,10,0.91167
+scratch,10,logit adjusted,LIME,10000,0.99866,0.96500,10,0.99500
+scratch,10,logit adjusted,Logit-CLIME,100,0.92955,0.80667,10,0.02667
+scratch,10,logit adjusted,Logit-CLIME,300,0.96690,0.87167,10,0.32000
+scratch,10,logit adjusted,Logit-CLIME,1000,0.98543,0.91167,10,0.73333
+scratch,10,logit adjusted,Logit-CLIME,3000,0.99352,0.93667,10,0.88167
+scratch,10,logit adjusted,Logit-CLIME,10000,0.99724,0.96500,10,0.95167
+scratch,10,logit adjusted,Logit-LIME,100,0.94929,0.81167,10,0.03833
+scratch,10,logit adjusted,Logit-LIME,300,0.98321,0.89167,10,0.42167
+scratch,10,logit adjusted,Logit-LIME,1000,0.99503,0.94000,10,0.90167
+scratch,10,logit adjusted,Logit-LIME,3000,0.99834,0.95500,10,0.99000
+scratch,10,logit adjusted,Logit-LIME,10000,0.99952,0.98000,10,1.00000
+scratch,10,logit adjusted,Soft logistic,100,0.87937,0.70167,10,0.00000
+scratch,10,logit adjusted,Soft logistic,300,0.95420,0.81167,10,0.07333
+scratch,10,logit adjusted,Soft logistic,1000,0.98661,0.88333,10,0.55833
+scratch,10,logit adjusted,Soft logistic,3000,0.99571,0.92667,10,0.90000
+scratch,10,logit adjusted,Soft logistic,10000,0.99877,0.97333,10,0.99167
+scratch,10,logit adjusted,Soft logistic CLIME,100,0.85524,0.65667,10,0.00000
+scratch,10,logit adjusted,Soft logistic CLIME,300,0.93130,0.78333,10,0.07167
+scratch,10,logit adjusted,Soft logistic CLIME,1000,0.97155,0.86000,10,0.46167
+scratch,10,logit adjusted,Soft logistic CLIME,3000,0.98672,0.91167,10,0.77167
+scratch,10,logit adjusted,Soft logistic CLIME,10000,0.99421,0.95833,10,0.91167
 scratch,10,plain,CLIME,100,0.85543,0.59667,10,0.00833
 scratch,10,plain,CLIME,300,0.93115,0.76000,10,0.09833
 scratch,10,plain,CLIME,1000,0.96648,0.84167,10,0.50667
@@ -59,6 +89,66 @@ scratch,10,plain,Soft logistic CLIME,300,0.93071,0.75833,10,0.06667
 scratch,10,plain,Soft logistic CLIME,1000,0.96852,0.85500,10,0.39500
 scratch,10,plain,Soft logistic CLIME,3000,0.98622,0.90500,10,0.71500
 scratch,10,plain,Soft logistic CLIME,10000,0.99468,0.94833,10,0.89500
+scratch,10,weighted,CLIME,100,0.89670,0.68500,10,0.01667
+scratch,10,weighted,CLIME,300,0.95207,0.79167,10,0.20500
+scratch,10,weighted,CLIME,1000,0.97882,0.87667,10,0.61000
+scratch,10,weighted,CLIME,3000,0.98882,0.93167,10,0.83833
+scratch,10,weighted,CLIME,10000,0.99456,0.95000,10,0.93667
+scratch,10,weighted,LIME,100,0.91770,0.72000,10,0.01833
+scratch,10,weighted,LIME,300,0.97018,0.82333,10,0.21167
+scratch,10,weighted,LIME,1000,0.99051,0.91667,10,0.70167
+scratch,10,weighted,LIME,3000,0.99682,0.95667,10,0.95500
+scratch,10,weighted,LIME,10000,0.99902,0.97667,10,0.99833
+scratch,10,weighted,Logit-CLIME,100,0.95676,0.79500,10,0.08667
+scratch,10,weighted,Logit-CLIME,300,0.98247,0.87333,10,0.47000
+scratch,10,weighted,Logit-CLIME,1000,0.99302,0.93000,10,0.84500
+scratch,10,weighted,Logit-CLIME,3000,0.99662,0.96167,10,0.92833
+scratch,10,weighted,Logit-CLIME,10000,0.99840,0.98167,10,0.97500
+scratch,10,weighted,Logit-LIME,100,0.96641,0.81833,10,0.09667
+scratch,10,weighted,Logit-LIME,300,0.98915,0.89667,10,0.61000
+scratch,10,weighted,Logit-LIME,1000,0.99683,0.94000,10,0.97000
+scratch,10,weighted,Logit-LIME,3000,0.99896,0.96667,10,1.00000
+scratch,10,weighted,Logit-LIME,10000,0.99968,0.99167,10,1.00000
+scratch,10,weighted,Soft logistic,100,0.90110,0.73000,10,0.00000
+scratch,10,weighted,Soft logistic,300,0.96556,0.83667,10,0.18333
+scratch,10,weighted,Soft logistic,1000,0.98939,0.92167,10,0.65833
+scratch,10,weighted,Soft logistic,3000,0.99647,0.95000,10,0.92167
+scratch,10,weighted,Soft logistic,10000,0.99899,0.97333,10,0.99833
+scratch,10,weighted,Soft logistic CLIME,100,0.88373,0.70500,10,0.00000
+scratch,10,weighted,Soft logistic CLIME,300,0.95208,0.82000,10,0.14833
+scratch,10,weighted,Soft logistic CLIME,1000,0.98187,0.90000,10,0.53833
+scratch,10,weighted,Soft logistic CLIME,3000,0.99200,0.93500,10,0.81833
+scratch,10,weighted,Soft logistic CLIME,10000,0.99699,0.96000,10,0.94333
+scratch,100,logit adjusted,CLIME,100,0.89043,0.70000,10,0.03333
+scratch,100,logit adjusted,CLIME,300,0.94674,0.80667,10,0.24167
+scratch,100,logit adjusted,CLIME,1000,0.97310,0.87833,10,0.64500
+scratch,100,logit adjusted,CLIME,3000,0.98544,0.93167,10,0.83833
+scratch,100,logit adjusted,CLIME,10000,0.99193,0.96500,10,0.91500
+scratch,100,logit adjusted,LIME,100,0.92167,0.75500,10,0.03167
+scratch,100,logit adjusted,LIME,300,0.97248,0.83833,10,0.24833
+scratch,100,logit adjusted,LIME,1000,0.99206,0.91333,10,0.74000
+scratch,100,logit adjusted,LIME,3000,0.99736,0.97833,10,0.98000
+scratch,100,logit adjusted,LIME,10000,0.99921,0.98333,10,1.00000
+scratch,100,logit adjusted,Logit-CLIME,100,0.92768,0.78333,10,0.06500
+scratch,100,logit adjusted,Logit-CLIME,300,0.96703,0.87000,10,0.37000
+scratch,100,logit adjusted,Logit-CLIME,1000,0.98397,0.93333,10,0.73333
+scratch,100,logit adjusted,Logit-CLIME,3000,0.99146,0.96500,10,0.87500
+scratch,100,logit adjusted,Logit-CLIME,10000,0.99543,0.97167,10,0.93667
+scratch,100,logit adjusted,Logit-LIME,100,0.94885,0.79500,10,0.06667
+scratch,100,logit adjusted,Logit-LIME,300,0.98358,0.88667,10,0.44500
+scratch,100,logit adjusted,Logit-LIME,1000,0.99537,0.94833,10,0.91000
+scratch,100,logit adjusted,Logit-LIME,3000,0.99842,0.97333,10,0.99333
+scratch,100,logit adjusted,Logit-LIME,10000,0.99953,0.98500,10,1.00000
+scratch,100,logit adjusted,Soft logistic,100,0.89940,0.72500,10,0.00000
+scratch,100,logit adjusted,Soft logistic,300,0.96792,0.84000,10,0.11833
+scratch,100,logit adjusted,Soft logistic,1000,0.99193,0.92333,10,0.73000
+scratch,100,logit adjusted,Soft logistic,3000,0.99769,0.97000,10,0.98167
+scratch,100,logit adjusted,Soft logistic,10000,0.99936,0.98167,10,1.00000
+scratch,100,logit adjusted,Soft logistic CLIME,100,0.87578,0.70500,10,0.00000
+scratch,100,logit adjusted,Soft logistic CLIME,300,0.95005,0.80333,10,0.10667
+scratch,100,logit adjusted,Soft logistic CLIME,1000,0.98057,0.89667,10,0.59833
+scratch,100,logit adjusted,Soft logistic CLIME,3000,0.99091,0.95667,10,0.84833
+scratch,100,logit adjusted,Soft logistic CLIME,10000,0.99558,0.97833,10,0.93667
 scratch,100,plain,CLIME,100,0.92544,0.75333,10,0.06167
 scratch,100,plain,CLIME,300,0.97169,0.84667,10,0.34333
 scratch,100,plain,CLIME,1000,0.98927,0.90667,10,0.72000
@@ -89,3 +179,33 @@ scratch,100,plain,Soft logistic CLIME,300,0.95663,0.82000,10,0.05000
 scratch,100,plain,Soft logistic CLIME,1000,0.98502,0.89333,10,0.44500
 scratch,100,plain,Soft logistic CLIME,3000,0.99477,0.92833,10,0.89833
 scratch,100,plain,Soft logistic CLIME,10000,0.99847,0.96167,10,0.98667
+scratch,100,weighted,CLIME,100,0.95878,0.82333,10,0.35000
+scratch,100,weighted,CLIME,300,0.98129,0.87500,10,0.62333
+scratch,100,weighted,CLIME,1000,0.99192,0.92833,10,0.81000
+scratch,100,weighted,CLIME,3000,0.99561,0.95500,10,0.90000
+scratch,100,weighted,CLIME,10000,0.99825,0.95000,10,0.93000
+scratch,100,weighted,LIME,100,0.96549,0.83000,10,0.37667
+scratch,100,weighted,LIME,300,0.98815,0.88500,10,0.65833
+scratch,100,weighted,LIME,1000,0.99653,0.92833,10,0.86333
+scratch,100,weighted,LIME,3000,0.99885,0.95167,10,0.94667
+scratch,100,weighted,LIME,10000,0.99966,0.95000,10,0.95500
+scratch,100,weighted,Logit-CLIME,100,0.97906,0.86833,10,0.48500
+scratch,100,weighted,Logit-CLIME,300,0.99222,0.92167,10,0.76500
+scratch,100,weighted,Logit-CLIME,1000,0.99684,0.94167,10,0.89167
+scratch,100,weighted,Logit-CLIME,3000,0.99873,0.95167,10,0.93000
+scratch,100,weighted,Logit-CLIME,10000,0.99951,0.97333,10,0.94667
+scratch,100,weighted,Logit-LIME,100,0.98182,0.86833,10,0.52000
+scratch,100,weighted,Logit-LIME,300,0.99426,0.93167,10,0.82667
+scratch,100,weighted,Logit-LIME,1000,0.99834,0.93167,10,0.93333
+scratch,100,weighted,Logit-LIME,3000,0.99948,0.95500,10,0.95500
+scratch,100,weighted,Logit-LIME,10000,0.99984,0.96833,10,0.95500
+scratch,100,weighted,Soft logistic,100,0.94128,0.83167,10,0.03000
+scratch,100,weighted,Soft logistic,300,0.98197,0.90333,10,0.49167
+scratch,100,weighted,Soft logistic,1000,0.99488,0.95500,10,0.80000
+scratch,100,weighted,Soft logistic,3000,0.99828,0.97667,10,0.92333
+scratch,100,weighted,Soft logistic,10000,0.99951,0.98333,10,0.95333
+scratch,100,weighted,Soft logistic CLIME,100,0.93590,0.83167,10,0.02667
+scratch,100,weighted,Soft logistic CLIME,300,0.97773,0.90000,10,0.45500
+scratch,100,weighted,Soft logistic CLIME,1000,0.99257,0.96167,10,0.75500
+scratch,100,weighted,Soft logistic CLIME,3000,0.99721,0.97500,10,0.89167
+scratch,100,weighted,Soft logistic CLIME,10000,0.99908,0.98500,10,0.93833

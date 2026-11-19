@@ -1,2 +1,4 @@
-networks,images,seeds,classes
-60,1800,2,10
+network,trained,networks,seeds,classes
+scratch,logit adjusted,40,2,10
+scratch,plain,60,2,10
+scratch,weighted,40,2,10

@@ -129,7 +129,6 @@ if __name__ == '__main__':
     moved = moves(coefs, queries)
     if not moved.empty:
         save(moved, 'images_moves')
-    save(pd.DataFrame([{'networks': len(models.drop_duplicates([*SETTING, 'dataset', 'seed', 'trained'])),
-                        'images': len(queries.drop_duplicates([*IMAGE, 'trained'])),
-                        'seeds': queries.seed.nunique(), 'classes': queries.dataset.nunique()}]),
-         'images_run')
+    trained = models[models.arm == models.trained].groupby(['network', 'trained'])
+    save(pd.DataFrame({'networks': trained.size(), 'seeds': trained.seed.nunique(),
+                       'classes': trained.dataset.nunique()}).reset_index(), 'images_run')

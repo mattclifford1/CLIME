@@ -497,9 +497,8 @@ IMAGE_SCORES = {'fidelity': 'fid', 'balanced': 'bal', 'auc': 'auc', 'skill': 'sk
                 'truth_shapley_cosine': 'shapley', 'exact_leave_one_out_cosine': 'exactloo',
                 'exact_shapley_cosine': 'exactshapley'}
 IMAGE_TRUTHS = {'leave one out': 'leave-one-out effects', 'Shapley': 'Shapley values'}
-IMAGE_ARMS = {'prior shift': 'prior shift', 're-thresholded': 're-thresholded (validation)',
-              'CP Minimax': 'deltas (CP Minimax)', 'reseeded': 'plain, another training seed',
-              'weighted': 'class weighted', 'logit adjusted': 'logit-adjusted loss'}
+IMAGE_MOVES = {'prior shift': 'prior shift', 're-thresholded': 're-thresholded (validation)',
+               'CP Minimax': 'deltas (CP Minimax)'}
 
 
 def images():
@@ -559,7 +558,7 @@ def images_moves():
     shown = frame[(frame.network == 'scratch') & (frame.ratio == 100) & (frame.neighbourhood == 'all')
                   & frame.fit.isin(['sample', 'truth'])]
     rows = []
-    for arm, label in IMAGE_ARMS.items():
+    for arm, label in IMAGE_MOVES.items():
         for explainer, name in {**SIX, **IMAGE_TRUTHS}.items():
             r = shown[(shown.arm == arm) & (shown.explainer == explainer)]
             if r.empty:
@@ -592,9 +591,9 @@ def images_models():
         macro(['img', 'check', column], checks[column], '{:,.0f}')
     for column in ('clime_is_lime', 'logit_lime_moved'):
         macro(['img', 'check', column], checks[column], '{:.5f}')
-    run = read('images_run').iloc[0]
-    for column in run.index:
-        macro(['img', 'run', column], run[column], '{:.0f}')
+    for _, r in read('images_run').iterrows():
+        for column in ('networks', 'seeds', 'classes'):
+            macro(['img', 'run', r.network, r.trained, column], r[column], '{:.0f}')
 
 
 def explanations_instruments():
