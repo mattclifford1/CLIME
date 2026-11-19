@@ -30,7 +30,7 @@ def fmt_ratio(x):
 def main(fid_path=None, tax_path=None):
     rows, _ = load(fid_path, tax_path)
     lines = [
-        r'\begin{table}[tbp]',
+        r'\begin{table}[H]',
         r'  \centering',
         r'  \caption{The two axes on which our evaluation departs from '
         r'\citet{clifford2023reconciling}: what is measured, and what it is measured over. '

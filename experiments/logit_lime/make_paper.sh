@@ -1,13 +1,11 @@
 #!/bin/bash
-# Regenerate every figure and table the paper uses, and copy them into the Overleaf clone.
+# Regenerate every figure and table, and copy the ones each paper uses into its Overleaf clone.
 #
-# The generators read from results/ and write to figs/ and tables/ under names that match
-# the \includegraphics and \input paths in the paper, so the copy is a straight mirror
-# with no renaming step to get wrong.
+# usage: ./make_paper.sh [paper directory ...]
 set -eu
 cd "$(dirname "$0")"
 
-PAPER=${1:-$HOME/Repos/clime/papers/Logit-LIME}
+PAPERS=${*:-"$HOME/Repos/clime/papers/Logit-LIME-method $HOME/Repos/clime/papers/evaluation-of-explanations"}
 
 # tables that take arguments, run before the plain loop below
 echo "=== analysis/table_fidelity_proxy.py --extended"
@@ -30,10 +28,17 @@ for f in figures/fig_mechanism.py figures/fig_diagnostic.py figures/fig_spatial.
     uv run python "$f" > /dev/null
 done
 
-if [ -d "$PAPER" ]; then
-    cp figs/*.pdf "$PAPER/figs/"
-    cp tables/*.tex "$PAPER/tables/"
-    echo "copied $(ls figs/*.pdf | wc -l) figures and $(ls tables/*.tex | wc -l) tables to $PAPER"
-else
-    echo "no paper at $PAPER - figures and tables left in figs/ and tables/"
-fi
+for PAPER in $PAPERS; do
+    if [ ! -d "$PAPER" ]; then
+        echo "no paper at $PAPER"
+        continue
+    fi
+    n=0
+    for f in figs/*.pdf tables/*.tex; do
+        if grep -rqF "${f%.tex}}" "$PAPER/main.tex" "$PAPER/sections"; then
+            cp "$f" "$PAPER/$f"
+            n=$((n + 1))
+        fi
+    done
+    echo "copied $n figures and tables to $PAPER"
+done

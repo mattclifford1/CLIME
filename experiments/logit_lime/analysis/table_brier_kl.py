@@ -44,7 +44,7 @@ def cells(values):
     return [f'$\\mathbf{{{b}}}$' if b == best else f'${b}$' for b in shown]
 
 lines = [
- r'\begin{table}[t]', r'\centering', r'\scriptsize',
+ r'\begin{table}[H]', r'\centering', r'\scriptsize',
  r'\setlength{\tabcolsep}{2.5pt}',
  r'\caption{Local Brier score and local KL divergence between each surrogate and the black'
  r' box, averaged over the 20 query points. $\Rlogit$ is the diagnostic of'

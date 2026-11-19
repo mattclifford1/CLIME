@@ -1,11 +1,12 @@
 #!/bin/bash
-# Regenerate every figure and table the aLIMEgn write-up uses, and copy them into the
-# Overleaf clone. Generated names match the write-up's \includegraphics and \input paths,
-# so the copy is a mirror with no renaming step to get wrong.
+# Regenerate every aLIMEgn figure and table, and copy them into the Overleaf clones.
+#
+# usage: ./make_writeup.sh [write-up directory] [CIKM extension paper directory]
 set -eu
 cd "$(dirname "$0")"
 
 WRITEUP=${1:-$HOME/Repos/clime/papers/aLIMEgn}
+EXTENDED=${2:-$HOME/Repos/clime/papers/CIKM-2023-extra-datasets}
 
 for f in figures/fig_schematic.py figures/fig_marginal.py figures/fig_degrade.py \
          figures/fig_weights.py "figures/fig_grid.py Gaussian" "figures/fig_grid.py Moons" \
@@ -23,4 +24,14 @@ if [ -d "$WRITEUP" ]; then
     echo "copied $(ls figs/*.pdf | wc -l) figures and $(ls tables/*.tex | wc -l) tables to $WRITEUP"
 else
     echo "no write-up at $WRITEUP - figures and tables left in figs/ and tables/"
+fi
+
+# the CIKM extension paper holds the same results as an appendix, with its own table labels
+if [ -d "$EXTENDED" ]; then
+    mkdir -p "$EXTENDED/figures/alimegn" "$EXTENDED/tables/alimegn"
+    cp figs/*.pdf "$EXTENDED/figures/alimegn/"
+    for f in tables/*.tex; do
+        sed 's/\\label{tab:/\\label{tab:alimegn-/' "$f" > "$EXTENDED/tables/alimegn/$(basename "$f")"
+    done
+    echo "copied the same to $EXTENDED"
 fi

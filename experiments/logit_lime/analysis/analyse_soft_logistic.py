@@ -289,7 +289,7 @@ def fmt_ratio(x):
 
 def write_table(groups, groups_full, n_reg, n_full):
     lines = [
-        r'\begin{table}[tbp]',
+        r'\begin{table}[H]',
         r'  \centering',
         r'  \scriptsize',
         r'  \setlength{\tabcolsep}{3.5pt}',
@@ -301,12 +301,12 @@ def write_table(groups, groups_full, n_reg, n_full):
         r'is better; \emph{vs hard} counts where it beats the hard-label surrogate on KL. '
         r'\emph{Cosine} is the mean cosine of the explanation to $\nabla\logit f(q)$ '
         r'(standard / Logit-LIME / soft-label) over the $n_\nabla$ configurations of the '
-        r"group's differentiable black boxes. These are S5's population, not the row's: on the "
+        r"group's differentiable black boxes. These are not the row's configurations: on the "
         r'registered datasets they include the five differentiable black boxes added after '
         r'registration (Nearest Class Mean, the polynomial, RBF and bagged logistic models and '
         r"the Gaussian class-conditional model), so the unassigned row's cosine is the bagged "
         r"logistic's alone. Registered grid: " + f'${n_reg}$' + r' configurations, $31$ of them '
-        r'seen before the sixth registration was scored ($28$ in a probe, $3$ in a smoke test). '
+        r'seen before the registered run was scored ($28$ in a probe, $3$ in a smoke test). '
         r'Full grid: the other ' + f'${n_full}$' + r' configurations of the '
         r'$71\times16$ grid that have results and were not seen in the probe.}',
         r'  \label{tab:softlabel}',

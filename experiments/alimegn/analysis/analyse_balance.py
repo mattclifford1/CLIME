@@ -136,8 +136,8 @@ def p8(results):
 
 def table(results):
     '''the E4 answer as a small LaTeX table'''
-    lines = [r'\begin{table}[tbp]', r'  \centering', r'  \footnotesize',
-             r'  \caption{E4: local or global class imbalance? Median gain in local '
+    lines = [r'\begin{table}[H]', r'  \centering', r'  \footnotesize',
+             r'  \caption{Local or global class imbalance? Median gain in local '
              r'fidelity over standard LIME on test data, over $14$ datasets $\times$ $3$ '
              r'model families, with the number of configurations improved. Local imbalance '
              r'helps in every cell; global imbalance in none.}',

@@ -159,7 +159,7 @@ def main(dataset='Gaussian', model='Logistic', points='10,11,13,15'):
         return f'    {label} & ' + ' & '.join(values) + r' \\'
 
     lines = [
-        r'\begin{table}[tbp]',
+        r'\begin{table}[H]',
         r'  \centering',
         r'  \footnotesize',
         r'  \caption{What each coefficient claims, at ' + f'{len(idx)}' +

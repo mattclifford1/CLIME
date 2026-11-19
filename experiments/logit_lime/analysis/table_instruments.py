@@ -51,7 +51,7 @@ def main(path=None):
                    [tuple(i) for i in meta['instruments']]]
 
     lines = [
-        r'\begin{table}[tbp]',
+        r'\begin{table}[H]',
         r'  \centering',
         r'  \footnotesize',
         # apostrophes go in double-quoted raw strings: inside r'...' a \' reaches LaTeX

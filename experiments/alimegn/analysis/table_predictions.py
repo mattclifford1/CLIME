@@ -192,7 +192,7 @@ def p8(balance):
     measured = (f'gain $+{np.median(normal[ok]):.4f}$ normally trained vs '
                 f'$+{np.median(balanced[ok]):.4f}$ balance-trained, smaller in '
                 f'{shrinks}/{ok.sum()}, $p = {tex_p(p)}$')
-    return ('P8', 'balanced training shrinks the gain (P6\'s mechanism again)',
+    return ('P8', 'balanced training shrinks the gain (the degradation mechanism again)',
             'gain smaller against a balance-trained black box', measured, verdict)
 
 
@@ -210,20 +210,20 @@ def main():
     for name, claim, registered, measured, verdict in rows:
         print(f'{name}  {verdict:42s} {claim}')
 
-    lines = [r'\begin{table}[tbp]', r'  \centering', r'  \footnotesize',
+    lines = [r'\begin{table}[H]', r'  \centering', r'  \footnotesize',
              r'  \setlength{\tabcolsep}{4pt}',
              r'  \caption{Each prediction as registered in \texttt{PREREGISTRATION.md} '
              r'before its sweep ran, against what was measured. Verdicts are computed from '
-             r'the registered thresholds rather than assigned by hand. P1--P6 were '
-             r'registered together, P7--P8 (E4) after the first six were analysed.}',
+             r'the registered thresholds rather than assigned by hand. The first '
+             r'six were registered together, the last two after those had been analysed.}',
              r'  \label{tab:predictions}',
              r'  \setlength{\tabcolsep}{3pt}',
-             r'  \begin{tabular}{l p{0.24\textwidth} p{0.34\textwidth} l}',
+             r'  \begin{tabular}{p{0.26\textwidth} p{0.35\textwidth} l}',
              r'    \toprule',
-             r'    & prediction & measured & verdict \\',
+             r'    prediction & measured & verdict \\',
              r'    \midrule']
     for name, claim, registered, measured, verdict in rows:
-        lines.append(f'    \\textbf{{{name}}} & {claim} & {measured} & {verdict} \\\\')
+        lines.append(f'    {claim} & {measured} & {verdict} \\\\')
     lines += [r'    \bottomrule', r'  \end{tabular}', r'\end{table}', '']
 
     out = paths.table('predictions.tex')

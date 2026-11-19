@@ -52,7 +52,7 @@ def main():
     marginal, _, _ = ca.load('results_marginal.json')
     degrade, _, _ = ca.load('results_degrade.json')
 
-    lines = [r'\begin{table}[tbp]', r'  \centering', r'  \footnotesize',
+    lines = [r'\begin{table}[H]', r'  \centering', r'  \footnotesize',
              r'  \setlength{\tabcolsep}{5pt}',
              r'  \caption{The six schemes over the $84$ marginal configurations and the '
              r'$210$ degraded ones. \emph{Worst point} is the median lowest local fidelity '

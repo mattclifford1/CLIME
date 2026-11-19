@@ -58,7 +58,7 @@ def main(path=None):
     n_datasets = len({r['dataset'] for r in rows})
 
     lines = [
-        r'\begin{table}[tbp]', r'  \centering', r'  \footnotesize',
+        r'\begin{table}[H]', r'  \centering', r'  \footnotesize',
         r'  \setlength{\tabcolsep}{4pt}',
         r'  \caption{Explanation accuracy against the analytic gradient of the black '
         r"box's log-odds, which is the true local importance vector wherever it exists. "

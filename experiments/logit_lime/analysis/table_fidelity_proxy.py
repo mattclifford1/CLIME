@@ -53,24 +53,24 @@ def main(extended=False):
 
     q = explanation_quality(rows)
     lines = [
-        r'\begin{table}[tbp]',
+        r'\begin{table}[H]',
         r'  \centering',
         r'  \footnotesize',
         r'  \caption{Each instrument applied to the same surrogates, at the '
         rf'{len(rows):,} query points of the {n_cfg} configurations that have an analytic '
-        + (r'explanation ground truth ($70$ of them run blind against the third '
+        + (r'explanation ground truth ($70$ of them run blind against a '
            r'pre-registration). ' if extended else r'explanation ground truth. ')
         + r'\emph{tracks} is the rank correlation of the reading '
         r'with cosine-to-truth, pooled over surrogates and points (negative is the '
-        r'expected sign where a lower score is better), and it shows that fidelity is '
-        r'\emph{not} uninformative. \emph{correct} and \emph{tied} split the comparisons '
+        r'expected sign where a lower score is better). '
+        r'\emph{correct} and \emph{tied} split the comparisons '
         r'between standard LIME and Logit-LIME at points where their explanations differ: '
         r'how often the instrument names the one with the better explanation, and how '
         r'often it returns exactly the same number for both and so names neither. '
         r'\emph{blind} is the share of query points at which all three surrogates score a '
         r'perfect $1$. \emph{crowns} counts the configurations in which each surrogate has '
-        r'the best mean reading. The last two rows are the surrogates themselves, and are '
-        r'what the crown column has to be read against.}',
+        r'the best mean reading. The last two rows give the explanation quality of the '
+        r'surrogates being crowned.}',
         r'  \label{tab:fidelityproxy}',
         r'  \begin{tabular}{lrrrrrrr}',
         r'    \toprule',

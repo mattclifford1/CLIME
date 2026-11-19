@@ -257,7 +257,7 @@ def main(path=None):
 
     # ------------------------------------------------------------------------- the table
     lines = [
-        r'\begin{table}[tbp]',
+        r'\begin{table}[H]',
         r'  \centering',
         r'  \footnotesize',
         r'  \caption{How far a standard LIME coefficient can be carried, over the '

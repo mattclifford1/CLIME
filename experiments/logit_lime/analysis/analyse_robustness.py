@@ -109,7 +109,7 @@ def main():
 
 
 def write_table(slices):
-    lines = [r'\begin{table}[tbp]', r'  \centering', r'  \scriptsize',
+    lines = [r'\begin{table}[H]', r'  \centering', r'  \scriptsize',
              r'  \setlength{\tabcolsep}{4pt}',
              # double-quoted raw strings: a doubled quote inside r'...' ends the raw string,
              # and '''' opened a triple-quoted string that swallowed the next source lines

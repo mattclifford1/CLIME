@@ -78,7 +78,7 @@ def write_table(results):
     def cell(s, k):
         lo, hi = s['ci'][k]
         return f'${s[k]:+.2f}$ {{\\scriptsize $[{lo:+.2f}, {hi:+.2f}]$}}'
-    lines = [r'\begin{table}[tbp]', r'  \centering', r'  \footnotesize',
+    lines = [r'\begin{table}[H]', r'  \centering', r'  \footnotesize',
              # double-quoted raw strings: in r'...''s...' the doubled quote ends the raw
              # string, so the rest is a plain string in which "\rho" is a carriage return
              r"  \caption{Which quantity predicts Logit-LIME's advantage (standard LIME's "

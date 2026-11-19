@@ -104,8 +104,8 @@ def panel_c(ax, rows):
     ax.axvline(0, color=style.MUTED, lw=1, ls='--')
     ax.set_xlabel(r'fidelity to $f$: gain of $\hat{y}$ weights')
     ax.set_ylabel(r'agreement with truth: gain of $y$ weights')
-    ax.set_title('(c) P4 refuted: the two objectives agree')
-    ax.annotate('P4 predicted this quadrant:\n'
+    ax.set_title('(c) the two objectives agree')
+    ax.annotate('predicted quadrant:\n'
                 r'$y$ weights better on truth,' '\n'
                 r'$\hat{y}$ weights better on $f$',
                 (0.30, 0.80), xycoords='axes fraction', fontsize=6.5,

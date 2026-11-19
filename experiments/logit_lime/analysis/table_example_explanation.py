@@ -107,7 +107,7 @@ def main(dataset='Breast Cancer', model='Logistic', point=None):
     rank = {'truth': ranks(truth), **{k: ranks(v) for k, v in coefs.items()}}
 
     lines = [
-        r'\begin{table}[tbp]',
+        r'\begin{table}[H]',
         r'  \centering',
         r'  \small',
         r'  \caption{One explanation, feature by feature: ' + escape(dataset) +

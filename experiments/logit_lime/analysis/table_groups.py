@@ -46,7 +46,7 @@ rows, _ = load(sys.argv[1] if len(sys.argv) > 1 else paths.results('results_taxo
 n_datasets = len({r['dataset'] for r in rows})
 
 lines = [
-    r'\begin{table}[t]', r'\centering', r'\footnotesize',
+    r'\begin{table}[H]', r'\centering', r'\footnotesize',
     r'\setlength{\tabcolsep}{5pt}',
     r'\caption{The pre-registered test. Each row aggregates one black box over the '
     fr'{n_datasets} datasets: median log-odds linearity gap $\Delta$, median saturation, '
