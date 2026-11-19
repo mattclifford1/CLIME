@@ -50,7 +50,7 @@ AXIS_LABEL = {
     'theta': ('rotation of the explanation  $\\theta$ (degrees)',
               'direction:  $\\cos\\theta$ is the cosine to the truth'),
     'scale': ('slope multiplier  $s$', 'slope only:  $g(q)=f(q)$ kept, boundary moves'),
-    'sharpen': ('log-odds multiplier  $s$',
+    'sharpen': ('log-odds multiplier  $c$',
                 'confidence:  boundary fixed, sharpness changes'),
 }
 FLAT_TOL = 0.0       # "flat" means exactly flat here, and it is
