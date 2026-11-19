@@ -507,24 +507,26 @@ def images():
         base = ['img', r.network, IMAGE_RATIOS[r.ratio][1], r.arm, r.explainer]
         for column, tag in IMAGE_SCORES.items():
             macro([*base, tag], r[column])
-    plain = frame[(frame.network == 'scratch') & (frame.arm == 'plain')]
-    rows = []
-    for ratio, (label, _) in IMAGE_RATIOS.items():
-        for explainer, name in SIX.items():
-            r = plain[(plain.ratio == ratio) & (plain.explainer == explainer)]
-            if r.empty:
-                continue
-            rows.append([label if explainer == 'LIME' else '', name]
-                        + [f'{r.iloc[0][c]:.2f}' for c in (
-                            'fidelity', 'balanced', 'auc', 'skill', 'skill_balanced',
-                            'stability_cosine', 'converged_cosine', 'truth_leave_one_out_cosine',
-                            'truth_shapley_cosine')])
-        if rows and rows[-1]:
-            rows.append([])
-    write('images', table(
-        ['', '', 'Fid.', 'Bal.\\ fid.', 'AUC', 'Skill', 'Bal.\\ skill', 'Stability', 'exact fit',
-         'leave one out', 'Shapley'], rows, 'llrrrrrrrrr',
-        [('agreement with the black box', 3, 7), ('cosine with', 9, 11)]))
+    for network, name in (('scratch', 'images'), ('pretrained', 'images_pretrained')):
+        plain = frame[(frame.network == network) & (frame.arm == 'plain')]
+        rows = []
+        for ratio, (label, _) in IMAGE_RATIOS.items():
+            for explainer, shown in SIX.items():
+                r = plain[(plain.ratio == ratio) & (plain.explainer == explainer)]
+                if r.empty:
+                    continue
+                rows.append([label if explainer == 'LIME' else '', shown]
+                            + [f'{r.iloc[0][c]:.2f}' for c in (
+                                'fidelity', 'balanced', 'auc', 'skill', 'skill_balanced',
+                                'stability_cosine', 'converged_cosine', 'truth_leave_one_out_cosine',
+                                'truth_shapley_cosine')])
+            if rows and rows[-1]:
+                rows.append([])
+        if rows:
+            write(name, table(
+                ['', '', 'Fid.', 'Bal.\\ fid.', 'AUC', 'Skill', 'Bal.\\ skill', 'Stability', 'exact fit',
+                 'leave one out', 'Shapley'], rows, 'llrrrrrrrrr',
+                [('agreement with the black box', 3, 7), ('cosine with', 9, 11)]))
 
 
 def images_paired():

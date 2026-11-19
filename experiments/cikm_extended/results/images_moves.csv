@@ -1,4 +1,130 @@
 network,ratio,arm,neighbourhood,explainer,fit,median_cosine,median_norm_ratio,median_rank,same_top,unchanged,n
+pretrained,100,CP Minimax,all,CLIME,exact,0.96311,79.77639,0.88824,0.74500,0.16000,600
+pretrained,100,CP Minimax,all,CLIME,sample,0.95454,82.30642,0.84853,0.70333,0.19333,600
+pretrained,100,CP Minimax,all,LIME,exact,0.98344,33.78159,0.93088,0.83333,0.18333,600
+pretrained,100,CP Minimax,all,LIME,sample,0.96619,32.71315,0.88529,0.80667,0.19333,600
+pretrained,100,CP Minimax,all,Logit-CLIME,exact,0.97682,1.04005,0.89706,0.81833,0.17500,600
+pretrained,100,CP Minimax,all,Logit-CLIME,sample,0.98139,1.02576,0.91176,0.83833,0.26500,600
+pretrained,100,CP Minimax,all,Logit-LIME,exact,1.00000,1.00000,1.00000,1.00000,1.00000,600
+pretrained,100,CP Minimax,all,Logit-LIME,sample,1.00000,1.00000,1.00000,1.00000,1.00000,600
+pretrained,100,CP Minimax,all,Shapley,truth,1.00000,1.00000,1.00000,1.00000,1.00000,600
+pretrained,100,CP Minimax,all,Soft logistic,exact,0.98210,1.47736,0.92941,0.82667,0.11833,600
+pretrained,100,CP Minimax,all,Soft logistic,sample,0.96623,9.02126,0.87941,0.81833,0.18833,600
+pretrained,100,CP Minimax,all,Soft logistic CLIME,exact,0.94075,1.58400,0.86471,0.77500,0.11667,600
+pretrained,100,CP Minimax,all,Soft logistic CLIME,sample,0.94469,14.26129,0.82353,0.72667,0.18833,600
+pretrained,100,CP Minimax,all,leave one out,truth,1.00000,1.00000,1.00000,1.00000,1.00000,600
+pretrained,100,CP Minimax,one-sided,CLIME,exact,0.97690,112.35218,0.91176,0.77732,0.19794,485
+pretrained,100,CP Minimax,one-sided,CLIME,sample,0.96580,108.60468,0.88235,0.73196,0.23918,485
+pretrained,100,CP Minimax,one-sided,LIME,exact,0.98769,54.75507,0.95000,0.86804,0.22680,485
+pretrained,100,CP Minimax,one-sided,LIME,sample,0.97633,52.50130,0.90882,0.82887,0.23918,485
+pretrained,100,CP Minimax,one-sided,Logit-CLIME,exact,0.97602,1.04623,0.89412,0.81649,0.21031,485
+pretrained,100,CP Minimax,one-sided,Logit-CLIME,sample,0.98480,1.03229,0.92353,0.84948,0.32577,485
+pretrained,100,CP Minimax,one-sided,Logit-LIME,exact,1.00000,1.00000,1.00000,1.00000,1.00000,485
+pretrained,100,CP Minimax,one-sided,Logit-LIME,sample,1.00000,1.00000,1.00000,1.00000,1.00000,485
+pretrained,100,CP Minimax,one-sided,Shapley,truth,1.00000,1.00000,1.00000,1.00000,1.00000,485
+pretrained,100,CP Minimax,one-sided,Soft logistic,exact,0.98582,1.87303,0.94706,0.85773,0.14639,485
+pretrained,100,CP Minimax,one-sided,Soft logistic,sample,0.97310,23.95346,0.90294,0.83299,0.23299,485
+pretrained,100,CP Minimax,one-sided,Soft logistic CLIME,exact,0.95105,2.03562,0.88824,0.81443,0.14433,485
+pretrained,100,CP Minimax,one-sided,Soft logistic CLIME,sample,0.95429,44.82072,0.85000,0.76082,0.23299,485
+pretrained,100,CP Minimax,one-sided,leave one out,truth,1.00000,1.00000,1.00000,1.00000,1.00000,485
+pretrained,100,CP Minimax,two-sided,CLIME,exact,0.90118,1.19512,0.75000,0.60870,0.00000,115
+pretrained,100,CP Minimax,two-sided,CLIME,sample,0.87203,1.19762,0.67941,0.58261,0.00000,115
+pretrained,100,CP Minimax,two-sided,LIME,exact,0.94569,1.77385,0.83529,0.68696,0.00000,115
+pretrained,100,CP Minimax,two-sided,LIME,sample,0.93327,1.81602,0.76765,0.71304,0.00000,115
+pretrained,100,CP Minimax,two-sided,Logit-CLIME,exact,0.97924,1.01605,0.91176,0.82609,0.02609,115
+pretrained,100,CP Minimax,two-sided,Logit-CLIME,sample,0.97244,0.99833,0.86471,0.79130,0.00870,115
+pretrained,100,CP Minimax,two-sided,Logit-LIME,exact,1.00000,1.00000,1.00000,1.00000,1.00000,115
+pretrained,100,CP Minimax,two-sided,Logit-LIME,sample,1.00000,1.00000,1.00000,1.00000,1.00000,115
+pretrained,100,CP Minimax,two-sided,Shapley,truth,1.00000,1.00000,1.00000,1.00000,1.00000,115
+pretrained,100,CP Minimax,two-sided,Soft logistic,exact,0.95281,1.06866,0.83529,0.69565,0.00000,115
+pretrained,100,CP Minimax,two-sided,Soft logistic,sample,0.94177,1.19252,0.78529,0.75652,0.00000,115
+pretrained,100,CP Minimax,two-sided,Soft logistic CLIME,exact,0.91148,1.14163,0.75882,0.60870,0.00000,115
+pretrained,100,CP Minimax,two-sided,Soft logistic CLIME,sample,0.87989,1.04741,0.67059,0.58261,0.00000,115
+pretrained,100,CP Minimax,two-sided,leave one out,truth,1.00000,1.00000,1.00000,1.00000,1.00000,115
+pretrained,100,prior shift,all,CLIME,exact,0.96736,87.21688,0.89265,0.77167,0.18333,600
+pretrained,100,prior shift,all,CLIME,sample,0.96303,77.76577,0.87353,0.74833,0.23000,600
+pretrained,100,prior shift,all,LIME,exact,0.98667,28.22292,0.94118,0.85667,0.22000,600
+pretrained,100,prior shift,all,LIME,sample,0.97432,26.74653,0.90588,0.84167,0.23000,600
+pretrained,100,prior shift,all,Logit-CLIME,exact,0.97759,1.01226,0.90294,0.82833,0.19000,600
+pretrained,100,prior shift,all,Logit-CLIME,sample,0.98386,1.00000,0.91912,0.84500,0.29833,600
+pretrained,100,prior shift,all,Logit-LIME,exact,1.00000,1.00000,1.00000,1.00000,1.00000,600
+pretrained,100,prior shift,all,Logit-LIME,sample,1.00000,1.00000,1.00000,1.00000,1.00000,600
+pretrained,100,prior shift,all,Shapley,truth,1.00000,1.00000,1.00000,1.00000,1.00000,600
+pretrained,100,prior shift,all,Soft logistic,exact,0.98647,1.44334,0.94118,0.84833,0.13333,600
+pretrained,100,prior shift,all,Soft logistic,sample,0.97438,8.37410,0.90588,0.83833,0.22500,600
+pretrained,100,prior shift,all,Soft logistic CLIME,exact,0.94851,1.50526,0.87941,0.80333,0.13167,600
+pretrained,100,prior shift,all,Soft logistic CLIME,sample,0.95366,14.47196,0.85000,0.77500,0.22500,600
+pretrained,100,prior shift,all,leave one out,truth,1.00000,1.00000,1.00000,1.00000,1.00000,600
+pretrained,100,prior shift,one-sided,CLIME,exact,0.97882,97.96846,0.92059,0.80000,0.22680,485
+pretrained,100,prior shift,one-sided,CLIME,sample,0.97544,93.54155,0.90000,0.77320,0.28454,485
+pretrained,100,prior shift,one-sided,LIME,exact,0.99061,44.14572,0.95882,0.88660,0.27216,485
+pretrained,100,prior shift,one-sided,LIME,sample,0.98297,46.59005,0.92647,0.86186,0.28454,485
+pretrained,100,prior shift,one-sided,Logit-CLIME,exact,0.97532,1.02645,0.89412,0.82268,0.23093,485
+pretrained,100,prior shift,one-sided,Logit-CLIME,sample,0.98847,1.00080,0.92941,0.85155,0.36907,485
+pretrained,100,prior shift,one-sided,Logit-LIME,exact,1.00000,1.00000,1.00000,1.00000,1.00000,485
+pretrained,100,prior shift,one-sided,Logit-LIME,sample,1.00000,1.00000,1.00000,1.00000,1.00000,485
+pretrained,100,prior shift,one-sided,Shapley,truth,1.00000,1.00000,1.00000,1.00000,1.00000,485
+pretrained,100,prior shift,one-sided,Soft logistic,exact,0.98926,1.85755,0.95588,0.87216,0.16495,485
+pretrained,100,prior shift,one-sided,Soft logistic,sample,0.97990,21.62995,0.92647,0.85567,0.27835,485
+pretrained,100,prior shift,one-sided,Soft logistic CLIME,exact,0.95791,2.17658,0.89706,0.83505,0.16289,485
+pretrained,100,prior shift,one-sided,Soft logistic CLIME,sample,0.96298,45.02730,0.87941,0.80206,0.27835,485
+pretrained,100,prior shift,one-sided,leave one out,truth,1.00000,1.00000,1.00000,1.00000,1.00000,485
+pretrained,100,prior shift,two-sided,CLIME,exact,0.92553,1.21574,0.79118,0.65217,0.00000,115
+pretrained,100,prior shift,two-sided,CLIME,sample,0.90740,1.20744,0.74118,0.64348,0.00000,115
+pretrained,100,prior shift,two-sided,LIME,exact,0.96398,1.89245,0.86471,0.73043,0.00000,115
+pretrained,100,prior shift,two-sided,LIME,sample,0.95006,1.91132,0.80588,0.75652,0.00000,115
+pretrained,100,prior shift,two-sided,Logit-CLIME,exact,0.98313,0.99061,0.92353,0.85217,0.01739,115
+pretrained,100,prior shift,two-sided,Logit-CLIME,sample,0.97907,0.98328,0.89706,0.81739,0.00000,115
+pretrained,100,prior shift,two-sided,Logit-LIME,exact,1.00000,1.00000,1.00000,1.00000,1.00000,115
+pretrained,100,prior shift,two-sided,Logit-LIME,sample,1.00000,1.00000,1.00000,1.00000,1.00000,115
+pretrained,100,prior shift,two-sided,Shapley,truth,1.00000,1.00000,1.00000,1.00000,1.00000,115
+pretrained,100,prior shift,two-sided,Soft logistic,exact,0.96908,1.05181,0.86176,0.74783,0.00000,115
+pretrained,100,prior shift,two-sided,Soft logistic,sample,0.95543,1.19535,0.81765,0.76522,0.00000,115
+pretrained,100,prior shift,two-sided,Soft logistic CLIME,exact,0.93366,1.11774,0.79412,0.66957,0.00000,115
+pretrained,100,prior shift,two-sided,Soft logistic CLIME,sample,0.91177,1.04170,0.72941,0.66087,0.00000,115
+pretrained,100,prior shift,two-sided,leave one out,truth,1.00000,1.00000,1.00000,1.00000,1.00000,115
+pretrained,100,re-thresholded,all,CLIME,exact,0.90261,112.96873,0.74706,0.63500,0.03833,600
+pretrained,100,re-thresholded,all,CLIME,sample,0.86583,120.81149,0.65000,0.57667,0.05667,600
+pretrained,100,re-thresholded,all,LIME,exact,0.92320,98.13468,0.79412,0.69000,0.04333,600
+pretrained,100,re-thresholded,all,LIME,sample,0.88214,93.31312,0.70000,0.64833,0.05667,600
+pretrained,100,re-thresholded,all,Logit-CLIME,exact,0.97686,1.06238,0.90000,0.84500,0.12333,600
+pretrained,100,re-thresholded,all,Logit-CLIME,sample,0.98484,1.07229,0.91765,0.85333,0.18167,600
+pretrained,100,re-thresholded,all,Logit-LIME,exact,1.00000,1.00000,1.00000,1.00000,1.00000,600
+pretrained,100,re-thresholded,all,Logit-LIME,sample,1.00000,1.00000,1.00000,1.00000,1.00000,600
+pretrained,100,re-thresholded,all,Shapley,truth,1.00000,1.00000,1.00000,1.00000,1.00000,600
+pretrained,100,re-thresholded,all,Soft logistic,exact,0.92473,1.47559,0.78971,0.68667,0.03000,600
+pretrained,100,re-thresholded,all,Soft logistic,sample,0.88423,10.37590,0.70294,0.67833,0.05000,600
+pretrained,100,re-thresholded,all,Soft logistic CLIME,exact,0.89812,1.44529,0.74118,0.65833,0.02833,600
+pretrained,100,re-thresholded,all,Soft logistic CLIME,sample,0.86200,11.15855,0.65588,0.61667,0.05000,600
+pretrained,100,re-thresholded,all,leave one out,truth,1.00000,1.00000,1.00000,1.00000,1.00000,600
+pretrained,100,re-thresholded,one-sided,CLIME,exact,0.91996,399.68346,0.77941,0.66392,0.04742,485
+pretrained,100,re-thresholded,one-sided,CLIME,sample,0.87776,392.67741,0.69118,0.59175,0.07010,485
+pretrained,100,re-thresholded,one-sided,LIME,exact,0.93208,256.94347,0.81471,0.70722,0.05361,485
+pretrained,100,re-thresholded,one-sided,LIME,sample,0.88843,247.75221,0.71765,0.64948,0.07010,485
+pretrained,100,re-thresholded,one-sided,Logit-CLIME,exact,0.98149,1.05511,0.91176,0.84948,0.14433,485
+pretrained,100,re-thresholded,one-sided,Logit-CLIME,sample,0.98974,1.06590,0.93824,0.86804,0.22062,485
+pretrained,100,re-thresholded,one-sided,Logit-LIME,exact,1.00000,1.00000,1.00000,1.00000,1.00000,485
+pretrained,100,re-thresholded,one-sided,Logit-LIME,sample,1.00000,1.00000,1.00000,1.00000,1.00000,485
+pretrained,100,re-thresholded,one-sided,Shapley,truth,1.00000,1.00000,1.00000,1.00000,1.00000,485
+pretrained,100,re-thresholded,one-sided,Soft logistic,exact,0.93409,1.58378,0.81176,0.69897,0.03711,485
+pretrained,100,re-thresholded,one-sided,Soft logistic,sample,0.89103,31.82993,0.72059,0.68454,0.06186,485
+pretrained,100,re-thresholded,one-sided,Soft logistic CLIME,exact,0.91142,1.56559,0.77353,0.68660,0.03505,485
+pretrained,100,re-thresholded,one-sided,Soft logistic CLIME,sample,0.87802,37.48860,0.68235,0.63505,0.06186,485
+pretrained,100,re-thresholded,one-sided,leave one out,truth,1.00000,1.00000,1.00000,1.00000,1.00000,485
+pretrained,100,re-thresholded,two-sided,CLIME,exact,0.79209,1.08997,0.60294,0.51304,0.00000,115
+pretrained,100,re-thresholded,two-sided,CLIME,sample,0.76206,1.08907,0.50588,0.51304,0.00000,115
+pretrained,100,re-thresholded,two-sided,LIME,exact,0.87211,0.69879,0.69412,0.61739,0.00000,115
+pretrained,100,re-thresholded,two-sided,LIME,sample,0.85989,0.70160,0.63529,0.64348,0.00000,115
+pretrained,100,re-thresholded,two-sided,Logit-CLIME,exact,0.95403,1.18626,0.85588,0.82609,0.03478,115
+pretrained,100,re-thresholded,two-sided,Logit-CLIME,sample,0.95343,1.14582,0.81471,0.79130,0.01739,115
+pretrained,100,re-thresholded,two-sided,Logit-LIME,exact,1.00000,1.00000,1.00000,1.00000,1.00000,115
+pretrained,100,re-thresholded,two-sided,Logit-LIME,sample,1.00000,1.00000,1.00000,1.00000,1.00000,115
+pretrained,100,re-thresholded,two-sided,Shapley,truth,1.00000,1.00000,1.00000,1.00000,1.00000,115
+pretrained,100,re-thresholded,two-sided,Soft logistic,exact,0.87404,1.19025,0.69412,0.63478,0.00000,115
+pretrained,100,re-thresholded,two-sided,Soft logistic,sample,0.86430,1.08102,0.62941,0.65217,0.00000,115
+pretrained,100,re-thresholded,two-sided,Soft logistic CLIME,exact,0.81277,1.20888,0.64118,0.53913,0.00000,115
+pretrained,100,re-thresholded,two-sided,Soft logistic CLIME,sample,0.78402,1.12786,0.52941,0.53913,0.00000,115
+pretrained,100,re-thresholded,two-sided,leave one out,truth,1.00000,1.00000,1.00000,1.00000,1.00000,115
 scratch,10,CP Minimax,all,CLIME,exact,0.98823,1.19314,0.95882,0.87500,0.26333,600
 scratch,10,CP Minimax,all,CLIME,sample,0.98754,1.21370,0.93235,0.84000,0.28333,600
 scratch,10,CP Minimax,all,LIME,exact,0.99600,2.29919,0.97941,0.94000,0.31333,600

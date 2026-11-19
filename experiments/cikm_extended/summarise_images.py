@@ -15,7 +15,7 @@ RUN = 'images_explained'
 SETTING = ['network', 'ratio']
 IMAGE = [*SETTING, 'dataset', 'seed', 'index']
 PLAIN = 'plain'
-CONTROL = 'reseeded'   # the plain network retrained from another seed
+CONTROL = 'reseeded'   # plain, another seed
 LOSSES = ('brier', 'brier_balanced', 'kl', 'kl_balanced')
 CLASSES = {0: 'majority', 1: 'minority'}
 

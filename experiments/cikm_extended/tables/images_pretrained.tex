@@ -1,0 +1,14 @@
+\begin{tabular}{@{}llrrrrrrrrr@{}}
+  \toprule
+   &  & \multicolumn{5}{c}{agreement with the black box} &  & \multicolumn{3}{c}{cosine with} \\
+  \cmidrule(lr){3-7} \cmidrule(lr){9-11}
+   &  & Fid. & Bal.\ fid. & AUC & Skill & Bal.\ skill & Stability & exact fit & leave one out & Shapley \\
+  \midrule
+  5000:50 & LIME & 0.98 & 0.54 & 0.96 & 0.52 & 0.07 & 0.89 & 0.94 & 0.46 & 0.78 \\
+   & CLIME & 0.98 & 0.68 & 0.95 & 0.09 & 0.47 & 0.87 & 0.91 & 0.44 & 0.75 \\
+   & Logit-LIME & 0.98 & 0.59 & 0.93 & 0.42 & 0.03 & 0.98 & 0.99 & 0.54 & 0.92 \\
+   & Logit-CLIME & 0.98 & 0.66 & 0.94 & 0.45 & 0.35 & 0.97 & 0.98 & 0.54 & 0.91 \\
+   & Soft logistic & 0.98 & 0.56 & 0.96 & 0.59 & 0.11 & 0.89 & 0.94 & 0.46 & 0.78 \\
+   & Soft logistic, CLIME weights & 0.98 & 0.67 & 0.95 & 0.44 & 0.44 & 0.87 & 0.91 & 0.45 & 0.76 \\
+  \bottomrule
+\end{tabular}

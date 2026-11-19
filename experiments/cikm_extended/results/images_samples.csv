@@ -1,4 +1,34 @@
 network,ratio,arm,explainer,samples,cosine,same_top,datasets,close
+pretrained,100,plain,CLIME,100,0.71385,0.33167,10,0.00000
+pretrained,100,plain,CLIME,300,0.82669,0.52833,10,0.00833
+pretrained,100,plain,CLIME,1000,0.90982,0.63833,10,0.08667
+pretrained,100,plain,CLIME,3000,0.94458,0.74333,10,0.25000
+pretrained,100,plain,CLIME,10000,0.97314,0.79333,10,0.61167
+pretrained,100,plain,LIME,100,0.74294,0.35667,10,0.00000
+pretrained,100,plain,LIME,300,0.86062,0.55833,10,0.01667
+pretrained,100,plain,LIME,1000,0.94206,0.70333,10,0.13167
+pretrained,100,plain,LIME,3000,0.97466,0.81833,10,0.36667
+pretrained,100,plain,LIME,10000,0.99186,0.85667,10,0.76833
+pretrained,100,plain,Logit-CLIME,100,0.89814,0.65667,10,0.00000
+pretrained,100,plain,Logit-CLIME,300,0.95709,0.80333,10,0.07833
+pretrained,100,plain,Logit-CLIME,1000,0.97916,0.90000,10,0.49000
+pretrained,100,plain,Logit-CLIME,3000,0.98731,0.92333,10,0.79500
+pretrained,100,plain,Logit-CLIME,10000,0.99306,0.96167,10,0.88500
+pretrained,100,plain,Logit-LIME,100,0.91214,0.67500,10,0.00000
+pretrained,100,plain,Logit-LIME,300,0.97140,0.82333,10,0.12833
+pretrained,100,plain,Logit-LIME,1000,0.99141,0.91333,10,0.68333
+pretrained,100,plain,Logit-LIME,3000,0.99719,0.94833,10,0.99000
+pretrained,100,plain,Logit-LIME,10000,0.99915,0.97333,10,1.00000
+pretrained,100,plain,Soft logistic,100,0.74566,0.41667,10,0.00000
+pretrained,100,plain,Soft logistic,300,0.85625,0.59500,10,0.02000
+pretrained,100,plain,Soft logistic,1000,0.93872,0.74500,10,0.13167
+pretrained,100,plain,Soft logistic,3000,0.97319,0.81500,10,0.33167
+pretrained,100,plain,Soft logistic,10000,0.99125,0.88833,10,0.72333
+pretrained,100,plain,Soft logistic CLIME,100,0.72004,0.40333,10,0.00000
+pretrained,100,plain,Soft logistic CLIME,300,0.82668,0.57000,10,0.01500
+pretrained,100,plain,Soft logistic CLIME,1000,0.91132,0.70500,10,0.07500
+pretrained,100,plain,Soft logistic CLIME,3000,0.94957,0.77667,10,0.21667
+pretrained,100,plain,Soft logistic CLIME,10000,0.97682,0.84500,10,0.55833
 scratch,1,plain,CLIME,100,0.86988,0.66000,10,0.00667
 scratch,1,plain,CLIME,300,0.93399,0.76000,10,0.10667
 scratch,1,plain,CLIME,1000,0.97021,0.85833,10,0.54167

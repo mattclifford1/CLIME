@@ -1,4 +1,16 @@
 network,ratio,arm,label,one_sided,one_sided_unweighted,single_class,single_class_sample,minority_weighted,f_class,datasets
+pretrained,100,CP Minimax,all,0.42167,0.41000,0.16333,0.25000,0.10438,0.29667,10
+pretrained,100,CP Minimax,majority,0.66667,0.64000,0.29000,0.42000,0.04018,0.02667,10
+pretrained,100,CP Minimax,minority,0.17667,0.18000,0.03667,0.08000,0.16859,0.56667,10
+pretrained,100,plain,all,0.80833,0.80667,0.60333,0.70333,0.02643,0.13000,10
+pretrained,100,plain,majority,0.97333,0.97000,0.86333,0.93333,0.00124,0.00333,10
+pretrained,100,plain,minority,0.64333,0.64333,0.34333,0.47333,0.05161,0.25667,10
+pretrained,100,prior shift,all,0.44667,0.43833,0.18333,0.29167,0.09782,0.28833,10
+pretrained,100,prior shift,majority,0.72333,0.69333,0.32667,0.50000,0.03030,0.03000,10
+pretrained,100,prior shift,minority,0.17000,0.18333,0.04000,0.08333,0.16535,0.54667,10
+pretrained,100,re-thresholded,all,0.21333,0.20167,0.05833,0.10167,0.15925,0.46833,10
+pretrained,100,re-thresholded,majority,0.28333,0.27000,0.09000,0.16000,0.12858,0.14000,10
+pretrained,100,re-thresholded,minority,0.14333,0.13333,0.02667,0.04333,0.18993,0.79667,10
 scratch,1,plain,all,0.34833,0.33333,0.19833,0.24167,0.14054,0.51500,10
 scratch,1,plain,majority,0.53333,0.51667,0.34333,0.40333,0.08239,0.09667,10
 scratch,1,plain,minority,0.16333,0.15000,0.05333,0.08000,0.19869,0.93333,10

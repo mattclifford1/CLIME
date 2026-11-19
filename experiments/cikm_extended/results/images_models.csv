@@ -1,4 +1,8 @@
 network,ratio,arm,shift,balanced_accuracy,recall_majority,recall_minority,positive_rate,roc_auc,datasets
+pretrained,100,CP Minimax,5.24167,0.78464,0.96817,0.60111,0.03746,0.90855,10
+pretrained,100,plain,0.00000,0.62736,0.99861,0.25611,0.00392,0.90855,10
+pretrained,100,prior shift,4.60517,0.77440,0.97492,0.57389,0.03052,0.90855,10
+pretrained,100,re-thresholded,9.19131,0.83586,0.86616,0.80556,0.14050,0.90855,10
 scratch,1,plain,0.00000,0.92097,0.91765,0.92430,0.50333,0.97311,10
 scratch,10,CP Minimax,1.95070,0.82535,0.95276,0.69794,0.10640,0.92048,10
 scratch,10,logit adjusted,0.00000,0.84137,0.95668,0.72606,0.10538,0.93010,10
