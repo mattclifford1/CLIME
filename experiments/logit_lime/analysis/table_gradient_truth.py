@@ -66,8 +66,7 @@ def main(path=None):
         r'mean cosine similarity, mean Spearman correlation of $|\beta|$, and the rate at '
         r'which the surrogate names the truly most important feature. The last column '
         r'counts datasets on which Logit-LIME has the higher cosine. Groups D and E are '
-        r'absent because a piecewise constant black box has no local gradient, so no '
-        r'ground truth exists for them at all.}',
+        r'absent: a piecewise constant black box has no local gradient.}',
         r'  \label{tab:gradient}',
         r'  \begin{tabular}{lrrrrrrrr}', r'    \toprule',
         r'    & & \multicolumn{2}{c}{cosine} & \multicolumn{2}{c}{rank $\rho$} & '
