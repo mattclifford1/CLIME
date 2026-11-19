@@ -25,7 +25,9 @@ GRID = 4            # patches per side
 QUERIES = 15        # test images per class
 EPOCHS = {False: 50, True: 10}   # from scratch, fine-tuned
 # this run's name for each training arm of imbalanced_explanations.images
-ARMS = {'plain': 'imbalanced', 'weighted': 'class_weighted', 'logit adjusted': 'logit_adjusted'}
+ARMS = {'plain': 'imbalanced', 'weighted': 'class_weighted', 'logit adjusted': 'logit_adjusted',
+        'reseeded': 'imbalanced'}
+RESEED = 1000   # offsets the training seed
 BATCH = 8192
 BALANCED = 4000     # rows per class of the balanced development set; the rest are validation
 
@@ -99,7 +101,8 @@ def run(positive, seed, ratio, arm, pretrained):
     start = time.time()
     problem = problem_for(positive, seed, ratio)
     device = torch.device('cuda')
-    net = train_net(problem, ARMS[arm], seed, EPOCHS[pretrained], pretrained=pretrained).float()
+    net = train_net(problem, ARMS[arm], seed + RESEED*(arm == 'reseeded'), EPOCHS[pretrained],
+                    pretrained=pretrained).float()
     split = {k: logits(net, torch.from_numpy(X).to(device)).cpu().numpy()
              for k, X in (('train', problem.X), ('val', problem.X_val), ('test', problem.X_test))}
     query = queries(problem, positive, seed)

@@ -498,8 +498,8 @@ IMAGE_SCORES = {'fidelity': 'fid', 'balanced': 'bal', 'auc': 'auc', 'skill': 'sk
                 'exact_shapley_cosine': 'exactshapley'}
 IMAGE_TRUTHS = {'leave one out': 'leave-one-out effects', 'Shapley': 'Shapley values'}
 IMAGE_ARMS = {'prior shift': 'prior shift', 're-thresholded': 're-thresholded (validation)',
-              'CP Minimax': 'deltas (CP Minimax)', 'weighted': 'class weighted',
-              'logit adjusted': 'logit-adjusted loss'}
+              'CP Minimax': 'deltas (CP Minimax)', 'reseeded': 'plain, another training seed',
+              'weighted': 'class weighted', 'logit adjusted': 'logit-adjusted loss'}
 
 
 def images():

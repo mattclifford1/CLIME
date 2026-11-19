@@ -681,8 +681,8 @@ def images_moves():
     frame = frame[(frame.network == 'scratch') & (frame.ratio == 100) & (frame.neighbourhood == 'all')
                   & frame.fit.isin(['sample', 'truth'])]
     frame = frame.assign(top_changed=100*(1 - frame.same_top))
-    arms = {'prior shift': 'threshold\nmoved', 'weighted': 'class\nweighted',
-            'logit adjusted': 'logit-adjusted\nloss'}
+    arms = {'prior shift': 'threshold\nmoved', 'reseeded': 'another\ntraining seed',
+            'weighted': 'class\nweighted', 'logit adjusted': 'logit-adjusted\nloss'}
     shown = [a for a in arms if a in set(frame.arm)]
     truths = {'leave one out': (INK2, 'leave-one-out effects'), 'Shapley': (MUTED, 'Shapley values')}
     panels = [('top_changed', 'query images whose\ntop patch changes (%)'),

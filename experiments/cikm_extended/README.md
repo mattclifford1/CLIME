@@ -35,5 +35,5 @@ uv run python explain_images.py         # six surrogates on those masks, scored 
 
 `./rerun_all.sh` runs the four large runs in stages, three seeds of the main run first.
 `check_outliers.py` repeats the headline comparison without the splits whose test set holds an extreme value.
-`run_images.py` takes `--arms weighted "logit adjusted"` and `--pretrained` for the other networks, and `--pictures` to store the query images that `make_figures.py images_example` draws.
+`run_images.py` takes `--arms weighted "logit adjusted" reseeded` and `--pretrained` for the other networks (`reseeded` is the plain network retrained from another seed), and `--pictures` to store the query images that `make_figures.py images_example` draws.
 `check_logistic.py` refits LIME's ridge on logistic regression at other kernel widths and with no penalty, and all six surrogates on 300 to 100,000 samples (about two hours).
