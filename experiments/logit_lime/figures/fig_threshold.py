@@ -9,7 +9,7 @@ usage:  python figures/fig_threshold.py
 import sys, os
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from common import paths, gradients, threshold
+from common import paths, gradients, threshold, toy
 from common.style import *
 
 import json
@@ -18,13 +18,11 @@ import numpy as np
 from scipy.special import expit, logit
 import clime
 from clime.data.utils import costs
-from sweeps.sweep import opts, METRICS
-from clime.evaluation.key_points import get_points_between_class_means
 
 warnings.filterwarnings('ignore')
 
-DATASET, MODEL = 'Gaussian', 'Logistic'
-QUERY_INDEX = 4                      # a confident negative: f(q) = 0.0003 as trained
+MODEL = toy.LINEAR['model']
+QUERY_INDEX = 2                      # a confident negative: f(q) = 0.002 as trained
 THRESHOLDS = (0.5, 0.1, 0.01)
 STYLES = {0.5: '-', 0.1: (0, (4, 1.6)), 0.01: (0, (1, 1.4))}
 SWEEP = expit(-np.linspace(-7, 11, 37))   # thresholds from 0.999 to 0.00002
@@ -49,10 +47,7 @@ def cosine(a, b):
     return float(a @ b/(np.linalg.norm(a)*np.linalg.norm(b)))
 
 
-r = clime.pipeline.run_pipeline(opts(DATASET, MODEL, SURROGATES['standard'], METRICS[0]),
-                                parallel_eval=False)
-clf, train, test = r['clf'], r['train_data'], r['test_data']
-qs = np.asarray(get_points_between_class_means(test)[0], dtype=float)
+clf, train, test, qs = toy.build(**toy.LINEAR)
 q = qs[QUERY_INDEX]
 K = costs.KERNEL_WIDTH_SCALE*np.sqrt(q.size)
 truth = gradients.grad_logit(clf, MODEL, q)[0]
@@ -276,7 +271,10 @@ fig.savefig(paths.fig('fig_threshold_sweep.png'))
 # ------------------------------------------------------------ the numbers the text quotes
 at = {t: int(np.argmin(np.abs(SWEEP - t))) for t in THRESHOLDS}
 readings = {
-    'dataset': DATASET, 'model': MODEL, 'query_index': QUERY_INDEX, 'truth': truth.tolist(),
+    'toy': toy.LINEAR, 'query_index': QUERY_INDEX, 'truth': truth.tolist(),
+    'ratio_truth': float(truth[1]/truth[0]),
+    'ratio': {label: {str(t): float(fits[t][label][0][1]/fits[t][label][0][0]) for t in THRESHOLDS}
+              for label in SURROGATES},
     'distance_to_boundary': {str(t): abs(s_q - float(logit(t)/np.linalg.norm(truth)))
                              for t in THRESHOLDS},
     'kernel_width': K,
@@ -297,6 +295,6 @@ readings = {
                                   for label in SURROGATES},
 }
 json.dump(readings, open(paths.results('threshold_readings.json'), 'w'), indent=1)
-for key in ('f_q', 'norm', 'fold_at_q', 'fold_over_points', 'span_over_thresholds_at_q',
+for key in ('truth', 'coef', 'ratio_truth', 'ratio', 'f_q', 'norm', 'fold_at_q', 'fold_over_points', 'span_over_thresholds_at_q',
             'cosine_with_truth', 'standard_claims_at_q', 'distance_to_boundary'):
     print(key, json.dumps(readings[key]))

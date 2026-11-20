@@ -986,12 +986,18 @@ recovered the gradient best here. Both report log-odds.
 a black box's decision threshold adds a constant to its log-odds (`common/threshold.py`)
 and leaves the gradient of the log-odds alone.
 
-- Toy, Gaussian | Logistic, one confident negative: standard LIME's coefficients grow
-  2.9-fold at threshold 0.1 and 7.1-fold at 0.01; Logit-LIME reports the weights each time.
-  LIME's direction stays right (cosine above 0.9999): its slope is the neighbourhood's
-  mean of p(1-p) times the weights, so its size says where the threshold is.
-- Along the query line at threshold 0.01 LIME's size changes by 0.015x to 34x. Logit-LIME
-  by 0.65x to 1.03x, leaving 1 only where the shifted probabilities pass its clip.
+- Linear toy (`common/toy.py`: a logistic regression with weights 2.64 and 0.87), one
+  confident negative: standard LIME's coefficients grow 3.8-fold at threshold 0.1 and
+  10.7-fold at 0.01; Logit-LIME reports the weights each time. LIME's direction stays
+  right (ratio 0.31 to 0.32 against 0.33): its slope is the neighbourhood's mean of
+  p(1-p) times the weights, so its size mixes the contribution with where the threshold is.
+- Along the query line at threshold 0.01 LIME's size changes by 0.012x to 26x. Logit-LIME
+  by 0.94x to 1.00x, leaving 1 only where the shifted probabilities pass its clip.
+- Curved toy (QDA, quadratic log-odds; `figures/fig_threshold_curved.py`): the gradient at
+  the query point is (8.9, 4.6). Standard LIME ranks x1 first at threshold 0.99 and x0
+  first at 0.01, flipping near 0.6; Logit-LIME ranks x0 first throughout (cosine with the
+  gradient at least 0.997), though its x0 coefficient falls from 8.5 to 7.0 at 0.99 where
+  part of the neighbourhood is below its clip.
 - Registered 14 datasets x 11 differentiable black boxes: LIME's size changes by a median
   1.77x (to 0.1 or 0.9) and 3.86x (to 0.01 or 0.99) and its top feature changes at 13%
   and 22% of query points; Logit-LIME 1.00x, 2% and 3%.
@@ -1002,9 +1008,9 @@ and leaves the gradient of the log-odds alone.
 
 `figures/fig_samples.py`, `sweeps/sweep_samples.py`, method paper Section 4.2.
 
-- Toy, same query point: on 30 samples standard LIME's explanation is a median 10.6
-  degrees from the weights and Logit-LIME's 0.7; LIME on 100,000 (0.15) is where
-  Logit-LIME is on 100 (0.14).
+- Linear toy, same query point: on 30 samples standard LIME's explanation is a median 5.9
+  degrees from the weights and Logit-LIME's 0.7; LIME needs 3,000 samples to reach that
+  and 100,000 (0.10) to pass Logit-LIME on 100 (0.15).
 - 42 exactly-linear black boxes (Logistic, LDA, Nearest Class Mean on the 14 registered
   datasets): mean cosine with the weights, Logit-LIME 0.946 on 1,000 samples against LIME
   0.938 on 10,000, and 0.974 on 10,000 against 0.973 on 100,000. About a tenth of the

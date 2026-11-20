@@ -9,7 +9,7 @@ usage:  python figures/fig_samples.py
 import sys, os
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from common import paths, gradients
+from common import paths, gradients, toy
 from common.style import *
 
 import json
@@ -17,13 +17,10 @@ import warnings
 import numpy as np
 import clime
 from clime.data.utils import costs
-from sweeps.sweep import opts, METRICS
-from clime.evaluation.key_points import get_points_between_class_means
 
 warnings.filterwarnings('ignore')
 
-DATASET, MODEL = 'Gaussian', 'Logistic'
-QUERY_INDEX = 4                      # the query point of fig_threshold.py
+QUERY_INDEX = 2                      # the query point of fig_threshold.py
 FEW = 30                             # samples in each neighbourhood of panels (a) and (b)
 SHOWN = 20                           # neighbourhoods drawn there
 DRAWS = 100                          # neighbourhoods behind each point of panel (c)
@@ -47,11 +44,9 @@ def angle(coef):
     return float(np.degrees(np.arccos(np.clip(c, -1, 1))))
 
 
-r = clime.pipeline.run_pipeline(opts(DATASET, MODEL, SURROGATES['standard'][0], METRICS[0]),
-                                parallel_eval=False)
-clf, train, test = r['clf'], r['train_data'], r['test_data']
-q = np.asarray(get_points_between_class_means(test)[0], dtype=float)[QUERY_INDEX]
-truth = gradients.grad_logit(clf, MODEL, q)[0]
+clf, train, test, qs = toy.build(**toy.LINEAR)
+q = qs[QUERY_INDEX]
+truth = gradients.grad_logit(clf, toy.LINEAR['model'], q)[0]
 u = truth/np.linalg.norm(truth)
 K = costs.KERNEL_WIDTH_SCALE*np.sqrt(q.size)
 
@@ -126,7 +121,7 @@ fig.savefig(paths.fig('fig_samples.pdf'))
 fig.savefig(paths.fig('fig_samples.png'))
 
 readings = {
-    'dataset': DATASET, 'model': MODEL, 'query_index': QUERY_INDEX, 'draws': DRAWS,
+    'toy': toy.LINEAR, 'query_index': QUERY_INDEX, 'draws': DRAWS,
     'median_angle': {label: {str(n): float(np.median(a)) for n, a in zip(SAMPLES, angles[label])}
                      for label in SURROGATES},
     'grid_configs': len(swept),

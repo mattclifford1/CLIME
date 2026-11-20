@@ -17,7 +17,8 @@ for f in figures/fig_mechanism.py figures/fig_diagnostic.py figures/fig_spatial.
          figures/fig_patches.py \
          figures/fig_fidelity_explanation.py figures/fig_taylor_tradeoff.py \
          figures/fig_instruments.py figures/fig_blind.py figures/fig_reading.py \
-         figures/fig_threshold.py analysis/table_threshold.py figures/fig_samples.py \
+         figures/fig_threshold.py figures/fig_threshold_curved.py analysis/table_threshold.py \
+         figures/fig_samples.py \
          analysis/table_brier_kl.py analysis/table_groups.py analysis/table_fidelity.py \
          analysis/table_example_explanation.py analysis/table_gradient_truth.py \
          analysis/table_instruments.py analysis/table_reading.py \
