@@ -1199,8 +1199,8 @@ committed first (`experiments/cikm_extended/PREREGISTRATION.md`): 1, 3, 4 and 7 
     against 0.78 at 5000:50), Logit-LIME on 300 masks matches LIME on 3,000 at 5000:50,
     and CLIME is worse than LIME at every ratio. The prior shift changes LIME's top patch
     at 16% of images and CLIME's at 25%, and leaves 45% of neighbourhoods one-sided
-    against the ResNet-20's 60%, so all nine predictions hold on this network where 5 and 6
-    held only in part on the ResNet-20.
+    against the ResNet-20's 60%. Predictions 5 and 6, which held only in part on the
+    ResNet-20, hold in full on this network.
 
 Not done: a ground truth for the tree models and k-NN.
 
