@@ -980,6 +980,24 @@ recovered the gradient best here. Both report log-odds.
 
 ---
 
+### A threshold move (toy example and sweep, 2026-11-20, exploratory)
+
+`figures/fig_threshold.py`, `sweeps/sweep_threshold.py`, method paper Section 4.1. Moving
+a black box's decision threshold adds a constant to its log-odds (`common/threshold.py`)
+and leaves the gradient of the log-odds alone.
+
+- Toy, Gaussian | Logistic, one confident negative: standard LIME's coefficients grow
+  2.9-fold at threshold 0.1 and 7.1-fold at 0.01; Logit-LIME reports the weights each time.
+  LIME's direction stays right (cosine above 0.9999): its slope is the neighbourhood's
+  mean of p(1-p) times the weights, so its size says where the threshold is.
+- Along the query line at threshold 0.01 LIME's size changes by 0.015x to 34x. Logit-LIME
+  by 0.65x to 1.03x, leaving 1 only where the shifted probabilities pass its clip.
+- Registered 14 datasets x 11 differentiable black boxes: LIME's size changes by a median
+  1.77x (to 0.1 or 0.9) and 3.86x (to 0.01 or 0.99) and its top feature changes at 13%
+  and 22% of query points; Logit-LIME 1.00x, 2% and 3%.
+- Bayes Optimal returns (0, 0) at some sampled points on Sonar and Credit Scoring (B21);
+  the shifted model reads those as p = 0.
+
 ## 5. Thread 3 — aLIMEgn
 
 Framing note from June 2024. **Coded and run on 2026-09-12/13, rerun from an empty cache

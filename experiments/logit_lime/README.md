@@ -81,6 +81,7 @@ wrong.
 | `sweep_instruments.py` | `results_instruments.json` | what each instrument responds to, on a family of surrogates whose error is prescribed rather than fitted (`common/surrogates.py`) — the arithmetic behind the claim that a 0.5 threshold cannot see confidence |
 | `sweep_null.py` | `results_null.json` | the base rate: what an explainer that explains nothing scores under each instrument |
 | `sweep_range.py` | `results_range.json` | how far the *reported coefficient* can be carried before a standard LIME surrogate stops being a probability, against the width of the kernel that defined the neighbourhood — plus the flip distance each surrogate implies, against the black box's own |
+| `sweep_threshold.py` | `results_threshold.json` | each explanation before and after the black box's decision threshold is moved; `figures/fig_threshold.py` is the toy example and `analysis/table_threshold.py` the table |
 | `sweep_seeds.py` | `results_seed*.json` | a subset repeated under five random seeds |
 | `sweep_diagnostic_checks.py` | `results_diagnostic_checks.json` | what R²_logit is measuring (fifth registration, C1–C5): clip sensitivity, same-space curvature, gradient dispersion (no fit), in-sample advantage, its own salt |
 | `sweep_ridge_alpha.py` | `results_ridge_alpha.json` | both surrogates refitted at five ridge penalties on the same neighbourhood; α = 1 reproduces `results_taxonomy.json` exactly |
