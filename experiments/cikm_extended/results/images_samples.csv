@@ -4,6 +4,11 @@ pretrained,1,plain,CLIME,300,0.90514,0.66167,10,0.06333
 pretrained,1,plain,CLIME,1000,0.94955,0.76667,10,0.40000
 pretrained,1,plain,CLIME,3000,0.97064,0.83333,10,0.65333
 pretrained,1,plain,CLIME,10000,0.98164,0.88000,10,0.81833
+pretrained,1,plain,KernelSHAP,100,0.78712,0.49500,10,0.00500
+pretrained,1,plain,KernelSHAP,300,0.93853,0.67167,10,0.03667
+pretrained,1,plain,KernelSHAP,1000,0.98466,0.81333,10,0.42833
+pretrained,1,plain,KernelSHAP,3000,0.99594,0.88833,10,0.93500
+pretrained,1,plain,KernelSHAP,10000,0.99922,0.92833,10,1.00000
 pretrained,1,plain,LIME,100,0.86375,0.59833,10,0.00167
 pretrained,1,plain,LIME,300,0.94767,0.74667,10,0.04833
 pretrained,1,plain,LIME,1000,0.98291,0.84333,10,0.49000
@@ -14,6 +19,11 @@ pretrained,1,plain,Logit-CLIME,300,0.96546,0.83500,10,0.22500
 pretrained,1,plain,Logit-CLIME,1000,0.98402,0.87667,10,0.63167
 pretrained,1,plain,Logit-CLIME,3000,0.99181,0.92333,10,0.84167
 pretrained,1,plain,Logit-CLIME,10000,0.99559,0.96000,10,0.92333
+pretrained,1,plain,Logit-KernelSHAP,100,0.90498,0.68500,10,0.02667
+pretrained,1,plain,Logit-KernelSHAP,300,0.97690,0.83833,10,0.31500
+pretrained,1,plain,Logit-KernelSHAP,1000,0.99449,0.93000,10,0.85667
+pretrained,1,plain,Logit-KernelSHAP,3000,0.99857,0.97333,10,0.99167
+pretrained,1,plain,Logit-KernelSHAP,10000,0.99972,0.99333,10,1.00000
 pretrained,1,plain,Logit-LIME,100,0.94009,0.75500,10,0.02167
 pretrained,1,plain,Logit-LIME,300,0.98124,0.87333,10,0.34333
 pretrained,1,plain,Logit-LIME,1000,0.99454,0.91667,10,0.88000
@@ -34,6 +44,11 @@ pretrained,1,reseeded,CLIME,300,0.90662,0.71500,10,0.06000
 pretrained,1,reseeded,CLIME,1000,0.95200,0.80500,10,0.38833
 pretrained,1,reseeded,CLIME,3000,0.97353,0.87167,10,0.66167
 pretrained,1,reseeded,CLIME,10000,0.98664,0.91167,10,0.84500
+pretrained,1,reseeded,KernelSHAP,100,0.78939,0.47167,10,0.00333
+pretrained,1,reseeded,KernelSHAP,300,0.93929,0.66667,10,0.04667
+pretrained,1,reseeded,KernelSHAP,1000,0.98549,0.81833,10,0.45500
+pretrained,1,reseeded,KernelSHAP,3000,0.99623,0.89500,10,0.94833
+pretrained,1,reseeded,KernelSHAP,10000,0.99924,0.93833,10,0.99833
 pretrained,1,reseeded,LIME,100,0.85731,0.62833,10,0.00167
 pretrained,1,reseeded,LIME,300,0.94483,0.77000,10,0.06833
 pretrained,1,reseeded,LIME,1000,0.98100,0.87167,10,0.46500
@@ -44,6 +59,11 @@ pretrained,1,reseeded,Logit-CLIME,300,0.96562,0.83667,10,0.22500
 pretrained,1,reseeded,Logit-CLIME,1000,0.98366,0.91000,10,0.62500
 pretrained,1,reseeded,Logit-CLIME,3000,0.99133,0.94167,10,0.84667
 pretrained,1,reseeded,Logit-CLIME,10000,0.99618,0.95167,10,0.93500
+pretrained,1,reseeded,Logit-KernelSHAP,100,0.90513,0.66167,10,0.02500
+pretrained,1,reseeded,Logit-KernelSHAP,300,0.97782,0.83333,10,0.34167
+pretrained,1,reseeded,Logit-KernelSHAP,1000,0.99431,0.90667,10,0.84833
+pretrained,1,reseeded,Logit-KernelSHAP,3000,0.99865,0.95000,10,0.99833
+pretrained,1,reseeded,Logit-KernelSHAP,10000,0.99973,0.98667,10,1.00000
 pretrained,1,reseeded,Logit-LIME,100,0.94186,0.77500,10,0.03000
 pretrained,1,reseeded,Logit-LIME,300,0.98154,0.87500,10,0.34167
 pretrained,1,reseeded,Logit-LIME,1000,0.99451,0.94167,10,0.87000
@@ -64,6 +84,11 @@ pretrained,10,plain,CLIME,300,0.89439,0.63500,10,0.03333
 pretrained,10,plain,CLIME,1000,0.94484,0.73333,10,0.30167
 pretrained,10,plain,CLIME,3000,0.97118,0.81333,10,0.56500
 pretrained,10,plain,CLIME,10000,0.98474,0.85167,10,0.82167
+pretrained,10,plain,KernelSHAP,100,0.77303,0.45667,10,0.00167
+pretrained,10,plain,KernelSHAP,300,0.93065,0.67500,10,0.03000
+pretrained,10,plain,KernelSHAP,1000,0.98113,0.79500,10,0.38333
+pretrained,10,plain,KernelSHAP,3000,0.99477,0.86500,10,0.90833
+pretrained,10,plain,KernelSHAP,10000,0.99899,0.93667,10,0.99333
 pretrained,10,plain,LIME,100,0.82432,0.54000,10,0.00167
 pretrained,10,plain,LIME,300,0.92385,0.69500,10,0.03500
 pretrained,10,plain,LIME,1000,0.97183,0.81333,10,0.33833
@@ -74,6 +99,11 @@ pretrained,10,plain,Logit-CLIME,300,0.95668,0.80333,10,0.16167
 pretrained,10,plain,Logit-CLIME,1000,0.97884,0.88000,10,0.55333
 pretrained,10,plain,Logit-CLIME,3000,0.98767,0.93000,10,0.81833
 pretrained,10,plain,Logit-CLIME,10000,0.99343,0.96167,10,0.91500
+pretrained,10,plain,Logit-KernelSHAP,100,0.88916,0.64167,10,0.00833
+pretrained,10,plain,Logit-KernelSHAP,300,0.97220,0.82500,10,0.21000
+pretrained,10,plain,Logit-KernelSHAP,1000,0.99305,0.91833,10,0.79500
+pretrained,10,plain,Logit-KernelSHAP,3000,0.99828,0.95500,10,0.99667
+pretrained,10,plain,Logit-KernelSHAP,10000,0.99966,0.98667,10,1.00000
 pretrained,10,plain,Logit-LIME,100,0.92602,0.71333,10,0.01667
 pretrained,10,plain,Logit-LIME,300,0.97474,0.84167,10,0.23167
 pretrained,10,plain,Logit-LIME,1000,0.99281,0.91667,10,0.77333
@@ -94,6 +124,11 @@ pretrained,10,reseeded,CLIME,300,0.90233,0.65000,10,0.04333
 pretrained,10,reseeded,CLIME,1000,0.94916,0.77000,10,0.32667
 pretrained,10,reseeded,CLIME,3000,0.96954,0.81333,10,0.60000
 pretrained,10,reseeded,CLIME,10000,0.98308,0.88000,10,0.85667
+pretrained,10,reseeded,KernelSHAP,100,0.77205,0.46833,10,0.00167
+pretrained,10,reseeded,KernelSHAP,300,0.93054,0.66333,10,0.02167
+pretrained,10,reseeded,KernelSHAP,1000,0.98156,0.81333,10,0.37500
+pretrained,10,reseeded,KernelSHAP,3000,0.99460,0.89833,10,0.90667
+pretrained,10,reseeded,KernelSHAP,10000,0.99892,0.95667,10,0.99333
 pretrained,10,reseeded,LIME,100,0.82973,0.52333,10,0.00167
 pretrained,10,reseeded,LIME,300,0.92944,0.70500,10,0.02833
 pretrained,10,reseeded,LIME,1000,0.97377,0.81500,10,0.33833
@@ -104,6 +139,11 @@ pretrained,10,reseeded,Logit-CLIME,300,0.95803,0.77500,10,0.18000
 pretrained,10,reseeded,Logit-CLIME,1000,0.97961,0.88000,10,0.60833
 pretrained,10,reseeded,Logit-CLIME,3000,0.98815,0.90667,10,0.82833
 pretrained,10,reseeded,Logit-CLIME,10000,0.99371,0.95667,10,0.91333
+pretrained,10,reseeded,Logit-KernelSHAP,100,0.88893,0.63000,10,0.00833
+pretrained,10,reseeded,Logit-KernelSHAP,300,0.97291,0.83333,10,0.20667
+pretrained,10,reseeded,Logit-KernelSHAP,1000,0.99315,0.90667,10,0.79833
+pretrained,10,reseeded,Logit-KernelSHAP,3000,0.99826,0.96500,10,0.99500
+pretrained,10,reseeded,Logit-KernelSHAP,10000,0.99966,0.98333,10,1.00000
 pretrained,10,reseeded,Logit-LIME,100,0.92633,0.70333,10,0.01000
 pretrained,10,reseeded,Logit-LIME,300,0.97616,0.82500,10,0.23167
 pretrained,10,reseeded,Logit-LIME,1000,0.99271,0.90833,10,0.80333
@@ -124,6 +164,11 @@ pretrained,100,plain,CLIME,300,0.82669,0.52833,10,0.00833
 pretrained,100,plain,CLIME,1000,0.90982,0.63833,10,0.08667
 pretrained,100,plain,CLIME,3000,0.94458,0.74333,10,0.25000
 pretrained,100,plain,CLIME,10000,0.97314,0.79333,10,0.61167
+pretrained,100,plain,KernelSHAP,100,0.73228,0.42333,10,0.00000
+pretrained,100,plain,KernelSHAP,300,0.90893,0.61167,10,0.01167
+pretrained,100,plain,KernelSHAP,1000,0.97309,0.75500,10,0.22833
+pretrained,100,plain,KernelSHAP,3000,0.99206,0.83500,10,0.78333
+pretrained,100,plain,KernelSHAP,10000,0.99822,0.90667,10,0.97167
 pretrained,100,plain,LIME,100,0.74294,0.35667,10,0.00000
 pretrained,100,plain,LIME,300,0.86062,0.55833,10,0.01667
 pretrained,100,plain,LIME,1000,0.94206,0.70333,10,0.13167
@@ -134,6 +179,11 @@ pretrained,100,plain,Logit-CLIME,300,0.95709,0.80333,10,0.07833
 pretrained,100,plain,Logit-CLIME,1000,0.97916,0.90000,10,0.49000
 pretrained,100,plain,Logit-CLIME,3000,0.98731,0.92333,10,0.79500
 pretrained,100,plain,Logit-CLIME,10000,0.99306,0.96167,10,0.88500
+pretrained,100,plain,Logit-KernelSHAP,100,0.88102,0.61833,10,0.00333
+pretrained,100,plain,Logit-KernelSHAP,300,0.96931,0.78833,10,0.15167
+pretrained,100,plain,Logit-KernelSHAP,1000,0.99260,0.90833,10,0.79167
+pretrained,100,plain,Logit-KernelSHAP,3000,0.99810,0.94500,10,0.98833
+pretrained,100,plain,Logit-KernelSHAP,10000,0.99962,0.97333,10,1.00000
 pretrained,100,plain,Logit-LIME,100,0.91214,0.67500,10,0.00000
 pretrained,100,plain,Logit-LIME,300,0.97140,0.82333,10,0.12833
 pretrained,100,plain,Logit-LIME,1000,0.99141,0.91333,10,0.68333
@@ -154,6 +204,11 @@ pretrained,100,reseeded,CLIME,300,0.83784,0.52000,10,0.01000
 pretrained,100,reseeded,CLIME,1000,0.91301,0.64000,10,0.09000
 pretrained,100,reseeded,CLIME,3000,0.94707,0.75333,10,0.31000
 pretrained,100,reseeded,CLIME,10000,0.97020,0.83167,10,0.66667
+pretrained,100,reseeded,KernelSHAP,100,0.74316,0.44333,10,0.00000
+pretrained,100,reseeded,KernelSHAP,300,0.91286,0.61667,10,0.02000
+pretrained,100,reseeded,KernelSHAP,1000,0.97606,0.78500,10,0.26000
+pretrained,100,reseeded,KernelSHAP,3000,0.99384,0.86667,10,0.86000
+pretrained,100,reseeded,KernelSHAP,10000,0.99872,0.90667,10,0.99000
 pretrained,100,reseeded,LIME,100,0.74860,0.43167,10,0.00000
 pretrained,100,reseeded,LIME,300,0.87438,0.58333,10,0.00667
 pretrained,100,reseeded,LIME,1000,0.95183,0.72167,10,0.10500
@@ -164,6 +219,11 @@ pretrained,100,reseeded,Logit-CLIME,300,0.94797,0.75000,10,0.04833
 pretrained,100,reseeded,Logit-CLIME,1000,0.97308,0.85667,10,0.43000
 pretrained,100,reseeded,Logit-CLIME,3000,0.98352,0.90500,10,0.75333
 pretrained,100,reseeded,Logit-CLIME,10000,0.98987,0.94167,10,0.84333
+pretrained,100,reseeded,Logit-KernelSHAP,100,0.87019,0.60667,10,0.00333
+pretrained,100,reseeded,Logit-KernelSHAP,300,0.96732,0.81833,10,0.13000
+pretrained,100,reseeded,Logit-KernelSHAP,1000,0.99221,0.90000,10,0.76333
+pretrained,100,reseeded,Logit-KernelSHAP,3000,0.99796,0.92833,10,0.99000
+pretrained,100,reseeded,Logit-KernelSHAP,10000,0.99960,0.98333,10,1.00000
 pretrained,100,reseeded,Logit-LIME,100,0.90342,0.66000,10,0.00000
 pretrained,100,reseeded,Logit-LIME,300,0.96697,0.77500,10,0.10167
 pretrained,100,reseeded,Logit-LIME,1000,0.99013,0.87500,10,0.63167
@@ -179,11 +239,56 @@ pretrained,100,reseeded,Soft logistic CLIME,300,0.84072,0.57167,10,0.01333
 pretrained,100,reseeded,Soft logistic CLIME,1000,0.91855,0.72167,10,0.07167
 pretrained,100,reseeded,Soft logistic CLIME,3000,0.95478,0.79833,10,0.23667
 pretrained,100,reseeded,Soft logistic CLIME,10000,0.97775,0.87500,10,0.62833
+pretrained,100,weighted,CLIME,100,0.98905,0.93333,2,0.80000
+pretrained,100,weighted,CLIME,300,0.99631,0.96667,2,0.90000
+pretrained,100,weighted,CLIME,1000,0.99897,0.98333,2,0.96667
+pretrained,100,weighted,CLIME,3000,0.99956,0.98333,2,0.98333
+pretrained,100,weighted,CLIME,10000,0.99972,1.00000,2,0.98333
+pretrained,100,weighted,KernelSHAP,100,0.98441,0.96667,2,0.81667
+pretrained,100,weighted,KernelSHAP,300,0.99640,0.96667,2,0.95000
+pretrained,100,weighted,KernelSHAP,1000,0.99947,0.98333,2,1.00000
+pretrained,100,weighted,KernelSHAP,3000,0.99982,1.00000,2,1.00000
+pretrained,100,weighted,KernelSHAP,10000,0.99997,0.98333,2,1.00000
+pretrained,100,weighted,LIME,100,0.98990,0.95000,2,0.80000
+pretrained,100,weighted,LIME,300,0.99673,0.98333,2,0.93333
+pretrained,100,weighted,LIME,1000,0.99928,0.98333,2,0.98333
+pretrained,100,weighted,LIME,3000,0.99977,1.00000,2,1.00000
+pretrained,100,weighted,LIME,10000,0.99992,1.00000,2,1.00000
+pretrained,100,weighted,Logit-CLIME,100,0.98923,0.93333,2,0.80000
+pretrained,100,weighted,Logit-CLIME,300,0.99654,0.96667,2,0.88333
+pretrained,100,weighted,Logit-CLIME,1000,0.99901,0.98333,2,0.96667
+pretrained,100,weighted,Logit-CLIME,3000,0.99959,0.98333,2,1.00000
+pretrained,100,weighted,Logit-CLIME,10000,0.99976,1.00000,2,1.00000
+pretrained,100,weighted,Logit-KernelSHAP,100,0.98458,0.93333,2,0.85000
+pretrained,100,weighted,Logit-KernelSHAP,300,0.99658,1.00000,2,0.93333
+pretrained,100,weighted,Logit-KernelSHAP,1000,0.99938,0.96667,2,0.98333
+pretrained,100,weighted,Logit-KernelSHAP,3000,0.99981,0.98333,2,1.00000
+pretrained,100,weighted,Logit-KernelSHAP,10000,0.99997,1.00000,2,1.00000
+pretrained,100,weighted,Logit-LIME,100,0.98999,0.95000,2,0.80000
+pretrained,100,weighted,Logit-LIME,300,0.99688,0.98333,2,0.91667
+pretrained,100,weighted,Logit-LIME,1000,0.99926,0.98333,2,0.98333
+pretrained,100,weighted,Logit-LIME,3000,0.99976,1.00000,2,1.00000
+pretrained,100,weighted,Logit-LIME,10000,0.99992,1.00000,2,1.00000
+pretrained,100,weighted,Soft logistic,100,0.96991,0.95000,2,0.06667
+pretrained,100,weighted,Soft logistic,300,0.99516,0.98333,2,0.91667
+pretrained,100,weighted,Soft logistic,1000,0.99917,0.98333,2,0.98333
+pretrained,100,weighted,Soft logistic,3000,0.99976,1.00000,2,1.00000
+pretrained,100,weighted,Soft logistic,10000,0.99993,1.00000,2,1.00000
+pretrained,100,weighted,Soft logistic CLIME,100,0.96857,0.93333,2,0.08333
+pretrained,100,weighted,Soft logistic CLIME,300,0.99460,0.96667,2,0.86667
+pretrained,100,weighted,Soft logistic CLIME,1000,0.99888,1.00000,2,0.96667
+pretrained,100,weighted,Soft logistic CLIME,3000,0.99959,0.98333,2,0.98333
+pretrained,100,weighted,Soft logistic CLIME,10000,0.99976,1.00000,2,1.00000
 scratch,1,plain,CLIME,100,0.86988,0.66000,10,0.00667
 scratch,1,plain,CLIME,300,0.93399,0.76000,10,0.10667
 scratch,1,plain,CLIME,1000,0.97021,0.85833,10,0.54167
 scratch,1,plain,CLIME,3000,0.98583,0.88167,10,0.80500
 scratch,1,plain,CLIME,10000,0.99420,0.93167,10,0.90833
+scratch,1,plain,KernelSHAP,100,0.86409,0.64333,10,0.01667
+scratch,1,plain,KernelSHAP,300,0.96401,0.80667,10,0.17667
+scratch,1,plain,KernelSHAP,1000,0.98994,0.89667,10,0.66333
+scratch,1,plain,KernelSHAP,3000,0.99750,0.93833,10,0.97500
+scratch,1,plain,KernelSHAP,10000,0.99948,0.97667,10,1.00000
 scratch,1,plain,LIME,100,0.89354,0.70500,10,0.00500
 scratch,1,plain,LIME,300,0.95991,0.82167,10,0.10333
 scratch,1,plain,LIME,1000,0.98752,0.89500,10,0.58667
@@ -194,6 +299,11 @@ scratch,1,plain,Logit-CLIME,300,0.97405,0.87167,10,0.35833
 scratch,1,plain,Logit-CLIME,1000,0.98836,0.93167,10,0.75500
 scratch,1,plain,Logit-CLIME,3000,0.99394,0.95000,10,0.89500
 scratch,1,plain,Logit-CLIME,10000,0.99775,0.97667,10,0.95333
+scratch,1,plain,Logit-KernelSHAP,100,0.95769,0.76500,10,0.12333
+scratch,1,plain,Logit-KernelSHAP,300,0.99158,0.89667,10,0.71500
+scratch,1,plain,Logit-KernelSHAP,1000,0.99783,0.96500,10,0.98500
+scratch,1,plain,Logit-KernelSHAP,3000,0.99948,0.97333,10,1.00000
+scratch,1,plain,Logit-KernelSHAP,10000,0.99989,0.99000,10,1.00000
 scratch,1,plain,Logit-LIME,100,0.95716,0.79167,10,0.05000
 scratch,1,plain,Logit-LIME,300,0.98624,0.88667,10,0.46500
 scratch,1,plain,Logit-LIME,1000,0.99598,0.93167,10,0.94167
@@ -214,6 +324,11 @@ scratch,1,reseeded,CLIME,300,0.93231,0.74167,10,0.09333
 scratch,1,reseeded,CLIME,1000,0.96852,0.81000,10,0.51333
 scratch,1,reseeded,CLIME,3000,0.98268,0.86833,10,0.78667
 scratch,1,reseeded,CLIME,10000,0.99233,0.91000,10,0.89333
+scratch,1,reseeded,KernelSHAP,100,0.85955,0.61833,10,0.00667
+scratch,1,reseeded,KernelSHAP,300,0.96188,0.81000,10,0.16333
+scratch,1,reseeded,KernelSHAP,1000,0.98948,0.86667,10,0.68000
+scratch,1,reseeded,KernelSHAP,3000,0.99738,0.92833,10,0.97500
+scratch,1,reseeded,KernelSHAP,10000,0.99948,0.97500,10,0.99833
 scratch,1,reseeded,LIME,100,0.89428,0.64167,10,0.00667
 scratch,1,reseeded,LIME,300,0.95914,0.78333,10,0.08667
 scratch,1,reseeded,LIME,1000,0.98762,0.88000,10,0.58500
@@ -224,6 +339,11 @@ scratch,1,reseeded,Logit-CLIME,300,0.97229,0.87000,10,0.32333
 scratch,1,reseeded,Logit-CLIME,1000,0.98815,0.92167,10,0.75833
 scratch,1,reseeded,Logit-CLIME,3000,0.99397,0.94833,10,0.89500
 scratch,1,reseeded,Logit-CLIME,10000,0.99749,0.97167,10,0.95500
+scratch,1,reseeded,Logit-KernelSHAP,100,0.95661,0.79000,10,0.14833
+scratch,1,reseeded,Logit-KernelSHAP,300,0.99099,0.90167,10,0.68667
+scratch,1,reseeded,Logit-KernelSHAP,1000,0.99775,0.94667,10,0.98167
+scratch,1,reseeded,Logit-KernelSHAP,3000,0.99946,0.97833,10,1.00000
+scratch,1,reseeded,Logit-KernelSHAP,10000,0.99989,0.98833,10,1.00000
 scratch,1,reseeded,Logit-LIME,100,0.95655,0.81333,10,0.06333
 scratch,1,reseeded,Logit-LIME,300,0.98600,0.90333,10,0.47667
 scratch,1,reseeded,Logit-LIME,1000,0.99591,0.94000,10,0.95500
@@ -244,6 +364,11 @@ scratch,10,logit adjusted,CLIME,300,0.93289,0.77333,10,0.10167
 scratch,10,logit adjusted,CLIME,1000,0.97021,0.85500,10,0.53167
 scratch,10,logit adjusted,CLIME,3000,0.98443,0.87833,10,0.79667
 scratch,10,logit adjusted,CLIME,10000,0.99271,0.91333,10,0.91500
+scratch,10,logit adjusted,KernelSHAP,100,0.86980,0.65833,10,0.01167
+scratch,10,logit adjusted,KernelSHAP,300,0.96369,0.81500,10,0.16167
+scratch,10,logit adjusted,KernelSHAP,1000,0.98959,0.90333,10,0.68667
+scratch,10,logit adjusted,KernelSHAP,3000,0.99759,0.94333,10,0.96833
+scratch,10,logit adjusted,KernelSHAP,10000,0.99948,0.97000,10,0.99833
 scratch,10,logit adjusted,LIME,100,0.88941,0.69167,10,0.00167
 scratch,10,logit adjusted,LIME,300,0.95807,0.82333,10,0.10167
 scratch,10,logit adjusted,LIME,1000,0.98710,0.91167,10,0.58167
@@ -254,6 +379,11 @@ scratch,10,logit adjusted,Logit-CLIME,300,0.96690,0.87167,10,0.32000
 scratch,10,logit adjusted,Logit-CLIME,1000,0.98543,0.91167,10,0.73333
 scratch,10,logit adjusted,Logit-CLIME,3000,0.99352,0.93667,10,0.88167
 scratch,10,logit adjusted,Logit-CLIME,10000,0.99724,0.96500,10,0.95167
+scratch,10,logit adjusted,Logit-KernelSHAP,100,0.95299,0.80000,10,0.12167
+scratch,10,logit adjusted,Logit-KernelSHAP,300,0.98935,0.90500,10,0.63500
+scratch,10,logit adjusted,Logit-KernelSHAP,1000,0.99745,0.95667,10,0.96667
+scratch,10,logit adjusted,Logit-KernelSHAP,3000,0.99934,0.98333,10,1.00000
+scratch,10,logit adjusted,Logit-KernelSHAP,10000,0.99987,0.98833,10,1.00000
 scratch,10,logit adjusted,Logit-LIME,100,0.94929,0.81167,10,0.03833
 scratch,10,logit adjusted,Logit-LIME,300,0.98321,0.89167,10,0.42167
 scratch,10,logit adjusted,Logit-LIME,1000,0.99503,0.94000,10,0.90167
@@ -274,6 +404,11 @@ scratch,10,plain,CLIME,300,0.93115,0.76000,10,0.09833
 scratch,10,plain,CLIME,1000,0.96648,0.84167,10,0.50667
 scratch,10,plain,CLIME,3000,0.98240,0.89167,10,0.76667
 scratch,10,plain,CLIME,10000,0.99304,0.91333,10,0.90500
+scratch,10,plain,KernelSHAP,100,0.86820,0.60333,10,0.01500
+scratch,10,plain,KernelSHAP,300,0.95965,0.78167,10,0.18000
+scratch,10,plain,KernelSHAP,1000,0.98911,0.85167,10,0.65167
+scratch,10,plain,KernelSHAP,3000,0.99705,0.92667,10,0.95333
+scratch,10,plain,KernelSHAP,10000,0.99931,0.97500,10,0.99333
 scratch,10,plain,LIME,100,0.88358,0.64000,10,0.00667
 scratch,10,plain,LIME,300,0.95395,0.77667,10,0.09167
 scratch,10,plain,LIME,1000,0.98402,0.86500,10,0.53833
@@ -284,6 +419,11 @@ scratch,10,plain,Logit-CLIME,300,0.97263,0.84333,10,0.32333
 scratch,10,plain,Logit-CLIME,1000,0.98681,0.91000,10,0.75833
 scratch,10,plain,Logit-CLIME,3000,0.99255,0.95667,10,0.89000
 scratch,10,plain,Logit-CLIME,10000,0.99716,0.98000,10,0.95333
+scratch,10,plain,Logit-KernelSHAP,100,0.95611,0.79333,10,0.14167
+scratch,10,plain,Logit-KernelSHAP,300,0.99018,0.89500,10,0.68167
+scratch,10,plain,Logit-KernelSHAP,1000,0.99767,0.95000,10,0.98167
+scratch,10,plain,Logit-KernelSHAP,3000,0.99938,0.96167,10,1.00000
+scratch,10,plain,Logit-KernelSHAP,10000,0.99988,0.99167,10,1.00000
 scratch,10,plain,Logit-LIME,100,0.95416,0.79833,10,0.03333
 scratch,10,plain,Logit-LIME,300,0.98507,0.89000,10,0.42500
 scratch,10,plain,Logit-LIME,1000,0.99561,0.94500,10,0.93000
@@ -304,6 +444,11 @@ scratch,10,reseeded,CLIME,300,0.93475,0.74833,10,0.10000
 scratch,10,reseeded,CLIME,1000,0.97042,0.85667,10,0.50333
 scratch,10,reseeded,CLIME,3000,0.98623,0.90333,10,0.78167
 scratch,10,reseeded,CLIME,10000,0.99308,0.93333,10,0.92500
+scratch,10,reseeded,KernelSHAP,100,0.86246,0.65833,10,0.01167
+scratch,10,reseeded,KernelSHAP,300,0.95950,0.81667,10,0.18667
+scratch,10,reseeded,KernelSHAP,1000,0.98931,0.89333,10,0.68000
+scratch,10,reseeded,KernelSHAP,3000,0.99702,0.94333,10,0.94833
+scratch,10,reseeded,KernelSHAP,10000,0.99939,0.97000,10,1.00000
 scratch,10,reseeded,LIME,100,0.88402,0.65500,10,0.00333
 scratch,10,reseeded,LIME,300,0.95369,0.78000,10,0.09000
 scratch,10,reseeded,LIME,1000,0.98465,0.88500,10,0.51833
@@ -314,6 +459,11 @@ scratch,10,reseeded,Logit-CLIME,300,0.97388,0.86167,10,0.35000
 scratch,10,reseeded,Logit-CLIME,1000,0.98812,0.92167,10,0.76500
 scratch,10,reseeded,Logit-CLIME,3000,0.99442,0.94000,10,0.90667
 scratch,10,reseeded,Logit-CLIME,10000,0.99708,0.97000,10,0.96333
+scratch,10,reseeded,Logit-KernelSHAP,100,0.95510,0.81500,10,0.12167
+scratch,10,reseeded,Logit-KernelSHAP,300,0.99018,0.91667,10,0.68167
+scratch,10,reseeded,Logit-KernelSHAP,1000,0.99758,0.94667,10,0.97500
+scratch,10,reseeded,Logit-KernelSHAP,3000,0.99936,0.97167,10,1.00000
+scratch,10,reseeded,Logit-KernelSHAP,10000,0.99988,0.99333,10,1.00000
 scratch,10,reseeded,Logit-LIME,100,0.95287,0.79000,10,0.07000
 scratch,10,reseeded,Logit-LIME,300,0.98487,0.87833,10,0.45167
 scratch,10,reseeded,Logit-LIME,1000,0.99546,0.94000,10,0.91000
@@ -334,6 +484,11 @@ scratch,10,weighted,CLIME,300,0.95207,0.79167,10,0.20500
 scratch,10,weighted,CLIME,1000,0.97882,0.87667,10,0.61000
 scratch,10,weighted,CLIME,3000,0.98882,0.93167,10,0.83833
 scratch,10,weighted,CLIME,10000,0.99456,0.95000,10,0.93667
+scratch,10,weighted,KernelSHAP,100,0.89758,0.69000,10,0.03833
+scratch,10,weighted,KernelSHAP,300,0.97258,0.83000,10,0.28500
+scratch,10,weighted,KernelSHAP,1000,0.99294,0.91500,10,0.77167
+scratch,10,weighted,KernelSHAP,3000,0.99821,0.96667,10,0.98833
+scratch,10,weighted,KernelSHAP,10000,0.99963,0.98333,10,1.00000
 scratch,10,weighted,LIME,100,0.91770,0.72000,10,0.01833
 scratch,10,weighted,LIME,300,0.97018,0.82333,10,0.21167
 scratch,10,weighted,LIME,1000,0.99051,0.91667,10,0.70167
@@ -344,6 +499,11 @@ scratch,10,weighted,Logit-CLIME,300,0.98247,0.87333,10,0.47000
 scratch,10,weighted,Logit-CLIME,1000,0.99302,0.93000,10,0.84500
 scratch,10,weighted,Logit-CLIME,3000,0.99662,0.96167,10,0.92833
 scratch,10,weighted,Logit-CLIME,10000,0.99840,0.98167,10,0.97500
+scratch,10,weighted,Logit-KernelSHAP,100,0.96890,0.85000,10,0.24667
+scratch,10,weighted,Logit-KernelSHAP,300,0.99323,0.93500,10,0.79000
+scratch,10,weighted,Logit-KernelSHAP,1000,0.99834,0.97500,10,0.99000
+scratch,10,weighted,Logit-KernelSHAP,3000,0.99957,0.98667,10,1.00000
+scratch,10,weighted,Logit-KernelSHAP,10000,0.99992,0.99500,10,1.00000
 scratch,10,weighted,Logit-LIME,100,0.96641,0.81833,10,0.09667
 scratch,10,weighted,Logit-LIME,300,0.98915,0.89667,10,0.61000
 scratch,10,weighted,Logit-LIME,1000,0.99683,0.94000,10,0.97000
@@ -364,6 +524,11 @@ scratch,100,logit adjusted,CLIME,300,0.94674,0.80667,10,0.24167
 scratch,100,logit adjusted,CLIME,1000,0.97310,0.87833,10,0.64500
 scratch,100,logit adjusted,CLIME,3000,0.98544,0.93167,10,0.83833
 scratch,100,logit adjusted,CLIME,10000,0.99193,0.96500,10,0.91500
+scratch,100,logit adjusted,KernelSHAP,100,0.92002,0.73333,10,0.06833
+scratch,100,logit adjusted,KernelSHAP,300,0.98152,0.87167,10,0.40000
+scratch,100,logit adjusted,KernelSHAP,1000,0.99530,0.94333,10,0.89167
+scratch,100,logit adjusted,KernelSHAP,3000,0.99876,0.95667,10,0.99333
+scratch,100,logit adjusted,KernelSHAP,10000,0.99976,0.97667,10,1.00000
 scratch,100,logit adjusted,LIME,100,0.92167,0.75500,10,0.03167
 scratch,100,logit adjusted,LIME,300,0.97248,0.83833,10,0.24833
 scratch,100,logit adjusted,LIME,1000,0.99206,0.91333,10,0.74000
@@ -374,6 +539,11 @@ scratch,100,logit adjusted,Logit-CLIME,300,0.96703,0.87000,10,0.37000
 scratch,100,logit adjusted,Logit-CLIME,1000,0.98397,0.93333,10,0.73333
 scratch,100,logit adjusted,Logit-CLIME,3000,0.99146,0.96500,10,0.87500
 scratch,100,logit adjusted,Logit-CLIME,10000,0.99543,0.97167,10,0.93667
+scratch,100,logit adjusted,Logit-KernelSHAP,100,0.95704,0.81333,10,0.17500
+scratch,100,logit adjusted,Logit-KernelSHAP,300,0.99114,0.92333,10,0.70000
+scratch,100,logit adjusted,Logit-KernelSHAP,1000,0.99783,0.96167,10,0.98000
+scratch,100,logit adjusted,Logit-KernelSHAP,3000,0.99940,0.98000,10,1.00000
+scratch,100,logit adjusted,Logit-KernelSHAP,10000,0.99989,0.98833,10,1.00000
 scratch,100,logit adjusted,Logit-LIME,100,0.94885,0.79500,10,0.06667
 scratch,100,logit adjusted,Logit-LIME,300,0.98358,0.88667,10,0.44500
 scratch,100,logit adjusted,Logit-LIME,1000,0.99537,0.94833,10,0.91000
@@ -394,6 +564,11 @@ scratch,100,plain,CLIME,300,0.97169,0.84667,10,0.34333
 scratch,100,plain,CLIME,1000,0.98927,0.90667,10,0.72000
 scratch,100,plain,CLIME,3000,0.99544,0.94833,10,0.94167
 scratch,100,plain,CLIME,10000,0.99844,0.95833,10,0.98667
+scratch,100,plain,KernelSHAP,100,0.93229,0.78167,10,0.17000
+scratch,100,plain,KernelSHAP,300,0.98056,0.86667,10,0.51000
+scratch,100,plain,KernelSHAP,1000,0.99474,0.91167,10,0.84833
+scratch,100,plain,KernelSHAP,3000,0.99870,0.95000,10,0.99000
+scratch,100,plain,KernelSHAP,10000,0.99975,0.98333,10,1.00000
 scratch,100,plain,LIME,100,0.92735,0.75500,10,0.06000
 scratch,100,plain,LIME,300,0.97406,0.85000,10,0.34667
 scratch,100,plain,LIME,1000,0.99156,0.91000,10,0.72833
@@ -404,6 +579,11 @@ scratch,100,plain,Logit-CLIME,300,0.98817,0.90167,10,0.62500
 scratch,100,plain,Logit-CLIME,1000,0.99603,0.94500,10,0.94500
 scratch,100,plain,Logit-CLIME,3000,0.99844,0.96333,10,0.98500
 scratch,100,plain,Logit-CLIME,10000,0.99950,0.98833,10,0.99333
+scratch,100,plain,Logit-KernelSHAP,100,0.97351,0.86333,10,0.41167
+scratch,100,plain,Logit-KernelSHAP,300,0.99401,0.93667,10,0.84500
+scratch,100,plain,Logit-KernelSHAP,1000,0.99862,0.96833,10,0.99000
+scratch,100,plain,Logit-KernelSHAP,3000,0.99965,0.98500,10,1.00000
+scratch,100,plain,Logit-KernelSHAP,10000,0.99993,0.99667,10,1.00000
 scratch,100,plain,Logit-LIME,100,0.96510,0.83000,10,0.20667
 scratch,100,plain,Logit-LIME,300,0.98921,0.90167,10,0.64000
 scratch,100,plain,Logit-LIME,1000,0.99681,0.94500,10,0.96667
@@ -424,6 +604,11 @@ scratch,100,reseeded,CLIME,300,0.96563,0.83500,10,0.32000
 scratch,100,reseeded,CLIME,1000,0.98631,0.88167,10,0.70167
 scratch,100,reseeded,CLIME,3000,0.99440,0.92667,10,0.92333
 scratch,100,reseeded,CLIME,10000,0.99776,0.94333,10,0.97167
+scratch,100,reseeded,KernelSHAP,100,0.92546,0.74500,10,0.15000
+scratch,100,reseeded,KernelSHAP,300,0.97890,0.87167,10,0.49000
+scratch,100,reseeded,KernelSHAP,1000,0.99422,0.92667,10,0.86667
+scratch,100,reseeded,KernelSHAP,3000,0.99845,0.96000,10,0.98333
+scratch,100,reseeded,KernelSHAP,10000,0.99970,0.98500,10,1.00000
 scratch,100,reseeded,LIME,100,0.92059,0.75500,10,0.07500
 scratch,100,reseeded,LIME,300,0.97206,0.84667,10,0.32333
 scratch,100,reseeded,LIME,1000,0.99061,0.89667,10,0.71167
@@ -434,6 +619,11 @@ scratch,100,reseeded,Logit-CLIME,300,0.98593,0.90667,10,0.59500
 scratch,100,reseeded,Logit-CLIME,1000,0.99468,0.94500,10,0.89500
 scratch,100,reseeded,Logit-CLIME,3000,0.99772,0.97667,10,0.96833
 scratch,100,reseeded,Logit-CLIME,10000,0.99904,0.98000,10,0.99000
+scratch,100,reseeded,Logit-KernelSHAP,100,0.97245,0.84333,10,0.37667
+scratch,100,reseeded,Logit-KernelSHAP,300,0.99319,0.93500,10,0.81167
+scratch,100,reseeded,Logit-KernelSHAP,1000,0.99841,0.96000,10,0.97833
+scratch,100,reseeded,Logit-KernelSHAP,3000,0.99959,0.99000,10,1.00000
+scratch,100,reseeded,Logit-KernelSHAP,10000,0.99992,0.99500,10,1.00000
 scratch,100,reseeded,Logit-LIME,100,0.96402,0.83500,10,0.20167
 scratch,100,reseeded,Logit-LIME,300,0.98869,0.90833,10,0.61833
 scratch,100,reseeded,Logit-LIME,1000,0.99643,0.94833,10,0.94000
@@ -454,6 +644,11 @@ scratch,100,weighted,CLIME,300,0.98129,0.87500,10,0.62333
 scratch,100,weighted,CLIME,1000,0.99192,0.92833,10,0.81000
 scratch,100,weighted,CLIME,3000,0.99561,0.95500,10,0.90000
 scratch,100,weighted,CLIME,10000,0.99825,0.95000,10,0.93000
+scratch,100,weighted,KernelSHAP,100,0.96636,0.87500,10,0.45833
+scratch,100,weighted,KernelSHAP,300,0.99230,0.91833,10,0.73167
+scratch,100,weighted,KernelSHAP,1000,0.99792,0.95667,10,0.90333
+scratch,100,weighted,KernelSHAP,3000,0.99945,0.98500,10,0.95000
+scratch,100,weighted,KernelSHAP,10000,0.99987,0.98333,10,0.95000
 scratch,100,weighted,LIME,100,0.96549,0.83000,10,0.37667
 scratch,100,weighted,LIME,300,0.98815,0.88500,10,0.65833
 scratch,100,weighted,LIME,1000,0.99653,0.92833,10,0.86333
@@ -464,6 +659,11 @@ scratch,100,weighted,Logit-CLIME,300,0.99222,0.92167,10,0.76500
 scratch,100,weighted,Logit-CLIME,1000,0.99684,0.94167,10,0.89167
 scratch,100,weighted,Logit-CLIME,3000,0.99873,0.95167,10,0.93000
 scratch,100,weighted,Logit-CLIME,10000,0.99951,0.97333,10,0.94667
+scratch,100,weighted,Logit-KernelSHAP,100,0.98765,0.92667,10,0.68667
+scratch,100,weighted,Logit-KernelSHAP,300,0.99755,0.94833,10,0.90667
+scratch,100,weighted,Logit-KernelSHAP,1000,0.99934,0.97500,10,0.95000
+scratch,100,weighted,Logit-KernelSHAP,3000,0.99984,0.99167,10,0.95500
+scratch,100,weighted,Logit-KernelSHAP,10000,0.99997,0.99833,10,0.95500
 scratch,100,weighted,Logit-LIME,100,0.98182,0.86833,10,0.52000
 scratch,100,weighted,Logit-LIME,300,0.99426,0.93167,10,0.82667
 scratch,100,weighted,Logit-LIME,1000,0.99834,0.93167,10,0.93333

@@ -1,6 +1,7 @@
 network,trained,networks,seeds,classes
 pretrained,plain,60,2,10
 pretrained,reseeded,60,2,10
+pretrained,weighted,2,1,2
 scratch,logit adjusted,40,2,10
 scratch,plain,60,2,10
 scratch,reseeded,60,2,10

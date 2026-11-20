@@ -1201,6 +1201,16 @@ committed first (`experiments/cikm_extended/PREREGISTRATION.md`): 1, 3, 4 and 7 
     at 16% of images and CLIME's at 25%, and leaves 45% of neighbourhoods one-sided
     against the ResNet-20's 60%. Predictions 5 and 6, which held only in part on the
     ResNet-20, hold in full on this network.
+  - KernelSHAP (the `shap` package, feature selection off, same 1,000 runs; added after
+    the results above, no prediction registered). On the probability it is no closer to
+    the Shapley values of the logit than LIME (−0.014, −0.006, −0.001 on the ResNet-20;
+    −0.023, −0.026, −0.044 on the ResNet-18), and a prior shift at 5000:50 grows its
+    coefficients 69-fold and changes its top patch at 15% of images. The exact Shapley
+    values of the probability have cosine 0.75 with those of the logit on the ResNet-18
+    at 5000:50. On the logit it estimates the Shapley truth itself (0.99 on 1,000 masks),
+    does not move, matches Logit-LIME against the leave-one-out effects on the ResNet-20
+    and leads on the ResNet-18 (0.65, 0.63, 0.59 against 0.58, 0.55, 0.54). The output
+    explained matters, not the explainer.
 
 Not done: a ground truth for the tree models and k-NN.
 

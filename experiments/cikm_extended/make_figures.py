@@ -651,7 +651,8 @@ def images_truth():
         ax.grid(axis='x', visible=False)
     axes[0].set_ylabel('cosine with the truth')
     handles, labels = axes[0].get_legend_handles_labels()
-    fig.legend(handles, labels, ncol=3, loc='lower center', bbox_to_anchor=(0.5, -0.3))
+    fig.legend(handles, labels, ncol=4, loc='lower center', bbox_to_anchor=(0.5, -0.24), fontsize=6.5,
+               columnspacing=1.0)
     style.save(fig, 'images_truth')
 
 
@@ -672,7 +673,8 @@ def images_samples(network='scratch', name='images_samples'):
         ax.set_title(IMAGE_RATIOS[ratio], fontsize=7.5)
     axes[0, 0].set_ylabel('cosine with the\nsurrogate\'s exact fit')
     handles, labels = axes[0, 0].get_legend_handles_labels()
-    fig.legend(handles, labels, ncol=3, loc='lower center', bbox_to_anchor=(0.5, -0.38))
+    fig.legend(handles, labels, ncol=4, loc='lower center', bbox_to_anchor=(0.5, -0.36), fontsize=6.5,
+               columnspacing=1.0)
     style.save(fig, name)
 
 
@@ -706,14 +708,15 @@ def images_moves():
             ax.bar(np.arange(len(shown)) + (i - (len(names) - 1)/2)*width, heights - base, width,
                    bottom=base, color=colour, label=name)
         ax.set_xticks(np.arange(len(shown)))
-        ax.set_xticklabels([arms[a] for a in shown], fontsize=6)
+        ax.set_xticklabels([arms[a] for a in shown], fontsize=5.5)
         ax.set_title(label, fontsize=7.5)
         ax.grid(axis='x', visible=False)
         if column == 'median_norm_ratio':
             ax.axhline(1, **style.ZERO_LINE)
             ax.set_yscale('log')
     handles, labels = axes[0].get_legend_handles_labels()
-    fig.legend(handles, labels, ncol=4, loc='lower center', bbox_to_anchor=(0.5, -0.25))
+    fig.legend(handles, labels, ncol=5, loc='lower center', bbox_to_anchor=(0.5, -0.22), fontsize=6.5,
+               columnspacing=1.0)
     fig.subplots_adjust(wspace=0.3)
     style.save(fig, 'images_moves')
 
