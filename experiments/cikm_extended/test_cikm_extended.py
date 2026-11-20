@@ -178,3 +178,16 @@ def test_a_logit_shift_leaves_the_logit_surrogate_and_the_truths(game):
     assert np.allclose(patches.leave_one_out(z), patches.leave_one_out(z + 4.6))
     assert np.allclose(patches.shapley(z), patches.shapley(z + 4.6))
 
+
+
+def test_kernel_shap_recovers_the_shapley_values_of_an_additive_game(game):
+    M, *_ = game
+    effects = np.random.default_rng(0).normal(size=patches.PATCHES)
+    coef, intercept = patches.fit_shap('Logit-KernelSHAP', 0.3 + M @ effects, 300, seed=0)
+    assert np.allclose(coef, effects) and np.isclose(intercept, 0.3)
+
+
+def test_kernel_shap_on_the_logit_approaches_its_exact_values(game):
+    _, _, z, _ = game
+    coef, _ = patches.fit_shap('Logit-KernelSHAP', z, 10_000, seed=0)
+    assert scores.explanation_agreement(patches.exact_shap('Logit-KernelSHAP', z)[0], coef)['cosine'] > 0.99

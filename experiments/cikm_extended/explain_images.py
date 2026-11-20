@@ -1,6 +1,6 @@
 '''
-Six surrogates fitted to patch masks of every query image, from the logits stored by
-run_images.py, scored as explanations. Writes results/raw/images_explained/.
+Six surrogates and KernelSHAP fitted to patch masks of every query image, from the logits
+stored by run_images.py, scored as explanations. Writes results/raw/images_explained/.
 
 usage: N_JOBS=8 uv run python explain_images.py
 '''
@@ -48,7 +48,11 @@ def draws(seed, query):
     return out
 
 
-def explain(z, first, second, M, w):
+def shap_seed(seed, image, salt, n):
+    return int(np.random.SeedSequence([int(seed), int(image), salt, n]).generate_state(1)[0])
+
+
+def explain(z, first, second, M, w, seed, image):
     '''(query row, score rows, sample rows, coefficient rows) for one image's logits on every mask'''
     f_prob, f_class = expit(z), (z > 0).astype(np.int64)
     truths = {'leave one out': patches.leave_one_out(z), 'Shapley': patches.shapley(z)}
@@ -63,11 +67,16 @@ def explain(z, first, second, M, w):
         query[f'brier{suffix}_constant'] = scores.calibration(flat, f_prob, f_class, w)[f'brier{suffix}']
     rows, sample_rows = [], []
     coefs = [{'explainer': name, 'fit': 'truth', 'coef': vector} for name, vector in truths.items()]
-    for name in patches.EXPLAINERS:
-        exact, _ = patches.fit(name, M, z, w)
-        fitted = {n: patches.fit(name, M[first[:n]], z[first[:n]], w[first[:n]]) for n in SAMPLES}
+    for name in (*patches.EXPLAINERS, *patches.SHAP):
+        if name in patches.SHAP:
+            exact, _ = patches.exact_shap(name, z)
+            fitted = {n: patches.fit_shap(name, z, n, shap_seed(seed, image, 2, n)) for n in SAMPLES}
+            again, _ = patches.fit_shap(name, z, DEFAULT, shap_seed(seed, image, 3, DEFAULT))
+        else:
+            exact, _ = patches.fit(name, M, z, w)
+            fitted = {n: patches.fit(name, M[first[:n]], z[first[:n]], w[first[:n]]) for n in SAMPLES}
+            again, _ = patches.fit(name, M[second[:DEFAULT]], z[second[:DEFAULT]], w[second[:DEFAULT]])
         coef, intercept = fitted[DEFAULT]
-        again, _ = patches.fit(name, M[second[:DEFAULT]], z[second[:DEFAULT]], w[second[:DEFAULT]])
         g = patches.predict(name, coef, intercept, M)
         row = {'explainer': name, 'coef_norm': float(np.linalg.norm(coef)),
                **scores.operating_point(g, 0.5, f_class, w), 'auc': scores.ranking(g, f_class, w),
@@ -100,7 +109,8 @@ def run(path):
         for i, query in enumerate(data['query']):
             where = {**tags, 'arm': arm, 'index': int(query), 'label': int(data['y_query'][i])}
             z = data['masks'][i].astype(np.float64) + shift
-            found, rows, sample_rows, coefs = explain(z, *draws(tags['seed'], query), M, w)
+            found, rows, sample_rows, coefs = explain(z, *draws(tags['seed'], query), M, w,
+                                                      tags['seed'], query)
             out['queries'].append({**where, **found})
             out['scores'] += [{**where, **r} for r in rows]
             out['samples'] += [{**where, **r} for r in sample_rows]

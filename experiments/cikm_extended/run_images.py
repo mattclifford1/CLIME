@@ -26,7 +26,7 @@ QUERIES = 15        # test images per class
 EPOCHS = {False: 50, True: 10}   # from scratch, fine-tuned
 # this run's name for each training arm of imbalanced_explanations.images
 ARMS = {'plain': 'imbalanced', 'weighted': 'class_weighted', 'logit adjusted': 'logit_adjusted',
-        'reseeded': 'imbalanced'}
+        'oversampled': 'oversample', 'reseeded': 'imbalanced'}
 RESEED = 1000   # offsets the training seed
 BATCH = 8192
 BALANCED = 4000     # rows per class of the balanced development set; the rest are validation
@@ -93,7 +93,7 @@ def pictures(positive, seed, ratio):
     np.savez(path, images=problem.X_test[query], query=query, y_query=problem.y_test[query])
 
 
-def run(positive, seed, ratio, arm, pretrained):
+def run(positive, seed, ratio, arm, pretrained, batch=BATCH):
     name = f"{'pretrained' if pretrained else 'scratch'}_{ratio}_{CLASSES[positive]}_{seed}_{arm}"
     path = RAW/f'{name.replace(" ", "-")}.npz'
     if path.exists():
@@ -103,12 +103,12 @@ def run(positive, seed, ratio, arm, pretrained):
     device = torch.device('cuda')
     net = train_net(problem, ARMS[arm], seed + RESEED*(arm == 'reseeded'), EPOCHS[pretrained],
                     pretrained=pretrained).float()
-    split = {k: logits(net, torch.from_numpy(X).to(device)).cpu().numpy()
+    split = {k: logits(net, torch.from_numpy(X).to(device), batch).cpu().numpy()
              for k, X in (('train', problem.X), ('val', problem.X_val), ('test', problem.X_test))}
     query = queries(problem, positive, seed)
     masks = all_masks(device)
     X_test = torch.from_numpy(problem.X_test).to(device)
-    found = torch.stack([enumerate_masks(net, X_test[i], masks) for i in query]).cpu().numpy()
+    found = torch.stack([enumerate_masks(net, X_test[i], masks, batch) for i in query]).cpu().numpy()
     RAW.mkdir(parents=True, exist_ok=True)
     np.savez(path, masks=found, query=query, y_query=problem.y_test[query],
              train=split['train'], y_train=problem.y, val=split['val'], y_val=problem.y_val,
@@ -126,6 +126,7 @@ if __name__ == '__main__':
     parser.add_argument('--arms', nargs='+', default=['plain'], choices=list(ARMS))
     parser.add_argument('--pretrained', action='store_true')
     parser.add_argument('--pictures', action='store_true')
+    parser.add_argument('--batch', type=int, default=BATCH)
     args = parser.parse_args()
     for ratio in args.ratios:
         for arm in args.arms:
@@ -136,4 +137,4 @@ if __name__ == '__main__':
                     if args.pictures:
                         pictures(positive, seed, ratio)
                     else:
-                        run(positive, seed, ratio, arm, args.pretrained)
+                        run(positive, seed, ratio, arm, args.pretrained, args.batch)

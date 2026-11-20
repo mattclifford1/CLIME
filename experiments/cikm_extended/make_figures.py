@@ -460,6 +460,7 @@ def matched():
 
 SIX = ['LIME', 'CLIME', 'Logit-LIME', 'Logit-CLIME', 'Soft logistic', 'Soft logistic CLIME']
 SMOOTH = ['Logistic', 'SVM', 'MLP']
+IMAGE_EXPLAINERS = [*SIX, 'KernelSHAP', 'Logit-KernelSHAP']
 
 
 def cuts():
@@ -637,11 +638,11 @@ def images_truth():
     panels = [('truth_leave_one_out_cosine', 'leave-one-out effect of each patch'),
               ('truth_shapley_cosine', 'Shapley value of each patch')]
     fig, axes = plt.subplots(1, 2, figsize=(TEXTWIDTH*0.85, TEXTWIDTH*0.3), sharey=True)
-    width = 0.8/len(SIX)
+    width = 0.8/len(IMAGE_EXPLAINERS)
     for ax, (column, label) in zip(axes, panels):
-        for i, explainer in enumerate(SIX):
+        for i, explainer in enumerate(IMAGE_EXPLAINERS):
             part = frame[frame.explainer == explainer].set_index('ratio')
-            ax.bar(np.arange(len(ratios)) + (i - (len(SIX) - 1)/2)*width,
+            ax.bar(np.arange(len(ratios)) + (i - (len(IMAGE_EXPLAINERS) - 1)/2)*width,
                    [part[column].get(r, np.nan) for r in ratios], width,
                    color=EXPLAINER_COLOURS[explainer], label=EXPLAINER_LABELS[explainer])
         ax.set_xticks(np.arange(len(ratios)))
@@ -662,7 +663,7 @@ def images_samples(network='scratch', name='images_samples'):
     fig, axes = plt.subplots(1, len(ratios), figsize=(TEXTWIDTH, TEXTWIDTH*0.3), sharey=True,
                              squeeze=False)
     for ax, ratio in zip(axes[0], ratios):
-        for explainer in SIX:
+        for explainer in IMAGE_EXPLAINERS:
             part = frame[(frame.ratio == ratio) & (frame.explainer == explainer)].sort_values('samples')
             ax.plot(part.samples, part.cosine, color=EXPLAINER_COLOURS[explainer],
                     marker=EXPLAINER_MARKERS[explainer], ms=3, label=EXPLAINER_LABELS[explainer])
@@ -686,13 +687,13 @@ def images_moves():
                   & frame.fit.isin(['sample', 'truth'])]
     frame = frame.assign(top_changed=100*(1 - frame.same_top))
     arms = {'prior shift': 'threshold\nmove', 'reseeded': 'other\nseed',
-            'weighted': 'class\nweights', 'logit adjusted': 'logit\nadjusted'}
+            'weighted': 'class\nweights', 'logit adjusted': 'logit\nadjusted', 'oversampled': 'over-\nsampled'}
     shown = [a for a in arms if a in set(frame.arm)]
     truths = {'leave one out': (INK2, 'leave-one-out effects'), 'Shapley': (MUTED, 'Shapley values')}
     panels = [('top_changed', 'query images whose\ntop patch changes (%)'),
               ('median_norm_ratio', 'size of the coefficients\n(ratio to the plain network)'),
               ('median_cosine', 'cosine with the\nplain network\'s')]
-    names = [*SIX, *truths]
+    names = [*IMAGE_EXPLAINERS, *truths]
     fig, axes = plt.subplots(1, 3, figsize=(TEXTWIDTH, TEXTWIDTH*0.34))
     width = 0.8/len(names)
     for ax, (column, label) in zip(axes, panels):

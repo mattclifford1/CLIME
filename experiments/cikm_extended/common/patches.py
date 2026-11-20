@@ -4,16 +4,19 @@
 from math import comb
 
 import numpy as np
+import shap
 from scipy.special import expit
 
 PATCHES = 16
 FULL = 2**PATCHES - 1
+POWERS = 1 << np.arange(PATCHES)
 KERNEL_WIDTH = 0.25   # lime_image's, on the cosine distance to the full image
 ALPHA = 1.0
 # target of the fit, and whether CLIME's class weights are applied
 EXPLAINERS = {'LIME': ('probability', False), 'CLIME': ('probability', True),
               'Logit-LIME': ('logit', False), 'Logit-CLIME': ('logit', True),
               'Soft logistic': ('soft', False), 'Soft logistic CLIME': ('soft', True)}
+SHAP = {'KernelSHAP': 'probability', 'Logit-KernelSHAP': 'logit'}   # target of each
 
 
 def masks():
@@ -90,6 +93,22 @@ def soft_logistic(X, p, w, iterations=200, tolerance=1e-10):
     return theta[1:], float(theta[0])
 
 
+def fit_shap(name, z, n, seed):
+    '''(coefficients, intercept) of one of SHAP from shap's KernelExplainer on n runs of the black box'''
+    y = z if SHAP[name] == 'logit' else expit(z)
+    np.random.seed(seed)   # the package draws its masks from numpy's global state
+    explainer = shap.KernelExplainer(lambda X: y[X.astype(np.int64) @ POWERS], np.zeros((1, PATCHES)))
+    # two of the n runs are the empty and the full image; l1_reg=False keeps all 16 patches
+    coef = explainer.shap_values(np.ones(PATCHES), nsamples=n - 2, l1_reg=False, silent=True)
+    return np.asarray(coef, dtype=np.float64), float(y[0])
+
+
+def exact_shap(name, z):
+    '''what fit_shap converges to: the Shapley values of its target'''
+    y = z if SHAP[name] == 'logit' else expit(z)
+    return shapley(y), float(y[0])
+
+
 def fit(name, X, z, w):
     '''(coefficients, intercept) of one of EXPLAINERS on masks X with black-box logits z'''
     target, balanced = EXPLAINERS[name]
@@ -105,4 +124,5 @@ def fit(name, X, z, w):
 def predict(name, coef, intercept, X):
     '''the surrogate's estimate of P(class 1)'''
     out = intercept + X @ coef
-    return out if EXPLAINERS[name][0] == 'probability' else expit(out)
+    target = SHAP[name] if name in SHAP else EXPLAINERS[name][0]
+    return out if target == 'probability' else expit(out)

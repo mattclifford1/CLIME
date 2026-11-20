@@ -20,6 +20,8 @@ EXPLAINER_COLOURS = {
     'Logit-CLIME': C['blue'],
     'Soft logistic': C['brown'],
     'Soft logistic CLIME': C['plum'],
+    'KernelSHAP': C['red'],
+    'Logit-KernelSHAP': C['yellow'],
     'gradient': INK2,
 }
 EXPLAINER_LABELS = {
@@ -32,12 +34,14 @@ EXPLAINER_LABELS = {
     'Logit-CLIME': 'Logit-CLIME',
     'Soft logistic': 'soft logistic',
     'Soft logistic CLIME': 'soft logistic, CLIME weights',
+    'KernelSHAP': 'KernelSHAP',
+    'Logit-KernelSHAP': 'KernelSHAP on the logit',
     'gradient': "black box's gradient",
 }
 EXPLAINER_MARKERS = {'LIME': 'o', 'CLIME': 's', 'LIME + re-threshold': 'D',
                      'LIME + DKW Minimax': '^', 'LIME + Gaussian Predictive': 'v',
                      'Logit-LIME': '^', 'Logit-CLIME': 'v', 'Soft logistic': 'D',
-                     'Soft logistic CLIME': 'P'}
+                     'Soft logistic CLIME': 'P', 'KernelSHAP': 'X', 'Logit-KernelSHAP': '*'}
 ARM_COLOURS = {
     'plain': INK2,
     'weighted': C['plum'],

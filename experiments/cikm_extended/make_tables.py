@@ -497,6 +497,7 @@ IMAGE_SCORES = {'fidelity': 'fid', 'balanced': 'bal', 'auc': 'auc', 'skill': 'sk
                 'truth_shapley_cosine': 'shapley', 'exact_leave_one_out_cosine': 'exactloo',
                 'exact_shapley_cosine': 'exactshapley'}
 IMAGE_TRUTHS = {'leave one out': 'leave-one-out effects', 'Shapley': 'Shapley values'}
+IMAGE_SURROGATES = {**SIX, 'KernelSHAP': 'KernelSHAP', 'Logit-KernelSHAP': 'KernelSHAP on the logit'}
 IMAGE_MOVES = {'prior shift': 'prior shift', 're-thresholded': 're-thresholded (validation)',
                'CP Minimax': 'deltas (CP Minimax)'}
 
@@ -511,7 +512,7 @@ def images():
         plain = frame[(frame.network == network) & (frame.arm == 'plain')]
         rows = []
         for ratio, (label, _) in IMAGE_RATIOS.items():
-            for explainer, shown in SIX.items():
+            for explainer, shown in IMAGE_SURROGATES.items():
                 r = plain[(plain.ratio == ratio) & (plain.explainer == explainer)]
                 if r.empty:
                     continue
@@ -561,7 +562,7 @@ def images_moves():
                   & frame.fit.isin(['sample', 'truth'])]
     rows = []
     for arm, label in IMAGE_MOVES.items():
-        for explainer, name in {**SIX, **IMAGE_TRUTHS}.items():
+        for explainer, name in {**IMAGE_SURROGATES, **IMAGE_TRUTHS}.items():
             r = shown[(shown.arm == arm) & (shown.explainer == explainer)]
             if r.empty:
                 continue
