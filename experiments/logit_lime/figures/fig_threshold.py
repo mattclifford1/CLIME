@@ -87,6 +87,10 @@ for level, at in ((0.5, 0.0), (moved, cross)):
     ax.axhline(level, color=MUTED, lw=0.6)
     ax.annotate(f'$t={level}$', xy=(1.55, level), xytext=(0, 2), textcoords='offset points',
                 fontsize=6.5, color=INK_2, ha='right')
+ax.axvspan(cross, 0, color=WASH, lw=0, zorder=0)
+ax.annotate('decisions that\nflip to class 1', xy=(cross/2, 0.3), xytext=(0.25, 0.3), fontsize=6.4,
+            color=INK_2, ha='left', va='center',
+            arrowprops=dict(arrowstyle='-', color=MUTED, lw=0.6, shrinkB=1))
 ax.plot([cross, cross], [moved, 0.5], color=AQUA, lw=1.2)
 ax.scatter([cross, cross], [moved, 0.5], s=16, facecolor='white', edgecolor=AQUA, linewidth=1.1,
            zorder=5)
