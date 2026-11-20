@@ -688,8 +688,8 @@ def images_moves():
     frame = frame[(frame.network == 'scratch') & (frame.ratio == 100) & (frame.neighbourhood == 'all')
                   & frame.fit.isin(['sample', 'truth'])]
     frame = frame.assign(top_changed=100*(1 - frame.same_top))
-    arms = {'prior shift': 'threshold\nmove', 'reseeded': 'other\nseed',
-            'weighted': 'class\nweights', 'logit adjusted': 'logit\nadjusted', 'oversampled': 'over-\nsampled'}
+    arms = {'prior shift': 'prior\nshift', 'reseeded': 'other\nseed',
+            'weighted': 'class\nweights', 'logit adjusted': 'logit\nloss', 'oversampled': 'over-\nsample'}
     shown = [a for a in arms if a in set(frame.arm)]
     truths = {'leave one out': (INK2, 'leave-one-out effects'), 'Shapley': (MUTED, 'Shapley values')}
     panels = [('top_changed', 'query images whose\ntop patch changes (%)'),
@@ -708,7 +708,7 @@ def images_moves():
             ax.bar(np.arange(len(shown)) + (i - (len(names) - 1)/2)*width, heights - base, width,
                    bottom=base, color=colour, label=name)
         ax.set_xticks(np.arange(len(shown)))
-        ax.set_xticklabels([arms[a] for a in shown], fontsize=5.5)
+        ax.set_xticklabels([arms[a] for a in shown], fontsize=5)
         ax.set_title(label, fontsize=7.5)
         ax.grid(axis='x', visible=False)
         if column == 'median_norm_ratio':
@@ -719,6 +719,49 @@ def images_moves():
                columnspacing=1.0)
     fig.subplots_adjust(wspace=0.3)
     style.save(fig, 'images_moves')
+
+
+def images_retrained():
+    """how each retrained network ranks the images, and how far its Shapley values are from the plain network's"""
+    models, control = read('images_models'), read('images_control')
+    models = models.set_index(['network', 'ratio', 'arm'])
+    control = control[(control.explainer == 'Shapley') & (control.fit == 'truth')]
+    control = control.set_index(['network', 'ratio', 'arm'])
+    arms = {'reseeded': (MUTED, 'o', 'plain, another seed'), 'weighted': (roles.C['plum'], 's', 'class weighted'),
+            'logit adjusted': (roles.C['aqua'], '^', 'logit-adjusted loss'),
+            'oversampled': (roles.C['orange'], 'D', 'oversampled')}
+    groups = [(network, ratio) for network in ('scratch', 'pretrained') for ratio in (10, 100)]
+    names = {'scratch': 'ResNet-20', 'pretrained': 'ResNet-18'}
+    panels = [('train_roc_auc', 'ROC AUC on the\ntraining images'),
+              ('roc_auc', 'ROC AUC on the\ntest images'),
+              ('cosine', 'cosine of the Shapley values\nwith the plain network\'s')]
+    fig, axes = plt.subplots(1, 3, figsize=(TEXTWIDTH, TEXTWIDTH*0.3))
+    for ax, (column, label) in zip(axes, panels):
+        for i, (arm, (colour, marker, name)) in enumerate(arms.items()):
+            x = np.arange(len(groups)) + (i - (len(arms) - 1)/2)*0.17
+            if column != 'cosine':
+                y, spread = [models[column].get((*g, arm), np.nan) for g in groups], None
+            elif arm == 'reseeded':
+                y = [control.mean_b.xs(g, level=('network', 'ratio')).iloc[0] if g in control.index.droplevel('arm')
+                     else np.nan for g in groups]
+                spread = None
+            else:
+                y = [control.mean_a.get((*g, arm), np.nan) for g in groups]
+                spread = [control.ci.get((*g, arm), np.nan) for g in groups]
+            ax.errorbar(x, y, yerr=spread, color=colour, marker=marker, ms=4, ls='none', lw=0.9,
+                        capsize=1.5, label=name)
+        ax.set_xticks(np.arange(len(groups)))
+        ax.set_xticklabels([IMAGE_RATIOS[r] for _, r in groups], fontsize=5.5)
+        for at, network in ((0.5, 'scratch'), (2.5, 'pretrained')):
+            ax.annotate(names[network], xy=(at, 0), xycoords=('data', 'axes fraction'), xytext=(0, -17),
+                        textcoords='offset points', ha='center', va='top', fontsize=6.5)
+        ax.axvline(1.5, color=MUTED, lw=0.6, ls=':')
+        ax.set_title(label, fontsize=7.5)
+        ax.grid(axis='x', visible=False)
+    handles, labels = axes[0].get_legend_handles_labels()
+    fig.legend(handles, labels, ncol=4, loc='lower center', bbox_to_anchor=(0.5, -0.28), fontsize=6.5)
+    fig.subplots_adjust(wspace=0.3)
+    style.save(fig, 'images_retrained')
 
 
 def images_example(dataset='airplane', seed=0, ratio=100):
@@ -774,7 +817,7 @@ FIGURES = {f.__name__: f for f in (reproduce, replication, profile, triad, one_s
                                    families, grid, operating_point, by_class, sweep, kernel,
                                    matched, cuts, truth, moves, losses, instruments,
                                    samples, images_truth, images_samples, images_samples_pretrained,
-                                   images_moves, images_example)}
+                                   images_moves, images_retrained, images_example)}
 
 if __name__ == '__main__':
     style.use()

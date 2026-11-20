@@ -1223,18 +1223,25 @@ committed first (`experiments/cikm_extended/PREREGISTRATION.md`): 1, 3, 4 and 7 
     at 9% of images (median cosine 0.998); Logit-LIME and the truths do not move.
   - Of seven predictions five hold and two hold in part: the top patch changes at 9%, not
     10%, and the logit's lead in samples does not grow with imbalance.
-  - Class-weighted and logit-adjusted networks (40 each), and a control: the plain network
-    retrained on the same data from another seed. At 5000:50 the Shapley values have
-    median cosine 0.13 (class weighted), 0.20 (logit adjusted) and 0.23 (control) with the
-    plain network's at the same image, so the truth moves because the network was
-    retrained. Paired against the control, the logit-adjusted loss adds nothing
-    (−0.009 ± 0.032) and class weighting a little (−0.078 ± 0.042). Every surrogate
-    follows the network.
+  - Rebalanced training on both networks at 5000:500 and 5000:50 (class weighted,
+    logit-adjusted loss, oversampled; 40 networks each), and a control: the plain network
+    retrained on the same data from another seed. The control's Shapley values already have
+    median cosine 0.23 (ResNet-20) and 0.55 (ResNet-18) with the plain network's at
+    5000:50, so the truth moves because the network was retrained. Paired against the
+    control in mean cosine, the logit-adjusted loss and oversampling add between
+    −0.034 ± 0.052 and +0.022 ± 0.016 over the eight settings. Class weighting adds
+    −0.045 and −0.078 on the ResNet-20 and −0.296 ± 0.082 and −0.419 ± 0.072 on the
+    ResNet-18, where it does not fit its training images (ROC AUC 0.978 and 0.795 against
+    1.000; test 0.938 and 0.717 against 0.976 and 0.909): another model, so another
+    explanation. Oversampling hardly corrects the network (balanced accuracy 0.54 from
+    0.52 and 0.63 from 0.63 at 5000:50). Every surrogate follows the network
+    (`tables/images_rebalanced.tex`, `figures/images_retrained.pdf`).
   - **A patch explanation describes one training run.** Seed against seed, median cosine of
     the Shapley values at 4000:4000, 5000:500, 5000:50: ResNet-20 from scratch 0.71, 0.50,
     0.23; fine-tuned ResNet-18 0.84, 0.78, 0.55.
   - On the logit-adjusted networks, where CLIME has two classes to weight, it is again
-    further from the Shapley values than LIME (−0.027) and Logit-LIME closer (+0.017).
+    further from the Shapley values than LIME (−0.027; −0.058 on the ResNet-18) and
+    Logit-LIME closer (+0.017; +0.035).
   - Fine-tuned ImageNet ResNet-18 (60 networks): the logit surrogate's lead is larger and
     grows with imbalance (+0.060, +0.060, +0.143 on LIME in cosine with Shapley; 0.92
     against 0.78 at 5000:50), Logit-LIME on 300 masks matches LIME on 3,000 at 5000:50,

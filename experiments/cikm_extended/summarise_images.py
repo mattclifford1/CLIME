@@ -8,7 +8,8 @@ usage: uv run python summarise_images.py
 from common import setup   # noqa: F401
 import numpy as np
 import pandas as pd
-from common import runner, scores, stats
+from sklearn.metrics import roc_auc_score
+from common import paths, runner, scores, stats
 from summarise import ONE_SIDED, save
 
 RUN = 'images_explained'
@@ -117,6 +118,16 @@ def against_control(frame):
     return pd.DataFrame(rows)
 
 
+def training_fit():
+    '''ROC AUC of each stored network on its own training images'''
+    rows = []
+    for path in sorted(paths.raw('images').glob('*.npz')):
+        data = np.load(path)
+        rows.append({**{k: data[k].item() for k in (*SETTING, 'dataset', 'seed')}, 'trained': str(data['arm']),
+                     'train_roc_auc': float(roc_auc_score(data['y_train'], data['train']))})
+    return pd.DataFrame(rows)
+
+
 def checks(coefs, queries):
     '''largest coefficient gap in the two identities that must hold exactly'''
     key = [*IMAGE, 'arm']
@@ -135,7 +146,8 @@ def checks(coefs, queries):
 
 
 if __name__ == '__main__':
-    queries, models = runner.load(RUN, 'queries'), runner.load(RUN, 'models')
+    queries = runner.load(RUN, 'queries')
+    models = runner.load(RUN, 'models').merge(training_fit(), on=[*SETTING, 'dataset', 'seed', 'trained'])
     full = runner.load(RUN, 'scores').merge(
         queries[[*IMAGE, 'arm', 'minority_weighted', 'brier_constant', 'brier_balanced_constant']],
         on=[*IMAGE, 'arm'])

@@ -500,6 +500,9 @@ IMAGE_TRUTHS = {'leave one out': 'leave-one-out effects', 'Shapley': 'Shapley va
 IMAGE_SURROGATES = {**SIX, 'KernelSHAP': 'KernelSHAP', 'Logit-KernelSHAP': 'KernelSHAP on the logit'}
 IMAGE_MOVES = {'prior shift': 'prior shift', 're-thresholded': 're-thresholded (validation)',
                'CP Minimax': 'deltas (CP Minimax)'}
+IMAGE_NETWORKS = {'scratch': 'ResNet-20', 'pretrained': 'ResNet-18'}
+IMAGE_RETRAINED = {'plain': 'plain', 'reseeded': 'plain, another seed', 'weighted': 'class weighted',
+                   'logit adjusted': 'logit-adjusted loss', 'oversampled': 'oversampled'}
 
 
 def images():
@@ -587,6 +590,36 @@ def images_control():
             macro([*base, column], r[column], '{:.0f}')
 
 
+def images_rebalanced():
+    '''each retrained network's fit, and its Shapley values against the plain network's'''
+    models = read('images_models').set_index(['network', 'ratio', 'arm'])
+    sided = read('images_neighbourhoods')
+    sided = sided[sided.label == 'all'].set_index(['network', 'ratio', 'arm'])
+    control = read('images_control')
+    control = control[(control.explainer == 'Shapley') & (control.fit == 'truth')]
+    rows = []
+    for network, name in IMAGE_NETWORKS.items():
+        for ratio in (10, 100):
+            against = control[(control.network == network) & (control.ratio == ratio)].set_index('arm')
+            for arm, shown in IMAGE_RETRAINED.items():
+                if (network, ratio, arm) not in models.index:
+                    continue
+                m = models.loc[(network, ratio, arm)]
+                cosine, gap = '', ''
+                if arm == 'reseeded' and len(against):
+                    cosine = f'{against.mean_b.iloc[0]:.2f}'
+                elif arm in against.index:
+                    r = against.loc[arm]
+                    cosine, gap = f'{r.mean_a:.2f}', f'${r["diff"]:+.3f} \\pm {r.ci:.3f}$'
+                rows.append([f'{name}, {IMAGE_RATIOS[ratio][0]}' if arm == 'plain' else '', shown,
+                             f'{m.train_roc_auc:.3f}', f'{m.roc_auc:.3f}', f'{m.balanced_accuracy:.2f}',
+                             f'{100*sided.loc[(network, ratio, arm)].one_sided:.0f}\\%', cosine, gap])
+            rows.append([])
+    write('images_rebalanced', table(
+        ['', 'Training', 'train', 'test', 'Bal.\\ acc.', 'One-sided', 'with plain', 'minus control'],
+        rows, 'llrrrrrr', [('ROC AUC', 3, 4), ('cosine of Shapley values', 7, 8)]))
+
+
 def images_models():
     for _, r in read('images_models').iterrows():
         base = ['imo', r.network, IMAGE_RATIOS[r.ratio][1], r.arm]
@@ -594,7 +627,8 @@ def images_models():
         macro([*base, 'recall'], r.recall_minority)
         macro([*base, 'positive'], pct(r.positive_rate), '{:.1f}')
         macro([*base, 'shift'], r['shift'])
-        macro([*base, 'ranking'], r.roc_auc)
+        macro([*base, 'ranking'], r.roc_auc, '{:.3f}')
+        macro([*base, 'fitted'], r.train_roc_auc, '{:.3f}')
     for _, r in read('images_neighbourhoods').iterrows():
         base = ['imn', r.network, IMAGE_RATIOS[r.ratio][1], r.arm, r.label]
         macro([*base, 'onesided'], pct(r.one_sided), '{:.0f}')
@@ -656,7 +690,7 @@ if __name__ == '__main__':
                  failures, outliers, reproduce, explanations, explanations_paired,
                  explanations_moves, explanations_spread, explanations_instruments,
                  explanations_cuts, logistic_check, logistic_samples,
-                 images, images_paired, images_samples, images_moves, images_control,
+                 images, images_paired, images_samples, images_moves, images_control, images_rebalanced,
                  images_models,
                  explanations_run):
         try:

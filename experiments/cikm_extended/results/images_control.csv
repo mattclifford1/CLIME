@@ -1,91 +1,217 @@
 network,ratio,explainer,fit,arm,mean_a,mean_b,diff,ci,p,n,datasets,wins,ties,losses
-pretrained,100,CLIME,exact,weighted,0.05161,0.51655,-0.46494,0.04271,0.50000,2,2,0,0,2
-pretrained,100,CLIME,sample,weighted,0.04380,0.48855,-0.44475,0.05325,0.50000,2,2,0,0,2
-pretrained,100,KernelSHAP,exact,weighted,0.01097,0.52223,-0.51126,0.14417,0.50000,2,2,0,0,2
-pretrained,100,KernelSHAP,sample,weighted,0.01655,0.49719,-0.48064,0.11547,0.50000,2,2,0,0,2
-pretrained,100,LIME,exact,weighted,0.06256,0.57140,-0.50884,0.05940,0.50000,2,2,0,0,2
-pretrained,100,LIME,sample,weighted,0.05573,0.52799,-0.47225,0.07731,0.50000,2,2,0,0,2
-pretrained,100,Logit-CLIME,exact,weighted,0.01434,0.53909,-0.52474,0.10872,0.50000,2,2,0,0,2
-pretrained,100,Logit-CLIME,sample,weighted,0.00659,0.52230,-0.51571,0.11526,0.50000,2,2,0,0,2
-pretrained,100,Logit-KernelSHAP,exact,weighted,-0.02977,0.57200,-0.60177,0.02072,0.50000,2,2,0,0,2
-pretrained,100,Logit-KernelSHAP,sample,weighted,-0.03227,0.56752,-0.59979,0.01548,0.50000,2,2,0,0,2
-pretrained,100,Logit-LIME,exact,weighted,0.00665,0.53122,-0.52457,0.12829,0.50000,2,2,0,0,2
-pretrained,100,Logit-LIME,sample,weighted,0.00565,0.52920,-0.52355,0.13930,0.50000,2,2,0,0,2
-pretrained,100,Shapley,truth,weighted,-0.02977,0.57200,-0.60177,0.02072,0.50000,2,2,0,0,2
-pretrained,100,Soft logistic,exact,weighted,0.06735,0.56583,-0.49848,0.06665,0.50000,2,2,0,0,2
-pretrained,100,Soft logistic,sample,weighted,0.05768,0.52420,-0.46653,0.09788,0.50000,2,2,0,0,2
-pretrained,100,Soft logistic CLIME,exact,weighted,0.06343,0.53044,-0.46701,0.06872,0.50000,2,2,0,0,2
-pretrained,100,Soft logistic CLIME,sample,weighted,0.04933,0.49191,-0.44258,0.06589,0.50000,2,2,0,0,2
-pretrained,100,leave one out,truth,weighted,0.02047,0.43012,-0.40965,0.24244,0.50000,2,2,0,0,2
+pretrained,10,CLIME,exact,logit adjusted,0.70443,0.69694,0.00748,0.02181,0.67422,20,10,5,1,4
+pretrained,10,CLIME,exact,oversampled,0.66256,0.69694,-0.03438,0.02256,0.00831,20,10,1,1,8
+pretrained,10,CLIME,exact,weighted,0.40563,0.69694,-0.29131,0.07909,0.00000,20,10,0,0,10
+pretrained,10,CLIME,sample,logit adjusted,0.68363,0.67199,0.01164,0.02151,0.45238,20,10,5,2,3
+pretrained,10,CLIME,sample,oversampled,0.64229,0.67199,-0.02969,0.02454,0.02958,20,10,3,1,6
+pretrained,10,CLIME,sample,weighted,0.39161,0.67199,-0.28038,0.07752,0.00000,20,10,0,0,10
+pretrained,10,KernelSHAP,exact,logit adjusted,0.68184,0.66594,0.01590,0.02089,0.20245,20,10,6,0,4
+pretrained,10,KernelSHAP,exact,oversampled,0.64014,0.66594,-0.02579,0.02852,0.10540,20,10,4,0,6
+pretrained,10,KernelSHAP,exact,weighted,0.39133,0.66594,-0.27460,0.07363,0.00000,20,10,0,0,10
+pretrained,10,KernelSHAP,sample,logit adjusted,0.67247,0.65904,0.01342,0.02218,0.45238,20,10,6,0,4
+pretrained,10,KernelSHAP,sample,oversampled,0.63301,0.65904,-0.02603,0.02734,0.12309,20,10,3,2,5
+pretrained,10,KernelSHAP,sample,weighted,0.38471,0.65904,-0.27433,0.07316,0.00000,20,10,0,0,10
+pretrained,10,LIME,exact,logit adjusted,0.73406,0.72246,0.01160,0.01882,0.32998,20,10,5,1,4
+pretrained,10,LIME,exact,oversampled,0.69125,0.72246,-0.03122,0.02305,0.01208,20,10,3,0,7
+pretrained,10,LIME,exact,weighted,0.42061,0.72246,-0.30185,0.08241,0.00000,20,10,0,0,10
+pretrained,10,LIME,sample,logit adjusted,0.71402,0.70169,0.01232,0.01948,0.34881,20,10,5,3,2
+pretrained,10,LIME,sample,oversampled,0.67241,0.70169,-0.02928,0.02168,0.01718,20,10,2,2,6
+pretrained,10,LIME,sample,weighted,0.41040,0.70169,-0.29130,0.08124,0.00000,20,10,0,0,10
+pretrained,10,Logit-CLIME,exact,logit adjusted,0.74004,0.72648,0.01356,0.01724,0.21617,20,10,6,1,3
+pretrained,10,Logit-CLIME,exact,oversampled,0.69299,0.72648,-0.03349,0.02074,0.00486,20,10,2,1,7
+pretrained,10,Logit-CLIME,exact,weighted,0.42550,0.72648,-0.30099,0.08277,0.00000,20,10,0,0,10
+pretrained,10,Logit-CLIME,sample,logit adjusted,0.73644,0.71975,0.01669,0.01641,0.12309,20,10,7,1,2
+pretrained,10,Logit-CLIME,sample,oversampled,0.68834,0.71975,-0.03141,0.02137,0.01718,20,10,2,1,7
+pretrained,10,Logit-CLIME,sample,weighted,0.41918,0.71975,-0.30058,0.08122,0.00000,20,10,0,0,10
+pretrained,10,Logit-KernelSHAP,exact,logit adjusted,0.74637,0.72387,0.02250,0.01583,0.02395,20,10,9,0,1
+pretrained,10,Logit-KernelSHAP,exact,oversampled,0.70725,0.72387,-0.01663,0.01588,0.09731,20,10,3,1,6
+pretrained,10,Logit-KernelSHAP,exact,weighted,0.42757,0.72387,-0.29630,0.08192,0.00000,20,10,0,0,10
+pretrained,10,Logit-KernelSHAP,sample,logit adjusted,0.74293,0.72129,0.02164,0.01542,0.01718,20,10,8,1,1
+pretrained,10,Logit-KernelSHAP,sample,oversampled,0.70665,0.72129,-0.01464,0.01521,0.08969,20,10,4,0,6
+pretrained,10,Logit-KernelSHAP,sample,weighted,0.42633,0.72129,-0.29497,0.08064,0.00000,20,10,0,0,10
+pretrained,10,Logit-LIME,exact,logit adjusted,0.74466,0.72798,0.01668,0.01632,0.08969,20,10,7,1,2
+pretrained,10,Logit-LIME,exact,oversampled,0.69953,0.72798,-0.02845,0.02087,0.01923,20,10,2,1,7
+pretrained,10,Logit-LIME,exact,weighted,0.41798,0.72798,-0.31000,0.08483,0.00000,20,10,0,0,10
+pretrained,10,Logit-LIME,sample,logit adjusted,0.74163,0.72459,0.01705,0.01662,0.08969,20,10,8,0,2
+pretrained,10,Logit-LIME,sample,oversampled,0.69752,0.72459,-0.02707,0.02117,0.02958,20,10,2,1,7
+pretrained,10,Logit-LIME,sample,weighted,0.41798,0.72459,-0.30661,0.08327,0.00000,20,10,0,0,10
+pretrained,10,Shapley,truth,logit adjusted,0.74637,0.72387,0.02250,0.01583,0.02395,20,10,9,0,1
+pretrained,10,Shapley,truth,oversampled,0.70725,0.72387,-0.01663,0.01588,0.09731,20,10,3,1,6
+pretrained,10,Shapley,truth,weighted,0.42757,0.72387,-0.29630,0.08192,0.00000,20,10,0,0,10
+pretrained,10,Soft logistic,exact,logit adjusted,0.73375,0.72144,0.01232,0.01848,0.24549,20,10,5,2,3
+pretrained,10,Soft logistic,exact,oversampled,0.68983,0.72144,-0.03161,0.02246,0.01069,20,10,2,2,6
+pretrained,10,Soft logistic,exact,weighted,0.41929,0.72144,-0.30215,0.08224,0.00000,20,10,0,0,10
+pretrained,10,Soft logistic,sample,logit adjusted,0.71108,0.70006,0.01102,0.01813,0.31179,20,10,5,2,3
+pretrained,10,Soft logistic,sample,oversampled,0.66993,0.70006,-0.03013,0.02143,0.01531,20,10,3,1,6
+pretrained,10,Soft logistic,sample,weighted,0.40961,0.70006,-0.29044,0.07939,0.00000,20,10,0,0,10
+pretrained,10,Soft logistic CLIME,exact,logit adjusted,0.71455,0.70118,0.01337,0.01881,0.18935,20,10,6,1,3
+pretrained,10,Soft logistic CLIME,exact,oversampled,0.66585,0.70118,-0.03533,0.02192,0.00558,20,10,3,0,7
+pretrained,10,Soft logistic CLIME,exact,weighted,0.40694,0.70118,-0.29425,0.08114,0.00000,20,10,0,0,10
+pretrained,10,Soft logistic CLIME,sample,logit adjusted,0.68631,0.67478,0.01153,0.01970,0.49801,20,10,6,0,4
+pretrained,10,Soft logistic CLIME,sample,oversampled,0.64395,0.67478,-0.03083,0.02310,0.02395,20,10,3,1,6
+pretrained,10,Soft logistic CLIME,sample,weighted,0.39589,0.67478,-0.27888,0.07699,0.00000,20,10,0,0,10
+pretrained,10,leave one out,truth,logit adjusted,0.54051,0.51869,0.02182,0.03709,0.32998,20,10,6,0,4
+pretrained,10,leave one out,truth,oversampled,0.47501,0.51869,-0.04368,0.03462,0.01923,20,10,2,1,7
+pretrained,10,leave one out,truth,weighted,0.29590,0.51869,-0.22279,0.06339,0.00003,20,10,0,0,10
+pretrained,100,CLIME,exact,logit adjusted,0.43326,0.44413,-0.01088,0.03663,0.70118,20,10,4,0,6
+pretrained,100,CLIME,exact,oversampled,0.42398,0.44413,-0.02015,0.04082,0.78413,20,10,5,0,5
+pretrained,100,CLIME,exact,weighted,0.05809,0.44413,-0.38604,0.06852,0.00000,20,10,0,0,10
+pretrained,100,CLIME,sample,logit adjusted,0.41174,0.41826,-0.00651,0.03497,0.78413,20,10,5,1,4
+pretrained,100,CLIME,sample,oversampled,0.40053,0.41826,-0.01773,0.04026,0.98544,20,10,6,0,4
+pretrained,100,CLIME,sample,weighted,0.05164,0.41826,-0.36662,0.06749,0.00000,20,10,0,0,10
+pretrained,100,KernelSHAP,exact,logit adjusted,0.41029,0.42507,-0.01479,0.02590,0.40910,20,10,2,2,6
+pretrained,100,KernelSHAP,exact,oversampled,0.40214,0.42507,-0.02293,0.02763,0.08969,20,10,3,0,7
+pretrained,100,KernelSHAP,exact,weighted,0.08719,0.42507,-0.33788,0.07214,0.00000,20,10,0,0,10
+pretrained,100,KernelSHAP,sample,logit adjusted,0.40033,0.41274,-0.01241,0.02734,0.43043,20,10,4,1,5
+pretrained,100,KernelSHAP,sample,oversampled,0.38451,0.41274,-0.02823,0.03046,0.08969,20,10,3,0,7
+pretrained,100,KernelSHAP,sample,weighted,0.08479,0.41274,-0.32795,0.07009,0.00000,20,10,0,0,10
+pretrained,100,LIME,exact,logit adjusted,0.45973,0.47263,-0.01289,0.03324,0.52167,20,10,4,0,6
+pretrained,100,LIME,exact,oversampled,0.45503,0.47263,-0.01760,0.04093,0.72851,20,10,5,0,5
+pretrained,100,LIME,exact,weighted,0.05805,0.47263,-0.41458,0.07240,0.00000,20,10,0,0,10
+pretrained,100,LIME,sample,logit adjusted,0.43594,0.44030,-0.00436,0.03474,0.81236,20,10,6,0,4
+pretrained,100,LIME,sample,oversampled,0.42572,0.44030,-0.01457,0.04049,0.84082,20,10,6,0,4
+pretrained,100,LIME,sample,weighted,0.05303,0.44030,-0.38727,0.07217,0.00000,20,10,0,0,10
+pretrained,100,Logit-CLIME,exact,logit adjusted,0.47024,0.48073,-0.01049,0.03319,0.57060,20,10,3,0,7
+pretrained,100,Logit-CLIME,exact,oversampled,0.45789,0.48073,-0.02284,0.03731,0.40910,20,10,4,0,6
+pretrained,100,Logit-CLIME,exact,weighted,0.04478,0.48073,-0.43595,0.07188,0.00000,20,10,0,0,10
+pretrained,100,Logit-CLIME,sample,logit adjusted,0.45796,0.47523,-0.01726,0.03065,0.47491,20,10,3,1,6
+pretrained,100,Logit-CLIME,sample,oversampled,0.44849,0.47523,-0.02673,0.03665,0.31179,20,10,4,0,6
+pretrained,100,Logit-CLIME,sample,weighted,0.04437,0.47523,-0.43086,0.07231,0.00000,20,10,0,0,10
+pretrained,100,Logit-KernelSHAP,exact,logit adjusted,0.46946,0.49887,-0.02941,0.02862,0.08255,20,10,2,0,8
+pretrained,100,Logit-KernelSHAP,exact,oversampled,0.46672,0.49887,-0.03214,0.04002,0.20245,20,10,5,0,5
+pretrained,100,Logit-KernelSHAP,exact,weighted,0.08018,0.49887,-0.41869,0.07222,0.00000,20,10,0,0,10
+pretrained,100,Logit-KernelSHAP,sample,logit adjusted,0.46654,0.49380,-0.02725,0.02992,0.12309,20,10,2,1,7
+pretrained,100,Logit-KernelSHAP,sample,oversampled,0.46137,0.49380,-0.03243,0.04116,0.21617,20,10,5,0,5
+pretrained,100,Logit-KernelSHAP,sample,weighted,0.07885,0.49380,-0.41495,0.07270,0.00000,20,10,0,0,10
+pretrained,100,Logit-LIME,exact,logit adjusted,0.46654,0.48165,-0.01511,0.03220,0.47491,20,10,3,1,6
+pretrained,100,Logit-LIME,exact,oversampled,0.45493,0.48165,-0.02671,0.04088,0.36828,20,10,4,1,5
+pretrained,100,Logit-LIME,exact,weighted,0.04258,0.48165,-0.43906,0.07379,0.00000,20,10,0,0,10
+pretrained,100,Logit-LIME,sample,logit adjusted,0.46191,0.47890,-0.01699,0.03049,0.38838,20,10,3,1,6
+pretrained,100,Logit-LIME,sample,oversampled,0.45239,0.47890,-0.02650,0.04007,0.31179,20,10,3,2,5
+pretrained,100,Logit-LIME,sample,weighted,0.04444,0.47890,-0.43446,0.07398,0.00000,20,10,0,0,10
+pretrained,100,Shapley,truth,logit adjusted,0.46946,0.49887,-0.02941,0.02862,0.08255,20,10,2,0,8
+pretrained,100,Shapley,truth,oversampled,0.46672,0.49887,-0.03214,0.04002,0.20245,20,10,5,0,5
+pretrained,100,Shapley,truth,weighted,0.08018,0.49887,-0.41869,0.07222,0.00000,20,10,0,0,10
+pretrained,100,Soft logistic,exact,logit adjusted,0.45869,0.46914,-0.01045,0.03380,0.57060,20,10,4,1,5
+pretrained,100,Soft logistic,exact,oversampled,0.45089,0.46914,-0.01825,0.04080,0.72851,20,10,5,0,5
+pretrained,100,Soft logistic,exact,weighted,0.05835,0.46914,-0.41079,0.07094,0.00000,20,10,0,0,10
+pretrained,100,Soft logistic,sample,logit adjusted,0.43234,0.43710,-0.00476,0.03515,0.75617,20,10,5,1,4
+pretrained,100,Soft logistic,sample,oversampled,0.42209,0.43710,-0.01501,0.03898,0.81236,20,10,6,1,3
+pretrained,100,Soft logistic,sample,weighted,0.05335,0.43710,-0.38376,0.07231,0.00000,20,10,0,0,10
+pretrained,100,Soft logistic CLIME,exact,logit adjusted,0.44008,0.44593,-0.00585,0.03685,0.86949,20,10,5,0,5
+pretrained,100,Soft logistic CLIME,exact,oversampled,0.42819,0.44593,-0.01774,0.04234,0.72851,20,10,5,0,5
+pretrained,100,Soft logistic CLIME,exact,weighted,0.05998,0.44593,-0.38595,0.06477,0.00000,20,10,0,0,10
+pretrained,100,Soft logistic CLIME,sample,logit adjusted,0.41330,0.41906,-0.00576,0.03657,0.78413,20,10,4,2,4
+pretrained,100,Soft logistic CLIME,sample,oversampled,0.40200,0.41906,-0.01706,0.03923,0.98544,20,10,6,0,4
+pretrained,100,Soft logistic CLIME,sample,weighted,0.05282,0.41906,-0.36624,0.06863,0.00000,20,10,0,0,10
+pretrained,100,leave one out,truth,logit adjusted,0.30758,0.33370,-0.02612,0.02997,0.27736,20,10,4,0,6
+pretrained,100,leave one out,truth,oversampled,0.28001,0.33370,-0.05369,0.04181,0.01718,20,10,2,1,7
+pretrained,100,leave one out,truth,weighted,-0.01256,0.33370,-0.34627,0.06262,0.00000,20,10,0,0,10
 scratch,10,CLIME,exact,logit adjusted,0.41545,0.41970,-0.00425,0.03043,0.75617,20,10,6,0,4
+scratch,10,CLIME,exact,oversampled,0.41695,0.41970,-0.00275,0.03324,0.98544,20,10,6,0,4
 scratch,10,CLIME,exact,weighted,0.37208,0.41970,-0.04761,0.04381,0.06372,20,10,2,0,8
 scratch,10,CLIME,sample,logit adjusted,0.41010,0.40839,0.00171,0.02806,0.89832,20,10,4,1,5
+scratch,10,CLIME,sample,oversampled,0.41352,0.40839,0.00513,0.03314,0.59582,20,10,6,0,4
 scratch,10,CLIME,sample,weighted,0.37342,0.40839,-0.03497,0.04521,0.20245,20,10,3,0,7
 scratch,10,KernelSHAP,exact,logit adjusted,0.41118,0.39855,0.01263,0.03517,0.57060,20,10,4,1,5
+scratch,10,KernelSHAP,exact,oversampled,0.39720,0.39855,-0.00135,0.03826,0.84082,20,10,5,2,3
 scratch,10,KernelSHAP,exact,weighted,0.36152,0.39855,-0.03703,0.04515,0.20245,20,10,3,0,7
 scratch,10,KernelSHAP,sample,logit adjusted,0.40710,0.39779,0.00932,0.03507,0.67422,20,10,4,1,5
+scratch,10,KernelSHAP,sample,oversampled,0.38912,0.39779,-0.00866,0.03958,0.89832,20,10,4,1,5
 scratch,10,KernelSHAP,sample,weighted,0.35614,0.39779,-0.04164,0.04522,0.11399,20,10,2,1,7
 scratch,10,LIME,exact,logit adjusted,0.43376,0.43723,-0.00347,0.03098,0.75617,20,10,6,0,4
+scratch,10,LIME,exact,oversampled,0.43251,0.43723,-0.00472,0.03365,0.92728,20,10,6,0,4
 scratch,10,LIME,exact,weighted,0.38942,0.43723,-0.04781,0.04408,0.08255,20,10,3,0,7
 scratch,10,LIME,sample,logit adjusted,0.42772,0.42632,0.00140,0.02943,0.92728,20,10,5,0,5
+scratch,10,LIME,sample,oversampled,0.42470,0.42632,-0.00162,0.03427,0.86949,20,10,6,0,4
 scratch,10,LIME,sample,weighted,0.38543,0.42632,-0.04090,0.04645,0.14291,20,10,3,0,7
 scratch,10,Logit-CLIME,exact,logit adjusted,0.43632,0.43791,-0.00159,0.02935,0.84082,20,10,5,1,4
+scratch,10,Logit-CLIME,exact,oversampled,0.43664,0.43791,-0.00126,0.03646,0.98544,20,10,5,0,5
 scratch,10,Logit-CLIME,exact,weighted,0.38838,0.43791,-0.04952,0.04527,0.08255,20,10,1,3,6
 scratch,10,Logit-CLIME,sample,logit adjusted,0.43719,0.43616,0.00103,0.02681,1.00000,20,10,5,1,4
+scratch,10,Logit-CLIME,sample,oversampled,0.43865,0.43616,0.00249,0.03385,0.70118,20,10,6,0,4
 scratch,10,Logit-CLIME,sample,weighted,0.38846,0.43616,-0.04770,0.04529,0.11399,20,10,3,1,6
 scratch,10,Logit-KernelSHAP,exact,logit adjusted,0.44531,0.44019,0.00512,0.03044,0.38838,20,10,7,0,3
+scratch,10,Logit-KernelSHAP,exact,oversampled,0.43850,0.44019,-0.00169,0.03715,0.75617,20,10,6,0,4
 scratch,10,Logit-KernelSHAP,exact,weighted,0.39538,0.44019,-0.04481,0.04149,0.07585,20,10,3,0,7
 scratch,10,Logit-KernelSHAP,sample,logit adjusted,0.44457,0.44155,0.00303,0.02982,0.57060,20,10,6,1,3
+scratch,10,Logit-KernelSHAP,sample,oversampled,0.43740,0.44155,-0.00414,0.03728,0.78413,20,10,6,0,4
 scratch,10,Logit-KernelSHAP,sample,weighted,0.39432,0.44155,-0.04722,0.04152,0.05826,20,10,3,0,7
 scratch,10,Logit-LIME,exact,logit adjusted,0.43909,0.43953,-0.00044,0.02925,0.98544,20,10,7,0,3
+scratch,10,Logit-LIME,exact,oversampled,0.43998,0.43953,0.00045,0.03558,0.89832,20,10,6,0,4
 scratch,10,Logit-LIME,exact,weighted,0.39066,0.43953,-0.04886,0.04412,0.08255,20,10,2,1,7
 scratch,10,Logit-LIME,sample,logit adjusted,0.44211,0.43917,0.00294,0.02765,0.98544,20,10,7,0,3
+scratch,10,Logit-LIME,sample,oversampled,0.44052,0.43917,0.00134,0.03471,0.78413,20,10,6,0,4
 scratch,10,Logit-LIME,sample,weighted,0.39073,0.43917,-0.04844,0.04465,0.07585,20,10,2,1,7
 scratch,10,Shapley,truth,logit adjusted,0.44531,0.44019,0.00512,0.03044,0.38838,20,10,7,0,3
+scratch,10,Shapley,truth,oversampled,0.43850,0.44019,-0.00169,0.03715,0.75617,20,10,6,0,4
 scratch,10,Shapley,truth,weighted,0.39538,0.44019,-0.04481,0.04149,0.07585,20,10,3,0,7
 scratch,10,Soft logistic,exact,logit adjusted,0.43574,0.43789,-0.00214,0.03047,0.86949,20,10,6,0,4
+scratch,10,Soft logistic,exact,oversampled,0.43354,0.43789,-0.00434,0.03404,0.95633,20,10,6,0,4
 scratch,10,Soft logistic,exact,weighted,0.39063,0.43789,-0.04726,0.04423,0.08255,20,10,3,0,7
 scratch,10,Soft logistic,sample,logit adjusted,0.42907,0.42719,0.00189,0.03096,0.84082,20,10,5,1,4
+scratch,10,Soft logistic,sample,oversampled,0.42652,0.42719,-0.00067,0.03549,0.84082,20,10,5,1,4
 scratch,10,Soft logistic,sample,weighted,0.38568,0.42719,-0.04151,0.04619,0.10540,20,10,3,0,7
 scratch,10,Soft logistic CLIME,exact,logit adjusted,0.42895,0.43183,-0.00288,0.02880,0.81236,20,10,4,2,4
+scratch,10,Soft logistic CLIME,exact,oversampled,0.42716,0.43183,-0.00467,0.03460,1.00000,20,10,6,0,4
 scratch,10,Soft logistic CLIME,exact,weighted,0.38471,0.43183,-0.04712,0.04449,0.08255,20,10,2,1,7
 scratch,10,Soft logistic CLIME,sample,logit adjusted,0.41705,0.41512,0.00193,0.02929,0.92728,20,10,4,2,4
+scratch,10,Soft logistic CLIME,sample,oversampled,0.41905,0.41512,0.00392,0.03421,0.62151,20,10,6,0,4
 scratch,10,Soft logistic CLIME,sample,weighted,0.37791,0.41512,-0.03721,0.04490,0.15365,20,10,3,0,7
 scratch,10,leave one out,truth,logit adjusted,0.33904,0.35730,-0.01826,0.02980,0.29425,20,10,3,2,5
+scratch,10,leave one out,truth,oversampled,0.32830,0.35730,-0.02899,0.04074,0.29425,20,10,3,1,6
 scratch,10,leave one out,truth,weighted,0.29927,0.35730,-0.05803,0.04916,0.02664,20,10,1,0,9
 scratch,100,CLIME,exact,logit adjusted,0.17922,0.20390,-0.02467,0.03380,0.17685,20,10,2,1,7
+scratch,100,CLIME,exact,oversampled,0.16259,0.20390,-0.04131,0.05346,0.21617,20,10,1,2,7
 scratch,100,CLIME,exact,weighted,0.12406,0.20390,-0.07983,0.04571,0.00233,20,10,0,1,9
 scratch,100,CLIME,sample,logit adjusted,0.17433,0.20058,-0.02625,0.03476,0.14291,20,10,2,1,7
+scratch,100,CLIME,sample,oversampled,0.15883,0.20058,-0.04175,0.05317,0.26110,20,10,1,0,9
 scratch,100,CLIME,sample,weighted,0.12130,0.20058,-0.07928,0.04666,0.00422,20,10,1,1,8
 scratch,100,KernelSHAP,exact,logit adjusted,0.17718,0.19231,-0.01514,0.03469,0.36828,20,10,2,3,5
+scratch,100,KernelSHAP,exact,oversampled,0.15734,0.19231,-0.03497,0.05424,0.29425,20,10,1,0,9
 scratch,100,KernelSHAP,exact,weighted,0.11600,0.19231,-0.07631,0.04382,0.00143,20,10,0,1,9
 scratch,100,KernelSHAP,sample,logit adjusted,0.17718,0.19093,-0.01374,0.03469,0.47491,20,10,3,1,6
+scratch,100,KernelSHAP,sample,oversampled,0.15745,0.19093,-0.03348,0.05392,0.27736,20,10,1,1,8
 scratch,100,KernelSHAP,sample,weighted,0.11528,0.19093,-0.07565,0.04304,0.00199,20,10,0,1,9
 scratch,100,LIME,exact,logit adjusted,0.18661,0.20544,-0.01883,0.03586,0.32998,20,10,5,1,4
+scratch,100,LIME,exact,oversampled,0.16605,0.20544,-0.03939,0.05357,0.29425,20,10,1,2,7
 scratch,100,LIME,exact,weighted,0.12654,0.20544,-0.07890,0.04797,0.00558,20,10,1,0,9
 scratch,100,LIME,sample,logit adjusted,0.18112,0.20324,-0.02213,0.03567,0.24549,20,10,4,1,5
+scratch,100,LIME,sample,oversampled,0.16214,0.20324,-0.04111,0.05368,0.27736,20,10,1,2,7
 scratch,100,LIME,sample,weighted,0.12148,0.20324,-0.08176,0.04811,0.00558,20,10,1,1,8
 scratch,100,Logit-CLIME,exact,logit adjusted,0.18207,0.19855,-0.01647,0.03262,0.36828,20,10,4,0,6
+scratch,100,Logit-CLIME,exact,oversampled,0.16232,0.19855,-0.03623,0.05338,0.27736,20,10,2,0,8
 scratch,100,Logit-CLIME,exact,weighted,0.11520,0.19855,-0.08335,0.04651,0.00143,20,10,1,0,9
 scratch,100,Logit-CLIME,sample,logit adjusted,0.17966,0.19832,-0.01866,0.03233,0.31179,20,10,4,0,6
+scratch,100,Logit-CLIME,sample,oversampled,0.16095,0.19832,-0.03737,0.05281,0.29425,20,10,2,0,8
 scratch,100,Logit-CLIME,sample,weighted,0.11520,0.19832,-0.08312,0.04723,0.00199,20,10,1,1,8
 scratch,100,Logit-KernelSHAP,exact,logit adjusted,0.18928,0.19784,-0.00856,0.03153,0.64766,20,10,6,0,4
+scratch,100,Logit-KernelSHAP,exact,oversampled,0.16429,0.19784,-0.03354,0.05162,0.31179,20,10,1,2,7
 scratch,100,Logit-KernelSHAP,exact,weighted,0.11977,0.19784,-0.07807,0.04188,0.00102,20,10,1,0,9
 scratch,100,Logit-KernelSHAP,sample,logit adjusted,0.18929,0.19693,-0.00764,0.03192,0.70118,20,10,6,0,4
+scratch,100,Logit-KernelSHAP,sample,oversampled,0.16524,0.19693,-0.03170,0.05134,0.38838,20,10,1,2,7
 scratch,100,Logit-KernelSHAP,sample,weighted,0.11983,0.19693,-0.07710,0.04175,0.00121,20,10,1,0,9
 scratch,100,Logit-LIME,exact,logit adjusted,0.18548,0.19883,-0.01335,0.03493,0.52167,20,10,4,1,5
+scratch,100,Logit-LIME,exact,oversampled,0.16348,0.19883,-0.03535,0.05354,0.27736,20,10,2,0,8
 scratch,100,Logit-LIME,exact,weighted,0.11513,0.19883,-0.08370,0.04774,0.00169,20,10,1,0,9
 scratch,100,Logit-LIME,sample,logit adjusted,0.18382,0.19935,-0.01553,0.03333,0.38838,20,10,4,1,5
+scratch,100,Logit-LIME,sample,oversampled,0.16307,0.19935,-0.03628,0.05348,0.32998,20,10,2,0,8
 scratch,100,Logit-LIME,sample,weighted,0.11453,0.19935,-0.08482,0.04800,0.00199,20,10,1,1,8
 scratch,100,Shapley,truth,logit adjusted,0.18928,0.19784,-0.00856,0.03153,0.64766,20,10,6,0,4
+scratch,100,Shapley,truth,oversampled,0.16429,0.19784,-0.03354,0.05162,0.31179,20,10,1,2,7
 scratch,100,Shapley,truth,weighted,0.11977,0.19784,-0.07807,0.04188,0.00102,20,10,1,0,9
 scratch,100,Soft logistic,exact,logit adjusted,0.18737,0.20457,-0.01719,0.03671,0.38838,20,10,5,1,4
+scratch,100,Soft logistic,exact,oversampled,0.16532,0.20457,-0.03924,0.05342,0.24549,20,10,2,1,7
 scratch,100,Soft logistic,exact,weighted,0.12478,0.20457,-0.07979,0.04807,0.00365,20,10,1,0,9
 scratch,100,Soft logistic,sample,logit adjusted,0.18049,0.20403,-0.02354,0.03520,0.20245,20,10,2,2,6
+scratch,100,Soft logistic,sample,oversampled,0.16270,0.20403,-0.04133,0.05206,0.21617,20,10,1,2,7
 scratch,100,Soft logistic,sample,weighted,0.12406,0.20403,-0.07997,0.04733,0.00486,20,10,1,1,8
 scratch,100,Soft logistic CLIME,exact,logit adjusted,0.18297,0.20286,-0.01989,0.03605,0.24549,20,10,3,2,5
+scratch,100,Soft logistic CLIME,exact,oversampled,0.16363,0.20286,-0.03923,0.05361,0.27736,20,10,1,2,7
 scratch,100,Soft logistic CLIME,exact,weighted,0.12401,0.20286,-0.07885,0.04694,0.00271,20,10,1,0,9
 scratch,100,Soft logistic CLIME,sample,logit adjusted,0.17598,0.20175,-0.02577,0.03454,0.14291,20,10,2,2,6
+scratch,100,Soft logistic CLIME,sample,oversampled,0.16089,0.20175,-0.04086,0.05177,0.23051,20,10,1,1,8
 scratch,100,Soft logistic CLIME,sample,weighted,0.12407,0.20175,-0.07768,0.04621,0.00422,20,10,1,1,8
 scratch,100,leave one out,truth,logit adjusted,0.15420,0.16701,-0.01280,0.04277,0.72851,20,10,5,0,5
+scratch,100,leave one out,truth,oversampled,0.13826,0.16701,-0.02875,0.05937,0.59582,20,10,3,0,7
 scratch,100,leave one out,truth,weighted,0.09047,0.16701,-0.07654,0.04632,0.00315,20,10,1,1,8
