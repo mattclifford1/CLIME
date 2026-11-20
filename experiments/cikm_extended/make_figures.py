@@ -654,10 +654,10 @@ def images_truth():
     style.save(fig, 'images_truth')
 
 
-def images_samples():
+def images_samples(network='scratch', name='images_samples'):
     """cosine between a fit on n masks and the surrogate's exact fit on all 65,536"""
     frame = read('images_samples')
-    frame = frame[(frame.network == 'scratch') & (frame.arm == 'plain')]
+    frame = frame[(frame.network == network) & (frame.arm == 'plain')]
     ratios = [r for r in IMAGE_RATIOS if r in set(frame.ratio)]
     fig, axes = plt.subplots(1, len(ratios), figsize=(TEXTWIDTH, TEXTWIDTH*0.3), sharey=True,
                              squeeze=False)
@@ -672,7 +672,11 @@ def images_samples():
     axes[0, 0].set_ylabel('cosine with the\nsurrogate\'s exact fit')
     handles, labels = axes[0, 0].get_legend_handles_labels()
     fig.legend(handles, labels, ncol=3, loc='lower center', bbox_to_anchor=(0.5, -0.38))
-    style.save(fig, 'images_samples')
+    style.save(fig, name)
+
+
+def images_samples_pretrained():
+    images_samples('pretrained', 'images_samples_pretrained')
 
 
 def images_moves():
@@ -765,8 +769,8 @@ def images_example(dataset='airplane', seed=0, ratio=100):
 FIGURES = {f.__name__: f for f in (reproduce, replication, profile, triad, one_sided, arms,
                                    families, grid, operating_point, by_class, sweep, kernel,
                                    matched, cuts, truth, moves, losses, instruments,
-                                   samples, images_truth, images_samples, images_moves,
-                                   images_example)}
+                                   samples, images_truth, images_samples, images_samples_pretrained,
+                                   images_moves, images_example)}
 
 if __name__ == '__main__':
     style.use()

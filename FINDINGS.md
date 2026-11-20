@@ -1183,15 +1183,24 @@ committed first (`experiments/cikm_extended/PREREGISTRATION.md`): 1, 3, 4 and 7 
   - Of seven predictions five hold and two hold in part: the top patch changes at 9%, not
     10%, and the logit's lead in samples does not grow with imbalance.
   - Class-weighted and logit-adjusted networks (40 each), and a control: the plain network
-    retrained on the same data from another seed (40). At 5000:50 the Shapley values have
+    retrained on the same data from another seed. At 5000:50 the Shapley values have
     median cosine 0.13 (class weighted), 0.20 (logit adjusted) and 0.23 (control) with the
     plain network's at the same image, so the truth moves because the network was
     retrained. Paired against the control, the logit-adjusted loss adds nothing
     (−0.009 ± 0.032) and class weighting a little (−0.078 ± 0.042). Every surrogate
-    follows the network. A patch explanation of these networks describes one training run.
+    follows the network.
+  - **A patch explanation describes one training run.** Seed against seed, median cosine of
+    the Shapley values at 4000:4000, 5000:500, 5000:50: ResNet-20 from scratch 0.71, 0.50,
+    0.23; fine-tuned ResNet-18 0.84, 0.78, 0.55.
   - On the logit-adjusted networks, where CLIME has two classes to weight, it is again
     further from the Shapley values than LIME (−0.027) and Logit-LIME closer (+0.017).
-  - Running: a pretrained ResNet-18, and the control at 4000:4000.
+  - Fine-tuned ImageNet ResNet-18 (60 networks): the logit surrogate's lead is larger and
+    grows with imbalance (+0.060, +0.060, +0.143 on LIME in cosine with Shapley; 0.92
+    against 0.78 at 5000:50), Logit-LIME on 300 masks matches LIME on 3,000 at 5000:50,
+    and CLIME is worse than LIME at every ratio. The prior shift changes LIME's top patch
+    at 16% of images and CLIME's at 25%, and leaves 45% of neighbourhoods one-sided
+    against the ResNet-20's 60%, so all nine predictions hold on this network where 5 and 6
+    held only in part on the ResNet-20.
 
 Not done: a ground truth for the tree models and k-NN.
 
