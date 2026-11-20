@@ -82,6 +82,7 @@ wrong.
 | `sweep_null.py` | `results_null.json` | the base rate: what an explainer that explains nothing scores under each instrument |
 | `sweep_range.py` | `results_range.json` | how far the *reported coefficient* can be carried before a standard LIME surrogate stops being a probability, against the width of the kernel that defined the neighbourhood — plus the flip distance each surrogate implies, against the black box's own |
 | `sweep_threshold.py` | `results_threshold.json` | each explanation before and after the black box's decision threshold is moved; `figures/fig_threshold.py` is the toy example and `analysis/table_threshold.py` the table |
+| `sweep_samples.py` | `results_samples.json` | cosine of each explanation with an exactly-linear black box's weights against the number of samples; `figures/fig_samples.py` draws it with the toy |
 | `sweep_seeds.py` | `results_seed*.json` | a subset repeated under five random seeds |
 | `sweep_diagnostic_checks.py` | `results_diagnostic_checks.json` | what R²_logit is measuring (fifth registration, C1–C5): clip sensitivity, same-space curvature, gradient dispersion (no fit), in-sample advantage, its own salt |
 | `sweep_ridge_alpha.py` | `results_ridge_alpha.json` | both surrogates refitted at five ridge penalties on the same neighbourhood; α = 1 reproduces `results_taxonomy.json` exactly |

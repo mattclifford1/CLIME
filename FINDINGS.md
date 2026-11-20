@@ -998,6 +998,23 @@ and leaves the gradient of the log-odds alone.
 - Bayes Optimal returns (0, 0) at some sampled points on Sonar and Credit Scoring (B21);
   the shifted model reads those as p = 0.
 
+### Fewer samples (toy example and sweep, 2026-11-20, exploratory)
+
+`figures/fig_samples.py`, `sweeps/sweep_samples.py`, method paper Section 4.2.
+
+- Toy, same query point: on 30 samples standard LIME's explanation is a median 10.6
+  degrees from the weights and Logit-LIME's 0.7; LIME on 100,000 (0.15) is where
+  Logit-LIME is on 100 (0.14).
+- 42 exactly-linear black boxes (Logistic, LDA, Nearest Class Mean on the 14 registered
+  datasets): mean cosine with the weights, Logit-LIME 0.946 on 1,000 samples against LIME
+  0.938 on 10,000, and 0.974 on 10,000 against 0.973 on 100,000. About a tenth of the
+  samples, less than the thirtieth found at 200:20 in `cikm_extended`.
+- Logit-LIME's lowest are Nearest Class Mean on Breast Cancer and Sonar (0.63, 0.64),
+  where 70% and 45% of query points are saturated past its clip.
+
+The toy examples are collected in `papers/Logit-LIME-motivation-example`, a standalone
+motivation built from the same figures.
+
 ## 5. Thread 3 — aLIMEgn
 
 Framing note from June 2024. **Coded and run on 2026-09-12/13, rerun from an empty cache

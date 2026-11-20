@@ -63,8 +63,8 @@ def main(path=None):
         r'and $20$ query points, both directions pooled. Size: median factor by which the norm '
         r'of the coefficients changes, up or down. Top: share of query points whose largest '
         r'coefficient changes feature. Size leaves out the moves with an all-zero explanation '
-        r'before or after (under $1\%$). The gradient of the log-odds, the truth of '
-        r'Table~\ref{tab:gradient}, is the same before and after.}',
+        r'before or after (under $1\%$). The gradient of the log-odds is the same before and '
+        r'after.}',
         r'  \label{tab:threshold}',
         r'  \begin{tabular}{lrrrrrrrrr}',
         r'    \toprule',
@@ -84,7 +84,7 @@ def main(path=None):
             cells += [f'${100*s[k]["top_changed"]:.0f}\\%$' for k in SURROGATES]
         if g == 'all':
             lines.append(r'    \midrule')
-        head = GROUP_HEAD.get(g, 'all')
+        head = {'unassigned': 'bagged logistic regression'}.get(g, GROUP_HEAD.get(g, 'all'))
         lines.append(f'    {head} & {summary[next(iter(MOVES))][g]["configs"]} & ' + ' & '.join(cells) + r' \\')
     lines += [r'    \bottomrule', r'  \end{tabular}', r'\end{table}']
     open(paths.table('threshold.tex'), 'w').write('\n'.join(lines) + '\n')
